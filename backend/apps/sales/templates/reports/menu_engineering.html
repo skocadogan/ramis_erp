@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        body { font-family: 'DejaVu Sans', sans-serif; font-size: 8pt; color: #333; margin: 0; padding: 15px; }
+        .header { text-align: center; border-bottom: 2px solid #2563eb; padding-bottom: 10px; margin-bottom: 15px; }
+        .header h1 { margin: 0; font-size: 14pt; color: #1e40af; }
+        .header p { margin: 2px 0; color: #666; font-size: 8pt; }
+        .filters, .summary { background-color: #f8fafc; padding: 8px; border-radius: 4px; margin-bottom: 15px; border: 1px solid #e2e8f0; }
+        .filters span, .summary span { font-weight: bold; margin-right: 12px; font-size: 7pt; color: #64748b; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 15px; }
+        th, td { padding: 5px 3px; text-align: left; border-bottom: 1px solid #f1f5f9; }
+        th { background-color: #f1f5f9; font-weight: bold; text-transform: uppercase; font-size: 7pt; color: #475569; }
+        .text-right { text-align: right; }
+        .tabular-nums { font-family: 'Courier New', monospace; }
+        .footer { clear: both; text-align: center; margin-top: 40px; font-size: 7pt; color: #94a3b8; border-top: 1px solid #f1f5f9; padding-top: 10px; }
+        .badge { background-color: #eff6ff; padding: 2px 5px; border-radius: 4px; font-size: 7pt; color: #1d4ed8; }
+        .muted { color: #64748b; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ report_description }}</p>
+        <p>{{ _('Rapor Oluşturma:') }} {{ now()|date_tr }} | {{ _('Kayıt Sayısı:') }} {{ count }}</p>
+    </div>
+
+    <div class="filters">
+        <span>{{ _('FİLTRELER:') }}</span>
+        {% if filters.start_date %}<span>{{ _('Başlangıç:') }} {{ filters.start_date|date_tr }}</span>{% endif %}
+        {% if filters.end_date %}<span>{{ _('Bitiş:') }} {{ filters.end_date|date_tr }}</span>{% endif %}
+        {% if filters.branch_id and filters.branch_id != 'ALL' %}<span>{{ _('Şube ID:') }} {{ filters.branch_id }}</span>{% endif %}
+        {% if filters.menu_class %}<span>{{ _('Sınıf:') }} {{ filters.menu_class_label or filters.menu_class }}</span>{% endif %}
+    </div>
+
+    <div class="summary">
+        <span>{{ _('Toplam ürün:') }} {{ summary.total_products }}</span>
+        <span>{{ _('Sınıflandırılan:') }} {{ summary.classified_products }}</span>
+        <span>{{ _('Yıldız:') }} {{ summary.stars_count }}</span>
+        <span>{{ _('Bulmaca:') }} {{ summary.puzzlers_count }}</span>
+        <span>{{ _('At:') }} {{ summary.plowhorses_count }}</span>
+        <span>{{ _('Köpek:') }} {{ summary.dogs_count }}</span>
+        {% if analysis_mode == 'actual' %}
+        <span>{{ _('Tam kapsanan:') }} {{ summary.fully_costed_products|default(0) }}</span>
+        <span>{{ _('Kısmi kapsanan:') }} {{ summary.partial_coverage_products|default(0) }}</span>
+        {% endif %}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Ürün') }}</th>
+                <th>{{ _('Kategori') }}</th>
+                <th>{{ _('Sınıf') }}</th>
+                <th class="text-right">{{ _('Satılan') }}</th>
+                <th class="text-right">{{ _('Ciro') }}</th>
+                <th class="text-right">
+                    {% if analysis_mode == 'actual' %}{{ _('Gerçek Maliyet') }}{% else %}{{ _('Tahmini Maliyet') }}{% endif %}
+                </th>
+                <th class="text-right">
+                    {% if analysis_mode == 'actual' %}{{ _('Gerçek Kar') }}{% else %}{{ _('Tahmini Kar') }}{% endif %}
+                </th>
+                <th class="text-right">{{ _('Marj %') }}</th>
+                <th>{{ _('Kapsam') }}</th>
+                <th>{{ _('Aksiyon Önerileri') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for p in products %}
+            <tr>
+                <td style="font-weight: bold;">{{ p.product_name }}</td>
+                <td>{{ p.category_name }}</td>
+                <td><span class="badge">{{ p.menu_class|default(_('Sınıflandırılamadı')) }}</span></td>
+                <td class="text-right tabular-nums">{{ p.sold_qty|qty }}</td>
+                <td class="text-right tabular-nums">{{ p.revenue|currency }}</td>
+                <td class="text-right tabular-nums">
+                    {% if p.food_cost is not none %}{{ p.food_cost|currency }}{% else %}—{% endif %}
+                </td>
+                <td class="text-right tabular-nums">
+                    {% if p.gross_profit is not none %}{{ p.gross_profit|currency }}{% else %}—{% endif %}
+                </td>
+                <td class="text-right tabular-nums">
+                    {% if p.margin_pct is not none %}%{{ p.margin_pct }}{% else %}—{% endif %}
+                </td>
+                <td class="muted">{{ p.coverage_note }}</td>
+                <td class="muted">{{ p.action_recommendations|default('—') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="summary">
+        <span>{{ _('Toplam stok sapma maliyeti:') }} {{ stock_variance_summary.totals.total_variance_cost|default(0)|currency }}</span>
+        <span>{{ _('Fire:') }} {{ stock_variance_summary.totals.waste_qty|default(0)|qty }}</span>
+        <span>{{ _('İptal:') }} {{ stock_variance_summary.totals.cancel_qty|default(0)|qty }}</span>
+        <span>{{ _('İade:') }} {{ stock_variance_summary.totals.return_qty|default(0)|qty }}</span>
+    </div>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+</html>

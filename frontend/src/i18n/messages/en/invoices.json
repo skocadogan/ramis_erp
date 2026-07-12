@@ -1,0 +1,42 @@
+{
+  "page": {
+    "title": "Invoices",
+    "description": "Issued invoices and PDF downloads{branchSuffix}",
+    "branchSuffixWithName": " — {name}",
+    "branchRequired": "Branch is required.",
+    "listTitle": "Invoice list",
+    "listHint": "Invoices for the selected branch; filter by date, PDF availability, and search.",
+    "dateFrom": "Start",
+    "dateTo": "End",
+    "pdfFilter": "PDF",
+    "pdfAll": "All",
+    "pdfYes": "Has PDF",
+    "pdfNo": "No PDF",
+    "searchLabel": "No. / customer",
+    "searchPlaceholder": "Search…",
+    "resetFilters": "Reset filters",
+    "empty": "No invoices match the criteria."
+  },
+  "table": {
+    "number": "No.",
+    "customer": "Customer",
+    "amount": "Amount",
+    "date": "Date",
+    "pdf": "PDF",
+    "download": "Download",
+    "noPdf": "None",
+    "missing": "—"
+  },
+  "createModal": {
+    "title": "Create invoice",
+    "saleLine": "Sale: {id}… · {amount}",
+    "placeholderName": "Title / full name",
+    "placeholderTaxId": "Tax ID / national ID",
+    "placeholderAddress": "Address",
+    "dismiss": "Cancel",
+    "submit": "Create",
+    "submitting": "…",
+    "toastSuccess": "Invoice created.",
+    "toastError": "Could not create invoice."
+  }
+}

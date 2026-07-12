@@ -1,0 +1,104 @@
+{
+  "title": "Restoran Özeti",
+  "subtitle": "Gelir özeti ve satış kırılımları — {branch}",
+  "allBranches": "Tüm Şubeler",
+  "branchRequired": "Şube bilgisi gerekli.",
+  "loadError": "Özet verileri yüklenemedi. Lütfen tekrar deneyin.",
+  "resetToToday": "Sıfırla",
+  "liveData": {
+    "label": "Anlık veri",
+    "ariaSwitch": "Anlık veri: periyodik yenileme",
+    "helpAria": "Anlık veri hakkında bilgi",
+    "tooltip": "Açıkken özet yaklaşık {seconds} saniyede bir yenilenir. Sekme arka plandayken istek gönderilmez. Tercih yalnızca bu tarayıcı oturumu için hatırlanır."
+  },
+  "anomalies": {
+    "details": "Detayları Gör",
+    "dismiss": "Yoksay",
+    "dismissAria": "Kapat"
+  },
+  "anomalyDialog": {
+    "intro": "Bu uyarı, akıllı anomali tespit motoru tarafından <bold>statik eşik kuralları</bold> çerçevesinde oluşturulmuştur.",
+    "ruleTitle": "Kural Analizi",
+    "rule1": "Sistem, bugünkü satışları son 4 haftanın aynı günüyle kıyasladı.",
+    "rule2": "Mevcut satış hacminde <bold>%35'ten fazla</bold> bir sapma tespit edildi.",
+    "rule3": "Bu durum mutfak hızı, tedarik eksikliği veya operasyonel bir aksaklığa işaret ediyor olabilir."
+  },
+  "kpi": {
+    "revenue": "Ciro ({period})",
+    "yesterday": "Dün:",
+    "orderCount": "Sipariş sayısı",
+    "monthlyTarget": "Aylık Hedef",
+    "avgTicket": "Ortalama adisyon",
+    "openShift": "Açık vardiya",
+    "openingCash": "{amount} başlangıç",
+    "none": "Yok"
+  },
+  "inventoryKpi": {
+    "criticalStock": "Kritik stok kalemi",
+    "belowMinimum": "Minimum eşiğin altında",
+    "stockValue": "Stok değeri (yaklaşık)",
+    "wasteRatio": "Fire/zayi oranı"
+  },
+  "presets": {
+    "today": "Bugün",
+    "this_week": "Bu Hafta",
+    "last_week": "Geçen Hafta",
+    "this_month": "Bu Ay",
+    "last_month": "Geçen Ay",
+    "last_3_months": "Son 3 Ay",
+    "last_6_months": "Son 6 Ay",
+    "last_9_months": "Son 9 Ay",
+    "this_year": "Bu Yıl",
+    "custom": "Özel Aralık"
+  },
+  "periodFilter": {
+    "label": "Dönem",
+    "selectPlaceholder": "Dönem seçin…",
+    "groupAria": "Satış dönemi",
+    "selectAria": "Satış dönemi"
+  },
+  "tables": {
+    "loading": "Yükleniyor...",
+    "noData": "Veri bulunamadı.",
+    "noRecords": "Kayıt bulunamadı."
+  },
+  "branchPerformance": {
+    "title": "Şube bazlı performans (gün)",
+    "branch": "Şube",
+    "revenue": "Ciro"
+  },
+  "warehouseStock": {
+    "title": "Depo bazlı stok değeri",
+    "warehouse": "Depo",
+    "value": "Değer"
+  },
+  "topConsumption": {
+    "title": "En çok tüketilen hammaddeler",
+    "hint": "Fire/Zayi'ler de dahil",
+    "stock": "Stok",
+    "sku": "SKU",
+    "consumption": "Tüketim"
+  },
+  "wasteTop": {
+    "title": "Fire/Zayi",
+    "subtitle": "Seçili tarihte sadece Fire/Zayi hareketleri",
+    "waste": "Fire"
+  },
+  "paymentBreakdown": {
+    "title": "Ödeme dağılımı (gün)"
+  },
+  "paymentMethods": {
+    "cash": "Nakit",
+    "card": "Kart",
+    "other": "Diğer"
+  },
+  "topSellers": {
+    "title": "En çok satanlar",
+    "piece": "ad"
+  },
+  "charts": {
+    "revenueCurve": "Gelir eğrisi",
+    "categoryDay": "Kategori (seçili gün)",
+    "tooltipRevenue": "Ciro"
+  }
+}

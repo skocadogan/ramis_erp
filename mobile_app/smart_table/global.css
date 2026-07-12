@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   Smart Table - Design System
+   RAMIS Design System v2 ile uyumlu
+   
+   NOT: React Native CSS custom properties
+   (var(--x)) desteklemez. Tema renkleri
+   useTheme() hook'u ve Tailwind dark: 
+   prefix ile yönetilmektedir.
+   ============================================ */
+
+/* Tablet optimizasyonları */
+@layer utilities {
+  /* Touch hedefleri için minimum boyut */
+  .touch-target {
+    min-width: 48px;
+    min-height: 48px;
+  }
+
+  /* Yemek fotoğrafı için aspect ratio */
+  .food-aspect {
+    aspect-ratio: 4/3;
+  }
+
+  /* Scrollbar gizleme */
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}

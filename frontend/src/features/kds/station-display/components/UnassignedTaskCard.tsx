@@ -1,0 +1,206 @@
+import { useEffect, useState } from "react";
+import { AlertTriangle, Timer, Users } from "lucide-react";
+import { type PrepTask } from "@/features/prep/types";
+import { cn } from "@/lib/utils";
+import { formatDeadline } from "../utils/formatDeadline";
+import { ProgressBar } from "./ProgressBar";
+
+interface UnassignedTaskCardProps {
+  tasks: PrepTask[];
+  stationColor: string;
+}
+
+/**
+ * UnassignedTaskCard displays tasks assigned to everyone (no specific user).
+ * Uses "Herkes" header with dashed border to visually distinguish from
+ * individual user cards.
+ */
+export function UnassignedTaskCard({
+  tasks,
+  stationColor,
+}: UnassignedTaskCardProps) {
+  // Sadece bu kartın ve deadline etiketlerinin periyodik olarak güncellenmesi için
+  const [, forceUpdate] = useState(0);
+  useEffect(() => {
+    const id = setInterval(() => forceUpdate((n) => n + 1), 60_000);
+    return () => clearInterval(id);
+  }, []);
+
+  const totalProgress = tasks.reduce(
+    (acc, t) => acc + (t.target_quantity > 0 ? t.completed_quantity / t.target_quantity : 0),
+    0
+  );
+  const avgProgress =
+    tasks.length > 0 ? Math.round((totalProgress / tasks.length) * 100) : 0;
+  const totalCompletedQty = tasks.reduce(
+    (acc, t) => acc + t.completed_quantity,
+    0
+  );
+  const totalTargetQty = tasks.reduce(
+    (acc, t) => acc + t.target_quantity,
+    0
+  );
+
+  return (
+    <div
+      className={cn(
+        "flex flex-col gap-4 rounded-2xl border-2 p-5 transition-colors duration-300",
+        "border-dashed border-slate-600/50 bg-slate-900/60 hover:border-slate-500/50"
+      )}
+    >
+      {/* ─── Header ─── */}
+      <div className="flex items-center gap-3">
+        <div
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl"
+          style={{
+            backgroundColor: `${stationColor}12`,
+            color: stationColor,
+          }}
+        >
+          <Users size={22} />
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <h3
+            className="truncate text-lg font-bold"
+            style={{ color: stationColor }}
+          >
+            👥 Herkes
+          </h3>
+          <div className="flex items-center gap-2 text-xs text-slate-400">
+            <span className="inline-flex items-center gap-1">
+              <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
+              {tasks.length} görev
+            </span>
+            {totalTargetQty > 0 && (
+              <span className="text-slate-500">
+                Toplam: {totalCompletedQty}/{totalTargetQty}
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Average progress */}
+        <div className="flex shrink-0 items-center gap-1.5">
+          <div
+            className={cn(
+              "text-lg font-bold tabular-nums",
+              avgProgress >= 100
+                ? "text-emerald-400"
+                : avgProgress > 50
+                  ? "text-blue-400"
+                  : "text-amber-400"
+            )}
+          >
+            %{avgProgress}
+          </div>
+        </div>
+      </div>
+
+      {/* ─── Divider ─── */}
+      <div className="h-px bg-slate-700/30" />
+
+      {/* ─── Task List ─── */}
+      <div className="flex flex-col gap-3">
+        {tasks.map((task) => (
+          <ActiveTaskItem key={task.id} task={task} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ─── Individual active task item (shared with UserTaskCard) ─── */
+
+function ActiveTaskItem({ task }: { task: PrepTask }) {
+  const deadline = formatDeadline(task.deadline);
+  const progress =
+    task.target_quantity > 0
+      ? Math.min(100, (task.completed_quantity / task.target_quantity) * 100)
+      : 0;
+
+  return (
+    <div className="group rounded-xl border border-slate-700/40 bg-slate-900/60 p-3.5 transition-all duration-200 hover:border-slate-600/50">
+      {/* Row 1: Status dot + title + deadline */}
+      <div className="flex items-start justify-between gap-2">
+        <div className="flex min-w-0 flex-1 items-center gap-2.5">
+          {/* Status dot */}
+          <span
+            className={cn(
+              "mt-0.5 h-2.5 w-2.5 shrink-0 rounded-full",
+              task.status === "IN_PROGRESS"
+                ? "bg-blue-500 shadow-[0_0_6px_rgba(59,130,246,0.5)]"
+                : "bg-amber-500"
+            )}
+          />
+
+          {/* Title */}
+          <span className="truncate text-base font-bold text-white">
+            {task.title}
+          </span>
+        </div>
+
+        <div className="flex shrink-0 items-center gap-2">
+          {/* Priority badge */}
+          {task.priority > 5 && (
+            <span className="inline-flex items-center gap-1 rounded-full border border-red-500/30 bg-red-500/10 px-2 py-0.5 text-xs font-bold uppercase text-red-400">
+              <AlertTriangle size={10} />
+              Acil
+            </span>
+          )}
+
+          {/* Deadline label */}
+          {deadline.label && (
+            <span
+              className={cn(
+                "inline-flex items-center gap-1 whitespace-nowrap text-xs font-semibold tabular-nums",
+                deadline.isOverdue
+                  ? "text-red-400"
+                  : deadline.isUrgent
+                    ? "text-amber-400"
+                    : "text-slate-400"
+              )}
+            >
+              <Timer size={12} />
+              {deadline.label}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Row 2: Quantity progress */}
+      {task.target_quantity > 0 && (
+        <div className="mt-2.5 space-y-1.5">
+          <div className="flex items-center justify-between text-xs">
+            <span className="font-medium text-slate-400">
+              {task.completed_quantity}/{task.target_quantity}{" "}
+              {task.unit && (
+                <span className="text-slate-500">{task.unit}</span>
+              )}
+            </span>
+            <span
+              className={cn(
+                "font-bold tabular-nums",
+                progress >= 100
+                  ? "text-emerald-400"
+                  : progress > 50
+                    ? "text-blue-400"
+                    : "text-amber-400"
+              )}
+            >
+              %{Math.round(progress)}
+            </span>
+          </div>
+          <ProgressBar value={task.completed_quantity} max={task.target_quantity} />
+        </div>
+      )}
+
+      {/* Compact description */}
+      {task.description && (
+        <p className="mt-1.5 line-clamp-1 text-xs text-slate-500">
+          {task.description}
+        </p>
+      )}
+    </div>
+  );
+}

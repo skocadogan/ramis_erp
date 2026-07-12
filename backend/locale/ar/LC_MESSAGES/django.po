@@ -1,0 +1,7258 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-06 08:51+0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+
+#: apps/audit/models.py:19
+msgid "Aktör"
+msgstr ""
+
+#: apps/audit/models.py:21 apps/printing/models.py:39 rbac/models/audit.py:49
+msgid "IP Adresi"
+msgstr ""
+
+#: apps/audit/models.py:22 rbac/models/audit.py:50
+msgid "User Agent"
+msgstr ""
+
+#: apps/audit/models.py:30 apps/branches/models.py:16
+#: apps/branches/models.py:80 apps/branches/models.py:280
+#: apps/credit/models.py:49 apps/credit/models.py:137
+#: apps/customers/reports.py:128 apps/customers/views.py:189
+#: apps/guest_feedback/models.py:148 apps/guest_feedback/models.py:249
+#: apps/inventory/models.py:257 apps/inventory/models.py:629
+#: apps/menu/models.py:20 apps/menu/models.py:49 apps/performances/models.py:22
+#: apps/performances/templates/reports/waiter_calls_report.html:151
+#: apps/performances/templates/reports/waiter_sales_report.html:181
+#: apps/performances/views.py:98 apps/performances/views.py:271
+#: apps/prep/models.py:236 apps/printing/models.py:26
+#: apps/production_planning/models.py:39 apps/production_planning/models.py:140
+#: apps/production_planning/models.py:179 apps/reservations/models.py:82
+#: apps/sales/templates/reports/cancellations_report.html:129
+#: apps/sales/templates/reports/customer_sales_detail.html:133
+#: apps/sales/templates/reports/sales_list.html:170
+#: apps/sales/templates/reports/sales_report.html:141 apps/sales/views.py:179
+#: apps/sales/views.py:299 apps/shifts/models.py:136
+#: apps/shifts/templates/reports/shift_list.html:51
+msgid "Şube"
+msgstr ""
+
+#: apps/audit/models.py:33
+msgid "Eylem"
+msgstr ""
+
+#: apps/audit/models.py:35 rbac/models/audit.py:45
+msgid "Hedef Tipi"
+msgstr ""
+
+#: apps/audit/models.py:36 rbac/models/audit.py:46
+msgid "Hedef ID"
+msgstr ""
+
+#: apps/audit/models.py:38
+msgid "Önceki Durum"
+msgstr ""
+
+#: apps/audit/models.py:39
+msgid "Sonraki Durum"
+msgstr ""
+
+#: apps/audit/models.py:41
+msgid "Ek Veri"
+msgstr ""
+
+#: apps/audit/models.py:45
+msgid "Denetim Kaydı"
+msgstr ""
+
+#: apps/audit/models.py:46
+msgid "Denetim Kayıtları"
+msgstr ""
+
+#: apps/branches/call_waiter.py:36
+#, python-format
+msgid "%(table)s masasından garson çağrısı"
+msgstr ""
+
+#: apps/branches/call_waiter.py:111
+msgid "Geçersiz table_id."
+msgstr ""
+
+#: apps/branches/call_waiter.py:129 apps/branches/reports/table_reports.py:28
+#: apps/branches/views.py:454 apps/branches/views_smart_button.py:37
+#: apps/guest_feedback/views.py:355
+msgid "Masa bulunamadı."
+msgstr ""
+
+#: apps/branches/call_waiter.py:132
+msgid "Masa hizmet dışı."
+msgstr ""
+
+#: apps/branches/call_waiter.py:136
+msgid "Bu masa için atanmış garson bulunamadı."
+msgstr ""
+
+#: apps/branches/models.py:18
+msgid "İstasyon Adı"
+msgstr ""
+
+#: apps/branches/models.py:19 apps/reporting/models.py:19
+#: apps/reporting/models.py:73
+msgid "Kod"
+msgstr ""
+
+#: apps/branches/models.py:20
+msgid "Renk"
+msgstr ""
+
+#: apps/branches/models.py:21 apps/credit/models.py:155
+#: apps/credit/reports/credit_reports.py:62 apps/guest_feedback/models.py:48
+#: apps/pos_display/models.py:92 apps/prep/models.py:26
+#: apps/recipes/models.py:51 rbac/models/category.py:23
+#: rbac/models/permission.py:10 rbac/models/role.py:12
+msgid "Açıklama"
+msgstr ""
+
+#: apps/branches/models.py:28 apps/inventory/models.py:157
+#: apps/inventory/models.py:308 apps/inventory/models.py:460
+#: apps/inventory/models.py:587 apps/inventory/models.py:641
+#: apps/inventory/models.py:708 apps/inventory/reports/inventory_reports.py:166
+#: apps/inventory/reports/inventory_reports.py:528
+#: apps/inventory/templates/reports/fefo_report.html:159
+#: apps/inventory/templates/reports/stock_item_detail.html:173
+#: apps/inventory/templates/reports/stock_movement_list.html:151
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:78
+#: apps/inventory/views.py:612 apps/warehouse/models.py:55
+#: apps/warehouse/models.py:77 apps/warehouse/models.py:526
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:104
+msgid "Depo"
+msgstr ""
+
+#: apps/branches/models.py:33
+msgid "Smart Firing ek buffer (dk)"
+msgstr ""
+
+#: apps/branches/models.py:34
+msgid ""
+"Smart Firing v2 açıkken bu istasyon için lead time’a eklenecek ek dakika; "
+"boş ise yalnızca kuyruk formülü uygulanır."
+msgstr ""
+
+#: apps/branches/models.py:40 apps/menu/models.py:96 apps/orders/models.py:148
+#: apps/prep/models.py:22 apps/printing/models.py:72
+#: apps/production_planning/models.py:112 apps/warehouse/models.py:665
+msgid "Mutfak İstasyonu"
+msgstr ""
+
+#: apps/branches/models.py:41
+msgid "Mutfak İstasyonları"
+msgstr ""
+
+#: apps/branches/models.py:51 apps/credit/models.py:38
+#: apps/customers/models.py:34 apps/customers/reports.py:65
+#: apps/customers/views.py:91 apps/inventory/models.py:423
+#: apps/sales/templates/reports/customer_list.html:83
+msgid "E-posta"
+msgstr ""
+
+#: apps/branches/models.py:52
+msgid "Web adresi"
+msgstr ""
+
+#: apps/branches/models.py:53 apps/customers/models.py:45
+#: apps/customers/reports.py:66 apps/customers/views.py:92
+msgid "Vergi Dairesi"
+msgstr ""
+
+#: apps/branches/models.py:54 apps/customers/reports.py:67
+#: apps/customers/views.py:93
+msgid "Vergi No"
+msgstr ""
+
+#: apps/branches/models.py:55
+msgid "Sicil No"
+msgstr ""
+
+#: apps/branches/models.py:56
+msgid "Mersis No"
+msgstr ""
+
+#: apps/branches/models.py:57
+msgid "Şube Logosu"
+msgstr ""
+
+#: apps/branches/models.py:60
+msgid "Masa temizlik süresi (dk)"
+msgstr ""
+
+#: apps/branches/models.py:61
+msgid "Ödeme sonrası masa Temizleniyor durumunda kalacağı dakika."
+msgstr ""
+
+#: apps/branches/models.py:63
+msgid "Para birimi"
+msgstr ""
+
+#: apps/branches/models.py:66
+msgid "Vergi oranı (%)"
+msgstr ""
+
+#: apps/branches/models.py:70
+msgid "Fatura ön eki"
+msgstr ""
+
+#: apps/branches/models.py:76
+msgid "Şube Üyeleri"
+msgstr ""
+
+#: apps/branches/models.py:81 apps/guest_feedback/models.py:53
+#: apps/warehouse/models.py:38
+msgid "Şubeler"
+msgstr ""
+
+#: apps/branches/models.py:91
+msgid "Paket Bölgesi"
+msgstr ""
+
+#: apps/branches/models.py:96 apps/performances/models.py:41
+#: apps/performances/templates/reports/waiter_calls_report.html:153
+#: apps/performances/views.py:100 apps/performances/views.py:273
+msgid "Bölge"
+msgstr ""
+
+#: apps/branches/models.py:97
+msgid "Bölgeler"
+msgstr ""
+
+#: apps/branches/models.py:103
+msgid "Küçük (1-2 Kişi)"
+msgstr ""
+
+#: apps/branches/models.py:104
+msgid "Orta (3-4 Kişi)"
+msgstr ""
+
+#: apps/branches/models.py:105
+msgid "Büyük (5-8 Kişi)"
+msgstr ""
+
+#: apps/branches/models.py:106
+msgid "Çok Büyük (8+ Kişi)"
+msgstr ""
+
+#: apps/branches/models.py:109
+msgid "Yuvarlak"
+msgstr ""
+
+#: apps/branches/models.py:110
+msgid "Kare"
+msgstr ""
+
+#: apps/branches/models.py:111
+msgid "Dikdörtgen"
+msgstr ""
+
+#: apps/branches/models.py:114
+msgid "Boş"
+msgstr ""
+
+#: apps/branches/models.py:115
+msgid "Dolu"
+msgstr ""
+
+#: apps/branches/models.py:116 apps/inventory/models.py:563
+msgid "Rezerve"
+msgstr ""
+
+#: apps/branches/models.py:117
+msgid "Temizleniyor"
+msgstr ""
+
+#: apps/branches/models.py:118
+msgid "Hizmet Dışı"
+msgstr ""
+
+#: apps/branches/models.py:141
+msgid "Rezervasyon bilgisi"
+msgstr ""
+
+#: apps/branches/models.py:142
+msgid "Kime / iletişim / not (yalnızca rezerve masalar için)"
+msgstr ""
+
+#: apps/branches/models.py:147
+msgid "Rezervasyon saati"
+msgstr ""
+
+#: apps/branches/models.py:148
+msgid "Planlanan geliş saati (isteğe bağlı)"
+msgstr ""
+
+#: apps/branches/models.py:153
+msgid "Rezervasyon kişi sayısı"
+msgstr ""
+
+#: apps/branches/models.py:159
+msgid "Temizlik başlangıcı"
+msgstr ""
+
+#: apps/branches/models.py:164 apps/guest_feedback/models.py:156
+#: apps/guest_feedback/models.py:257 apps/orders/models.py:20
+#: apps/orders/views.py:616 apps/performances/models.py:30
+#: apps/performances/templates/reports/waiter_calls_report.html:152
+#: apps/performances/templates/reports/waiter_sales_report.html:182
+#: apps/performances/views.py:99 apps/performances/views.py:272
+#: apps/sales/templates/reports/cancellations_report.html:130
+#: apps/sales/views.py:300
+msgid "Masa"
+msgstr ""
+
+#: apps/branches/models.py:165
+msgid "Masalar"
+msgstr ""
+
+#: apps/branches/models.py:192
+msgid "Garson şube ataması"
+msgstr ""
+
+#: apps/branches/models.py:193
+msgid "Garson şube atamaları"
+msgstr ""
+
+#: apps/branches/models.py:222
+msgid "Aşçı istasyon ataması"
+msgstr ""
+
+#: apps/branches/models.py:223
+msgid "Aşçı istasyon atamaları"
+msgstr ""
+
+#: apps/branches/models.py:247
+msgid "Müdür şube ataması"
+msgstr ""
+
+#: apps/branches/models.py:248
+msgid "Müdür şube atamaları"
+msgstr ""
+
+#: apps/branches/models.py:264
+msgid "Şube Sipariş Sayacı"
+msgstr ""
+
+#: apps/branches/models.py:265
+msgid "Şube Sipariş Sayaçları"
+msgstr ""
+
+#: apps/branches/models.py:282
+msgid "Ay (1-12)"
+msgstr ""
+
+#: apps/branches/models.py:283
+msgid "Yıl"
+msgstr ""
+
+#: apps/branches/models.py:287
+msgid "Hedef Ciro"
+msgstr ""
+
+#: apps/branches/models.py:293
+msgid "Şube Hedefi"
+msgstr ""
+
+#: apps/branches/models.py:294
+msgid "Şube Hedefleri"
+msgstr ""
+
+#: apps/branches/reports/table_reports.py:15
+msgid "Masa QR Kod Raporu"
+msgstr ""
+
+#: apps/branches/reports/table_reports.py:16
+msgid "Seçilen masanın QR Kodunu içeren yazıcı çıktısı."
+msgstr ""
+
+#: apps/branches/reports/table_reports.py:23
+msgid "Masa ID parametresi (table_id) eksik."
+msgstr ""
+
+#: apps/branches/serializers.py:440
+msgid "Paket bölgelerinde masa tanımlanamaz."
+msgstr ""
+
+#: apps/branches/serializers.py:477
+msgid "stock_item_id veya product_id alanlarından en az biri dolu olmalıdır."
+msgstr ""
+
+#: apps/branches/serializers.py:500
+msgid "Geçersiz neden kodu."
+msgstr ""
+
+#: apps/branches/services.py:303
+msgid "Paket bölgelerinde temizlik akışı kullanılmaz."
+msgstr ""
+
+#: apps/branches/services.py:306
+msgid "Masa temizlik durumuna alınamaz."
+msgstr ""
+
+#: apps/branches/services.py:316
+msgid "Aktif sipariş varken masa temizliğe alınamaz."
+msgstr ""
+
+#: apps/branches/services.py:377
+msgid ""
+"Aktif sipariş varken masa kapatılamaz. Önce ödeme alın veya masayı zorla "
+"kapatın."
+msgstr ""
+
+#: apps/branches/services.py:408
+msgid "Yalnızca dolu (OCCUPIED) masalar zorla kapatılabilir."
+msgstr ""
+
+#: apps/branches/services.py:617
+msgid "Paket bölgesine toplu masa eklenemez."
+msgstr ""
+
+#: apps/branches/views.py:74
+msgid "Şube silme yetkisi sadece sistem yöneticilerine aittir."
+msgstr ""
+
+#: apps/branches/views.py:88
+msgid "Şube geri yükleme yetkisi sadece sistem yöneticilerine aittir."
+msgstr ""
+
+#: apps/branches/views.py:123 apps/branches/views.py:163
+msgid "Kullanıcının birincil şubesi bu şube değil."
+msgstr ""
+
+#: apps/branches/views.py:184
+msgid "Bazı istasyonlar bu şubeye ait değil."
+msgstr ""
+
+#: apps/branches/views.py:211
+msgid "Bazı şubeler bulunamadı."
+msgstr ""
+
+#: apps/branches/views.py:260
+msgid "Çoklu şube erişiminiz var; branch_id parametresi gerekli."
+msgstr ""
+
+#: apps/branches/views.py:282 apps/menu/views.py:72 apps/menu/views.py:243
+#: apps/pos_display/views.py:185
+msgid "Sıra verisi sağlanmadı."
+msgstr ""
+
+#: apps/branches/views.py:288 apps/pos_display/views.py:191
+msgid "Yetkisiz kayıt."
+msgstr ""
+
+#: apps/branches/views.py:308
+msgid ""
+"Bu bölgede aktif masalar bulunuyor. Önce masaları silin veya başka bölgeye "
+"taşıyın."
+msgstr ""
+
+#: apps/branches/views.py:704
+msgid "İstasyona depo atanmamış; fire/zayi kaydı yapılamaz."
+msgstr ""
+
+#: apps/branches/views.py:722 apps/branches/views.py:781
+msgid "Seçilen stok kalemi bu depoda tanımlı değil."
+msgstr ""
+
+#: apps/branches/views.py:769
+msgid "İstasyona depo atanmamış; iade/iptal kaydı yapılamaz."
+msgstr ""
+
+#: apps/branches/virtual_table_ids.py:195
+msgid "Sanal paket masası yalnızca paket siparişi için kullanılabilir."
+msgstr ""
+
+#: apps/branches/virtual_table_ids.py:201
+msgid "Geçersiz paket bölgesi."
+msgstr ""
+
+#: apps/branches/virtual_table_ids.py:204
+msgid "Açık paket siparişine yeni satır bu uçtan eklenemez."
+msgstr ""
+
+#: apps/branches/waiter_call_pending.py:28
+#: apps/reservations/reservation_alerts.py:44
+#, python-format
+msgid "Rezervasyon saati geldi: %(customer)s · %(table)s · %(party)s kişi"
+msgstr ""
+
+#: apps/branches/waiter_call_pending.py:36
+#: apps/reservations/reservation_alerts.py:60
+#, python-format
+msgid ""
+"Rezervasyon yaklaşıyor (%(minutes)s dk): %(customer)s · %(table)s · "
+"%(party)s kişi"
+msgstr ""
+
+#: apps/branches/waiter_call_pending.py:70 apps/branches/waiter_call_sync.py:67
+#: apps/credit/views.py:219
+msgid "branch_id zorunludur."
+msgstr ""
+
+#: apps/branches/waiter_call_pending.py:73 apps/branches/waiter_call_sync.py:70
+#: apps/credit/views.py:121 apps/credit/views.py:148 apps/credit/views.py:166
+#: apps/credit/views.py:182 apps/credit/views.py:221 apps/dashboard/views.py:32
+#: apps/guest_feedback/views.py:176 apps/guest_feedback/views.py:192
+#: apps/guest_feedback/views.py:337 apps/guest_feedback/views.py:359
+#: apps/guest_feedback/views.py:466 apps/guest_feedback/views.py:500
+#: apps/pos_display/views.py:41 apps/pos_display/views.py:105
+#: apps/pos_display/views.py:268 apps/pos_display/views.py:274
+#: apps/pos_display/views.py:278 apps/pos_display/views.py:283
+#: apps/pos_display/views.py:291 apps/pos_display/views.py:310
+#: apps/pos_display/views.py:338 apps/reservations/views.py:155
+#: apps/reservations/views.py:204 apps/shifts/views.py:95
+#: apps/shifts/views.py:132
+msgid "Bu şube için yetkiniz yok."
+msgstr ""
+
+#: apps/branches/waiter_call_pending.py:119
+#: apps/reservations/reservation_alerts.py:71
+#, python-format
+msgid "Misafir geldi: %(customer)s · %(table)s · %(party)s kişi"
+msgstr ""
+
+#: apps/branches/waiter_call_sync.py:95
+msgid "call_id, call_ids veya dismiss_all belirtilmelidir."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:109
+msgid "Bu şube için garson atamanız tanımlı değil."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:118 apps/branches/waiter_scope.py:130
+msgid "Bu paket bölgesi garson hizmet alanınızda değil."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:125
+msgid "Bu sipariş garson hizmet alanınızda değil."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:135
+msgid "Bu masa garson hizmet alanınızda değil."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:151
+msgid "Bu işlem yalnızca masa siparişleri için geçerlidir."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:164
+#, python-format
+msgid "Zone %(zone_id)s bu şubeye ait değil."
+msgstr ""
+
+#: apps/branches/waiter_scope.py:171
+#, python-format
+msgid "Masa %(table_id)s bu şubeye ait değil."
+msgstr ""
+
+#: apps/credit/models.py:13
+msgid "Bakiye yetersizse engelle"
+msgstr ""
+
+#: apps/credit/models.py:14
+msgid "Uyar ama satışa izin ver"
+msgstr ""
+
+#: apps/credit/models.py:15
+msgid "Açık hesap (limitsiz)"
+msgstr ""
+
+#: apps/credit/models.py:33
+msgid "Sistem Kullanıcısı"
+msgstr ""
+
+#: apps/credit/models.py:35
+msgid "Ad"
+msgstr ""
+
+#: apps/credit/models.py:36
+msgid "Soyad"
+msgstr ""
+
+#: apps/credit/models.py:37 apps/customers/models.py:29
+#: apps/customers/reports.py:64 apps/customers/views.py:90
+#: apps/inventory/models.py:422
+#: apps/sales/templates/reports/customer_list.html:82
+msgid "Telefon"
+msgstr ""
+
+#: apps/credit/models.py:39 apps/customers/models.py:23
+#: apps/customers/reports.py:69 apps/customers/views.py:95
+#: apps/inventory/models.py:424
+#: apps/inventory/templates/reports/supplier_list.html:33
+#: apps/sales/templates/reports/customer_list.html:85
+#: apps/warehouse/models.py:41
+msgid "Adres"
+msgstr ""
+
+#: apps/credit/models.py:40 apps/inventory/models.py:321
+#: apps/inventory/models.py:425 apps/inventory/models.py:476
+#: apps/inventory/templates/reports/stock_item_detail.html:177
+#: apps/production_planning/models.py:48 apps/recipes/models.py:160
+#: apps/warehouse/models.py:52 apps/warehouse/models.py:159
+#: apps/warehouse/models.py:223 apps/warehouse/models.py:309
+#: apps/warehouse/models.py:355 apps/warehouse/models.py:447
+#: apps/warehouse/models.py:483 apps/warehouse/models.py:551
+#: apps/warehouse/models.py:591 apps/warehouse/models.py:680
+#: apps/warehouse/models.py:729
+msgid "Notlar"
+msgstr ""
+
+#: apps/credit/models.py:53
+msgid "Tüm Şubelerde Geçerli"
+msgstr ""
+
+#: apps/credit/models.py:54
+msgid "İşaretliyse hesap herhangi bir şubede kullanılabilir."
+msgstr ""
+
+#: apps/credit/models.py:60
+msgid "Bakiye Politikası"
+msgstr ""
+
+#: apps/credit/models.py:69 apps/inventory/models.py:249
+#: apps/inventory/models.py:454 apps/inventory/models.py:828
+#: apps/production_planning/models.py:54 apps/warehouse/models.py:173
+#: apps/warehouse/models.py:686
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:112
+msgid "Oluşturan"
+msgstr ""
+
+#: apps/credit/models.py:74
+msgid "Ödenmez Hesabı"
+msgstr ""
+
+#: apps/credit/models.py:75
+msgid "Ödenmez Hesapları"
+msgstr ""
+
+#: apps/credit/models.py:99
+msgid "Kredi Yükleme"
+msgstr ""
+
+#: apps/credit/models.py:100
+msgid "Harcama"
+msgstr ""
+
+#: apps/credit/models.py:119 apps/credit/reports/credit_reports.py:82
+msgid "Hesap"
+msgstr ""
+
+#: apps/credit/models.py:124
+msgid "Hareket Türü"
+msgstr ""
+
+#: apps/credit/models.py:129 apps/credit/reports/credit_reports.py:60
+#: apps/performances/templates/reports/waiter_sales_report.html:184
+#: apps/performances/views.py:276
+#: apps/sales/templates/reports/cancellations_report.html:135
+#: apps/sales/views.py:305 apps/shifts/templates/reports/cash_report.html:262
+#: apps/shifts/templates/reports/cash_report.html:321
+#: apps/shifts/templates/reports/z_report.html:52
+#: apps/shifts/templates/reports/z_report.html:78
+msgid "Tutar"
+msgstr ""
+
+#: apps/credit/models.py:145 apps/guest_feedback/models.py:172
+#: apps/guest_feedback/models.py:273 apps/inventory/models.py:813
+#: apps/shifts/templates/reports/cash_report.html:236
+#: apps/shifts/templates/reports/cash_report.html:293
+msgid "Satış"
+msgstr ""
+
+#: apps/credit/models.py:153 apps/inventory/models.py:328
+#: apps/inventory/reports/inventory_reports.py:170 apps/inventory/views.py:619
+#: apps/production_planning/models.py:214 rbac/models/audit.py:42
+msgid "İşlemi Yapan"
+msgstr ""
+
+#: apps/credit/models.py:159
+msgid "Ödenmez Hareketi"
+msgstr ""
+
+#: apps/credit/models.py:160
+msgid "Ödenmez Hareketleri"
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:15
+msgid "Ödenmez Hesap Ekstresi"
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:16
+msgid "Seçili ödenmez hesabının kredi yüklemeleri ve harcamaları."
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:23
+msgid "account_id parametresi zorunludur."
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:33 apps/credit/services.py:38
+#: apps/credit/services.py:242
+msgid "Ödenmez hesabı bulunamadı."
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:58 apps/customers/reports.py:127
+#: apps/customers/views.py:188 apps/inventory/reports/inventory_reports.py:163
+#: apps/inventory/reports/inventory_reports.py:425
+#: apps/inventory/reports/inventory_reports.py:526
+#: apps/inventory/templates/reports/stock_item_detail.html:172
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:76
+#: apps/inventory/templates/reports/supplier_rejected_items.html:75
+#: apps/inventory/views.py:609
+#: apps/performances/templates/reports/waiter_calls_report.html:150
+#: apps/performances/templates/reports/waiter_sales_report.html:180
+#: apps/performances/views.py:97 apps/performances/views.py:270
+#: apps/sales/templates/reports/cancellations_report.html:128
+#: apps/sales/templates/reports/customer_sales_detail.html:131
+#: apps/sales/templates/reports/sales_report.html:139 apps/sales/views.py:178
+#: apps/sales/views.py:298 apps/shifts/templates/reports/cash_report.html:317
+#: rbac/models/audit.py:51
+msgid "Tarih"
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:59
+#: apps/inventory/templates/reports/stock_movement_list.html:152
+#: apps/pos_display/models.py:89 apps/shifts/templates/reports/z_report.html:51
+msgid "Tür"
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:61 apps/orders/models.py:57
+#: apps/performances/views.py:275
+#: apps/shifts/templates/reports/cash_report.html:316
+#: apps/warehouse/models.py:137
+msgid "Sipariş No"
+msgstr ""
+
+#: apps/credit/reports/credit_reports.py:85
+msgid "Güncel bakiye"
+msgstr ""
+
+#: apps/credit/services.py:59 apps/credit/services.py:125
+msgid "Ad alanı zorunludur."
+msgstr ""
+
+#: apps/credit/services.py:64 apps/credit/services.py:111
+msgid "Bu kullanıcı için zaten aktif bir ödenmez hesabı var."
+msgstr ""
+
+#: apps/credit/services.py:67 apps/credit/services.py:122
+msgid "Şubeye özel hesap için şube seçilmelidir."
+msgstr ""
+
+#: apps/credit/services.py:150
+msgid "Yükleme tutarı sıfırdan büyük olmalıdır."
+msgstr ""
+
+#: apps/credit/services.py:181
+msgid "Geçersiz tutar."
+msgstr ""
+
+#: apps/credit/services.py:188
+msgid "Bu hesap bu şubede kullanılamaz."
+msgstr ""
+
+#: apps/credit/services.py:207
+#, python-format
+msgid "Yetersiz ödenmez bakiyesi. Kalan: %(bal)s"
+msgstr ""
+
+#: apps/credit/services.py:226
+msgid "Ödenmez ödemesi için credit_account_id zorunludur."
+msgstr ""
+
+#: apps/credit/services.py:246
+msgid "Ödenmez ile ödeme yapılamadı."
+msgstr ""
+
+#: apps/customers/models.py:6
+msgid "Bireysel"
+msgstr ""
+
+#: apps/customers/models.py:7
+msgid "Kurumsal"
+msgstr ""
+
+#: apps/customers/models.py:14
+msgid "Müşteri Tipi"
+msgstr ""
+
+#: apps/customers/models.py:18
+msgid "Müşteri Adı / Firma Adı"
+msgstr ""
+
+#: apps/customers/models.py:39
+msgid "Web Adresi"
+msgstr ""
+
+#: apps/customers/models.py:51
+msgid "Vergi Numarası"
+msgstr ""
+
+#: apps/customers/models.py:57
+msgid "T.C. Kimlik Numarası"
+msgstr ""
+
+#: apps/customers/models.py:63
+msgid "Mersis Numarası"
+msgstr ""
+
+#: apps/customers/models.py:67 apps/guest_feedback/models.py:180
+#: apps/guest_feedback/models.py:281 apps/orders/models.py:42
+msgid "Müşteri"
+msgstr ""
+
+#: apps/customers/models.py:68
+msgid "Müşteriler"
+msgstr ""
+
+#: apps/customers/reports.py:14
+msgid "Müşteri Listesi Raporu"
+msgstr ""
+
+#: apps/customers/reports.py:15
+msgid "Sistemde kayıtlı olan aktif müşterilerin detaylı listesi."
+msgstr ""
+
+#: apps/customers/reports.py:62 apps/customers/views.py:88
+#: apps/sales/templates/reports/customer_list.html:80
+msgid "Müşteri/Firma Adı"
+msgstr ""
+
+#: apps/customers/reports.py:63 apps/customers/views.py:89
+#: apps/inventory/reports/inventory_reports.py:164 apps/inventory/views.py:610
+#: apps/sales/templates/reports/customer_list.html:81
+msgid "Tip"
+msgstr ""
+
+#: apps/customers/reports.py:68 apps/customers/views.py:94
+msgid "T.C. No"
+msgstr ""
+
+#: apps/customers/reports.py:78
+msgid "Müşteri Satış Detay Raporu"
+msgstr ""
+
+#: apps/customers/reports.py:79
+msgid "Bir müşteriye ait bugüne kadar yapılmış satış hareketleri listesi."
+msgstr ""
+
+#: apps/customers/reports.py:126 apps/customers/views.py:187
+#: apps/sales/templates/reports/customer_sales_detail.html:132
+msgid "Satış No"
+msgstr ""
+
+#: apps/customers/reports.py:129 apps/customers/views.py:190
+#: apps/sales/templates/reports/customer_sales_detail.html:134
+#: apps/sales/templates/reports/sales_list.html:173
+#: apps/shifts/templates/reports/cash_report.html:261
+msgid "Ödeme Yöntemi"
+msgstr ""
+
+#: apps/customers/reports.py:130 apps/customers/views.py:191
+msgid "Brüt Tutar"
+msgstr ""
+
+#: apps/customers/reports.py:131 apps/customers/views.py:192
+#: apps/sales/templates/reports/customer_sales_detail.html:135
+#: apps/sales/templates/reports/sales_list.html:175
+#: apps/sales/templates/reports/sales_report.html:143 apps/sales/views.py:182
+#: apps/shifts/templates/reports/cash_report.html:320
+msgid "İndirim"
+msgstr ""
+
+#: apps/customers/reports.py:132 apps/customers/views.py:193
+#: apps/sales/templates/reports/customer_sales_detail.html:123
+#: apps/sales/templates/reports/customer_sales_detail.html:136
+#: apps/sales/templates/reports/sales_list.html:176
+#: apps/sales/templates/reports/sales_report.html:144
+msgid "Net Tutar"
+msgstr ""
+
+#: apps/customers/reports.py:150 apps/customers/views.py:209
+#: apps/performances/views.py:122 apps/performances/views.py:309
+#: apps/sales/views.py:204 apps/sales/views.py:327
+msgid "TOPLAM"
+msgstr ""
+
+#: apps/customers/views.py:111
+msgid "Müşteri Listesi"
+msgstr ""
+
+#: apps/customers/views.py:125 apps/customers/views.py:155
+#: apps/performances/views.py:147 apps/performances/views.py:337
+#: apps/sales/views.py:227 apps/sales/views.py:375
+msgid "PDF raporlama devre dışı."
+msgstr ""
+
+#: apps/customers/views.py:218
+msgid "Müşteri Satış Detayları"
+msgstr ""
+
+#: apps/dashboard/views.py:48
+msgid "Tarih formatı YYYY-MM-DD olmalıdır."
+msgstr ""
+
+#: apps/dashboard/views.py:79 apps/dashboard/views.py:96
+#: apps/dashboard/views.py:115 apps/dashboard/views.py:135
+#: apps/dashboard/views.py:158
+msgid "start_date / end_date YYYY-MM-DD olmalıdır."
+msgstr ""
+
+#: apps/dashboard/views.py:167
+msgid "limit sayısal olmalıdır."
+msgstr ""
+
+#: apps/guest_feedback/models.py:14
+msgid "Müşteri Ekranı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:15
+msgid "Smart Table"
+msgstr ""
+
+#: apps/guest_feedback/models.py:19
+msgid "Derecelendirme"
+msgstr ""
+
+#: apps/guest_feedback/models.py:20 apps/guest_feedback/models.py:375
+msgid "Evet / Hayır"
+msgstr ""
+
+#: apps/guest_feedback/models.py:21 apps/guest_feedback/models.py:122
+msgid "Seçenek"
+msgstr ""
+
+#: apps/guest_feedback/models.py:22
+msgid "Kısa Metin"
+msgstr ""
+
+#: apps/guest_feedback/models.py:26
+msgid "Genel"
+msgstr ""
+
+#: apps/guest_feedback/models.py:27 apps/guest_feedback/models.py:306
+msgid "NPS"
+msgstr ""
+
+#: apps/guest_feedback/models.py:28
+msgid "Yemek"
+msgstr ""
+
+#: apps/guest_feedback/models.py:29
+msgid "Servis"
+msgstr ""
+
+#: apps/guest_feedback/models.py:30
+msgid "Hız"
+msgstr ""
+
+#: apps/guest_feedback/models.py:31
+msgid "Temizlik"
+msgstr ""
+
+#: apps/guest_feedback/models.py:35
+msgid "Açıldı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:36
+msgid "Yanıtlandı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:37
+msgid "Kapatıldı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:41 apps/shifts/models.py:10
+msgid "Açık"
+msgstr ""
+
+#: apps/guest_feedback/models.py:42
+msgid "İncelendi"
+msgstr ""
+
+#: apps/guest_feedback/models.py:43
+msgid "Çözüldü"
+msgstr ""
+
+#: apps/guest_feedback/models.py:47 apps/pos_display/models.py:90
+msgid "Başlık"
+msgstr ""
+
+#: apps/guest_feedback/models.py:49 apps/guest_feedback/models.py:97
+#: apps/guest_feedback/models.py:123 apps/inventory/models.py:507
+#: apps/menu/models.py:417 apps/pos_display/models.py:130
+msgid "Sıra"
+msgstr ""
+
+#: apps/guest_feedback/models.py:57
+msgid "Müşteri ekranında aktif"
+msgstr ""
+
+#: apps/guest_feedback/models.py:61
+msgid "Smart Table üzerinde aktif"
+msgstr ""
+
+#: apps/guest_feedback/models.py:66 apps/guest_feedback/models.py:82
+#: apps/guest_feedback/models.py:142 apps/guest_feedback/models.py:237
+msgid "Anket"
+msgstr ""
+
+#: apps/guest_feedback/models.py:67
+msgid "Anketler"
+msgstr ""
+
+#: apps/guest_feedback/models.py:84 apps/guest_feedback/models.py:120
+#: apps/guest_feedback/models.py:358
+msgid "Soru"
+msgstr ""
+
+#: apps/guest_feedback/models.py:89
+msgid "Cevap tipi"
+msgstr ""
+
+#: apps/guest_feedback/models.py:95
+msgid "Analitik rol"
+msgstr ""
+
+#: apps/guest_feedback/models.py:98
+msgid "Zorunlu"
+msgstr ""
+
+#: apps/guest_feedback/models.py:99
+msgid "Yer tutucu"
+msgstr ""
+
+#: apps/guest_feedback/models.py:100
+msgid "Min puan"
+msgstr ""
+
+#: apps/guest_feedback/models.py:101
+msgid "Maks puan"
+msgstr ""
+
+#: apps/guest_feedback/models.py:105
+msgid "Anket sorusu"
+msgstr ""
+
+#: apps/guest_feedback/models.py:106
+msgid "Anket soruları"
+msgstr ""
+
+#: apps/guest_feedback/models.py:127
+msgid "Soru seçeneği"
+msgstr ""
+
+#: apps/guest_feedback/models.py:128
+msgid "Soru seçenekleri"
+msgstr ""
+
+#: apps/guest_feedback/models.py:164 apps/guest_feedback/models.py:265
+#: apps/inventory/models.py:820 apps/orders/models.py:92
+#: apps/performances/templates/reports/waiter_sales_report.html:126
+msgid "Sipariş"
+msgstr ""
+
+#: apps/guest_feedback/models.py:188 apps/guest_feedback/models.py:289
+#: apps/performances/templates/reports/waiter_calls_report.html:125
+msgid "Personel"
+msgstr ""
+
+#: apps/guest_feedback/models.py:196 apps/guest_feedback/models.py:297
+#: apps/pos_display/models.py:33 apps/pos_display/models.py:82
+#: apps/pos_display/models.py:148 apps/sales/models.py:40
+msgid "POS terminali"
+msgstr ""
+
+#: apps/guest_feedback/models.py:202 apps/guest_feedback/models.py:303
+#: apps/performances/models.py:42 apps/production_planning/models.py:119
+msgid "Kaynak"
+msgstr ""
+
+#: apps/guest_feedback/models.py:204 apps/guest_feedback/models.py:305
+msgid "Oturum anahtarı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:209 apps/inventory/models.py:481
+#: apps/inventory/models.py:594 apps/inventory/models.py:717
+#: apps/inventory/models.py:779 apps/inventory/reports/inventory_reports.py:426
+#: apps/inventory/reports/inventory_reports.py:527
+#: apps/inventory/templates/reports/stock_item_detail.html:143
+#: apps/inventory/templates/reports/stock_item_list.html:148
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:77
+#: apps/performances/templates/reports/waiter_calls_report.html:156
+#: apps/performances/templates/reports/waiter_sales_report.html:186
+#: apps/performances/views.py:103 apps/performances/views.py:278
+#: apps/printing/models.py:133 apps/production_planning/models.py:46
+#: apps/production_planning/models.py:192
+#: apps/production_planning/templates/reports/mrp_pdf.html:140
+#: apps/shifts/templates/reports/shift_list.html:53
+#: apps/warehouse/models.py:155 apps/warehouse/models.py:289
+#: apps/warehouse/models.py:412 apps/warehouse/models.py:532
+#: apps/warehouse/models.py:678
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:92
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:92
+msgid "Durum"
+msgstr ""
+
+#: apps/guest_feedback/models.py:211 apps/printing/models.py:147
+msgid "Tamamlanma zamanı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:214
+msgid "Anket oturum durumu"
+msgstr ""
+
+#: apps/guest_feedback/models.py:215
+msgid "Anket oturum durumları"
+msgstr ""
+
+#: apps/guest_feedback/models.py:243
+msgid "Oturum"
+msgstr ""
+
+#: apps/guest_feedback/models.py:307
+msgid "Yemek puanı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:308
+msgid "Servis puanı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:309
+msgid "Hız puanı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:310
+msgid "Temizlik puanı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:311
+msgid "İlgi gerekiyor"
+msgstr ""
+
+#: apps/guest_feedback/models.py:316
+msgid "İlgi durumu"
+msgstr ""
+
+#: apps/guest_feedback/models.py:318
+msgid "İlgi notu"
+msgstr ""
+
+#: apps/guest_feedback/models.py:325
+msgid "İnceleyen kullanıcı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:330
+msgid "İnceleme zamanı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:335
+msgid "Anket yanıtı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:336
+msgid "Anket yanıtları"
+msgstr ""
+
+#: apps/guest_feedback/models.py:352
+msgid "Yanıt"
+msgstr ""
+
+#: apps/guest_feedback/models.py:366
+msgid "Seçilen seçenek"
+msgstr ""
+
+#: apps/guest_feedback/models.py:372
+msgid "Seçenek etiketi"
+msgstr ""
+
+#: apps/guest_feedback/models.py:374
+msgid "Puan"
+msgstr ""
+
+#: apps/guest_feedback/models.py:376 apps/pos_display/models.py:87
+msgid "Metin"
+msgstr ""
+
+#: apps/guest_feedback/models.py:380
+msgid "Soru yanıtı"
+msgstr ""
+
+#: apps/guest_feedback/models.py:381
+msgid "Soru yanıtları"
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:58
+msgid "Maksimum puan minimum puandan büyük olmalıdır."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:64
+msgid "NPS soruları yalnızca derecelendirme tipinde olabilir."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:68
+msgid "NPS soruları 0-10 aralığında olmalıdır."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:118
+msgid "En az bir şube seçmelisiniz."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:120
+msgid "En az bir soru eklemelisiniz."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:134
+msgid "{index + 1}. soru için en az bir seçenek gerekli."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:138
+msgid ""
+"{index + 1}. soruda seçenekler yalnızca Seçenek tipi için tanımlanabilir."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:144
+msgid "Aynı analitik rol bir ankette yalnızca bir kez kullanılabilir."
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:303
+msgid "Evet"
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:303
+msgid "Hayır"
+msgstr ""
+
+#: apps/guest_feedback/serializers.py:319
+msgid "Geçersiz ilgi durumu."
+msgstr ""
+
+#: apps/guest_feedback/views.py:155
+msgid "sale_id veya order_id gerekli."
+msgstr ""
+
+#: apps/guest_feedback/views.py:174
+msgid "Satış bulunamadı."
+msgstr ""
+
+#: apps/guest_feedback/views.py:190
+msgid "Sipariş bulunamadı."
+msgstr ""
+
+#: apps/guest_feedback/views.py:199 apps/guest_feedback/views.py:252
+#: apps/guest_feedback/views.py:305
+msgid "terminal_code gerekli."
+msgstr ""
+
+#: apps/guest_feedback/views.py:208 apps/orders/services/sale_helper.py:32
+#: apps/pos_display/views.py:44
+msgid "Geçersiz veya pasif POS terminali."
+msgstr ""
+
+#: apps/guest_feedback/views.py:232 apps/guest_feedback/views.py:254
+msgid "display_token gerekli."
+msgstr ""
+
+#: apps/guest_feedback/views.py:234 apps/guest_feedback/views.py:256
+#: apps/guest_feedback/views.py:331
+msgid "Geçersiz ekran tokenı."
+msgstr ""
+
+#: apps/guest_feedback/views.py:279 apps/guest_feedback/views.py:464
+msgid "Açık anket oturumu bulunamadı."
+msgstr ""
+
+#: apps/guest_feedback/views.py:327 apps/guest_feedback/views.py:498
+msgid "Anket oturumu bulunamadı."
+msgstr ""
+
+#: apps/guest_feedback/views.py:335
+msgid "Yetkilendirme gerekli."
+msgstr ""
+
+#: apps/guest_feedback/views.py:342
+msgid "Bu işlem için yetkiniz yok."
+msgstr ""
+
+#: apps/guest_feedback/views.py:367
+msgid "Aktif sipariş bulunamadı."
+msgstr ""
+
+#: apps/guest_feedback/views.py:379
+msgid "table_id ve order_id gerekli."
+msgstr ""
+
+#: apps/inventory/expiry_warning_view.py:35
+#: apps/inventory/services/expiry_action_service.py:14
+#: apps/inventory/views.py:261 apps/inventory/views.py:305
+#: apps/inventory/views.py:325 apps/inventory/views.py:407
+#: apps/inventory/views.py:976
+msgid "Bu depo için yetkiniz yok."
+msgstr ""
+
+#: apps/inventory/models.py:8 apps/recipes/models.py:11
+#: rbac/models/category.py:22
+msgid "Kategori Adı"
+msgstr ""
+
+#: apps/inventory/models.py:9 apps/recipes/models.py:12
+#: rbac/models/category.py:27
+msgid "Kategori Kodu"
+msgstr ""
+
+#: apps/inventory/models.py:16 apps/menu/models.py:86 apps/recipes/models.py:19
+msgid "Üst Kategori"
+msgstr ""
+
+#: apps/inventory/models.py:20
+msgid "Stok Kategorisi"
+msgstr ""
+
+#: apps/inventory/models.py:21
+msgid "Stok Kategorileri"
+msgstr ""
+
+#: apps/inventory/models.py:29
+msgid "Ağırlık (kg, g, ...)"
+msgstr ""
+
+#: apps/inventory/models.py:30
+msgid "Hacim (Lt, ml, ...)"
+msgstr ""
+
+#: apps/inventory/models.py:31
+msgid "Adet / Sayı (adet, pk, kutu, ...)"
+msgstr ""
+
+#: apps/inventory/models.py:32 apps/inventory/return_cancel_reasons.py:22
+#: apps/sales/models.py:12 apps/sales/templates/reports/sales_list.html:162
+#: apps/shifts/templates/reports/cash_report.html:275
+#: apps/shifts/templates/reports/cash_report.html:300
+#: apps/shifts/templates/reports/cash_report.html:343
+#: apps/shifts/templates/reports/z_report.html:84 apps/warehouse/models.py:509
+msgid "Diğer"
+msgstr ""
+
+#: apps/inventory/models.py:38
+msgid "Sistem Kodu"
+msgstr ""
+
+#: apps/inventory/models.py:39
+msgid "Madde Adı"
+msgstr ""
+
+#: apps/inventory/models.py:44
+msgid "Küresel Sıklık Oranı (%)"
+msgstr ""
+
+#: apps/inventory/models.py:48
+msgid "Risk Puanı"
+msgstr ""
+
+#: apps/inventory/models.py:49
+msgid "1 (düşük) – 10 (yüksek)"
+msgstr ""
+
+#: apps/inventory/models.py:51 apps/pos_display/models.py:94
+msgid "Sıralama"
+msgstr ""
+
+#: apps/inventory/models.py:55
+msgid "Alerjen Maddesi"
+msgstr ""
+
+#: apps/inventory/models.py:56
+msgid "Alerjen Maddeleri"
+msgstr ""
+
+#: apps/inventory/models.py:63 apps/orders/models.py:129
+msgid "Birim Adı"
+msgstr ""
+
+#: apps/inventory/models.py:64
+msgid "Kısa Ad"
+msgstr ""
+
+#: apps/inventory/models.py:66
+msgid "Çarpan"
+msgstr ""
+
+#: apps/inventory/models.py:72
+msgid "Birim Kategorisi"
+msgstr ""
+
+#: apps/inventory/models.py:73
+msgid "Birim dönüşümü yalnızca aynı kategorideki birimler arasında yapılır."
+msgstr ""
+
+#: apps/inventory/models.py:77
+msgid "Miktar Birimi"
+msgstr ""
+
+#: apps/inventory/models.py:78
+msgid "Miktar Birimleri"
+msgstr ""
+
+#: apps/inventory/models.py:88
+msgid "Stok Adı"
+msgstr ""
+
+#: apps/inventory/models.py:89
+msgid "Stok Kodu"
+msgstr ""
+
+#: apps/inventory/models.py:90
+msgid "Barkod"
+msgstr ""
+
+#: apps/inventory/models.py:94 apps/inventory/models.py:342
+#: apps/inventory/reports/inventory_reports.py:168
+#: apps/inventory/reports/inventory_reports.py:432
+#: apps/inventory/templates/reports/stock_item_list.html:146
+#: apps/inventory/templates/reports/stock_movement_list.html:154
+#: apps/inventory/templates/reports/supplier_rejected_items.html:80
+#: apps/inventory/views.py:614 apps/prep/models.py:30
+#: apps/production_planning/reports.py:91
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:151
+#: apps/recipes/models.py:150 apps/warehouse/models.py:218
+#: apps/warehouse/models.py:351 apps/warehouse/models.py:479
+#: apps/warehouse/models.py:590 apps/warehouse/models.py:728
+msgid "Birim"
+msgstr ""
+
+#: apps/inventory/models.py:95
+msgid "StockUnit.short_name ile eşleşmeli (Birim Tanımlamalarından)"
+msgstr ""
+
+#: apps/inventory/models.py:101 apps/warehouse/models.py:92
+msgid "Minimum Miktar"
+msgstr ""
+
+#: apps/inventory/models.py:102 apps/warehouse/models.py:93
+msgid "-1 = sınırsız (kritik stok kontrollerinde dikkate alınmaz)."
+msgstr ""
+
+#: apps/inventory/models.py:105
+msgid "Son Giriş Fiyatı"
+msgstr ""
+
+#: apps/inventory/models.py:109
+msgid "Ağırlıklı Ortalama Maliyet"
+msgstr ""
+
+#: apps/inventory/models.py:110
+msgid "Mal kabulleri üzerinden otomatik hesaplanır."
+msgstr ""
+
+#: apps/inventory/models.py:116
+#: apps/inventory/templates/reports/stock_item_list.html:144
+#: apps/menu/models.py:108 apps/recipes/models.py:48
+#: apps/reporting/models.py:24 apps/reporting/models.py:78
+#: apps/sales/reports/product_reports.py:94
+#: apps/sales/reports/product_reports.py:201
+#: apps/sales/templates/reports/menu_engineering.html:55
+#: apps/sales/templates/reports/product_analytics.html:40
+#: rbac/models/audit.py:32
+msgid "Kategori"
+msgstr ""
+
+#: apps/inventory/models.py:123
+msgid "Alerjen Maddeler"
+msgstr ""
+
+#: apps/inventory/models.py:127
+msgid "İade Edilebilir"
+msgstr ""
+
+#: apps/inventory/models.py:128
+msgid ""
+"Kapaklı/kutulu ürünlerde fiziksel iade mümkün. True ise iptal/iade akışında "
+"fiziksel kontrol talep edilir."
+msgstr ""
+
+#: apps/inventory/models.py:134 apps/inventory/models.py:151
+#: apps/inventory/models.py:300 apps/inventory/models.py:514
+#: apps/inventory/models.py:581 apps/inventory/models.py:635
+#: apps/inventory/models.py:702 apps/inventory/models.py:866
+#: apps/recipes/models.py:137 apps/warehouse/models.py:83
+#: apps/warehouse/models.py:215 apps/warehouse/models.py:340
+#: apps/warehouse/models.py:476 apps/warehouse/models.py:579
+#: apps/warehouse/models.py:725
+msgid "Stok Kalemi"
+msgstr ""
+
+#: apps/inventory/models.py:135
+msgid "Stok Kalemleri"
+msgstr ""
+
+#: apps/inventory/models.py:161
+msgid "Parti/Lot Numarası"
+msgstr ""
+
+#: apps/inventory/models.py:165
+msgid "Son Kullanma Tarihi (SKT)"
+msgstr ""
+
+#: apps/inventory/models.py:169
+msgid "Kalan Miktar"
+msgstr ""
+
+#: apps/inventory/models.py:173
+msgid "Başlangıç Miktarı"
+msgstr ""
+
+#: apps/inventory/models.py:177 apps/inventory/models.py:346
+#: apps/inventory/models.py:392 apps/inventory/models.py:543
+#: apps/inventory/models.py:884 apps/warehouse/models.py:219
+#: apps/warehouse/models.py:352
+msgid "Birim Fiyat"
+msgstr ""
+
+#: apps/inventory/models.py:181
+msgid "Kabul Tarihi"
+msgstr ""
+
+#: apps/inventory/models.py:185
+msgid "FEFO Öncelik Boost"
+msgstr ""
+
+#: apps/inventory/models.py:186
+msgid "Yüksek değer önce tüketilir (SKT öncelikli tüketim aksiyonu)."
+msgstr ""
+
+#: apps/inventory/models.py:191
+msgid "FEFO Boost Geçerlilik"
+msgstr ""
+
+#: apps/inventory/models.py:195 apps/inventory/models.py:235
+#: apps/inventory/models.py:386
+msgid "Stok Partisi"
+msgstr ""
+
+#: apps/inventory/models.py:196
+msgid "Stok Partileri"
+msgstr ""
+
+#: apps/inventory/models.py:223
+msgid "Öncelikli Tüketim"
+msgstr ""
+
+#: apps/inventory/models.py:224
+msgid "Transfer Önerisi"
+msgstr ""
+
+#: apps/inventory/models.py:225
+msgid "Plan Revizyon Notu"
+msgstr ""
+
+#: apps/inventory/models.py:240
+msgid "Aksiyon Tipi"
+msgstr ""
+
+#: apps/inventory/models.py:242 apps/inventory/views.py:618
+msgid "Not"
+msgstr ""
+
+#: apps/inventory/models.py:262
+msgid "Otomasyon Sonucu"
+msgstr ""
+
+#: apps/inventory/models.py:266
+msgid "Otomasyon Uygulandı"
+msgstr ""
+
+#: apps/inventory/models.py:270
+msgid "SKT Aksiyonu"
+msgstr ""
+
+#: apps/inventory/models.py:271
+msgid "SKT Aksiyonları"
+msgstr ""
+
+#: apps/inventory/models.py:283
+msgid "Giriş"
+msgstr ""
+
+#: apps/inventory/models.py:284
+msgid "Çıkış"
+msgstr ""
+
+#: apps/inventory/models.py:285 apps/warehouse/models.py:505
+msgid "Düzeltme"
+msgstr ""
+
+#: apps/inventory/models.py:286
+msgid "Fire/Zayi"
+msgstr ""
+
+#: apps/inventory/models.py:287 apps/warehouse/models.py:470
+msgid "Transfer"
+msgstr ""
+
+#: apps/inventory/models.py:288
+msgid "İade"
+msgstr ""
+
+#: apps/inventory/models.py:289
+#: apps/performances/templates/reports/waiter_sales_report.html:112
+#: apps/performances/templates/reports/waiter_sales_report.html:127
+#: apps/reservations/models.py:18 apps/sales/models.py:155
+msgid "İptal"
+msgstr ""
+
+#: apps/inventory/models.py:290 apps/inventory/models.py:763
+msgid "İmha"
+msgstr ""
+
+#: apps/inventory/models.py:313
+msgid "Hareket Tipi"
+msgstr ""
+
+#: apps/inventory/models.py:316 apps/inventory/models.py:389
+#: apps/inventory/models.py:530 apps/inventory/models.py:589
+#: apps/inventory/models.py:652 apps/inventory/models.py:711
+#: apps/inventory/models.py:878 apps/inventory/reports/inventory_reports.py:167
+#: apps/inventory/templates/reports/stock_item_detail.html:175
+#: apps/inventory/templates/reports/stock_item_list.html:145
+#: apps/inventory/templates/reports/stock_movement_list.html:153
+#: apps/inventory/views.py:613 apps/menu/models.py:373
+#: apps/production_planning/reports.py:90
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:150
+#: apps/recipes/models.py:148
+#: apps/sales/templates/reports/cancellations_report.html:134
+#: apps/sales/views.py:304 apps/warehouse/models.py:86
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:131
+msgid "Miktar"
+msgstr ""
+
+#: apps/inventory/models.py:319
+#: apps/inventory/templates/reports/stock_item_detail.html:176
+#: apps/inventory/templates/reports/stock_movement_list.html:155
+msgid "Referans"
+msgstr ""
+
+#: apps/inventory/models.py:336 apps/inventory/models.py:435
+#: apps/inventory/models.py:468 apps/inventory/models.py:800
+#: apps/warehouse/models.py:143 apps/warehouse/models.py:277
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:100
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:96
+msgid "Tedarikçi"
+msgstr ""
+
+#: apps/inventory/models.py:343
+msgid "StockUnit.short_name ile eşleşmeli"
+msgstr ""
+
+#: apps/inventory/models.py:351 apps/inventory/models.py:378
+msgid "Stok Hareketi"
+msgstr ""
+
+#: apps/inventory/models.py:352
+msgid "Stok Hareketleri"
+msgstr ""
+
+#: apps/inventory/models.py:396
+msgid "Parti Numarası (snapshot)"
+msgstr ""
+
+#: apps/inventory/models.py:400
+msgid "SKT (snapshot)"
+msgstr ""
+
+#: apps/inventory/models.py:404
+msgid "Stok Hareketi Lot Satırı"
+msgstr ""
+
+#: apps/inventory/models.py:405
+msgid "Stok Hareketi Lot Satırları"
+msgstr ""
+
+#: apps/inventory/models.py:418
+#: apps/inventory/templates/reports/supplier_list.html:30
+msgid "Tedarikçi Adı"
+msgstr ""
+
+#: apps/inventory/models.py:420
+msgid "İletişim Kişisi"
+msgstr ""
+
+#: apps/inventory/models.py:430
+msgid "Tedarik Edilen Ürünler"
+msgstr ""
+
+#: apps/inventory/models.py:436
+msgid "Tedarikçiler"
+msgstr ""
+
+#: apps/inventory/models.py:443 apps/inventory/models.py:505
+#: apps/inventory/models.py:753 apps/production_planning/models.py:8
+#: apps/warehouse/models.py:119 apps/warehouse/models.py:379
+#: apps/warehouse/models.py:498 apps/warehouse/models.py:642
+msgid "Taslak"
+msgstr ""
+
+#: apps/inventory/models.py:444
+msgid "Kesinleştirildi"
+msgstr ""
+
+#: apps/inventory/models.py:474
+msgid "Fatura / İrsaliye Referansı"
+msgstr ""
+
+#: apps/inventory/models.py:483
+msgid "Kesinleştirme Zamanı"
+msgstr ""
+
+#: apps/inventory/models.py:486
+msgid "Toplu Stok Girişi Taslağı"
+msgstr ""
+
+#: apps/inventory/models.py:487
+msgid "Toplu Stok Girişi Taslakları"
+msgstr ""
+
+#: apps/inventory/models.py:516
+msgid "Geçici Ad (yeni kalem)"
+msgstr ""
+
+#: apps/inventory/models.py:517
+msgid "Geçici SKU"
+msgstr ""
+
+#: apps/inventory/models.py:518
+msgid "Geçici Birim"
+msgstr ""
+
+#: apps/inventory/models.py:525
+msgid "Geçici Kategori"
+msgstr ""
+
+#: apps/inventory/models.py:536
+msgid "Fatura Birimi"
+msgstr ""
+
+#: apps/inventory/models.py:537
+msgid "StockUnit.short_name; boşsa stok kaleminin birimi kullanılır"
+msgstr ""
+
+#: apps/inventory/models.py:545
+msgid "Parti/Lot"
+msgstr ""
+
+#: apps/inventory/models.py:546
+msgid "SKT"
+msgstr ""
+
+#: apps/inventory/models.py:549
+msgid "Taslak Satırı"
+msgstr ""
+
+#: apps/inventory/models.py:550
+msgid "Taslak Satırları"
+msgstr ""
+
+#: apps/inventory/models.py:564
+msgid "Commit"
+msgstr ""
+
+#: apps/inventory/models.py:565
+msgid "Serbest"
+msgstr ""
+
+#: apps/inventory/models.py:575 apps/inventory/models.py:617
+#: apps/orders/models.py:195 apps/warehouse/models.py:226
+msgid "Sipariş Kalemi"
+msgstr ""
+
+#: apps/inventory/models.py:599
+msgid "Stok Rezervasyonu"
+msgstr ""
+
+#: apps/inventory/models.py:600
+msgid "Stok Rezervasyonları"
+msgstr ""
+
+#: apps/inventory/models.py:623 apps/inventory/reports/inventory_reports.py:165
+#: apps/inventory/reports/inventory_reports.py:427
+#: apps/inventory/templates/reports/stock_movement_list.html:150
+#: apps/inventory/templates/reports/supplier_rejected_items.html:76
+#: apps/inventory/views.py:611 apps/menu/models.py:200 apps/prep/models.py:75
+#: apps/prep/models.py:194 apps/production_planning/models.py:97
+#: apps/production_planning/models.py:186 apps/recipes/models.py:40
+#: apps/sales/templates/reports/cancellations_report.html:133
+#: apps/sales/templates/reports/menu_engineering.html:54
+#: apps/sales/views.py:303
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:138
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:130
+msgid "Ürün"
+msgstr ""
+
+#: apps/inventory/models.py:649
+msgid "İlgili Stok Hareketi"
+msgstr ""
+
+#: apps/inventory/models.py:655
+msgid "Birim Maliyet Snapshot"
+msgstr ""
+
+#: apps/inventory/models.py:658
+msgid "Satır Maliyet Snapshot"
+msgstr ""
+
+#: apps/inventory/models.py:660
+msgid "Commit Zamanı"
+msgstr ""
+
+#: apps/inventory/models.py:664
+msgid "Sipariş Ingredient Maliyet Kaydı"
+msgstr ""
+
+#: apps/inventory/models.py:665
+msgid "Sipariş Ingredient Maliyet Kayıtları"
+msgstr ""
+
+#: apps/inventory/models.py:678
+msgid "Aktif"
+msgstr ""
+
+#: apps/inventory/models.py:679
+msgid "Tüketildi"
+msgstr ""
+
+#: apps/inventory/models.py:680
+msgid "Serbest Bırakıldı"
+msgstr ""
+
+#: apps/inventory/models.py:696 apps/prep/models.py:85
+#: apps/production_planning/models.py:125
+msgid "Üretim Planı Satırı"
+msgstr ""
+
+#: apps/inventory/models.py:725 apps/prep/models.py:96 apps/prep/models.py:114
+msgid "Hazırlık Görevi"
+msgstr ""
+
+#: apps/inventory/models.py:726
+msgid "Hangi hazırlık görevi için rezerve edildiğini takip eder."
+msgstr ""
+
+#: apps/inventory/models.py:730
+msgid "Üretim Stok Rezervasyonu"
+msgstr ""
+
+#: apps/inventory/models.py:731
+msgid "Üretim Stok Rezervasyonları"
+msgstr ""
+
+#: apps/inventory/models.py:754 apps/warehouse/models.py:120
+#: apps/warehouse/models.py:380
+msgid "Onay Bekliyor"
+msgstr ""
+
+#: apps/inventory/models.py:755 apps/reservations/models.py:15
+#: apps/warehouse/models.py:121 apps/warehouse/models.py:501
+#: apps/warehouse/models.py:644
+msgid "Onaylandı"
+msgstr ""
+
+#: apps/inventory/models.py:756 apps/orders/models.py:16 apps/prep/models.py:10
+#: apps/printing/models.py:108 apps/reservations/models.py:17
+#: apps/sales/models.py:154 apps/warehouse/models.py:382
+#: apps/warehouse/models.py:500
+msgid "Tamamlandı"
+msgstr ""
+
+#: apps/inventory/models.py:757 apps/orders/models.py:17 apps/prep/models.py:11
+#: apps/warehouse/models.py:125 apps/warehouse/models.py:383
+#: apps/warehouse/models.py:648
+msgid "İptal Edildi"
+msgstr ""
+
+#: apps/inventory/models.py:761
+msgid "Tedarikçiye İade"
+msgstr ""
+
+#: apps/inventory/models.py:762
+msgid "Müşteri İadesi"
+msgstr ""
+
+#: apps/inventory/models.py:764
+msgid "Gün Sonu Fazlası"
+msgstr ""
+
+#: apps/inventory/models.py:773
+msgid "Akış Tipi"
+msgstr ""
+
+#: apps/inventory/models.py:785 apps/warehouse/models.py:400
+msgid "Kaynak Depo"
+msgstr ""
+
+#: apps/inventory/models.py:793 apps/warehouse/models.py:149
+#: apps/warehouse/models.py:283 apps/warehouse/models.py:406
+msgid "Hedef Depo"
+msgstr ""
+
+#: apps/inventory/models.py:805
+msgid "Neden Kodu"
+msgstr ""
+
+#: apps/inventory/models.py:807
+msgid "Neden Açıklaması"
+msgstr ""
+
+#: apps/inventory/models.py:836 apps/production_planning/models.py:62
+#: apps/warehouse/models.py:181 apps/warehouse/models.py:445
+#: apps/warehouse/models.py:548 apps/warehouse/models.py:694
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:116
+msgid "Onaylayan"
+msgstr ""
+
+#: apps/inventory/models.py:838 apps/warehouse/models.py:415
+msgid "Tamamlanma Tarihi"
+msgstr ""
+
+#: apps/inventory/models.py:841 apps/orders/models.py:184
+#: apps/sales/models.py:89
+msgid "İade/İmha Akışı"
+msgstr ""
+
+#: apps/inventory/models.py:842
+msgid "İade/İmha Akışları"
+msgstr ""
+
+#: apps/inventory/models.py:861
+msgid "Akış"
+msgstr ""
+
+#: apps/inventory/models.py:873
+msgid "Lot/Parti"
+msgstr ""
+
+#: apps/inventory/models.py:890
+msgid "Ambalaj Sağlam mı?"
+msgstr ""
+
+#: apps/inventory/models.py:891
+msgid "Kapaklı/kutulu ürünlerde fiziksel kontrol sonucu"
+msgstr ""
+
+#: apps/inventory/models.py:898 apps/warehouse/models.py:307
+msgid "Kontrol Eden"
+msgstr ""
+
+#: apps/inventory/models.py:903
+msgid "Kontrol Tarihi"
+msgstr ""
+
+#: apps/inventory/models.py:907
+msgid "İade/İmha Kalemi"
+msgstr ""
+
+#: apps/inventory/models.py:908
+msgid "İade/İmha Kalemleri"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:17
+msgid "Envanter Kalem Listesi"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:18
+msgid "Stok miktarları, kategoriler ve depo bazlı envanter dökümü."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:91
+msgid "Envanter Hareket Raporu"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:92
+msgid "Giriş, çıkış, fire ve düzeltme hareketlerinin detaylı dökümü."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:139 apps/inventory/views.py:639
+#: apps/orders/services/order_core_service.py:403
+msgid "Sistem"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:169 apps/inventory/views.py:617
+#: apps/sales/templates/reports/cancellations_report.html:132
+#: apps/sales/views.py:302
+msgid "Neden"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:191
+msgid "Tedarikçi Listesi"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:192
+msgid "Aktif tedarikçiler ve iletişim bilgileri."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:219
+msgid "FEFO Envanter Raporu"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:220
+msgid "SKT bazlı (First-Expired-First-Out) detaylı envanter dökümü."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:272
+#, python-format
+msgid "%(product)s — Lot Detay Raporu"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:295
+msgid "Ürün Detay Raporu"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:296
+msgid "Ürünün depo stok dağılımı ve hareket geçmişi."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:305
+msgid "Stok kalemi belirtilmedi."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:310
+msgid "Ürün bulunamadı."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:329
+#, python-format
+msgid "%(name)s — Ürün Kartı"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:344
+msgid "Tedarikçi Red Ürünleri"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:345
+msgid ""
+"Seçili tedarikçiden reddedilen ürünlerin sipariş ve mal kabul bazlı listesi."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:354
+#: apps/inventory/reports/inventory_reports.py:459
+msgid "supplier_id gerekli."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:424
+#: apps/inventory/reports/inventory_reports.py:525
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:75
+#: apps/inventory/templates/reports/supplier_rejected_items.html:74
+#: apps/warehouse/models.py:263
+msgid "Mal Kabul No"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:428
+#: apps/inventory/templates/reports/stock_item_list.html:142
+msgid "SKU"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:429
+#: apps/inventory/templates/reports/supplier_rejected_items.html:77
+#: apps/shifts/templates/reports/shift_list.html:54
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:139
+msgid "Beklenen"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:430
+#: apps/inventory/templates/reports/supplier_rejected_items.html:78
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:140
+msgid "Alınan"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:431
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:81
+#: apps/inventory/templates/reports/supplier_rejected_items.html:79
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:141
+msgid "Red"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:449
+msgid "Tedarikçi Mal Kabul Raporu"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:450
+msgid "Seçili tedarikçiye ait mal kabul kayıtlarının listesi."
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:529
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:79
+#: apps/sales/templates/reports/cancellations_report.html:120
+#: apps/warehouse/models.py:185 apps/warehouse/models.py:311
+msgid "Toplam Tutar"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:530
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:80
+msgid "Kalem"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:531
+msgid "Red Kalem"
+msgstr ""
+
+#: apps/inventory/reports/inventory_reports.py:532
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:82
+#: apps/warehouse/models.py:292
+msgid "Fatura No"
+msgstr ""
+
+#: apps/inventory/return_cancel_reasons.py:16
+msgid "SKT Geçmiş"
+msgstr ""
+
+#: apps/inventory/return_cancel_reasons.py:17
+msgid "Hasarlı / Bozuk"
+msgstr ""
+
+#: apps/inventory/return_cancel_reasons.py:18
+msgid "Tedarikçi Hatası"
+msgstr ""
+
+#: apps/inventory/return_cancel_reasons.py:19
+msgid "Sipariş İptali"
+msgstr ""
+
+#: apps/inventory/return_cancel_reasons.py:20
+msgid "Kalite Sorunu"
+msgstr ""
+
+#: apps/inventory/return_cancel_reasons.py:21
+msgid "Geri Çağırma"
+msgstr ""
+
+#: apps/inventory/serializers.py:34
+#, python-format
+msgid "Geçersiz birim: '%(value)s'. Lütfen Birim Tanımlamalarından seçin."
+msgstr ""
+
+#: apps/inventory/serializers.py:348
+msgid "Satın alma seçimi zorunludur."
+msgstr ""
+
+#: apps/inventory/serializers.py:360
+msgid "Satın alma bulunamadı."
+msgstr ""
+
+#: apps/inventory/serializers.py:366
+msgid "Seçilen satın alma bu depoya ait değil."
+msgstr ""
+
+#: apps/inventory/serializers.py:375
+msgid "Seçilen satın alma bu stok kalemini içermiyor."
+msgstr ""
+
+#: apps/inventory/serializers.py:386
+msgid "Bu satın alma durumunda iptal/iade kaydı yapılamaz."
+msgstr ""
+
+#: apps/inventory/serializers.py:400
+#: apps/inventory/services/return_cancel_service.py:88
+#, python-format
+msgid "Satın alma: %(order)s"
+msgstr ""
+
+#: apps/inventory/serializers.py:461
+msgid "Mevcut stok kalemi seçin veya yeni kalem için ad, SKU ve birim girin."
+msgstr ""
+
+#: apps/inventory/serializers.py:467
+msgid "Miktar pozitif olmalı."
+msgstr ""
+
+#: apps/inventory/serializers.py:485
+msgid "En az bir satır gerekli."
+msgstr ""
+
+#: apps/inventory/serializers.py:502
+msgid "Sadece taslaklar güncellenebilir."
+msgstr ""
+
+#: apps/inventory/services/_helpers.py:21
+#, python-format
+msgid ""
+"\"%(name)s\" için yetersiz stok: Mevcut %(available)s, istenen %(requested)s"
+msgstr ""
+
+#: apps/inventory/services/_helpers.py:45 apps/recipes/recipe_expansion.py:34
+#, python-format
+msgid "Birim dönüşümü için StockUnit bulunamadı: %(from_u)s -> %(to_u)s"
+msgstr ""
+
+#: apps/inventory/services/_helpers.py:60
+#, python-format
+msgid ""
+"Birim kategorisi uyuşmazlığı: '%(from_unit)s' (%(from_cat)s) → "
+"'%(to_unit)s' (%(to_cat)s). Ağırlık birimi hacim birimine dönüştürülemez."
+msgstr ""
+
+#: apps/inventory/services/expiry_action_service.py:66
+msgid "Geçersiz aksiyon tipi."
+msgstr ""
+
+#: apps/inventory/services/expiry_action_service.py:74
+#: apps/inventory/services/expiry_return_cancel_service.py:27
+msgid "Lot bulunamadı veya stokta değil."
+msgstr ""
+
+#: apps/inventory/services/expiry_automation_service.py:42
+#: apps/inventory/services/expiry_automation_service.py:62
+msgid "Desteklenmeyen aksiyon tipi."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:23
+msgid "Mutfak deposundaki lot için hedef depo seçilmelidir."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:27
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:40
+msgid "Geçersiz hedef depo."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:29
+#: apps/warehouse/services/transfer_service.py:212
+#: apps/warehouse/services/transfer_service.py:299
+msgid "Kaynak ve hedef depo aynı olamaz."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:34
+msgid "Lot deposuna bağlı şube bulunamadı."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:42
+msgid "Hedef depo lot şubesi ile uyumlu değil."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:56
+msgid "Şube için mutfak deposu bulunamadı."
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:86
+#, python-format
+msgid "Bu lot için zaten bekleyen bir transfer taslağı var: %(num)s"
+msgstr ""
+
+#: apps/inventory/services/expiry_handlers/transfer_suggest.py:96
+msgid "Geçersiz transfer miktarı."
+msgstr ""
+
+#: apps/inventory/services/expiry_return_cancel_service.py:30
+msgid "Yalnızca süresi geçmiş lotlar için otomatik iptal/iade yapılabilir."
+msgstr ""
+
+#: apps/inventory/services/expiry_return_cancel_service.py:36
+msgid "Lot miktarı sıfır."
+msgstr ""
+
+#: apps/inventory/services/expiry_return_cancel_service.py:66
+#, python-format
+msgid "SKT Takibi otomatik iptal/iade — Lot: %(lot)s"
+msgstr ""
+
+#: apps/inventory/services/return_cancel_service.py:82
+#, python-format
+msgid "Mal kabul red #%(number)s"
+msgstr ""
+
+#: apps/inventory/services/stock_receipt_service.py:33
+#: apps/inventory/views.py:1001
+msgid "Taslak zaten kesinleştirilmiş."
+msgstr ""
+
+#: apps/inventory/services/stock_receipt_service.py:41
+msgid "Taslakta en az bir satır olmalı."
+msgstr ""
+
+#: apps/inventory/services/stock_receipt_service.py:51
+#, python-format
+msgid "Satır %(line)s: miktar pozitif olmalı."
+msgstr ""
+
+#: apps/inventory/services/stock_receipt_service.py:63
+#, python-format
+msgid "Satır %(line)s: yeni kalem için ad, SKU ve birim zorunludur."
+msgstr ""
+
+#: apps/inventory/services/stock_receipt_service.py:69
+#, python-format
+msgid "Satır %(line)s: SKU \"%(sku)s\" zaten kullanılıyor."
+msgstr ""
+
+#: apps/inventory/services/stock_receipt_service.py:75
+#, python-format
+msgid ""
+"Satır %(line)s: geçersiz birim \"%(unit)s\". Birim Tanımlamalarından seçin."
+msgstr ""
+
+#: apps/inventory/stock_minimum.py:43
+msgid "Geçersiz minimum miktar."
+msgstr ""
+
+#: apps/inventory/stock_minimum.py:48
+msgid "Minimum miktar -1 (sınırsız) veya sıfırdan büyük olmalıdır."
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:130
+msgid "Son Kullanma Tarihi (SKT) Bazlı Stok Detayları"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:131
+#: apps/inventory/templates/reports/stock_item_list.html:122
+#: apps/inventory/templates/reports/stock_movement_list.html:127
+#: apps/inventory/templates/reports/supplier_list.html:24
+#: apps/shifts/templates/reports/shift_list.html:35
+msgid "Rapor Tarihi:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:135
+#: apps/inventory/templates/reports/stock_item_list.html:126
+#: apps/inventory/templates/reports/stock_movement_list.html:131
+#: apps/sales/templates/reports/menu_engineering.html:31
+#: apps/sales/templates/reports/product_analytics.html:30
+#: apps/sales/templates/reports/sales_list.html:157
+msgid "FİLTRELER:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:136
+#: apps/inventory/templates/reports/stock_item_list.html:127
+#: apps/inventory/templates/reports/stock_movement_list.html:134
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:136
+#: apps/production_planning/templates/reports/mrp_pdf.html:123
+msgid "Depo:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:137
+#: apps/inventory/templates/reports/stock_item_list.html:128
+msgid "Kategori:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:138
+#: apps/inventory/templates/reports/stock_item_list.html:129
+#: apps/shifts/templates/reports/shift_list.html:42
+msgid "Durum:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:138
+#: apps/inventory/templates/reports/stock_item_list.html:129
+#: apps/inventory/templates/reports/stock_item_list.html:166
+msgid "NORMAL"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:138
+#: apps/inventory/templates/reports/stock_item_list.html:129
+#: apps/inventory/templates/reports/stock_item_list.html:164
+msgid "DÜŞÜK"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:138
+#: apps/inventory/templates/reports/stock_item_detail.html:154
+#: apps/inventory/templates/reports/stock_item_list.html:129
+#: apps/inventory/templates/reports/stock_item_list.html:162
+msgid "KRİTİK"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:138
+#: apps/inventory/templates/reports/stock_item_list.html:129
+msgid "UYARI"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:139
+#: apps/inventory/templates/reports/stock_item_list.html:130
+#: apps/inventory/templates/reports/stock_movement_list.html:137
+msgid "Arama:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:145
+#: apps/inventory/templates/reports/stock_item_list.html:135
+#: apps/inventory/templates/reports/stock_movement_list.html:142
+msgid "DİKKAT:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:152
+msgid "SKU:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:152
+msgid "Toplam Envanter:"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:158
+msgid "Hareket No."
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:160
+msgid "Giriş Tarihi"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:161
+msgid "SKT (Vade)"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:162
+msgid "Hareket Miktarı"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:177
+msgid "Süresiz"
+msgstr ""
+
+#: apps/inventory/templates/reports/fefo_report.html:188
+#: apps/inventory/templates/reports/stock_item_detail.html:217
+#: apps/inventory/templates/reports/stock_item_list.html:175
+#: apps/inventory/templates/reports/stock_movement_list.html:188
+#: apps/inventory/templates/reports/supplier_list.html:52
+#: apps/sales/templates/reports/menu_engineering.html:100
+#: apps/sales/templates/reports/product_analytics.html:58
+#: apps/sales/templates/reports/sales_list.html:220
+#: apps/shifts/templates/reports/cash_report.html:360
+#: apps/shifts/templates/reports/shift_list.html:88
+#: apps/shifts/templates/reports/z_report.html:117
+msgid ""
+"Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir."
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:112
+msgid "Ürün Durum ve Hareket Detay Raporu"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:112
+#: apps/shifts/templates/reports/cash_report.html:200
+#: apps/shifts/templates/reports/z_report.html:33
+msgid "Tarih:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:117
+msgid "ÜRÜN ADI:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:119
+msgid "SKU / KOD:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:123
+msgid "KATEGORİ:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:125
+msgid "BİRİM:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:129
+msgid "TOPLAM STOK:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:131
+msgid "BARKOD:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:136
+msgid "DEPO STOK DAĞILIMI"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:140
+#: apps/warehouse/models.py:27
+msgid "Depo Adı"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:141
+msgid "Mevcut Miktar"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:142
+msgid "Minimum Seviye"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:156
+msgid "Normal"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:162
+msgid "Depo stok kaydı bulunamadı."
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:168
+msgid "SON STOK HAREKETLERİ (EN SON 50)"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:174
+#: rbac/models/audit.py:44
+msgid "İşlem"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:186
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:167
+msgid "GİRİŞ"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:187
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:168
+msgid "ÇIKIŞ"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:188
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:169
+msgid "DÜZELTME"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:189
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:171
+msgid "TRANSFER"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:190
+msgid "FİRE"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:191
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:172
+msgid "İADE"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:192
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:173
+msgid "İPTAL"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:193
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:174
+msgid "İMHA"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:205
+msgid "İşlem:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_detail.html:210
+msgid "Hareket kaydı bulunamadı."
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_list.html:121
+msgid "Envanter Stok Durum Özeti"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_list.html:122
+#: apps/inventory/templates/reports/stock_movement_list.html:127
+#: apps/inventory/templates/reports/supplier_list.html:24
+#: apps/sales/templates/reports/menu_engineering.html:27
+#: apps/sales/templates/reports/product_analytics.html:26
+#: apps/sales/templates/reports/sales_list.html:153
+msgid "Kayıt Sayısı:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_list.html:135
+#, python-format
+msgid ""
+"Toplam %(total)s kayıt bulundu. Performans nedeniyle sadece ilk %(shown)s "
+"kayıt gösteriliyor. Daha spesifik sonuçlar için lütfen filtreleri kullanın."
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_list.html:143
+#: apps/sales/reports/product_reports.py:93
+#: apps/sales/reports/product_reports.py:200
+#: apps/sales/templates/reports/product_analytics.html:39
+msgid "Ürün Adı"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_item_list.html:147
+msgid "Min. Stok"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:126
+msgid "Depo Giriş/Çıkış ve Hareket Detayları"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:132
+#: apps/sales/templates/reports/menu_engineering.html:32
+#: apps/sales/templates/reports/product_analytics.html:31
+#: apps/sales/templates/reports/sales_list.html:158
+#: apps/shifts/templates/reports/shift_list.html:40
+msgid "Başlangıç:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:133
+#: apps/sales/templates/reports/menu_engineering.html:33
+#: apps/sales/templates/reports/product_analytics.html:32
+#: apps/sales/templates/reports/sales_list.html:159
+#: apps/shifts/templates/reports/shift_list.html:41
+msgid "Bitiş:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:135
+msgid "Ürün:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+msgid "Tip:"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:136
+#: apps/inventory/templates/reports/stock_movement_list.html:170
+msgid "FİRE/ZAYİ"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:149
+#: apps/sales/templates/reports/sales_list.html:169
+msgid "Tarih / Saat"
+msgstr ""
+
+#: apps/inventory/templates/reports/stock_movement_list.html:156
+msgid "İşlem Yapan"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:68
+msgid "Toplam mal kabul kaydı:"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:69
+#: apps/inventory/templates/reports/supplier_rejected_items.html:68
+msgid "Gösterim sınırına ulaşıldı (2000)"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:83
+#: apps/warehouse/models.py:293
+msgid "İrsaliye No"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_goods_receivings.html:103
+#: apps/inventory/templates/reports/supplier_rejected_items.html:103
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:169
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:157
+msgid "Bu belge Ramis ERP üzerinden üretilmiştir."
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_list.html:23
+msgid "Ramis ERP Onaylı Tedarikçi Listesi"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_list.html:31
+msgid "İlgili Kişi"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_list.html:32
+msgid "İletişim"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_rejected_items.html:67
+msgid "Toplam reddedilen ürün kaydı:"
+msgstr ""
+
+#: apps/inventory/templates/reports/supplier_rejected_items.html:81
+#: apps/warehouse/models.py:354
+msgid "Parti No"
+msgstr ""
+
+#: apps/inventory/views.py:183
+msgid "rows bir liste olmalıdır."
+msgstr ""
+
+#: apps/inventory/views.py:299
+msgid "warehouse_id parametresi gereklidir."
+msgstr ""
+
+#: apps/inventory/views.py:319
+msgid "warehouse_id ve items gereklidir."
+msgstr ""
+
+#: apps/inventory/views.py:335
+#, python-format
+msgid "%(count)s kalem için fire kaydı oluşturuldu."
+msgstr ""
+
+#: apps/inventory/views.py:396
+msgid "stock_item_id parametresi gerekli."
+msgstr ""
+
+#: apps/inventory/views.py:421
+msgid "FEFO lot verisi bulunamadı."
+msgstr ""
+
+#: apps/inventory/views.py:508 apps/inventory/views.py:664
+#: apps/inventory/views.py:698
+msgid "Depo belirtilmedi ve varsayılan depo bulunamadı."
+msgstr ""
+
+#: apps/inventory/views.py:561
+#, python-format
+msgid "Geçersiz hareket tipi: %(t)s"
+msgstr ""
+
+#: apps/inventory/views.py:615
+msgid "Birim Maliyet"
+msgstr ""
+
+#: apps/inventory/views.py:616 apps/production_planning/reports.py:93
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:153
+msgid "Toplam"
+msgstr ""
+
+#: apps/inventory/views.py:646
+msgid "İptal ve İade Raporu"
+msgstr ""
+
+#: apps/inventory/views.py:1056
+msgid "Yalnızca taslak akışlar onaylanabilir."
+msgstr ""
+
+#: apps/inventory/views.py:1069
+msgid "Yalnızca onaylanmış akışlar tamamlanabilir."
+msgstr ""
+
+#: apps/inventory/views.py:1088
+msgid "Akış zaten tamamlanmış veya iptal edilmiş."
+msgstr ""
+
+#: apps/invoices/models.py:33
+msgid "Fatura"
+msgstr ""
+
+#: apps/invoices/models.py:34
+msgid "Faturalar"
+msgstr ""
+
+#: apps/invoices/services.py:36
+msgid "PDF için reportlab kurulu değil."
+msgstr ""
+
+#: apps/invoices/services.py:101
+msgid "Satış bulunamadı veya silinmiş."
+msgstr ""
+
+#: apps/invoices/services.py:103
+msgid "Bu satış için fatura zaten oluşturulmuş."
+msgstr ""
+
+#: apps/invoices/views.py:101
+msgid "PDF bulunamadı."
+msgstr ""
+
+#: apps/invoices/views.py:104
+msgid "PDF dosyası eksik."
+msgstr ""
+
+#: apps/menu/models.py:22
+msgid "Etiket Adı"
+msgstr ""
+
+#: apps/menu/models.py:26
+msgid "Menü Etiketi"
+msgstr ""
+
+#: apps/menu/models.py:27
+msgid "Menü Etiketleri"
+msgstr ""
+
+#: apps/menu/models.py:57
+msgid "Aktif Etiket"
+msgstr ""
+
+#: apps/menu/models.py:61
+msgid "Etiketsiz filtresi"
+msgstr ""
+
+#: apps/menu/models.py:62
+msgid "True ise yalnızca etiketsiz ürün ve kategoriler gösterilir."
+msgstr ""
+
+#: apps/menu/models.py:66
+msgid "Menü Katalog Ayarı"
+msgstr ""
+
+#: apps/menu/models.py:67
+msgid "Menü Katalog Ayarları"
+msgstr ""
+
+#: apps/menu/models.py:71
+msgid "Etiketsiz"
+msgstr ""
+
+#: apps/menu/models.py:74
+msgid "Filtre yok"
+msgstr ""
+
+#: apps/menu/models.py:97
+msgid "Bu kategorideki ürünlerin hazırlanacağı mutfak istasyonu."
+msgstr ""
+
+#: apps/menu/models.py:103 apps/menu/models.py:195
+msgid "Etiketler"
+msgstr ""
+
+#: apps/menu/models.py:109
+msgid "Kategoriler"
+msgstr ""
+
+#: apps/menu/models.py:123
+msgid "Brüt Fiyat (KDV hariç)"
+msgstr ""
+
+#: apps/menu/models.py:124
+msgid "Vergi hariç birim fiyat; net satış ile birlikte saklanır."
+msgstr ""
+
+#: apps/menu/models.py:130
+msgid "Vergi Oranı (%)"
+msgstr ""
+
+#: apps/menu/models.py:131
+msgid "KDV / satış vergisi yüzdesi (örn. 20)."
+msgstr ""
+
+#: apps/menu/models.py:137
+msgid "İndirim Oranı (%)"
+msgstr ""
+
+#: apps/menu/models.py:138
+msgid "0–100 arasında yüzdelik indirim oranı. 0 = indirim yok."
+msgstr ""
+
+#: apps/menu/models.py:144
+msgid "İndirimli Fiyat (Cache)"
+msgstr ""
+
+#: apps/menu/models.py:145
+msgid "Sık hesaplamaları önlemek için kaydedilen indirimli fiyat."
+msgstr ""
+
+#: apps/menu/models.py:152
+msgid "Kalori (kCal)"
+msgstr ""
+
+#: apps/menu/models.py:153
+msgid "Porsiyon başına enerji değeri (kCal)."
+msgstr ""
+
+#: apps/menu/models.py:157
+msgid "POS'ta göster"
+msgstr ""
+
+#: apps/menu/models.py:158
+msgid "Kapalıysa ürün POS satış ekranında listelenmez."
+msgstr ""
+
+#: apps/menu/models.py:162
+msgid "Menüde Göster"
+msgstr ""
+
+#: apps/menu/models.py:163
+msgid "Kapalıysa ürün menüden kaldırılır ancak sistemde silinmiş sayılmaz."
+msgstr ""
+
+#: apps/menu/models.py:167
+msgid "Öne Çıkar"
+msgstr ""
+
+#: apps/menu/models.py:168
+msgid ""
+"İşaretlenirse ürün POS ekranında en üstte 'Öne Çıkanlar' kategorisinde "
+"gösterilir."
+msgstr ""
+
+#: apps/menu/models.py:172
+msgid "Popüler"
+msgstr ""
+
+#: apps/menu/models.py:173
+msgid "İşaretlenirse ürün dijital menüde 'Popüler' etiketiyle gösterilir."
+msgstr ""
+
+#: apps/menu/models.py:177
+msgid "Şefin Önerisi"
+msgstr ""
+
+#: apps/menu/models.py:178
+msgid ""
+"İşaretlenirse ürün dijital menüde 'Şefin Önerisi' etiketiyle gösterilir."
+msgstr ""
+
+#: apps/menu/models.py:182 apps/menu/models.py:361
+msgid "Birleşik Ürün"
+msgstr ""
+
+#: apps/menu/models.py:183
+msgid "Birden fazla ürünün birleştirilmesiyle oluşan paket ürün."
+msgstr ""
+
+#: apps/menu/models.py:189
+msgid "Satışa Sunulacak Şubeler"
+msgstr ""
+
+#: apps/menu/models.py:201
+msgid "Ürünler"
+msgstr ""
+
+#: apps/menu/models.py:326
+msgid "Fiyat Çarpanı"
+msgstr ""
+
+#: apps/menu/models.py:327
+msgid ""
+"Ürün ana fiyatı ile çarpılır (örn: 1.50). Özel fiyat girildiyse dikkate "
+"alınmaz."
+msgstr ""
+
+#: apps/menu/models.py:334
+msgid "Özel Fiyat"
+msgstr ""
+
+#: apps/menu/models.py:335
+msgid ""
+"Birim için sabit fiyat. Girilirse çarpan hesabı yerine bu fiyat kullanılır."
+msgstr ""
+
+#: apps/menu/models.py:341
+msgid "Ürün Birimi"
+msgstr ""
+
+#: apps/menu/models.py:342
+msgid "Ürün Birimleri"
+msgstr ""
+
+#: apps/menu/models.py:367
+msgid "Alt Ürün"
+msgstr ""
+
+#: apps/menu/models.py:381 apps/menu/models.py:414
+msgid "Satış Birimi"
+msgstr ""
+
+#: apps/menu/models.py:382
+msgid ""
+"Alt ürünün satış birimi (örn. tam / yarım porsiyon). Boş bırakılırsa çarpan "
+"1 kabul edilir."
+msgstr ""
+
+#: apps/menu/models.py:386
+msgid "Birleşik Ürün Kalemi"
+msgstr ""
+
+#: apps/menu/models.py:387
+msgid "Birleşik Ürün Kalemleri"
+msgstr ""
+
+#: apps/menu/models.py:400
+msgid "Kaynak Ürün"
+msgstr ""
+
+#: apps/menu/models.py:406
+msgid "Önerilen Ürün"
+msgstr ""
+
+#: apps/menu/models.py:415
+msgid "Boş bırakılırsa standart birim (ana fiyat) kullanılır."
+msgstr ""
+
+#: apps/menu/models.py:420
+msgid "Ürün Önerisi"
+msgstr ""
+
+#: apps/menu/models.py:421
+msgid "Ürün Önerileri"
+msgstr ""
+
+#: apps/menu/serializers.py:25
+msgid "Geçerli bir etiket adı girin."
+msgstr ""
+
+#: apps/menu/serializers.py:36
+msgid "Bu şubede aynı isimde etiket zaten var."
+msgstr ""
+
+#: apps/menu/serializers.py:208
+msgid "Bu satış birimi seçilen alt ürüne ait değil."
+msgstr ""
+
+#: apps/menu/serializers.py:290
+msgid "Ürün kendisini öneremez."
+msgstr ""
+
+#: apps/menu/serializers.py:296
+msgid "Önerilen ürün bulunamadı."
+msgstr ""
+
+#: apps/menu/serializers.py:303
+msgid "Satış birimi bu ürüne ait değil."
+msgstr ""
+
+#: apps/menu/serializers.py:320
+msgid "Aynı ürün birden fazla kez önerilemez."
+msgstr ""
+
+#: apps/menu/services.py:98
+msgid "Ürün bulunamadı veya pasif."
+msgstr ""
+
+#: apps/menu/services.py:118
+msgid "Geçersiz seçenek kimliği."
+msgstr ""
+
+#: apps/menu/services.py:124
+msgid "Seçilen seçenek bu ürün için geçerli değil."
+msgstr ""
+
+#: apps/menu/services.py:129
+#, python-brace-format
+msgid "\"{name}\" grubunda yalnızca bir seçenek seçilebilir."
+msgstr ""
+
+#: apps/menu/services.py:138
+#, python-brace-format
+msgid "Zorunlu seçenek grubu: {name}"
+msgstr ""
+
+#: apps/menu/views.py:77
+msgid "Bazı kategoriler bulunamadı veya bu şubeye ait değil."
+msgstr ""
+
+#: apps/menu/views.py:268
+msgid "discount_rate zorunludur."
+msgstr ""
+
+#: apps/menu/views.py:273
+msgid "discount_rate geçerli bir sayı olmalıdır."
+msgstr ""
+
+#: apps/menu/views.py:276
+msgid "discount_rate 0 ile 100 arasında olmalıdır."
+msgstr ""
+
+#: apps/menu/views.py:279 apps/menu/views.py:307
+msgid "product_ids listesi boş olamaz."
+msgstr ""
+
+#: apps/menu/views.py:413
+msgid "group_ids zorunludur."
+msgstr ""
+
+#: apps/menu/views.py:657
+msgid "branch_id parametresi gerekli."
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:17
+msgid "Müşteri Smart Table üzerinden iptal etti"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:20
+msgid "Yanlış Sipariş / Giriş Hatası"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:21
+msgid "Müşteri Vazgeçti"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:22
+msgid "Ürün Kalmadı (86)"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:23
+msgid "Mutfak Hatası"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:24
+msgid "Kalite / Şikayet"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:25
+msgid "Diğer (Açıklama Yazınız)"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:26
+msgid "Satış iptali (iade)"
+msgstr ""
+
+#: apps/orders/cancellation_reasons.py:27
+msgid "Garson tarafından iptal"
+msgstr ""
+
+#: apps/orders/force_stock.py:27
+msgid "Yetersiz stokta sipariş geçme yetkiniz yok."
+msgstr ""
+
+#: apps/orders/idempotency.py:68
+msgid "Idempotency anahtarı farklı bir işlem kapsamında kayıtlı."
+msgstr ""
+
+#: apps/orders/idempotency.py:82
+msgid "Aynı idempotency anahtarı farklı istek gövdesi ile kullanıldı."
+msgstr ""
+
+#: apps/orders/models.py:12 apps/performances/models.py:7 apps/prep/models.py:8
+#: apps/printing/models.py:106 apps/reservations/models.py:14
+#: apps/sales/models.py:153 apps/warehouse/models.py:248
+#: apps/warehouse/models.py:643
+msgid "Bekliyor"
+msgstr ""
+
+#: apps/orders/models.py:13 apps/prep/models.py:9
+msgid "Hazırlanıyor"
+msgstr ""
+
+#: apps/orders/models.py:14
+msgid "Hazır"
+msgstr ""
+
+#: apps/orders/models.py:15
+msgid "Teslim Edildi"
+msgstr ""
+
+#: apps/orders/models.py:21 apps/orders/views.py:616
+msgid "Paket"
+msgstr ""
+
+#: apps/orders/models.py:32
+msgid "Paket bölgesi"
+msgstr ""
+
+#: apps/orders/models.py:33
+msgid "Masasız paket siparişleri için POS’ta gruplanacak bölge."
+msgstr ""
+
+#: apps/orders/models.py:49
+msgid "Sipariş Türü"
+msgstr ""
+
+#: apps/orders/models.py:58
+msgid "Günlük sıfırlanan, şubeye özel kısa numara (örn. #1, #2)"
+msgstr ""
+
+#: apps/orders/models.py:65 apps/sales/models.py:95
+msgid "İndirim Tutarı"
+msgstr ""
+
+#: apps/orders/models.py:69 apps/sales/models.py:99
+#: apps/sales/serializers.py:85
+msgid "Sipariş İndirimi"
+msgstr ""
+
+#: apps/orders/models.py:69 apps/sales/models.py:99
+#: apps/sales/serializers.py:85
+msgid "Ürün İndirimi"
+msgstr ""
+
+#: apps/orders/models.py:71 apps/sales/models.py:101
+msgid "İndirim Türü"
+msgstr ""
+
+#: apps/orders/models.py:78 apps/sales/models.py:108
+msgid "İndirimi Uygulayan"
+msgstr ""
+
+#: apps/orders/models.py:82
+msgid "Ürün Kısıtına Göre"
+msgstr ""
+
+#: apps/orders/models.py:82
+msgid "Hammaddeye Göre"
+msgstr ""
+
+#: apps/orders/models.py:84
+msgid "Stok Takip Yöntemi"
+msgstr ""
+
+#: apps/orders/models.py:88 apps/orders/models.py:168
+msgid "İptal Gerekçesi Kodu"
+msgstr ""
+
+#: apps/orders/models.py:89 apps/orders/models.py:169
+msgid "İptal Gerekçesi Metni"
+msgstr ""
+
+#: apps/orders/models.py:93
+msgid "Siparişler"
+msgstr ""
+
+#: apps/orders/models.py:116
+msgid "Porsiyon çarpanı"
+msgstr ""
+
+#: apps/orders/models.py:117
+msgid ""
+"Birleşik ürün alt kaleminde reçete düşümü: miktar × bu çarpan (satış birimi)."
+msgstr ""
+
+#: apps/orders/models.py:126
+msgid "Planlanan Başlangıç Zamanı"
+msgstr ""
+
+#: apps/orders/models.py:127
+msgid "Smart Firing için hazırlığa başlanması gereken zaman."
+msgstr ""
+
+#: apps/orders/models.py:138
+msgid "Ana Ürün (Birleşik)"
+msgstr ""
+
+#: apps/orders/models.py:153
+msgid "Ateşleme operatör müdahalesi (şimdi başlat)"
+msgstr ""
+
+#: apps/orders/models.py:154
+msgid "force-now ile set edilir; KDS firing_state için kullanılır."
+msgstr ""
+
+#: apps/orders/models.py:163
+msgid "Şube (denormalize)"
+msgstr ""
+
+#: apps/orders/models.py:164
+msgid ""
+"order.branch_id'nin okuma performansı için kopyası. Order.save() ile "
+"güncellenir."
+msgstr ""
+
+#: apps/orders/models.py:174
+msgid "Fire Kaydedildi"
+msgstr ""
+
+#: apps/orders/models.py:175
+msgid ""
+"Hazırlanmış ürün iptal edildiğinde fire stok hareketinin kaydedilip "
+"kaydedilmediğini gösterir. Double-spending koruması."
+msgstr ""
+
+#: apps/orders/models.py:190
+msgid "Garson mutfak bildiriminde görüldü"
+msgstr ""
+
+#: apps/orders/models.py:191
+msgid ""
+"READY kalem garson tarafından görüldü işaretlendiğinde set edilir; teslim "
+"(DELIVERED) ayrıdır."
+msgstr ""
+
+#: apps/orders/models.py:196 apps/warehouse/models.py:227
+msgid "Sipariş Kalemleri"
+msgstr ""
+
+#: apps/orders/models.py:235
+msgid "EMA (dk)"
+msgstr ""
+
+#: apps/orders/models.py:236
+msgid "Örnek sayısı"
+msgstr ""
+
+#: apps/orders/models.py:239
+msgid "Ürün istasyon süre istatistiği"
+msgstr ""
+
+#: apps/orders/models.py:240
+msgid "Ürün istasyon süre istatistikleri"
+msgstr ""
+
+#: apps/orders/models.py:253
+msgid "Sipariş oluştur"
+msgstr ""
+
+#: apps/orders/models.py:254
+msgid "Sipariş tamamla"
+msgstr ""
+
+#: apps/orders/models.py:255
+msgid "Masa kapat"
+msgstr ""
+
+#: apps/orders/models.py:265 apps/printing/models.py:141
+msgid "Idempotency anahtarı"
+msgstr ""
+
+#: apps/orders/models.py:270
+#: apps/sales/templates/reports/menu_engineering.html:66
+msgid "Kapsam"
+msgstr ""
+
+#: apps/orders/models.py:272
+msgid "İstek özeti"
+msgstr ""
+
+#: apps/orders/models.py:273
+msgid "Yanıt durumu"
+msgstr ""
+
+#: apps/orders/models.py:274
+msgid "Yanıt gövdesi"
+msgstr ""
+
+#: apps/orders/models.py:292
+msgid "POS idempotency kaydı"
+msgstr ""
+
+#: apps/orders/models.py:293
+msgid "POS idempotency kayıtları"
+msgstr ""
+
+#: apps/orders/order_validation_service.py:59
+msgid "Sepet boş."
+msgstr ""
+
+#: apps/orders/order_validation_service.py:128
+msgid "Üretim / ürün kalmadı."
+msgstr ""
+
+#: apps/orders/order_validation_service.py:132
+#, python-format
+msgid ""
+"Stok: %(code)s — %(name)s (Mevcut: %(physical)s, Rezerve: %(reserved)s, "
+"Kullanılabilir: %(available)s, Gerekli: %(required)s)"
+msgstr ""
+
+#: apps/orders/order_validation_service.py:143
+msgid "Sipariş doğrulanamadı."
+msgstr ""
+
+#: apps/orders/services/discount_service.py:16
+msgid "Tamamlanmış veya iptal edilmiş siparişe indirim uygulanamaz."
+msgstr ""
+
+#: apps/orders/services/discount_service.py:19
+msgid "İndirim tutarı sıfırdan büyük olmalıdır."
+msgstr ""
+
+#: apps/orders/services/discount_service.py:31
+msgid "ITEM tipinde order_item_id zorunludur."
+msgstr ""
+
+#: apps/orders/services/discount_service.py:35
+msgid "Ürün bu siparişe ait değil."
+msgstr ""
+
+#: apps/orders/services/discount_service.py:51
+msgid "Sipariş tamamlanmış veya iptal edilmiş."
+msgstr ""
+
+#: apps/orders/services/item_service.py:27
+msgid "Ürün zaten tamamlanmış veya iptal edilmiş."
+msgstr ""
+
+#: apps/orders/services/item_service.py:186
+msgid "Yalnızca servise gönderilmiş kalemler geri çağrılabilir."
+msgstr ""
+
+#: apps/orders/services/item_service.py:192
+msgid "Geri çağırma süresi dolmuş."
+msgstr ""
+
+#: apps/orders/services/item_service.py:201
+msgid "Hesabı kapanmış veya tamamlanmış sipariş geri çağrılamaz."
+msgstr ""
+
+#: apps/orders/services/item_status_service.py:19 apps/orders/views.py:978
+msgid "Invalid status"
+msgstr ""
+
+#: apps/orders/services/item_status_service.py:26
+msgid ""
+"Garson yalnızca hazır ürünü teslim edildi (DELIVERED) olarak işaretleyebilir."
+msgstr ""
+
+#: apps/orders/services/item_status_service.py:41 apps/orders/views.py:777
+#: apps/orders/views.py:815 apps/orders/views.py:872
+msgid "Bu sipariş kalemi için bu mutfak istasyonunda yetkiniz yok."
+msgstr ""
+
+#: apps/orders/services/order_core_service.py:46
+msgid "Masa siparişi için masa seçilmelidir."
+msgstr ""
+
+#: apps/orders/services/order_core_service.py:79
+msgid "Bu şube için paket (takeaway) bölgesi tanımlı değil."
+msgstr ""
+
+#: apps/orders/services/order_core_service.py:290
+msgid ""
+"Hammadde rezervasyonu oluşturulamadı. Reçete, mutfak/istasyon deposu ve şube "
+"depo bağlantılarını kontrol edin."
+msgstr ""
+
+#: apps/orders/services/order_core_service.py:305
+#: apps/orders/services/order_core_service.py:342
+#: apps/orders/services/order_core_service.py:397
+msgid "Sipariş zaten tamamlanmış veya iptal edilmiş."
+msgstr ""
+
+#: apps/orders/services/order_core_service.py:404
+#, python-brace-format
+msgid "Zorla kapatıldı ({actor} — {ts})"
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:21
+msgid "Sipariş doğrulama hatası."
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:46
+#: apps/orders/services/sale_helper.py:60
+#, python-format
+msgid "Geçersiz ödeme yöntemi: %(method)s. Geçerli: %(valid)s"
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:56
+msgid "payments öğelerinde method ve amount zorunludur."
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:74
+#, python-format
+msgid ""
+"Ödeme tutarları toplamı sipariş tutarına eşit olmalı. Beklenen: "
+"%(expected)s, girilen: %(actual)s"
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:86
+msgid "Masada ödenecek tutar bulunamadı."
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:118
+#, python-format
+msgid ""
+"Sipariş %(order)s için dağıtılan ödeme tutarı eşleşmedi. Beklenen: "
+"%(expected)s, dağıtılan: %(actual)s"
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:157
+#, python-format
+msgid "%(customer_name)s adına fiş düzenlendi."
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:242
+#, python-format
+msgid "%(name)s hesabından karşılandı."
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:276
+msgid "Mali cihazdan hata alındı."
+msgstr ""
+
+#: apps/orders/services/sale_helper.py:283
+#, python-format
+msgid "Mali entegrasyon işlemi başarısız oldu: %(error)s"
+msgstr ""
+
+#: apps/orders/services/table_flow_service.py:51
+msgid "Bu masada aktif sipariş bulunamadı."
+msgstr ""
+
+#: apps/orders/services/table_flow_service.py:107
+msgid "Geçersiz ödeme yöntemi."
+msgstr ""
+
+#: apps/orders/services/table_flow_service.py:160
+msgid "Kaynak masada aktif sipariş bulunamadı."
+msgstr ""
+
+#: apps/orders/tasks.py:102 apps/orders/tests/test_auto_close_task.py:42
+msgid "Sistem tarafından OTOMATİK kapama"
+msgstr ""
+
+#: apps/orders/views.py:182
+msgid "Bu şubeye sipariş oluşturma yetkiniz yok."
+msgstr ""
+
+#: apps/orders/views.py:236
+msgid "Bu şube için stok kontrolü yapma yetkiniz yok."
+msgstr ""
+
+#: apps/orders/views.py:264 apps/orders/views.py:346
+msgid "payments bir dizi olmalıdır."
+msgstr ""
+
+#: apps/orders/views.py:349
+msgid "table_id required"
+msgstr ""
+
+#: apps/orders/views.py:409
+msgid "table_id gereklidir."
+msgstr ""
+
+#: apps/orders/views.py:418
+msgid "Bu şubeye erişim yetkiniz yok."
+msgstr ""
+
+#: apps/orders/views.py:471
+msgid "idempotency_keys bir dizi olmalıdır."
+msgstr ""
+
+#: apps/orders/views.py:596 apps/orders/views.py:940 apps/orders/views.py:953
+msgid "branch_id sorgu parametresi veya kullanıcı şubesi gerekli."
+msgstr ""
+
+#: apps/orders/views.py:641
+msgid "from_table_id ve to_table_id gereklidir."
+msgstr ""
+
+#: apps/orders/views.py:658
+msgid "Masa başarıyla taşındı."
+msgstr ""
+
+#: apps/orders/views.py:676
+msgid "discount_amount geçerli bir sayı olmalıdır."
+msgstr ""
+
+#: apps/orders/views.py:691
+#: apps/performances/templates/reports/waiter_calls_report.html:171
+#: apps/performances/templates/reports/waiter_sales_report.html:203
+msgid "Kayıt bulunamadı."
+msgstr ""
+
+#: apps/orders/views.py:846 apps/orders/views.py:848
+#: apps/warehouse/services/purchase_recommendation_service.py:193
+msgid "Geçersiz miktar."
+msgstr ""
+
+#: apps/orders/views.py:864
+msgid ""
+"Bu işlem için orders.manage_order veya orders.manage_smart_firing yetkisi "
+"gerekir."
+msgstr ""
+
+#: apps/orders/views.py:880
+msgid ""
+"orders.manage_smart_firing yalnızca KDS (orders.view_kds) ile birlikte "
+"kullanılabilir; aksi halde orders.manage_order gerekir."
+msgstr ""
+
+#: apps/orders/views.py:894
+msgid "İptal edilmiş kalem için ateşleme yapılamaz."
+msgstr ""
+
+#: apps/orders/views.py:896
+msgid "Yalnızca bekleyen kalemler şimdi zamanlanabilir."
+msgstr ""
+
+#: apps/orders/views.py:921
+msgid "İptal edilmiş kalem ertelenemez."
+msgstr ""
+
+#: apps/orders/views.py:923
+msgid "Erteleme yalnızca bekleyen kalemler için geçerlidir."
+msgstr ""
+
+#: apps/orders/views.py:980 apps/orders/views.py:1012
+msgid "ids listesi gerekli."
+msgstr ""
+
+#: apps/orders/views.py:983 apps/orders/views.py:1015
+msgid "Yinelenen id olamaz."
+msgstr ""
+
+#: apps/orders/views.py:987
+msgid "Bazı kalemler bulunamadı veya bu şubeye ait değil."
+msgstr ""
+
+#: apps/orders/views.py:1020
+msgid "Bazı kalemler bulunamadı, READY değil veya bu şubeye ait değil."
+msgstr ""
+
+#: apps/performances/models.py:8
+#: apps/performances/templates/reports/waiter_calls_report.html:108
+msgid "Görüldü"
+msgstr ""
+
+#: apps/performances/models.py:38 apps/reservations/models.py:63
+msgid "Rezervasyon"
+msgstr ""
+
+#: apps/performances/models.py:40
+msgid "Masa adı"
+msgstr ""
+
+#: apps/performances/models.py:47
+msgid "Misafir mesajı"
+msgstr ""
+
+#: apps/performances/models.py:55
+msgid "Bildirilen garson"
+msgstr ""
+
+#: apps/performances/models.py:56
+msgid "Çağrı zamanı"
+msgstr ""
+
+#: apps/performances/models.py:57
+msgid "Görüldü zamanı"
+msgstr ""
+
+#: apps/performances/models.py:64
+#: apps/performances/templates/reports/waiter_calls_report.html:154
+#: apps/performances/views.py:101
+msgid "Görüldü yapan"
+msgstr ""
+
+#: apps/performances/models.py:69
+msgid "Yanıt süresi (sn)"
+msgstr ""
+
+#: apps/performances/models.py:73
+msgid "Garson çağrı kaydı"
+msgstr ""
+
+#: apps/performances/models.py:74
+msgid "Garson çağrı kayıtları"
+msgstr ""
+
+#: apps/performances/reports/waiter_call_reports.py:14
+#: apps/performances/templates/reports/waiter_calls_report.html:5
+#: apps/performances/templates/reports/waiter_calls_report.html:90
+#: apps/performances/views.py:132
+msgid "Garson Çağrı Performans Raporu"
+msgstr ""
+
+#: apps/performances/reports/waiter_call_reports.py:15
+msgid "Garson çağrı geçmişi ve personel yanıt süreleri analizi."
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:11
+#: apps/performances/templates/reports/waiter_sales_report.html:11
+#: apps/sales/templates/reports/cancellations_report.html:11
+#: apps/sales/templates/reports/customer_list.html:11
+#: apps/sales/templates/reports/customer_sales_detail.html:11
+#: apps/sales/templates/reports/sales_report.html:11
+msgid "Sayfa"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:94
+#: apps/performances/templates/reports/waiter_sales_report.html:94
+msgid "Rapor tarihi"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:96
+#: apps/performances/templates/reports/waiter_sales_report.html:96
+msgid "Başlangıç"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:97
+#: apps/performances/templates/reports/waiter_sales_report.html:97
+msgid "Bitiş"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:104
+msgid "Toplam çağrı"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:112
+msgid "Bekleyen"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:116
+msgid "Ort. yanıt süresi"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:121
+msgid "Personel performansı"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:126
+msgid "Çağrı adedi"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:127
+msgid "Ort. yanıt (sn)"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:128
+msgid "Min (sn)"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:129
+msgid "Max (sn)"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:146
+msgid "Çağrı geçmişi"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_calls_report.html:155
+#: apps/performances/views.py:102
+msgid "Yanıt (sn)"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:5
+#: apps/performances/templates/reports/waiter_sales_report.html:90
+#: apps/performances/views.py:322
+msgid "Garson Satış Performans Raporu"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:104
+msgid "Toplam sipariş"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:108
+msgid "Toplam satış"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:116
+msgid "Mobil / Web"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:121
+msgid "Personel satış özeti"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:125
+#: apps/performances/templates/reports/waiter_sales_report.html:183
+#: apps/performances/views.py:274 apps/users/models.py:44
+msgid "Garson"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:128
+msgid "Toplam tutar"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:129
+msgid "Ort. tutar"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:130
+msgid "Masa sayısı"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:131
+msgid "En yoğun gün"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:132
+msgid "En yüksek masa"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:133
+msgid "Mobil"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:134
+#: apps/performances/views.py:265 apps/performances/views.py:348
+msgid "Web"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:157
+msgid "İptal gerekçeleri"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:161
+msgid "Gerekçe"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:162
+msgid "Adet"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:176
+msgid "Sipariş geçmişi"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:185
+#: apps/performances/views.py:277
+msgid "Kanal"
+msgstr ""
+
+#: apps/performances/templates/reports/waiter_sales_report.html:187
+#: apps/performances/views.py:279
+msgid "İptal gerekçesi"
+msgstr ""
+
+#: apps/performances/views.py:264 apps/performances/views.py:347
+msgid "Mobil uygulama"
+msgstr ""
+
+#: apps/performances/views.py:266 apps/performances/views.py:349
+#: apps/production_planning/services/approximate_cost_service.py:169
+#: apps/production_planning/services/approximate_cost_service.py:188
+msgid "Bilinmiyor"
+msgstr ""
+
+#: apps/pos_display/models.py:9
+msgid "Kod yalnızca harf, rakam, alt çizgi ve tire içerebilir."
+msgstr ""
+
+#: apps/pos_display/models.py:34
+msgid "Boş bırakılırsa şube varsayılanıdır."
+msgstr ""
+
+#: apps/pos_display/models.py:36
+msgid "Saniye cinsinden bekleme süresi"
+msgstr ""
+
+#: apps/pos_display/models.py:37
+msgid "Slaytlar arası geçiş hızı (saniye)"
+msgstr ""
+
+#: apps/pos_display/models.py:38
+msgid "Ekranda saat gösterilsin mi?"
+msgstr ""
+
+#: apps/pos_display/models.py:39
+msgid "Karşılama Başlığı"
+msgstr ""
+
+#: apps/pos_display/models.py:40
+msgid "Karşılama Alt Başlığı"
+msgstr ""
+
+#: apps/pos_display/models.py:41
+msgid "Sipariş Başarı Başlığı"
+msgstr ""
+
+#: apps/pos_display/models.py:42
+msgid "Sipariş Başarı Alt Başlığı"
+msgstr ""
+
+#: apps/pos_display/models.py:43
+msgid "Ödeme Başarı Başlığı"
+msgstr ""
+
+#: apps/pos_display/models.py:44
+msgid "Ödeme Başarı Alt Başlığı"
+msgstr ""
+
+#: apps/pos_display/models.py:45
+msgid "Başarı mesajının ekranda kalma süresi (saniye)"
+msgstr ""
+
+#: apps/pos_display/models.py:51
+msgid "Ekran Ayarı"
+msgstr ""
+
+#: apps/pos_display/models.py:52
+msgid "Ekran Ayarları"
+msgstr ""
+
+#: apps/pos_display/models.py:83
+msgid "Boş ise şube geneli tüm müşteri ekranlarında gösterilir."
+msgstr ""
+
+#: apps/pos_display/models.py:86 apps/pos_display/models.py:93
+msgid "Görsel"
+msgstr ""
+
+#: apps/pos_display/models.py:91
+msgid "Alt Başlık"
+msgstr ""
+
+#: apps/pos_display/models.py:95
+msgid "Bu slaytın ekranda kalma süresi (saniye)"
+msgstr ""
+
+#: apps/pos_display/models.py:99
+msgid "Tanıtım Slaytı"
+msgstr ""
+
+#: apps/pos_display/models.py:100
+msgid "Tanıtım Slaytları"
+msgstr ""
+
+#: apps/pos_display/models.py:107
+msgid "Yok (Mali Entegrasyon Devre Dışı)"
+msgstr ""
+
+#: apps/pos_display/models.py:108
+msgid "Sanal Entegrasyon (Test/Simülasyon)"
+msgstr ""
+
+#: apps/pos_display/models.py:109
+msgid "Beko ÖKC (GMP3 Bulut/Lokal)"
+msgstr ""
+
+#: apps/pos_display/models.py:110
+msgid "Hugin ÖKC (GMP3 Lokal/Socket)"
+msgstr ""
+
+#: apps/pos_display/models.py:111
+msgid "Uyumsoft e-Arşiv Fatura"
+msgstr ""
+
+#: apps/pos_display/models.py:127
+msgid "Kanal kodu (örn. kasa-1); müşteri ekranı URL/WS ile uyumlu olmalıdır."
+msgstr ""
+
+#: apps/pos_display/models.py:129
+msgid "Görünen ad"
+msgstr ""
+
+#: apps/pos_display/models.py:137
+msgid "Mali Entegrasyon Türü"
+msgstr ""
+
+#: apps/pos_display/models.py:142
+msgid "Mali Entegrasyon Ayarları"
+msgstr ""
+
+#: apps/pos_display/models.py:143
+msgid "IP, Port, Seri Port, API Key vb. parametreleri JSON olarak saklar."
+msgstr ""
+
+#: apps/pos_display/models.py:149
+msgid "POS terminalleri"
+msgstr ""
+
+#: apps/pos_display/serializers.py:23 apps/pos_display/serializers.py:40
+msgid "Terminal seçildiğinde şube zorunludur."
+msgstr ""
+
+#: apps/pos_display/serializers.py:25 apps/pos_display/serializers.py:42
+msgid "Terminal bu şubeye ait değil."
+msgstr ""
+
+#: apps/pos_display/views.py:37
+msgid "terminal_id gerekli."
+msgstr ""
+
+#: apps/pos_display/views.py:39 apps/pos_display/views.py:102
+#: apps/pos_display/views.py:167 apps/prep_display/views.py:43
+#: apps/shifts/views.py:130
+msgid "branch_id gerekli."
+msgstr ""
+
+#: apps/pos_display/views.py:112 apps/pos_display/views.py:346
+msgid "WebSocket kanalı aktif değil."
+msgstr ""
+
+#: apps/pos_display/views.py:306
+msgid "Bağlantıları görüntüleme yetkiniz yok."
+msgstr ""
+
+#: apps/pos_display/views.py:334
+msgid "Bağlantıları kesme yetkiniz yok."
+msgstr ""
+
+#: apps/pos_display/views.py:342
+msgid "channel_name gerekli."
+msgstr ""
+
+#: apps/prep/models.py:25
+msgid "Görev Başlığı"
+msgstr ""
+
+#: apps/prep/models.py:39
+msgid "Öncelik"
+msgstr ""
+
+#: apps/prep/models.py:40
+msgid "Son Tamamlanma Zamanı"
+msgstr ""
+
+#: apps/prep/models.py:57
+msgid "Tekrarlayan Görev"
+msgstr ""
+
+#: apps/prep/models.py:65
+msgid "Kaynak şablon"
+msgstr ""
+
+#: apps/prep/models.py:66
+msgid ""
+"Şablondan otomatik oluşturulduysa bağlantı; aynı gün tekrar üretimi "
+"engellemek için kullanılır."
+msgstr ""
+
+#: apps/prep/models.py:76
+msgid ""
+"Bu hazırlık görevinin bağlı olduğu ürün. PrepTemplate üzerinden otomatik "
+"atanır."
+msgstr ""
+
+#: apps/prep/models.py:86
+msgid ""
+"Bu görevin bağlı olduğu üretim planı satırı. Plan onaylandığında otomatik "
+"atanır."
+msgstr ""
+
+#: apps/prep/models.py:90
+msgid "Planlanan Başlangıç"
+msgstr ""
+
+#: apps/prep/models.py:91
+msgid "Görevin planlanan başlangıç zamanı"
+msgstr ""
+
+#: apps/prep/models.py:97
+msgid "Hazırlık Görevleri"
+msgstr ""
+
+#: apps/prep/models.py:122 apps/shifts/models.py:142 apps/users/models.py:25
+#: apps/users/models.py:58
+msgid "Kullanıcı"
+msgstr ""
+
+#: apps/prep/models.py:128 apps/prep/models.py:184
+msgid "Görünen İsim"
+msgstr ""
+
+#: apps/prep/models.py:129
+msgid "Sisteme kayıtlı olmayan kişiler için manuel isim girişi"
+msgstr ""
+
+#: apps/prep/models.py:133
+msgid "Görev Ataması"
+msgstr ""
+
+#: apps/prep/models.py:134
+msgid "Görev Atamaları"
+msgstr ""
+
+#: apps/prep/models.py:164
+msgid "Görevin her gün saat kaçta oluşturulacağı"
+msgstr ""
+
+#: apps/prep/models.py:166
+msgid "Şablon Etkin"
+msgstr ""
+
+#: apps/prep/models.py:175
+msgid "Atanan Kişi"
+msgstr ""
+
+#: apps/prep/models.py:176
+msgid "Boş bırakılırsa herkese atanır."
+msgstr ""
+
+#: apps/prep/models.py:185
+msgid ""
+"Sisteme kayıtlı olmayan kişiler için manuel isim girişi. assigned_to ile "
+"birlikte kullanılmaz."
+msgstr ""
+
+#: apps/prep/models.py:195
+msgid ""
+"Bu şablonun bağlı olduğu ürün. Yeni görev oluşturulurken PrepTask.product'a "
+"kopyalanır."
+msgstr ""
+
+#: apps/prep/models.py:199
+msgid "Hazırlık Şablonu"
+msgstr ""
+
+#: apps/prep/models.py:200
+msgid "Hazırlık Şablonları"
+msgstr ""
+
+#: apps/prep/models.py:206
+msgid "Kural Adı"
+msgstr ""
+
+#: apps/prep/models.py:212
+msgid "Hazırlanacak Malzeme"
+msgstr ""
+
+#: apps/prep/models.py:222
+msgid "Akıllı Hazırlık Kuralı"
+msgstr ""
+
+#: apps/prep/models.py:223
+msgid "Akıllı Hazırlık Kuralları"
+msgstr ""
+
+#: apps/prep/models.py:240
+msgid "Yönetimde eski tamamlananları gizle"
+msgstr ""
+
+#: apps/prep/models.py:242
+msgid ""
+"Açıkken hazırlık yönetimi görev listesi operasyon modunda davranır: önceki "
+"gün oluşturulmuş tamamlanan görevler listelenmez."
+msgstr ""
+
+#: apps/prep/models.py:248
+msgid "Hazırlık şube ayarı"
+msgstr ""
+
+#: apps/prep/models.py:249
+msgid "Hazırlık şube ayarları"
+msgstr ""
+
+#: apps/prep/services.py:100
+msgid "Tamamlanmış veya iptal edilmiş görevde ilerleme güncellenemez."
+msgstr ""
+
+#: apps/prep/services.py:106
+msgid "Geçerli bir sayı girin."
+msgstr ""
+
+#: apps/prep/services.py:109
+msgid "Negatif miktar olamaz."
+msgstr ""
+
+#: apps/prep/services.py:114
+#, python-format
+msgid "Miktar hedefi (%(target)s) aşamaz."
+msgstr ""
+
+#: apps/prep/services.py:326
+msgid "Yüksek satış hacmi tespit edildi."
+msgstr ""
+
+#: apps/prep/services.py:452
+#, python-format
+msgid "PrepTask tamamlanmasıyla stok düşümü: %(task_title)s"
+msgstr ""
+
+#: apps/prep/views.py:153
+#, python-format
+msgid "%(count)s yeni hazırlık görevi üretildi."
+msgstr ""
+
+#: apps/prep/views.py:155
+msgid "Yeni üretilecek şablon görevi yok."
+msgstr ""
+
+#: apps/prep/views.py:166
+msgid "status alanı gereklidir."
+msgstr ""
+
+#: apps/prep/views.py:186
+msgid "completed_quantity alanı gereklidir."
+msgstr ""
+
+#: apps/prep/views.py:218 apps/prep/views.py:235 apps/prep/views.py:308
+#: apps/reservations/views.py:71
+msgid "branch_id query parametresi gerekli."
+msgstr ""
+
+#: apps/prep_display/views.py:48
+msgid "Geçersiz şube."
+msgstr ""
+
+#: apps/prep_display/views.py:80
+msgid "branch_id ve station_id gerekli."
+msgstr ""
+
+#: apps/prep_display/views.py:96
+msgid "Geçersiz istasyon veya şube."
+msgstr ""
+
+#: apps/prep_display/views.py:127
+msgid "İstasyon bulunamadı."
+msgstr ""
+
+#: apps/prep_display/views.py:140
+msgid "Token bu istasyon için geçerli değil."
+msgstr ""
+
+#: apps/printing/models.py:6
+msgid "Network (Ethernet/WiFi)"
+msgstr ""
+
+#: apps/printing/models.py:7
+msgid "USB"
+msgstr ""
+
+#: apps/printing/models.py:10
+msgid "Epson"
+msgstr ""
+
+#: apps/printing/models.py:11
+msgid "Star"
+msgstr ""
+
+#: apps/printing/models.py:12
+msgid "Bixolon"
+msgstr ""
+
+#: apps/printing/models.py:13
+msgid "Jenerik ESC/POS"
+msgstr ""
+
+#: apps/printing/models.py:17
+msgid "Mutfak"
+msgstr ""
+
+#: apps/printing/models.py:18 apps/users/models.py:43
+msgid "POS / Kasa"
+msgstr ""
+
+#: apps/printing/models.py:28
+msgid "Yazıcı Adı"
+msgstr ""
+
+#: apps/printing/models.py:33 apps/printing/views.py:45
+msgid "Bağlantı Tipi"
+msgstr ""
+
+#: apps/printing/models.py:43
+msgid "Port"
+msgstr ""
+
+#: apps/printing/models.py:49
+msgid "Cihaz Yolu"
+msgstr ""
+
+#: apps/printing/models.py:50
+msgid "Linux için örn: /dev/usb/lp0"
+msgstr ""
+
+#: apps/printing/models.py:57
+msgid "Yazıcı Modeli/Profili"
+msgstr ""
+
+#: apps/printing/models.py:64
+msgid "Kullanım Alanı"
+msgstr ""
+
+#: apps/printing/models.py:73
+msgid "Mutfak yazıcıları için hangi istasyona ait olduğu."
+msgstr ""
+
+#: apps/printing/models.py:79 apps/reporting/models.py:100
+msgid "Fiş Şablonu"
+msgstr ""
+
+#: apps/printing/models.py:80
+msgid "Bu yazıcıda kullanılacak ESC/POS fiş şablon kodu."
+msgstr ""
+
+#: apps/printing/models.py:82 rbac/models/role.py:26
+msgid "Aktif mi?"
+msgstr ""
+
+#: apps/printing/models.py:88
+msgid "Durum Bilgisi"
+msgstr ""
+
+#: apps/printing/models.py:89
+msgid "Online/Offline, Kağıt durumu vb."
+msgstr ""
+
+#: apps/printing/models.py:93
+msgid "Son Görülme"
+msgstr ""
+
+#: apps/printing/models.py:97 apps/printing/models.py:121
+msgid "Yazıcı"
+msgstr ""
+
+#: apps/printing/models.py:98
+msgid "Yazıcılar"
+msgstr ""
+
+#: apps/printing/models.py:107
+msgid "İşleniyor"
+msgstr ""
+
+#: apps/printing/models.py:109
+msgid "Başarısız"
+msgstr ""
+
+#: apps/printing/models.py:125
+msgid "Fiş şablon kodu"
+msgstr ""
+
+#: apps/printing/models.py:127
+msgid "Şablon bağlamı"
+msgstr ""
+
+#: apps/printing/models.py:135
+msgid "Hata mesajı"
+msgstr ""
+
+#: apps/printing/models.py:142
+msgid "Aynı anahtarla tekrar istek yinelenen iş üretmez."
+msgstr ""
+
+#: apps/printing/models.py:151
+msgid "Yazdırma işi"
+msgstr ""
+
+#: apps/printing/models.py:152
+msgid "Yazdırma işleri"
+msgstr ""
+
+#: apps/printing/serializers.py:50
+msgid "Network yazıcıları için geçerli bir IP adresi gereklidir."
+msgstr ""
+
+#: apps/printing/serializers.py:57
+msgid "USB yazıcılar için cihaz yolu (örn: /dev/usb/lp0) gereklidir."
+msgstr ""
+
+#: apps/printing/serializers.py:66
+msgid "Mutfak yazıcıları için istasyon seçimi zorunludur."
+msgstr ""
+
+#: apps/printing/serializers.py:70
+msgid "Mutfak yazıcıları için fiş şablonu zorunludur."
+msgstr ""
+
+#: apps/printing/serializers.py:79
+msgid "Seçilen istasyon yazıcının şubesine ait olmalıdır."
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:37
+msgid "IP adresi tanımlanmamış."
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:42
+msgid "USB cihaz yolu tanımlanmamış."
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:63
+#, python-format
+msgid "Yazıcıya bağlanılamadı: %(err)s"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:79
+msgid "IP adresi eksik"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:104
+#, python-format
+msgid "Bağlantı reddedildi (Kod: %(code)s)"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:108
+msgid "USB yolu eksik"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:116
+msgid "USB izni yok (Permission Denied)"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:118
+msgid "Cihaz bağlı değil"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:166
+#, python-format
+msgid "TOPLAM: %(total)s\n"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:169
+msgid "Teşekkür Ederiz"
+msgstr ""
+
+#: apps/printing/services/escpos_service.py:173
+#, python-format
+msgid "Yazdırma işlemi başarısız: %(err)s"
+msgstr ""
+
+#: apps/printing/tasks.py:161
+msgid "Yazdırma işi zaman aşımına uğradı; worker yanıt vermedi."
+msgstr ""
+
+#: apps/printing/views.py:41
+msgid "TEST BASKISI"
+msgstr ""
+
+#: apps/printing/views.py:42
+#, python-format
+msgid "Yazıcı: %(name)s"
+msgstr ""
+
+#: apps/printing/views.py:44
+msgid "Sistem Kontrol"
+msgstr ""
+
+#: apps/printing/views.py:47
+msgid "BAŞARILI"
+msgstr ""
+
+#: apps/printing/views.py:52
+msgid "Test çıktısı gönderildi."
+msgstr ""
+
+#: apps/production_planning/models.py:9
+msgid "Onaylı"
+msgstr ""
+
+#: apps/production_planning/models.py:10
+msgid "Kilitli"
+msgstr ""
+
+#: apps/production_planning/models.py:14
+msgid "Manuel"
+msgstr ""
+
+#: apps/production_planning/models.py:15
+msgid "Tahmin"
+msgstr ""
+
+#: apps/production_planning/models.py:16
+msgid "İçe Aktarma"
+msgstr ""
+
+#: apps/production_planning/models.py:20 apps/shifts/models.py:11
+msgid "Kapalı"
+msgstr ""
+
+#: apps/production_planning/models.py:21
+msgid "Uyarı Ver"
+msgstr ""
+
+#: apps/production_planning/models.py:22
+msgid "Siparişi Engelle"
+msgstr ""
+
+#: apps/production_planning/models.py:26
+#: apps/production_planning/templates/reports/mrp_pdf.html:138
+msgid "Mevcut"
+msgstr ""
+
+#: apps/production_planning/models.py:27
+msgid "Sınırlı"
+msgstr ""
+
+#: apps/production_planning/models.py:28
+msgid "Tükendi (Ürün Kalmadı)"
+msgstr ""
+
+#: apps/production_planning/models.py:41
+msgid "Plan Tarihi"
+msgstr ""
+
+#: apps/production_planning/models.py:64
+msgid "Onaylanma Zamanı"
+msgstr ""
+
+#: apps/production_planning/models.py:76
+msgid "Üretim Planı"
+msgstr ""
+
+#: apps/production_planning/models.py:77
+msgid "Üretim Planları"
+msgstr ""
+
+#: apps/production_planning/models.py:91
+msgid "Plan"
+msgstr ""
+
+#: apps/production_planning/models.py:104
+msgid "Hedef Miktar (Porsiyon)"
+msgstr ""
+
+#: apps/production_planning/models.py:113
+msgid "Ürünün hazırlandığı istasyon"
+msgstr ""
+
+#: apps/production_planning/models.py:126
+msgid "Üretim Planı Satırları"
+msgstr ""
+
+#: apps/production_planning/models.py:146
+msgid "Varsayılan Güvenlik Çarpanı"
+msgstr ""
+
+#: apps/production_planning/models.py:147
+msgid "Tahmin hesaplamalarında kullanılır (Örn: %10 tolerans için 1.10)"
+msgstr ""
+
+#: apps/production_planning/models.py:153
+msgid "POS Engel Modu"
+msgstr ""
+
+#: apps/production_planning/models.py:154
+msgid "Tükendi veya limiti dolan ürünler POS ekranında nasıl davranacak?"
+msgstr ""
+
+#: apps/production_planning/models.py:158
+msgid "Negatif Plan Farkına İzin Ver"
+msgstr ""
+
+#: apps/production_planning/models.py:159
+msgid "Planda belirlenenden daha fazla satılmasına göz yumulacak mı?"
+msgstr ""
+
+#: apps/production_planning/models.py:163
+msgid "Üretim Günü Ayarı"
+msgstr ""
+
+#: apps/production_planning/models.py:164
+msgid "Üretim Günü Ayarları"
+msgstr ""
+
+#: apps/production_planning/models.py:181
+msgid "Geçerlilik Tarihi"
+msgstr ""
+
+#: apps/production_planning/models.py:193
+msgid "Ürün satışta mı, limiti var mı, yoksa tükendi (kalmadı) mi?"
+msgstr ""
+
+#: apps/production_planning/models.py:200
+msgid "Kalan Porsiyon"
+msgstr ""
+
+#: apps/production_planning/models.py:201
+msgid "Durum \"Sınırlı\" seçilirse geçerlidir."
+msgstr ""
+
+#: apps/production_planning/models.py:207
+msgid "Sebep"
+msgstr ""
+
+#: apps/production_planning/models.py:220
+msgid "Ürün Kalmadı (86) Kaydı"
+msgstr ""
+
+#: apps/production_planning/models.py:221
+msgid "Ürün Kalmadı (86) Kayıtları"
+msgstr ""
+
+#: apps/production_planning/reports.py:15
+msgid "MRP (Malzeme İhtiyaç Planlaması)"
+msgstr ""
+
+#: apps/production_planning/reports.py:16
+msgid "Üretim planı bazlı malzeme gereksinim raporu."
+msgstr ""
+
+#: apps/production_planning/reports.py:24
+#: apps/production_planning/reports.py:61
+msgid "Tüm İstasyonlar"
+msgstr ""
+
+#: apps/production_planning/reports.py:27
+#: apps/production_planning/reports.py:64
+msgid "Plan ID belirtilmedi."
+msgstr ""
+
+#: apps/production_planning/reports.py:31
+#: apps/production_planning/reports.py:68
+#: apps/production_planning/services/approximate_cost_service.py:165
+msgid "Plan bulunamadı."
+msgstr ""
+
+#: apps/production_planning/reports.py:52
+msgid "Üretim Planı Yaklaşık Maliyet"
+msgstr ""
+
+#: apps/production_planning/reports.py:53
+msgid "FEFO lot birim fiyatları ile üretim planı yaklaşık maliyet raporu."
+msgstr ""
+
+#: apps/production_planning/reports.py:88
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:148
+msgid "Ürün / Hammadde"
+msgstr ""
+
+#: apps/production_planning/reports.py:89
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:149
+#: apps/production_planning/templates/reports/mrp_pdf.html:136
+msgid "İstasyon"
+msgstr ""
+
+#: apps/production_planning/reports.py:92
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:152
+msgid "Birim Maliyet (FEFO)"
+msgstr ""
+
+#: apps/production_planning/reports.py:102
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:162
+#: apps/recipes/templates/reports/recipe_detail_report.html:164
+msgid "Porsiyon"
+msgstr ""
+
+#: apps/production_planning/reports.py:120
+msgid "Genel Toplam"
+msgstr ""
+
+#: apps/production_planning/services/plan_copy.py:20
+msgid "Hedef tarih, kaynak planın tarihiyle aynı olamaz."
+msgstr ""
+
+#: apps/production_planning/services/plan_copy.py:28
+msgid "Bu şube ve tarih için zaten bir üretim planı var."
+msgstr ""
+
+#: apps/production_planning/services/portion_service.py:43
+msgid "Ürün o gün için 'Ürün kalmadı' olarak işaretli."
+msgstr ""
+
+#: apps/production_planning/services/portion_service.py:50
+#, python-format
+msgid "Yeterli porsiyon yok. Kalan: %(left)s."
+msgstr ""
+
+#: apps/production_planning/services/portion_service.py:98
+#, python-format
+msgid "Ürün (%(name)s) kalmadı."
+msgstr ""
+
+#: apps/production_planning/services/portion_service.py:104
+#, python-format
+msgid "Yeterli porsiyon yok: %(name)s."
+msgstr ""
+
+#: apps/production_planning/services/production_reservation_service.py:146
+msgid "Üretim planından otomatik oluşturuldu"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:123
+msgid "FEFO lot birim fiyatları ile hesaplanmış yaklaşık üretim maliyeti"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:128
+#: apps/production_planning/templates/reports/mrp_pdf.html:115
+#: apps/shifts/templates/reports/cash_report.html:215
+#: apps/shifts/templates/reports/z_report.html:39
+msgid "Şube:"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:132
+msgid "Üretim Tarihi:"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:140
+#: apps/production_planning/templates/reports/mrp_pdf.html:127
+msgid "İstasyon:"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:167
+msgid "Reçetesiz"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:186
+msgid "Bu kriterlere uygun plan satırı bulunamadı."
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:194
+msgid "Genel Toplam Yaklaşık Maliyet:"
+msgstr ""
+
+#: apps/production_planning/templates/reports/approximate_cost_pdf.html:198
+#: apps/production_planning/templates/reports/mrp_pdf.html:175
+#: apps/sales/templates/reports/cancellations_report.html:104
+#: apps/sales/templates/reports/customer_list.html:73
+#: apps/sales/templates/reports/customer_sales_detail.html:109
+#: apps/sales/templates/reports/sales_report.html:111
+msgid "Oluşturulma:"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:110
+msgid "Malzeme İhtiyaç Analizi"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:119
+msgid "Plan Tarihi:"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:135
+msgid "Malzeme"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:137
+msgid "Gereken"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:139
+msgid "Eksik"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:149
+msgid "Sınırsız"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:155
+msgid "İzlenmiyor"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:157
+msgid "EKSİK"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:159
+msgid "YETERLİ"
+msgstr ""
+
+#: apps/production_planning/templates/reports/mrp_pdf.html:167
+msgid "Bu kriterlere uygun malzeme gereksinimi bulunamadı."
+msgstr ""
+
+#: apps/production_planning/views.py:158
+msgid "Sadece taslak planlar onaylanabilir."
+msgstr ""
+
+#: apps/production_planning/views.py:216
+msgid "Sadece onaylı planlar için görev oluşturulabilir."
+msgstr ""
+
+#: apps/production_planning/views.py:223 apps/production_planning/views.py:615
+msgid "Liste formatında veri bekleniyor."
+msgstr ""
+
+#: apps/production_planning/views.py:234
+msgid "plan_line_id gerekli"
+msgstr ""
+
+#: apps/production_planning/views.py:240
+msgid "Plan satırı bulunamadı"
+msgstr ""
+
+#: apps/production_planning/views.py:269
+#, python-brace-format
+msgid "{product} hazırlığı"
+msgstr ""
+
+#: apps/production_planning/views.py:273
+msgid "porsiyon"
+msgstr ""
+
+#: apps/production_planning/views.py:377
+msgid "Sadece taslak planlar için tahmin önizlemesi yapılabilir."
+msgstr ""
+
+#: apps/production_planning/views.py:398
+msgid "Sadece taslak planlara tahmin uygulanabilir."
+msgstr ""
+
+#: apps/production_planning/views.py:433
+msgid ""
+"Üretim planı yalnızca aynı şube içinde kopyalanabilir; hedef şube "
+"değiştirilemez."
+msgstr ""
+
+#: apps/production_planning/views.py:441
+msgid "target_date gerekli."
+msgstr ""
+
+#: apps/production_planning/views.py:446
+msgid "Geçersiz hedef tarih."
+msgstr ""
+
+#: apps/production_planning/views.py:534
+msgid ""
+"Bu tarih ve şube için onaylanmış bir üretim planı bulunduğundan kısıtlar "
+"değiştirilemez."
+msgstr ""
+
+#: apps/production_planning/views.py:654
+#, python-format
+msgid "%(created)s yeni kısıt eklendi, %(updated)s kısıt güncellendi."
+msgstr ""
+
+#: apps/recipes/allergen_expansion.py:27 apps/recipes/recipe_expansion.py:157
+#, python-format
+msgid "Reçete döngüsü tespit edildi: %(name)s"
+msgstr ""
+
+#: apps/recipes/models.py:23
+msgid "Reçete Kategorisi"
+msgstr ""
+
+#: apps/recipes/models.py:24
+msgid "Reçete Kategorileri"
+msgstr ""
+
+#: apps/recipes/models.py:50
+msgid "Reçete Adı"
+msgstr ""
+
+#: apps/recipes/models.py:52
+msgid "Porsiyon Sayısı"
+msgstr ""
+
+#: apps/recipes/models.py:54
+msgid "Porsiyon Miktarı/Ağırlığı"
+msgstr ""
+
+#: apps/recipes/models.py:55
+msgid "Örn: 250.000"
+msgstr ""
+
+#: apps/recipes/models.py:58
+msgid "Porsiyon Birimi"
+msgstr ""
+
+#: apps/recipes/models.py:59
+msgid "Örn: g, ml"
+msgstr ""
+
+#: apps/recipes/models.py:62
+msgid "Hazırlık Süresi (dk)"
+msgstr ""
+
+#: apps/recipes/models.py:65
+msgid "Pişirme Süresi (dk)"
+msgstr ""
+
+#: apps/recipes/models.py:68
+msgid "Porsiyon Başına Hazırlık (dk)"
+msgstr ""
+
+#: apps/recipes/models.py:71
+msgid "Porsiyon Başına Pişirme (dk)"
+msgstr ""
+
+#: apps/recipes/models.py:73
+msgid "Hazırlanış Talimatları"
+msgstr ""
+
+#: apps/recipes/models.py:78
+msgid "Kullanılacak Şubeler"
+msgstr ""
+
+#: apps/recipes/models.py:82
+msgid "Alerjen İçerir"
+msgstr ""
+
+#: apps/recipes/models.py:83
+msgid "Malzemelerden otomatik hesaplanır."
+msgstr ""
+
+#: apps/recipes/models.py:89
+msgid "İçerdiği Alerjen Maddeler"
+msgstr ""
+
+#: apps/recipes/models.py:94 apps/recipes/models.py:129
+msgid "Reçete"
+msgstr ""
+
+#: apps/recipes/models.py:95
+msgid "Reçeteler"
+msgstr ""
+
+#: apps/recipes/models.py:145
+msgid "Alt Reçete (Yarı Mamül)"
+msgstr ""
+
+#: apps/recipes/models.py:154
+msgid "Stok birimine göre miktar"
+msgstr ""
+
+#: apps/recipes/models.py:156
+msgid ""
+"Maliyet için stok kalemi birimine normalize edilmiş miktar (envanter birim "
+"dönüşümü ile)."
+msgstr ""
+
+#: apps/recipes/models.py:165
+msgid "Reçete Malzemesi"
+msgstr ""
+
+#: apps/recipes/models.py:166
+msgid "Reçete Malzemeleri"
+msgstr ""
+
+#: apps/recipes/models.py:198 apps/recipes/serializers.py:53
+msgid "Malzeme satırı ya stok kalemi ya da alt reçete içermelidir."
+msgstr ""
+
+#: apps/recipes/models.py:201
+msgid "Reçete kendisini alt reçete olarak kullanamaz."
+msgstr ""
+
+#: apps/recipes/models.py:207
+msgid "Alt reçete seçimi döngüsel bağımlılık oluşturur."
+msgstr ""
+
+#: apps/recipes/models.py:241 apps/recipes/models.py:253
+#, python-format
+msgid "Birim dönüşümü yapılamadı: %(err)s"
+msgstr ""
+
+#: apps/recipes/models.py:247
+msgid "Stok kalemi gerekli."
+msgstr ""
+
+#: apps/recipes/recipe_expansion.py:48
+#, python-format
+msgid ""
+"Birim kategorisi uyuşmazlığı: '%(from_unit)s' (%(from_cat)s) → "
+"'%(to_unit)s' (%(to_cat)s)."
+msgstr ""
+
+#: apps/recipes/reports/recipe_reports.py:13
+msgid "Reçete Detay Raporu"
+msgstr ""
+
+#: apps/recipes/reports/recipe_reports.py:14
+msgid "Reçete malzemeleri, porsiyon maliyetleri ve hazırlık talimatları."
+msgstr ""
+
+#: apps/recipes/reports/recipe_reports.py:23
+msgid "Reçete belirtilmedi."
+msgstr ""
+
+#: apps/recipes/reports/recipe_reports.py:27
+msgid "Reçete bulunamadı."
+msgstr ""
+
+#: apps/recipes/reports/recipe_reports.py:33
+#, python-format
+msgid "%(name)s — Reçete Kartı"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:141
+msgid "TEKNİK REÇETE FORMU"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:145
+msgid "SİSTEM KAYIT NO:"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:146
+msgid "BASIM TARİHİ:"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:147
+msgid "RAMIS ERP REÇETE YÖNETİMİ"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:155
+msgid "İLGİLİ ÜRÜN"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:159
+msgid "KATEGORİ"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:163
+msgid "PORSİYON ADEDİ"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:169
+msgid "PORSİYON MİKTARI"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:173
+msgid "HAZIRLIK SÜRESİ (TOPLAM)"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:174
+#: apps/recipes/templates/reports/recipe_detail_report.html:178
+#: apps/recipes/templates/reports/recipe_detail_report.html:187
+#: apps/recipes/templates/reports/recipe_detail_report.html:191
+msgid "Dk"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:177
+msgid "PİŞİRME SÜRESİ (TOPLAM)"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:186
+msgid "PORS. BAŞI HAZIRLIK"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:190
+msgid "PORS. BAŞI PİŞİRME"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:196
+msgid "MALZEME LİSTESİ VE BİRİM MALİYETLER"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:200
+msgid "MALZEME ADI / NOT"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:201
+msgid "MİKTAR"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:202
+msgid "BİRİM"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:203
+msgid "SATIR MALİYETİ"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:215
+msgid "NOT:"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:223
+msgid "Bileşen tanımlanmamış."
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:230
+msgid "HAZIRLANIŞ VE OPERASYON TALİMATLARI"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:235
+msgid "GENEL AÇIKLAMALAR"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:240
+msgid "ALLERJENLER"
+msgstr "مسببات الحساسية"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:244
+msgid "ALERJEN MADDE"
+msgstr "مادة مسببة للحساسية"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:245
+msgid "KOD"
+msgstr "الرمز"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:246
+msgid "RİSK PUANI"
+msgstr "درجة المخاطرة"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:269
+msgid "ALERJEN KAYNAKLARI"
+msgstr "مصادر مسببات الحساسية"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:273
+msgid "MALZEME / YARI MAMÜL"
+msgstr "المكونات / منتج نصف مصنع"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:274
+msgid "İÇERDİĞİ ALERJENLER"
+msgstr "مسببات الحساسية المحتواة"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:282
+msgid "Yarı mamül"
+msgstr "منتج نصف مصنع"
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:299
+msgid "MALİYET ANALİZ ÖZETİ"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:304
+msgid "TOPLAM REÇETE MALİYETİ"
+msgstr ""
+
+#: apps/recipes/templates/reports/recipe_detail_report.html:310
+msgid "PORSİYON BAŞINA MALİYET"
+msgstr ""
+
+#: apps/reporting/models.py:7 apps/reporting/models.py:62
+msgid "POS Fişi / Adisyon"
+msgstr ""
+
+#: apps/reporting/models.py:8 apps/reporting/models.py:63
+msgid "Mutfak Fişi"
+msgstr ""
+
+#: apps/reporting/models.py:9 apps/reporting/models.py:64
+msgid "Garson Fişi"
+msgstr ""
+
+#: apps/reporting/models.py:12
+msgid "Modül Raporu (Sabit)"
+msgstr ""
+
+#: apps/reporting/models.py:14
+msgid "Fatura Şablonu"
+msgstr ""
+
+#: apps/reporting/models.py:15
+msgid "Özel Şablon"
+msgstr ""
+
+#: apps/reporting/models.py:18 apps/reporting/models.py:72
+msgid "Şablon Adı"
+msgstr ""
+
+#: apps/reporting/models.py:28
+msgid "HTML Gövdesi"
+msgstr ""
+
+#: apps/reporting/models.py:29
+msgid "Template formatında HTML içeriği."
+msgstr ""
+
+#: apps/reporting/models.py:33
+msgid "CSS Stilleri"
+msgstr ""
+
+#: apps/reporting/models.py:34
+msgid "Rapor için özel CSS kuralları."
+msgstr ""
+
+#: apps/reporting/models.py:39 apps/reporting/models.py:95
+msgid "Varsayılan mı?"
+msgstr ""
+
+#: apps/reporting/models.py:40
+msgid ""
+"Aynı kategorideki bir işlem için bu şablonun varsayılan olarak kullanılıp "
+"kullanılmayacağını belirler."
+msgstr ""
+
+#: apps/reporting/models.py:44
+msgid "Rapor Şablonu"
+msgstr ""
+
+#: apps/reporting/models.py:45
+msgid "Rapor Şablonları"
+msgstr ""
+
+#: apps/reporting/models.py:83
+msgid "Kağıt Genişliği (karakter)"
+msgstr ""
+
+#: apps/reporting/models.py:84
+msgid "Satır başına karakter sayısı. 58mm→32, 80mm→48."
+msgstr ""
+
+#: apps/reporting/models.py:89
+msgid "Şablon Blokları"
+msgstr ""
+
+#: apps/reporting/models.py:90
+msgid "ESC/POS komutlarına dönüştürülecek blok listesi."
+msgstr ""
+
+#: apps/reporting/models.py:96
+msgid "Aynı kategorideki işlem için varsayılan şablon."
+msgstr ""
+
+#: apps/reporting/models.py:101
+msgid "Fiş Şablonları"
+msgstr ""
+
+#: apps/reporting/module_views.py:42
+#, python-format
+msgid "Rapor bulunamadı: %(slug)s"
+msgstr ""
+
+#: apps/reporting/module_views.py:65 apps/reporting/views.py:51
+msgid "PDF raporlama devre dışı. Sistem yöneticinize başvurun."
+msgstr ""
+
+#: apps/reporting/module_views.py:90
+msgid "Bu rapor Excel formatını desteklemiyor."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:121
+msgid "printer_id zorunludur."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:138
+msgid "Yazıcı bulunamadı veya aktif değil."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:162 apps/reporting/receipt_views.py:184
+msgid "Bu idempotency anahtarı için iş zaten kayıtlı."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:190
+msgid "Yazdırma işi oluşturulamadı."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:204
+#, python-format
+msgid "Baskı çalıştırılamadı: %(exc)s"
+msgstr ""
+
+#: apps/reporting/receipt_views.py:215
+msgid "Baskı tamamlanamadı."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:223
+#, python-format
+msgid "Baskı \"%(name)s\" yazıcısında tamamlandı."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:238
+msgid ""
+"Baskı işi kaydedildi ancak kuyruk (Celery) iletilemedi. Worker çalışıyor mu?"
+msgstr ""
+
+#: apps/reporting/receipt_views.py:250
+#, python-format
+msgid "Baskı \"%(name)s\" yazıcısı için kuyruğa alındı."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:272
+#, python-format
+msgid "\"%(name)s\" varsayılan özelliği kaldırıldı."
+msgstr ""
+
+#: apps/reporting/receipt_views.py:286
+#, python-format
+msgid "\"%(name)s\" varsayılan yapıldı."
+msgstr ""
+
+#: apps/reporting/serializers.py:24 apps/reporting/serializers.py:50
+msgid "Bu şablon kodu ile zaten aktif bir şablon var."
+msgstr ""
+
+#: apps/reporting/serializers.py:57
+msgid "layout_json bir liste olmalıdır."
+msgstr ""
+
+#: apps/reporting/serializers.py:62
+#, python-format
+msgid "Blok %(index)s bir sözlük (dict) olmalıdır."
+msgstr ""
+
+#: apps/reporting/serializers.py:67
+#, python-format
+msgid "Blok %(index)s: geçersiz tip '%(typ)s'. Geçerli tipler: %(valid)s"
+msgstr ""
+
+#: apps/reporting/views.py:74
+msgid "Yazıcı ID gereklidir."
+msgstr ""
+
+#: apps/reporting/views.py:96
+#, python-format
+msgid "Baskı %(printer)s yazıcısına gönderildi."
+msgstr ""
+
+#: apps/reporting/views.py:101
+msgid "Yazıcı bulunamadı."
+msgstr ""
+
+#: apps/reservations/models.py:16
+msgid "Oturdu"
+msgstr ""
+
+#: apps/reservations/models.py:19
+msgid "Gelmedi"
+msgstr ""
+
+#: apps/reservations/models.py:51
+msgid "Rezervasyon saati bildirimi"
+msgstr ""
+
+#: apps/reservations/models.py:64
+msgid "Rezervasyonlar"
+msgstr ""
+
+#: apps/reservations/models.py:86
+msgid "Bildirim başlangıç (dk önce)"
+msgstr ""
+
+#: apps/reservations/models.py:88
+msgid "Rezervasyon saatinden kaç dakika önce geliş bildirimleri başlasın."
+msgstr ""
+
+#: apps/reservations/models.py:93
+msgid "Bildirim tekrar aralığı (dk)"
+msgstr ""
+
+#: apps/reservations/models.py:94
+msgid "Geliş bildirimleri kaç dakikada bir tekrarlansın."
+msgstr ""
+
+#: apps/reservations/models.py:98
+msgid "Rezervasyon şube ayarı"
+msgstr ""
+
+#: apps/reservations/models.py:99
+msgid "Rezervasyon şube ayarları"
+msgstr ""
+
+#: apps/reservations/reservation_alerts.py:42
+#: apps/reservations/reservation_alerts.py:58
+msgid "masa atanmadı"
+msgstr ""
+
+#: apps/reservations/serializers.py:73
+msgid "En az 1 kişi gerekli."
+msgstr ""
+
+#: apps/reservations/services.py:43
+msgid "Rezervasyon bulunamadı."
+msgstr ""
+
+#: apps/reservations/services.py:69
+msgid "Bu zaman aralığında masa zaten rezerve."
+msgstr ""
+
+#: apps/reservations/services.py:93 apps/reservations/services.py:166
+msgid "Masa bulunamadı veya şubeye ait değil."
+msgstr ""
+
+#: apps/reservations/services.py:96
+msgid ""
+"Masa müsait değil (rezerve, dolu veya kapalı). Masa planında uygun bir masa "
+"seçin."
+msgstr ""
+
+#: apps/reservations/services.py:99
+#, python-format
+msgid "Masa kapasitesi %(n)s kişi."
+msgstr ""
+
+#: apps/reservations/services.py:123
+msgid "Bu rezervasyon güncellenemez."
+msgstr ""
+
+#: apps/reservations/services.py:139
+msgid "Misafir oturmuşken masa değiştirilemez."
+msgstr ""
+
+#: apps/reservations/services.py:168
+msgid "Yeni masa müsait değil."
+msgstr ""
+
+#: apps/reservations/services.py:180
+msgid "Sadece beklemedeki rezervasyon onaylanır."
+msgstr ""
+
+#: apps/reservations/services.py:190
+msgid "Rezervasyon oturmaya uygun değil."
+msgstr ""
+
+#: apps/reservations/services.py:192
+msgid "Masa atanmadan oturulamaz."
+msgstr ""
+
+#: apps/reservations/services.py:207
+msgid "Rezervasyon zaten kapalı."
+msgstr ""
+
+#: apps/reservations/services.py:212
+msgid ""
+"\n"
+"İptal: "
+msgstr ""
+
+#: apps/reservations/services.py:229
+msgid "Durum gelmedi olarak işaretlenemez."
+msgstr ""
+
+#: apps/reservations/services.py:293
+msgid "Masa rezerve görüntüsü güncellenemiyor (dolu veya kapalı)."
+msgstr ""
+
+#: apps/reservations/table_bridge.py:23
+msgid "Misafir"
+msgstr ""
+
+#: apps/sales/cancellation_selectors.py:156 apps/sales/serializers.py:67
+msgid "Paket Satış"
+msgstr ""
+
+#: apps/sales/fiscal/gmp3_wired_driver.py:67
+msgid "GMP-3 entegrasyonu için cihaz IP adresi tanımlanmamış."
+msgstr ""
+
+#: apps/sales/fiscal/gmp3_wired_driver.py:109
+#, python-format
+msgid "Yazar kasa bağlantı hatası: %(error)s"
+msgstr ""
+
+#: apps/sales/fiscal/gmp3_wired_driver.py:128
+msgid "Yazar kasadan geçerli mali yanıt alınamadı."
+msgstr ""
+
+#: apps/sales/models.py:10 apps/sales/templates/reports/sales_list.html:162
+#: apps/shifts/templates/reports/cash_report.html:267
+#: apps/shifts/templates/reports/cash_report.html:298
+#: apps/shifts/templates/reports/cash_report.html:339
+#: apps/shifts/templates/reports/z_report.html:84
+msgid "Nakit"
+msgstr ""
+
+#: apps/sales/models.py:11 apps/sales/templates/reports/sales_list.html:162
+#: apps/shifts/templates/reports/cash_report.html:271
+#: apps/shifts/templates/reports/cash_report.html:299
+#: apps/shifts/templates/reports/cash_report.html:341
+#: apps/shifts/templates/reports/z_report.html:84
+msgid "Kredi Kartı"
+msgstr ""
+
+#: apps/sales/models.py:13 apps/sales/templates/reports/sales_list.html:162
+#: apps/shifts/templates/reports/cash_report.html:301
+#: apps/shifts/templates/reports/z_report.html:84
+msgid "Ödenmez"
+msgstr ""
+
+#: apps/sales/models.py:67
+msgid "Mali Fiş Basıldı mı"
+msgstr ""
+
+#: apps/sales/models.py:68
+msgid "ÖKC Seri No"
+msgstr ""
+
+#: apps/sales/models.py:69
+msgid "ÖKC Fiş No"
+msgstr ""
+
+#: apps/sales/models.py:70
+msgid "Z Raporu No"
+msgstr ""
+
+#: apps/sales/models.py:71
+msgid "ÖKC Mali Fiş Zamanı"
+msgstr ""
+
+#: apps/sales/models.py:72
+msgid "Mali Karekod Verisi"
+msgstr ""
+
+#: apps/sales/models.py:73
+msgid "Mali Ham Yanıt"
+msgstr ""
+
+#: apps/sales/models.py:78
+msgid "İade Gerekçe Kodu"
+msgstr ""
+
+#: apps/sales/models.py:82
+msgid "İade Gerekçe Metni"
+msgstr ""
+
+#: apps/sales/models.py:145
+msgid "Satış Ödemesi"
+msgstr ""
+
+#: apps/sales/models.py:146
+msgid "Satış Ödemeleri"
+msgstr ""
+
+#: apps/sales/models.py:156
+msgid "Hata"
+msgstr ""
+
+#: apps/sales/models.py:188
+msgid "Bekleyen mali sepet"
+msgstr ""
+
+#: apps/sales/models.py:189
+msgid "Bekleyen mali sepetler"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:14
+msgid "Yıldız"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:15
+msgid "At"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:16
+msgid "Bulmaca"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:17
+msgid "Köpek"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:20
+msgid "Sınıflandırılamadı"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:26
+msgid "Ingredient mod"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:27
+msgid "Product mod"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:28
+msgid "Karma mod"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:31
+msgid "Ürün bazlı sapma yok"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:32
+msgid "Yalnızca stok bazlı sapma"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:43
+msgid "Tam Kapsama"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:44
+msgid "Kısmi Kapsama"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:45
+#: apps/sales/reports/product_reports.py:48
+msgid "Kapsama yok"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:56
+msgid "Ürün Satış Analiz Raporu"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:57
+msgid ""
+"Belirli tarih aralığı ve şube bazında ürünlerin satış performans analizi."
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:95
+#: apps/sales/reports/product_reports.py:203
+#: apps/sales/templates/reports/product_analytics.html:41
+msgid "Satılan Miktar"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:96
+#: apps/sales/templates/reports/product_analytics.html:42
+msgid "Toplam Ciro"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:119
+msgid "Menü Mühendisliği Raporu"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:120
+msgid "Ürün bazlı tahmini kârlılık ve menü sınıflandırma raporu."
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:194
+msgid "Gerçek Birim Maliyet"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:194
+msgid "Tahmini Birim Maliyet"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:195
+msgid "Gerçek Toplam Maliyet"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:195
+msgid "Tahmini Toplam Maliyet"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:196
+msgid "Gerçek Brüt Kar"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:196
+msgid "Tahmini Brüt Kar"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:197
+msgid "Gerçek Marj %"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:197
+msgid "Tahmini Marj %"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:198
+msgid "Gerçek Kapsam"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:198
+msgid "Sapma Kapsamı"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:202
+msgid "Menü Sınıfı"
+msgstr ""
+
+#: apps/sales/reports/product_reports.py:204
+#: apps/sales/templates/reports/menu_engineering.html:58
+msgid "Ciro"
+msgstr ""
+
+#: apps/sales/reports/sales_reports.py:15
+msgid "Satış Hareket Listesi"
+msgstr ""
+
+#: apps/sales/reports/sales_reports.py:16
+msgid ""
+"Belirli tarih aralığı, şube ve ödeme yöntemine göre filtrelenmiş satış "
+"listesi."
+msgstr ""
+
+#: apps/sales/reports/sales_reports.py:46
+#: apps/sales/reports/sales_reports.py:47
+#: apps/sales/reports/sales_reports.py:51
+msgid "—"
+msgstr ""
+
+#: apps/sales/services.py:87 apps/sales/services.py:123
+msgid "Satış kaydı bulunamadı."
+msgstr ""
+
+#: apps/sales/services.py:90
+msgid "Bu satış zaten silinmiş."
+msgstr ""
+
+#: apps/sales/services.py:126
+msgid "Silinmiş satış iade edilemez."
+msgstr ""
+
+#: apps/sales/services.py:129
+msgid "Bu satış zaten iade edilmiş."
+msgstr ""
+
+#: apps/sales/services.py:185 apps/sales/services.py:200
+msgid "Geçerli id listesi gereklidir."
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:5
+#: apps/sales/views.py:338
+msgid "İptaller ve İadeler Raporu"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:99
+msgid "İPTALLER VE İADELER RAPORU"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:105
+#: apps/sales/templates/reports/sales_report.html:112
+#: apps/shifts/templates/reports/shift_list.html:39
+msgid "Filtreler:"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:106
+#: apps/sales/templates/reports/sales_report.html:113
+msgid "Başlangıç Belirsiz"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:107
+#: apps/sales/templates/reports/sales_report.html:114
+msgid "Bitiş Belirsiz"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:110
+#: apps/sales/templates/reports/sales_report.html:117
+msgid "Ramis ERP Sistemi"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:116
+msgid "Toplam Miktar"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:131
+#: apps/sales/views.py:301
+msgid "İptal Eden"
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:156
+#: apps/sales/templates/reports/sales_report.html:163
+msgid ""
+"Rapor güvenliği nedeniyle sadece ilk 1000 kayıt listelenmiştir. Daha "
+"kapsamlı veriler için lütfen Excel çıktısı alınız."
+msgstr ""
+
+#: apps/sales/templates/reports/cancellations_report.html:161
+#: apps/sales/templates/reports/customer_list.html:105
+#: apps/sales/templates/reports/customer_sales_detail.html:154
+#: apps/sales/templates/reports/sales_report.html:168
+msgid "Bu rapor otomatik olarak Ramis ERP tarafından oluşturulmuştur."
+msgstr ""
+
+#: apps/sales/templates/reports/customer_list.html:74
+msgid "Toplam Kayıt:"
+msgstr ""
+
+#: apps/sales/templates/reports/customer_list.html:84
+msgid "Vergi No / T.C. No"
+msgstr ""
+
+#: apps/sales/templates/reports/customer_sales_detail.html:110
+msgid "Toplam İşlem:"
+msgstr ""
+
+#: apps/sales/templates/reports/customer_sales_detail.html:115
+msgid "Brüt Toplam"
+msgstr ""
+
+#: apps/sales/templates/reports/customer_sales_detail.html:119
+#: apps/sales/templates/reports/sales_report.html:127
+#: apps/shifts/templates/reports/cash_report.html:239
+#: apps/shifts/templates/reports/z_report.html:61
+msgid "Toplam İndirim"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:27
+#: apps/sales/templates/reports/product_analytics.html:26
+#: apps/sales/templates/reports/sales_list.html:153
+msgid "Rapor Oluşturma:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:34
+#: apps/sales/templates/reports/product_analytics.html:33
+#: apps/sales/templates/reports/sales_list.html:160
+msgid "Şube ID:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:35
+msgid "Sınıf:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:39
+msgid "Toplam ürün:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:40
+msgid "Sınıflandırılan:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:41
+msgid "Yıldız:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:42
+msgid "Bulmaca:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:43
+msgid "At:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:44
+msgid "Köpek:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:46
+msgid "Tam kapsanan:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:47
+msgid "Kısmi kapsanan:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:56
+msgid "Sınıf"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:57
+msgid "Satılan"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:60
+msgid "Gerçek Maliyet"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:60
+msgid "Tahmini Maliyet"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:63
+msgid "Gerçek Kar"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:63
+msgid "Tahmini Kar"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:65
+msgid "Marj %"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:93
+msgid "Toplam stok sapma maliyeti:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:94
+msgid "Fire:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:95
+msgid "İptal:"
+msgstr ""
+
+#: apps/sales/templates/reports/menu_engineering.html:96
+msgid "İade:"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:162
+msgid "Ödeme:"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:163
+msgid "Sadece İndirimliler"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:171
+msgid "Masa/Tür"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:172
+#: apps/shifts/templates/reports/cash_report.html:318
+msgid "Kasiyer"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:174 apps/sales/views.py:181
+msgid "Brüt"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:190
+msgid "(bölünmüş)"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:206
+msgid "BRÜT TOPLAM:"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:210
+msgid "TOPLAM İNDİRİM:"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_list.html:214
+msgid "NET TAHSİLAT:"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_report.html:5 apps/sales/views.py:213
+msgid "Satış Raporu"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_report.html:106
+msgid "SATIŞ RAPORU"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_report.html:123
+#: apps/shifts/templates/reports/cash_report.html:234
+#: apps/shifts/templates/reports/z_report.html:57
+msgid "Brüt Satış"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_report.html:131
+msgid "Net Ciro"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_report.html:140
+msgid "Fiş No"
+msgstr ""
+
+#: apps/sales/templates/reports/sales_report.html:142
+#: apps/shifts/templates/reports/cash_report.html:319
+msgid "Ödeme"
+msgstr ""
+
+#: apps/sales/views.py:177
+msgid "No"
+msgstr ""
+
+#: apps/sales/views.py:180 apps/shifts/templates/reports/z_report.html:77
+msgid "Ödeme Türü"
+msgstr ""
+
+#: apps/sales/views.py:183
+msgid "Net"
+msgstr ""
+
+#: apps/sales/views.py:355
+msgid "İade gerekçe kodu zorunludur."
+msgstr ""
+
+#: apps/shifts/models.py:15
+msgid "Giren"
+msgstr ""
+
+#: apps/shifts/models.py:16
+msgid "Çıkan"
+msgstr ""
+
+#: apps/shifts/models.py:49
+msgid "Açıldığı Terminal"
+msgstr ""
+
+#: apps/shifts/models.py:71
+msgid "Vardiya"
+msgstr ""
+
+#: apps/shifts/models.py:72
+msgid "Vardiyalar"
+msgstr ""
+
+#: apps/shifts/models.py:101
+msgid "Vardiya Gideri"
+msgstr ""
+
+#: apps/shifts/models.py:102
+msgid "Vardiya Giderleri"
+msgstr ""
+
+#: apps/shifts/models.py:127
+msgid "Vardiya Nakit Hareketi"
+msgstr ""
+
+#: apps/shifts/models.py:128
+msgid "Vardiya Nakit Hareketleri"
+msgstr ""
+
+#: apps/shifts/models.py:147
+msgid "POS Terminalleri"
+msgstr ""
+
+#: apps/shifts/models.py:153
+msgid "PIN Kodu"
+msgstr ""
+
+#: apps/shifts/models.py:158
+msgid "Kasiyer PIN Ataması"
+msgstr ""
+
+#: apps/shifts/models.py:159
+msgid "Kasiyer PIN Atamaları"
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:15
+msgid "Z-Raporu (Vardiya Özeti)"
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:16
+msgid "Vardiya kapanışındaki satış, ödeme ve kasa özetlerini içerir."
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:27
+msgid "Z-Raporu için geçerli bir vardiya bulunamadı."
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:42
+msgid "Vardiya Kasa Raporu"
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:43
+msgid ""
+"Vardiya içerisindeki satış cihazı bazlı satışlar, iptal, indirim ve ödeme "
+"türü detaylarını içerir."
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:54
+msgid "Kasa Raporu için geçerli bir vardiya bulunamadı."
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:69
+msgid "Vardiya Hareket Listesi"
+msgstr ""
+
+#: apps/shifts/reports/shift_reports.py:70
+msgid "Belirli tarih aralığı ve kriterlere göre filtrelenmiş vardiya listesi."
+msgstr ""
+
+#: apps/shifts/serializers.py:139
+msgid "PIN kodu 4 haneli sadece rakamlardan oluşmalıdır."
+msgstr ""
+
+#: apps/shifts/serializers.py:146
+msgid "Bu PIN kodu zaten başka bir kullanıcıya atanmış."
+msgstr ""
+
+#: apps/shifts/serializers.py:151
+msgid "Seçilen kullanıcı Kasiyer rolüne sahip değil."
+msgstr ""
+
+#: apps/shifts/serializers.py:163
+msgid "Seçilen POS terminalleri bu şubeye ait değil."
+msgstr ""
+
+#: apps/shifts/services.py:61
+msgid "Bu terminalde zaten açık bir vardiya var."
+msgstr ""
+
+#: apps/shifts/services.py:63
+msgid "Bu şubede zaten açık bir (genel) vardiya var."
+msgstr ""
+
+#: apps/shifts/services.py:99
+msgid "Bu vardiya zaten kapalı."
+msgstr ""
+
+#: apps/shifts/services.py:103
+msgid ""
+"Ödemesi alınmamış açık hesaplar (masa veya sipariş) varken vardiya "
+"kapatılamaz. Önce tüm hesapları kapatın."
+msgstr ""
+
+#: apps/shifts/services.py:185
+msgid "Kapalı vardiyaya gider eklenemez."
+msgstr ""
+
+#: apps/shifts/services.py:209
+msgid "Geçersiz hareket tipi (IN/OUT)."
+msgstr ""
+
+#: apps/shifts/services.py:212
+msgid "Kapalı vardiyaya nakit hareketi eklenemez."
+msgstr ""
+
+#: apps/shifts/services.py:253
+msgid "Sadece kapalı vardiyalar düzenlenebilir."
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:199
+#: apps/shifts/templates/reports/z_report.html:33
+msgid "Vardiya ID:"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:206
+#: apps/shifts/templates/reports/z_report.html:37
+msgid "Vardiya Bilgileri"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:217
+#: apps/shifts/templates/reports/z_report.html:42
+msgid "Kasiyer:"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:221
+msgid "Açılış Zamanı:"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:223
+msgid "Kapanış Zamanı:"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:230
+msgid "Finansal Özet"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:241
+msgid "Net Satış:"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:244
+msgid "Toplam İptal"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:246
+msgid "İptal Edilen Satışlar"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:253
+msgid "Ödeme Türü Dağılımı"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:279
+msgid "Toplam Tahsilat"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:287
+msgid "Cihaz Bazlı Satış Detayları"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:293
+msgid "Toplam:"
+msgstr ""
+
+#: apps/shifts/templates/reports/cash_report.html:355
+msgid "Bu vardiyada yapılmış aktif bir cihaz satışı bulunamadı."
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:42
+#: apps/shifts/templates/reports/shift_list.html:68
+msgid "AÇIK"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:42
+msgid "KAPALI"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:43
+msgid "Terminal ID:"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:49
+msgid "Açılış Tarihi"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:50
+msgid "Kapanış Tarihi"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:52
+msgid "Terminal"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:55
+msgid "Sayılan"
+msgstr ""
+
+#: apps/shifts/templates/reports/shift_list.html:56
+#: apps/warehouse/models.py:588
+msgid "Fark"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:40
+msgid "Açılış:"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:41
+msgid "Kapanış:"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:47
+msgid "Satış Özeti"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:65
+msgid "Net Satış"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:73
+msgid "Ödemeler (Beklenen)"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:93
+msgid "Kasa Hareketleri"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:97
+msgid "Açılış Nakit"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:101
+msgid "Giderler"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:105
+msgid "Net Nakit Giriş/Çıkış (Harici)"
+msgstr ""
+
+#: apps/shifts/templates/reports/z_report.html:109
+msgid "Kasadaki Beklenen Nakit"
+msgstr ""
+
+#: apps/shifts/views.py:143 apps/shifts/views.py:151
+msgid "Vardiya bulunamadı."
+msgstr ""
+
+#: apps/users/models.py:21 rbac/models/role.py:44
+msgid "Roller"
+msgstr ""
+
+#: apps/users/models.py:26
+msgid "Kullanıcılar"
+msgstr ""
+
+#: apps/users/models.py:35
+msgid "Tercih edilen dil"
+msgstr ""
+
+#: apps/users/models.py:63
+msgid "Ekran"
+msgstr ""
+
+#: apps/users/models.py:65
+msgid "Tercihler"
+msgstr ""
+
+#: apps/users/models.py:68
+msgid "POS ekran tercihi"
+msgstr ""
+
+#: apps/users/models.py:69
+msgid "POS ekran tercihleri"
+msgstr ""
+
+#: apps/users/serializers.py:80
+msgid "Bu kullanıcı adı zaten kullanılıyor."
+msgstr ""
+
+#: apps/users/serializers.py:85 apps/users/serializers.py:105
+#: apps/users/serializers.py:180
+msgid "Bu e-posta adresi zaten kullanılıyor."
+msgstr ""
+
+#: apps/users/views.py:68 apps/users/views.py:89
+msgid "context pos veya waiter olmalıdır."
+msgstr ""
+
+#: apps/users/views.py:221
+msgid "role_ids bir liste olmalıdır."
+msgstr ""
+
+#: apps/users/views.py:235
+msgid "Şifre alanı boş olamaz."
+msgstr ""
+
+#: apps/users/views.py:276
+msgid "Mevcut şifre yanlış."
+msgstr ""
+
+#: apps/users/views.py:298
+msgid "permission_ids bir liste olmalıdır."
+msgstr ""
+
+#: apps/users/views.py:392
+msgid "Token geçersiz veya süresi dolmuş."
+msgstr ""
+
+#: apps/users/views.py:464
+msgid "Kullanıcı adı boş olamaz."
+msgstr ""
+
+#: apps/users/views.py:500
+msgid "Kullanıcı adı ve PIN boş olamaz."
+msgstr ""
+
+#: apps/users/views.py:509
+msgid "Kullanıcı bulunamadı veya pasif."
+msgstr ""
+
+#: apps/users/views.py:516
+msgid "Bu kullanıcı Kasiyer rolüne sahip değil."
+msgstr ""
+
+#: apps/users/views.py:526
+msgid "Bu kullanıcıya ait bir PIN tanımlanmamış."
+msgstr ""
+
+#: apps/users/views.py:533
+msgid "Girdiğiniz PIN kodu yanlış."
+msgstr ""
+
+#: apps/warehouse/models.py:16
+msgid "Ana Depo"
+msgstr ""
+
+#: apps/warehouse/models.py:17
+msgid "Ara Depo"
+msgstr ""
+
+#: apps/warehouse/models.py:18
+msgid "Soğuk Hava Deposu"
+msgstr ""
+
+#: apps/warehouse/models.py:19
+msgid "Kuru Depo"
+msgstr ""
+
+#: apps/warehouse/models.py:20
+msgid "Hammadde Deposu"
+msgstr ""
+
+#: apps/warehouse/models.py:21
+msgid "Mutfak Deposu"
+msgstr ""
+
+#: apps/warehouse/models.py:28
+msgid "Depo Kodu"
+msgstr ""
+
+#: apps/warehouse/models.py:33
+msgid "Depo Tipi"
+msgstr ""
+
+#: apps/warehouse/models.py:42
+msgid "Kapasite Bilgisi"
+msgstr ""
+
+#: apps/warehouse/models.py:49
+msgid "Depo Sorumlusu"
+msgstr ""
+
+#: apps/warehouse/models.py:51
+msgid "Varsayılan Depo"
+msgstr ""
+
+#: apps/warehouse/models.py:56
+msgid "Depolar"
+msgstr ""
+
+#: apps/warehouse/models.py:97
+msgid "Depo Stok Seviyesi"
+msgstr ""
+
+#: apps/warehouse/models.py:98
+msgid "Depo Stok Seviyeleri"
+msgstr ""
+
+#: apps/warehouse/models.py:122 apps/warehouse/models.py:645
+msgid "Sipariş Verildi"
+msgstr ""
+
+#: apps/warehouse/models.py:123
+msgid "Kısmen Teslim Alındı"
+msgstr ""
+
+#: apps/warehouse/models.py:124
+msgid "Teslim Alındı"
+msgstr ""
+
+#: apps/warehouse/models.py:157
+msgid "Sipariş Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:158
+msgid "Beklenen Teslimat Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:166 apps/warehouse/models.py:422
+msgid "Bağlı Eksik Listesi"
+msgstr ""
+
+#: apps/warehouse/models.py:183 apps/warehouse/models.py:550
+#: apps/warehouse/models.py:696
+msgid "Onay Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:189 apps/warehouse/models.py:209
+#: apps/warehouse/models.py:271
+msgid "Satın Alma Siparişi"
+msgstr ""
+
+#: apps/warehouse/models.py:190
+msgid "Satın Alma Siparişleri"
+msgstr ""
+
+#: apps/warehouse/models.py:217
+msgid "Sipariş Miktarı"
+msgstr ""
+
+#: apps/warehouse/models.py:221
+msgid "Teslim Alınan Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:249
+msgid "Kontrol Edildi"
+msgstr ""
+
+#: apps/warehouse/models.py:250
+msgid "Kabul Edildi"
+msgstr ""
+
+#: apps/warehouse/models.py:251
+msgid "Kısmen Kabul Edildi"
+msgstr ""
+
+#: apps/warehouse/models.py:252
+msgid "Reddedildi"
+msgstr ""
+
+#: apps/warehouse/models.py:291
+msgid "Teslim Alma Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:299
+msgid "Teslim Alan"
+msgstr ""
+
+#: apps/warehouse/models.py:315 apps/warehouse/models.py:334
+msgid "Mal Kabul"
+msgstr ""
+
+#: apps/warehouse/models.py:316
+msgid "Mal Kabul İşlemleri"
+msgstr ""
+
+#: apps/warehouse/models.py:343
+msgid "Beklenen Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:346
+msgid "Alınan Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:349
+msgid "Reddedilen Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:353
+msgid "Son Kullanma Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:358
+msgid "Mal Kabul Kalemi"
+msgstr ""
+
+#: apps/warehouse/models.py:359
+msgid "Mal Kabul Kalemleri"
+msgstr ""
+
+#: apps/warehouse/models.py:381
+msgid "Transfer Ediliyor"
+msgstr ""
+
+#: apps/warehouse/models.py:394
+msgid "Transfer No"
+msgstr ""
+
+#: apps/warehouse/models.py:414
+msgid "Transfer Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:430
+msgid "Bağlı SKT Aksiyonu"
+msgstr ""
+
+#: apps/warehouse/models.py:437
+msgid "Talep Eden"
+msgstr ""
+
+#: apps/warehouse/models.py:450
+msgid "Depo Transferi"
+msgstr ""
+
+#: apps/warehouse/models.py:451
+msgid "Depo Transferleri"
+msgstr ""
+
+#: apps/warehouse/models.py:478
+msgid "Transfer Miktarı"
+msgstr ""
+
+#: apps/warehouse/models.py:481
+msgid "Hedefte Alınan Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:486
+msgid "Transfer Kalemi"
+msgstr ""
+
+#: apps/warehouse/models.py:487
+msgid "Transfer Kalemleri"
+msgstr ""
+
+#: apps/warehouse/models.py:499
+msgid "Sayım Devam Ediyor"
+msgstr ""
+
+#: apps/warehouse/models.py:506
+msgid "Yanlış Ölçüm"
+msgstr ""
+
+#: apps/warehouse/models.py:507
+msgid "İptal / İade"
+msgstr ""
+
+#: apps/warehouse/models.py:508
+msgid "Fire / Zayi"
+msgstr ""
+
+#: apps/warehouse/models.py:520
+msgid "Sayım No"
+msgstr ""
+
+#: apps/warehouse/models.py:534
+msgid "Sayım Tarihi"
+msgstr ""
+
+#: apps/warehouse/models.py:540
+msgid "Sayan"
+msgstr ""
+
+#: apps/warehouse/models.py:554
+msgid "Stok Sayımı"
+msgstr ""
+
+#: apps/warehouse/models.py:555
+msgid "Stok Sayımları"
+msgstr ""
+
+#: apps/warehouse/models.py:573
+msgid "Sayım"
+msgstr ""
+
+#: apps/warehouse/models.py:582
+msgid "Sistem Miktarı"
+msgstr ""
+
+#: apps/warehouse/models.py:585
+msgid "Sayılan Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:597
+msgid "Fark Nedeni"
+msgstr ""
+
+#: apps/warehouse/models.py:605
+msgid "Bağlı Stok Hareketi"
+msgstr ""
+
+#: apps/warehouse/models.py:606
+msgid "Onayda oluşturulan iptal/iade, fire veya düzeltme hareketi."
+msgstr ""
+
+#: apps/warehouse/models.py:610
+msgid "Sayım Kalemi"
+msgstr ""
+
+#: apps/warehouse/models.py:611
+msgid "Sayım Kalemleri"
+msgstr ""
+
+#: apps/warehouse/models.py:646
+msgid "Kısmen İşlendi"
+msgstr ""
+
+#: apps/warehouse/models.py:647
+msgid "Tamamlandı / İşlendi"
+msgstr ""
+
+#: apps/warehouse/models.py:659
+msgid "Rapor No"
+msgstr ""
+
+#: apps/warehouse/models.py:671
+msgid "Hedef Depo (Mutfak Deposu)"
+msgstr ""
+
+#: apps/warehouse/models.py:672
+msgid "Malzemelerin transfer edileceği mutfağa bağlı küçük depo."
+msgstr ""
+
+#: apps/warehouse/models.py:699 apps/warehouse/models.py:719
+msgid "Eksik Listesi"
+msgstr ""
+
+#: apps/warehouse/models.py:700
+msgid "Eksik Listeleri"
+msgstr ""
+
+#: apps/warehouse/models.py:727
+msgid "İstenen Miktar"
+msgstr ""
+
+#: apps/warehouse/models.py:732
+msgid "Eksik Listesi Kalemi"
+msgstr ""
+
+#: apps/warehouse/models.py:733
+msgid "Eksik Listesi Kalemleri"
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:16
+msgid "Satın Alma Siparişi PDF"
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:17
+msgid "Onaylı veya taslak satın alma siparişinin PDF dökümü."
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:24
+msgid "purchase_order_id gerekli."
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:35
+msgid "Satın alma siparişi bulunamadı."
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:51
+msgid "Mal Kabul PDF"
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:52
+msgid "Mal kabul fişinin PDF dökümü."
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:59
+msgid "goods_receiving_id gerekli."
+msgstr ""
+
+#: apps/warehouse/reports/warehouse_reports.py:74
+msgid "Mal kabul kaydı bulunamadı."
+msgstr ""
+
+#: apps/warehouse/serializers.py:200
+msgid "Kabul veya red miktarı girilmelidir."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:64
+#: apps/warehouse/services/deficiency_action_service.py:301
+msgid "Bu rapor için satır işlemi yapılamaz."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:75
+#: apps/warehouse/services/purchase_recommendation_service.py:169
+msgid "En az bir kalem seçilmelidir."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:81
+msgid "Geçersiz kalem kimliği."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:83
+#, python-format
+msgid "Geçersiz işlem tipi: %(a)s"
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:103
+#, python-format
+msgid "\"%(name)s\" tamamen stoktan karşılanamaz."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:124
+#, python-format
+msgid "\"%(name)s\" için kısmi stok karşılama mümkün değil."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:136
+msgid "Geçersiz işlem tipi."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:145
+msgid "Raporda bulunmayan kalem(ler) seçildi."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:262
+msgid "Satın alma kalemi var; tedarikçi ve hedef depo zorunludur."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:387
+msgid "Satın alma için tedarikçi ve depo gerekli."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_action_service.py:395
+#, python-format
+msgid "Eksik Listesi #%(number)s — seçili kalemler"
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:35
+msgid "Bu depo için eksik listesi oluşturma yetkiniz yok."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:45
+msgid "Geçersiz mutfak istasyonu."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:48
+msgid "Seçilen istasyona bağlı depo tanımlı değil."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:80
+#: apps/warehouse/services/purchase_recommendation_service.py:177
+msgid "Geçersiz veya pasif stok kalemi seçildi."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:101
+msgid "Sadece bekleyen raporlar onaylanabilir."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:133
+msgid "Bu rapor iptal edilemez."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:167
+msgid "İşlenmiş raporlar silinemez."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:173
+msgid "Bağlı sipariş veya transfer varken rapor silinemez."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:189
+msgid "Bu rapordan sipariş oluşturulamaz."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:204
+#: apps/warehouse/services/deficiency_report_service.py:264
+msgid "Rapor kalemi bulunmuyor."
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:213
+#: apps/warehouse/services/deficiency_report_service.py:271
+#, python-format
+msgid "Eksik Listesi #%(number)s"
+msgstr ""
+
+#: apps/warehouse/services/deficiency_report_service.py:250
+msgid "Bu rapordan transfer oluşturulamaz."
+msgstr ""
+
+#: apps/warehouse/services/fulfillment_service.py:235
+msgid "Sadece bekleyen veya onaylı raporlardan otomatik karşılama yapılabilir."
+msgstr ""
+
+#: apps/warehouse/services/fulfillment_service.py:246
+msgid "Herhangi bir tedarik deposunda mevcut stok bulunamadı."
+msgstr ""
+
+#: apps/warehouse/services/goods_receiving_service.py:34
+msgid "Kabul edilen miktar negatif olamaz."
+msgstr ""
+
+#: apps/warehouse/services/goods_receiving_service.py:36
+msgid "Reddedilen miktar negatif olamaz."
+msgstr ""
+
+#: apps/warehouse/services/goods_receiving_service.py:68
+msgid "Bu mal kabul zaten tamamlanmış."
+msgstr ""
+
+#: apps/warehouse/services/goods_receiving_service.py:128
+msgid "Kabul veya red miktarı girilmemiş."
+msgstr ""
+
+#: apps/warehouse/services/goods_receiving_service.py:200
+msgid "Tamamlanmış mal kabul kayıtları silinemez."
+msgstr ""
+
+#: apps/warehouse/services/purchase_order_service.py:215
+msgid ""
+"Onay bekleyen veya onaylanmış siparişleri düzenlemek için \"Sipariş "
+"Düzenleme\" yetkisi gerekir."
+msgstr ""
+
+#: apps/warehouse/services/purchase_order_service.py:220
+msgid "Bu durumdaki satın alma siparişi düzenlenemez."
+msgstr ""
+
+#: apps/warehouse/services/purchase_order_service.py:242
+msgid "Sadece taslak siparişler onaya gönderilebilir."
+msgstr ""
+
+#: apps/warehouse/services/purchase_order_service.py:252
+msgid "Sadece onay bekleyen siparişler onaylanabilir."
+msgstr ""
+
+#: apps/warehouse/services/purchase_order_service.py:274
+msgid "Sadece onaylanmış siparişler sipariş verildi olarak işaretlenebilir."
+msgstr ""
+
+#: apps/warehouse/services/purchase_order_service.py:285
+msgid "Teslim alınmış veya iptal edilmiş siparişler iptal edilemez."
+msgstr ""
+
+#: apps/warehouse/services/purchase_recommendation_service.py:50
+msgid "Geçersiz depo."
+msgstr ""
+
+#: apps/warehouse/services/purchase_recommendation_service.py:54
+msgid "Bu depo için satın alma önerisi görüntüleme yetkiniz yok."
+msgstr ""
+
+#: apps/warehouse/services/purchase_recommendation_service.py:218
+msgid "Talep bazlı satın alma önerisi"
+msgstr ""
+
+#: apps/warehouse/services/purchase_recommendation_service.py:229
+msgid "Tedarikçisi tanımlı seçili kalem bulunamadı."
+msgstr ""
+
+#: apps/warehouse/services/purchase_recommendation_service.py:239
+msgid "Talep bazlı satın alma önerisinden oluşturuldu"
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:34
+msgid "Geçersiz sayılan miktar."
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:47
+#, python-format
+msgid "%(item)s için fark oluştu; neden seçilmelidir."
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:53
+#, python-format
+msgid "Geçersiz fark nedeni: %(reason)s"
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:57
+#, python-format
+msgid "%(item)s için pozitif farkta İptal/İade veya Fire/Zayi seçilemez."
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:70
+#, python-format
+msgid "Sayım #%(number)s — %(item)s: %(qty)s %(unit)s (%(reason)s)"
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:76
+msgid "Belirtilmedi"
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:103
+msgid "Sadece taslak sayımlar başlatılabilir."
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:113
+msgid "Sadece devam eden sayımlar tamamlanabilir."
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:134
+msgid "Sadece tamamlanmış sayımlar onaylanabilir."
+msgstr ""
+
+#: apps/warehouse/services/stock_counting_service.py:270
+msgid "Onaylanmış sayımlar güncellenemez."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:76
+#, python-format
+msgid "Onay: alınan miktar transfer miktarını aşamaz: %(name)s"
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:96
+#, python-format
+msgid "Alınan miktar transfer miktarını aşamaz: %(name)s"
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:101
+#, python-format
+msgid "Alınan miktar geçersiz: %(name)s"
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:106
+#, python-format
+msgid "Transfer kalemi miktarı pozitif olmalı: %s"
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:146
+msgid "Stok kalemi bulunamadı."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:214
+#: apps/warehouse/services/transfer_service.py:301
+msgid "En az bir transfer kalemi gerekli."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:225
+#: apps/warehouse/services/transfer_service.py:312
+msgid "Kaynak depoda tüm kalemler için yeterli stok yok."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:227
+#: apps/warehouse/services/transfer_service.py:314
+msgid "Bazı kalemler için kaynak depoda yeterli stok yok."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:236
+#: apps/warehouse/services/transfer_service.py:323
+msgid "Hiçbir kalem için kaynak depoda yeterli stok yok."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:288
+msgid "Tamamlanmış veya iptal edilmiş transferler düzenlenemez."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:293
+msgid ""
+"Hedefte kısmi teslim kaydı olan transfer kalemleri bu ekrandan "
+"değiştirilemez."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:360
+msgid "Sadece taslak veya bekleyen transferler onaylanabilir."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:365
+msgid "Onay için kaynak depoda yeterli stok yok."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:394
+msgid "Sadece transfer halindeki işlemler tamamlanabilir."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:401
+msgid ""
+"Tamamlama anında kaynak depoda yeterli stok yok; stok başka işlemle değişmiş "
+"olabilir."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:408
+msgid "Transfer kalemi bulunmuyor."
+msgstr ""
+
+#: apps/warehouse/services/transfer_service.py:493
+msgid "Tamamlanmış veya iptal edilmiş transferler iptal edilemez."
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:96
+msgid "Satın alma siparişi"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:108
+msgid "Teslim tarihi"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:112
+msgid "Fatura no"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:116
+msgid "İrsaliye no"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:120
+msgid "Teslim alan"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:124
+msgid "Kontrol eden"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:131
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:123
+msgid "Notlar:"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:142
+msgid "Kabul"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:143
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:132
+msgid "Birim fiyat"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:144
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:133
+msgid "Satır tutarı"
+msgstr ""
+
+#: apps/warehouse/templates/reports/goods_receiving_pdf.html:163
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:151
+msgid "Genel toplam"
+msgstr ""
+
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:100
+msgid "Hedef depo"
+msgstr ""
+
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:104
+msgid "Sipariş tarihi"
+msgstr ""
+
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:108
+msgid "Beklenen teslimat"
+msgstr ""
+
+#: apps/warehouse/templates/reports/purchase_order_pdf.html:134
+msgid "Teslim alınan"
+msgstr ""
+
+#: apps/warehouse/views/deficiency_view.py:133
+msgid "supplier_id ve warehouse_id zorunludur."
+msgstr ""
+
+#: apps/warehouse/views/deficiency_view.py:155
+msgid "source_warehouse_id zorunludur."
+msgstr ""
+
+#: apps/warehouse/views/purchase_order_view.py:102
+msgid "Yetki hatası."
+msgstr ""
+
+#: apps/warehouse/views/purchase_order_view.py:105
+msgid "Onay sonrası düzenleme yetkisi gerekir."
+msgstr ""
+
+#: apps/warehouse/views/purchase_order_view.py:107
+msgid "Bu durumda düzenleme yapılamaz."
+msgstr ""
+
+#: apps/warehouse/views/purchase_order_view.py:187
+#: apps/warehouse/views/purchase_order_view.py:197
+#: apps/warehouse/views/purchase_recommendation_view.py:36
+msgid "warehouse_id zorunludur."
+msgstr ""
+
+#: apps/warehouse/views/purchase_recommendation_view.py:41
+msgid "Bu depoya erişim yetkiniz yok."
+msgstr ""
+
+#: apps/warehouse/views/warehouse_view.py:64
+msgid "stock_item_id ve minimum_quantity zorunludur."
+msgstr ""
+
+#: config/settings.py:451
+msgid "Türkçe"
+msgstr ""
+
+#: config/settings.py:452
+msgid "English"
+msgstr ""
+
+#: config/settings.py:453
+msgid "العربية"
+msgstr ""
+
+#: config/settings.py:454
+msgid "Deutsch"
+msgstr ""
+
+#: config/settings.py:455
+msgid "Русский"
+msgstr ""
+
+#: config/settings.py:456
+msgid "Български"
+msgstr ""
+
+#: config/settings.py:457
+msgid "Shqip"
+msgstr ""
+
+#: core/exception_handler.py:43 core/middleware.py:91
+msgid ""
+"Veritabanı geçici olarak meşgul. Lütfen birkaç saniye sonra tekrar deneyin."
+msgstr ""
+
+#: core/exception_handler.py:64
+msgid "Yetersiz stok"
+msgstr ""
+
+#: core/exception_handler.py:69
+msgid "allow_negative_stock=true ile tamamlayabilirsiniz."
+msgstr ""
+
+#: core/recycle_bin_errors.py:69
+#, python-format
+msgid "Sipariş %(order)s"
+msgstr ""
+
+#: core/recycle_bin_errors.py:83
+#, python-format
+msgid "%(model)s kaydı (%(record)s)"
+msgstr ""
+
+#: core/recycle_bin_errors.py:115
+msgid "Bu kayıt başka kayıtlara bağlı olduğu için silinemiyor."
+msgstr ""
+
+#: core/recycle_bin_errors.py:121 core/recycle_bin_force_delete.py:104
+#, python-format
+msgid "ve %(count)s kayıt daha"
+msgid_plural "ve %(count)s kayıt daha"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
+msgstr[5] ""
+
+#: core/recycle_bin_errors.py:126
+#, python-format
+msgid "Kayıt silinemiyor. Şu kayıtlarda kullanılıyor: %(refs)s."
+msgstr ""
+
+#: core/recycle_bin_errors.py:136
+#, python-format
+msgid ""
+"%(deleted)s kayıt temizlendi. %(protected)s kayıt bağımlılıkları nedeniyle "
+"silinemedi."
+msgstr ""
+
+#: core/recycle_bin_errors.py:141
+#, python-format
+msgid "Örnek bağımlılıklar: %(refs)s."
+msgstr ""
+
+#: core/recycle_bin_force_delete.py:49
+#, python-format
+msgid "Zorla silme limiti (%(limit)s kayıt) aşıldı."
+msgstr ""
+
+#: core/recycle_bin_force_delete.py:58
+msgid "Bağımlılık zinciri çok derin; zorla silme iptal edildi."
+msgstr ""
+
+#: core/recycle_bin_force_delete.py:93 core/views.py:170
+msgid "Kayıt kalıcı olarak silindi."
+msgstr ""
+
+#: core/recycle_bin_force_delete.py:96
+#, python-format
+msgid "Kayıt kalıcı olarak silindi: %(ref)s."
+msgstr ""
+
+#: core/recycle_bin_force_delete.py:110
+#, python-format
+msgid ""
+"Kayıt kalıcı olarak silindi: %(target)s. Birlikte silinen bağımlı kayıtlar: "
+"%(deps)s."
+msgstr ""
+
+#: core/views.py:71 core/views.py:135
+msgid "Model bulunamadı."
+msgstr ""
+
+#: core/views.py:75 core/views.py:139
+msgid "Bu model soft-delete desteklemiyor."
+msgstr ""
+
+#: core/views.py:127
+msgid "Eksik parametre."
+msgstr ""
+
+#: core/views.py:130
+msgid "Bu işlem için ID gereklidir."
+msgstr ""
+
+#: core/views.py:146
+msgid "Kayıt bulunamadı veya zaten aktif/silinmiş."
+msgstr ""
+
+#: core/views.py:148
+#, python-format
+msgid "Geçersiz ID: %(err)s"
+msgstr ""
+
+#: core/views.py:159
+msgid "Kayıt başarıyla geri yüklendi."
+msgstr ""
+
+#: core/views.py:185
+#, python-format
+msgid "Silme işlemi başarısız: %(err)s"
+msgstr ""
+
+#: core/views.py:195
+#, python-format
+msgid "Bağımlılık önizlemesi başarısız: %(err)s"
+msgstr ""
+
+#: core/views.py:220
+#, python-format
+msgid "Zorla silme başarısız: %(err)s"
+msgstr ""
+
+#: core/views.py:230
+msgid "Geri yüklenecek kayıt bulunamadı."
+msgstr ""
+
+#: core/views.py:241
+#, python-format
+msgid "%(count)s kayıt başarıyla geri yüklendi."
+msgstr ""
+
+#: core/views.py:245
+msgid "Temizlenecek kayıt bulunamadı."
+msgstr ""
+
+#: core/views.py:278
+#, python-format
+msgid "%(deleted)s kayıt temizlendi."
+msgstr ""
+
+#: core/views.py:281
+msgid "Geçersiz işlem."
+msgstr ""
+
+#: rbac/admin.py:14 rbac/models/audit.py:31
+msgid "İzin"
+msgstr ""
+
+#: rbac/admin.py:15 rbac/models/role.py:24
+msgid "İzinler"
+msgstr ""
+
+#: rbac/apps.py:8
+msgid "RBAC - Rol Tabanlı Erişim Kontrolü"
+msgstr ""
+
+#: rbac/drf.py:73
+msgid "Bu işlem için gerekli yetkiniz bulunmamaktadır."
+msgstr ""
+
+#: rbac/drf.py:122 rbac/drf.py:142
+msgid "Bu işlem için gerekli tüm yetkilere sahip değilsiniz."
+msgstr ""
+
+#: rbac/drf.py:160
+msgid "Bu işlem için yetkiniz bulunmamaktadır."
+msgstr ""
+
+#: rbac/drf.py:177
+msgid "Bu işlem için gerekli role sahip değilsiniz."
+msgstr ""
+
+#: rbac/models/audit.py:17
+msgid "Oluşturma"
+msgstr ""
+
+#: rbac/models/audit.py:18
+msgid "Güncelleme"
+msgstr ""
+
+#: rbac/models/audit.py:19
+msgid "Silme"
+msgstr ""
+
+#: rbac/models/audit.py:20
+msgid "Atama"
+msgstr ""
+
+#: rbac/models/audit.py:21
+msgid "Geri Alma"
+msgstr ""
+
+#: rbac/models/audit.py:30 rbac/models/role.py:43
+msgid "Rol"
+msgstr ""
+
+#: rbac/models/audit.py:33
+msgid "Kullanıcı-Rol"
+msgstr ""
+
+#: rbac/models/audit.py:47
+msgid "Hedef Özeti"
+msgstr ""
+
+#: rbac/models/audit.py:48
+msgid "Değişiklik Detayları"
+msgstr ""
+
+#: rbac/models/audit.py:54
+msgid "RBAC Denetim Kaydı"
+msgstr ""
+
+#: rbac/models/audit.py:55
+msgid "RBAC Denetim Kayıtları"
+msgstr ""
+
+#: rbac/models/category.py:9
+msgid "Kod boş olamaz."
+msgstr ""
+
+#: rbac/models/category.py:13
+msgid ""
+"Kod geçerli bir Python tanımlayıcısı olmalıdır (harf veya alt çizgi ile "
+"başlamalı, harf/rakam/alt çizgi içermeli)."
+msgstr ""
+
+#: rbac/models/category.py:44 rbac/models/permission.py:16
+msgid "İzin Kategorisi"
+msgstr ""
+
+#: rbac/models/category.py:45
+msgid "İzin Kategorileri"
+msgstr ""
+
+#: rbac/models/permission.py:9
+msgid "İzin Adı"
+msgstr ""
+
+#: rbac/models/permission.py:11
+msgid "İzin Kodu"
+msgstr ""
+
+#: rbac/models/permission.py:20
+msgid "Rol İzni"
+msgstr ""
+
+#: rbac/models/permission.py:21
+msgid "Rol İzinleri"
+msgstr ""
+
+#: rbac/models/role.py:11
+msgid "Rol Adı"
+msgstr ""
+
+#: rbac/models/role.py:19
+msgid "Üst Rol"
+msgstr ""
+
+#: rbac/models/role.py:27
+msgid "Oluşturulma Tarihi"
+msgstr ""
+
+#: rbac/models/role.py:28
+msgid "Güncellenme Tarihi"
+msgstr ""
+
+#: rbac/permissions.py:21
+msgid "Bu sayfaya erişim izniniz bulunmamaktadır."
+msgstr ""
+
+#: rbac/permissions.py:99 rbac/permissions.py:159 rbac/permissions.py:188
+#: rbac/permissions.py:212
+msgid "Giriş yapmanız gerekmektedir."
+msgstr ""
+
+#: rbac/permissions.py:125 rbac/permissions.py:164
+msgid "Bu işlemi gerçekleştirmek için gerekli yetkiye sahip değilsiniz."
+msgstr ""
+
+#: rbac/permissions.py:193
+msgid "Bu işlemi gerçekleştirmek için yetkiniz bulunmamaktadır."
+msgstr ""
+
+#: rbac/permissions.py:218
+msgid "Bu işlemi gerçekleştirmek için gerekli role sahip değilsiniz."
+msgstr ""

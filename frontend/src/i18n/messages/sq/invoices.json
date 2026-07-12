@@ -1,0 +1,42 @@
+{
+  "page": {
+    "title": "Faturat",
+    "description": "Faturat e lëshuara dhe shkarkimet PDF{branchSuffix}",
+    "branchSuffixWithName": " — {name}",
+    "branchRequired": "Dega është e detyrueshme.",
+    "listTitle": "Lista e faturave",
+    "listHint": "Faturat për degën e zgjedhur; filtro sipas datës, disponueshmërisë së PDF dhe kërkimit.",
+    "dateFrom": "Fillimi",
+    "dateTo": "Fundi",
+    "pdfFilter": "PDF",
+    "pdfAll": "Të gjitha",
+    "pdfYes": "Ka PDF",
+    "pdfNo": "Pa PDF",
+    "searchLabel": "Nr. / klienti",
+    "searchPlaceholder": "Kërko…",
+    "resetFilters": "Rivendos filtrat",
+    "empty": "Asnjë faturë nuk përputhet me kriteret."
+  },
+  "table": {
+    "number": "Nr.",
+    "customer": "Klienti",
+    "amount": "Shuma",
+    "date": "Data",
+    "pdf": "PDF",
+    "download": "Shkarko",
+    "noPdf": "Asnjë",
+    "missing": "—"
+  },
+  "createModal": {
+    "title": "Krijo faturë",
+    "saleLine": "Shitja: {id}… · {amount}",
+    "placeholderName": "Titulli / emri i plotë",
+    "placeholderTaxId": "Numri i identifikimit tatimor / ID kombëtare",
+    "placeholderAddress": "Adresa",
+    "dismiss": "Anulo",
+    "submit": "Krijo",
+    "submitting": "…",
+    "toastSuccess": "Fatura u krijua.",
+    "toastError": "Nuk mund të krijohej fatura."
+  }
+}

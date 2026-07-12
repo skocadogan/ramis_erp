@@ -1,0 +1,105 @@
+{
+  "page": {
+    "title": "Reservations",
+    "subtitle": "View reserved tables; manage guest arrival, edits, and cancellations.",
+    "branchLabel": "Branch: {name}",
+    "branchSelectAria": "Select branch",
+    "refresh": "Refresh",
+    "noBranch": "Select a branch or have a branch assigned to your account to list reservations.",
+    "emptyTablesTitle": "No reserved tables at this branch right now.",
+    "emptyTablesHint": "For new reservations, reserve an empty table from <link>Table management</link>."
+  },
+  "cards": {
+    "badgeReserved": "Reserved",
+    "partyRow": "Reservation: {party} · Table seats {min}–{max}",
+    "people": "{count} guests",
+    "dash": "—"
+  },
+  "actions": {
+    "guestArrived": "Guest arrived",
+    "edit": "Edit",
+    "cancel": "Cancel"
+  },
+  "cancelModal": {
+    "title": "Cancel reservation",
+    "description": "Are you sure you want to clear the reservation for table <bold>{name}</bold> and mark it available?",
+    "dismiss": "Go back",
+    "confirm": "Cancel reservation"
+  },
+  "editModal": {
+    "title": "Edit reservation",
+    "closeAria": "Close",
+    "infoLabel": "Reservation details",
+    "requiredMark": "*",
+    "scheduledLabel": "Planned time",
+    "scheduledHint": "Optional.",
+    "partyLabel": "Party size",
+    "partyPlaceholder": "e.g. 4",
+    "errorInfoRequired": "Reservation details are required.",
+    "errorPartyInvalid": "Party size must be a positive number.",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving…"
+  },
+  "toast": {
+    "guestArrived": "{name}: Guest arrived; table marked occupied.",
+    "operationFailed": "Could not complete the action.",
+    "cancelReservationSuccess": "Reservation cancelled; table cleared.",
+    "cancelReservationFailed": "Could not cancel.",
+    "updateSuccess": "Reservation updated.",
+    "updateFailed": "Could not update.",
+    "customerNameRequired": "Customer name is required.",
+    "createSuccess": "Reservation created.",
+    "saveFailed": "Could not save.",
+    "deleteSuccess": "Reservation deleted.",
+    "deleteFailed": "Could not delete.",
+    "confirmSuccess": "Confirmed",
+    "seatSuccess": "Seated",
+    "cancelShortSuccess": "Cancelled",
+    "actionFailed": "Action failed."
+  },
+  "ledger": {
+    "title": "Reservation ledger",
+    "description": "Records are filtered by the branch selected at the top. Assigning a table on new entries updates the floor plan to \"Reserved\".",
+    "new": "New",
+    "columns": {
+      "time": "Time",
+      "customer": "Customer",
+      "party": "Guests",
+      "table": "Table",
+      "status": "Status",
+      "actions": "Actions"
+    },
+    "emptyDay": "No entries for this date.",
+    "createTitle": "New reservation",
+    "namePlaceholder": "Customer name",
+    "phonePlaceholder": "Phone",
+    "partyPlaceholder": "Guests",
+    "tableLabel": "Table (optional, available tables)",
+    "tableNone": "— No table selected —",
+    "loadingTables": "Loading tables…",
+    "save": "Save",
+    "deleteTitle": "Delete reservation",
+    "deleteDescription": "The reservation for <bold>{customer}</bold> ({time}) will be permanently deleted. For pending or confirmed reservations with a table, the floor-plan reservation is removed as well.",
+    "deleting": "Deleting…",
+    "delete": "Delete",
+    "dismiss": "Go back",
+    "confirmSeatTitle": "Seat",
+    "confirmApproveTitle": "Confirm",
+    "cancelActionTitle": "Cancel",
+    "deleteActionTitle": "Delete permanently"
+  },
+  "alertSettings": {
+    "title": "Arrival alert settings",
+    "description": "Configure when recurring arrival alerts are sent to waiter, POS, and mobile screens before each reservation time.",
+    "leadLabel": "Start how many minutes before",
+    "leadHint": "0 = only at reservation time; max 180 min.",
+    "intervalLabel": "Repeat interval (min)",
+    "intervalHint": "Alerts repeat at this interval until the guest is seated or the reservation is closed.",
+    "save": "Save",
+    "saving": "Saving…",
+    "saveSuccess": "Alert settings saved.",
+    "saveFailed": "Could not save settings.",
+    "loadFailed": "Could not load alert settings."
+  }
+}

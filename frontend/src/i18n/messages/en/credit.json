@@ -1,0 +1,88 @@
+{
+  "page": {
+    "credit": "Credit",
+    "title": "Store Credit Management",
+    "subtitle": "Customer credit accounts, top-ups and spending history",
+    "branchLabel": "Branch: {name}",
+    "branchSelectAria": "Select branch",
+    "searchPlaceholder": "Search name, phone or username…",
+    "newAccount": "New Account",
+    "empty": "No store credit accounts yet.",
+    "loading": "Loading…",
+    "loadingMore": "Loading more…"
+  },
+  "table": {
+    "name": "Name",
+    "user": "System User",
+    "branch": "Branch",
+    "balance": "Balance",
+    "credited": "Total Credited",
+    "spent": "Spent",
+    "policy": "Policy",
+    "actions": "Actions"
+  },
+  "policy": {
+    "BLOCK": "Block if insufficient balance",
+    "WARN_ALLOW": "Warn but allow sale",
+    "OPEN_TAB": "Open tab (unlimited)"
+  },
+  "form": {
+    "createTitle": "New Store Credit Account",
+    "editTitle": "Edit Account",
+    "firstName": "First name",
+    "lastName": "Last name",
+    "phone": "Phone",
+    "email": "Email",
+    "address": "Address",
+    "notes": "Notes",
+    "systemUser": "System user (optional)",
+    "systemUserNone": "Virtual person (no login)",
+    "noUsersAvailable": "No active users available without an existing store credit account.",
+    "branch": "Branch",
+    "isGlobal": "Valid at all branches",
+    "creditPolicy": "Balance policy",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "detail": {
+    "title": "Account Detail",
+    "topup": "Top Up",
+    "topupAmount": "Top-up amount",
+    "topupNotes": "Notes",
+    "confirmTopup": "Top Up",
+    "transactions": "Transactions",
+    "noTransactions": "No transactions yet.",
+    "txDate": "Date",
+    "txType": "Type",
+    "txAmount": "Amount",
+    "txOrder": "Order",
+    "exportPdf": "PDF",
+    "exportExcel": "Excel",
+    "delete": "Delete Account",
+    "deleteConfirm": "Delete this store credit account? (soft delete)",
+    "saleDetailTitle": "Order Detail",
+    "saleTotal": "Total Amount",
+    "saleDiscount": "Discount",
+    "saleTable": "Table",
+    "saleDate": "Payment Date",
+    "saleCreatedBy": "Created By",
+    "saleNotFound": "Order detail not found."
+  },
+  "toast": {
+    "created": "Store credit account created.",
+    "updated": "Account updated.",
+    "deleted": "Account deleted.",
+    "topupSuccess": "Credit topped up.",
+    "operationFailed": "Operation failed.",
+    "exportFailed": "Could not export report."
+  },
+  "pos": {
+    "button": "Store Credit",
+    "modalTitle": "Select Store Credit Account",
+    "selectAccount": "Select account",
+    "balance": "Balance",
+    "confirm": "Select & Pay",
+    "noAccounts": "No store credit accounts available at this branch.",
+    "selected": "Payment from {name}'s account"
+  }
+}

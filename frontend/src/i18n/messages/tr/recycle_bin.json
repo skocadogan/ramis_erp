@@ -1,0 +1,75 @@
+{
+  "unauthorized": {
+    "title": "Yetkisiz Erişim",
+    "description": "Geri Dönüşüm Kutusu sadece sistem yöneticilerine açıktır."
+  },
+  "sidebar": {
+    "categories": "Kategoriler",
+    "refreshTitle": "Yenile"
+  },
+  "emptySummary": "Çöp kutusu tamamen boş.",
+  "header": {
+    "title": "Geri Dönüşüm Kutusu",
+    "subtitle": "Sistemden silinmiş verileri inceleyin, geri yükleyin veya kalıcı olarak temizleyin."
+  },
+  "selectCategoryHint": "Görüntülemek için sol menüden bir kategori seçin.",
+  "toolbar": {
+    "deletedRecords": "Silinen {model} kayıtları",
+    "restoreAll": "Tümünü geri al",
+    "emptyBin": "Boşalt",
+    "searchPlaceholder": "Ara…"
+  },
+  "table": {
+    "id": "ID No",
+    "name": "Kayıt adı",
+    "deletedAt": "Silinme tarihi",
+    "actions": "İşlemler"
+  },
+  "actions": {
+    "restore": "Geri yükle",
+    "hardDelete": "Kalıcı sil",
+    "forceDelete": "Zorla sil"
+  },
+  "noSearchResults": "Aranan kriterlere uygun kayıt bulunamadı.",
+  "toast": {
+    "restored": "Kayıt geri yüklendi.",
+    "restoreFailed": "Geri yükleme başarısız.",
+    "hardDeleted": "Kayıt kalıcı olarak silindi.",
+    "hardDeleteFailed": "Silme işlemi başarısız.",
+    "forceHardDeleted": "Kayıt ve bağımlılıkları kalıcı olarak silindi.",
+    "forceHardDeleteFailed": "Zorla silme başarısız.",
+    "forceDeletePreviewFailed": "Bağımlılık listesi yüklenemedi.",
+    "allRestored": "Tüm kayıtlar geri yüklendi.",
+    "restoreAllFailed": "Toplu geri yükleme başarısız.",
+    "binEmptied": "Çöp kutusu boşaltıldı.",
+    "emptyFailed": "Boşaltma işlemi başarısız."
+  },
+  "modal": {
+    "cancel": "İptal",
+    "hardDelete": {
+      "title": "Kayıt tamamen silinecek",
+      "description": "“{name}” ({model}) tamamen silinecektir. Bu işlem veritabanından kaydı tamamen kaldırır ve kesinlikle geri alınamaz. Devam etmek istiyor musunuz?",
+      "confirm": "Kalıcı olarak sil"
+    },
+    "restoreAll": {
+      "title": "Tümünü geri yükle?",
+      "description": "“{model}” kategorisindeki tüm silinmiş kayıtlar geri yüklenecektir.",
+      "confirm": "Hepsini geri yükle"
+    },
+    "emptyBin": {
+      "title": "Çöp kutusunu boşalt?",
+      "description": "“{model}” kategorisindeki tüm kayıtlar kalıcı olarak silinecektir. Bu işlem geri alınamaz.",
+      "confirm": "Tümünü kalıcı sil"
+    },
+    "forceDelete": {
+      "title": "Bağımlılıklarla birlikte zorla sil",
+      "description": "“{name}” ({model}) doğrudan silinemiyor. Onay verirseniz aşağıdaki bağlı kayıtlar da kalıcı olarak silinir.",
+      "warning": "Dikkat: Bu işlem geri alınamaz",
+      "dependenciesTitle": "Birlikte silinecek kayıtlar",
+      "loadingDeps": "Bağımlılıklar yükleniyor…",
+      "noDeps": "Ek bağımlılık bulunamadı; yalnızca seçili kayıt silinecek.",
+      "confirm": "Evet, zorla sil",
+      "confirming": "Siliniyor…"
+    }
+  }
+}

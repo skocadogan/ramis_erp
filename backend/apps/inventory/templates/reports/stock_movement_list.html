@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1cm;
+        }
+
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 8pt;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 14pt;
+            color: #1e40af;
+        }
+
+        .header p {
+            margin: 2px 0;
+            color: #666;
+            font-size: 8pt;
+        }
+
+        .filters {
+            background-color: #f8fafc;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filters span {
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 7pt;
+            color: #64748b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            padding: 5px 3px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 8pt;
+            color: #475569;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .tabular-nums {
+            font-family: 'Courier New', monospace;
+        }
+
+        .type-badge {
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 6.5pt;
+            font-weight: bold;
+        }
+
+        .type-in {
+            background-color: #f0fdf4;
+            color: #166534;
+        }
+
+        .type-out {
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+
+        .type-adjustment {
+            background-color: #f0f9ff;
+            color: #075985;
+        }
+
+        .type-waste {
+            background-color: #fffbeb;
+            color: #92400e;
+        }
+
+        .footer {
+            clear: both;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 7pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ _('Depo Giriş/Çıkış ve Hareket Detayları') }}</p>
+        <p>{{ _('Rapor Tarihi:') }} {{ now()|date_tr }} | {{ _('Kayıt Sayısı:') }} {{ count }}</p>
+    </div>
+
+    <div class="filters">
+        <span>{{ _('FİLTRELER:') }}</span>
+        {% if filters.start_date %}<span>{{ _('Başlangıç:') }} {{ filters.start_date|date_tr }}</span>{% endif %}
+        {% if filters.end_date %}<span>{{ _('Bitiş:') }} {{ filters.end_date|date_tr }}</span>{% endif %}
+        {% if filters.warehouse_id %}<span>{{ _('Depo:') }} {{ warehouse_name }}</span>{% endif %}
+        {% if filters.stock_item_id %}<span>{{ _('Ürün:') }} {{ stock_item_name }}</span>{% endif %}
+        {% if filters.movement_type and filters.movement_type != 'ALL' %}<span>{{ _('Tip:') }} {% if filters.movement_type == 'IN' %}{{ _('GİRİŞ') }}{% elif filters.movement_type == 'OUT' %}{{ _('ÇIKIŞ') }}{% elif filters.movement_type == 'ADJUSTMENT' %}{{ _('DÜZELTME') }}{% elif filters.movement_type == 'WASTE' %}{{ _('FİRE/ZAYİ') }}{% elif filters.movement_type == 'TRANSFER' %}{{ _('TRANSFER') }}{% elif filters.movement_type == 'RETURN' %}{{ _('İADE') }}{% elif filters.movement_type == 'CANCEL' %}{{ _('İPTAL') }}{% elif filters.movement_type == 'DISPOSAL' %}{{ _('İMHA') }}{% else %}{{ filters.movement_type }}{% endif %}</span>{% endif %}
+        {% if filters.search %}<span>{{ _('Arama:') }} "{{ filters.search }}"</span>{% endif %}
+    </div>
+
+    {% if limit_reached %}
+    <div style="background-color: #fffbeb; border: 1px solid #fde68a; color: #92400e; padding: 6px 10px; border-radius: 4px; margin-bottom: 15px; font-size: 7.5pt;">
+        <strong>{{ _('DİKKAT:') }}</strong> {{ (_('Toplam %(total)s kayıt bulundu. Performans nedeniyle sadece son %(shown)s kayıt gösteriliyor. Daha spesifik sonuçlar için lütfen tarih aralığı veya filtreleri kullanın.') % {'total': total_count, 'shown': count}) }}
+    </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Tarih / Saat') }}</th>
+                <th>{{ _('Ürün') }}</th>
+                <th>{{ _('Depo') }}</th>
+                <th>{{ _('Tür') }}</th>
+                <th class="text-right">{{ _('Miktar') }}</th>
+                <th>{{ _('Birim') }}</th>
+                <th>{{ _('Referans') }}</th>
+                <th>{{ _('İşlem Yapan') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for m in movements %}
+            <tr>
+                <td class="tabular-nums">{{ m.date|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td style="font-weight: bold;">{{ m.item_name }}</td>
+                <td>{{ m.warehouse_name }}</td>
+                <td>
+                    <span class="type-badge type-{{ m.type|lower }}">
+                        {% if m.type == 'IN' %}{{ _('GİRİŞ') }}
+                        {% elif m.type == 'OUT' %}{{ _('ÇIKIŞ') }}
+                        {% elif m.type == 'ADJUSTMENT' %}{{ _('DÜZELTME') }}
+                        {% elif m.type == 'WASTE' %}{{ _('FİRE/ZAYİ') }}
+                        {% elif m.type == 'TRANSFER' %}{{ _('TRANSFER') }}
+                        {% elif m.type == 'RETURN' %}{{ _('İADE') }}
+                        {% elif m.type == 'CANCEL' %}{{ _('İPTAL') }}
+                        {% elif m.type == 'DISPOSAL' %}{{ _('İMHA') }}
+                        {% else %}{{ m.type }}{% endif %}
+                    </span>
+                </td>
+                <td class="text-right tabular-nums">{{ m.quantity|currency('') }}</td>
+                <td>{{ m.unit }}</td>
+                <td>{{ m.reference or '—' }}</td>
+                <td>{{ m.performed_by }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,67 @@
+{
+  "page": {
+    "title": "Allerjen Referansı",
+    "subtitle": "Allerjen kodları, yaygınlık ve risk puanları",
+    "searchPh": "Kod veya ad ara…",
+    "deleteTitle": "Allerjeni sil",
+    "deleteDesc": "Bu allerjen kaydı pasifleştirilecek. Devam etmek istiyor musunuz?",
+    "cancel": "İptal",
+    "confirmDelete": "Sil",
+    "paginationTotal": "Toplam {count} kayıt",
+    "paginationInfo": "{start}-{end} / {total} gösteriliyor",
+    "allStatuses": "Tüm durumlar",
+    "addNew": "Yeni allerjen"
+  },
+  "table": {
+    "title": "Allerjen listesi",
+    "new": "Yeni allerjen",
+    "colCode": "Kod",
+    "colName": "Ad",
+    "colPrevalence": "Yaygınlık",
+    "colRisk": "Risk",
+    "colSortOrder": "Sıra",
+    "colActions": "İşlemler",
+    "loading": "Yükleniyor…",
+    "loadingHint": "Veriler güncelleniyor…",
+    "empty": "Kayıt bulunamadı",
+    "active": "Aktif",
+    "passive": "Pasif"
+  },
+  "form": {
+    "titleNew": "Yeni allerjen",
+    "titleEdit": "Allerjeni düzenle",
+    "code": "Kod",
+    "codePh": "GLUTEN",
+    "name": "Ad",
+    "namePh": "Gluten",
+    "prevalence": "Yaygınlık (%)",
+    "riskScore": "Risk puanı (1-10)",
+    "sortOrder": "Sıra",
+    "cancel": "İptal",
+    "add": "Ekle",
+    "update": "Güncelle",
+    "closeAria": "Kapat"
+  },
+  "referenceModal": {
+    "title": "Allerjen referans tablosu",
+    "subtitle": "Yaygınlık ve risk puanları",
+    "colCode": "Kod",
+    "colName": "Ad",
+    "colPrevalence": "Yaygınlık",
+    "colRisk": "Risk",
+    "loading": "Yükleniyor…",
+    "empty": "Allerjen bulunamadı",
+    "closeAria": "Kapat"
+  },
+  "stockForm": {
+    "label": "Allerjenler",
+    "hint": "Bu stok kaleminde doğrudan bulunan allerjenler",
+    "reference": "Referans tablosu",
+    "none": "Allerjen atanmadı"
+  },
+  "toasts": {
+    "created": "Allerjen oluşturuldu",
+    "updated": "Allerjen güncellendi",
+    "deleted": "Allerjen silindi"
+  }
+}

@@ -1,0 +1,184 @@
+{
+  "header": {
+    "toggleSidebar": "Kenar Çubuğunu Aç/Kapat",
+    "searchLabel": "Global Arama",
+    "search": "Hızlı Arama",
+    "searchMobileLabel": "Ara",
+    "logoutLabel": "Oturumu Kapat",
+    "logout": "Çıkış",
+    "brandName": "Ramis ERP"
+  },
+  "nav": {
+    "overview": "Genel Bakış",
+    "definitions": "Tanımlamalar",
+    "users": "Kullanıcılar",
+    "kitchenStations": "Mutfak İstasyonları",
+    "rolesPermissions": "Roller & Yetkiler",
+    "branches": "Şubeler",
+    "posSettings": "POS Ayarları",
+    "waiterAssignments": "Garson Atamaları",
+    "cashierPins": "Kasiyer PIN",
+    "cookAssignments": "Aşçı Atamaları",
+    "managerAssignments": "Müdür Atamaları",
+    "reportTemplates": "Rapor Şablonları",
+    "printers": "Yazıcılar",
+    "restaurant": "Restoran Operasyon",
+    "restaurantSummary": "Restoran Özeti",
+    "tables": "Masa Yönetimi",
+    "menuManagement": "Menü Yönetimi",
+    "reservations": "Rezervasyonlar",
+    "credit": "Ödenmez Yönetimi",
+    "shiftCashier": "Vardiya & Kasa",
+    "sales": "Satışlar",
+    "surveys": "Anketler",
+    "customers": "Müşteriler",
+    "invoices": "Faturalar",
+    "inventoryManagement": "Stok Yönetimi",
+    "allergens": "Allerjenler",
+    "warehouseManagement": "Depo Yönetimi",
+    "stockWarehouse": "Stok / Depo",
+    "personnel": "Personel",
+    "kitchen": "Mutfak Yönetimi",
+    "recipes": "Reçeteler",
+    "productionPlanning": "Üretim Planlama",
+    "prepManagement": "Hazırlık Yönetimi",
+    "performanceManagement": "Performans Yönetimi",
+    "kds": "Mutfak Ekranı (KDS)",
+    "pos": "Satış Ekranı (POS)",
+    "waiter": "Garson Ekranı",
+    "system": "Sistem",
+    "auditLogs": "Denetim Kayıtları",
+    "recycleBin": "Geri Dönüşüm Kutusu",
+    "defSubgroupUsers": "Kullanıcı & Yetki",
+    "defSubgroupStore": "Şube, POS & Mutfak",
+    "defSubgroupStaff": "Personel Atamaları",
+    "defSubgroupReports": "Rapor & Kayıt",
+    "collapse": "Daralt"
+  },
+  "authGuard": {
+    "checkingPermission": "Yetki kontrol ediliyor..."
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Dil seç"
+  },
+  "theme": {
+    "triggerAriaLabel": "Görünüm ayarları",
+    "triggerTitle": "Görünüm",
+    "colorTheme": "Renk Teması",
+    "density": "Arayüz Yoğunluğu",
+    "light": "Açık",
+    "dark": "Koyu",
+    "highContrast": "Yüksek Kontrast",
+    "outdoor": "Dış Mekan (Parlak)",
+    "system": "Sistem",
+    "densityCompact": "Sıkışık",
+    "densityComfortable": "Normal",
+    "densitySpacious": "Geniş"
+  },
+  "backendHealth": {
+    "statusOk": "Sunucu çalışıyor (sağlık kontrolü başarılı)",
+    "statusDown": "Sunucu yanıt vermiyor — yeniden denemek için tıklayın",
+    "statusChecking": "Sunucu kontrol ediliyor…",
+    "banner": "Sunucuya ulaşılamıyor. Sunucu hatası olabilir.",
+    "retry": "Bağlanmayı Dene"
+  },
+  "notFound": {
+    "title": "Sayfa Bulunamadı",
+    "description": "Ulaşmaya çalıştığınız sayfa silinmiş, adresi değişmiş ya da geçici olarak hizmet dışı kalmış olabilir.",
+    "goBack": "Geri Dön",
+    "goHome": "Sisteme Dön"
+  },
+  "orderStatus": {
+    "PENDING": "Bekliyor",
+    "PREPARING": "Hazırlanıyor",
+    "READY": "Hazır",
+    "DELIVERED": "Teslim Edildi",
+    "CANCELLED": "İptal",
+    "COMPLETED": "Tamamlandı"
+  },
+  "feedback": {
+    "success": "Başarılı",
+    "error": "Hata"
+  },
+  "timeline": {
+    "emptySteps": "Gösterilecek adım yok."
+  },
+  "dialog": {
+    "close": "Kapat"
+  },
+  "offline": {
+    "title": "Çevrimdışı",
+    "description": "İnternet bağlantısı yok. Bağlantı düzelince sayfayı yenileyin."
+  },
+  "globalSearch": {
+    "dialogAriaLabel": "Global arama",
+    "searchingAriaLabel": "Aranıyor",
+    "inputPlaceholder": "Ara… (kod numarası, ürün adı, müşteri adı, tarih…)",
+    "inputAriaLabel": "Arama terimi",
+    "clearAriaLabel": "Aramayı temizle",
+    "resultsAriaLabel": "Arama sonuçları",
+    "errorMessage": "Arama sırasında bir hata oluştu.",
+    "noResults": "“{query}” için sonuç bulunamadı.",
+    "uuidSearchHint": "Kod numarası araması yapıldı. Erişim yetkiniz olmayan modüller gösterilmez.",
+    "startPrompt": "Arama yapmak için yazmaya başlayın.",
+    "startHint": "Sayfa adı, ürün adı, masa, sipariş kod numarası, müşteri adı, tarih vb.",
+    "pagesGroupTitle": "Sayfalar",
+    "pagesGroupBadge": "Sayfa",
+    "modules": {
+      "menu_products": { "label": "Ürünler", "badge": "Menü" },
+      "menu_categories": { "label": "Kategoriler", "badge": "Kategori" },
+      "orders": { "label": "Siparişler", "badge": "Sipariş" },
+      "inventory_items": { "label": "Stok Kalemleri", "badge": "Stok" },
+      "inventory_suppliers": { "label": "Tedarikçiler", "badge": "Tedarikçi" },
+      "branches": { "label": "Şubeler", "badge": "Şube" },
+      "tables": { "label": "Masalar", "badge": "Masa" },
+      "users": { "label": "Kullanıcılar", "badge": "Kullanıcı" },
+      "customers": { "label": "Müşteriler", "badge": "Müşteri" },
+      "warehouses": { "label": "Depolar", "badge": "Depo" },
+      "purchase_orders": { "label": "Satın Alma Siparişleri", "badge": "Satın Alma" },
+      "deficiency_reports": { "label": "Eksik Listeleri", "badge": "Eksik" },
+      "goods_receivings": { "label": "Mal Kabul", "badge": "Mal Kabul" },
+      "transfers": { "label": "Transferler", "badge": "Transfer" },
+      "stock_countings": { "label": "Stok Sayımı", "badge": "Sayım" },
+      "reservations": { "label": "Rezervasyonlar", "badge": "Rezervasyon" },
+      "invoices": { "label": "Faturalar", "badge": "Fatura" },
+      "recipes": { "label": "Reçeteler", "badge": "Reçete" },
+      "sales": { "label": "Satışlar", "badge": "Satış" }
+    },
+    "resultCount": "{count, plural, one {# sonuç bulundu} other {# sonuç bulundu}}",
+    "footerHint": "Sonuca tıklayarak veya Enter ile ilgili sayfaya gidebilirsiniz.",
+    "recentSearchesTitle": "Son Aramalar",
+    "removeRecentAriaLabel": "\"{search}\" aramasını sil"
+  },
+  "virtualKeyboard": {
+    "ariaGroup": "Sanal klavye",
+    "numericMode": "Sayısal klavye",
+    "numericShort": "Sayısal",
+    "alphaMode": "Harf klavyesi",
+    "alphaShort": "Harf",
+    "digit": "Rakam {n}",
+    "backspace": "Sil",
+    "plus": "Artı",
+    "minus": "Eksi",
+    "decimalSeparator": "Ondalık ayırıcı (nokta)",
+    "cancel": "İptal",
+    "enter": "Enter",
+    "letter": "Harf {letter}",
+    "shiftOnce": "Üst karakter (sonraki harf büyük)",
+    "escape": "Esc",
+    "space": "Boşluk",
+    "digit0": "Rakam 0"
+  },
+  "asyncState": {
+    "loading": "Yükleniyor...",
+    "empty": "Gösterilecek kayıt yok.",
+    "error": "Veriler yüklenemedi.",
+    "retry": "Tekrar dene"
+  },
+  "export": {
+    "pdf": "PDF Dışa Aktar",
+    "preparing": "PDF hazırlanıyor...",
+    "retry": "Tekrar dene",
+    "failed": "PDF dışa aktarılamadı"
+  }
+}

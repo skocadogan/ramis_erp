@@ -1,0 +1,88 @@
+{
+  "page": {
+    "credit": "Ödenmez",
+    "title": "Ödenmez Yönetimi",
+    "subtitle": "Müşteri kredisi hesapları, bakiye yüklemeleri ve harcama geçmişi",
+    "branchLabel": "Şube: {name}",
+    "branchSelectAria": "Şube seçin",
+    "searchPlaceholder": "Ad, telefon veya kullanıcı adı ara…",
+    "newAccount": "Yeni Hesap",
+    "empty": "Henüz ödenmez hesabı tanımlanmamış.",
+    "loading": "Yükleniyor…",
+    "loadingMore": "Daha fazla yükleniyor…"
+  },
+  "table": {
+    "name": "Ad Soyad",
+    "user": "Sistem Kullanıcısı",
+    "branch": "Şube",
+    "balance": "Bakiye",
+    "credited": "Toplam Kredi",
+    "spent": "Harcanan",
+    "policy": "Politika",
+    "actions": "İşlemler"
+  },
+  "policy": {
+    "BLOCK": "Bakiye yetersizse engelle",
+    "WARN_ALLOW": "Uyar, satışa izin ver",
+    "OPEN_TAB": "Açık hesap"
+  },
+  "form": {
+    "createTitle": "Yeni Ödenmez Hesabı",
+    "editTitle": "Hesap Düzenle",
+    "firstName": "Ad",
+    "lastName": "Soyad",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "address": "Adres",
+    "notes": "Notlar",
+    "systemUser": "Sistem kullanıcısı (opsiyonel)",
+    "systemUserNone": "Sanal kişi (giriş hesabı yok)",
+    "noUsersAvailable": "Başka hesaba bağlı olmayan aktif kullanıcı bulunamadı.",
+    "branch": "Şube",
+    "isGlobal": "Tüm şubelerde geçerli",
+    "creditPolicy": "Bakiye politikası",
+    "save": "Kaydet",
+    "cancel": "İptal"
+  },
+  "detail": {
+    "title": "Hesap Detayı",
+    "topup": "Kredi Yükle",
+    "topupAmount": "Yükleme tutarı (₺)",
+    "topupNotes": "Açıklama",
+    "confirmTopup": "Yükle",
+    "transactions": "Hareketler",
+    "noTransactions": "Henüz hareket yok.",
+    "txDate": "Tarih",
+    "txType": "Tür",
+    "txAmount": "Tutar",
+    "txOrder": "Sipariş",
+    "exportPdf": "PDF",
+    "exportExcel": "Excel",
+    "delete": "Hesabı Sil",
+    "deleteConfirm": "Bu ödenmez hesabı silinsin mi? (Pasif kayıt)",
+    "saleDetailTitle": "Sipariş Detayı",
+    "saleTotal": "Toplam Tutar",
+    "saleDiscount": "İndirim",
+    "saleTable": "Masa",
+    "saleDate": "Ödeme Tarihi",
+    "saleCreatedBy": "Oluşturan",
+    "saleNotFound": "Sipariş detayı bulunamadı."
+  },
+  "toast": {
+    "created": "Ödenmez hesabı oluşturuldu.",
+    "updated": "Hesap güncellendi.",
+    "deleted": "Hesap silindi.",
+    "topupSuccess": "Kredi yüklendi.",
+    "operationFailed": "İşlem başarısız.",
+    "exportFailed": "Rapor alınamadı."
+  },
+  "pos": {
+    "button": "Ödenmez",
+    "modalTitle": "Ödenmez Hesabı Seç",
+    "selectAccount": "Hesap seçin",
+    "balance": "Bakiye",
+    "confirm": "Seç ve Öde",
+    "noAccounts": "Bu şubede kullanılabilir ödenmez hesabı yok.",
+    "selected": "{name} hesabından ödenecek"
+  }
+}

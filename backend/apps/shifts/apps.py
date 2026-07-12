@@ -1,0 +1,13 @@
+from django.apps import AppConfig
+
+
+class ShiftsConfig(AppConfig):
+    default_auto_field = "django.db.models.BigAutoField"
+    name = "apps.shifts"
+    verbose_name = "Kasa / Vardiya"
+
+    def ready(self):
+        try:
+            from . import reports # noqa
+        except ImportError:
+            pass

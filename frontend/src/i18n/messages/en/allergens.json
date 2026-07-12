@@ -1,0 +1,67 @@
+{
+  "page": {
+    "title": "Allergen Reference",
+    "subtitle": "Allergen codes, prevalence and risk scores",
+    "searchPh": "Search code or name…",
+    "deleteTitle": "Delete allergen",
+    "deleteDesc": "This allergen will be deactivated. Continue?",
+    "cancel": "Cancel",
+    "confirmDelete": "Delete",
+    "paginationTotal": "Total {count} records",
+    "paginationInfo": "Showing {start}-{end} of {total}",
+    "allStatuses": "All statuses",
+    "addNew": "New allergen"
+  },
+  "table": {
+    "title": "Allergen list",
+    "new": "New allergen",
+    "colCode": "Code",
+    "colName": "Name",
+    "colPrevalence": "Prevalence",
+    "colRisk": "Risk",
+    "colSortOrder": "Sort",
+    "colActions": "Actions",
+    "loading": "Loading…",
+    "loadingHint": "Refreshing data…",
+    "empty": "No records found",
+    "active": "Active",
+    "passive": "Passive"
+  },
+  "form": {
+    "titleNew": "New allergen",
+    "titleEdit": "Edit allergen",
+    "code": "Code",
+    "codePh": "GLUTEN",
+    "name": "Name",
+    "namePh": "Gluten",
+    "prevalence": "Prevalence (%)",
+    "riskScore": "Risk score (1-10)",
+    "sortOrder": "Sort order",
+    "cancel": "Cancel",
+    "add": "Add",
+    "update": "Update",
+    "closeAria": "Close"
+  },
+  "referenceModal": {
+    "title": "Allergen reference table",
+    "subtitle": "Prevalence and risk scores",
+    "colCode": "Code",
+    "colName": "Name",
+    "colPrevalence": "Prevalence",
+    "colRisk": "Risk",
+    "loading": "Loading…",
+    "empty": "No allergens found",
+    "closeAria": "Close"
+  },
+  "stockForm": {
+    "label": "Allergens",
+    "hint": "Allergens directly present in this stock item",
+    "reference": "Reference table",
+    "none": "No allergens assigned"
+  },
+  "toasts": {
+    "created": "Allergen created",
+    "updated": "Allergen updated",
+    "deleted": "Allergen deleted"
+  }
+}

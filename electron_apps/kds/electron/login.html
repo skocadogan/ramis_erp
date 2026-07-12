@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">Ramis KDS — Giriş</title>
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #1e1b4b 0%, #09090b 100%);
+      --card-bg: rgba(24, 24, 27, 0.75);
+      --card-border: rgba(63, 63, 70, 0.4);
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --danger: #ef4444;
+      --input-bg: rgba(9, 9, 11, 0.6);
+      --input-border: rgba(63, 63, 70, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 2.5rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 8rem;
+      height: 8rem;
+      border-radius: 1rem;
+      background: var(--primary);
+      color: #fff;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    }
+
+    .logo-img {
+      width: 5.5rem;
+      height: 5.5rem;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(to right, #ffffff, #d4d4d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lang-selector {
+      display: flex;
+      justify-content: center;
+      gap: 0.375rem;
+      margin-bottom: 1.75rem;
+    }
+
+    .lang-btn {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 9999px;
+      border: 1px solid var(--card-border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 0.75rem;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.875rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: var(--primary);
+      border: none;
+      border-radius: 0.75rem;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .error-box {
+      display: none;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    /* Spinner loader */
+    .spinner {
+      display: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="header">
+      <div class="logo-container">
+        <img src="./icon.png" class="logo-img" alt="Ramis KDS" />
+      </div>
+      <h1>Ramis KDS</h1>
+      <div class="lang-selector">
+        <button class="lang-btn" data-lang="tr">🇹🇷 TR</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+        <button class="lang-btn" data-lang="bg">🇧🇬 BG</button>
+        <button class="lang-btn" data-lang="sq">🇦🇱 SQ</button>
+      </div>
+    </div>
+
+    <div class="error-box" id="errorBox">Hata mesajı</div>
+
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="apiUrl" data-i18n="apiUrl">API Adresi (URL)</label>
+        <input type="url" id="apiUrl" name="apiUrl" placeholder="http://[SERVER_IP]" required>
+      </div>
+
+      <div class="form-group">
+        <label for="username" data-i18n="username">Kullanıcı Adı</label>
+        <input type="text" id="username" name="username" placeholder="" required>
+      </div>
+
+      <div class="form-group">
+        <label for="password" data-i18n="password">Parola</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" required>
+      </div>
+
+      <button type="submit" class="btn-submit" id="btnSubmit">
+        <div class="spinner" id="spinner"></div>
+        <span id="btnText" data-i18n="loginBtn">Sisteme Bağlan</span>
+      </button>
+    </form>
+  </div>
+
+  <script>
+    const SUPPORTED_LOCALES = ["tr", "en", "bg", "sq"];
+    const DEFAULT_LOCALE = "tr";
+
+    const t = {
+      tr: {
+        title: "Ramis KDS — Giriş",
+        apiUrl: "API Adresi (URL)",
+        username: "Kullanıcı Adı",
+        password: "Parola",
+        loginBtn: "Sisteme Bağlan",
+        connecting: "Bağlanıyor...",
+        fillAllFields: "Lütfen tüm alanları doldurun.",
+        loginFailed: "Giriş başarısız. Lütfen bilgileri kontrol edin.",
+        permissionDenied: "KDS uygulaması için kullanıcının izinleri yeterli değil.",
+        connectionError: "Bağlantı hatası: "
+      },
+      en: {
+        title: "Ramis KDS — Login",
+        apiUrl: "API Address (URL)",
+        username: "Username",
+        password: "Password",
+        loginBtn: "Connect to System",
+        connecting: "Connecting...",
+        fillAllFields: "Please fill in all fields.",
+        loginFailed: "Login failed. Please check your credentials.",
+        permissionDenied: "This user does not have sufficient permissions for the KDS application.",
+        connectionError: "Connection error: "
+      },
+      bg: {
+        title: "Ramis KDS — Вход",
+        apiUrl: "API Адрес (URL)",
+        username: "Потребителско име",
+        password: "Парола",
+        loginBtn: "Свързване",
+        connecting: "Свързване...",
+        fillAllFields: "Моля, попълнете всички полета.",
+        loginFailed: "Неуспешен вход. Проверете данните.",
+        permissionDenied: "Потребителят няма достатъчни права за KDS приложението.",
+        connectionError: "Грешка при свързване: "
+      },
+      sq: {
+        title: "Ramis KDS — Hyrje",
+        apiUrl: "Adresa API (URL)",
+        username: "Emri i përdoruesit",
+        password: "Fjalëkalimi",
+        loginBtn: "Lidhu me Sistemin",
+        connecting: "Duke u lidhur...",
+        fillAllFields: "Ju lutemi plotësoni të gjitha fushat.",
+        loginFailed: "Hyrja dështoi. Kontrolloni të dhënat.",
+        permissionDenied: "Ky përdorues nuk ka leje të mjaftueshme për aplikacionin KDS.",
+        connectionError: "Gabim lidhjeje: "
+      }
+    };
+
+    let currentLocale = DEFAULT_LOCALE;
+
+    const form = document.getElementById("loginForm");
+    const errorBox = document.getElementById("errorBox");
+    const btnSubmit = document.getElementById("btnSubmit");
+    const spinner = document.getElementById("spinner");
+    const btnText = document.getElementById("btnText");
+
+    function setLocale(locale) {
+      if (!SUPPORTED_LOCALES.includes(locale)) locale = DEFAULT_LOCALE;
+      currentLocale = locale;
+
+      document.documentElement.lang = locale;
+      document.title = t[locale].title;
+
+      document.querySelectorAll("[data-i18n]").forEach(function(el) {
+        var key = el.getAttribute("data-i18n");
+        if (t[locale][key]) {
+          el.textContent = t[locale][key];
+        }
+      });
+
+      document.querySelectorAll(".lang-btn").forEach(function(btn) {
+        btn.classList.toggle("active", btn.getAttribute("data-lang") === locale);
+      });
+    }
+
+    function resolveLoginError(result) {
+      if (result && result.errorCode === "permission_denied") {
+        return t[currentLocale].permissionDenied;
+      }
+      return (result && result.error) || t[currentLocale].loginFailed;
+    }
+
+    window.showLoginError = function(errorCode) {
+      if (errorCode === "permission_denied") {
+        showError(t[currentLocale].permissionDenied);
+      }
+    };
+
+    document.querySelectorAll(".lang-btn").forEach(function(btn) {
+      btn.addEventListener("click", function() {
+        setLocale(btn.getAttribute("data-lang"));
+      });
+    });
+
+    form.addEventListener("submit", async function(e) {
+      e.preventDefault();
+
+      var url = document.getElementById("apiUrl").value.trim();
+      var user = document.getElementById("username").value.trim();
+      var pass = document.getElementById("password").value;
+
+      if (!url || !user || !pass) {
+        showError(t[currentLocale].fillAllFields);
+        return;
+      }
+
+      hideError();
+      setLoading(true);
+
+      try {
+        var result = await window.electronAPI.login({
+          apiUrl: url,
+          username: user,
+          pass: pass,
+          locale: currentLocale
+        });
+        if (result && result.success) {
+          // Success is handled by main process (it closes this window and opens KDS)
+        } else {
+          showError(resolveLoginError(result));
+          setLoading(false);
+        }
+      } catch (err) {
+        showError(t[currentLocale].connectionError + err.message);
+        setLoading(false);
+      }
+    });
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.style.display = "block";
+    }
+
+    function hideError() {
+      errorBox.style.display = "none";
+    }
+
+    function setLoading(isLoading) {
+      btnSubmit.disabled = isLoading;
+      if (isLoading) {
+        spinner.style.display = "block";
+        btnText.textContent = t[currentLocale].connecting;
+      } else {
+        spinner.style.display = "none";
+        btnText.textContent = t[currentLocale].loginBtn;
+      }
+    }
+  </script>
+</body>
+</html>

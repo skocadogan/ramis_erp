@@ -1,0 +1,56 @@
+appId: com.ramis.kds-electron
+productName: Ramis KDS
+copyright: Copyright © 2026 Ramis ERP
+
+directories:
+  output: out
+  buildResources: resources
+
+files:
+  - dist/electron/**/*
+  - package.json
+
+extraResources:
+  - from: src/
+    to: src/
+    filter:
+      - "**/*"
+  - from: resources/
+    to: resources/
+    filter:
+      - "**/*"
+
+linux:
+  target:
+    - target: AppImage
+      arch: [x64]
+    - target: deb
+      arch: [x64]
+  category: Utility
+  syncDesktopName: true
+  icon: resources/icon.png
+  desktop:
+    entry:
+      Name: Ramis KDS
+      Comment: Mutfak Ekran Sistemi
+      Categories: Utility;
+
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  icon: resources/icon.png
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true
+  createStartMenuShortcut: true
+  runAfterFinish: true
+
+toolsets:
+  nsis: "1.2.1"
+
+publish:
+  provider: generic
+  url: https://update.ramis.com.tr/kds-electron

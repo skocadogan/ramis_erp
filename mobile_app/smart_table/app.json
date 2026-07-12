@@ -1,0 +1,93 @@
+{
+  "expo": {
+    "name": "Smart Table",
+    "slug": "smart-table",
+    "version": "0.0.7",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "smart-table",
+    "assetBundlePatterns": [
+      "assets/**/*",
+      "fonts/**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true,
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": false
+            }
+          }
+        },
+        "NSLocationWhenInUseUsageDescription": "Yakındaki WiFi ağlarını listelemek için konum izni gereklidir."
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FAFAFA"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.NEARBY_WIFI_DEVICES"
+      ],
+      "package": "com.ramis.smarttable",
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "platforms": [
+      "ios",
+      "android"
+    ],
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      "expo-image",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#FAFAFA",
+          "dark": {
+            "image": "./assets/splash.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#0F0F1A"
+          }
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true,
+            "enableProguardInReleaseBuilds": true,
+            "enableShrinkResourcesInReleaseBuilds": true,
+            "hermesFlags": ["-O", "-max-dedup-size=64"]
+          },
+          "ios": {
+            "hermesFlags": ["-O", "-max-dedup-size=64"],
+            "deploymentTarget": "16.4"
+          }
+        }
+      ]
+    ],
+    
+    "experiments": {
+      "typedRoutes": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "3ee94072-f6e7-4f19-8e99-c98b08bf8d31"
+      },
+      "owner" :"skocadogan"
+    }
+  }
+}

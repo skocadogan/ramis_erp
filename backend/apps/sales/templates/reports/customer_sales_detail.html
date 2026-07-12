@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+            @bottom-right {
+                content: "{{ _('Sayfa') }} " counter(page) " / " counter(pages);
+                font-size: 9pt;
+            }
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 10pt;
+            color: #333;
+            line-height: 1.4;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #1e3a8a;
+            font-size: 20pt;
+        }
+        .report-info {
+            margin-bottom: 20px;
+            font-size: 9pt;
+            color: #666;
+        }
+        .summary-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 30px;
+            border-spacing: 10px;
+        }
+        .summary-box {
+            display: table-cell;
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 15px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .summary-box .label {
+            display: block;
+            font-size: 8pt;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+        }
+        .summary-box .value {
+            display: block;
+            font-size: 14pt;
+            font-weight: bold;
+            color: #0f172a;
+        }
+        .summary-box.highlight {
+            background: #eff6ff;
+            border-color: #bfdbfe;
+        }
+        .summary-box.highlight .value {
+            color: #2563eb;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: bold;
+            text-align: left;
+            padding: 10px 8px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 9pt;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 9pt;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .text-right { text-align: right; }
+        .footer {
+            margin-top: 50px;
+            font-size: 8pt;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <h3>{{ customer_name }}</h3>
+    </div>
+
+    <div class="report-info">
+        <strong>{{ _('Oluşturulma:') }}</strong> {{ report_date|date_tr('%d.%m.%Y %H:%M') }}<br>
+        <strong>{{ _('Toplam İşlem:') }}</strong> {{ count }}
+    </div>
+
+    <div class="summary-grid">
+        <div class="summary-box">
+            <span class="label">{{ _('Brüt Toplam') }}</span>
+            <span class="value">{{ totals.gross_total|currency }}</span>
+        </div>
+        <div class="summary-box">
+            <span class="label">{{ _('Toplam İndirim') }}</span>
+            <span class="value">{{ totals.discount_total|currency }}</span>
+        </div>
+        <div class="summary-box highlight">
+            <span class="label">{{ _('Net Tutar') }}</span>
+            <span class="value">{{ totals.net_total|currency }}</span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Tarih') }}</th>
+                <th>{{ _('Satış No') }}</th>
+                <th>{{ _('Şube') }}</th>
+                <th>{{ _('Ödeme Yöntemi') }}</th>
+                <th class="text-right">{{ _('İndirim') }}</th>
+                <th class="text-right">{{ _('Net Tutar') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sale in sales %}
+            <tr>
+                <td>{{ sale.paid_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td>#{{ sale.id }}</td>
+                <td>{{ sale.branch.name }}</td>
+                <td>{{ sale.get_payment_method_display() }}</td>
+                <td class="text-right">{{ sale.discount_amount|currency }}</td>
+                <td class="text-right"><strong>{{ sale.total_amount|currency }}</strong></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Bu rapor otomatik olarak Ramis ERP tarafından oluşturulmuştur.') }}
+    </div>
+</body>
+</html>

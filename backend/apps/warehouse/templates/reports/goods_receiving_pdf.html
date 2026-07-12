@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>{{ receiving.receiving_number }} — {{ report_name }}</title>
+  <style>
+    body {
+      font-family: DejaVu Sans, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      color: #1e293b;
+      margin: 0;
+      padding: 18px 20px;
+    }
+    .doc-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #047857;
+      margin: 0 0 4px 0;
+      letter-spacing: 0.02em;
+    }
+    .recv-no {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 0 0 12px 0;
+    }
+    .grid {
+      display: table;
+      width: 100%;
+      margin-bottom: 14px;
+      font-size: 8.5pt;
+    }
+    .grid-row { display: table-row; }
+    .grid-cell {
+      display: table-cell;
+      padding: 3px 8px 3px 0;
+      vertical-align: top;
+    }
+    .label { color: #64748b; width: 38%; }
+    .notes {
+      margin: 10px 0 14px 0;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      color: #475569;
+    }
+    table.lines {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+    table.lines th,
+    table.lines td {
+      padding: 6px 4px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    table.lines th {
+      background: #ecfdf5;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #475569;
+      text-align: left;
+    }
+    table.lines th.right,
+    table.lines td.right { text-align: right; }
+    .total-row td {
+      font-weight: bold;
+      border-top: 2px solid #059669;
+      padding-top: 8px;
+      font-size: 10pt;
+      color: #047857;
+    }
+    .footer {
+      margin-top: 18px;
+      font-size: 7pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <p class="doc-title">{{ report_name }}</p>
+  <p class="recv-no">{{ receiving.receiving_number }}</p>
+
+  <div class="grid">
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Durum') }}</div>
+      <div class="grid-cell">{{ status_label }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Satın alma siparişi') }}</div>
+      <div class="grid-cell">{{ receiving.purchase_order_number or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Tedarikçi') }}</div>
+      <div class="grid-cell">{{ receiving.supplier_name or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Depo') }}</div>
+      <div class="grid-cell">{{ receiving.warehouse_name or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Teslim tarihi') }}</div>
+      <div class="grid-cell">{{ receiving.received_date }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Fatura no') }}</div>
+      <div class="grid-cell">{{ receiving.invoice_number or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('İrsaliye no') }}</div>
+      <div class="grid-cell">{{ receiving.waybill_number or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Teslim alan') }}</div>
+      <div class="grid-cell">{{ receiving.received_by_name or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Kontrol eden') }}</div>
+      <div class="grid-cell">{{ receiving.inspected_by_name or '—' }}</div>
+    </div>
+  </div>
+
+  {% if receiving.notes %}
+  <div class="notes">
+    <strong>{{ _('Notlar:') }}</strong> {{ receiving.notes }}
+  </div>
+  {% endif %}
+
+  <table class="lines">
+    <thead>
+      <tr>
+        <th style="width:28%">{{ _('Ürün') }}</th>
+        <th class="right">{{ _('Beklenen') }}</th>
+        <th class="right">{{ _('Alınan') }}</th>
+        <th class="right">{{ _('Red') }}</th>
+        <th class="right">{{ _('Kabul') }}</th>
+        <th class="right">{{ _('Birim fiyat') }}</th>
+        <th class="right">{{ _('Satır tutarı') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for it in receiving_items %}
+      <tr>
+        <td>
+          {{ it.stock_item_name or '—' }}
+          {% if it.stock_item_sku %}<span style="color:#94a3b8;font-size:7pt;"> ({{ it.stock_item_sku }})</span>{% endif %}
+        </td>
+        <td class="right">{{ it.expected_quantity | qty }} {{ it.unit }}</td>
+        <td class="right">{{ it.received_quantity | qty }} {{ it.unit }}</td>
+        <td class="right">{{ it.rejected_quantity | qty }} {{ it.unit }}</td>
+        <td class="right">{{ it.accepted_quantity | qty }} {{ it.unit }}</td>
+        <td class="right">{{ it.unit_price | currency }}</td>
+        <td class="right">{{ it.line_total | currency }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="total-row">
+        <td colspan="5" style="text-align:right">{{ _('Genel toplam') }}</td>
+        <td class="right" colspan="2">{{ receiving.total_amount | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footer">{{ _('Bu belge Ramis ERP üzerinden üretilmiştir.') }}</p>
+</body>
+</html>

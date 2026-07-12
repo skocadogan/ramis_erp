@@ -1,0 +1,95 @@
+{
+  "messages": {
+    "loadFailed": "Неуспешно зареждане на данни.",
+    "saveFailed": "Неуспешно запазване на назначението."
+  },
+  "title": "Управление на клонове",
+  "titlePersonal": "Информация за вашия клон",
+  "description": "Управление на клонове на ресторанта",
+  "descriptionPersonal": "Записи за клонове, свързани с вашия акаунт",
+  "addNew": "Нов клон",
+  "activeBranches": "Активни клонове ({count})",
+  "deletedBranches": "Изтрити клонове ({count})",
+  "name": "Име на клон",
+  "code": "Код",
+  "phone": "Телефон",
+  "email": "Имейл",
+  "website": "Уеб адрес",
+  "address": "Адрес",
+  "taxOffice": "Данъчна служба",
+  "taxNumber": "Данъчен номер",
+  "registryNo": "Регистрационен номер",
+  "mersisNo": "Mersis номер",
+  "logo": "Лого на клон",
+  "users": "Потребители",
+  "details": "Детайли",
+  "hardDelete": "Окончателно изтриване",
+  "empty": {
+    "personal": "Няма намерени записи за назначен клон.",
+    "deleted": "Няма намерени изтрити клонове.",
+    "active": "Няма регистрирани активни клонове.",
+    "noMatch": "Няма клонове, отговарящи на търсенето."
+  },
+  "modals": {
+    "deleteTitle": "Изтриване на клон",
+    "hardDeleteTitle": "Окончателно изтриване на клон",
+    "deleteDesc": "Клонът „{name}“ ще бъде изтрит. Можете по-късно да прегледате или възстановите изтритите клонове.",
+    "hardDeleteDesc": "Клонът „{name}“ ще бъде напълно премахнат от системата. Това действие е необратимо и може да засегне всички данни, свързани с клона.",
+    "deleteConfirm": "Изтриване на клон",
+    "hardDeleteConfirm": "Окончателно изтриване"
+  },
+  "formModal": {
+    "namePlaceholder": "напр. Главен клон",
+    "codePlaceholder": "MAIN",
+    "phonePlaceholder": "+1 555 123 4567",
+    "addressPlaceholder": "Улица, квартал, град…"
+  },
+  "editModal": {
+    "title": "Редактиране на клон",
+    "subtitle": "Обновяване на данните за {branchName}",
+    "monthlyTargetLabel": "Месечен приходен таргет (€)",
+    "monthlyTargetPlaceholder": "1,000,000",
+    "monthlyTargetHint": "Задвижва лентата за напредък на таблото за текущия месец.",
+    "validationNameRequired": "Името на клона е задължително.",
+    "validationCodeRequired": "Кодът на клона е задължителен.",
+    "updateFailed": "Неуспешно обновяване на клон.",
+    "uploadLogo": "Качване на лого",
+    "changeLogo": "Смяна на лого",
+    "removeLogo": "Премахване на лого",
+    "emailPlaceholder": "example@company.com",
+    "websitePlaceholder": "https://company.com",
+    "taxOfficePlaceholder": "напр. Данъчна служба",
+    "taxNumberPlaceholder": "1234567890",
+    "registryNoPlaceholder": "123456",
+    "mersisNoPlaceholder": "0123456789012345"
+  },
+  "detailModal": {
+    "usersAssignedSummary": "{count} назначени потребители",
+    "zoneManagement": "Управление на зони",
+    "noAssignableUsers": "Няма налични потребители за назначаване",
+    "assigning": "Назначаване…",
+    "assignUsersButton": "Назначаване на {count} потребител(и)",
+    "assignedUsers": "Назначени потребители",
+    "addUser": "Добавяне на потребител",
+    "emptyNoUsers": "Все още няма назначени потребители за този клон.",
+    "noRole": "Без роля",
+    "removeUser": "Премахни",
+    "close": "Затвори",
+    "assignFailed": "Неуспешно назначаване на потребители.",
+    "removeUserFailed": "Неуспешно премахване на потребител.",
+    "confirmRemoveUser": "Премахване на този потребител от клона?"
+  },
+  "branchUserModal": {
+    "title": "Назначаване на потребители",
+    "subtitle": "Изберете потребители за {branchName} ({selectedCount} избрани)",
+    "searchPlaceholder": "Търсене на потребители…",
+    "empty": "Няма намерени потребители",
+    "selectAllToggle": "Избери всички / Изчисти",
+    "footerSummary": "{selected} / {total} избрани потребители"
+  },
+  "branchSelect": {
+    "placeholder": "Изберете клон",
+    "loading": "Зареждане…",
+    "allBranches": "Всички клонове"
+  }
+}

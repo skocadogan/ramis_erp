@@ -1,0 +1,25 @@
+{
+  "loading": "Duke ngarkuar të dhënat...",
+  "cart": "Shporta",
+  "shift": {
+    "checking": "Duke kontrolluar statusin e turnit...",
+    "closed": "Turni i mbyllur",
+    "requiredMessage": "Duhet të jetë hapur një turn aktiv për të kryer veprime. Ju lutemi kontaktoni arkëtarin.",
+    "selectPos": "Zgjidh POS",
+    "backFromPosPick": "Mbrapa"
+  },
+  "reservation": {
+    "title": "Konfirmimi i rezervimit",
+    "scheduledAt": "Planifikuar më",
+    "partySize": "Madhësia e grupit",
+    "pax": "Vetë",
+    "confirmationHint": "Ka një rezervim të regjistruar për këtë tavolinë. Jeni i sigurt se doni të filloni një porosi?",
+    "cancel": "Anulo",
+    "startOrder": "Fillo porosinë"
+  },
+  "orderSuccess": {
+    "title": "Porosia u dërgua",
+    "description": "Porosia juaj u dërgua me sukses në kuzhinë.",
+    "ok": "OK"
+  }
+}

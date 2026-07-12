@@ -1,0 +1,948 @@
+{
+  "title": "Paneli i administrimit",
+  "common": {
+    "loading": "Duke u ngarkuar...",
+    "error": "Gabim",
+    "success": "Sukses",
+    "save": "Ruaj",
+    "cancel": "Anulo",
+    "create": "Krijo",
+    "update": "Përditëso",
+    "delete": "Fshije",
+    "restore": "Rivendos",
+    "edit": "Ndrysho",
+    "search": "Kërko...",
+    "all": "Të gjitha",
+    "active": "Aktiv",
+    "passive": "Pasiv",
+    "status": "Statusi",
+    "actions": "Veprimet",
+    "confirmDelete": "Jeni i sigurt se doni të fshini?",
+    "saving": "Duke ruajtur...",
+    "deleteConfirmDescription": "Ky veprim nuk mund të zhbëhet.",
+    "noMatch": "Nuk u gjetën regjistrime që përputhen."
+  },
+  "cancellationReason": {
+    "defaultTitle": "Arsyeja e anulimit",
+    "defaultDescription": "Kjo do të ruhet në regjistrin e auditimit. Ju lutemi specifikoni pse po anuloni.",
+    "categoryLabel": "Kategoria e arsyes",
+    "selectPlaceholder": "Zgjidh...",
+    "detailLabel": "Detaje shtesë (opsionale)",
+    "detailPlaceholder": "Çdo detaj shtesë që dëshironi të shtoni...",
+    "dismiss": "Anulo",
+    "submit": "Anulo dhe ruaj",
+    "reasons": {
+      "MISTAKE": "Porosi e gabuar / gabim hyrjeje",
+      "CUSTOMER_CANCEL": "Klienti anuloi",
+      "OUT_OF_STOCK": "Mungesë stoku (86)",
+      "KITCHEN_ERROR": "Gabim në kuzhinë",
+      "QUALITY_ISSUE": "Cilësi / ankesë",
+      "OTHER": "Tjetër (ju lutemi përshkruani)",
+      "SALE_VOID": "Anulim shitjeje (kthim)",
+      "mistake": "Gabim / Hyrje e gabuar",
+      "customerCancel": "Klienti anuloi",
+      "outOfStock": "Mungesë stoku",
+      "kitchenError": "Gabim në kuzhinë",
+      "qualityIssue": "Problem cilësie",
+      "other": "Tjetër"
+    }
+  },
+  "panelPage": {
+    "branchCreateFailed": "Nuk mund të krijohej dega.",
+    "branchDeleteFailed": "Nuk mund të fshihej dega \"{name}\".",
+    "branchRestoreFailed": "Nuk mund të rivendosej dega \"{name}\".",
+    "roleSaveFailed": "Nuk mund të ruhej roli.",
+    "roleDeleteFailed": "Nuk mund të fshihej roli.",
+    "roleStaleToast": "Ky rol nuk ekziston më. Të dhënat u rifreskuan.",
+    "roleDeleteConfirm": "Jeni i sigurt se doni të fshini këtë rol?"
+  },
+  "tabs": {
+    "overview": "Përmbledhje",
+    "users": "Përdoruesit",
+    "branches": "Degët",
+    "roles": "Rolet & Lejet",
+    "inventory": "Inventari",
+    "recipes": "Recetat",
+    "menu": "Menaxhimi i menysë",
+    "orders": "Historia e porosive",
+    "sales": "Shitjet",
+    "stations": "Stacionet e kuzhinës",
+    "waiterAssignments": "Caktimet e kamerierëve",
+    "cookAssignments": "Caktimet e kuzhinierëve",
+    "managerAssignments": "Caktimet e menaxherëve",
+    "printers": "Cilësimet e printerit",
+    "reporting": "Raportimi",
+    "audit": "Regjistrat e auditimit",
+    "posSettings": "Cilësimet e POS",
+    "surveys": "Anketat"
+  },
+  "surveys": {
+    "title": "Anketat",
+    "description": "Menaxhoni anketat për ekranin e klientit dhe komentet e mbledhura.",
+    "addNew": "Anketë e re",
+    "searchPlaceholder": "Kërko anketa...",
+    "allBranches": "Të gjitha degët",
+    "empty": "Nuk ka ende anketa të krijuara.",
+    "deleteTitle": "Fshi anketën",
+    "deleteDescription": "Anketa \"{title}\" do të fshihet përgjithmonë. Ky veprim nuk mund të zhbëhet.",
+    "channels": {
+      "customerDisplayOn": "Ekrani i klientit aktiv",
+      "customerDisplayOff": "Ekrani i klientit joaktiv",
+      "smartTableOn": "Smart Table aktiv",
+      "smartTableOff": "Smart Table joaktiv"
+    },
+    "table": {
+      "title": "Anketa",
+      "branches": "Degët",
+      "channels": "Kanalet",
+      "questions": "Pyetjet",
+      "responses": "Përgjigjet",
+      "status": "Statusi"
+    },
+    "answerTypes": {
+      "RATING": "Vlerësim",
+      "YES_NO": "Po / Jo",
+      "OPTION": "Opsion",
+      "SHORT_TEXT": "Tekst i shkurtër"
+    },
+    "roles": {
+      "NONE": "Përgjithshëm",
+      "NPS": "NPS",
+      "FOOD": "Ushqimi",
+      "SERVICE": "Shërbimi",
+      "SPEED": "Shpejtësia",
+      "CLEANLINESS": "Pastërtia"
+    },
+    "attentionStatus": {
+      "OPEN": "Kërkon vëmendje",
+      "REVIEWED": "Në shqyrtim",
+      "RESOLVED": "Zgjidhur"
+    },
+    "form": {
+      "createTitle": "Krijo anketë",
+      "editTitle": "Ndrysho anketën",
+      "description": "Menaxhoni degët, kanalet e publikimit dhe rrjedhën e pyetjeve nga kjo faqe.",
+      "title": "Titulli i anketës",
+      "titlePlaceholder": "P.sh. anketa e kënaqësisë me shërbimin",
+      "sortOrder": "Renditja",
+      "descriptionLabel": "Përshkrimi",
+      "descriptionPlaceholder": "Mesazh i shkurtër që i shfaqet klientit...",
+      "flags": {
+        "active": "Anketa aktive",
+        "customerDisplay": "Aktive në ekranin e klientit",
+        "smartTable": "Aktive në Smart Table"
+      },
+      "branches": "Degët",
+      "questions": "Pyetjet",
+      "addQuestion": "Shto pyetje",
+      "questionNumber": "Pyetja {number}",
+      "questionText": "Teksti i pyetjes",
+      "questionTextPlaceholder": "Teksti i pyetjes që shfaqet për klientin",
+      "answerType": "Lloji i përgjigjes",
+      "role": "Roli analitik",
+      "questionSortOrder": "Rendi i pyetjes",
+      "required": "Përgjigje e detyrueshme",
+      "ratingMin": "Vlerësimi minimal",
+      "ratingMax": "Vlerësimi maksimal",
+      "placeholder": "Tekst ndihmës",
+      "placeholderPlaceholder": "P.sh. shkruani komentin tuaj të shkurtër",
+      "options": "Opsionet",
+      "addOption": "Shto opsion",
+      "optionPlaceholder": "Teksti i opsionit"
+    },
+    "results": {
+      "title": "Rezultatet e anketave",
+      "description": "Filtroni komentet e mbledhura dhe menaxhoni regjistrimet që kërkojnë vëmendje.",
+      "descriptionWithSurvey": "Përgjigjet për \"{title}\"",
+      "count": "{count} përgjigje",
+      "empty": "Nuk u gjetën përgjigje për këtë anketë.",
+      "noCustomer": "Nuk ka të dhëna për mysafirin",
+      "detailEmpty": "Zgjidhni një përgjigje majtas për të parë detajet.",
+      "detailAnswers": "Përgjigjet",
+      "detailPreview": "Përmbledhje",
+      "detailAttention": "Statusi i vëmendjes",
+      "notePlaceholder": "Shtoni një shënim operacional...",
+      "saveAttention": "Ruaj statusin",
+      "filters": {
+        "allStatuses": "Të gjitha statuset"
+      },
+      "table": {
+        "date": "Data",
+        "context": "Konteksti",
+        "metrics": "Metrikat",
+        "status": "Statusi"
+      },
+      "messages": {
+        "updateSuccess": "Statusi i përgjigjes u përditësua.",
+        "updateError": "Statusi i përgjigjes nuk mundi të përditësohej."
+      }
+    },
+    "messages": {
+      "createSuccess": "Anketa u krijua.",
+      "updateSuccess": "Anketa u përditësua.",
+      "saveError": "Anketa nuk mundi të ruhej.",
+      "deleteSuccess": "Anketa u fshi.",
+      "deleteError": "Anketa nuk mundi të fshihej."
+    }
+  },
+  "stations": {
+    "title": "Stacionet e kuzhinës",
+    "subtitle": "Përcakto ku duhet të drejtohen porositë në kuzhinë",
+    "addNew": "Stacion i ri",
+    "stationName": "Emri i stacionit",
+    "branch": "Dega",
+    "warehouse": "Depoja e lidhur",
+    "descriptionLabel": "Përshkrimi",
+    "warehouseNote": "Raportet e mungesave do të drejtohen në këtë depo.",
+    "code": "Kodi (slug)",
+    "categories": "Kategoritë",
+    "color": "Ngjyra (ngjyra e ekranit KDS)",
+    "colorAria": "Ngjyra {code}",
+    "openKds": "Hap ekranin KDS",
+    "noWarehouse": "Asnjë depo e caktuar",
+    "selectBranch": "Zgjidh degën...",
+    "selectWarehouse": "Zgjidh depon (Opsionale)...",
+    "count": "{count} stacione",
+    "allBranches": "Të gjitha degët",
+    "placeholderName": "Kuzhina kryesore",
+    "placeholderCode": "main-kitchen",
+    "placeholderDesc": "Pjata të nxehta, pica, burgera...",
+    "errors": {
+      "loadFailed": "Nuk mund të ngarkoheshin stacionet.",
+      "warehousesLoadFailed": "Nuk mund të ngarkoheshin depot.",
+      "requiredFields": "Dega, emri dhe kodi janë të detyrueshëm.",
+      "saveFailed": "Ndodhi një gabim gjatë ruajtjes.",
+      "deleteFailed": "Nuk mund të fshihej stacioni."
+    },
+    "empty": {
+      "title": "Ende pa stacione të shtuara.",
+      "action": "+ Shto stacionin e parë"
+    }
+  },
+  "printers": {
+    "title": "Menaxhimi i printerëve",
+    "description": "Konfiguro printerët termikë të faturave dhe raporteve (Rrjet/USB)",
+    "addNew": "Printer i ri",
+    "printer": "Printeri",
+    "usage": "Përdorimi",
+    "station": "Stacioni",
+    "noStation": "Pa caktuar",
+    "connection": "Lidhja",
+    "address": "Adresa",
+    "model": "Modeli",
+    "testPrint": "Provo printimin",
+    "connectionTypes": {
+      "network": "Rrjet (Ethernet/WiFi)",
+      "usb": "USB"
+    },
+    "usageTypes": {
+      "pos": "POS / Regjistri",
+      "kitchen": "Kuzhina / Përgatitja"
+    },
+    "fields": {
+      "name": "Emri i printerit",
+      "ipAddress": "Adresa IP",
+      "port": "Porta",
+      "devicePath": "Rruga e pajisjes (USB)",
+      "printerType": "Modeli i printerit",
+      "kitchenStation": "Stacioni i kuzhinës",
+      "receiptTemplate": "Modeli i faturës"
+    },
+    "selectStation": "Zgjidh stacionin...",
+    "selectTemplate": "Zgjidh modelin...",
+    "messages": {
+      "testSending": "Duke dërguar printimin test...",
+      "testSuccess": "Printimi test u dërgua me sukses.",
+      "testFailed": "Printimi test dështoi.",
+      "updateSuccess": "Printeri u përditësua.",
+      "createSuccess": "Printeri u krijua.",
+      "deleteSuccess": "Printeri u fshi."
+    },
+    "errors": {
+      "loadFailed": "Nuk mund të ngarkoheshin printerët.",
+      "requiredFields": "Dega dhe Emri i printerit janë të detyrueshëm.",
+      "requiredUsbPath": "Rruga e pajisjes është e detyrueshme për printerët USB.",
+      "requiredIp": "Adresa IP është e detyrueshme për printerët në rrjet.",
+      "requiredStation": "Stacioni i kuzhinës është i detyrueshëm për printerët e kuzhinës.",
+      "requiredTemplate": "Modeli i faturës është i detyrueshëm për printerët e kuzhinës.",
+      "ipNotEmpty": "Adresa IP nuk mund të jetë bosh.",
+      "saveFailed": "Ndodhi një gabim gjatë ruajtjes.",
+      "deleteFailed": "Nuk mund të fshihej printeri."
+    },
+    "modals": {
+      "deleteTitle": "Fshij printerin",
+      "deleteDesc": "Printeri \"{name}\" do të fshihet përgjithmonë. Ky veprim nuk mund të zhbëhet."
+    },
+    "empty": "Ende pa printera të shtuar."
+  },
+  "inventory": {
+    "title": "Menaxhimi i stokut",
+    "description": "Artikujt aktualë të stokut dhe informacioni i sasisë në kohë reale.",
+    "goToPage": "Shko te faqja e stokut",
+    "searchPlaceholder": "Kërko sipas emrit të produktit ose SKU...",
+    "allWarehouses": "Të gjitha (të autorizuara)",
+    "table": {
+      "item": "Produkti",
+      "sku": "SKU",
+      "current": "Aktual",
+      "min": "Min.",
+      "status": "Statusi"
+    },
+    "status": {
+      "low": "I ulët",
+      "normal": "Normal"
+    },
+    "empty": "Nuk u gjet asnjë artikull stoku."
+  },
+  "recipes": {
+    "title": "Menaxhimi i recetave",
+    "description": "Menaxho recetat e produkteve dhe strukturat e kostove",
+    "goToPage": "Shko te faqja e recetave",
+    "details": "Detajet e recetës",
+    "menuProduct": "Produkti i menysë",
+    "totalCost": "Kostoja totale",
+    "ingredients": "Përbërësit",
+    "independent": "Recetë e pavarur",
+    "table": {
+      "recipe": "Receta",
+      "product": "Produkti",
+      "ingredientCount": "Përbërësi",
+      "cost": "Kostoja",
+      "ingredient": "Përbërësi",
+      "quantity": "Sasia"
+    },
+    "empty": "Nuk u gjetën përbërës për këtë recetë."
+  },
+  "menu": {
+    "title": "Menaxhimi i menysë",
+    "description": "Ndrysho kategoritë dhe listën e produkteve",
+    "goToPage": "Shko te faqja e menysë",
+    "categoriesCount": "Kategoritë ({count})",
+    "productsCount": "Produktet ({count})",
+    "addNewCategory": "Kategori e re",
+    "addNewProduct": "Produkt i ri"
+  },
+  "orders": {
+    "title": "Historia e porosive",
+    "description": "Shqyrto regjistrimet e porosive të kaluara dhe aktive",
+    "goToPage": "Shko te faqja POS",
+    "searchPlaceholder": "Kërko porosi, tavolinë, përdorues, degë...",
+    "details": "Detajet e porosisë",
+    "items": "Artikujt e porosisë ({count})",
+    "itemsEmpty": "Lista e artikujve nuk mund të ngarkohej ose është bosh.",
+    "status": {
+      "PENDING": "Në pritje",
+      "PREPARING": "Duke u përgatitur",
+      "READY": "Gati",
+      "DELIVERED": "Dorëzuar",
+      "COMPLETED": "Përfunduar",
+      "CANCELLED": "Anuluar"
+    },
+    "fields": {
+      "id": "Nr. i porosisë",
+      "date": "Data",
+      "status": "Statusi",
+      "total": "Totali",
+      "createdAt": "Krijuar më",
+      "updatedAt": "Përditësimi i fundit",
+      "branch": "Dega",
+      "table": "Tavolina",
+      "user": "Krijuar nga",
+      "notes": "Shënim i përgjithshëm",
+      "unitPrice": "Njësia",
+      "station": "Stacioni",
+      "itemNote": "Shënimi",
+      "takeaway": "Për të marrë / pa tavolinë"
+    },
+    "actions": {
+      "forceClose": "Mbylle",
+      "cancel": "Anulo",
+      "forceCloseConfirm": "Jeni i sigurt se doni të mbyllni me forcë këtë porosi? Ky veprim nuk krijon një regjistrim shitjeje dhe ka për qëllim të pastrojë porositë e varura.",
+      "cancelSuccess": "Porosia u anulua me sukses.",
+      "forceCloseSuccess": "Porosia u mbyll me forcë."
+    },
+    "errors": {
+      "cancelFailed": "Nuk mund të anulohej porosia.",
+      "forceCloseFailed": "Nuk mund të mbyllej porosia."
+    }
+  },
+  "sales": {
+    "title": "Analiza e shitjeve",
+    "description": "Shiko të gjitha regjistrimet e pagesave",
+    "summary": {
+      "selected": "Regjistrimet e zgjedhura",
+      "gross": "Lista bruto",
+      "discount": "Zbritja",
+      "net": "Totali i përgjithshëm"
+    },
+    "filters": {
+      "tablePlaceholder": "Zgjidh tavolinën...",
+      "cashierPlaceholder": "Zgjidh arkëtarin...",
+      "allTables": "Të gjitha tavolinat",
+      "allCashiers": "Të gjithë arkëtarët",
+      "allPayments": "Të gjitha pagesat",
+      "cash": "Para të gatshme",
+      "card": "Kartë",
+      "other": "Tjetër",
+      "date": "Data:",
+      "resetTitle": "Apliko parazgjedhjen (sot)"
+    },
+    "table": {
+      "index": "#",
+      "table": "Tavolina",
+      "cashier": "Arkëtari",
+      "method": "Mënyra e pagesës",
+      "gross": "Lista bruto",
+      "discount": "Zbritja",
+      "total": "Totali i përgjithshëm",
+      "branch": "Dega",
+      "date": "Data",
+      "notes": "Shënime",
+      "count": "{count} regjistrime"
+    }
+  },
+  "roles": {
+    "title": "Rolet & Lejet",
+    "description": "Përcakto rolet dhe lejet e përdoruesve",
+    "addNew": "Rol i ri",
+    "rolesCount": "Rolet ({count})",
+    "permCategories": "Kategoritë e lejeve",
+    "more": "+{count} të tjera",
+    "name": "Emri i rolit",
+    "permissions": "Lejet",
+    "create": "Shto rol",
+    "edit": "Ndrysho rolin",
+    "descriptionLabel": "Përshkrimi",
+    "parentRole": "Roli prind",
+    "parentRoleNone": "Asnjë (niveli më i lartë)",
+    "permissionCountSummary": "{selected} / {total} leje të përzgjedhura",
+    "namePlaceholder": "p.sh. BranchManager",
+    "descriptionPlaceholder": "Përshkruaj shkurtimisht qëllimin e rolit…",
+    "selectAllPerms": "Zgjidh të gjitha",
+    "clearPerms": "Pastro",
+    "permissionSearchPlaceholder": "Kërko sipas emrit ose kodit të lejes…",
+    "categoryFilterLabel": "Kategoria",
+    "allCategories": "Të gjitha kategoritë",
+    "resetFilters": "Rivendos filtrat",
+    "permissionListAriaLabel": "Lista e lejeve",
+    "noPermissionsMatchFilter": "Asnjë leje nuk përputhet me këtë filtër. Ndrysho kërkimin ose përzgjedhjen e kategorisë.",
+    "categoryToggleAll": "Të gjitha",
+    "categoryToggleRemove": "Hiq",
+    "footerEditing": "Duke ndryshuar: {name}",
+    "footerCreating": "Një rol i ri do të krijohet",
+    "createSuccess": "Roli u krijua.",
+    "deleteSuccess": "Roli u fshi."
+  },
+  "posSettings": {
+    "title": "Cilësimet e POS",
+    "description": "Pikat e pagesës, përmbajtja e ekranit të klientit dhe cilësimet e modalitetit të qetë.",
+    "branchLabel": "Dega",
+    "displayScopeLabel": "Profili i ekranit të klientit",
+    "branchDefaultScope": "Parazgjedhja e degës (të gjitha POS)",
+    "displayScopeHintBranch": "Këto cilësime zbatohen për çdo ekran klienti në degë; zgjidh një POS më poshtë për të anashkaluar për një terminal.",
+    "displayScopeHintTerminal": "Vetëm ekrani i klientit i lidhur me këtë POS përdor këto cilësime; përndryshe zbatohet parazgjedhja e degës.",
+    "slideScopeAll": "Të gjitha POS",
+    "noBranchError": "Zgjidh një degë ose cakto një për llogarinë tënde për të ndryshuar cilësimet e POS.",
+    "applyChanges": "Apliko ndryshimet",
+    "applyingChanges": "Duke aplikuar...",
+    "defaults": {
+      "welcomeTitle": "RAMIS ERP",
+      "welcomeSubtitle": "Shërbim transparent dhe profesional",
+      "orderSuccessTitle": "Porosia u mor",
+      "orderSuccessSubtitle": "Përcjellë në kuzhinë, duke u përgatitur...",
+      "paymentSuccessTitle": "Faleminderit",
+      "paymentSuccessSubtitle": "Ju bëftë mirë, shihemi së shpejti."
+    },
+    "messages": {
+      "saveSuccess": "Cilësimet u ruajtën me sukses.",
+      "saveError": "Nuk mund të ruheshin cilësimet.",
+      "applySuccess": "Ndryshimet u aplikuan me sukses. Ekranet e klientit po rifreskohen automatikisht.",
+      "applyError": "Ndodhi një gabim gjatë aplikimit të ndryshimeve.",
+      "slideSaveSuccess": "Sllajdi u ruajt me sukses.",
+      "slideSaveError": "Nuk mund të ruhej sllajdi.",
+      "slideDeleteSuccess": "Sllajdi u fshi.",
+      "slideDeleteError": "Nuk mund të fshihej sllajdi.",
+      "slideActivated": "Sllajdi u aktivizua.",
+      "slideDeactivated": "Sllajdi u çaktivizua.",
+      "statusUpdateError": "Nuk mund të përditësohej statusi."
+    },
+    "modals": {
+      "deleteSlideTitle": "Fshij sllajdin",
+      "deleteSlideDesc": "Jeni i sigurt se doni të fshini këtë sllajd? Ky veprim nuk mund të zhbëhet."
+    }
+  },
+  "audit": {
+    "title": "Regjistrat e auditimit",
+    "description": "Regjistrimet e operacioneve kritike në të gjithë aplikacionin.",
+    "allBranches": "Të gjitha degët",
+    "allActions": "Të gjitha veprimet",
+    "startDate": "Fillimi",
+    "endDate": "Fundi",
+    "export": "Eksporto CSV",
+    "exporting": "Duke eksportuar...",
+    "exportSuccess": "Regjistrat e auditimit u shkarkuan.",
+    "exportFailed": "Nuk mund të eksportoheshin regjistrat e auditimit.",
+    "searchPlaceholder": "Kërko veprim, përdorues ose objektiv...",
+    "table": {
+      "dateActor": "Data / Kryesi",
+      "action": "Veprimi",
+      "target": "Objektivi",
+      "detail": "Detajet"
+    },
+    "actions": {
+      "order": {
+        "cancelled": "Porosia u anulua",
+        "created": "Porosia u krijua",
+        "completed": "Porosia u përfundua",
+        "force_closed": "Porosia u mbyll me forcë",
+        "auto_close_initiated": "Mbyllja automatike u nis",
+        "auto_closed": "Mbyllja automatike u përfundua",
+        "discount_applied": "Zbritja e porosisë u aplikua",
+        "discount_removed": "Zbritja e porosisë u hoq"
+      },
+      "table": {
+        "auto_closed": "Tavolina u mbyll automatikisht"
+      },
+      "order_item": {
+        "cancelled": "Artikulli i porosisë u anulua",
+        "discount_applied": "Zbritja e artikullit u aplikua",
+        "recalled": "Artikulli KDS u tërhoq"
+      },
+      "sale": {
+        "created": "Shitja u krijua"
+      },
+      "stock": {
+        "receive": "Marrje stoku",
+        "out": "Dalje stoku",
+        "waste": "Mbetje / Prishje",
+        "transfer": "Transfertë stoku",
+        "adjustment": "Rregullim stoku",
+        "movement_deleted": "Lëvizja e stokut u fshi",
+        "return": "Kthim stoku"
+      },
+      "warehouse": {
+        "purchase_recommendation": {
+          "committed": "Rekomandimi i blerjes u angazhua"
+        },
+        "transfer": {
+          "created": "Transferta e depove u krijua",
+          "approved": "Transferta e depove u miratua",
+          "completed": "Transferta e depove u përfundua",
+          "cancelled": "Transferta e depove u anulua"
+        },
+        "purchase_order": {
+          "approved": "Porosia e blerjes u miratua",
+          "cancelled": "Porosia e blerjes u anulua"
+        },
+        "goods_receiving": {
+          "completed": "Marrja e mallrave u përfundua"
+        },
+        "stock_counting": {
+          "approved": "Numërimi i stokut u miratua",
+          "deleted": "Numërimi i stokut u fshi"
+        },
+        "deficiency_report": {
+          "approved": "Raporti i mungesave u miratua",
+          "cancelled": "Raporti i mungesave u anulua",
+          "ordered": "Raporti i mungesave u porosit",
+          "item_actions_executed": "Veprimet e artikujve të raportit të mungesave u ekzekutuan"
+        }
+      },
+      "inventory": {
+        "expiry_action": {
+          "priority_consume": "Skadim — Konsum prioritar",
+          "transfer_suggest": "Skadim — Sugjerim transferte",
+          "plan_note": "Skadim — Shënim plani"
+        },
+        "expiry_auto_return_cancel": "Skadim — Anulim automatik kthimi"
+      },
+      "shift": {
+        "opened": "Turni u hap",
+        "closed": "Turni u mbyll",
+        "expense_added": "Shpenzimi i turnit u shtua",
+        "cash_movement": {
+          "in": "Hyrje parash",
+          "out": "Dalje parash"
+        },
+        "update_closing": "Mbyllja e turnit u rregullua"
+      },
+      "pos": {
+        "idempotency": {
+          "conflict": "Konflikt idempotence POS",
+          "scope_mismatch": "Mospërputhje e fushëveprimit të idempotencës POS"
+        }
+      },
+      "production_planning": {
+        "availability": {
+          "auto_purged": "Regjistër 86 i skaduar fshirë automatikisht",
+          "purge_expired_completed": "Pastrimi në grup i 86 të skaduara u përfundua"
+        }
+      }
+    },
+    "details": {
+      "title": "Detajet e operacionit",
+      "date": "Data",
+      "branch": "Dega",
+      "global": "Global / Sistemi",
+      "context": "Informacioni i kontekstit",
+      "ip": "Adresa IP",
+      "ua": "Pajisja / Shfletuesi",
+      "metadata": "Të dhënat ndihmëse / Arsyeja",
+      "dataChange": "Ndryshimi i të dhënave",
+      "before": "PARA",
+      "after": "PAS",
+      "noSelection": "Asnjë regjistrim i zgjedhur",
+      "selectionDesc": "Kliko një rresht për të parë informacion të detajuar IP, pajisje dhe ndryshim të dhënash."
+    },
+    "system": "Sistemi",
+    "empty": "Nuk u gjetën regjistrime auditimi."
+  },
+  "overview": {
+    "title": "Përmbledhje",
+    "description": "Përmbledhje e bazuar në modulet e autorizuara; kliko një kartë për të lundruar te faqja e menaxhimit.",
+    "noAccess": "Nuk ka module menaxhimi të disponueshme për llogarinë tuaj. Ju lutemi konsultohuni me administratorin tuaj për lejet.",
+    "activeUsers": "Përdoruesit aktivë",
+    "activeBranches": "Degët aktive",
+    "stats": {
+      "users": "Përdoruesit",
+      "branches": "Degët",
+      "stations": "Stacionet e kuzhinës",
+      "roles": "Rolet",
+      "inventory": "Artikujt e stokut",
+      "recipes": "Recetat",
+      "categories": "Kategoritë e menysë",
+      "products": "Produktet e menysë",
+      "pendingOrders": "Porositë aktive",
+      "sales": "Regjistrimet e shitjeve",
+      "posDisplay": "Ekrani i klientit POS"
+    },
+    "alerts": {
+      "lowStock": "{count} të ulëta",
+      "inProgress": "në proces",
+      "lowStockWarning": "Paralajmërim stoku i ulët"
+    }
+  },
+  "assignments": {
+    "waiter": {
+      "title": "Caktimi i zonave dhe tavolinave të kamerierit",
+      "description": "Cakto zonat e ngrënies dhe tavolinat direkte për përdoruesit, dega kryesore e të cilëve përputhet me degën e zgjedhur. Zonat për të marrë nuk janë të listuara.",
+      "staffLabel": "Kamerieri",
+      "staffSelect": "— Zgjidh përdoruesin —",
+      "zonesTitle": "Zonat",
+      "tablesTitle": "Tavolinat (Direkte)",
+      "noZones": "Nuk ka zona ngrënieje në këtë degë.",
+      "noTables": "Nuk ka tavolina për të listuar (krijo fillimisht zonat dhe tavolinat).",
+      "zonesSelected": "{count} / {total} zona të përzgjedhura",
+      "tablesSelected": "{count} / {total} tavolina të përzgjedhura",
+      "saveWarning": "Zgjidh fillimisht një kamerier për të ruajtur."
+    },
+    "cook": {
+      "title": "Caktimi i stacionit të kuzhinierit",
+      "description": "Cakto stacionet e kuzhinës për kuzhinierët për të cilët janë përgjegjës.",
+      "staffLabel": "Kuzhinieri",
+      "stationsTitle": "Stacionet",
+      "noStations": "Nuk ka stacione kuzhine në këtë degë.",
+      "stationsSelected": "{count} / {total} stacione të përzgjedhura",
+      "saveWarning": "Zgjidh fillimisht një kuzhinier për të ruajtur."
+    },
+    "manager": {
+      "title": "Caktimi i degëve të menaxherit",
+      "description": "Cakto degë shtesë që menaxherët mund të mbikëqyrin.",
+      "staffLabel": "Menaxheri",
+      "branchesTitle": "Degët e autorizuara",
+      "noBranches": "Nuk ka degë të tjera për të caktuar.",
+      "branchesSelected": "{count} / {total} degë të përzgjedhura",
+      "saveWarning": "Zgjidh fillimisht një menaxher për të ruajtur."
+    },
+    "cashierPin": {
+      "title": "Caktimet e PIN-it të arkëtarit",
+      "description": "Përcakto një PIN 4-shifror për arkëtarët për qasje të shpejtë në POS dhe zgjidh terminalet POS të autorizuara.",
+      "staffLabel": "Arkëtari",
+      "staffSelect": "— Zgjidh përdoruesin —",
+      "posTitle": "Terminalet POS të autorizuara",
+      "pinTitle": "Konfigurimi i PIN",
+      "noPos": "Nuk ka terminale POS të përcaktuara në këtë degë.",
+      "posSelected": "{count} / {total} POS të përzgjedhura",
+      "pinLabel": "Kodi PIN 4-shifror",
+      "pinPlaceholder": "p.sh. 1234",
+      "saveWarning": "Zgjidh fillimisht një arkëtar dhe fut një PIN 4-shifror për të ruajtur.",
+      "toastCashierSaved": "Caktimi i PIN-it të arkëtarit u ruajt me sukses."
+    },
+    "common": {
+      "branch": "Dega",
+      "selectAll": "Zgjidh të gjitha",
+      "deselectAll": "Çzgjidh të gjitha",
+      "saving": "Duke ruajtur...",
+      "save": "Ruaj",
+      "emptyBranches": "Lista e degëve është bosh.",
+      "toastWaiterSaved": "Caktimi i kamerierit u ruajt.",
+      "toastCookSaved": "Caktimi i stacionit të kuzhinierit u ruajt.",
+      "toastManagerSaved": "Caktimi i degës së menaxherit u ruajt.",
+      "toastSaveFailed": "Ruajtja dështoi."
+    }
+  },
+  "reporting": {
+    "title": "Modelet e faturave ESC/POS",
+    "description": "Dizajne faturash të bazuara në blloqe për printerët termikë",
+    "addNew": "Model i ri",
+    "import": "Importo nga skedari",
+    "export": "Eksporto si JSON",
+    "clone": "Krijo kopje",
+    "table": {
+      "name": "Emri i modelit",
+      "category": "Kategoria",
+      "paper": "Letra",
+      "blocks": "Blloku",
+      "default": "Parazgjedhje"
+    },
+    "categories": {
+      "all": "Të gjitha",
+      "pos": "Fatura POS",
+      "kitchen": "Kuzhina",
+      "waiter": "Kamerieri"
+    },
+    "editor": {
+      "returnList": "Kthehu te lista",
+      "templateName": "Emri i modelit *",
+      "slug": "slugu *",
+      "blocksCount": "Blloqet e modelit ({count})",
+      "preview": "Paraparje termike",
+      "expand": "Zgjero",
+      "shrink": "Tkurr",
+      "dragToResize": "Tërhiq për të ndryshuar madhësinë",
+      "zoomIn": "Zmadho",
+      "zoomOut": "Zvogëlo",
+      "zoomReset": "Rivendos",
+      "help": "Ndihmë",
+      "update": "Përditëso",
+      "save": "Ruaj",
+      "validation": {
+        "nameRequired": "Emri i modelit është i detyrueshëm.",
+        "slugRequired": "Slugu i modelit është i detyrueshëm.",
+        "blocksRequired": "Duhet të shtoni të paktën një bllok.",
+        "invalidFile": "Skedar modeli i pavlefshëm.",
+        "readError": "Gabim gjatë leximit të skedarit.",
+        "saveError": "Ndodhi një gabim gjatë ruajtjes."
+      }
+    },
+    "messages": {
+      "loadError": "Nuk mund të ngarkoheshin modelet e faturave.",
+      "updateSuccess": "Modeli u përditësua.",
+      "createSuccess": "Modeli u krijua.",
+      "deleteSuccess": "Modeli u fshi.",
+      "deleteError": "Nuk mund të fshihej modeli.",
+      "setDefaultSuccess": "\"{name}\" u vendos si parazgjedhje.",
+      "setDefaultError": "Veprimi dështoi.",
+      "cloneSuccess": "\"{name}\" u kopjua.",
+      "cloneError": "Procesi i kopjimit dështoi.",
+      "importSuccess": "Skedari i modelit u ngarkua. Mund ta rishikoni dhe ruani.",
+      "exportSuccess": "Modeli u shkarkua si JSON."
+    },
+    "modals": {
+      "deleteTitle": "Jeni i sigurt se doni të fshini modelin?",
+      "deleteDesc": "Modeli \"{name}\" do të fshihet përgjithmonë. Ky veprim nuk mund të zhbëhet."
+    },
+    "importedNameSuffix": " (I importuar)",
+    "paperWidth58": "58mm (32ch)",
+    "paperWidth80": "80mm (48ch)",
+    "receiptPreview": {
+      "sampleData": "të dhëna shembull",
+      "emptyLayout": "(Model bosh — shto blloqe)",
+      "selectTemplate": "Zgjidh një model për të parë paraparjen"
+    },
+    "reportEditor": {
+      "placeholder": "Shkruaj përmbajtjen e raportit këtu…",
+      "toolbar": {
+        "bold": "Trashë",
+        "italic": "Pjerrët",
+        "heading1": "Titulli 1",
+        "heading2": "Titulli 2",
+        "paragraph": "Teksti i trupit",
+        "bulletList": "Listë me pika",
+        "orderedList": "Listë e numëruar",
+        "quote": "Citat",
+        "undo": "Çbëj",
+        "redo": "Ribëj"
+      },
+      "variablesTitle": "Variablat",
+      "variablesHint": "Kliko fushën që dëshiron të fusësh",
+      "groups": {
+        "order": "Porosia / Shitjet",
+        "branch": "Dega",
+        "customer": "Klienti"
+      },
+      "vars": {
+        "tableNo": "Nr. i tavolinës",
+        "orderNo": "Nr. i porosisë",
+        "productTable": "Lista e produkteve (tabelë)",
+        "total": "Shuma totale",
+        "discount": "Zbritja",
+        "paymentType": "Lloji i pagesës",
+        "date": "Data",
+        "branchName": "Emri i degës",
+        "address": "Adresa",
+        "phone": "Telefoni",
+        "customerName": "Emri i klientit",
+        "taxNo": "Numri i identifikimit tatimor"
+      },
+      "tableHeaders": {
+        "product": "Produkti",
+        "qty": "Sasia",
+        "price": "Çmimi"
+      }
+    },
+    "blockEditor": {
+      "addBlockTitle": "Shto bllok",
+      "variablesToggle": "Variablat e disponueshëm",
+      "emptyBlocks": "Shto blloqe nga lart",
+      "columnAdd": "Shto kolonë",
+      "cutHelp": "Ky bllok pret letrën. Nuk ka cilësime shtesë.",
+      "columns": "Kolonat",
+      "blockTypes": {
+        "text": "Tekst",
+        "divider": "Vijë",
+        "key_value": "Etiketë–vlerë",
+        "item_loop": "Listë artikujsh",
+        "feed": "Hapësirë",
+        "cut": "Prerje",
+        "qr": "Kod QR",
+        "date": "Data",
+        "time": "Ora",
+        "branchLogo": "Logo e Degës",
+        "branchInfo": "Të dhënat e Degës"
+      },
+      "fields": {
+        "content": "Përmbajtja",
+        "align": "Drejtimi",
+        "size": "Madhësia",
+        "marginLeft": "Hapësirë majtas",
+        "marginRight": "Hapësirë djathtas",
+        "boldCheckbox": "I trashë (Bold)",
+        "hideIfEmpty": "Fshih nëse bosh",
+        "logoWidthPx": "Gjerësia e Logos (px)",
+        "char": "Karakteri",
+        "leftLabel": "Etiketa e majtë",
+        "rightValue": "Vlera e djathtë",
+        "variable": "Variabli",
+        "lineCount": "Numri i rreshtave",
+        "qrData": "Të dhënat QR",
+        "boldWrite": "Trashë",
+        "branch": "Dega",
+        "autoBranch": "Automatike (Dega e faturës)",
+        "visibleFields": "Fushat e Dukshme"
+      },
+      "align": {
+        "left": "Majtas",
+        "center": "Qendër",
+        "right": "Djathtas"
+      },
+      "sizeOpts": {
+        "normal": "Normal",
+        "double": "2× lartësi",
+        "triple": "3× lartësi",
+        "quadruple": "4× lartësi"
+      },
+      "dividerChars": {
+        "single": "— (njëfish)",
+        "double": "═ (dyfish)",
+        "star": "★ (yll)",
+        "space": "   (hapësirë)"
+      },
+      "itemPlaceholder": "emri ose '{{ name | with_options }}' / '{{ name | with_tax_rates }}'",
+      "withOptionsColumnHint": "Rreshti i modifikuesit: fusha «name» + formati «Options», ose vendos «name|with_options» / «'{{ name | with_options }}'» në fushë. Shënimet përdorin «description»; modifikuesit përdorin «modifier_names».",
+      "withTaxRatesColumnHint": "Rreshti i TVSH-së: fusha «name» + formati «Normat e TVSH-së», ose «'{{ name | with_tax_rates }}'». Kolona e çmimit printon bruto (pa TVSH); rreshti tjetër «% norma» dhe shuma TVSH. '{{ tax | currency }}' mbledh TVSH-në e rreshtave.",
+      "format": {
+        "none": "—",
+        "currency": "Valuta",
+        "qty": "Sasia",
+        "withOptions": "Opsionet",
+        "withTaxRates": "Normat e TVSH-së"
+      },
+      "defaultKeyValueLeft": "Tavolina:",
+      "prefix": "parashtesë",
+      "suffix": "prapashtesë",
+      "summary": {
+        "keyValue": "{left} … {right}",
+        "itemLoop": "{variable} cikël ({cols} kolona)",
+        "feedLines": "{n} rresht(a) bosh",
+        "paperCut": "Prerje letre",
+        "printDate": "Data e printimit",
+        "printTime": "Koha e printimit",
+        "branchLogo": "Logo e Degës",
+        "branchInfo": "{n} fusha (Të dhënat e Degës)"
+      },
+      "branchFields": {
+        "name": "Emri",
+        "phone": "Telefoni",
+        "email": "E-mail",
+        "website": "Faqja Web",
+        "address": "Adresa",
+        "taxOffice": "Zyra Tatimore",
+        "taxNumber": "Nr. Tatimor",
+        "registryNo": "Nr. Regjistri",
+        "mersisNo": "Nr. MERSIS"
+      }
+    },
+    "guide": {
+      "title": "Udhëzuesi i dizajnuesit të faturave",
+      "subtitle": "Dokumentacion teknik për modelet e faturave termike.",
+      "close": "Mbylle",
+      "sections": {
+        "blockTypes": "Llojet e blloqeve",
+        "filters": "Filtrat e avancuar",
+        "limits": "Kufijtë teknikë",
+        "variables": "Variablat e disponueshëm",
+        "itemLoopFields": "Fushat e kolonës së listës së artikujve",
+        "rules": "Procedura & rregullat"
+      },
+      "blocks": {
+        "text": {
+          "title": "Tekst",
+          "desc": "Tekst i lirë ose variabla. Mund të vendoset madhësia (1–4) dhe trashësia."
+        },
+        "keyValue": {
+          "title": "Etiketë–vlerë",
+          "desc": "Tekst i drejtuar majtas dhe djathtas. Më i miri për të dhëna të çiftëzuara."
+        },
+        "itemLoop": {
+          "title": "Listë artikujsh",
+          "desc": "Përsërit rreshtat e porosisë. Gjerësia e kolonave nuk duhet të kalojë gjerësinë e letrës. Për modifikues: '{{ name | with_options }}'; për TVSH sipas artikullit: '{{ name | with_tax_rates }}'."
+        },
+        "hideEmpty": {
+          "title": "Fshih nëse bosh",
+          "desc": "Kur aktivizohet, rreshti nuk printohet nëse të gjithë variablat janë bosh ose zero."
+        }
+      },
+      "filters": {
+        "currency": "Formaton një numër si valutë (10.00 TL).",
+        "qty": "Shkurton numrat dhjetorë (2.00 → 2).",
+        "dateTr": "Formaton datën/orën si dd.mm.yyyy (p.sh. '{{ created_at | date_tr }}').",
+        "rate": "Llogarit X%. Përdor totalin si bazë për rreshtat tatimore.",
+        "withOptions": "Printon opsionet e produktit në rreshtin tjetër të paraprirë me * (p.sh. * Salcë pikante, Piper i zi). Përdor '{{ name | with_options }}' në kolonat item_loop.",
+        "withTaxRates": "Printon normën dhe shumën e TVSH-së nën produktin (p.sh. % 10 … 15,00). Kolona e çmimit tregon bruto; '{{ tax | currency }}' mbledh TVSH-në e rreshtave."
+      },
+      "limit58": "Printer 58mm (standardi)",
+      "limit80": "Printer 80mm (i gjerë)",
+      "chars": "karaktere",
+      "varHintTitle": "Këshillë:",
+      "varHintBody": "payment_method dhe payment_type janë të këmbyeshëm; pagesat e ndara listohen rresht pas rreshti. '{{ station_name }}' tregon stacionin e kuzhinës. '{{ notes }}' printon shënimin e porosisë.",
+      "itemLoopVarsHint": "Vendos variablin e bllokut të listës së artikujve në {items} si parazgjedhje, ose {payments} për rreshtat e pagesave të ndara. Përdor çelësat e fushave të kolonës më lart në cilësimin e fushës së secilës kolonë.",
+      "tips": {
+        "alignCenter": "Kur drejtimi është qendër, hapësirat balancohen automatikisht.",
+        "suffixCol": "Në kolona mund të shtoni TL ose % në fushën e prapashtesës.",
+        "tryLira": "Në varësi të grupit të karaktereve të printerit, \"TL\" rekomandohet në vend të L.",
+        "splitPay": "Për detajet e pagesës së ndarë, vendos variablin e listës së artikujve në \"payments\".",
+        "descriptions": "Variabli descriptions printon çdo rresht me një shënim si «emri i artikullit : shënimi», të ndara me presje (p.sh. Biftek : mesatarisht i pjekur, Supë : pa erëza). Rreshtat e gjatë me gjerësi të dyfishtë mbështillen në rreshtin tjetër.",
+        "withOptions": "Për të shfaqur grupet e modifikuesve në faturat e kuzhinës, përdor '{{ name | with_options }}' në kolonën e listës së artikujve; rreshtat pa modifikues printojnë vetëm emrin e produktit.",
+        "withTaxRates": "Për faturat POS me TVSH sipas artikullit, përdor '{{ name | with_tax_rates }}'; kombino me opsione: '{{ name | with_options | with_tax_rates }}'. '{{ tax | currency }}' në fund mbledh TVSH-në."
+      },
+      "warnBox": "Aktivizo Fshih nëse bosh për një faturë më të pastër dhe më pak letër të humbur."
+    }
+  },
+  "pos": {
+    "terminals": "Terminali"
+  },
+  "users": {
+    "title": "Përdoruesit"
+  }
+}

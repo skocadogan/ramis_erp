@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 1cm;
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #333;
+            margin: 0;
+            padding: 10px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #059669;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 16pt;
+            color: #047857;
+        }
+        .header p {
+            margin: 4px 0;
+            color: #666;
+        }
+        .info-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #f0fdf4;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #bbf7d0;
+        }
+        .info-row {
+            display: table-row;
+        }
+        .info-label {
+            display: table-cell;
+            font-weight: bold;
+            width: 140px;
+            padding: 2px 0;
+            color: #64748b;
+        }
+        .info-value {
+            display: table-cell;
+            padding: 2px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px 4px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            color: #475569;
+            text-transform: uppercase;
+            font-size: 8pt;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .product-row td {
+            font-weight: 500;
+            background-color: #fafafa;
+        }
+        .ingredient-row td {
+            font-size: 8pt;
+            color: #475569;
+            background-color: #f8fafc;
+        }
+        .ingredient-row td:first-child {
+            padding-left: 18px;
+        }
+        .ingredient-label {
+            color: #64748b;
+            font-size: 7pt;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+        .grand-total {
+            margin-top: 10px;
+            padding: 12px;
+            background-color: #ecfdf5;
+            border: 1px solid #6ee7b7;
+            border-radius: 4px;
+            text-align: right;
+            font-size: 11pt;
+            font-weight: bold;
+            color: #065f46;
+        }
+        .footer {
+            text-align: center;
+            font-size: 8pt;
+            color: #94a3b8;
+            margin-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+        .no-recipe {
+            color: #94a3b8;
+            font-style: italic;
+            font-size: 8pt;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ _('FEFO lot birim fiyatları ile hesaplanmış yaklaşık üretim maliyeti') }}</p>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-row">
+            <span class="info-label">{{ _('Şube:') }}</span>
+            <span class="info-value">{{ plan.branch.name }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">{{ _('Üretim Tarihi:') }}</span>
+            <span class="info-value">{{ plan.plan_date|date_tr }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">{{ _('Depo:') }}</span>
+            <span class="info-value">{{ cost_data.warehouse_name }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">{{ _('İstasyon:') }}</span>
+            <span class="info-value">{{ station_name }}</span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Ürün / Hammadde') }}</th>
+                <th>{{ _('İstasyon') }}</th>
+                <th class="text-right">{{ _('Miktar') }}</th>
+                <th>{{ _('Birim') }}</th>
+                <th class="text-right">{{ _('Birim Maliyet (FEFO)') }}</th>
+                <th class="text-right">{{ _('Toplam') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cost_data['items'] %}
+            <tr class="product-row">
+                <td>{{ item.product_name }}</td>
+                <td style="font-size: 8pt; color: #64748b;">{{ item.station_name }}</td>
+                <td class="text-right">{{ item.quantity|qty }}</td>
+                <td>{{ _('Porsiyon') }}</td>
+                <td class="text-right">
+                    {% if item.has_recipe %}
+                        {{ item.unit_cost|currency }}
+                    {% else %}
+                        <span class="no-recipe">{{ _('Reçetesiz') }}</span>
+                    {% endif %}
+                </td>
+                <td class="text-right" style="font-weight: bold;">{{ item.line_total|currency }}</td>
+            </tr>
+            {% for ing in item.get('ingredients', []) %}
+            <tr class="ingredient-row">
+                <td><span class="ingredient-label">↳</span> {{ ing.stock_item_name }}</td>
+                <td></td>
+                <td class="text-right">{{ ing.quantity|qty }}</td>
+                <td>{{ ing.unit }}</td>
+                <td class="text-right">{{ ing.unit_cost|currency }}</td>
+                <td class="text-right">{{ ing.line_total|currency }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+            {% if not cost_data['items'] %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 20px; color: #64748b; font-style: italic;">
+                    {{ _('Bu kriterlere uygun plan satırı bulunamadı.') }}
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div class="grand-total">
+        {{ _('Genel Toplam Yaklaşık Maliyet:') }} {{ cost_data.grand_total|currency }}
+    </div>
+
+    <div class="footer">
+        {{ _('Oluşturulma:') }} {{ now()|date_tr }} | Ramis ERP
+    </div>
+</body>
+</html>

@@ -1,0 +1,184 @@
+{
+  "header": {
+    "toggleSidebar": "Toggle Sidebar",
+    "searchLabel": "Global Search",
+    "search": "Quick Search",
+    "searchMobileLabel": "Search",
+    "logoutLabel": "Logout",
+    "logout": "Logout",
+    "brandName": "Ramis ERP"
+  },
+  "nav": {
+    "overview": "Overview",
+    "definitions": "Definitions",
+    "users": "Users",
+    "kitchenStations": "Kitchen Stations",
+    "rolesPermissions": "Roles & Permissions",
+    "branches": "Branches",
+    "posSettings": "POS Settings",
+    "waiterAssignments": "Waiter Assignments",
+    "cashierPins": "Cashier PIN",
+    "cookAssignments": "Cook Assignments",
+    "managerAssignments": "Manager Assignments",
+    "reportTemplates": "Report Templates",
+    "printers": "Printers",
+    "restaurant": "Restaurant Ops",
+    "restaurantSummary": "Restaurant Summary",
+    "tables": "Table Management",
+    "menuManagement": "Menu Management",
+    "reservations": "Reservations",
+    "credit": "Store Credit",
+    "shiftCashier": "Shifts & Cash",
+    "sales": "Sales",
+    "surveys": "Surveys",
+    "customers": "Customers",
+    "invoices": "Invoices",
+    "inventoryManagement": "Inventory Mgmt",
+    "allergens": "Allergens",
+    "warehouseManagement": "Warehouse Mgmt",
+    "stockWarehouse": "Stock / Warehouse",
+    "personnel": "Personnel",
+    "kitchen": "Kitchen Mgmt",
+    "recipes": "Recipes",
+    "productionPlanning": "Production Planning",
+    "prepManagement": "Prep Management",
+    "performanceManagement": "Performance Management",
+    "kds": "Kitchen Display (KDS)",
+    "pos": "Sales Screen (POS)",
+    "waiter": "Waiter Screen",
+    "system": "System",
+    "auditLogs": "Audit Logs",
+    "recycleBin": "Recycle Bin",
+    "defSubgroupUsers": "Users & Permissions",
+    "defSubgroupStore": "Branch, POS & Kitchen",
+    "defSubgroupStaff": "Staff Assignments",
+    "defSubgroupReports": "Reports & Records",
+    "collapse": "Collapse"
+  },
+  "authGuard": {
+    "checkingPermission": "Checking permissions…"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Select language"
+  },
+  "theme": {
+    "triggerAriaLabel": "Appearance settings",
+    "triggerTitle": "Appearance",
+    "colorTheme": "Color theme",
+    "density": "Interface density",
+    "light": "Light",
+    "dark": "Dark",
+    "highContrast": "High contrast",
+    "outdoor": "Outdoor (bright)",
+    "system": "System",
+    "densityCompact": "Compact",
+    "densityComfortable": "Comfortable",
+    "densitySpacious": "Spacious"
+  },
+  "backendHealth": {
+    "statusOk": "Server is up (health check OK)",
+    "statusDown": "Server not responding — click to retry",
+    "statusChecking": "Checking server…",
+    "banner": "Cannot reach the server. It may be down.",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for may have been removed, moved, or is temporarily unavailable.",
+    "goBack": "Go Back",
+    "goHome": "Return to App"
+  },
+  "orderStatus": {
+    "PENDING": "Pending",
+    "PREPARING": "Preparing",
+    "READY": "Ready",
+    "DELIVERED": "Delivered",
+    "CANCELLED": "Cancelled",
+    "COMPLETED": "Completed"
+  },
+  "feedback": {
+    "success": "Success",
+    "error": "Error"
+  },
+  "timeline": {
+    "emptySteps": "No steps to show."
+  },
+  "dialog": {
+    "close": "Close"
+  },
+  "offline": {
+    "title": "Offline",
+    "description": "No internet connection. Refresh the page when you are back online."
+  },
+  "globalSearch": {
+    "dialogAriaLabel": "Global search",
+    "searchingAriaLabel": "Searching",
+    "inputPlaceholder": "Search… (code, product name, customer, date…)",
+    "inputAriaLabel": "Search query",
+    "clearAriaLabel": "Clear search",
+    "resultsAriaLabel": "Search results",
+    "errorMessage": "Something went wrong while searching.",
+    "noResults": "No results for “{query}”.",
+    "uuidSearchHint": "Code search: modules you cannot access are hidden.",
+    "startPrompt": "Type to start searching.",
+    "startHint": "Page name, product, table, order code, customer, date, etc.",
+    "pagesGroupTitle": "Pages",
+    "pagesGroupBadge": "Page",
+    "modules": {
+      "menu_products": { "label": "Products", "badge": "Menu" },
+      "menu_categories": { "label": "Categories", "badge": "Category" },
+      "orders": { "label": "Orders", "badge": "Order" },
+      "inventory_items": { "label": "Stock Items", "badge": "Stock" },
+      "inventory_suppliers": { "label": "Suppliers", "badge": "Supplier" },
+      "branches": { "label": "Branches", "badge": "Branch" },
+      "tables": { "label": "Tables", "badge": "Table" },
+      "users": { "label": "Users", "badge": "User" },
+      "customers": { "label": "Customers", "badge": "Customer" },
+      "warehouses": { "label": "Warehouses", "badge": "Warehouse" },
+      "purchase_orders": { "label": "Purchase Orders", "badge": "Purchase" },
+      "deficiency_reports": { "label": "Deficiency Reports", "badge": "Deficiency" },
+      "goods_receivings": { "label": "Goods Receiving", "badge": "Receiving" },
+      "transfers": { "label": "Transfers", "badge": "Transfer" },
+      "stock_countings": { "label": "Stock Counting", "badge": "Count" },
+      "reservations": { "label": "Reservations", "badge": "Reservation" },
+      "invoices": { "label": "Invoices", "badge": "Invoice" },
+      "recipes": { "label": "Recipes", "badge": "Recipe" },
+      "sales": { "label": "Sales", "badge": "Sale" }
+    },
+    "resultCount": "{count, plural, one {# result found} other {# results found}}",
+    "footerHint": "Click or press Enter to open a result.",
+    "recentSearchesTitle": "Recent Searches",
+    "removeRecentAriaLabel": "Remove \"{search}\" search"
+  },
+  "virtualKeyboard": {
+    "ariaGroup": "On-screen keyboard",
+    "numericMode": "Numeric keypad",
+    "numericShort": "Numbers",
+    "alphaMode": "Letter keyboard",
+    "alphaShort": "Letters",
+    "digit": "Digit {n}",
+    "backspace": "Backspace",
+    "plus": "Plus",
+    "minus": "Minus",
+    "decimalSeparator": "Decimal separator (dot)",
+    "cancel": "Cancel",
+    "enter": "Enter",
+    "letter": "Letter {letter}",
+    "shiftOnce": "Shift (next letter uppercase)",
+    "escape": "Esc",
+    "space": "Space",
+    "digit0": "Digit 0"
+  },
+  "asyncState": {
+    "loading": "Loading...",
+    "empty": "No records to display.",
+    "error": "Could not load data.",
+    "retry": "Try again"
+  },
+  "export": {
+    "pdf": "Export PDF",
+    "preparing": "Preparing PDF...",
+    "retry": "Try again",
+    "failed": "PDF export failed"
+  }
+}

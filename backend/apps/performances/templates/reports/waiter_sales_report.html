@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Garson Satış Performans Raporu') }}</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.2cm;
+            @bottom-right {
+                content: "{{ _('Sayfa') }} " counter(page) " / " counter(pages);
+                font-size: 9pt;
+            }
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #333;
+            line-height: 1.35;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 8px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #1d4ed8;
+            font-size: 18pt;
+        }
+        .report-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 8pt;
+            color: #666;
+        }
+        .summary-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+            border-spacing: 10px;
+        }
+        .summary-box {
+            display: table-cell;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 12px;
+            text-align: center;
+            border-radius: 6px;
+        }
+        .summary-box .value {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+        .summary-box .label {
+            font-size: 8pt;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: bold;
+            font-size: 8pt;
+        }
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        h2 {
+            font-size: 11pt;
+            color: #334155;
+            margin: 16px 0 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ _('Garson Satış Performans Raporu') }}</h1>
+    </div>
+
+    <div class="report-info">
+        <span>{{ _('Rapor tarihi') }}: {{ report_date|date_tr('%d.%m.%Y %H:%M') }}</span>
+        <span>
+            {% if filters.start_date %}{{ _('Başlangıç') }}: {{ filters.start_date }}{% endif %}
+            {% if filters.end_date %} — {{ _('Bitiş') }}: {{ filters.end_date }}{% endif %}
+        </span>
+    </div>
+
+    <div class="summary-grid">
+        <div class="summary-box">
+            <div class="value">{{ totals.total_orders }}</div>
+            <div class="label">{{ _('Toplam sipariş') }}</div>
+        </div>
+        <div class="summary-box">
+            <div class="value">{{ totals.total_sales_amount|currency }}</div>
+            <div class="label">{{ _('Toplam satış') }}</div>
+        </div>
+        <div class="summary-box">
+            <div class="value">{{ totals.cancelled_orders }}</div>
+            <div class="label">{{ _('İptal') }}</div>
+        </div>
+        <div class="summary-box">
+            <div class="value">{{ totals.mobile_orders }} / {{ totals.web_orders }}</div>
+            <div class="label">{{ _('Mobil / Web') }}</div>
+        </div>
+    </div>
+
+    {% if staff_performance %}
+    <h2>{{ _('Personel satış özeti') }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Garson') }}</th>
+                <th>{{ _('Sipariş') }}</th>
+                <th>{{ _('İptal') }}</th>
+                <th>{{ _('Toplam tutar') }}</th>
+                <th>{{ _('Ort. tutar') }}</th>
+                <th>{{ _('Masa sayısı') }}</th>
+                <th>{{ _('En yoğun gün') }}</th>
+                <th>{{ _('En yüksek masa') }}</th>
+                <th>{{ _('Mobil') }}</th>
+                <th>{{ _('Web') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in staff_performance %}
+            <tr>
+                <td>{{ row.staff_name }}</td>
+                <td>{{ row.order_count }}</td>
+                <td>{{ row.cancelled_count }}</td>
+                <td>{{ row.total_amount|currency }}</td>
+                <td>{{ row.avg_order_amount|currency }}</td>
+                <td>{{ row.table_count }}</td>
+                <td>{% if row.busiest_day %}{{ row.busiest_day }} ({{ row.busiest_day_order_count }}){% else %}—{% endif %}</td>
+                <td>{% if row.top_table_name %}{{ row.top_table_name }} ({{ row.top_table_amount|currency }}){% else %}—{% endif %}</td>
+                <td>{{ row.mobile_order_count }}</td>
+                <td>{{ row.web_order_count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    {% if cancellation_breakdown %}
+    <h2>{{ _('İptal gerekçeleri') }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Gerekçe') }}</th>
+                <th>{{ _('Adet') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in cancellation_breakdown %}
+            <tr>
+                <td>{{ row.label }}</td>
+                <td>{{ row.count }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <h2>{{ _('Sipariş geçmişi') }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Tarih') }}</th>
+                <th>{{ _('Şube') }}</th>
+                <th>{{ _('Masa') }}</th>
+                <th>{{ _('Garson') }}</th>
+                <th>{{ _('Tutar') }}</th>
+                <th>{{ _('Kanal') }}</th>
+                <th>{{ _('Durum') }}</th>
+                <th>{{ _('İptal gerekçesi') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+            <tr>
+                <td>{{ order.created_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ order.branch.name }}</td>
+                <td>{{ order.table.name|default('—') }}</td>
+                <td>{% if order.user %}{{ order.user.get_full_name() or order.user.username }}{% else %}—{% endif %}</td>
+                <td>{{ order.total_amount|currency }}</td>
+                <td>{{ order.report_channel_label|default('—') }}</td>
+                <td>{{ order.get_status_display() }}</td>
+                <td>{% if order.cancel_reason_code %}{{ order.cancel_reason_code }}{% else %}—{% endif %}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="8">{{ _('Kayıt bulunamadı.') }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

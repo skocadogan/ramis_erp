@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 8pt;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 14pt;
+            color: #1e40af;
+        }
+
+        .header p {
+            margin: 2px 0;
+            color: #666;
+            font-size: 8pt;
+        }
+
+        .filters {
+            background-color: #f8fafc;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filters span {
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 7pt;
+            color: #64748b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            padding: 5px 3px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 7pt;
+            color: #475569;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .tabular-nums {
+            font-family: 'Courier New', monospace;
+        }
+
+        .method-badge {
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 6.5pt;
+            font-weight: bold;
+        }
+
+        .method-cash {
+            background-color: #ecfdf5;
+            color: #065f46;
+        }
+
+        .method-card {
+            background-color: #eef2ff;
+            color: #3730a3;
+        }
+
+        .method-other {
+            background-color: #fffbeb;
+            color: #92400e;
+        }
+
+        .totals-box {
+            float: right;
+            width: 200px;
+            margin-top: 10px;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .totals-row {
+            padding: 6px 8px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .totals-row:last-child {
+            border-bottom: none;
+            background-color: #f8fafc;
+        }
+
+        .totals-label {
+            font-size: 7pt;
+            color: #64748b;
+            font-weight: bold;
+        }
+
+        .totals-value {
+            float: right;
+            font-weight: bold;
+            color: #1e293b;
+        }
+
+        .final-net {
+            color: #2563eb;
+            font-size: 9pt;
+        }
+
+        .footer {
+            clear: both;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 7pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ report_description }}</p>
+        <p>{{ _('Rapor Oluşturma:') }} {{ now()|date_tr }} | {{ _('Kayıt Sayısı:') }} {{ count }}</p>
+    </div>
+
+    <div class="filters">
+        <span>{{ _('FİLTRELER:') }}</span>
+        {% if filters.start_date %}<span>{{ _('Başlangıç:') }} {{ filters.start_date|date_tr }}</span>{% endif %}
+        {% if filters.end_date %}<span>{{ _('Bitiş:') }} {{ filters.end_date|date_tr }}</span>{% endif %}
+        {% if filters.branch_id and filters.branch_id != 'ALL' %}<span>{{ _('Şube ID:') }} {{ filters.branch_id }}</span>{% endif
+        %}
+        {% if filters.payment_method and filters.payment_method != 'ALL' %}<span>{{ _('Ödeme:') }} {% if filters.payment_method == 'CASH' %}{{ _('Nakit') }}{% elif filters.payment_method == 'CARD' %}{{ _('Kredi Kartı') }}{% elif filters.payment_method == 'OTHER' %}{{ _('Diğer') }}{% elif filters.payment_method == 'CREDIT' %}{{ _('Ödenmez') }}{% else %}{{ filters.payment_method }}{% endif %}</span>{% endif %}
+        {% if filters.discount_only == 'true' or filters.discount_only is sameas true %}<span>{{ _('Sadece İndirimliler') }}</span>{% endif %}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Tarih / Saat') }}</th>
+                <th>{{ _('Şube') }}</th>
+                <th>{{ _('Masa/Tür') }}</th>
+                <th>{{ _('Kasiyer') }}</th>
+                <th>{{ _('Ödeme Yöntemi') }}</th>
+                <th class="text-right">{{ _('Brüt') }}</th>
+                <th class="text-right">{{ _('İndirim') }}</th>
+                <th class="text-right">{{ _('Net Tutar') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in sales %}
+            <tr>
+                <td>{{ s.paid_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ s.branch_name }}</td>
+                <td>{{ s.table_name }}</td>
+                <td>{{ s.created_by }}</td>
+                <td>
+                    <span class="method-badge method-{{ s.payment_method_key|lower }}">
+                        {{ s.payment_method_display }}
+                        {% if s.is_split_payment %}
+                            <small style="opacity: 0.8; font-size: 0.8em;">{{ _('(bölünmüş)') }}</small>
+                        {% endif %}
+                    </span>
+                </td>
+                <td class="text-right tabular-nums">{{ s.gross_amount|currency }}</td>
+                <td class="text-right tabular-nums" style="color: #dc2626;">{{ s.discount_amount|currency if
+                    s.discount_amount > 0 else '—' }}</td>
+                <td class="text-right tabular-nums font-bold" style="font-weight: bold;">{{ s.total_amount|currency }}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="totals-box">
+        <div class="totals-row">
+            <span class="totals-label">{{ _('BRÜT TOPLAM:') }}</span>
+            <span class="totals-value">{{ totals.gross_total|currency }}</span>
+        </div>
+        <div class="totals-row">
+            <span class="totals-label">{{ _('TOPLAM İNDİRİM:') }}</span>
+            <span class="totals-value" style="color: #dc2626;">- {{ totals.discount_total|currency }}</span>
+        </div>
+        <div class="totals-row">
+            <span class="totals-label" style="color: #2563eb;">{{ _('NET TAHSİLAT:') }}</span>
+            <span class="totals-value final-net">{{ totals.net_total|currency }}</span>
+        </div>
+    </div>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+
+</html>

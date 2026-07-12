@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title data-i18n="title">Ramis POS — Giriş</title>
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top, #1e1b4b 0%, #09090b 100%);
+      --card-bg: rgba(24, 24, 27, 0.75);
+      --card-border: rgba(63, 63, 70, 0.4);
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --text: #fafafa;
+      --text-muted: #a1a1aa;
+      --danger: #ef4444;
+      --input-bg: rgba(9, 9, 11, 0.6);
+      --input-border: rgba(63, 63, 70, 0.5);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 420px;
+      padding: 2.25rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 1.25rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .logo-container {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 7rem;
+      height: 7rem;
+      border-radius: 0.75rem;
+      background: var(--primary);
+      color: #fff;
+      margin-bottom: 0.75rem;
+      box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+    }
+
+    .logo-img {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(to right, #ffffff, #d4d4d8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .lang-selector {
+      display: flex;
+      justify-content: center;
+      gap: 0.375rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .lang-btn {
+      padding: 0.3rem 0.65rem;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      border-radius: 9999px;
+      border: 1px solid var(--card-border);
+      background: transparent;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .lang-btn:hover {
+      border-color: var(--primary);
+      color: var(--text);
+    }
+
+    .lang-btn.active {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: #fff;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      background: var(--input-bg);
+      border: 1px solid var(--input-border);
+      border-radius: 0.75rem;
+      color: var(--text);
+      outline: none;
+      transition: all 0.2s;
+    }
+
+    input:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 0.875rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      background: var(--primary);
+      border: none;
+      border-radius: 0.75rem;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all 0.2s;
+      box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .error-box {
+      display: none;
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      border-radius: 0.75rem;
+      padding: 0.75rem 1rem;
+      color: var(--danger);
+      font-size: 0.85rem;
+      margin-bottom: 1.25rem;
+      animation: shake 0.3s;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      75% { transform: translateX(5px); }
+    }
+
+    .spinner {
+      display: none;
+      width: 1.25rem;
+      height: 1.25rem;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Step Panels */
+    .step-panel {
+      display: none;
+    }
+
+    .step-panel.active {
+      display: block;
+      animation: slideIn 0.3s ease-out;
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(10px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Back Link */
+    .back-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    /* PIN Lock dots */
+    .pin-dots-container {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .pin-dot {
+      width: 0.85rem;
+      height: 0.85rem;
+      border-radius: 50%;
+      border: 2px solid rgba(161, 161, 170, 0.4);
+      transition: all 0.15s;
+    }
+
+    .pin-dot.filled {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: scale(1.1);
+      box-shadow: 0 0 8px rgba(79, 70, 229, 0.6);
+    }
+
+    /* Keypad Grid */
+    .keypad-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      max-width: 220px;
+      margin: 0 auto;
+      justify-content: center;
+    }
+
+    .keypad-btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 3.5rem;
+      height: 3.5rem;
+      border-radius: 50%;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text);
+      font-size: 1.25rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .keypad-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .keypad-btn:active {
+      transform: scale(0.9);
+    }
+
+    .keypad-btn.clear {
+      color: var(--danger);
+      font-size: 0.95rem;
+    }
+
+    .keypad-btn.back {
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="header">
+      <div class="logo-container">
+        <img src="./icon.png" class="logo-img" alt="Ramis POS" />
+      </div>
+      <h1>Ramis POS</h1>
+      <div class="lang-selector">
+        <button class="lang-btn" data-lang="tr">🇹🇷 TR</button>
+        <button class="lang-btn" data-lang="en">🇬🇧 EN</button>
+        <button class="lang-btn" data-lang="bg">🇧🇬 BG</button>
+        <button class="lang-btn" data-lang="sq">🇦🇱 SQ</button>
+      </div>
+    </div>
+
+    <div class="error-box" id="errorBox">Hata mesajı</div>
+
+    <!-- STEP 1: API URL & USERNAME -->
+    <div class="step-panel active" id="stepUsername">
+      <form id="formUsername">
+        <div class="form-group">
+          <label for="apiUrl" data-i18n="apiUrl">API Adresi (URL)</label>
+          <input type="url" id="apiUrl" name="apiUrl" placeholder="http://[SERVER_IP]" required>
+        </div>
+        <div class="form-group">
+          <label for="username" data-i18n="username">Kullanıcı Adı</label>
+          <input type="text" id="username" name="username" placeholder="" required>
+        </div>
+        <button type="submit" class="btn-submit" id="btnContinue">
+          <div class="spinner" id="spinnerUsername"></div>
+          <span id="btnContinueText" data-i18n="continueBtn">Devam Et</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- STEP 2: PASSWORD -->
+    <div class="step-panel" id="stepPassword">
+      <button class="back-btn" id="btnBackToUser" data-i18n="backBtn">← Geri</button>
+      <form id="formPassword">
+        <div class="form-group">
+          <label for="password" data-i18n="password">Parola</label>
+          <input type="password" id="password" name="password" placeholder="••••••••" required>
+        </div>
+        <button type="submit" class="btn-submit" id="btnSubmitPass">
+          <div class="spinner" id="spinnerPass"></div>
+          <span id="btnSubmitPassText" data-i18n="loginBtn">Giriş Yap</span>
+        </button>
+      </form>
+    </div>
+
+    <!-- STEP 3: CASHIER PIN KEYPAD -->
+    <div class="step-panel" id="stepPin">
+      <button class="back-btn" id="btnBackToUserFromPin" data-i18n="backBtn">← Geri</button>
+      <div class="pin-dots-container">
+        <div class="pin-dot" id="dot0"></div>
+        <div class="pin-dot" id="dot1"></div>
+        <div class="pin-dot" id="dot2"></div>
+        <div class="pin-dot" id="dot3"></div>
+      </div>
+      
+      <div class="keypad-grid">
+        <button class="keypad-btn" type="button" onclick="pressNumpad('1')">1</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('2')">2</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('3')">3</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('4')">4</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('5')">5</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('6')">6</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('7')">7</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('8')">8</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('9')">9</button>
+        <button class="keypad-btn clear" type="button" onclick="pressNumpad('C')">C</button>
+        <button class="keypad-btn" type="button" onclick="pressNumpad('0')">0</button>
+        <button class="keypad-btn back" type="button" onclick="pressNumpad('back')">⌫</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var SUPPORTED_LOCALES = ["tr", "en", "bg", "sq"];
+    var DEFAULT_LOCALE = "tr";
+
+    var t = {
+      tr: {
+        title: "Ramis POS — Giriş",
+        apiUrl: "API Adresi (URL)",
+        username: "Kullanıcı Adı",
+        password: "Parola",
+        continueBtn: "Devam Et",
+        checking: "Kontrol ediliyor...",
+        loginBtn: "Giriş Yap",
+        loggingIn: "Giriş yapılıyor...",
+        backBtn: "← Geri",
+        subtitleDefault: "Satış Noktası Sistemi Bağlantısı",
+        subtitlePin: "Kasiyer PIN kodunu giriniz",
+        subtitlePass: "Kullanıcı parolasını giriniz",
+        fillAllFields: "Lütfen tüm alanları doldurun.",
+        loginFailed: "Giriş başarısız. Lütfen bilgileri kontrol edin.",
+        permissionDenied: "Uygulama bu kullanıcının izinleri yeterli değil.",
+        pinInvalid: "PIN kodu geçersiz.",
+        connectionError: "Bağlantı hatası: "
+      },
+      en: {
+        title: "Ramis POS — Login",
+        apiUrl: "API Address (URL)",
+        username: "Username",
+        password: "Password",
+        continueBtn: "Continue",
+        checking: "Checking...",
+        loginBtn: "Login",
+        loggingIn: "Logging in...",
+        backBtn: "← Back",
+        subtitleDefault: "Point of Sale System Connection",
+        subtitlePin: "Enter cashier PIN",
+        subtitlePass: "Enter user password",
+        fillAllFields: "Please fill in all fields.",
+        loginFailed: "Login failed. Please check your credentials.",
+        permissionDenied: "This user does not have sufficient permissions for this application.",
+        pinInvalid: "Invalid PIN code.",
+        connectionError: "Connection error: "
+      },
+      bg: {
+        title: "Ramis POS — Вход",
+        apiUrl: "API Адрес (URL)",
+        username: "Потребителско име",
+        password: "Парола",
+        continueBtn: "Продължи",
+        checking: "Проверка...",
+        loginBtn: "Вход",
+        loggingIn: "Влизане...",
+        backBtn: "← Назад",
+        subtitleDefault: "Връзка към ПОС система",
+        subtitlePin: "Въведете ПИН на касиер",
+        subtitlePass: "Въведете парола",
+        fillAllFields: "Моля, попълнете всички полета.",
+        loginFailed: "Неуспешен вход. Проверете данните.",
+        permissionDenied: "Потребителят няма достатъчни права за това приложение.",
+        pinInvalid: "Невалиден ПИН код.",
+        connectionError: "Грешка при свързване: "
+      },
+      sq: {
+        title: "Ramis POS — Hyrje",
+        apiUrl: "Adresa API (URL)",
+        username: "Emri i përdoruesit",
+        password: "Fjalëkalimi",
+        continueBtn: "Vazhdo",
+        checking: "Duke kontrolluar...",
+        loginBtn: "Hyr",
+        loggingIn: "Duke u identifikuar...",
+        backBtn: "← Kthehu",
+        subtitleDefault: "Lidhja e Sistemit të Shitjes",
+        subtitlePin: "Vendosni PIN-in e arkëtarit",
+        subtitlePass: "Vendosni fjalëkalimin",
+        fillAllFields: "Ju lutemi plotësoni të gjitha fushat.",
+        loginFailed: "Hyrja dështoi. Kontrolloni të dhënat.",
+        permissionDenied: "Ky përdorues nuk ka leje të mjaftueshme për këtë aplikacion.",
+        pinInvalid: "Kodi PIN i pavlefshëm.",
+        connectionError: "Gabim lidhjeje: "
+      }
+    };
+
+    var currentLocale = DEFAULT_LOCALE;
+
+    var currentUrl = "";
+    var currentUsername = "";
+    var pinCode = "";
+    var isSubmitting = false;
+
+    var formUsername = document.getElementById("formUsername");
+    var formPassword = document.getElementById("formPassword");
+    var errorBox = document.getElementById("errorBox");
+
+    var stepUsername = document.getElementById("stepUsername");
+    var stepPassword = document.getElementById("stepPassword");
+    var stepPin = document.getElementById("stepPin");
+
+    var btnContinue = document.getElementById("btnContinue");
+    var spinnerUsername = document.getElementById("spinnerUsername");
+    var btnContinueText = document.getElementById("btnContinueText");
+
+    var btnSubmitPass = document.getElementById("btnSubmitPass");
+    var spinnerPass = document.getElementById("spinnerPass");
+    var btnSubmitPassText = document.getElementById("btnSubmitPassText");
+
+    function setLocale(locale) {
+      if (SUPPORTED_LOCALES.indexOf(locale) === -1) locale = DEFAULT_LOCALE;
+      currentLocale = locale;
+
+      document.documentElement.lang = locale;
+      document.title = t[locale].title;
+
+      var i18nEls = document.querySelectorAll("[data-i18n]");
+      for (var i = 0; i < i18nEls.length; i++) {
+        var el = i18nEls[i];
+        var key = el.getAttribute("data-i18n");
+        if (t[locale][key]) {
+          el.textContent = t[locale][key];
+        }
+      }
+
+      var btns = document.querySelectorAll(".lang-btn");
+      for (var j = 0; j < btns.length; j++) {
+        btns[j].classList.toggle("active", btns[j].getAttribute("data-lang") === locale);
+      }
+
+      // Update button text if in loading state
+      updateButtonTexts();
+    }
+
+    function updateButtonTexts() {
+      if (!btnContinue.disabled) {
+        btnContinueText.textContent = t[currentLocale].continueBtn;
+      }
+      if (!btnSubmitPass.disabled) {
+        btnSubmitPassText.textContent = t[currentLocale].loginBtn;
+      }
+    }
+
+    function resolveLoginError(result) {
+      if (result && result.errorCode === "permission_denied") {
+        return t[currentLocale].permissionDenied;
+      }
+      if (result && result.error) {
+        return result.error;
+      }
+      return t[currentLocale].loginFailed;
+    }
+
+    window.showLoginError = function(errorCode) {
+      if (errorCode === "permission_denied") {
+        showError(t[currentLocale].permissionDenied);
+      }
+    };
+
+    // Language button clicks
+    var langBtns = document.querySelectorAll(".lang-btn");
+    for (var k = 0; k < langBtns.length; k++) {
+      langBtns[k].addEventListener("click", function() {
+        setLocale(this.getAttribute("data-lang"));
+      });
+    }
+
+    // Form 1: Username & API URL Submit
+    formUsername.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      currentUrl = document.getElementById("apiUrl").value.trim();
+      currentUsername = document.getElementById("username").value.trim();
+
+      hideError();
+      setContinueLoading(true);
+
+      try {
+        var pinCheck = await window.electronAPI.checkPin({ apiUrl: currentUrl, username: currentUsername });
+        if (pinCheck.has_pin && pinCheck.has_cashier_role) {
+          document.getElementById("subtitleText") && (document.getElementById("subtitleText").textContent = t[currentLocale].subtitlePin);
+          switchStep("pin");
+        } else {
+          document.getElementById("subtitleText") && (document.getElementById("subtitleText").textContent = t[currentLocale].subtitlePass);
+          switchStep("password");
+        }
+      } catch (err) {
+        showError(t[currentLocale].connectionError + err.message);
+      } finally {
+        setContinueLoading(false);
+      }
+    });
+
+    // Form 2: Password Submit
+    formPassword.addEventListener("submit", async function(e) {
+      e.preventDefault();
+      if (isSubmitting) return;
+
+      var password = document.getElementById("password").value;
+      hideError();
+      setPassLoading(true);
+
+      try {
+        var result = await window.electronAPI.login({ 
+          apiUrl: currentUrl, 
+          username: currentUsername, 
+          pass: password,
+          locale: currentLocale
+        });
+        if (!result.success) {
+          showError(resolveLoginError(result));
+          setPassLoading(false);
+        }
+      } catch (err) {
+        showError(t[currentLocale].connectionError + err.message);
+        setPassLoading(false);
+      }
+    });
+
+    // Back Buttons
+    document.getElementById("btnBackToUser").addEventListener("click", function() {
+      document.getElementById("subtitleText") && (document.getElementById("subtitleText").textContent = t[currentLocale].subtitleDefault);
+      switchStep("username");
+    });
+
+    document.getElementById("btnBackToUserFromPin").addEventListener("click", function() {
+      document.getElementById("subtitleText") && (document.getElementById("subtitleText").textContent = t[currentLocale].subtitleDefault);
+      pinCode = "";
+      updatePinDots();
+      switchStep("username");
+    });
+
+    async function pressNumpad(val) {
+      if (isSubmitting) return;
+
+      if (val === "C") {
+        pinCode = "";
+      } else if (val === "back") {
+        pinCode = pinCode.slice(0, -1);
+      } else {
+        if (pinCode.length < 4 && /^\d$/.test(val)) {
+          pinCode += val;
+          if (pinCode.length === 4) {
+            updatePinDots();
+            await submitPinLogin();
+            return;
+          }
+        }
+      }
+      updatePinDots();
+    }
+
+    window.addEventListener("keydown", async function(e) {
+      if (stepPin.classList.contains("active") && !isSubmitting) {
+        var key = e.key;
+        if (/^\d$/.test(key)) {
+          e.preventDefault();
+          await pressNumpad(key);
+        } else if (key === "Backspace") {
+          e.preventDefault();
+          await pressNumpad("back");
+        } else if (key === "Escape" || key.toLowerCase() === "c") {
+          e.preventDefault();
+          await pressNumpad("C");
+        }
+      }
+    });
+
+    async function submitPinLogin() {
+      isSubmitting = true;
+      hideError();
+      
+      try {
+        var result = await window.electronAPI.login({ 
+          apiUrl: currentUrl, 
+          username: currentUsername, 
+          pin: pinCode,
+          locale: currentLocale
+        });
+        if (!result.success) {
+          showError(resolveLoginError(result));
+          pinCode = "";
+          updatePinDots();
+          isSubmitting = false;
+        }
+      } catch (err) {
+        showError(t[currentLocale].connectionError + err.message);
+        pinCode = "";
+        updatePinDots();
+        isSubmitting = false;
+      }
+    }
+
+    function updatePinDots() {
+      for (var i = 0; i < 4; i++) {
+        var dot = document.getElementById("dot" + i);
+        if (pinCode.length > i) {
+          dot.classList.add("filled");
+        } else {
+          dot.classList.remove("filled");
+        }
+      }
+    }
+
+    function switchStep(step) {
+      stepUsername.classList.remove("active");
+      stepPassword.classList.remove("active");
+      stepPin.classList.remove("active");
+
+      if (step === "username") stepUsername.classList.add("active");
+      if (step === "password") stepPassword.classList.add("active");
+      if (step === "pin") stepPin.classList.add("active");
+    }
+
+    function showError(msg) {
+      errorBox.textContent = msg;
+      errorBox.style.display = "block";
+    }
+
+    function hideError() {
+      errorBox.style.display = "none";
+    }
+
+    function setContinueLoading(isLoading) {
+      isSubmitting = isLoading;
+      btnContinue.disabled = isLoading;
+      if (isLoading) {
+        spinnerUsername.style.display = "block";
+        btnContinueText.textContent = t[currentLocale].checking;
+      } else {
+        spinnerUsername.style.display = "none";
+        btnContinueText.textContent = t[currentLocale].continueBtn;
+      }
+    }
+
+    function setPassLoading(isLoading) {
+      isSubmitting = isLoading;
+      btnSubmitPass.disabled = isLoading;
+      if (isLoading) {
+        spinnerPass.style.display = "block";
+        btnSubmitPassText.textContent = t[currentLocale].loggingIn;
+      } else {
+        spinnerPass.style.display = "none";
+        btnSubmitPassText.textContent = t[currentLocale].loginBtn;
+      }
+    }
+  </script>
+</body>
+</html>

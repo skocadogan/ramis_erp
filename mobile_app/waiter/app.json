@@ -1,0 +1,93 @@
+{
+  "expo": {
+    "name": "Ramis Erp Waiter",
+    "slug": "waiter",
+    "scheme": "waiter",
+    "version": "0.1.6",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "experiments": {
+      "reactCompiler": true
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true,
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": false
+            }
+          }
+        },
+        "NSLocationWhenInUseUsageDescription": "Yakındaki WiFi ağlarını listelemek için konum izni gereklidir."
+      },
+      "bundleIdentifier": "com.ramiserp.waiter"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
+      "predictiveBackGestureEnabled": false,
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.MODIFY_AUDIO_SETTINGS",
+        "android.permission.FOREGROUND_SERVICE",
+        "android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.ACCESS_WIFI_STATE",
+        "android.permission.CHANGE_WIFI_STATE",
+        "android.permission.NEARBY_WIFI_DEVICES"
+      ],
+      "package": "com.ramiserp.waiter"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/splash-icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#ffffff"
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Garsonların masalardaki QR kodları tarayabilmesi için kamera izni gerekmektedir."
+        }
+      ],
+      "expo-router",
+      "expo-secure-store",
+      "expo-audio",
+      "expo-asset",
+      "react-native-wifi-reborn",
+      "expo-image",
+      "expo-status-bar",
+      "expo-sqlite"
+    ],
+    "extra": {
+      "apiUrl": "http://RAMISSERVER_IP/api/v1",
+      "eas": {
+        "projectId": "b8a93cb5-f433-45b8-b3f8-c575e2612fde"
+      },
+      "router": {}
+    },
+    "owner": "skocadogan"
+  }
+}

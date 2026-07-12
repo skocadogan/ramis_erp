@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 10mm;
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 8.5pt;
+            color: #1e293b;
+            line-height: 1.3;
+            margin: 0;
+            padding: 0;
+        }
+        .header-table {
+            width: 100%;
+            border-bottom: 2px solid #0f172a;
+            margin-bottom: 15px;
+        }
+        .header-table td { padding: 5px 0; vertical-align: bottom; }
+        .report-title {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #0f172a;
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        .report-meta {
+            text-align: right;
+            font-size: 7.5pt;
+            color: #64748b;
+        }
+
+        .specs-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            background-color: #f8fafc;
+        }
+        .specs-table td {
+            border: 1px solid #e2e8f0;
+            padding: 6px 10px;
+            width: 25%;
+        }
+        .label {
+            font-size: 7pt;
+            font-weight: bold;
+            color: #64748b;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 2px;
+        }
+        .value {
+            font-size: 9pt;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .section-header {
+            background-color: #0f172a;
+            color: white;
+            padding: 4px 10px;
+            font-size: 8pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            border-radius: 2px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+        .data-table th {
+            text-align: left;
+            padding: 6px 10px;
+            border-bottom: 1px solid #0f172a;
+            font-size: 7.5pt;
+            color: #475569;
+            text-transform: uppercase;
+        }
+        .data-table td {
+            padding: 6px 10px;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .text-right { text-align: right; }
+        .font-mono { font-family: 'Courier', monospace; font-size: 8pt; }
+
+        .content-box {
+            border: 1px solid #e2e8f0;
+            padding: 10px;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+            background-color: #fff;
+            min-height: 40px;
+        }
+
+        .summary-grid {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        .summary-box {
+            border: 2px solid #0f172a;
+            padding: 10px;
+            text-align: center;
+        }
+        .summary-label {
+            font-size: 7pt;
+            font-weight: bold;
+            color: #475569;
+            text-transform: uppercase;
+        }
+        .summary-value {
+            font-size: 13pt;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 5mm;
+            width: 100%;
+            text-align: center;
+            font-size: 7pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <table class="header-table">
+        <tr>
+            <td>
+                <div class="report-title">{{ _('TEKNİK REÇETE FORMU') }}</div>
+                <div style="font-size: 10pt; font-weight: bold; color: #475569;">{{ recipe.name }}</div>
+            </td>
+            <td class="report-meta">
+                {{ _('SİSTEM KAYIT NO:') }} <span class="font-mono" style="color:#000">#{{ (recipe.id|string)[:8]|upper }}</span><br>
+                {{ _('BASIM TARİHİ:') }} {{ now()|date_tr }}<br>
+                {{ _('RAMIS ERP REÇETE YÖNETİMİ') }}
+            </td>
+        </tr>
+    </table>
+
+    <table class="specs-table">
+        <tr>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('İLGİLİ ÜRÜN') }}</span>
+                <span class="value">{{ recipe.product.name if recipe.product else _('GENEL REÇETE') }}</span>
+            </td>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('KATEGORİ') }}</span>
+                <span class="value">{{ recipe.category_name|default('-') }}</span>
+            </td>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('PORSİYON ADEDİ') }}</span>
+                <span class="value">{{ recipe.servings }} {{ _('Porsiyon') }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('PORSİYON MİKTARI') }}</span>
+                <span class="value">{{ recipe.serving_quantity|currency('') if recipe.serving_quantity else '-' }} {{ recipe.serving_unit }}</span>
+            </td>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('HAZIRLIK SÜRESİ (TOPLAM)') }}</span>
+                <span class="value">{{ recipe.prep_time_minutes }} {{ _('Dk') }}</span>
+            </td>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('PİŞİRME SÜRESİ (TOPLAM)') }}</span>
+                <span class="value">{{ recipe.cook_time_minutes }} {{ _('Dk') }}</span>
+            </td>
+        </tr>
+        <tr>
+            <td style="width: 33.3%;">
+                <!-- Empty for alignment -->
+            </td>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('PORS. BAŞI HAZIRLIK') }}</span>
+                <span class="value">{{ recipe.prep_time_per_serving|default(0) }} {{ _('Dk') }}</span>
+            </td>
+            <td style="width: 33.3%;">
+                <span class="label">{{ _('PORS. BAŞI PİŞİRME') }}</span>
+                <span class="value">{{ recipe.cook_time_per_serving|default(0) }} {{ _('Dk') }}</span>
+            </td>
+        </tr>
+    </table>
+
+    <div class="section-header">{{ _('MALZEME LİSTESİ VE BİRİM MALİYETLER') }}</div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 45%;">{{ _('MALZEME ADI / NOT') }}</th>
+                <th style="width: 20%;" class="text-right">{{ _('MİKTAR') }}</th>
+                <th style="width: 15%;" class="text-right">{{ _('BİRİM') }}</th>
+                <th style="width: 20%;" class="text-right">{{ _('SATIR MALİYETİ') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ing in ingredients %}
+            <tr>
+                <td>
+                    {% if ing.sub_recipe %}
+                    <strong>{{ ing.sub_recipe.name }}</strong> <span style="color:#64748b;">(Yarı mamül)</span>
+                    {% else %}
+                    <strong>{{ ing.stock_item.name }}</strong>
+                    {% endif %}
+                    {% if ing.notes %}<div style="font-size: 7pt; color: #64748b; margin-top: 2px;">{{ _('NOT:') }} {{ ing.notes }}</div>{% endif %}
+                </td>
+                <td class="text-right font-mono">{{ ing.quantity|qty }}</td>
+                <td class="text-right">{{ ing.unit }}</td>
+                <td class="text-right font-mono"><strong>{{ ing.line_cost|currency }}</strong></td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" style="text-align: center; padding: 15px; color: #94a3b8;">{{ _('Bileşen tanımlanmamış.') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if recipe.instructions %}
+    <div class="section-header">{{ _('HAZIRLANIŞ VE OPERASYON TALİMATLARI') }}</div>
+    <div class="content-box">{{ recipe.instructions }}</div>
+    {% endif %}
+
+    {% if recipe.description %}
+    <div class="section-header">{{ _('GENEL AÇIKLAMALAR') }}</div>
+    <div class="content-box" style="font-style: italic; color: #475569;">{{ recipe.description }}</div>
+    {% endif %}
+
+    {% if allergens %}
+    <div class="section-header">{{ _('ALLERJENLER') }}</div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 50%;">{{ _('ALERJEN MADDE') }}</th>
+                <th style="width: 25%;" class="text-right">{{ _('KOD') }}</th>
+                <th style="width: 25%;" class="text-right">{{ _('RİSK PUANI') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for allergen in allergens %}
+            <tr>
+                <td>{{ allergen.name }}</td>
+                <td class="text-right font-mono">{{ allergen.code }}</td>
+                <td class="text-right font-mono">
+                    {% if allergen.risk_score >= 7 %}
+                    <strong style="color: #dc2626;">{{ allergen.risk_score }}/10</strong>
+                    {% elif allergen.risk_score >= 4 %}
+                    <strong style="color: #b45309;">{{ allergen.risk_score }}/10</strong>
+                    {% else %}
+                    {{ allergen.risk_score }}/10
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if allergen_sources %}
+    <div class="section-header">{{ _('ALERJEN KAYNAKLARI') }}</div>
+    <table class="data-table">
+        <thead>
+            <tr>
+                <th style="width: 45%;">{{ _('MALZEME / YARI MAMÜL') }}</th>
+                <th style="width: 55%;">{{ _('İÇERDİĞİ ALERJENLER') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for source in allergen_sources %}
+            <tr>
+                <td>
+                    {% if source.type == 'sub_recipe' %}
+                    <strong>{{ source.name }}</strong> <span style="color:#64748b;">({{ _('Yarı mamül') }})</span>
+                    {% else %}
+                    {{ source.name }}
+                    {% endif %}
+                </td>
+                <td style="font-size: 7pt; color: #475569;">
+                    {% for a in source.allergens %}
+                    {{ a.name }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+    {% endif %}
+
+    <div class="section-header">{{ _('MALİYET ANALİZ ÖZETİ') }}</div>
+    <table class="summary-grid">
+        <tr>
+            <td style="width: 49%; padding-right: 2%;">
+                <div class="summary-box">
+                    <div class="summary-label">{{ _('TOPLAM REÇETE MALİYETİ') }}</div>
+                    <div class="summary-value">{{ recipe.total_cost|currency }}</div>
+                </div>
+            </td>
+            <td style="width: 49%;">
+                <div class="summary-box" style="border-color: #b45309;">
+                    <div class="summary-label" style="color: #b45309;">{{ _('PORSİYON BAŞINA MALİYET') }}</div>
+                    <div class="summary-value" style="color: #b45309;">{{ recipe.cost_per_serving|currency }}</div>
+                </div>
+            </td>
+        </tr>
+    </table>
+
+    <div class="footer">
+        {{ _('Bu belge Ramis ERP Bulut Otomasyon Sistemi tarafından otomatik üretilmiştir. | Sayfa 1/1') }}
+    </div>
+</body>
+</html>

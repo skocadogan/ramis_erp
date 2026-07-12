@@ -1,0 +1,104 @@
+{
+  "title": "Përmbledhja e restorantit",
+  "subtitle": "Përmbledhja e të ardhurave dhe ndarja e shitjeve — {branch}",
+  "allBranches": "Të gjitha degët",
+  "branchRequired": "Informacioni i degës është i nevojshëm.",
+  "loadError": "Nuk mund të ngarkoheshin të dhënat përmbledhëse. Ju lutemi provoni përsëri.",
+  "resetToToday": "Rivendos",
+  "liveData": {
+    "label": "Të dhëna të drejtpërdrejta",
+    "ariaSwitch": "Të dhëna të drejtpërdrejta: rifreskim periodik",
+    "helpAria": "Rreth të dhënave të drejtpërdrejta",
+    "tooltip": "Kur aktivizohet, përmbledhja rifreskohet rreth çdo {seconds} sekonda. Asnjë kërkesë nuk dërgohet ndërsa skeda është në sfond. Preferenca mbahet mend vetëm për këtë sesion shfletuesi."
+  },
+  "anomalies": {
+    "details": "Shiko detajet",
+    "dismiss": "Hidhe poshtë",
+    "dismissAria": "Hidhe poshtë"
+  },
+  "anomalyDialog": {
+    "intro": "Ky alarm u krijua nga motori i zgjuar i zbulimit të anomalive brenda <bold>rregullave statike të pragut</bold>.",
+    "ruleTitle": "Analiza e rregullit",
+    "rule1": "Sistemi krahasoi shitjet e sotme me të njëjtën ditë të javës gjatë 4 javëve të fundit.",
+    "rule2": "U zbulua një devijim prej <bold>më shumë se 35%</bold> në vëllimin aktual të shitjeve.",
+    "rule3": "Kjo mund të tregojë shpejtësinë e kuzhinës, mungesë furnizimi ose një problem operacional."
+  },
+  "kpi": {
+    "revenue": "Të ardhurat ({period})",
+    "yesterday": "Dje:",
+    "orderCount": "Numri i porosive",
+    "monthlyTarget": "Objektivi mujor",
+    "avgTicket": "Mesatarja e faturës",
+    "openShift": "Turni i hapur",
+    "openingCash": "{amount} hapje",
+    "none": "Asnjë"
+  },
+  "inventoryKpi": {
+    "criticalStock": "Artikuj stoku kritikë",
+    "belowMinimum": "Nën pragun minimal",
+    "stockValue": "Vlera e stokut (përafërsisht)",
+    "wasteRatio": "Raporti i mbetjeve/prishjeve"
+  },
+  "presets": {
+    "today": "Sot",
+    "this_week": "Këtë javë",
+    "last_week": "Javën e kaluar",
+    "this_month": "Këtë muaj",
+    "last_month": "Muajin e kaluar",
+    "last_3_months": "3 muajt e fundit",
+    "last_6_months": "6 muajt e fundit",
+    "last_9_months": "9 muajt e fundit",
+    "this_year": "Këtë vit",
+    "custom": "Interval i personalizuar"
+  },
+  "periodFilter": {
+    "label": "Periudha",
+    "selectPlaceholder": "Zgjidh periudhën…",
+    "groupAria": "Periudha e shitjeve",
+    "selectAria": "Periudha e shitjeve"
+  },
+  "tables": {
+    "loading": "Duke u ngarkuar…",
+    "noData": "Nuk u gjetën të dhëna.",
+    "noRecords": "Nuk u gjetën regjistrime."
+  },
+  "branchPerformance": {
+    "title": "Performanca e degëve (dita)",
+    "branch": "Dega",
+    "revenue": "Të ardhurat"
+  },
+  "warehouseStock": {
+    "title": "Vlera e stokut sipas depove",
+    "warehouse": "Depoja",
+    "value": "Vlera"
+  },
+  "topConsumption": {
+    "title": "Lëndët e para më të konsumuara",
+    "hint": "Përfshin mbetjet / prishjet",
+    "stock": "Artikulli",
+    "sku": "SKU",
+    "consumption": "Konsumi"
+  },
+  "wasteTop": {
+    "title": "Mbetjet / prishjet",
+    "subtitle": "Vetëm lëvizjet e mbetjeve/prishjeve në datën e zgjedhur",
+    "waste": "Mbetje"
+  },
+  "paymentBreakdown": {
+    "title": "Ndarja e pagesave (dita)"
+  },
+  "paymentMethods": {
+    "cash": "Para të gatshme",
+    "card": "Kartë",
+    "other": "Tjetër"
+  },
+  "topSellers": {
+    "title": "Më të shiturit",
+    "piece": "copë"
+  },
+  "charts": {
+    "revenueCurve": "Trendi i të ardhurave",
+    "categoryDay": "Kategoritë (dita e zgjedhur)",
+    "tooltipRevenue": "Të ardhurat"
+  }
+}

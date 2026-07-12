@@ -1,0 +1,25 @@
+{
+  "loading": "Loading data...",
+  "cart": "Cart",
+  "shift": {
+    "checking": "Checking shift status...",
+    "closed": "Shift Closed",
+    "requiredMessage": "An active shift must be open to perform actions. Please contact the cashier.",
+    "selectPos": "Select POS",
+    "backFromPosPick": "Back"
+  },
+  "reservation": {
+    "title": "Reservation Confirmation",
+    "scheduledAt": "Scheduled At",
+    "partySize": "Party Size",
+    "pax": "Pax",
+    "confirmationHint": "There is a reservation recorded for this table. Are you sure you want to start an order?",
+    "cancel": "Cancel",
+    "startOrder": "Start Order"
+  },
+  "orderSuccess": {
+    "title": "Order Sent",
+    "description": "Your order has been successfully sent to the kitchen.",
+    "ok": "OK"
+  }
+}

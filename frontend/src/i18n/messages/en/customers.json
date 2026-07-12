@@ -1,0 +1,55 @@
+{
+  "title": "Customer Management",
+  "addNew": "Add New Customer",
+  "edit": "Edit Customer",
+  "detailTitle": "Customer Detail",
+  "customerType": "Customer Type",
+  "types": {
+    "INDIVIDUAL": "Individual",
+    "CORPORATE": "Corporate",
+    "ALL": "All Types"
+  },
+  "fields": {
+    "name": "Customer / Company Name",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "webAddress": "Web Address",
+    "taxOffice": "Tax Office",
+    "taxNo": "Tax No",
+    "tcNo": "T.C. No",
+    "mersisNo": "Mersis No"
+  },
+  "table": {
+    "empty": "No customer records found.",
+    "colName": "Customer / Company Name",
+    "colType": "Type",
+    "colPhone": "Phone",
+    "colEmail": "Email",
+    "colTax": "Tax / T.C. No",
+    "colActions": "Actions"
+  },
+  "sales": {
+    "title": "Sales History",
+    "empty": "No sales recorded for this customer.",
+    "colSaleNo": "Sale No",
+    "colDate": "Date",
+    "colBranch": "Branch",
+    "colPayment": "Payment",
+    "colAmount": "Amount",
+    "totalNet": "Total Net Revenue",
+    "totalDiscount": "Total Discount",
+    "totalGross": "Total Gross Revenue",
+    "loadingMore": "Loading more sales..."
+  },
+  "messages": {
+    "createSuccess": "Customer created successfully.",
+    "updateSuccess": "Customer details updated.",
+    "deleteSuccess": "Customer deleted successfully.",
+    "deleteConfirm": "Are you sure you want to delete this customer?",
+    "exportPdf": "PDF",
+    "exportExcel": "Excel",
+    "exportPdfSuccess": "PDF report downloaded successfully.",
+    "exportExcelSuccess": "Excel report downloaded successfully."
+  }
+}

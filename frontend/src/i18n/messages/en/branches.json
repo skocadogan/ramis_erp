@@ -1,0 +1,95 @@
+{
+  "messages": {
+    "loadFailed": "Could not load data.",
+    "saveFailed": "Could not save assignment."
+  },
+  "title": "Branch Management",
+  "titlePersonal": "Your Branch Info",
+  "description": "Manage restaurant branches",
+  "descriptionPersonal": "Branch records assigned to your account",
+  "addNew": "New Branch",
+  "activeBranches": "Active Branches ({count})",
+  "deletedBranches": "Deleted Branches ({count})",
+  "name": "Branch Name",
+  "code": "Code",
+  "phone": "Phone",
+  "email": "Email",
+  "website": "Website",
+  "address": "Address",
+  "taxOffice": "Tax Office",
+  "taxNumber": "Tax Number",
+  "registryNo": "Registry No",
+  "mersisNo": "Mersis No",
+  "logo": "Branch Logo",
+  "users": "Users",
+  "details": "Details",
+  "hardDelete": "Permanently Delete",
+  "empty": {
+    "personal": "No assigned branch records found.",
+    "deleted": "No deleted branches found.",
+    "active": "No active branches registered.",
+    "noMatch": "No branches match your search."
+  },
+  "modals": {
+    "deleteTitle": "Delete Branch",
+    "hardDeleteTitle": "Permanently Delete Branch",
+    "deleteDesc": "\"{name}\" branch will be deleted. You can view or restore deleted branches later.",
+    "hardDeleteDesc": "\"{name}\" branch will be completely removed from the system. This action cannot be undone and may affect all data linked to the branch.",
+    "deleteConfirm": "Delete Branch",
+    "hardDeleteConfirm": "Permanently Delete"
+  },
+  "formModal": {
+    "namePlaceholder": "e.g. Main branch",
+    "codePlaceholder": "MAIN",
+    "phonePlaceholder": "+1 555 123 4567",
+    "addressPlaceholder": "Street, district, city…"
+  },
+  "editModal": {
+    "title": "Edit branch",
+    "subtitle": "Update details for {branchName}",
+    "monthlyTargetLabel": "Monthly revenue target (₺)",
+    "monthlyTargetPlaceholder": "1,000,000",
+    "monthlyTargetHint": "Drives the progress bar on the dashboard for the current month.",
+    "validationNameRequired": "Branch name is required.",
+    "validationCodeRequired": "Branch code is required.",
+    "updateFailed": "Could not update branch.",
+    "uploadLogo": "Upload Logo",
+    "changeLogo": "Change Logo",
+    "removeLogo": "Remove Logo",
+    "emailPlaceholder": "example@company.com",
+    "websitePlaceholder": "https://company.com",
+    "taxOfficePlaceholder": "e.g. Tax Office",
+    "taxNumberPlaceholder": "1234567890",
+    "registryNoPlaceholder": "123456",
+    "mersisNoPlaceholder": "0123456789012345"
+  },
+  "detailModal": {
+    "usersAssignedSummary": "{count} users assigned",
+    "zoneManagement": "Zone management",
+    "noAssignableUsers": "No users available to assign",
+    "assigning": "Assigning…",
+    "assignUsersButton": "Assign {count} user(s)",
+    "assignedUsers": "Assigned users",
+    "addUser": "Add user",
+    "emptyNoUsers": "No users have been assigned to this branch yet.",
+    "noRole": "No role",
+    "removeUser": "Remove",
+    "close": "Close",
+    "assignFailed": "Could not assign users.",
+    "removeUserFailed": "Could not remove user.",
+    "confirmRemoveUser": "Remove this user from the branch?"
+  },
+  "branchUserModal": {
+    "title": "Assign users",
+    "subtitle": "Select users for {branchName} ({selectedCount} selected)",
+    "searchPlaceholder": "Search users…",
+    "empty": "No users found",
+    "selectAllToggle": "Select all / Clear",
+    "footerSummary": "{selected} / {total} users selected"
+  },
+  "branchSelect": {
+    "placeholder": "Select branch",
+    "loading": "Loading…",
+    "allBranches": "All branches"
+  }
+}

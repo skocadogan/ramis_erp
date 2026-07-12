@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 1.2cm;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #1e293b;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        .header-table {
+            width: 100%;
+            border-collapse: collapse;
+            border-bottom: 2px solid #e2e8f0;
+            margin-bottom: 18px;
+        }
+
+        .header-table td {
+            vertical-align: top;
+            padding: 0 0 12px 0;
+            border: none;
+        }
+
+        .header-table h1 {
+            margin: 0;
+            font-size: 15pt;
+            font-weight: bold;
+            color: #0f172a;
+            text-transform: uppercase;
+        }
+
+        .header-table .meta {
+            margin: 4px 0 0;
+            color: #64748b;
+            font-size: 8.5pt;
+        }
+
+        .header-right {
+            text-align: right;
+            white-space: nowrap;
+        }
+
+        .section { margin-bottom: 20px; page-break-inside: avoid; }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 10pt;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 4px;
+            margin-bottom: 10px;
+            color: #0f172a;
+            text-transform: uppercase;
+        }
+
+        .summary-cards {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 8px 0;
+            margin-bottom: 12px;
+        }
+
+        .summary-cards td {
+            width: 33.33%;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 10px;
+            vertical-align: top;
+        }
+
+        .card-label {
+            font-size: 7.5pt;
+            font-weight: bold;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .card-value {
+            font-size: 11pt;
+            font-weight: bold;
+            color: #0f172a;
+        }
+
+        .card-sub {
+            font-size: 7.5pt;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        table.data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 12px;
+            table-layout: fixed;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 6px 8px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+            vertical-align: middle;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .data-table th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            color: #475569;
+            font-size: 7.5pt;
+            text-transform: uppercase;
+        }
+
+        .text-right { text-align: right; }
+        .total-row { font-weight: bold; background-color: #f8fafc; color: #0f172a; }
+
+        .terminal-block {
+            border: 1px solid #e2e8f0;
+            border-radius: 4px;
+            padding: 12px;
+            margin-bottom: 16px;
+            page-break-inside: avoid;
+        }
+
+        .terminal-header {
+            background-color: #f8fafc;
+            padding: 8px 10px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 9.5pt;
+            color: #0f172a;
+            margin-bottom: 10px;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .terminal-payments {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+            table-layout: fixed;
+        }
+
+        .terminal-payments td {
+            width: 33.33%;
+            text-align: center;
+            font-size: 8pt;
+            color: #475569;
+            padding: 6px 4px;
+            border: 1px solid #e2e8f0;
+            background-color: #f8fafc;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 7pt;
+            font-weight: bold;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .badge-cash { background-color: #dcfce7; color: #15803d; }
+        .badge-card { background-color: #f3e8ff; color: #6b21a8; }
+        .badge-other { background-color: #fef9c3; color: #a16207; }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 7.5pt;
+            color: #94a3b8;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 12px;
+        }
+    </style>
+</head>
+<body>
+    <table class="header-table">
+        <tr>
+            <td>
+                <h1>{{ report_name }}</h1>
+                <p class="meta">{{ report_description }}</p>
+            </td>
+            <td class="header-right">
+                <p class="meta"><strong>{{ _('Vardiya ID:') }}</strong> {{ shift_id|truncate(8, True, '') }}...</p>
+                <p class="meta"><strong>{{ _('Tarih:') }}</strong> {{ now()|date_tr }}</p>
+            </td>
+        </tr>
+    </table>
+
+    <div class="section">
+        <div class="section-title">{{ _('Vardiya Bilgileri') }}</div>
+        <table class="data-table">
+            <colgroup>
+                <col style="width: 18%;">
+                <col style="width: 32%;">
+                <col style="width: 18%;">
+                <col style="width: 32%;">
+            </colgroup>
+            <tr>
+                <td><strong>{{ _('Şube:') }}</strong></td>
+                <td>{{ cash_data.shift.branch_name }}</td>
+                <td><strong>{{ _('Kasiyer:') }}</strong></td>
+                <td>{{ cash_data.shift.opened_by_name or '—' }}</td>
+            </tr>
+            <tr>
+                <td><strong>{{ _('Açılış Zamanı:') }}</strong></td>
+                <td>{{ cash_data.shift.opened_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td><strong>{{ _('Kapanış Zamanı:') }}</strong></td>
+                <td>{{ cash_data.shift.closed_at|date_tr('%d.%m.%Y %H:%M') if cash_data.shift.closed_at else _('AÇIK') }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Finansal Özet') }}</div>
+        <table class="summary-cards">
+            <tr>
+                <td>
+                    <div class="card-label">{{ _('Brüt Satış') }}</div>
+                    <div class="card-value">{{ cash_data.totals.gross_sales|currency }}</div>
+                    <div class="card-sub">{{ cash_data.totals.sale_count }} {{ _('Satış') }}</div>
+                </td>
+                <td>
+                    <div class="card-label">{{ _('Toplam İndirim') }}</div>
+                    <div class="card-value" style="color: #ea580c;">- {{ cash_data.totals.total_discount|currency }}</div>
+                    <div class="card-sub">{{ _('Net Satış:') }} {{ (cash_data.totals.gross_sales - cash_data.totals.total_discount)|currency }}</div>
+                </td>
+                <td>
+                    <div class="card-label">{{ _('Toplam İptal') }}</div>
+                    <div class="card-value" style="color: #dc2626;">{{ cash_data.totals.total_cancelled|currency }}</div>
+                    <div class="card-sub">{{ _('İptal Edilen Satışlar') }}</div>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Ödeme Türü Dağılımı') }}</div>
+        <table class="data-table">
+            <colgroup>
+                <col style="width: 70%;">
+                <col style="width: 30%;">
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>{{ _('Ödeme Yöntemi') }}</th>
+                    <th class="text-right">{{ _('Tutar') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="badge badge-cash">{{ _('Nakit') }}</span></td>
+                    <td class="text-right"><strong>{{ cash_data.payment_breakdown.CASH|currency }}</strong></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-card">{{ _('Kredi Kartı') }}</span></td>
+                    <td class="text-right"><strong>{{ cash_data.payment_breakdown.CARD|currency }}</strong></td>
+                </tr>
+                <tr>
+                    <td><span class="badge badge-other">{{ _('Diğer') }}</span></td>
+                    <td class="text-right"><strong>{{ cash_data.payment_breakdown.OTHER|currency }}</strong></td>
+                </tr>
+                <tr class="total-row">
+                    <td>{{ _('Toplam Tahsilat') }}</td>
+                    <td class="text-right">{{ (cash_data.payment_breakdown.CASH + cash_data.payment_breakdown.CARD + cash_data.payment_breakdown.OTHER)|currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Cihaz Bazlı Satış Detayları') }}</div>
+
+        {% if cash_data.terminals %}
+            {% for term in cash_data.terminals %}
+                <div class="terminal-block">
+                    <div class="terminal-header">
+                        {{ term.terminal_name }} — {{ term.sales_count }} {{ _('Satış') }} | {{ _('Toplam:') }} {{ term.total_amount|currency }}
+                    </div>
+
+                    <table class="terminal-payments">
+                        <tr>
+                            <td><strong>{{ _('Nakit') }}</strong><br>{{ term.payments.CASH|currency }}</td>
+                            <td><strong>{{ _('Kredi Kartı') }}</strong><br>{{ term.payments.CARD|currency }}</td>
+                            <td><strong>{{ _('Diğer') }}</strong><br>{{ term.payments.OTHER|currency }}</td>
+                            <td><strong>{{ _('Ödenmez') }}</strong><br>{{ term.payments.CREDIT|currency }}</td>
+                        </tr>
+                    </table>
+
+                    <table class="data-table" style="font-size: 8pt; margin-bottom: 0;">
+                        <colgroup>
+                            <col style="width: 11%;">
+                            <col style="width: 18%;">
+                            <col style="width: 22%;">
+                            <col style="width: 14%;">
+                            <col style="width: 17%;">
+                            <col style="width: 18%;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>{{ _('Sipariş No') }}</th>
+                                <th>{{ _('Tarih') }}</th>
+                                <th>{{ _('Kasiyer') }}</th>
+                                <th>{{ _('Ödeme') }}</th>
+                                <th class="text-right">{{ _('İndirim') }}</th>
+                                <th class="text-right">{{ _('Tutar') }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for sale in term.sales_list %}
+                                <tr>
+                                    <td>
+                                        {% set order_no = sale.order_number|string %}
+                                        {% if order_no == '—' or order_no.startswith('#') %}
+                                            {{ order_no }}
+                                        {% else %}
+                                            #{{ order_no }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ sale.paid_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                                    <td>{{ sale.created_by }}</td>
+                                    <td>
+                                        {% if sale.payment_method == 'CASH' %}
+                                            <span class="badge badge-cash">{{ _('Nakit') }}</span>
+                                        {% elif sale.payment_method == 'CARD' %}
+                                            <span class="badge badge-card">{{ _('Kredi Kartı') }}</span>
+                                        {% else %}
+                                            <span class="badge badge-other">{{ _('Diğer') }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td class="text-right" style="color: #ea580c;">{{ sale.discount_amount|currency if sale.discount_amount > 0 else '—' }}</td>
+                                    <td class="text-right"><strong>{{ sale.total_amount|currency }}</strong></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p style="text-align: center; color: #64748b; font-style: italic; padding: 16px;">{{ _('Bu vardiyada yapılmış aktif bir cihaz satışı bulunamadı.') }}</p>
+        {% endif %}
+    </div>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+</html>

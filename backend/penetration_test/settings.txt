@@ -1,0 +1,129 @@
+# =============================================================================
+# Ramis ERP — peak hour yük testi ayarları (test_peak_hour.py)
+# =============================================================================
+# Format: ANAHTAR=değer  (satır başı # yorumdur)
+# Öncelik: ortam değişkeni (RAMIS_PEAK_*) > bu dosya > kod varsayılanı
+#
+# Önerilen koşu (shape açıkken, ~20 dk kapasite testi):
+#   cd backend/penetration_test
+#   locust -f test_peak_hour.py --headless --run-time 20m --host http://192.168.0.10
+#
+# Web arayüzü:
+#   locust -f test_peak_hour.py --host http://192.168.0.10
+#   (Shape son aşamaya ulaşınca kullanıcı sayısı sabit kalır; durdurma manuel veya --run-time ile)
+#
+# Ortak altyapı (şube, kullanıcı, ürün ID'leri): base.py — RAMIS_LOADTEST_*
+# =============================================================================
+
+# --- Login (frontend akışı — base.py) ---
+# Kasiyer/POS: check-pin → token/pin. Garson/aşçı: token (şifre).
+# Tüm auth endpoint'leri aynı IP için 5/dk login throttle paylaşır.
+
+# Kasiyer PIN kodu (test ortamında genelde 1234).
+RAMIS_LOADTEST_CASHIER_PIN=1234
+
+# 1 = kasiyer/POS kullanıcıları frontend PIN akışını kullanır. 0 = herkes şifre ile girer.
+RAMIS_LOADTEST_CASHIER_USE_PIN=1
+
+# Eşzamanlı login istekleri arası gecikme (sn). PIN akışı 2 istek tükettiği için 1.0 önerilir.
+RAMIS_LOADTEST_LOGIN_STAGGER_SEC=1.0
+
+# Login 429 (rate limit) yeniden deneme sayısı.
+RAMIS_LOADTEST_LOGIN_MAX_RETRIES=8
+
+# --- Genel ---
+
+# Locust istek adlarına eklenen etiket; raporda [Peak] öneki görünür.
+RAMIS_PEAK_REQUEST_TAG=[Peak]
+
+# 1 = kademeli kullanıcı ramp'ı (RAMIS_PEAK_SHAPE_STAGES). 0 = manuel -u / -r kullan.
+RAMIS_PEAK_USE_SHAPE=1
+
+# HTTP isteği tam yanıt bekleme süresi (saniye). Yoğunlukta yavaş yanıtlar için 120 önerilir.
+RAMIS_PEAK_NETWORK_TIMEOUT=120
+
+# TCP bağlantı kurulum timeout (saniye).
+RAMIS_PEAK_CONNECTION_TIMEOUT=30
+
+# 1 = HTTP 429 (throttle) yanıtlarını Locust'ta başarı say; kapasite ölçümünde gürültüyü azaltır.
+# 0 = gerçek throttle oranını görmek için kapatın.
+RAMIS_PEAK_COUNT_THROTTLE_AS_SUCCESS=1
+
+# 1 = HTTP 502/503/504 (gateway) yanıtlarını başarı say; geçici nginx/backend kopmalarında fail oranını şişirmez.
+# 0 = altyapı hatalarını fail olarak raporlar.
+RAMIS_PEAK_COUNT_GATEWAY_AS_SUCCESS=1
+
+# --- Kademeli ramp (LoadTestShape) ---
+# Format: duration:users:spawn_rate — virgülle ayrılmış, duration test başlangıcından kümülatif saniye.
+# Örnek 120:15:2 → ilk 2 dk içinde en fazla 15 kullanıcı, saniyede 2 spawn.
+#
+# Profil: 5 dk'da 0 fail baseline (15 kull.) → 30 → 45 → 50 kullanıcı (20. dk).
+# Son aşamadan sonra shape None döner ve test biter; --run-time en az 20m olmalı.
+RAMIS_PEAK_SHAPE_STAGES=120:15:2,300:30:3,600:45:4,1200:50:4
+
+# --- Garson (PeakWaiterUser) ---
+# Locust kullanıcı ağırlığı; diğer rollerle oran belirler (~%53 garson hedefi).
+
+RAMIS_PEAK_WAITER_WEIGHT=25
+
+# İki sipariş arası minimum bekleme (saniye). Düşük = daha agresif yük.
+RAMIS_PEAK_WAITER_WAIT_MIN=5
+
+# İki sipariş arası maksimum bekleme (saniye).
+RAMIS_PEAK_WAITER_WAIT_MAX=15
+
+# --- POS (PeakPosSyncUser) ---
+# Masa listesi + olası complete_table tek task; ~%27 POS hedefi.
+
+RAMIS_PEAK_POS_WEIGHT=12
+
+# POS turu arası minimum bekleme (saniye).
+RAMIS_PEAK_POS_WAIT_MIN=4
+
+# POS turu arası maksimum bekleme (saniye).
+RAMIS_PEAK_POS_WAIT_MAX=12
+
+# Her masa listesi turunda complete_table deneme olasılığı (0.0–1.0). 0.45 = yaklaşık her 2 turda bir.
+RAMIS_PEAK_POS_CLOSE_PROB=0.45
+
+# 1 = eşik altında tek siparişli dolu masalar da kapatma adayı olur. 0 = yalnızca PEAK_TABLE_CLOSE_MIN_ORDERS+.
+RAMIS_PEAK_POS_CLOSE_ANY_OCCUPIED=1
+
+# --- Kasa (PeakCashierUser) ---
+# READY sipariş listesi + tekil complete; ~%10 kasa hedefi.
+
+# 1 = masa siparişlerini kasa complete etmez (çift satış önlenir; masa kapatma POS complete_table ile).
+RAMIS_PEAK_CASHIER_SKIP_TABLE_ORDERS=1
+
+# 1 = ödeme sonrası masayı temizleme modundan çıkar (finish_cleaning → FREE, yeni sipariş açılabilir).
+RAMIS_PEAK_FINISH_CLEANING_AFTER_PAY=1
+
+RAMIS_PEAK_CASHIER_WEIGHT=4
+
+# Kasa turu arası minimum bekleme (saniye).
+RAMIS_PEAK_CASHIER_WAIT_MIN=8
+
+# Kasa turu arası maksimum bekleme (saniye).
+RAMIS_PEAK_CASHIER_WAIT_MAX=20
+
+# --- KDS / aşçı (PeakChefUser) ---
+# kds_active + kalemleri PREPARING → READY; ~%10 aşçı hedefi.
+
+RAMIS_PEAK_CHEF_WEIGHT=4
+
+# KDS turu arası minimum bekleme (saniye).
+RAMIS_PEAK_CHEF_WAIT_MIN=10
+
+# KDS turu arası maksimum bekleme (saniye).
+RAMIS_PEAK_CHEF_WAIT_MAX=35
+
+# Her KDS turunda en fazla kaç kalem durumu güncellenir (PENDING→PREPARING→READY).
+RAMIS_PEAK_KDS_ITEMS_PER_TICK=5
+
+# --- Masa biriktirme + POS kapatma eşiği ---
+
+# Aynı masaya yeni sipariş verme olasılığı (0.0–1.0). Yüksek = masada çoklu sipariş birikir.
+RAMIS_PEAK_TABLE_STACK_BIAS=0.90
+
+# POS complete_table için tercih edilen minimum aktif sipariş sayısı (order_count).
+RAMIS_PEAK_TABLE_CLOSE_MIN_ORDERS=2

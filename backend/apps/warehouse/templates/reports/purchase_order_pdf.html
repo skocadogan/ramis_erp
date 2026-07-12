@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>{{ order.order_number }} — {{ report_name }}</title>
+  <style>
+    body {
+      font-family: DejaVu Sans, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      color: #1e293b;
+      margin: 0;
+      padding: 18px 20px;
+    }
+    .doc-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #1e40af;
+      margin: 0 0 4px 0;
+      letter-spacing: 0.02em;
+    }
+    .order-no {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 0 0 12px 0;
+    }
+    .grid {
+      display: table;
+      width: 100%;
+      margin-bottom: 14px;
+      font-size: 8.5pt;
+    }
+    .grid-row { display: table-row; }
+    .grid-cell {
+      display: table-cell;
+      padding: 3px 8px 3px 0;
+      vertical-align: top;
+    }
+    .label { color: #64748b; width: 38%; }
+    .notes {
+      margin: 10px 0 14px 0;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 4px;
+      font-size: 8.5pt;
+      color: #475569;
+    }
+    table.lines {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+    table.lines th,
+    table.lines td {
+      padding: 6px 5px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    table.lines th {
+      background: #f1f5f9;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #475569;
+      text-align: left;
+    }
+    table.lines th.right,
+    table.lines td.right { text-align: right; }
+    .total-row td {
+      font-weight: bold;
+      border-top: 2px solid #2563eb;
+      padding-top: 8px;
+      font-size: 10pt;
+      color: #1e40af;
+    }
+    .footer {
+      margin-top: 18px;
+      font-size: 7pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <p class="doc-title">{{ report_name }}</p>
+  <p class="order-no">{{ order.order_number }}</p>
+
+  <div class="grid">
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Durum') }}</div>
+      <div class="grid-cell">{{ status_label }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Tedarikçi') }}</div>
+      <div class="grid-cell">{{ order.supplier_name or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Hedef depo') }}</div>
+      <div class="grid-cell">{{ order.warehouse_name or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Sipariş tarihi') }}</div>
+      <div class="grid-cell">{{ order.order_date }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Beklenen teslimat') }}</div>
+      <div class="grid-cell">{{ order.expected_date or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Oluşturan') }}</div>
+      <div class="grid-cell">{{ order.created_by_name or '—' }}</div>
+    </div>
+    <div class="grid-row">
+      <div class="grid-cell label">{{ _('Onaylayan') }}</div>
+      <div class="grid-cell">{{ order.approved_by_name or '—' }}</div>
+    </div>
+  </div>
+
+  {% if order.notes %}
+  <div class="notes">
+    <strong>{{ _('Notlar:') }}</strong> {{ order.notes }}
+  </div>
+  {% endif %}
+
+  <table class="lines">
+    <thead>
+      <tr>
+        <th style="width:36%">{{ _('Ürün') }}</th>
+        <th class="right">{{ _('Miktar') }}</th>
+        <th class="right">{{ _('Birim fiyat') }}</th>
+        <th class="right">{{ _('Satır tutarı') }}</th>
+        <th class="right">{{ _('Teslim alınan') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for it in order_items %}
+      <tr>
+        <td>
+          {{ it.stock_item_name or '—' }}
+          {% if it.stock_item_sku %}<span style="color:#94a3b8;font-size:7pt;"> ({{ it.stock_item_sku }})</span>{% endif %}
+        </td>
+        <td class="right">{{ it.quantity | qty }} {{ it.unit }}</td>
+        <td class="right">{{ it.unit_price | currency }}</td>
+        <td class="right">{{ it.line_total | currency }}</td>
+        <td class="right">{{ it.received_quantity | qty }} {{ it.unit }}</td>
+      </tr>
+      {% endfor %}
+      <tr class="total-row">
+        <td colspan="3" style="text-align:right">{{ _('Genel toplam') }}</td>
+        <td class="right" colspan="2">{{ order.total_amount | currency }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p class="footer">{{ _('Bu belge Ramis ERP üzerinden üretilmiştir.') }}</p>
+</body>
+</html>

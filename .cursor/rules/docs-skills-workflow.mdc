@@ -1,0 +1,35 @@
+---
+description: Proje docs/skills klasörünü görev türüne göre okuma ve uygulama
+alwaysApply: true
+---
+
+# docs/skills kullanımı
+
+Bu depoda teknolojiye özel kalıplar **`docs/skills/`** altındadır. Kod yazmadan önce ilgili skill varsa **önce onu oku**, sonra projeye uy.
+
+## Ne zaman ne okunur
+
+| Çalışma alanı | Öncelikli giriş noktaları |
+|---------------|---------------------------|
+| **Web:** `frontend/` — React, Next.js App Router, TS/TSX | `docs/skills/react-best-practices/SKILL.md` veya `AGENTS.md` |
+| **Mobil:** `mobile_app/` — React Native, Expo | `docs/skills/react-native-skills/SKILL.md`, `react-native-best-practices/SKILL.md`, `docs/skills/expo/SKILL.md` |
+| **Expo alt konular** (router, native UI, EAS, upgrade) | `docs/skills/expo/skills/<konu>/SKILL.md` |
+| **RN sürüm yükseltme** | `docs/skills/upgrading-react-native/SKILL.md` |
+
+## Akış
+0. wiki_schema.md dosyasını okuyarak başla ve temel talimatları o dosyadan al.
+1. Görevin dilini ve dizinini belirle (`frontend/`, `mobile_app/`, `electron_app` vb.).
+2. Tablodaki eşlemenin **SKILL.md** veya **AGENTS.md** dosyasını aç (ikisi de varsa önce **SKILL.md** — odaklı giriş).
+3. O skill’deki kurallara uy; projenin **`AGENTS.md`**, **`docs/wiki`** ve mevcut kod stili ile çelişirse **kodu ve proje kurallarını** esas al, gerekirse wiki’yi güncelle.
+
+## Kısa örnek
+
+```text
+# ❌ Skill klasörü varken atlamak
+Yeni POS bileşeni → doğrudan bileşen yazmak.
+
+# ✅ Doğru sıra
+frontend + React/Next → docs/skills/react-best-practices okundu → sonra features/ altında mevcut pattern’e uygun kod.
+```
+
+Yeni skill eklendiğinde tabloyu veya bu kuralı güncellemek yeterlidir; skill içeriği `docs/skills` içinde kalır.

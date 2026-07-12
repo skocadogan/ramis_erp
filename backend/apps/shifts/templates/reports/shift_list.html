@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        body { font-family: 'DejaVu Sans', sans-serif; font-size: 9pt; color: #333; margin: 0; padding: 15px; }
+        .header { text-align: center; border-bottom: 2px solid #444; padding-bottom: 10px; margin-bottom: 15px; }
+        .header h1 { margin: 0; font-size: 16pt; color: #000; }
+        .header p { margin: 3px 0; color: #666; font-size: 9pt; }
+        
+        .filters { background-color: #f8f9fa; padding: 10px; border-radius: 5px; margin-bottom: 15px; font-size: 8pt; border: 1px solid #eee; }
+        .filters span { font-weight: bold; margin-right: 15px; }
+
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { padding: 6px 4px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f0f0f0; font-weight: bold; text-transform: uppercase; font-size: 8pt; }
+        .text-right { text-align: right; }
+        .tabular-nums { font-family: 'Courier New', monospace; }
+        
+        .status-badge { padding: 2px 5px; border-radius: 3px; font-size: 7pt; font-weight: bold; }
+        .status-open { background-color: #fffbeb; color: #92400e; }
+        .status-closed { background-color: #f3f4f6; color: #374151; }
+
+        .diff-pos { color: #059669; font-weight: bold; }
+        .diff-neg { color: #dc2626; font-weight: bold; }
+
+        .footer { text-align: center; margin-top: 30px; font-size: 8pt; color: #aaa; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ report_description }}</p>
+        <p>{{ _('Rapor Tarihi:') }} {{ now()|date_tr }}</p>
+    </div>
+
+    <div class="filters">
+        <span><strong>{{ _('Filtreler:') }}</strong></span>
+        {% if filters.date_from %}<span>{{ _('Başlangıç:') }} {{ filters.date_from|date_tr }}</span>{% endif %}
+        {% if filters.date_to %}<span>{{ _('Bitiş:') }} {{ filters.date_to|date_tr }}</span>{% endif %}
+        {% if filters.status and filters.status != 'all' %}<span>{{ _('Durum:') }} {% if filters.status == 'OPEN' %}{{ _('AÇIK') }}{% elif filters.status == 'CLOSED' %}{{ _('KAPALI') }}{% else %}{{ filters.status }}{% endif %}</span>{% endif %}
+        {% if filters.opened_at_terminal %}<span>{{ _('Terminal ID:') }} {{ filters.opened_at_terminal }}</span>{% endif %}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Açılış Tarihi') }}</th>
+                <th>{{ _('Kapanış Tarihi') }}</th>
+                <th>{{ _('Şube') }}</th>
+                <th>{{ _('Terminal') }}</th>
+                <th>{{ _('Durum') }}</th>
+                <th class="text-right">{{ _('Beklenen') }}</th>
+                <th class="text-right">{{ _('Sayılan') }}</th>
+                <th class="text-right">{{ _('Fark') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for s in shifts %}
+            <tr>
+                <td>{{ s.opened_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ s.closed_at|date_tr('%d.%m.%Y %H:%M') if s.closed_at else '—' }}</td>
+                <td>{{ s.branch_name }}</td>
+                <td>{{ s.terminal_name }}</td>
+                <td>
+                    <span class="status-badge {{ 'status-open' if s.status == 'OPEN' else 'status-closed' }}">
+                        {{ _('AÇIK') if s.status == 'OPEN' else _('KAPALI') }}
+                    </span>
+                </td>
+                <td class="text-right tabular-nums">{{ s.expected_cash|currency }}</td>
+                <td class="text-right tabular-nums">{{ s.actual_cash|currency if s.status == 'CLOSED' else '—' }}</td>
+                <td class="text-right tabular-nums">
+                    {% if s.status == 'CLOSED' %}
+                        <span class="{{ 'diff-pos' if s.difference > 0 else ('diff-neg' if s.difference < 0 else '') }}">
+                            {{ '+' if s.difference > 0 }}{{ s.difference|currency }}
+                        </span>
+                    {% else %}
+                        —
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+</html>

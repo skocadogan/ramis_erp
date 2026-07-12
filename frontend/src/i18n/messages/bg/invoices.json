@@ -1,0 +1,42 @@
+{
+  "page": {
+    "title": "Фактури",
+    "description": "Издадени фактури и PDF изтегляния{branchSuffix}",
+    "branchSuffixWithName": " — {name}",
+    "branchRequired": "Клонът е задължителен.",
+    "listTitle": "Списък с фактури",
+    "listHint": "Фактури за избрания клон; филтриране по дата, наличие на PDF и търсене.",
+    "dateFrom": "От",
+    "dateTo": "До",
+    "pdfFilter": "PDF",
+    "pdfAll": "Всички",
+    "pdfYes": "Има PDF",
+    "pdfNo": "Няма PDF",
+    "searchLabel": "№ / клиент",
+    "searchPlaceholder": "Търсене…",
+    "resetFilters": "Нулиране на филтрите",
+    "empty": "Няма фактури, отговарящи на критериите."
+  },
+  "table": {
+    "number": "№",
+    "customer": "Клиент",
+    "amount": "Сума",
+    "date": "Дата",
+    "pdf": "PDF",
+    "download": "Изтегли",
+    "noPdf": "Няма",
+    "missing": "—"
+  },
+  "createModal": {
+    "title": "Създаване на фактура",
+    "saleLine": "Продажба: {id}… · {amount}",
+    "placeholderName": "Титуляр / пълно име",
+    "placeholderTaxId": "Данъчен номер / ЕГН",
+    "placeholderAddress": "Адрес",
+    "dismiss": "Отказ",
+    "submit": "Създай",
+    "submitting": "…",
+    "toastSuccess": "Фактурата е създадена.",
+    "toastError": "Неуспешно създаване на фактура."
+  }
+}

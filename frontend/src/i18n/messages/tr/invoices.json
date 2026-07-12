@@ -1,0 +1,42 @@
+{
+  "page": {
+    "title": "Faturalar",
+    "description": "Kesilen faturalar ve PDF indirme{branchSuffix}",
+    "branchSuffixWithName": " — {name}",
+    "branchRequired": "Şube gerekli.",
+    "listTitle": "Fatura listesi",
+    "listHint": "Şubeye ait kesilen faturalar; tarih, PDF ve arama ile süzebilirsiniz.",
+    "dateFrom": "Başlangıç",
+    "dateTo": "Bitiş",
+    "pdfFilter": "PDF",
+    "pdfAll": "Tümü",
+    "pdfYes": "PDF var",
+    "pdfNo": "PDF yok",
+    "searchLabel": "No / müşteri",
+    "searchPlaceholder": "Ara…",
+    "resetFilters": "Filtreleri sıfırla",
+    "empty": "Kriterlere uygun fatura yok."
+  },
+  "table": {
+    "number": "No",
+    "customer": "Müşteri",
+    "amount": "Tutar",
+    "date": "Tarih",
+    "pdf": "PDF",
+    "download": "İndir",
+    "noPdf": "Yok",
+    "missing": "—"
+  },
+  "createModal": {
+    "title": "Fatura oluştur",
+    "saleLine": "Satış: {id}… · {amount}",
+    "placeholderName": "Ünvan / ad soyad",
+    "placeholderTaxId": "VKN / TCKN",
+    "placeholderAddress": "Adres",
+    "dismiss": "Vazgeç",
+    "submit": "Oluştur",
+    "submitting": "…",
+    "toastSuccess": "Fatura oluşturuldu.",
+    "toastError": "Fatura oluşturulamadı."
+  }
+}

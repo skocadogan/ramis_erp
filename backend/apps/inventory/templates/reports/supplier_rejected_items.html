@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>{{ supplier_name }} — {{ report_name }}</title>
+  <style>
+    body {
+      font-family: DejaVu Sans, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      color: #1e293b;
+      margin: 0;
+      padding: 18px 20px;
+    }
+    .doc-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #b91c1c;
+      margin: 0 0 2px 0;
+      letter-spacing: 0.02em;
+    }
+    .supplier-name {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 0 0 12px 0;
+    }
+    .summary {
+      margin-bottom: 14px;
+      font-size: 8.5pt;
+      color: #475569;
+    }
+    table.lines {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+    table.lines th,
+    table.lines td {
+      padding: 6px 4px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    table.lines th {
+      background: #fef2f2;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #991b1b;
+      text-align: left;
+    }
+    table.lines th.right,
+    table.lines td.right { text-align: right; }
+    .footer {
+      margin-top: 18px;
+      font-size: 7pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <p class="doc-title">{{ report_name }}</p>
+  <p class="supplier-name">{{ supplier_name }}</p>
+
+  <p class="summary">
+    {{ _('Toplam reddedilen ürün kaydı:') }} {{ count }}
+    {% if limit_reached %}<span style="color:#b91c1c;"> ({{ _('Gösterim sınırına ulaşıldı (2000)') }})</span>{% endif %}
+  </p>
+
+  <table class="lines">
+    <thead>
+      <tr>
+        <th style="width:16%">{{ _('Mal Kabul No') }}</th>
+        <th style="width:10%">{{ _('Tarih') }}</th>
+        <th style="width:22%">{{ _('Ürün') }}</th>
+        <th style="width:10%" class="right">{{ _('Beklenen') }}</th>
+        <th style="width:10%" class="right">{{ _('Alınan') }}</th>
+        <th style="width:10%" class="right">{{ _('Red') }}</th>
+        <th style="width:7%">{{ _('Birim') }}</th>
+        <th style="width:15%">{{ _('Parti No') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for it in items %}
+      <tr>
+        <td>{{ it.receiving_number }}</td>
+        <td>{{ it.received_date }}</td>
+        <td>
+          {{ it.stock_item_name }}
+          <span style="color:#94a3b8;font-size:7pt;"> ({{ it.stock_item_sku }})</span>
+        </td>
+        <td class="right">{{ it.expected_quantity | qty }} {{ it.unit }}</td>
+        <td class="right">{{ it.received_quantity | qty }} {{ it.unit }}</td>
+        <td class="right" style="color:#b91c1c;font-weight:bold;">{{ it.rejected_quantity | qty }} {{ it.unit }}</td>
+        <td>{{ it.unit }}</td>
+        <td>{{ it.batch_number }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p class="footer">{{ _('Bu belge Ramis ERP üzerinden üretilmiştir.') }}</p>
+</body>
+</html>

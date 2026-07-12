@@ -1,0 +1,957 @@
+{
+  "title": "Yönetim Paneli",
+  "common": {
+    "loading": "Yükleniyor...",
+    "error": "Hata",
+    "success": "Başarılı",
+    "save": "Kaydet",
+    "cancel": "İptal",
+    "create": "Oluştur",
+    "update": "Güncelle",
+    "delete": "Sil",
+    "restore": "Geri Yükle",
+    "edit": "Düzenle",
+    "search": "Ara...",
+    "all": "Tümü",
+    "active": "Aktif",
+    "passive": "Pasif",
+    "status": "Durum",
+    "actions": "İşlemler",
+    "confirmDelete": "Silmek istediğinize emin misiniz?",
+    "saving": "Kaydediliyor...",
+    "deleteConfirmDescription": "Bu işlem geri alınamaz.",
+    "noMatch": "Eşleşen kayıt bulunamadı."
+  },
+  "cancellationReason": {
+    "defaultTitle": "İptal Gerekçesi",
+    "defaultDescription": "Bu işlem denetim kaydı olarak saklanacaktır. Lütfen iptal nedenini belirtin.",
+    "categoryLabel": "Gerekçe Kategorisi",
+    "selectPlaceholder": "Seçiniz...",
+    "detailLabel": "Detaylı Açıklama (Opsiyonel)",
+    "detailPlaceholder": "Eklemek istediğiniz detaylar...",
+    "dismiss": "Vazgeç",
+    "submit": "İptal Et ve Kaydet",
+    "reasons": {
+      "MISTAKE": "Yanlış Sipariş / Giriş Hatası",
+      "CUSTOMER_CANCEL": "Müşteri Vazgeçti",
+      "OUT_OF_STOCK": "Ürün Kalmadı (86)",
+      "KITCHEN_ERROR": "Mutfak Hatası",
+      "QUALITY_ISSUE": "Kalite / Şikayet",
+      "OTHER": "Diğer (Açıklama Yazınız)",
+      "SALE_VOID": "Satış iptali (iade)",
+      "mistake": "Hatalı Giriş",
+      "customerCancel": "Müşteri Vazgeçti",
+      "outOfStock": "Ürün Tükendi",
+      "kitchenError": "Mutfak Hatası",
+      "qualityIssue": "Kalite Problemi",
+      "other": "Diğer"
+    }
+  },
+  "panelPage": {
+    "branchCreateFailed": "Şube oluşturulamadı.",
+    "branchDeleteFailed": "\"{name}\" şubesi silinemedi.",
+    "branchRestoreFailed": "\"{name}\" şubesi geri yüklenemedi.",
+    "roleSaveFailed": "Rol kaydedilemedi.",
+    "roleDeleteFailed": "Rol silinemedi.",
+    "roleStaleToast": "Bu rol artık mevcut değil. Veriler yenilendi.",
+    "roleDeleteConfirm": "Bu rolü silmek istediğinize emin misiniz?"
+  },
+  "tabs": {
+    "overview": "Genel Bakış",
+    "users": "Kullanıcılar",
+    "branches": "Şubeler",
+    "roles": "Roller & İzinler",
+    "inventory": "Envanter",
+    "recipes": "Reçeteler",
+    "menu": "Menü Yönetimi",
+    "orders": "Sipariş Geçmişi",
+    "sales": "Satışlar",
+    "stations": "Mutfak İstasyonları",
+    "waiterAssignments": "Garson Atamaları",
+    "cookAssignments": "Aşçı Atamaları",
+    "managerAssignments": "Yönetici Atamaları",
+    "printers": "Yazıcı Ayarları",
+    "reporting": "Raporlama",
+    "audit": "Denetim Logları",
+    "posSettings": "POS Ayarları",
+    "surveys": "Anketler"
+  },
+  "surveys": {
+    "title": "Anketler",
+    "description": "Müşteri ekranında gösterilecek anketleri ve gelen geri bildirimleri yönetin.",
+    "addNew": "Yeni Anket",
+    "searchPlaceholder": "Anket ara...",
+    "allBranches": "Tüm Şubeler",
+    "empty": "Henüz anket oluşturulmadı.",
+    "deleteTitle": "Anketi Sil",
+    "deleteDescription": "\"{title}\" anketi kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+    "channels": {
+      "customerDisplayOn": "Müşteri ekranı açık",
+      "customerDisplayOff": "Müşteri ekranı kapalı",
+      "smartTableOn": "Smart Table açık",
+      "smartTableOff": "Smart Table kapalı"
+    },
+    "table": {
+      "title": "Anket",
+      "branches": "Şubeler",
+      "channels": "Kanallar",
+      "questions": "Soru",
+      "responses": "Yanıt",
+      "status": "Durum"
+    },
+    "answerTypes": {
+      "RATING": "Derecelendirme",
+      "YES_NO": "Evet / Hayır",
+      "OPTION": "Seçenek",
+      "SHORT_TEXT": "Kısa Metin"
+    },
+    "roles": {
+      "NONE": "Genel",
+      "NPS": "NPS",
+      "FOOD": "Yemek",
+      "SERVICE": "Servis",
+      "SPEED": "Hız",
+      "CLEANLINESS": "Temizlik"
+    },
+    "attentionStatus": {
+      "OPEN": "İlgi Bekliyor",
+      "REVIEWED": "İnceleniyor",
+      "RESOLVED": "Çözüldü"
+    },
+    "form": {
+      "createTitle": "Yeni Anket Oluştur",
+      "editTitle": "Anketi Düzenle",
+      "description": "Şubeleri, yayın kanallarını ve soru akışını bu ekrandan yönetin.",
+      "title": "Anket Başlığı",
+      "titlePlaceholder": "Örn. Servis memnuniyet anketi",
+      "sortOrder": "Sıra",
+      "descriptionLabel": "Açıklama",
+      "descriptionPlaceholder": "Müşteriye gösterilecek kısa açıklama...",
+      "flags": {
+        "active": "Anket aktif",
+        "customerDisplay": "Müşteri ekranında aktif",
+        "smartTable": "Smart Table'da aktif"
+      },
+      "branches": "Şubeler",
+      "questions": "Sorular",
+      "addQuestion": "Soru Ekle",
+      "questionNumber": "Soru {number}",
+      "questionText": "Soru Metni",
+      "questionTextPlaceholder": "Müşteriye gösterilecek soru metni",
+      "answerType": "Cevap Tipi",
+      "role": "Analitik Rol",
+      "questionSortOrder": "Soru Sırası",
+      "required": "Yanıt zorunlu",
+      "ratingMin": "Minimum Puan",
+      "ratingMax": "Maksimum Puan",
+      "placeholder": "Yardımcı Metin",
+      "placeholderPlaceholder": "Örn. Kısa yorumunuzu yazın",
+      "options": "Seçenekler",
+      "addOption": "Seçenek Ekle",
+      "optionPlaceholder": "Seçenek metni"
+    },
+    "results": {
+      "title": "Anket Sonuçları",
+      "description": "Toplanan geri bildirimleri filtreleyin ve dikkat gerektiren kayıtları yönetin.",
+      "descriptionWithSurvey": "\"{title}\" anketine ait yanıtlar",
+      "count": "{count} yanıt",
+      "empty": "Bu ankete ait yanıt bulunamadı.",
+      "noCustomer": "Misafir bilgisi yok",
+      "detailEmpty": "Detayları görmek için soldan bir yanıt seçin.",
+      "detailAnswers": "Yanıtlar",
+      "detailPreview": "Özet",
+      "detailAttention": "İlgi Durumu",
+      "notePlaceholder": "Operasyon notu ekleyin...",
+      "saveAttention": "Durumu Kaydet",
+      "filters": {
+        "allStatuses": "Tüm durumlar"
+      },
+      "table": {
+        "date": "Tarih",
+        "context": "Bağlam",
+        "metrics": "Metrikler",
+        "status": "Durum"
+      },
+      "messages": {
+        "updateSuccess": "Yanıt durumu güncellendi.",
+        "updateError": "Yanıt durumu güncellenemedi."
+      }
+    },
+    "messages": {
+      "createSuccess": "Anket oluşturuldu.",
+      "updateSuccess": "Anket güncellendi.",
+      "saveError": "Anket kaydedilemedi.",
+      "deleteSuccess": "Anket silindi.",
+      "deleteError": "Anket silinemedi."
+    }
+  },
+  "stations": {
+    "title": "Mutfak İstasyonları",
+    "subtitle": "Siparişlerin hangi mutfağa yönlendirileceğini tanımlayın",
+    "addNew": "Yeni İstasyon",
+    "stationName": "İstasyon Adı",
+    "branch": "Şube",
+    "warehouse": "İlişkili Depo",
+    "descriptionLabel": "Açıklama",
+    "warehouseNote": "Eksik listeleri bu depoya yönlendirilecektir.",
+    "code": "Kod (slug)",
+    "categories": "Kategoriler",
+    "color": "Renk (KDS ekran rengi)",
+    "colorAria": "Renk {code}",
+    "openKds": "KDS Ekranını Aç",
+    "noWarehouse": "Depo Atanmamış",
+    "selectBranch": "Şube seçin...",
+    "selectWarehouse": "Depo seçin (Opsiyonel)...",
+    "count": "{count} istasyon",
+    "allBranches": "Tüm Şubeler",
+    "placeholderName": "Ana Mutfak",
+    "placeholderCode": "ana-mutfak",
+    "placeholderDesc": "Sıcak yemekler, pizza, burger...",
+    "errors": {
+      "loadFailed": "İstasyonlar yüklenemedi.",
+      "warehousesLoadFailed": "Depolar yüklenemedi.",
+      "requiredFields": "Şube, ad ve kod zorunludur.",
+      "saveFailed": "Kayıt sırasında hata oluştu.",
+      "deleteFailed": "İstasyon silinemedi."
+    },
+    "empty": {
+      "title": "Henüz istasyon eklenmedi.",
+      "action": "+ İlk istasyonu ekle"
+    }
+  },
+  "printers": {
+    "title": "Yazıcı Yönetimi",
+    "description": "Termal fiş ve rapor yazıcılarını yapılandırın (Network/USB)",
+    "addNew": "Yeni Yazıcı",
+    "printer": "Yazıcı",
+    "usage": "Alan",
+    "station": "İstasyon",
+    "noStation": "Atanmamış",
+    "connection": "Bağlantı",
+    "address": "Adres",
+    "model": "Model",
+    "testPrint": "Test Çıktısı",
+    "connectionTypes": {
+      "network": "Ağ (Ethernet/WiFi)",
+      "usb": "USB"
+    },
+    "usageTypes": {
+      "pos": "POS / Kasa",
+      "kitchen": "Mutfak / Hazırlık"
+    },
+    "fields": {
+      "name": "Yazıcı Adı",
+      "ipAddress": "IP Adresi",
+      "port": "Port",
+      "devicePath": "Cihaz Yolu (USB)",
+      "printerType": "Yazıcı Modeli",
+      "kitchenStation": "Hangi İstasyonda Kullanılacak",
+      "receiptTemplate": "Fiş Şablonu"
+    },
+    "selectStation": "İstasyon seçin...",
+    "selectTemplate": "Şablon seçin...",
+    "messages": {
+      "testSending": "Test çıktısı gönderiliyor...",
+      "testSuccess": "Test çıktısı başarıyla gönderildi.",
+      "testFailed": "Test çıktısı başarısız.",
+      "updateSuccess": "Yazıcı güncellendi.",
+      "createSuccess": "Yazıcı oluşturuldu.",
+      "deleteSuccess": "Yazıcı silindi."
+    },
+    "errors": {
+      "loadFailed": "Yazıcılar yüklenemedi.",
+      "requiredFields": "Şube ve Yazıcı Adı zorunludur.",
+      "requiredUsbPath": "USB yazıcılar için Cihaz Yolu zorunludur.",
+      "requiredIp": "Ağ yazıcıları için IP Adresi zorunludur.",
+      "requiredStation": "Mutfak yazıcıları için istasyon seçimi zorunludur.",
+      "requiredTemplate": "Mutfak yazıcıları için fiş şablonu zorunludur.",
+      "ipNotEmpty": "IP adresi boş bırakılamaz.",
+      "saveFailed": "Kayıt sırasında hata oluştu.",
+      "deleteFailed": "Yazıcı silinemedi."
+    },
+    "modals": {
+      "deleteTitle": "Yazıcıyı Sil",
+      "deleteDesc": "\"{name}\" yazıcısı kalıcı olarak silinecektir. Bu işlem geri alınamaz."
+    },
+    "empty": "Henüz yazıcı eklenmedi."
+  },
+  "inventory": {
+    "title": "Stok Yönetimi",
+    "description": "Mevcut stok kalemleri ve anlık miktar bilgileri.",
+    "goToPage": "Stok Sayfasına Git",
+    "searchPlaceholder": "Ürün adı veya SKU ile ara...",
+    "allWarehouses": "Tümü (Yetkili)",
+    "table": {
+      "item": "Ürün",
+      "sku": "SKU",
+      "current": "Mevcut",
+      "min": "Min.",
+      "status": "Durum"
+    },
+    "status": {
+      "low": "Düşük",
+      "normal": "Normal"
+    },
+    "empty": "Henüz stok kalemi bulunamadı."
+  },
+  "recipes": {
+    "title": "Reçete Yönetimi",
+    "description": "Ürün reçetelerini ve maliyet yapılarını yönetin",
+    "goToPage": "Reçete Sayfasına Git",
+    "details": "Reçete Detayı",
+    "menuProduct": "Menü Ürünü",
+    "totalCost": "Toplam Maliyet",
+    "ingredients": "Malzemeler",
+    "independent": "Bağımsız Reçete",
+    "table": {
+      "recipe": "Reçete",
+      "product": "Ürün",
+      "ingredientCount": "Malzeme",
+      "cost": "Maliyet",
+      "ingredient": "Malzeme",
+      "quantity": "Miktar"
+    },
+    "empty": "Bu reçeteye ait malzeme bulunamadı."
+  },
+  "menu": {
+    "title": "Menü Yönetimi",
+    "description": "Kategoriler ve ürün listesini düzenleyin",
+    "goToPage": "Menü Sayfasına Git",
+    "categoriesCount": "Kategoriler ({count})",
+    "productsCount": "Ürünler ({count})",
+    "addNewCategory": "Yeni Kategori",
+    "addNewProduct": "Yeni Ürün"
+  },
+  "orders": {
+    "title": "Sipariş Geçmişi",
+    "description": "Geçmiş ve aktif sipariş kayıtlarını inceleyin",
+    "goToPage": "POS Sayfasına Git",
+    "searchPlaceholder": "Sipariş, masa, kullanıcı, şube ara...",
+    "details": "Sipariş detayı",
+    "items": "Sipariş kalemleri ({count})",
+    "itemsEmpty": "Kalem listesi yüklenemedi veya boş.",
+    "status": {
+      "PENDING": "Bekliyor",
+      "PREPARING": "Hazırlanıyor",
+      "READY": "Hazır",
+      "DELIVERED": "Teslim edildi",
+      "COMPLETED": "Tamamlandı",
+      "CANCELLED": "İptal edildi"
+    },
+    "fields": {
+      "id": "Sipariş no",
+      "date": "Tarih",
+      "status": "Durum",
+      "total": "Tutar",
+      "createdAt": "Oluşturulma",
+      "updatedAt": "Son güncelleme",
+      "branch": "Şube",
+      "table": "Masa",
+      "user": "Açan kullanıcı",
+      "notes": "Genel not",
+      "unitPrice": "Birim",
+      "station": "İstasyon",
+      "itemNote": "Not",
+      "takeaway": "Paket / masa yok"
+    },
+    "actions": {
+      "forceClose": "Kapat",
+      "cancel": "İptal Et",
+      "forceCloseConfirm": "Bu siparişi zorla kapatmak istediğinize emin misiniz? Bu işlem satış kaydı oluşturmaz, asılı kalan siparişleri temizlemek içindir.",
+      "cancelSuccess": "Sipariş iptal edildi.",
+      "forceCloseSuccess": "Sipariş zorla kapatıldı."
+    },
+    "errors": {
+      "cancelFailed": "Sipariş iptal edilemedi.",
+      "forceCloseFailed": "Sipariş kapatılamadı."
+    }
+  },
+  "sales": {
+    "title": "Satış Analizi",
+    "description": "Tüm ödeme kayıtlarını görüntüleyin",
+    "summary": {
+      "selected": "Seçili kayıtlar",
+      "gross": "Liste (brüt)",
+      "discount": "İndirim",
+      "net": "Genel Toplam"
+    },
+    "filters": {
+      "tablePlaceholder": "Masa seçin...",
+      "cashierPlaceholder": "Kasiyer seçin...",
+      "allTables": "Tüm Masalar",
+      "allCashiers": "Tüm Kasiyerler",
+      "allPayments": "Tüm Ödemeler",
+      "cash": "Nakit",
+      "card": "Kart",
+      "other": "Diğer",
+      "date": "Tarih:",
+      "resetTitle": "Varsayılanı uygula (bugün)"
+    },
+    "table": {
+      "index": "#",
+      "table": "Masa",
+      "cashier": "Kasiyer",
+      "method": "Ödeme Yöntemi",
+      "gross": "Liste (brüt)",
+      "discount": "İndirim",
+      "total": "Genel Toplam",
+      "branch": "Şube",
+      "date": "Tarih",
+      "notes": "Notlar",
+      "count": "{count} kayıt"
+    }
+  },
+  "roles": {
+    "title": "Roller & İzinler",
+    "description": "Kullanıcı rolleri ve izinleri tanımlama",
+    "addNew": "Yeni Rol",
+    "rolesCount": "Roller ({count})",
+    "permCategories": "İzin Kategorileri",
+    "more": "+{count} daha",
+    "name": "Rol Adı",
+    "permissions": "İzinler",
+    "create": "Rol Ekle",
+    "edit": "Rolü Düzenle",
+    "descriptionLabel": "Açıklama",
+    "parentRole": "Üst Rol",
+    "parentRoleNone": "Yok (üst seviye)",
+    "permissionCountSummary": "{selected} / {total} izin seçili",
+    "namePlaceholder": "Örn: BranchManager",
+    "descriptionPlaceholder": "Rolün amacını kısaca açıklayın…",
+    "selectAllPerms": "Tümünü Seç",
+    "clearPerms": "Temizle",
+    "permissionSearchPlaceholder": "İzin adı veya kod ile ara…",
+    "categoryFilterLabel": "Kategori",
+    "allCategories": "Tüm kategoriler",
+    "resetFilters": "Filtreleri sıfırla",
+    "permissionListAriaLabel": "İzin listesi",
+    "noPermissionsMatchFilter": "Filtreye uygun izin bulunamadı. Aramayı veya kategori seçimini değiştirin.",
+    "categoryToggleAll": "Tümü",
+    "categoryToggleRemove": "Kaldır",
+    "footerEditing": "Düzenleniyor: {name}",
+    "footerCreating": "Yeni rol oluşturulacak",
+    "createSuccess": "Rol oluşturuldu.",
+    "deleteSuccess": "Rol silindi."
+  },
+  "posSettings": {
+    "title": "POS Ayarları",
+    "description": "Ödeme noktaları, müşteri ekranı içerikleri ve bekleme modu ayarları.",
+    "branchLabel": "Şube",
+    "displayScopeLabel": "Müşteri ekranı ayarı",
+    "branchDefaultScope": "Şube varsayılanı (tüm POS)",
+    "displayScopeHintBranch": "Bu ayarlar bu şubedeki tüm müşteri ekranları için geçerlidir; aşağıdan belirli bir POS seçerek özelleştirebilirsiniz.",
+    "displayScopeHintTerminal": "Yalnızca seçilen POS ile eşleşen müşteri ekranı bu ayarları kullanır; tanımlı değilse şube varsayılanına düşer.",
+    "slideScopeAll": "Tüm POS",
+    "noBranchError": "POS ayarlarını düzenlemek için şube seçin veya hesabınıza şube atanmalıdır.",
+    "applyChanges": "Değişiklikleri Uygula",
+    "applyingChanges": "Uygulanıyor...",
+    "defaults": {
+      "welcomeTitle": "RAMIS ERP",
+      "welcomeSubtitle": "Şeffaf ve Profesyonel Hizmet",
+      "orderSuccessTitle": "Siparişiniz Alındı",
+      "orderSuccessSubtitle": "Mutfağa iletildi, hazırlanıyor...",
+      "paymentSuccessTitle": "Teşekkürler",
+      "paymentSuccessSubtitle": "Afiyet olsun, yine bekleriz."
+    },
+    "messages": {
+      "saveSuccess": "Ayarlar başarıyla kaydedildi.",
+      "saveError": "Ayarlar kaydedilemedi.",
+      "applySuccess": "Değişiklikler uygulandı. Müşteri ekranları otomatik yenileniyor.",
+      "applyError": "Değişiklikler uygulanırken bir hata oluştu.",
+      "slideSaveSuccess": "Slayt başarıyla kaydedildi.",
+      "slideSaveError": "Slayt kaydedilemedi.",
+      "slideDeleteSuccess": "Slayt silindi.",
+      "slideDeleteError": "Slayt silinemedi.",
+      "slideActivated": "Slayt aktifleştirildi.",
+      "slideDeactivated": "Slayt pasifleştirildi.",
+      "statusUpdateError": "Durum güncellenemedi."
+    },
+    "modals": {
+      "deleteSlideTitle": "Slaytı Sil",
+      "deleteSlideDesc": "Bu slaytı silmek istediğinize emin misiniz? Bu işlem geri alınamaz."
+    }
+  },
+  "audit": {
+    "title": "Denetim Kayıtları",
+    "description": "Uygulama genelindeki kritik operasyonların kayıtları.",
+    "allBranches": "Tüm Şubeler",
+    "allActions": "Tüm Eylemler",
+    "startDate": "Başlangıç",
+    "endDate": "Bitiş",
+    "export": "CSV Dışa Aktar",
+    "exporting": "Dışa aktarılıyor...",
+    "exportSuccess": "Denetim kayıtları indirildi.",
+    "exportFailed": "Denetim kayıtları dışa aktarılamadı.",
+    "searchPlaceholder": "Eylem, kullanıcı veya hedef ara...",
+    "table": {
+      "dateActor": "Tarih / Aktör",
+      "action": "Eylem",
+      "target": "Hedef",
+      "detail": "Detay"
+    },
+    "actions": {
+      "order": {
+        "cancelled": "Sipariş İptali",
+        "created": "Sipariş Oluşturma",
+        "completed": "Sipariş Tamamlama",
+        "force_closed": "Sipariş Zorla Kapatma",
+        "auto_close_initiated": "Otomatik Kapama Başlatıldı",
+        "auto_closed": "Otomatik Kapama Tamamlandı",
+        "discount_applied": "Sipariş İndirimi",
+        "discount_removed": "Sipariş İndirimi Kaldırıldı"
+      },
+      "table": {
+        "auto_closed": "Masa Otomatik Kapatıldı"
+      },
+      "order_item": {
+        "cancelled": "Ürün İptali",
+        "discount_applied": "Ürün İndirimi",
+        "recalled": "KDS Geri Çağır"
+      },
+      "sale": {
+        "created": "Satış Oluşturma"
+      },
+      "stock": {
+        "receive": "Stok Girişi",
+        "out": "Stok Çıkışı",
+        "waste": "Fire / Zayi",
+        "transfer": "Stok Transferi",
+        "adjustment": "Stok Düzeltme",
+        "movement_deleted": "Stok Hareketi Silme",
+        "return": "Stok İadesi"
+      },
+      "warehouse": {
+        "purchase_recommendation": {
+          "committed": "Satın Alma Önerisi Onayı"
+        },
+        "transfer": {
+          "created": "Depo Transferi Oluşturma",
+          "approved": "Depo Transferi Onayı",
+          "completed": "Depo Transferi Tamamlama",
+          "cancelled": "Depo Transferi İptali"
+        },
+        "purchase_order": {
+          "approved": "Satın Alma Siparişi Onayı",
+          "cancelled": "Satın Alma Siparişi İptali"
+        },
+        "goods_receiving": {
+          "completed": "Mal Kabul Tamamlama"
+        },
+        "stock_counting": {
+          "approved": "Stok Sayımı Onayı",
+          "deleted": "Stok Sayımı Silme"
+        },
+        "deficiency_report": {
+          "approved": "Eksik Listesi Onayı",
+          "cancelled": "Eksik Listesi İptali",
+          "ordered": "Eksik Listesinden Sipariş",
+          "item_actions_executed": "Eksik Kalem İşlemleri Uygulandı"
+        }
+      },
+      "inventory": {
+        "expiry_action": {
+          "priority_consume": "SKT — Öncelikli Tüket",
+          "transfer_suggest": "SKT — Transfer Önerisi",
+          "plan_note": "SKT — Plan Notu"
+        },
+        "expiry_auto_return_cancel": "SKT — Otomatik İade İptal"
+      },
+      "shift": {
+        "opened": "Vardiya Açma",
+        "closed": "Vardiya Kapatma",
+        "expense_added": "Vardiya Gideri",
+        "cash_movement": {
+          "in": "Kasa Girişi",
+          "out": "Kasa Çıkışı"
+        },
+        "update_closing": "Vardiya Sonu Düzeltme"
+      },
+      "pos": {
+        "idempotency": {
+          "conflict": "POS Idempotency Çakışması",
+          "scope_mismatch": "POS Idempotency Kapsam Uyuşmazlığı"
+        }
+      },
+      "production_planning": {
+        "availability": {
+          "auto_purged": "Geçmiş 86 Kaydı Otomatik Silindi",
+          "purge_expired_completed": "Geçmiş 86 Toplu Temizlik Tamamlandı"
+        }
+      }
+    },
+    "details": {
+      "title": "İşlem Detayı",
+      "date": "Tarih",
+      "branch": "Şube",
+      "global": "Global / Sistem",
+      "context": "Bağlam Bilgisi",
+      "ip": "IP Adresi",
+      "ua": "Cihaz / Tarayıcı",
+      "metadata": "Metadata / Gerekçe",
+      "dataChange": "Veri Değişimi",
+      "before": "ÖNCE",
+      "after": "SONRA",
+      "noSelection": "Kayıt Seçilmedi",
+      "selectionDesc": "Detaylı IP, cihaz ve veri değişim bilgilerini görmek için bir satıra tıklayın."
+    },
+    "system": "Sistem",
+    "empty": "Denetim logu bulunamadı."
+  },
+  "overview": {
+    "title": "Genel Bakış",
+    "description": "Yetkiniz olan modüllere göre özet; karta tıklayarak ilgili yönetim sayfasına gidebilirsiniz.",
+    "noAccess": "Erişiminiz olan bir yönetim modülü yok. Yetkileriniz için sistem yöneticinize danışın.",
+    "activeUsers": "Aktif Kullanıcılar",
+    "activeBranches": "Aktif Şubeler",
+    "stats": {
+      "users": "Kullanıcılar",
+      "branches": "Şubeler",
+      "stations": "Mutfak İstasyonları",
+      "roles": "Roller",
+      "inventory": "Stok kalemleri",
+      "recipes": "Reçeteler",
+      "categories": "Menü kategorileri",
+      "products": "Menü ürünleri",
+      "pendingOrders": "Aktif sipariş",
+      "sales": "Satış kayıtları",
+      "posDisplay": "POS müşteri ekranı"
+    },
+    "alerts": {
+      "lowStock": "{count} düşük",
+      "inProgress": "işlemde",
+      "lowStockWarning": "Düşük Stok Uyarısı"
+    }
+  },
+  "assignments": {
+    "waiter": {
+      "title": "Garson bölge ve masa ataması",
+      "description": "Birincil şubesi seçilen şube ile eşleşen kullanıcılara salon bölgeleri ve doğrudan masalar tanımlanır. Paket bölgeleri listelenmez.",
+      "staffLabel": "Garson",
+      "staffSelect": "— Kullanıcı seçin —",
+      "zonesTitle": "Bölgeler (zone)",
+      "tablesTitle": "Masalar (doğrudan)",
+      "noZones": "Bu şubede salon bölgesi yok.",
+      "noTables": "Listelenecek masa yok (önce salon bölgesi ve masa oluşturun).",
+      "zonesSelected": "{count} / {total} bölge seçili",
+      "tablesSelected": "{count} / {total} masa seçili",
+      "saveWarning": "Kaydetmek için önce bir garson seçin."
+    },
+    "cook": {
+      "title": "Aşçı istasyon ataması",
+      "description": "Aşçılara sorumlu oldukları mutfak istasyonlarını atayın.",
+      "staffLabel": "Aşçı",
+      "stationsTitle": "İstasyonlar",
+      "noStations": "Bu şubede mutfak istasyonu yok.",
+      "stationsSelected": "{count} / {total} istasyon seçili",
+      "saveWarning": "Kaydetmek için önce bir aşçı seçin."
+    },
+    "manager": {
+      "title": "Müdür şube ataması",
+      "description": "Müdürlere yönetebilecekleri ek şubeleri atayın.",
+      "staffLabel": "Müdür",
+      "branchesTitle": "Yetkili Şubeler",
+      "noBranches": "Atanabilecek başka şube yok.",
+      "branchesSelected": "{count} / {total} şube seçili",
+      "saveWarning": "Kaydetmek için önce bir müdür seçin."
+    },
+    "cashierPin": {
+      "title": "Kasiyer PIN tanımlamaları",
+      "description": "Kasiyer kullanıcılarına hızlı geçiş için 4 haneli PIN numarası tanımlayın ve yetkili POS terminallerini seçin.",
+      "staffLabel": "Kasiyer",
+      "staffSelect": "— Kullanıcı seçin —",
+      "posTitle": "Yetkili POS Terminalleri",
+      "pinTitle": "PIN Tanımlama",
+      "noPos": "Bu şubede tanımlı POS terminali bulunmuyor.",
+      "posSelected": "{count} / {total} POS seçili",
+      "pinLabel": "4 Haneli PIN Kodu",
+      "pinPlaceholder": "Örn: 1234",
+      "saveWarning": "Kaydetmek için önce bir kasiyer seçin ve 4 haneli PIN girin.",
+      "toastCashierSaved": "Kasiyer PIN tanımlaması kaydedildi."
+    },
+    "common": {
+      "branch": "Şube",
+      "selectAll": "Tümünü seç",
+      "deselectAll": "Seçimi kaldır",
+      "saving": "Kaydediliyor…",
+      "save": "Kaydet",
+      "emptyBranches": "Şube listesi boş.",
+      "toastWaiterSaved": "Garson ataması kaydedildi.",
+      "toastCookSaved": "Aşçı istasyon ataması kaydedildi.",
+      "toastManagerSaved": "Müdür şube ataması kaydedildi.",
+      "toastSaveFailed": "Kayıt başarısız."
+    }
+  },
+  "reporting": {
+    "title": "ESC/POS Fiş Şablonları",
+    "description": "Termal yazıcılar için blok tabanlı fiş tasarımları",
+    "addNew": "Yeni Şablon",
+    "import": "Dosyadan Yükle",
+    "export": "JSON Olarak Dışa Aktar",
+    "clone": "Kopyasını Oluştur",
+    "table": {
+      "name": "Şablon Adı",
+      "category": "Kategori",
+      "paper": "Kağıt",
+      "blocks": "Blok",
+      "default": "Varsayılan"
+    },
+    "categories": {
+      "all": "Tümü",
+      "pos": "POS Fişi",
+      "kitchen": "Mutfak",
+      "waiter": "Garson"
+    },
+    "editor": {
+      "returnList": "Listeye Dön",
+      "templateName": "Şablon Adı *",
+      "slug": "slug *",
+      "blocksCount": "Şablon Blokları ({count})",
+      "preview": "Termal Önizleme",
+      "expand": "Genişlet",
+      "shrink": "Daralt",
+      "dragToResize": "Sürükleyerek boyutlandır",
+      "zoomIn": "Yakınlaştır",
+      "zoomOut": "Uzaklaştır",
+      "zoomReset": "Sıfırla",
+      "help": "Yardım",
+      "update": "Güncelle",
+      "save": "Kaydet",
+      "validation": {
+        "nameRequired": "Şablon adı zorunludur.",
+        "slugRequired": "Şablon kodu (slug) zorunludur.",
+        "blocksRequired": "En az bir blok eklemelisiniz.",
+        "invalidFile": "Geçersiz şablon dosyası.",
+        "readError": "Dosya okunurken hata oluştu.",
+        "saveError": "Kayıt sırasında hata oluştu."
+      }
+    },
+    "messages": {
+      "loadError": "Fiş şablonları yüklenemedi.",
+      "updateSuccess": "Şablon güncellendi.",
+      "createSuccess": "Şablon oluşturuldu.",
+      "deleteSuccess": "Şablon silindi.",
+      "deleteError": "Şablon silinemedi.",
+      "setDefaultSuccess": "\"{name}\" varsayılan yapıldı.",
+      "setDefaultError": "İşlem başarısız.",
+      "cloneSuccess": "\"{name}\" kopyalandı.",
+      "cloneError": "Kopyalama işlemi başarısız oldu.",
+      "importSuccess": "Şablon dosyası yüklendi. Kontrol edip kaydedebilirsiniz.",
+      "exportSuccess": "Şablon JSON olarak indirildi."
+    },
+    "modals": {
+      "deleteTitle": "Şablonu silmek istediğinize emin misiniz?",
+      "deleteDesc": "\"{name}\" şablonu kalıcı olarak silinecektir. Bu işlem geri alınamaz."
+    },
+    "importedNameSuffix": " (İçe aktarıldı)",
+    "paperWidth58": "58mm (32ch)",
+    "paperWidth80": "80mm (48ch)",
+    "receiptPreview": {
+      "sampleData": "örnek veri",
+      "emptyLayout": "(Boş şablon — blok ekleyin)",
+      "selectTemplate": "Önizlemek için bir şablon seçin"
+    },
+    "reportEditor": {
+      "placeholder": "Rapor içeriğini buraya yazın...",
+      "toolbar": {
+        "bold": "Kalın",
+        "italic": "İtalik",
+        "heading1": "Başlık 1",
+        "heading2": "Başlık 2",
+        "paragraph": "Metin",
+        "bulletList": "Madde işaretli liste",
+        "orderedList": "Numaralı liste",
+        "quote": "Alıntı",
+        "undo": "Geri Al",
+        "redo": "İleri Al"
+      },
+      "variablesTitle": "Değişkenler",
+      "variablesHint": "Eklemek istediğiniz alana tıklayın",
+      "groups": {
+        "order": "Sipariş / Satış",
+        "branch": "Şube Bilgileri",
+        "customer": "Müşteri"
+      },
+      "vars": {
+        "tableNo": "Masa No",
+        "orderNo": "Sipariş No",
+        "productTable": "Ürün Listesi",
+        "total": "Toplam Tutar",
+        "discount": "İndirim",
+        "paymentType": "Ödeme Tipi",
+        "date": "Tarih",
+        "branchName": "Şube Adı",
+        "address": "Adres",
+        "phone": "Telefon",
+        "customerName": "Müşteri Adı",
+        "taxNo": "Vergi No"
+      },
+      "tableHeaders": {
+        "product": "Ürün",
+        "qty": "Adet",
+        "price": "Fiyat"
+      }
+    },
+    "blockEditor": {
+      "addBlockTitle": "Blok Ekle",
+      "variablesToggle": "Mevcut Değişkenler",
+      "emptyBlocks": "Yukarıdan blok ekleyin",
+      "columnAdd": "Sütun Ekle",
+      "cutHelp": "Bu blok kağıdı keser. Ek ayar gerektirmez.",
+      "columns": "Sütunlar",
+      "blockTypes": {
+        "text": "Metin",
+        "divider": "Çizgi",
+        "key_value": "Etiket–Değer",
+        "item_loop": "Ürün Listesi",
+        "feed": "Boşluk",
+        "cut": "Kes",
+        "qr": "QR Kod",
+        "date": "Tarih",
+        "time": "Saat",
+        "branchLogo": "Şube Logosu",
+        "branchInfo": "Şube Bilgileri"
+      },
+      "branchFields": {
+        "name": "Şube Adı",
+        "phone": "Telefon",
+        "email": "E-posta",
+        "website": "Web Adresi",
+        "address": "Adres",
+        "taxOffice": "Vergi Dairesi",
+        "taxNumber": "Vergi No",
+        "registryNo": "Sicil No",
+        "mersisNo": "Mersis No"
+      },
+      "fields": {
+        "content": "İçerik",
+        "align": "Hizalama",
+        "size": "Boyut",
+        "marginLeft": "Sol boşluk",
+        "marginRight": "Sağ boşluk",
+        "boldCheckbox": "Kalın (Bold)",
+        "hideIfEmpty": "Boşsa Gizle",
+        "logoWidthPx": "Logo Genişliği (px)",
+        "branch": "Şube",
+        "autoBranch": "Otomatik (Fiş Şubesi)",
+        "visibleFields": "Görünür Alanlar",
+        "field": "Alan",
+        "char": "Karakter",
+        "leftLabel": "Sol Etiket",
+        "rightValue": "Sağ Değer",
+        "variable": "Değişken",
+        "lineCount": "Satır Sayısı",
+        "qrData": "QR Verisi",
+        "boldWrite": "Kalın Yaz"
+      },
+      "align": {
+        "left": "Sol",
+        "center": "Orta",
+        "right": "Sağ"
+      },
+      "sizeOpts": {
+        "normal": "Normal",
+        "double": "2× Büyük",
+        "triple": "3× Büyük",
+        "quadruple": "4× Büyük"
+      },
+      "dividerChars": {
+        "single": "─  (tek çizgi)",
+        "double": "═  (çift çizgi)",
+        "star": "★  (yıldız)",
+        "space": "   (boş)"
+      },
+      "itemPlaceholder": "name veya '{{ name | with_options }}' / '{{ name | with_tax_rates }}'",
+      "withOptionsColumnHint": "Seçenek satırı: alan «name» + biçim «Seçenekler», veya alana «name|with_options» / «'{{ name | with_options }}'» yazın. Notlar «description» ile gelir; seçenekler «modifier_names» ile basılır.",
+      "withTaxRatesColumnHint": "Vergi satırı: alan «name» + biçim «Vergi Oranları», veya «'{{ name | with_tax_rates }}'» kullanın. Fiyat sütunu brüt (KDV hariç) basılır; alt satırda «% oran» ve KDV tutarı görünür. '{{ tax | currency }}' tüm kalemlerin KDV toplamını yazar.",
+      "format": {
+        "none": "—",
+        "currency": "Para",
+        "qty": "Adet",
+        "withOptions": "Seçenekler",
+        "withTaxRates": "Vergi Oranları"
+      },
+      "defaultKeyValueLeft": "Masa:",
+      "prefix": "ön",
+      "suffix": "son",
+      "summary": {
+        "keyValue": "{left} … {right}",
+        "itemLoop": "{variable} döngüsü ({cols} sütun)",
+        "feedLines": "{n} satır boşluk",
+        "paperCut": "Kağıt kes",
+        "printDate": "Tarih Bas",
+        "printTime": "Saat Bas",
+        "branchLogo": "Şube Logosu",
+        "branchInfo": "{n} alan (Şube Bilgileri)"
+      }
+    },
+    "guide": {
+      "title": "Fiş Tasarımcısı Rehberi",
+      "subtitle": "Termal fiş şablonları için teknik dökümantasyon ve kullanım klavuzu.",
+      "close": "Kapat",
+      "sections": {
+        "blockTypes": "Blok Tipleri",
+        "filters": "Gelişmiş Filtreler",
+        "limits": "Teknik Limitler",
+        "variables": "Kullanılabilir Değişkenler",
+        "itemLoopFields": "Ürün Listesi Sütun Alanları",
+        "rules": "Prosedür & Kurallar"
+      },
+      "blocks": {
+        "text": {
+          "title": "Metin",
+          "desc": "Serbest metin veya değişken içerir. Boyut (1-4) ve kalınlık (bold) ayarlanabilir."
+        },
+        "keyValue": {
+          "title": "Etiket-Değer",
+          "desc": "Sol ve sağa yaslı iki parça metin. Karşılıklı veriler için en uygun bloktur."
+        },
+        "itemLoop": {
+          "title": "Ürün Listesi",
+          "desc": "Sipariş kalemlerini döner. Sütun genişlikleri toplamı kağıt genişliğini aşmamalıdır. Seçenekler için '{{ name | with_options }}'; ürün bazlı KDV için '{{ name | with_tax_rates }}' kullanın."
+        },
+        "hideEmpty": {
+          "title": "Boşsa Gizle",
+          "desc": "Bu özellik seçili ise, içerikteki tüm değişkenler 0 veya boşsa satır basılmaz."
+        },
+        "branchLogo": {
+          "title": "Şube Logosu",
+          "desc": "Aktif şubenin logosunu fişe basar. Logo yoksa veya 'Boşsa Gizle' seçiliyse blok atlanır. Logo genişliği piksel cinsinden ayarlanabilir (varsayılan 384px = 58mm). Hizalama seçenekleri ile ortalanabilir."
+        },
+        "branchInfo": {
+          "title": "Şube Bilgileri",
+          "desc": "Şubenin adı, telefon, adres, vergi bilgileri gibi alanlarını etiket–değer formatında basar. Hangi alanların görüneceği ve sıralaması ayarlanabilir. 'Boşsa Gizle' ile dolu olmayan alanlar atlanır."
+        }
+      },
+      "filters": {
+        "currency": "Sayıyı para birimine çevirir (10,00 TL).",
+        "qty": "Ondalıkları temizler (2.00 -> 2).",
+        "dateTr": "Tarih/saat değerini dd.mm.yyyy biçimine çevirir (ör. '{{ created_at | date_tr }}').",
+        "rate": "Yüzde X hesaplar. Vergi satırları için total'i baz alır.",
+        "withOptions": "Ürün adının altına seçenekleri * ile basar (ör. * Acı Soslu, Ekstra Acı (+20)). Ücretli seçenekler (+N) ile gösterilir; tutar satır hesabına dahil edilir.",
+        "withTaxRates": "Ürün adının altına KDV oranı ve tutarını basar (ör. % 10 … 15,00 TL). Fiyat sütunu brüt tutarı gösterir; '{{ tax | currency }}' kalemlerin KDV toplamını yazar."
+      },
+      "limit58": "58mm Yazıcı (Standart)",
+      "limit80": "80mm Yazıcı (Geniş)",
+      "chars": "Karakter",
+      "varHintTitle": "İpucu:",
+      "varHintBody": "payment_method ve payment_type eş anlamlıdır; bölünmüş ödemeler alt alta listelenir. '{{ station_name }}' mutfak istasyonunu gösterir. '{{ notes }}' sipariş genel notunu basar.",
+      "itemLoopVarsHint": "Ürün Listesi bloğunda «Değişken» alanı genelde {items} olur; bölünmüş ödeme satırları için {payments} seçin. Sütun «Alan» değerlerinde yukarıdaki kalem anahtarlarını kullanın.",
+      "tips": {
+        "alignCenter": "Hizalama ayarı 'Ortalı' ise boşluklar otomatik dengelenir.",
+        "suffixCol": "Sütunlarda 'Son' alanına TL simgesi veya % işareti ekleyebilirsiniz.",
+        "tryLira": "Yazıcı karakter setine bağlı olarak ₺ sembolü yerine TL kullanımı önerilir.",
+        "splitPay": "Bölünmüş ödeme detayları için Ürün Listesi değişkenini 'payments' yapın.",
+        "descriptions": "descriptions değişkeni notu olan her kalemi «ürün adı : not» biçiminde yazar; birden fazla kalem varsa araya virgül koyar (ör. Köfte : az pişmiş, Çorba : acısız). Çift boyut (double) satırlarda uzun metin alt satıra sarılır.",
+        "withOptions": "Seçenek grupları (modifier) mutfak fişinde görünsün istiyorsanız ürün listesi sütununda '{{ name | with_options }}' kullanın; seçenek yoksa sadece ürün adı basılır.",
+        "withTaxRates": "POS fişinde ürün bazlı KDV dökümü için '{{ name | with_tax_rates }}' kullanın; seçeneklerle birlikte '{{ name | with_options | with_tax_rates }}' yazılabilir. Alt toplam bloğunda '{{ tax | currency }}' tüm satır KDV'lerinin toplamını verir."
+      },
+      "warnBox": "Profesyonel görünüm için Boşsa Gizle özelliğini aktif ederek fişin gereksiz uzamasını engelleyin."
+    }
+  },
+  "pos": {
+    "terminals": "Terminal"
+  },
+  "users": {
+    "title": "Kullanıcılar"
+  }
+}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        body { font-family: 'DejaVu Sans', sans-serif; font-size: 10pt; color: #333; margin: 0; padding: 20px; }
+        .header { text-align: center; border-bottom: 2px solid #333; padding-bottom: 15px; margin-bottom: 20px; }
+        .header h1 { margin: 0; font-size: 18pt; text-transform: uppercase; }
+        .header p { margin: 5px 0 0; color: #666; font-size: 10pt; }
+        
+        .section { margin-bottom: 25px; }
+        .section-title { font-weight: bold; font-size: 12pt; border-bottom: 1px solid #ddd; padding-bottom: 5px; margin-bottom: 10px; color: #000; text-transform: uppercase; }
+        
+        table { width: 100%; border-collapse: collapse; margin-bottom: 10px; }
+        th, td { padding: 8px 5px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background-color: #f9f9f9; font-weight: bold; }
+        .text-right { text-align: right; }
+        .total-row { font-weight: bold; background-color: #f1f1f1; }
+        
+        .summary-grid { display: block; margin-bottom: 20px; }
+        .summary-item { margin-bottom: 5px; overflow: hidden; }
+        .label { font-weight: bold; color: #555; }
+        .value { float: right; font-weight: bold; }
+        
+        .footer { text-align: center; margin-top: 40px; font-size: 8pt; color: #999; border-top: 1px solid #eee; padding-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ report_description }}</p>
+        <p>{{ _('Vardiya ID:') }} {{ shift_id|truncate(8, True, '') }}... | {{ _('Tarih:') }} {{ now()|date_tr }}</p>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Vardiya Bilgileri') }}</div>
+        <div class="summary-grid">
+            <div class="summary-item"><span class="label">{{ _('Şube:') }}</span> <span class="value">{{ z_data.shift.branch_name }}</span></div>
+            <div class="summary-item"><span class="label">{{ _('Açılış:') }}</span> <span class="value">{{ z_data.shift.opened_at|date_tr('%d.%m.%Y %H:%M') }}</span></div>
+            <div class="summary-item"><span class="label">{{ _('Kapanış:') }}</span> <span class="value">{{ z_data.shift.closed_at|date_tr('%d.%m.%Y %H:%M') if z_data.shift.closed_at else _('AÇIK') }}</span></div>
+            <div class="summary-item"><span class="label">{{ _('Kasiyer:') }}</span> <span class="value">{{ z_data.shift.opened_by_name }}</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Satış Özeti') }}</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ _('Tür') }}</th>
+                    <th class="text-right">{{ _('Tutar') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{ _('Brüt Satış') }}</td>
+                    <td class="text-right">{{ z_data.totals.gross_sales|currency }}</td>
+                </tr>
+                <tr>
+                    <td>{{ _('Toplam İndirim') }}</td>
+                    <td class="text-right">- {{ z_data.totals.discounts|currency }}</td>
+                </tr>
+                <tr class="total-row">
+                    <td>{{ _('Net Satış') }}</td>
+                    <td class="text-right">{{ (z_data.totals.gross_sales - z_data.totals.discounts)|currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Ödemeler (Beklenen)') }}</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>{{ _('Ödeme Türü') }}</th>
+                    <th class="text-right">{{ _('Tutar') }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for method, amount in z_data.payment_breakdown.items() %}
+                <tr>
+                    <td>{% if method == 'CASH' %}{{ _('Nakit') }}{% elif method == 'CARD' %}{{ _('Kredi Kartı') }}{% elif method == 'OTHER' %}{{ _('Diğer') }}{% elif method == 'CREDIT' %}{{ _('Ödenmez') }}{% else %}{{ method }}{% endif %}</td>
+                    <td class="text-right">{{ amount|currency }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="section">
+        <div class="section-title">{{ _('Kasa Hareketleri') }}</div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>{{ _('Açılış Nakit') }}</td>
+                    <td class="text-right">{{ z_data.shift.opening_cash|currency }}</td>
+                </tr>
+                <tr>
+                    <td>{{ _('Giderler') }}</td>
+                    <td class="text-right">- {{ z_data.expenses_total|currency }}</td>
+                </tr>
+                <tr>
+                    <td>{{ _('Net Nakit Giriş/Çıkış (Harici)') }}</td>
+                    <td class="text-right">{{ z_data.cash_movements_net|currency }}</td>
+                </tr>
+                <tr class="total-row">
+                    <td>{{ _('Kasadaki Beklenen Nakit') }}</td>
+                    <td class="text-right">{{ z_data.shift.expected_cash|currency }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+</html>

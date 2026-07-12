@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1cm;
+        }
+
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 8pt;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 14pt;
+            color: #1e40af;
+        }
+
+        .header p {
+            margin: 2px 0;
+            color: #666;
+            font-size: 8pt;
+        }
+
+        .filters {
+            background-color: #f8fafc;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filters span {
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 7pt;
+            color: #64748b;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+        }
+
+        th,
+        td {
+            padding: 5px 3px;
+            text-align: left;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 7pt;
+            color: #475569;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .tabular-nums {
+            font-family: 'Courier New', monospace;
+        }
+
+        .status-badge {
+            padding: 1px 4px;
+            border-radius: 2px;
+            font-size: 6.5pt;
+            font-weight: bold;
+        }
+
+        .status-low {
+            background-color: #fffbeb;
+            color: #92400e;
+        }
+
+        .status-critical {
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+
+        .status-normal {
+            background-color: #f0fdf4;
+            color: #166534;
+        }
+
+        .footer {
+            clear: both;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 7pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ _('Envanter Stok Durum Özeti') }}</p>
+        <p>{{ _('Rapor Tarihi:') }} {{ now()|date_tr }} | {{ _('Kayıt Sayısı:') }} {{ count }}</p>
+    </div>
+
+    <div class="filters">
+        <span>{{ _('FİLTRELER:') }}</span>
+        {% if filters.warehouse_id %}<span>{{ _('Depo:') }} {{ warehouse_name }}</span>{% endif %}
+        {% if filters.category_id %}<span>{{ _('Kategori:') }} {{ category_name }}</span>{% endif %}
+        {% if filters.stock_status %}<span>{{ _('Durum:') }} {% if filters.stock_status == 'normal' %}{{ _('NORMAL') }}{% elif filters.stock_status == 'low' %}{{ _('DÜŞÜK') }}{% elif filters.stock_status == 'critical' %}{{ _('KRİTİK') }}{% elif filters.stock_status == 'warning' %}{{ _('UYARI') }}{% else %}{{ filters.stock_status|upper }}{% endif %}</span>{% endif %}
+        {% if filters.search %}<span>{{ _('Arama:') }} "{{ filters.search }}"</span>{% endif %}
+    </div>
+
+    {% if limit_reached %}
+    <div style="background-color: #fffbeb; border: 1px solid #fde68a; color: #92400e; padding: 6px 10px; border-radius: 4px; margin-bottom: 15px; font-size: 7.5pt;">
+        <strong>{{ _('DİKKAT:') }}</strong> {{ _('Toplam %(total)s kayıt bulundu. Performans nedeniyle sadece ilk %(shown)s kayıt gösteriliyor. Daha spesifik sonuçlar için lütfen filtreleri kullanın.') % {'total': total_count, 'shown': count} }}
+    </div>
+    {% endif %}
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('SKU') }}</th>
+                <th>{{ _('Ürün Adı') }}</th>
+                <th>{{ _('Kategori') }}</th>
+                <th class="text-right">{{ _('Miktar') }}</th>
+                <th>{{ _('Birim') }}</th>
+                <th class="text-right">{{ _('Min. Stok') }}</th>
+                <th>{{ _('Durum') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+            <tr>
+                <td class="tabular-nums">{{ item.sku }}</td>
+                <td style="font-weight: bold;">{{ item.name }}</td>
+                <td>{{ item.category_name }}</td>
+                <td class="text-right tabular-nums">{{ item.current_quantity|currency('') }}</td>
+                <td>{{ item.unit }}</td>
+                <td class="text-right tabular-nums">{{ item.minimum_quantity|currency('') if item.minimum_quantity != -1
+                    else '∞' }}</td>
+                <td>
+                    {% if item.current_quantity <= 0 %} <span class="status-badge status-critical">{{ _('KRİTİK') }}</span>
+                        {% elif item.is_low_stock %}
+                        <span class="status-badge status-low">{{ _('DÜŞÜK') }}</span>
+                        {% else %}
+                        <span class="status-badge status-normal">{{ _('NORMAL') }}</span>
+                        {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('İptaller ve İadeler Raporu') }}</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.2cm;
+            @bottom-right {
+                content: "{{ _('Sayfa') }} " counter(page) " / " counter(pages);
+                font-size: 9pt;
+            }
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #333;
+            line-height: 1.35;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ef4444;
+            padding-bottom: 8px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #991b1b;
+            font-size: 18pt;
+        }
+        .report-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 8pt;
+            color: #666;
+        }
+        .summary-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+            border-spacing: 10px;
+        }
+        .summary-box {
+            display: table-cell;
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            padding: 12px;
+            text-align: center;
+            border-radius: 8px;
+        }
+        .summary-box .label {
+            display: block;
+            font-size: 8pt;
+            color: #64748b;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .summary-box .value {
+            display: block;
+            font-size: 13pt;
+            font-weight: bold;
+            color: #991b1b;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 16px;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: bold;
+            text-align: left;
+            padding: 8px 6px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 8pt;
+        }
+        td {
+            padding: 6px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 8pt;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .text-right { text-align: right; }
+        .footer {
+            margin-top: 30px;
+            font-size: 8pt;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ _('İPTALLER VE İADELER RAPORU') }}</h1>
+    </div>
+
+    <div class="report-info">
+        <div>
+            <strong>{{ _('Oluşturulma:') }}</strong> {{ report_date|date_tr('%d.%m.%Y %H:%M') }}<br>
+            <strong>{{ _('Filtreler:') }}</strong>
+            {% if filters.start_date %}{{ filters.start_date }}{% else %}{{ _('Başlangıç Belirsiz') }}{% endif %} -
+            {% if filters.end_date %}{{ filters.end_date }}{% else %}{{ _('Bitiş Belirsiz') }}{% endif %}
+        </div>
+        <div class="text-right">
+            {{ _('Ramis ERP Sistemi') }}
+        </div>
+    </div>
+
+    <div class="summary-grid">
+        <div class="summary-box">
+            <span class="label">{{ _('Toplam Miktar') }}</span>
+            <span class="value">{{ totals.item_count }}</span>
+        </div>
+        <div class="summary-box">
+            <span class="label">{{ _('Toplam Tutar') }}</span>
+            <span class="value">{{ totals.total_amount|currency }}</span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th width="12%">{{ _('Tarih') }}</th>
+                <th width="10%">{{ _('Şube') }}</th>
+                <th width="10%">{{ _('Masa') }}</th>
+                <th width="12%">{{ _('İptal Eden') }}</th>
+                <th width="18%">{{ _('Neden') }}</th>
+                <th width="18%">{{ _('Ürün') }}</th>
+                <th class="text-right" width="8%">{{ _('Miktar') }}</th>
+                <th class="text-right" width="12%">{{ _('Tutar') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in rows %}
+            <tr>
+                <td>{{ row.cancelled_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ row.branch_name }}</td>
+                <td>{{ row.table_name or '—' }}</td>
+                <td>{{ row.cancelled_by_name or '—' }}</td>
+                <td>{{ row.reason_display or '—' }}</td>
+                <td>{{ row.product_name }}</td>
+                <td class="text-right">{{ row.quantity }}</td>
+                <td class="text-right"><strong>{{ row.total_price|currency }}</strong></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% if rows|length >= 1000 %}
+    <p style="color: #ef4444; font-size: 8pt; text-align: center;">
+        * {{ _('Rapor güvenliği nedeniyle sadece ilk 1000 kayıt listelenmiştir. Daha kapsamlı veriler için lütfen Excel çıktısı alınız.') }}
+    </p>
+    {% endif %}
+
+    <div class="footer">
+        {{ _('Bu rapor otomatik olarak Ramis ERP tarafından oluşturulmuştur.') }}
+    </div>
+</body>
+</html>

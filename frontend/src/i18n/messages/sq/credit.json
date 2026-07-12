@@ -1,0 +1,88 @@
+{
+  "page": {
+    "credit": "Kredi",
+    "title": "Menaxhimi i kredisë së dyqanit",
+    "subtitle": "Llogaritë e kredisë së klientëve, rimbushjet dhe historia e shpenzimeve",
+    "branchLabel": "Dega: {name}",
+    "branchSelectAria": "Zgjidh degën",
+    "searchPlaceholder": "Kërko emër, telefon ose emër përdoruesi…",
+    "newAccount": "Llogari e re",
+    "empty": "Ende nuk ka llogari kredie dyqani.",
+    "loading": "Duke u ngarkuar…",
+    "loadingMore": "Duke ngarkuar më shumë…"
+  },
+  "table": {
+    "name": "Emri",
+    "user": "Përdoruesi i sistemit",
+    "branch": "Dega",
+    "balance": "Bilanci",
+    "credited": "Gjithsej i kredituar",
+    "spent": "Shpenzuar",
+    "policy": "Politika",
+    "actions": "Veprimet"
+  },
+  "policy": {
+    "BLOCK": "Blloko nëse bilanci është i pamjaftueshëm",
+    "WARN_ALLOW": "Paralajmëro por lejo shitjen",
+    "OPEN_TAB": "Hap tab (pa kufi)"
+  },
+  "form": {
+    "createTitle": "Llogari e re kredie dyqani",
+    "editTitle": "Ndrysho llogarinë",
+    "firstName": "Emri",
+    "lastName": "Mbiemri",
+    "phone": "Telefoni",
+    "email": "Email",
+    "address": "Adresa",
+    "notes": "Shënimet",
+    "systemUser": "Përdoruesi i sistemit (opsional)",
+    "systemUserNone": "Person virtual (pa hyrje)",
+    "noUsersAvailable": "Nuk ka përdorues aktivë pa një llogari ekzistuese kredie dyqani.",
+    "branch": "Dega",
+    "isGlobal": "Vlefshme në të gjitha degët",
+    "creditPolicy": "Politika e bilancit",
+    "save": "Ruaj",
+    "cancel": "Anulo"
+  },
+  "detail": {
+    "title": "Detajet e llogarisë",
+    "topup": "Rimbush",
+    "topupAmount": "Shuma e rimbushjes",
+    "topupNotes": "Shënimet",
+    "confirmTopup": "Rimbush",
+    "transactions": "Transaksionet",
+    "noTransactions": "Ende pa transaksione.",
+    "txDate": "Data",
+    "txType": "Lloji",
+    "txAmount": "Shuma",
+    "txOrder": "Porosia",
+    "exportPdf": "PDF",
+    "exportExcel": "Excel",
+    "delete": "Fshij llogarinë",
+    "deleteConfirm": "Fshij këtë llogari kredie dyqani? (fshirje e butë)",
+    "saleDetailTitle": "Detajet e porosisë",
+    "saleTotal": "Shuma totale",
+    "saleDiscount": "Zbritja",
+    "saleTable": "Tavolina",
+    "saleDate": "Data e pagesës",
+    "saleCreatedBy": "Krijuar nga",
+    "saleNotFound": "Detajet e porosisë nuk u gjetën."
+  },
+  "toast": {
+    "created": "Llogaria e kredisë së dyqanit u krijua.",
+    "updated": "Llogaria u përditësua.",
+    "deleted": "Llogaria u fshi.",
+    "topupSuccess": "Kredia u rimbush.",
+    "operationFailed": "Operacioni dështoi.",
+    "exportFailed": "Nuk mund të eksportohej raporti."
+  },
+  "pos": {
+    "button": "Kredia e dyqanit",
+    "modalTitle": "Zgjidh llogarinë e kredisë së dyqanit",
+    "selectAccount": "Zgjidh llogarinë",
+    "balance": "Bilanci",
+    "confirm": "Zgjidh & Paguaj",
+    "noAccounts": "Nuk ka llogari kredie dyqani të disponueshme në këtë degë.",
+    "selected": "Pagesë nga llogaria e {name}"
+  }
+}

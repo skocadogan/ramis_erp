@@ -1,0 +1,182 @@
+{
+  "header": {
+    "toggleSidebar": "Превключване на страничната лента",
+    "searchLabel": "Глобално търсене",
+    "search": "Бързо търсене",
+    "searchMobileLabel": "Търсене",
+    "logoutLabel": "Изход",
+    "logout": "Изход",
+    "brandName": "Ramis ERP"
+  },
+  "nav": {
+    "overview": "Общ преглед",
+    "definitions": "Дефиниции",
+    "users": "Потребители",
+    "kitchenStations": "Кухненски станции",
+    "rolesPermissions": "Роли и разрешения",
+    "branches": "Клонове",
+    "posSettings": "POS настройки",
+    "waiterAssignments": "Назначения на сервитьори",
+    "cashierPins": "ПИН на касиер",
+    "cookAssignments": "Назначения на готвачи",
+    "managerAssignments": "Назначения на мениджъри",
+    "reportTemplates": "Шаблони за отчети",
+    "printers": "Принтери",
+    "restaurant": "Ресторант операции",
+    "restaurantSummary": "Резюме на ресторанта",
+    "tables": "Управление на маси",
+    "menuManagement": "Управление на меню",
+    "reservations": "Резервации",
+    "credit": "Кредит",
+    "shiftCashier": "Смени и каса",
+    "sales": "Продажби",
+    "surveys": "Анкети",
+    "customers": "Клиенти",
+    "invoices": "Фактури",
+    "inventoryManagement": "Управление на инвентар",
+    "allergens": "Алергени",
+    "warehouseManagement": "Управление на склад",
+    "stockWarehouse": "Склад / Депо",
+    "personnel": "Персонал",
+    "kitchen": "Управление на кухня",
+    "recipes": "Рецепти",
+    "productionPlanning": "Планиране на производство",
+    "prepManagement": "Управление на подготовка",
+    "performanceManagement": "Управление на ефективността",
+    "kds": "Кухненски дисплей (KDS)",
+    "pos": "Продажбен екран (POS)",
+    "waiter": "Екран на сервитьор",
+    "system": "Система",
+    "auditLogs": "Одитни записи",
+    "recycleBin": "Кошче",
+    "defSubgroupUsers": "Потребители и разрешения",
+    "defSubgroupStore": "Клон, POS и кухня",
+    "defSubgroupStaff": "Назначения на персонал",
+    "defSubgroupReports": "Отчети и записи",
+    "collapse": "Свиване"
+  },
+  "authGuard": {
+    "checkingPermission": "Проверка на разрешения…"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Избор на език"
+  },
+  "theme": {
+    "triggerAriaLabel": "Настройки на външния вид",
+    "triggerTitle": "Външен вид",
+    "colorTheme": "Цветова тема",
+    "density": "Плътност на интерфейса",
+    "light": "Светла",
+    "dark": "Тъмна",
+    "highContrast": "Висок контраст",
+    "outdoor": "На открито (ярка)",
+    "system": "Системна",
+    "densityCompact": "Компактна",
+    "densityComfortable": "Комфортна",
+    "densitySpacious": "Просторна"
+  },
+  "backendHealth": {
+    "statusOk": "Сървърът работи (здравната проверка е OK)",
+    "statusDown": "Сървърът не отговаря — щракнете за повторен опит",
+    "statusChecking": "Проверка на сървъра…",
+    "banner": "Не може да се достигне сървърът. Възможно е да е недостъпен.",
+    "retry": "Опитай отново"
+  },
+  "notFound": {
+    "title": "Страницата не е намерена",
+    "description": "Страницата, която търсите, може да е премахната, преместена или временно недостъпна.",
+    "goBack": "Назад",
+    "goHome": "Към приложението"
+  },
+  "orderStatus": {
+    "PENDING": "Чакащо",
+    "PREPARING": "В подготовка",
+    "READY": "Готово",
+    "DELIVERED": "Доставено",
+    "CANCELLED": "Отменено",
+    "COMPLETED": "Завършено"
+  },
+  "feedback": {
+    "success": "Успех",
+    "error": "Грешка"
+  },
+  "timeline": {
+    "emptySteps": "Няма стъпки за показване."
+  },
+  "dialog": {
+    "close": "Затвори"
+  },
+  "offline": {
+    "title": "Офлайн",
+    "description": "Няма интернет връзка. Опреснете страницата, когато отново сте онлайн."
+  },
+  "globalSearch": {
+    "dialogAriaLabel": "Глобално търсене",
+    "searchingAriaLabel": "Търсене",
+    "inputPlaceholder": "Търсене… (код, име на продукт, клиент, дата…)",
+    "inputAriaLabel": "Търсена фраза",
+    "clearAriaLabel": "Изчистване на търсенето",
+    "resultsAriaLabel": "Резултати от търсенето",
+    "errorMessage": "Нещо се обърка по време на търсенето.",
+    "noResults": "Няма резултати за „{query}“.",
+    "uuidSearchHint": "Търсене по код: модулите, до които нямате достъп, са скрити.",
+    "startPrompt": "Пишете, за да започнете търсене.",
+    "startHint": "Име на страница, продукт, маса, код на поръчка, клиент, дата и др.",
+    "pagesGroupTitle": "Страници",
+    "pagesGroupBadge": "Страница",
+    "modules": {
+      "menu_products": { "label": "Продукти", "badge": "Меню" },
+      "menu_categories": { "label": "Категории", "badge": "Категория" },
+      "orders": { "label": "Поръчки", "badge": "Поръчка" },
+      "inventory_items": { "label": "Стокови артикули", "badge": "Сток" },
+      "inventory_suppliers": { "label": "Доставчици", "badge": "Доставчик" },
+      "branches": { "label": "Клонове", "badge": "Клон" },
+      "tables": { "label": "Маси", "badge": "Маса" },
+      "users": { "label": "Потребители", "badge": "Потребител" },
+      "customers": { "label": "Клиенти", "badge": "Клиент" },
+      "warehouses": { "label": "Складове", "badge": "Склад" },
+      "purchase_orders": { "label": "Поръчки за покупка", "badge": "Покупка" },
+      "deficiency_reports": { "label": "Доклади за липси", "badge": "Липса" },
+      "goods_receivings": { "label": "Приемане на стока", "badge": "Прием" },
+      "transfers": { "label": "Трансфери", "badge": "Трансфер" },
+      "stock_countings": { "label": "Инвентаризация", "badge": "Броене" },
+      "reservations": { "label": "Резервации", "badge": "Резервация" },
+      "invoices": { "label": "Фактури", "badge": "Фактура" },
+      "recipes": { "label": "Рецепти", "badge": "Рецепта" },
+      "sales": { "label": "Продажби", "badge": "Продажба" }
+    },
+    "resultCount": "{count, plural, one {# резултат} other {# резултата}}",
+    "footerHint": "Щракнете върху резултат, за да отворите страницата му."
+  },
+  "virtualKeyboard": {
+    "ariaGroup": "Екранна клавиатура",
+    "numericMode": "Цифрова клавиатура",
+    "numericShort": "Цифри",
+    "alphaMode": "Буквена клавиатура",
+    "alphaShort": "Букви",
+    "digit": "Цифра {n}",
+    "backspace": "Backspace",
+    "plus": "Плюс",
+    "minus": "Минус",
+    "decimalSeparator": "Десетичен разделител (точка)",
+    "cancel": "Отказ",
+    "enter": "Enter",
+    "letter": "Буква {letter}",
+    "shiftOnce": "Shift (следващата буква главна)",
+    "escape": "Esc",
+    "space": "Интервал",
+    "digit0": "Цифра 0"
+  },
+  "asyncState": {
+    "loading": "Зареждане...",
+    "empty": "Няма записи за показване.",
+    "error": "Неуспешно зареждане на данни.",
+    "retry": "Опитай отново"
+  },
+  "export": {
+    "pdf": "Експорт на PDF",
+    "preparing": "Подготовка на PDF...",
+    "retry": "Опитай отново",
+    "failed": "Експортът на PDF не успя"
+  }
+}

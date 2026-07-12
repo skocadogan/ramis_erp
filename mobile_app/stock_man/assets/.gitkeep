@@ -1,0 +1,10 @@
+# Stock Man — Expo static assets
+#
+# icon.png           — iOS / genel uygulama ikonu (1024×1024)
+# adaptive-icon.png  — Android adaptive icon ön plan (1024×1024)
+# splash-icon.png    — Siyah zeminli logo alternatifi (kullanılmıyor)
+# splash.png         — Tam ekran splash alternatifi (kullanılmıyor)
+# favicon.png        — Web favicon
+#
+# app.json içindeki icon / splash yolları bu dosyalara işaret eder.
+# Native ikon değişikliği için yeni EAS/prebuild gerekir (expo start yetmez).

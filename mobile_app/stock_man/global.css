@@ -1,0 +1,130 @@
+/* ============================================
+   Stock Man — Design System
+   Warehouse & Purchase Order Management
+   NativeWind 4 + Tailwind 3.4.17
+   
+   Tema mimarisi: CSS değişkenleri (HSL triplet
+   formatında) Tailwind config'te `rgb(... / <alpha>)`
+   sarmalayıcısı ile kullanılır. NativeWind 4 build
+   zamanında derler; runtime CSS var() erişimine
+   gerek yoktur.
+   
+   Karanlık tema: Tailwind `darkMode: "class"`
+   ile `.dark` sınıfı eklendiğinde aktif olur.
+   `_layout.tsx` içinde `useColorScheme()` ile
+   yönetilir.
+   ============================================ */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 247 248 250;          /* #F7F8FA  açık gri renk */
+    --foreground: 15 23 42;             /* #0F172A  koyu gri renk */
+    --card: 255 255 255;
+    --card-foreground: 15 23 42;
+    --popover: 255 255 255;
+    --popover-foreground: 15 23 42;
+    --primary: 30 64 175;               /* #1E40AF navy  mavi renk */
+    --primary-foreground: 255 255 255;
+    --secondary: 241 245 249;           /* #F1F5F9  açık gri renk */
+    --secondary-foreground: 15 23 42;
+    --accent: 245 158 11;               /* #F59E0B amber  sarı renk */
+    --accent-foreground: 31 41 55;
+    --muted: 241 245 249;
+    --muted-foreground: 100 116 139;    /* #64748B  gri renk */
+    --destructive: 220 38 38;           /* #DC2626  kırmızı renk */
+    --destructive-foreground: 255 255 255;
+    --success: 5 150 105;                /* #059669  yeşil renk */
+    --success-foreground: 255 255 255;
+    --warning: 245 158 11;               /* #F59E0B  sarı renk  */
+    --warning-foreground: 31 41 55;
+    --info: 14 165 233;                  /* #0EA5E9  mavi renk */
+    --info-foreground: 255 255 255;
+    --border: 226 232 240;               /* #E2E8F0  açık gri renk */
+    --input: 226 232 240;               /* #E2E8F0  açık gri renk */
+    --ring: 30 64 175;               /* #1E40AF  mavi renk */ 
+    --radius: 12px;
+    --radius-sm: 8px;
+    --radius-lg: 16px;
+  }
+
+  .dark {
+    --background: 11 17 32;             /* #0B1120 */
+    --foreground: 226 232 240;          /* #E2E8F0 */
+    --card: 17 24 39;                   /* #111827 */
+    --card-foreground: 226 232 240;
+    --popover: 17 24 39;
+    --popover-foreground: 226 232 240;
+    --primary: 59 130 246;              /* #3B82F6 brighter blue */
+    --primary-foreground: 255 255 255;
+    --secondary: 30 41 59;              /* #1E293B */
+    --secondary-foreground: 226 232 240;
+    --accent: 251 191 36;               /* #FBBF24 */
+    --accent-foreground: 17 24 39;
+    --muted: 30 41 59;
+    --muted-foreground: 148 163 184;    /* #94A3B8 */
+    --destructive: 239 68 68;           /* #EF4444 */
+    --destructive-foreground: 255 255 255;
+    --success: 16 185 129;              /* #10B981 */
+    --success-foreground: 255 255 255;
+    --warning: 251 191 36;               /* #FBBF24 */
+    --warning-foreground: 17 24 39;
+    --info: 56 189 248;                 /* #38BDF8 */
+    --info-foreground: 17 24 39;
+    --border: 31 41 55;                 /* #1F2937 */
+    --input: 31 41 55;
+    --ring: 59 130 246;
+  }
+}
+
+@layer components {
+  /* Tablet accessibility — minimum 48x48 dp touch area */
+  .touch-target {
+    @apply min-w-[48px] min-h-[48px];
+  }
+
+  /* Tipografi skalası — tablet listelerinde okunabilir */
+  .text-display {
+    @apply text-[28px] leading-[32px] font-bold tracking-tight;
+  }
+  .text-h1 {
+    @apply text-2xl font-bold tracking-tight;
+  }
+  .text-h2 {
+    @apply text-xl font-semibold tracking-tight;
+  }
+  .text-h3 {
+    @apply text-lg font-semibold;
+  }
+  .text-body {
+    @apply text-[15px] leading-[22px];
+  }
+  .text-caption {
+    @apply text-xs leading-4 text-muted-foreground;
+  }
+  .text-mono {
+    @apply font-mono tabular-nums;
+  }
+
+  /* Kart varyantları */
+  .card-elevated {
+    @apply bg-card rounded-xl border border-border;
+    shadow-color: #000;
+    shadow-offset: 0 2px;
+    shadow-opacity: 0.05;
+    shadow-radius: 8px;
+    elevation: 2;
+  }
+
+  .card-flat {
+    @apply bg-card rounded-xl border border-border;
+  }
+
+  /* iOS/Android güvenli alan (home indicator) */
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}

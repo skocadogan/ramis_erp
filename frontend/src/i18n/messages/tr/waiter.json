@@ -1,0 +1,25 @@
+{
+  "loading": "Veriler yükleniyor...",
+  "cart": "Sepet",
+  "shift": {
+    "checking": "Vardiya durumu kontrol ediliyor...",
+    "closed": "Vardiya Kapalı",
+    "requiredMessage": "İşlem yapabilmek için aktif bir vardiya açılmış olmalıdır. Lütfen kasa yetkilisi ile görüşün.",
+    "selectPos": "POS seçin",
+    "backFromPosPick": "Geri"
+  },
+  "reservation": {
+    "title": "Rezervasyon Onayı",
+    "scheduledAt": "Planlanan Zaman",
+    "partySize": "Kişi Sayısı",
+    "pax": "Kişi",
+    "confirmationHint": "Bu masada kayıtlı bir rezervasyon bulunmaktadır. Sipariş başlatmak istediğinizden emin misiniz?",
+    "cancel": "Vazgeç",
+    "startOrder": "Siparişi Başlat"
+  },
+  "orderSuccess": {
+    "title": "Sipariş Gönderildi",
+    "description": "Siparişiniz başarıyla mutfağa iletildi.",
+    "ok": "Tamam"
+  }
+}

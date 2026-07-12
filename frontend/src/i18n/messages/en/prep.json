@@ -1,0 +1,244 @@
+{
+  "drawer": {
+    "title": "Prep Tracking",
+    "sidebarLabel": "Prep List",
+    "tooltip": "Prep List",
+    "activeTasks": "{count} active tasks",
+    "addTask": "Add task",
+    "placeholder": "Task name... (e.g. Chop tomatoes)",
+    "quantity": "Qty",
+    "unit": "Unit",
+    "defaultUnit": "UNIT",
+    "emptyList": "Prep list is empty",
+    "urgent": "Urgent",
+    "footerNote": "Use +/− to update quantity; Finish closes the task. Completed items are archived at end of day.",
+    "successAdd": "Prep task added",
+    "errorAdd": "Could not save task.",
+    "errorBranch": "Branch is missing. Select a branch from the top bar or check station configuration.",
+    "errorAssign": "Could not save task assignment.",
+    "assignPlaceholder": "Select person...",
+            "assignedTo": "Assigned To",
+            "namePlaceholder": "Type a name...",
+    "unassigned": "Unassigned",
+    "loading": "Loading…",
+    "filters": {
+      "all": "ALL",
+      "pending": "PENDING",
+      "inProgress": "IN PROGRESS",
+      "completed": "DONE"
+    },
+    "status": {
+      "pending": "Pending",
+      "inProgress": "Preparing",
+      "completed": "Completed",
+      "cancelled": "Cancelled",
+      "ready": "Ready"
+    },
+    "actions": {
+      "finish": "Finish",
+      "start": "Start",
+      "increase": "Increase",
+      "decrease": "Decrease"
+    }
+  },
+  "toasts": {
+    "tasks": {
+      "statusUpdated": "Prep status updated",
+      "completed": "Prep completed",
+      "progressError": "Could not update progress.",
+      "created": "Prep task created",
+      "deleted": "Prep task deleted"
+    },
+    "templates": {
+      "created": "Prep template created",
+      "createError": "Error while creating template",
+      "updated": "Template updated",
+      "deleted": "Template deleted"
+    },
+    "smartRules": {
+      "created": "Smart rule created",
+      "createError": "Error while creating rule",
+      "updated": "Rule updated",
+      "updateError": "Error while updating rule",
+      "deleted": "Rule deleted",
+      "deleteError": "Error while deleting rule"
+    },
+    "settingsLoadFailed": "Could not load prep settings.",
+    "settingsSaveFailed": "Could not save setting."
+  },
+  "management": {
+    "title": "Prep management",
+    "allBranches": "All branches",
+    "noBranchAssigned": "No branch assigned",
+    "newTemplate": "New template",
+    "newRule": "New rule",
+    "refresh": "Refresh",
+    "tabs": {
+      "tasks": "Active tasks",
+      "templates": "Prep templates",
+      "smartRules": "Smart rules",
+      "settings": "Settings"
+    },
+    "stats": {
+      "activeTasks": "Active tasks",
+      "completed": "Completed",
+      "activeTemplates": "Active templates",
+      "smartSuggestions": "Smart suggestions"
+    },
+    "searchPlaceholder": "Search…",
+    "filter": "Filter",
+    "edit": "Edit",
+    "delete": "Delete",
+    "smartSubTabs": {
+      "suggestions": "Suggestions",
+      "ruleManagement": "Rule management"
+    },
+    "columns": {
+      "tasks": {
+        "nameStation": "Task / station",
+        "status": "Status",
+        "progress": "Progress",
+        "actions": "Actions"
+      },
+      "templates": {
+        "nameSchedule": "Template / schedule",
+        "station": "Station",
+        "target": "Target",
+        "actions": "Actions"
+      },
+      "suggestions": {
+        "materialBase": "Item / base product",
+        "salesAnalysis": "Sales analysis",
+        "suggestion": "Suggestion",
+        "action": "Action"
+      },
+      "rules": {
+        "nameMatch": "Rule / match",
+        "ratio": "Ratio",
+        "status": "Status",
+        "actions": "Actions"
+      }
+    },
+    "defaultStation": "General station",
+    "taskStatus": {
+      "completed": "Completed",
+      "inProgress": "In progress",
+      "pending": "Pending"
+    },
+    "progressDecreaseAria": "Decrease progress",
+    "progressIncreaseAria": "Increase progress",
+    "changeStatus": "Change status",
+    "setPending": "Set to pending",
+    "setInProgress": "Set to in progress",
+    "setCompleted": "Set to completed",
+    "deleteTask": "Delete task",
+    "emptyTasks": "No active prep tasks.",
+    "emptyCompletedTasks": "No completed prep tasks.",
+    "emptyAllTasks": "No prep tasks.",
+    "emptyTemplates": "No templates defined yet.",
+    "createFirstTemplate": "Create the first template",
+    "dailyAtTime": "Every day at {time}",
+    "emptySuggestions": "No suggestions found.",
+    "emptySuggestionsHint": "Check your smart rules or wait for sales data.",
+    "salesBasedOn": "Based on {product} sales",
+    "avgSales": "Avg. sales: {avg}",
+    "start": "Start",
+    "suggestionTaskTitle": "Prepare {item} (smart suggestion)",
+    "rulesSectionTitle": "Active rules ({count})",
+    "ruleState": {
+      "active": "Active",
+      "inactive": "Inactive"
+    },
+    "systemSuggestedRules": "System-suggested rules ({count})",
+    "prepForProduct": "Prep for {product}",
+    "soldIn30Days": "{count} sold in 30 days",
+    "discoveryCta": "{reason} Create a prep rule to automate stock management.",
+    "addRule": "Add rule",
+    "discoveryRuleTitle": "{product} prep rule",
+    "discoveryTargetMaterial": "{product} ingredient",
+    "emptyRulesAndDiscovery": "No rules yet and not enough data collected.",
+    "createManualRule": "Create rule manually",
+    "moduleSettings": "Module settings",
+    "autoArchive": {
+      "label": "Automatic archiving",
+      "description": "When on, tasks completed on previous days are hidden from this list (only today’s completed and open tasks). Preference is saved per branch.",
+      "branchRequired": "Select a branch above to save this setting."
+    },
+    "tipsTitle": "Quick tips",
+    "tips": {
+      "templatesFire": "Templates run at the scheduled time each day.",
+      "smartRulesTrend": "Smart rules analyze sales trends."
+    },
+    "dialogs": {
+      "deleting": "Deleting…",
+      "deleteTask": {
+        "title": "Delete task",
+        "description": "Are you sure you want to delete this active prep task? This cannot be undone."
+      },
+      "deleteTemplate": {
+        "title": "Are you sure?",
+        "description": "Deleting this template stops automatic tasks generated from it. This cannot be undone.",
+        "deleting": "Deleting…",
+        "confirm": "Yes, delete"
+      },
+      "deleteRule": {
+        "title": "Delete rule",
+        "description": "Are you sure you want to delete this smart prep rule? Suggestion calculation will stop for this rule."
+      },
+      "cancel": "Cancel",
+      "delete": "Delete"
+    }
+  },
+  "templateModal": {
+    "editTitle": "Edit template",
+    "createTitle": "New prep template",
+    "enabled": "Enabled",
+    "branch": "Branch",
+    "selectBranch": "Select branch…",
+    "station": "Kitchen station",
+    "noStation": "General (no station)",
+    "stationsLoading": "Loading stations…",
+    "templateName": "Template name",
+    "titlePlaceholder": "e.g. Daily dough prep",
+    "targetQty": "Target quantity",
+    "unit": "Unit",
+    "unitPlaceholder": "KG, PCS…",
+    "activationTime": "Run time",
+    "validDays": "Active days",
+    "days": {
+      "mon": "Mon",
+      "tue": "Tue",
+      "wed": "Wed",
+      "thu": "Thu",
+      "fri": "Fri",
+      "sat": "Sat",
+      "sun": "Sun"
+    },
+    "assignedTo": "Assign To",
+    "assignedToEveryone": "Everyone (General)",
+            "namePlaceholder": "Type a name...",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "update": "Update",
+    "create": "Create template"
+  },
+  "smartRuleModal": {
+    "editTitle": "Edit rule",
+    "createTitle": "New smart rule",
+    "enabled": "Enabled",
+    "ruleTitle": "Rule title",
+    "titlePlaceholder": "e.g. Burger patty prep",
+    "baseProduct": "Base product (sales)",
+    "selectProduct": "Select product…",
+    "productsLoading": "Loading products…",
+    "targetItem": "Item to prep",
+    "targetPlaceholder": "e.g. Frozen burger patties",
+    "ratio": "Ratio (per 1 product)",
+    "unit": "Unit",
+    "unitPlaceholder": "PCS, G…",
+    "cancel": "Cancel",
+    "saving": "Saving…",
+    "update": "Update",
+    "create": "Create rule"
+  }
+}

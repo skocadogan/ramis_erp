@@ -1,0 +1,41 @@
+name: Expo CI/CD
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'npm'
+          cache-dependency-path: mobile_app/stock_man/package-lock.json
+
+      - name: Install dependencies
+        run: |
+          cd mobile_app/stock_man
+          npm ci --legacy-peer-deps
+
+      - name: Run lint
+        run: |
+          cd mobile_app/stock_man
+          npm run lint
+
+      - name: Run typecheck
+        run: |
+          cd mobile_app/stock_man
+          npm run typecheck
+
+      - name: Run tests
+        run: |
+          cd mobile_app/stock_man
+          npm run test:ci

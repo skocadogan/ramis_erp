@@ -1,0 +1,325 @@
+{
+  "tabs": {
+    "sales": "Sales",
+    "summary": "Summary",
+    "products": "Product analytics",
+    "menuEngineering": "Menu engineering",
+    "cancellations": "Cancellations & returns"
+  },
+  "periodFilter": {
+    "label": "Period",
+    "selectPlaceholder": "Select period…",
+    "groupAriaLabel": "Sales period",
+    "selectAriaLabel": "Sales period"
+  },
+  "presets": {
+    "today": "Today",
+    "this_week": "This week",
+    "last_week": "Last week",
+    "this_month": "This month",
+    "last_month": "Last month",
+    "last_3_months": "Last 3 months",
+    "last_6_months": "Last 6 months",
+    "last_9_months": "Last 9 months",
+    "this_year": "This year",
+    "custom": "Date range"
+  },
+  "list": {
+    "searchPlaceholder": "Search table, cashier…",
+    "discountOnly": "Discounted only",
+    "reset": "Reset",
+    "exportExcel": "Excel",
+    "exportPdf": "PDF",
+    "exportBusy": "…",
+    "netTotal": "Net total",
+    "discount": "Discount",
+    "quantity": "Count",
+    "filterAmountLine": "Filter: {amount}",
+    "loadingHint": "Refreshing data…",
+    "paginationTotal": "Total {count} records"
+  },
+  "filters": {
+    "tablePlaceholder": "Select table…",
+    "cashierPlaceholder": "Select cashier…",
+    "allTables": "All Tables",
+    "allCashiers": "All Cashiers"
+  },
+  "payment": {
+    "all": "All payments",
+    "cash": "Cash",
+    "card": "Card",
+    "other": "Other",
+    "credit": "Store Credit",
+    "cashFull": "Cash",
+    "cardFull": "Credit card"
+  },
+  "export": {
+    "pdfLoading": "Preparing PDF report…",
+    "pdfSuccess": "PDF report downloaded.",
+    "pdfError": "Could not generate PDF report.",
+    "excelLoading": "Preparing Excel report…",
+    "excelSuccess": "Excel report downloaded.",
+    "excelError": "Could not generate Excel report.",
+    "salesPdfFilename": "sales_report_{date}.pdf",
+    "salesExcelFilename": "sales_report_{date}.xlsx",
+    "productAnalyticsPdf": "product_analytics_{date}.pdf",
+    "productAnalyticsExcel": "product_analytics_{date}.xlsx",
+    "menuEngineeringPdf": "menu_engineering_{date}.pdf",
+    "menuEngineeringExcel": "menu_engineering_{date}.xlsx",
+    "productReportLoading": "Preparing {format} report…",
+    "productReportSuccess": "Report downloaded.",
+    "productReportError": "Could not generate report.",
+    "cancellationsPdfFilename": "cancellations_returns_{date}.pdf",
+    "cancellationsExcelFilename": "cancellations_returns_{date}.xlsx"
+  },
+  "table": {
+    "empty": "No sales records yet.",
+    "colCheck": "",
+    "colIndex": "#",
+    "colBranch": "Branch",
+    "colTable": "Table",
+    "colCashier": "Cashier",
+    "colPayment": "Payment method",
+    "colAmounts": "Amounts",
+    "colNotes": "Notes",
+    "colDate": "Date",
+    "colActions": "",
+    "takeaway": "Takeaway",
+    "splitPayment": "(split)",
+    "listPrice": "List ₺{amount}",
+    "discountLine": "Discount −₺{amount}",
+    "grandTotal": "Grand total ₺{amount}",
+    "editTitle": "Edit",
+    "deleteTitle": "Delete",
+    "invoiceTitle": "Create invoice",
+    "dash": "—"
+  },
+  "stats": {
+    "expandAllLabel": "Expand / collapse all",
+    "expandAllAriaExpand": "Expand all summary cards",
+    "expandAllAriaCollapse": "Collapse all summary cards",
+    "periods": {
+      "today": "Today",
+      "this_week": "This week",
+      "last_week": "Last week",
+      "this_month": "This month",
+      "last_month": "Last month",
+      "last_3_months": "Last 3 months",
+      "last_6_months": "Last 6 months",
+      "last_9_months": "Last 9 months",
+      "this_year": "This year"
+    }
+  },
+  "summaryCard": {
+    "transactions": "{count} transactions",
+    "tableGross": "Dine-in gross:",
+    "takeawayGross": "Takeaway gross:",
+    "discountsAllMethods": "Discounts (all payment types):",
+    "netGain": "Net revenue:",
+    "discountDetailTitle": "Discounted sales detail",
+    "discountCountLabel": "Discounts applied",
+    "discountCountUnit": "{count}",
+    "discountedNetLabel": "Net collected on discounted sales",
+    "paymentTypesTitle": "Payment types",
+    "paymentTypesSubtitle": "(Gross / net)",
+    "paymentAllTypes": "{label} (all types)",
+    "paymentNetLine": "{count} transactions (net)",
+    "grossAmount": "Gross ₺{amount}",
+    "grossMasked": "Gross {mask}",
+    "paymentLabels": {
+      "CASH": "Cash",
+      "CARD": "Card",
+      "OTHER": "Other"
+    }
+  },
+  "productAnalytics": {
+    "loading": "Loading product analytics…",
+    "filterLabel": "Filter",
+    "clearFilters": "Clear filters",
+    "statTotalProducts": "Products sold",
+    "statTopSeller": "Top seller",
+    "statTop2": "2nd best seller",
+    "statTop3": "3rd best seller",
+    "unitsSold": "{count} units sold",
+    "tableTitle": "Sales statistics for all products",
+    "searchPlaceholder": "Search product or category…",
+    "colProduct": "Product",
+    "colCategory": "Category",
+    "colQty": "Units sold",
+    "colRevenue": "Total revenue",
+    "emptyData": "No data found.",
+    "chartTitle": "Daily sales trends (top 5 products)",
+    "legendIsolated": "{count} products isolated",
+    "formatPdf": "PDF",
+    "formatExcel": "Excel"
+  },
+  "productSelect": {
+    "allProducts": "All products",
+    "searchPlaceholder": "Search products…",
+    "empty": "No products found."
+  },
+  "menuEngineering": {
+    "loading": "Loading menu engineering analytics…",
+    "filterLabel": "Filter",
+    "allCategories": "All categories",
+    "allClasses": "All classes",
+    "searchPlaceholder": "Search product or category…",
+    "clearFilters": "Clear filters",
+    "disclaimerTitle": "Estimated profitability view",
+    "disclaimerBody": "This report is calculated from sales, recipe data and the current FEFO view. It is not an accounting-grade actual cost report.",
+    "actualDisclaimerTitle": "Actual cost view",
+    "actualDisclaimerBody": "Actual margin is calculated only for sales whose cost has been recorded in the system. If cost data is missing, actual margin fields are left empty.",
+    "analysisModes": {
+      "estimated": "Estimated",
+      "actual": "Actual"
+    },
+    "stats": {
+      "totalProducts": "Products covered",
+      "classifiedProductsLine": "{count} products classified",
+      "totalEstimatedProfit": "Estimated total profit",
+      "totalActualProfit": "Actual total profit",
+      "profitThresholdLine": "Profit threshold: {amount}",
+      "actualProfitThresholdLine": "Actual profit threshold: {amount}",
+      "avgMargin": "Average estimated margin",
+      "avgActualMargin": "Average actual margin",
+      "popularityThresholdLine": "Popularity threshold: {qty}",
+      "actualPopularityThresholdLine": "Actual view threshold: {qty}",
+      "stockVarianceCost": "Stock variance cost",
+      "stockVarianceQtyLine": "Total variance: {qty}",
+      "actualCoverage": "Actual coverage",
+      "actualCoverageLine": "Full: {full} • Partial: {partial} • None: {none}"
+    },
+    "classes": {
+      "STAR": "Star",
+      "PLOWHORSE": "Plowhorse",
+      "PUZZLE": "Puzzle",
+      "DOG": "Dog"
+    },
+    "classDescriptions": {
+      "STAR": "High demand and high contribution",
+      "PLOWHORSE": "Popular but low margin",
+      "PUZZLE": "Profitable but low demand",
+      "DOG": "Low demand and low contribution"
+    },
+    "tableTitle": "Product profitability matrix",
+    "tableSubtitle": "Profitability, menu class and coverage warnings per product",
+    "actualTableTitle": "Actual cost matrix by product",
+    "actualTableSubtitle": "Actual cost and margin view derived from ledger-covered sales",
+    "cols": {
+      "product": "Product",
+      "class": "Class",
+      "qty": "Sold",
+      "revenue": "Revenue",
+      "unitCost": "Estimated unit cost",
+      "actualUnitCost": "Actual unit cost",
+      "grossProfit": "Estimated profit",
+      "actualGrossProfit": "Actual profit",
+      "margin": "Margin",
+      "coverage": "Coverage",
+      "actions": "Actions"
+    },
+    "actionsTitle": "Action recommendations",
+    "actionsSubtitle": "Automatic suggestions based on menu class and actual vs estimated cost variance",
+    "actionsEmpty": "No action recommendations for the selected period.",
+    "actions": {
+      "INCREASE_PRICE": "Increase price",
+      "FEATURE": "Feature product",
+      "REMOVE_FROM_MENU": "Remove from menu",
+      "COST_INCREASED": "Cost increased"
+    },
+    "actionDescriptions": {
+      "INCREASE_PRICE": "Popular but low margin — review pricing",
+      "FEATURE": "Strong contribution or profit potential — highlight on the menu",
+      "REMOVE_FROM_MENU": "Low demand and low contribution — consider removing from menu",
+      "COST_INCREASED": "Actual cost is more than 5% above estimate — review recipe and supply costs"
+    },
+    "recipeMissing": "Missing recipe / cost",
+    "unclassified": "Unclassified",
+    "popularityIndexLine": "Popularity index: {value}",
+    "coverageMode": {
+      "INGREDIENT": "Ingredient mode",
+      "PRODUCT": "Product mode",
+      "MIXED": "Mixed mode"
+    },
+    "actualCoverage": {
+      "FULL": "Full coverage",
+      "PARTIAL": "Partial coverage",
+      "NONE": "No coverage"
+    },
+    "actualCoverageQtyLine": "Covered sales qty: {qty}",
+    "actualCoverageEntriesLine": "{count} cost entries",
+    "varianceCoverage": {
+      "NONE": "No product-level variance",
+      "STOCK_ONLY": "Stock-level variance only"
+    },
+    "costSource": {
+      "RECIPE_LAST_COST": "Recipe last cost",
+      "RECIPE_FEFO_ESTIMATE": "FEFO estimate"
+    },
+    "emptyData": "No product analytics found for the selected filters.",
+    "combinedBadge": "Combined product",
+    "combinedDialog": {
+      "openHint": "View components",
+      "title": "Combined product components",
+      "description": "Line items and sales units that make up {productName}.",
+      "descriptionFallback": "Combined product components",
+      "empty": "No component lines are defined for this combined product.",
+      "standardUnit": "Standard",
+      "cols": {
+        "product": "Component product",
+        "quantity": "Quantity",
+        "salesUnit": "Sales unit",
+        "multiplier": "Multiplier",
+        "effectiveQty": "Effective qty"
+      }
+    },
+    "varianceTitle": "Stock variance summary",
+    "varianceSubtitle": "Waste, cancellations, returns, disposals and counting differences are shown separately from product profitability.",
+    "varianceCards": {
+      "waste": "Waste",
+      "cancel": "Cancel",
+      "return": "Return",
+      "disposal": "Disposal",
+      "adjustment": "Adjustment"
+    },
+    "varianceTable": {
+      "stockItem": "Stock item",
+      "breakdown": "Breakdown",
+      "qty": "Total quantity",
+      "cost": "Total cost"
+    },
+    "varianceEmpty": "No stock variance found in the selected range.",
+    "recentVarianceTitle": "Recent variance movements",
+    "recentVarianceSubtitle": "Latest variance records for operational review",
+    "recentVarianceEmpty": "No recent variance movement found."
+  },
+  "editModal": {
+    "title": "Edit sale",
+    "paymentMethod": "Payment method",
+    "totalAmount": "Total amount",
+    "notes": "Notes",
+    "notesPlaceholder": "Add a note about this sale…",
+    "cancel": "Cancel",
+    "save": "Save"
+  },
+  "deleteModal": {
+    "title": "Delete sale?",
+    "description": "Are you sure you want to delete this sale? It will be moved to the \"Deleted\" tab.",
+    "cancel": "Cancel",
+    "confirm": "Yes, delete"
+  },
+  "cancellations": {
+    "searchPlaceholder": "Search table, product or user…",
+    "empty": "No cancellations or returns in the selected period.",
+    "colDate": "Date",
+    "colCancelledBy": "Cancelled by",
+    "colReason": "Reason",
+    "colProduct": "Product / qty",
+    "colAmounts": "Amount",
+    "totalAmount": "Total amount",
+    "totalQuantity": "Total quantity",
+    "quantityLine": "{qty} units",
+    "unitPrice": "Unit ₺{amount}",
+    "noReason": "Not specified"
+  }
+}

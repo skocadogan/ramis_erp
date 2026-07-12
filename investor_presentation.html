@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramis ERP - Yatırımcı Sunumu</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #1B2A4A;
+            --primary-light: #2D4A7A;
+            --accent: #3B82F6;
+            --accent-light: #60A5FA;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --surface: #F8FAFC;
+            --surface-alt: #F1F5F9;
+            --border: #E2E8F0;
+            --text: #1E293B;
+            --text-muted: #64748B;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text);
+            line-height: 1.5;
+        }
+        
+        .slide {
+            width: 297mm;
+            height: 210mm;
+            padding: 15mm;
+            page-break-after: always;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide:last-child {
+            page-break-after: avoid;
+        }
+        
+        /* Kapak Sayfası */
+        .cover {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px 60px;
+            color: white;
+        }
+        
+        .cover .logo {
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: var(--accent-light);
+            margin-bottom: 40px;
+        }
+        
+        .cover h1 {
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+        
+        .cover .subtitle {
+            font-size: 18px;
+            color: var(--accent-light);
+            margin-bottom: 40px;
+        }
+        
+        .cover .date {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: auto;
+        }
+        
+        /* İçerik Sayfaları */
+        .content-slide {
+            background: white;
+            padding: 50px 60px;
+        }
+        
+        .slide-header {
+            margin-bottom: 30px;
+        }
+        
+        .slide-header .brand {
+            font-size: 10px;
+            color: white;
+            background: var(--primary);
+            padding: 4px 12px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .slide-header h2 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+        
+        .slide-header .accent-line {
+            width: 60px;
+            height: 3px;
+            background: var(--accent);
+        }
+        
+        /* Grid Sistemi */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .grid-4 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 15px;
+        }
+        
+        /* Kartlar */
+        .card {
+            background: var(--surface-alt);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .card-primary {
+            background: var(--accent);
+            color: white;
+        }
+        
+        .card h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        
+        .card-primary h3 {
+            color: white;
+        }
+        
+        .card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .card li {
+            font-size: 11px;
+            margin-bottom: 6px;
+            padding-left: 15px;
+            position: relative;
+        }
+        
+        .card li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+        
+        .card-primary li::before {
+            color: white;
+        }
+        
+        .card-primary li {
+            color: white;
+        }
+        
+        /* Başlık Kutusu */
+        .hero-box {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: white;
+            padding: 25px 30px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .hero-box p {
+            font-size: 14px;
+        }
+        
+        /* Özellik Listesi */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            font-size: 12px;
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            background: var(--surface-alt);
+            border-left: 3px solid var(--accent);
+        }
+        
+        /* Mimari Diagram */
+        .architecture {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .arch-layer {
+            padding: 18px;
+            text-align: center;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            border-radius: 6px;
+        }
+        
+        .arch-layer.frontend { background: var(--accent-light); }
+        .arch-layer.backend { background: var(--accent); }
+        .arch-layer.database { background: var(--primary); }
+        
+        .arch-components {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .arch-component {
+            background: var(--surface-alt);
+            padding: 10px 18px;
+            border-radius: 5px;
+            font-size: 11px;
+            text-align: center;
+        }
+        
+        /* Mobil Uygulama Kartları */
+        .mobile-card {
+            padding: 25px;
+            border-radius: 10px;
+            color: white;
+        }
+        
+        .mobile-card.waiter { background: var(--accent); }
+        .mobile-card.smart-table { background: var(--success); }
+        .mobile-card.stock-man { background: var(--warning); }
+        
+        .mobile-card h3 {
+            font-size: 16px;
+            margin-bottom: 5px;
+            color: white;
+        }
+        
+        .mobile-card .desc {
+            font-size: 11px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+        }
+        
+        .mobile-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .mobile-card li {
+            font-size: 10px;
+            margin-bottom: 6px;
+        }
+        
+        /* Kapanış Sayfası */
+        .closing {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .closing h1 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+        
+        .closing .tagline {
+            font-size: 18px;
+            color: var(--accent-light);
+            margin-bottom: 40px;
+        }
+        
+        .closing .contact {
+            background: var(--primary-light);
+            padding: 20px 40px;
+            border-radius: 10px;
+        }
+        
+        .closing .contact h3 {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        
+        .closing .contact p {
+            font-size: 12px;
+            color: var(--accent-light);
+        }
+        
+        /* Sayfa numarası */
+        .page-num {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+        
+        /* Güvenlik Kutuları */
+        .security-box {
+            background: var(--surface-alt);
+            padding: 15px;
+            border-radius: 6px;
+        }
+        
+        .security-box h4 {
+            font-size: 11px;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+        
+        .security-box p {
+            font-size: 9px;
+            color: var(--text-muted);
+        }
+        
+        /* Teknoloji Kutusu */
+        .tech-box {
+            background: var(--surface-alt);
+            padding: 18px;
+            border-radius: 8px;
+        }
+        
+        .tech-box h3 {
+            font-size: 12px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+        }
+        
+        .tech-box ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .tech-box li {
+            font-size: 10px;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<!-- SLIDE 1: KAPAK SAYFASI -->
+<div class="slide cover">
+    <div class="logo">RAMIS ERP</div>
+    <h1>Restoran & Kafe<br>İçin Kurumsal Kaynak Planlama Sistemi</h1>
+    <div class="subtitle">Yatırımcı Sunumu</div>
+    <div class="date">2026</div>
+</div>
+
+<!-- SLIDE 2: EXECUTIVE ÖZET -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Executive Özet</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-2">
+        <div class="card">
+            <h3>Pazar Problemi</h3>
+            <ul>
+                <li>Restoranlar farklı sistemlerle çalışmak zorunda kalıyor</li>
+                <li>El yazısı sipariş hatalara yol açıyor</li>
+                <li>Stok takibi zaman alıcı ve hatalı</li>
+                <li>Müşteri memnuniyeti düşüyor</li>
+                <li>Veriye dayalı karar alma zorlaşıyor</li>
+            </ul>
+        </div>
+        
+        <div class="card card-primary">
+            <h3>Çözümümüz</h3>
+            <ul>
+                <li>Tek platformda tüm operasyonlar</li>
+                <li>Gerçek zamanlı sipariş yönetimi</li>
+                <li>Otomatik stok takibi ve uyarılar</li>
+                <li>Müşteri deneyimini iyileştirme</li>
+                <li>Detaylı analitik ve raporlama</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">2 / 12</div>
+</div>
+
+<!-- SLIDE 3: PROJE NEDİR? -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Ramis ERP Nedir?</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="hero-box">
+        <p>Ramis ERP, restoran ve kafeler için geliştirilmiş, tam kapsamlı kurumsal kaynak planlama sistemidir.</p>
+    </div>
+    
+    <div class="grid-3">
+        <div class="card">
+            <h3>Sipariş Yönetimi</h3>
+            <ul>
+                <li>Masa siparişleri</li>
+                <li>Paket siparişleri</li>
+                <li>Garson siparişleri</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Stok & Envanter</h3>
+            <ul>
+                <li>FEFO lot takibi</li>
+                <li>Stok rezervasyonu</li>
+                <li>SKT erken uyarı</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Mutfak Operasyonları</h3>
+            <ul>
+                <li>KDS gösterim sistemi</li>
+                <li>Hazırlık yönetimi</li>
+                <li>Üretim planlama</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Satış & Ödeme</h3>
+            <ul>
+                <li>Nakit/Kart/Kredi</li>
+                <li>Bölünmüş ödeme</li>
+                <li>Mali entegrasyon</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Raporlama</h3>
+            <ul>
+                <li>PDF/Excel raporlar</li>
+                <li>Z raporları</li>
+                <li>Analitik dashboard</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Mobil Uygulamalar</h3>
+            <ul>
+                <li>Garson uygulaması</li>
+                <li>Self-servis tablet</li>
+                <li>Depo uygulaması</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">3 / 12</div>
+</div>
+
+<!-- SLIDE 4: MİMARİ YAPISI -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Teknik Mimari</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="architecture">
+        <div class="arch-layer frontend">Frontend (Next.js 16) - React 19 - TailwindCSS - Zustand</div>
+        <div class="arch-layer backend">Backend (Django 6) - REST API - WebSocket - Celery</div>
+        <div class="arch-layer database">PostgreSQL 16 - Redis 7 - File System</div>
+    </div>
+    
+    <div class="arch-components">
+        <div class="arch-component">PostgreSQL 16</div>
+        <div class="arch-component">Redis 7</div>
+        <div class="arch-component">Celery</div>
+        <div class="arch-component">WebSocket</div>
+        <div class="arch-component">Docker</div>
+        <div class="arch-component">Nginx</div>
+    </div>
+    
+    <div class="page-num">4 / 12</div>
+</div>
+
+<!-- SLIDE 5: TEMEL MODÜLLER -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Temel Modüller</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-2">
+        <div class="card">
+            <h3>Sipariş Yönetimi</h3>
+            <ul>
+                <li>Masa ve paket siparişleri</li>
+                <li>Smart Firing ile akıllı zamanlama</li>
+                <li>Gerçek zamanlı durum takibi</li>
+                <li>İndirim ve not ekleme</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Satış & Ödeme</h3>
+            <ul>
+                <li>Nakit, kart, kredi kartı</li>
+                <li>Bölünmüş ödeme desteği</li>
+                <li>Müşteri kredisi sistemi</li>
+                <li>Mali fiş basımı</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Stok & Envanter</h3>
+            <ul>
+                <li>FEFO (First-Expired-First-Out)</li>
+                <li>Lot bazlı stok takibi</li>
+                <li>Stok rezervasyonu</li>
+                <li>Otomatik eksik listesi</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Depo Yönetimi</h3>
+            <ul>
+                <li>Satın alma siparişleri</li>
+                <li>Mal kabul ve kontrol</li>
+                <li>Depolar arası transfer</li>
+                <li>Stok sayımı</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">5 / 12</div>
+</div>
+
+<!-- SLIDE 6: MUTFAK & ÜRETİM -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Mutfak & Üretim Operasyonları</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-2">
+        <div class="card">
+            <h3>Mutfak Gösterim Sistemi (KDS)</h3>
+            <ul>
+                <li>Gerçek zamanlı sipariş takibi</li>
+                <li>İstasyon bazlı görev yönetimi</li>
+                <li>Smart Firing ile akıllı zamanlama</li>
+                <li>Gecikmiş sipariş uyarıları</li>
+                <li>Mutfak personeli performansı</li>
+                <li>Hazırlık şablonları</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Üretim Planlama</h3>
+            <ul>
+                <li>Günlük üretim planları</li>
+                <li>86 listesi (ürün kalmadı)</li>
+                <li>MRP malzeme ihtiyacı</li>
+                <li>FEFO bazlı maliyet hesabı</li>
+                <li>Tahmin bazlı planlama</li>
+                <li>POS entegrasyonu</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">6 / 12</div>
+</div>
+
+<!-- SLIDE 7: MOBİL UYGULAMALAR -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Mobil Uygulamalar</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-3">
+        <div class="mobile-card waiter">
+            <h3>Mobile Waiter</h3>
+            <div class="desc">Garson El Terminali</div>
+            <ul>
+                <li>Sipariş alma</li>
+                <li>Masa yönetimi</li>
+                <li>Ödeme başlatma</li>
+                <li>QR okuma</li>
+                <li>4 dil desteği</li>
+            </ul>
+        </div>
+        
+        <div class="mobile-card smart-table">
+            <h3>Smart Table</h3>
+            <div class="desc">Müşteri Self-Servis</div>
+            <ul>
+                <li>Menü görüntüleme</li>
+                <li>Sipariş verme</li>
+                <li>Garson çağırma</li>
+                <li>Kendi kendine servis</li>
+                <li>Dark/Light tema</li>
+            </ul>
+        </div>
+        
+        <div class="mobile-card stock-man">
+            <h3>Stock Man</h3>
+            <div class="desc">Depo & Satınalma</div>
+            <ul>
+                <li>Mal kabul</li>
+                <li>Satınalma siparişi</li>
+                <li>Depo transferi</li>
+                <li>Stok sayımı</li>
+                <li>Barkod okuma</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">7 / 12</div>
+</div>
+
+<!-- SLIDE 8: MASAÜSTÜ UYGULAMALARI -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Masaüstü Uygulamaları (Electron)</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-3">
+        <div class="card">
+            <h3>Electron KDS</h3>
+            <ul>
+                <li>Mutfak Gösterim Sistemi</li>
+                <li>Bağımsız uygulama</li>
+                <li>Otomatik oturum yönetimi</li>
+                <li>İstasyon bazlı görünüm</li>
+                <li>Gerçek zamanlı güncelleme</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Electron POS</h3>
+            <ul>
+                <li>Satış Noktası</li>
+                <li>Çoklu monitör desteği</li>
+                <li>Müşteri ekranı</li>
+                <li>Yazıcı entegrasyonu</li>
+                <li>Çevrimdışı çalışma</li>
+            </ul>
+        </div>
+        
+        <div class="card">
+            <h3>Electron KDS Prep</h3>
+            <ul>
+                <li>Hazırlık İstasyonu</li>
+                <li>Kiosk modu</li>
+                <li>İmzalı display token</li>
+                <li>Görev akışı yönetimi</li>
+                <li>Otomatik oturum</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">8 / 12</div>
+</div>
+
+<!-- SLIDE 9: ÖZEL ÖZELLİKLER -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Rekabet Avantajları</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-3">
+        <div class="card">
+            <h3>Smart Firing v2</h3>
+            <p style="font-size: 10px;">Yapay zeka destekli mutfak zamanlama sistemi. Gerçek zamanlı verilerle hazırlık sürelerini optimize eder.</p>
+        </div>
+        
+        <div class="card">
+            <h3>FEFO Takibi</h3>
+            <p style="font-size: 10px;">First-Expired-First-Out ile ürün tazeliği garantisi. Son kullanma tarihi takibi ve otomatik uyarılar.</p>
+        </div>
+        
+        <div class="card">
+            <h3>Allerjen Yönetimi</h3>
+            <p style="font-size: 10px;">14 farklı allerjen kategorisi. Reçete bazlı allerjen hesaplama ve müşteri uyarıları.</p>
+        </div>
+        
+        <div class="card">
+            <h3>Mali Entegrasyon</h3>
+            <p style="font-size: 10px;">Beko ve Token yazar kasa entegrasyonu. Yasal mevzuata uygun mali fiş basımı.</p>
+        </div>
+        
+        <div class="card">
+            <h3>Akıllı Stok</h3>
+            <p style="font-size: 10px;">Otomatik eksik listesi, satın alma önerileri ve stok rezervasyon sistemi.</p>
+        </div>
+        
+        <div class="card">
+            <h3>Gerçek Zamanlı</h3>
+            <p style="font-size: 10px;">WebSocket ile anlık güncelleme. KDS, POS ve mobil uygulamalar arasında senkronizasyon.</p>
+        </div>
+    </div>
+    
+    <div class="page-num">9 / 12</div>
+</div>
+
+<!-- SLIDE 10: GÜVENLİK -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Güvenlik & Yetkilendirme</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="hero-box">
+        <p>Rol Tabanlı Erişim Kontrolü (RBAC) ile veri güvenliği ve yetki yönetimi sağlanır.</p>
+    </div>
+    
+    <div class="grid-3">
+        <div class="security-box">
+            <h4>Hiyerarşik Roller</h4>
+            <p>Admin, Manager, Staff gibi roller ve alt roller ile organizasyon yapısına uygun yetkilendirme.</p>
+        </div>
+        
+        <div class="security-box">
+            <h4>18 Modül İzni</h4>
+            <p>Her modül için ayrı okuma/yazma yetkileri ile detaylı kontrol.</p>
+        </div>
+        
+        <div class="security-box">
+            <h4>Şube Kapsamı</h4>
+            <p>Her kullanıcı yalnızca kendi şubesinin verilerini görebilir.</p>
+        </div>
+        
+        <div class="security-box">
+            <h4>JWT Kimlik Doğrulama</h4>
+            <p>Cookie tabanlı güvenli oturum yönetimi.</p>
+        </div>
+        
+        <div class="security-box">
+            <h4>Denetim Kayıtları</h4>
+            <p>Tüm değişiklikler loglanır ve izlenebilir.</p>
+        </div>
+        
+        <div class="security-box">
+            <h4>Redis Önbellek</h4>
+            <p>İzin kontrolleri hızlı ve güvenli şekilde önbelleklenir.</p>
+        </div>
+    </div>
+    
+    <div class="page-num">10 / 12</div>
+</div>
+
+<!-- SLIDE 11: TEKNOLOJİ YIGINI -->
+<div class="slide content-slide">
+    <div class="slide-header">
+        <div class="brand">RAMIS ERP</div>
+        <h2>Teknoloji Yığını</h2>
+        <div class="accent-line"></div>
+    </div>
+    
+    <div class="grid-4">
+        <div class="tech-box">
+            <h3>Backend</h3>
+            <ul>
+                <li>Python 3.x</li>
+                <li>Django 6.0</li>
+                <li>Django REST Framework</li>
+                <li>Daphne (ASGI)</li>
+                <li>Celery</li>
+                <li>PostgreSQL 16</li>
+                <li>Redis 7</li>
+            </ul>
+        </div>
+        
+        <div class="tech-box">
+            <h3>Frontend</h3>
+            <ul>
+                <li>TypeScript 5.x</li>
+                <li>Next.js 16</li>
+                <li>React 19</li>
+                <li>TailwindCSS 4</li>
+                <li>Zustand 5</li>
+                <li>TanStack Query 5</li>
+                <li>Shadcn/ui</li>
+            </ul>
+        </div>
+        
+        <div class="tech-box">
+            <h3>Mobil</h3>
+            <ul>
+                <li>React Native</li>
+                <li>Expo SDK 56</li>
+                <li>NativeWind 4</li>
+                <li>Zustand 5</li>
+                <li>TypeScript 6</li>
+                <li>expo-secure-store</li>
+            </ul>
+        </div>
+        
+        <div class="tech-box">
+            <h3>Altyapı</h3>
+            <ul>
+                <li>Docker Compose</li>
+                <li>Nginx</li>
+                <li>systemd</li>
+                <li>GTK4</li>
+                <li>WeasyPrint</li>
+                <li>python-escpos</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="page-num">11 / 12</div>
+</div>
+
+<!-- SLIDE 12: KAPANIŞ -->
+<div class="slide closing">
+    <h1>Teşekkürler</h1>
+    <div class="tagline">Ramis ERP ile restoran ve kafe operasyonlarınızı<br>tek platformda yönetin.</div>
+    
+    <div class="contact">
+        <h3>İletişim</h3>
+        <p>info@ramis-erp.com</p>
+    </div>
+</div>
+
+</body>
+</html>

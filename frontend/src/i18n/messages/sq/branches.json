@@ -1,0 +1,95 @@
+{
+  "messages": {
+    "loadFailed": "Nuk mund të ngarkoheshin të dhënat.",
+    "saveFailed": "Nuk mund të ruhej caktimi."
+  },
+  "title": "Menaxhimi i degëve",
+  "titlePersonal": "Informacioni i degës suaj",
+  "description": "Menaxho degët e restorantit",
+  "descriptionPersonal": "Regjistrimet e degëve të caktuara për llogarinë tuaj",
+  "addNew": "Degë e re",
+  "activeBranches": "Degët aktive ({count})",
+  "deletedBranches": "Degët e fshira ({count})",
+  "name": "Emri i degës",
+  "code": "Kodi",
+  "phone": "Telefoni",
+  "email": "Email",
+  "website": "Faqja e internetit",
+  "address": "Adresa",
+  "taxOffice": "Zyra tatimore",
+  "taxNumber": "Numri tatimor",
+  "registryNo": "Nr. i regjistrimit",
+  "mersisNo": "Mersis Nr",
+  "logo": "Logoja e degës",
+  "users": "Përdoruesit",
+  "details": "Detajet",
+  "hardDelete": "Fshij përgjithmonë",
+  "empty": {
+    "personal": "Nuk u gjetën regjistrime të degëve të caktuara.",
+    "deleted": "Nuk u gjetën degë të fshira.",
+    "active": "Nuk ka degë aktive të regjistruara.",
+    "noMatch": "Asnjë degë nuk përputhet me kërkimin tuaj."
+  },
+  "modals": {
+    "deleteTitle": "Fshij degën",
+    "hardDeleteTitle": "Fshij përgjithmonë degën",
+    "deleteDesc": "Dega \"{name}\" do të fshihet. Mund të shikoni ose rivendosni degët e fshira më vonë.",
+    "hardDeleteDesc": "Dega \"{name}\" do të hiqet plotësisht nga sistemi. Ky veprim nuk mund të zhbëhet dhe mund të ndikojë në të gjitha të dhënat e lidhura me degën.",
+    "deleteConfirm": "Fshij degën",
+    "hardDeleteConfirm": "Fshij përgjithmonë"
+  },
+  "formModal": {
+    "namePlaceholder": "p.sh. Dega kryesore",
+    "codePlaceholder": "MAIN",
+    "phonePlaceholder": "+1 555 123 4567",
+    "addressPlaceholder": "Rruga, lagjja, qyteti…"
+  },
+  "editModal": {
+    "title": "Ndrysho degën",
+    "subtitle": "Përditëso detajet për {branchName}",
+    "monthlyTargetLabel": "Objektivi mujor i të ardhurave (L)",
+    "monthlyTargetPlaceholder": "1,000,000",
+    "monthlyTargetHint": "Drejton shiritin e progresit në panelin kryesor për muajin aktual.",
+    "validationNameRequired": "Emri i degës është i detyrueshëm.",
+    "validationCodeRequired": "Kodi i degës është i detyrueshëm.",
+    "updateFailed": "Nuk mund të përditësohej dega.",
+    "uploadLogo": "Ngarko Logon",
+    "changeLogo": "Ndrysho Logon",
+    "removeLogo": "Hiq Logon",
+    "emailPlaceholder": "shembull@kompania.com",
+    "websitePlaceholder": "https://kompania.com",
+    "taxOfficePlaceholder": "p.sh. Zyra Tatimore",
+    "taxNumberPlaceholder": "1234567890",
+    "registryNoPlaceholder": "123456",
+    "mersisNoPlaceholder": "0123456789012345"
+  },
+  "detailModal": {
+    "usersAssignedSummary": "{count} përdorues të caktuar",
+    "zoneManagement": "Menaxhimi i zonave",
+    "noAssignableUsers": "Nuk ka përdorues të disponueshëm për të caktuar",
+    "assigning": "Duke caktuar…",
+    "assignUsersButton": "Cakto {count} përdorues(a)",
+    "assignedUsers": "Përdoruesit e caktuar",
+    "addUser": "Shto përdorues",
+    "emptyNoUsers": "Asnjë përdorues nuk është caktuar ende në këtë degë.",
+    "noRole": "Pa rol",
+    "removeUser": "Hiqe",
+    "close": "Mbylle",
+    "assignFailed": "Nuk mund të caktoheshin përdoruesit.",
+    "removeUserFailed": "Nuk mund të hiqej përdoruesi.",
+    "confirmRemoveUser": "Të hiqet ky përdorues nga dega?"
+  },
+  "branchUserModal": {
+    "title": "Cakto përdoruesit",
+    "subtitle": "Zgjidh përdoruesit për {branchName} ({selectedCount} të përzgjedhur)",
+    "searchPlaceholder": "Kërko përdoruesit…",
+    "empty": "Nuk u gjetën përdorues",
+    "selectAllToggle": "Zgjidh të gjithë / Pastro",
+    "footerSummary": "{selected} / {total} përdorues të përzgjedhur"
+  },
+  "branchSelect": {
+    "placeholder": "Zgjidh degën",
+    "loading": "Duke u ngarkuar…",
+    "allBranches": "Të gjitha degët"
+  }
+}

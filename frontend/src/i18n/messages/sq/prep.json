@@ -1,0 +1,244 @@
+{
+  "drawer": {
+    "title": "Ndjekja e përgatitjes",
+    "sidebarLabel": "Lista e përgatitjes",
+    "tooltip": "Lista e përgatitjes",
+    "activeTasks": "{count} detyra aktive",
+    "addTask": "Shto detyrë",
+    "placeholder": "Emri i detyrës... (p.sh. Prit domatet)",
+    "quantity": "Sasia",
+    "unit": "Njësia",
+    "defaultUnit": "NJËSIA",
+    "emptyList": "Lista e përgatitjes është bosh",
+    "urgent": "Urgjente",
+    "footerNote": "Përdor +/− për të përditësuar sasinë; Përfundo mbyll detyrën. Artikujt e përfunduar arkivohen në fund të ditës.",
+    "successAdd": "Detyra e përgatitjes u shtua",
+    "errorAdd": "Nuk mund të ruhej detyra.",
+    "errorBranch": "Dega mungon. Zgjidh një degë nga shiriti i sipërm ose kontrollo konfigurimin e stacionit.",
+    "errorAssign": "Nuk mund të ruhej caktimi i detyrës.",
+    "assignPlaceholder": "Zgjidh personin...",
+            "assignedTo": "Caktuar tek",
+            "namePlaceholder": "Shkruani emrin...",
+    "unassigned": "Pa caktuar",
+    "loading": "Duke u ngarkuar…",
+    "filters": {
+      "all": "TË GJITHA",
+      "pending": "NË PRITJE",
+      "inProgress": "NË PROCES",
+      "completed": "TË PËRFUNDUARA"
+    },
+    "status": {
+      "pending": "Në pritje",
+      "inProgress": "Duke u përgatitur",
+      "completed": "Përfunduar",
+      "cancelled": "Anuluar",
+      "ready": "Gati"
+    },
+    "actions": {
+      "finish": "Përfundo",
+      "start": "Fillo",
+      "increase": "Rrit",
+      "decrease": "Ul"
+    }
+  },
+  "toasts": {
+    "tasks": {
+      "statusUpdated": "Statusi i përgatitjes u përditësua",
+      "completed": "Përgatitja u përfundua",
+      "progressError": "Nuk mund të përditësohej progresi.",
+      "created": "Detyra e përgatitjes u krijua",
+      "deleted": "Detyra e përgatitjes u fshi"
+    },
+    "templates": {
+      "created": "Modeli i përgatitjes u krijua",
+      "createError": "Gabim gjatë krijimit të modelit",
+      "updated": "Modeli u përditësua",
+      "deleted": "Modeli u fshi"
+    },
+    "smartRules": {
+      "created": "Rregulli inteligjent u krijua",
+      "createError": "Gabim gjatë krijimit të rregullit",
+      "updated": "Rregulli u përditësua",
+      "updateError": "Gabim gjatë përditësimit të rregullit",
+      "deleted": "Rregulli u fshi",
+      "deleteError": "Gabim gjatë fshirjes së rregullit"
+    },
+    "settingsLoadFailed": "Nuk mund të ngarkoheshin cilësimet e përgatitjes.",
+    "settingsSaveFailed": "Nuk mund të ruhej cilësimi."
+  },
+  "management": {
+    "title": "Menaxhimi i përgatitjes",
+    "allBranches": "Të gjitha degët",
+    "noBranchAssigned": "Asnjë degë e caktuar",
+    "newTemplate": "Model i ri",
+    "newRule": "Rregull i ri",
+    "refresh": "Rifresko",
+    "tabs": {
+      "tasks": "Detyrat aktive",
+      "templates": "Modelet e përgatitjes",
+      "smartRules": "Rregullat inteligjente",
+      "settings": "Cilësimet"
+    },
+    "stats": {
+      "activeTasks": "Detyrat aktive",
+      "completed": "Të përfunduara",
+      "activeTemplates": "Modelet aktive",
+      "smartSuggestions": "Sugjerimet inteligjente"
+    },
+    "searchPlaceholder": "Kërko…",
+    "filter": "Filtro",
+    "edit": "Ndrysho",
+    "delete": "Fshije",
+    "smartSubTabs": {
+      "suggestions": "Sugjerimet",
+      "ruleManagement": "Menaxhimi i rregullave"
+    },
+    "columns": {
+      "tasks": {
+        "nameStation": "Detyra / stacioni",
+        "status": "Statusi",
+        "progress": "Progresi",
+        "actions": "Veprimet"
+      },
+      "templates": {
+        "nameSchedule": "Modeli / orari",
+        "station": "Stacioni",
+        "target": "Objektivi",
+        "actions": "Veprimet"
+      },
+      "suggestions": {
+        "materialBase": "Artikulli / produkti bazë",
+        "salesAnalysis": "Analiza e shitjeve",
+        "suggestion": "Sugjerimi",
+        "action": "Veprimi"
+      },
+      "rules": {
+        "nameMatch": "Rregulli / përputhja",
+        "ratio": "Raporti",
+        "status": "Statusi",
+        "actions": "Veprimet"
+      }
+    },
+    "defaultStation": "Stacioni i përgjithshëm",
+    "taskStatus": {
+      "completed": "Përfunduar",
+      "inProgress": "Në proces",
+      "pending": "Në pritje"
+    },
+    "progressDecreaseAria": "Ul progresin",
+    "progressIncreaseAria": "Rrit progresin",
+    "changeStatus": "Ndrysho statusin",
+    "setPending": "Vendos në pritje",
+    "setInProgress": "Vendos në proces",
+    "setCompleted": "Vendos të përfunduar",
+    "deleteTask": "Fshij detyrën",
+    "emptyTasks": "Nuk ka detyra aktive të përgatitjes.",
+    "emptyCompletedTasks": "Nuk ka detyra të përfunduara të përgatitjes.",
+    "emptyAllTasks": "Nuk ka detyra të përgatitjes.",
+    "emptyTemplates": "Ende pa modele të përcaktuara.",
+    "createFirstTemplate": "Krijo modelin e parë",
+    "dailyAtTime": "Çdo ditë në {time}",
+    "emptySuggestions": "Nuk u gjetën sugjerime.",
+    "emptySuggestionsHint": "Kontrollo rregullat e tua inteligjente ose prit për të dhëna shitjesh.",
+    "salesBasedOn": "Bazuar në shitjet e {product}",
+    "avgSales": "Shitjet mesatare: {avg}",
+    "start": "Fillo",
+    "suggestionTaskTitle": "Përgatit {item} (sugjerim inteligjent)",
+    "rulesSectionTitle": "Rregullat aktive ({count})",
+    "ruleState": {
+      "active": "Aktiv",
+      "inactive": "Joaktiv"
+    },
+    "systemSuggestedRules": "Rregullat e sugjeruara nga sistemi ({count})",
+    "prepForProduct": "Përgatitje për {product}",
+    "soldIn30Days": "{count} shitur në 30 ditë",
+    "discoveryCta": "{reason} Krijo një rregull përgatitjeje për të automatizuar menaxhimin e stokut.",
+    "addRule": "Shto rregull",
+    "discoveryRuleTitle": "Rregulli i përgatitjes {product}",
+    "discoveryTargetMaterial": "Përbërësi {product}",
+    "emptyRulesAndDiscovery": "Ende pa rregulla dhe të dhëna të pamjaftueshme të mbledhura.",
+    "createManualRule": "Krijo rregull manualisht",
+    "moduleSettings": "Cilësimet e modulit",
+    "autoArchive": {
+      "label": "Arkivim automatik",
+      "description": "Kur aktivizohet, detyrat e përfunduara në ditët e mëparshme fshihen nga kjo listë (vetëm detyrat e sotme të përfunduara dhe të hapura). Preferenca ruhet për çdo degë.",
+      "branchRequired": "Zgjidh një degë më lart për të ruajtur këtë cilësim."
+    },
+    "tipsTitle": "Këshilla të shpejta",
+    "tips": {
+      "templatesFire": "Modelet ekzekutohen në orarin e planifikuar çdo ditë.",
+      "smartRulesTrend": "Rregullat inteligjente analizojnë tendencat e shitjeve."
+    },
+    "dialogs": {
+      "deleting": "Duke fshirë…",
+      "deleteTask": {
+        "title": "Fshij detyrën",
+        "description": "Jeni i sigurt se doni të fshini këtë detyrë aktive përgatitjeje? Ky veprim nuk mund të zhbëhet."
+      },
+      "deleteTemplate": {
+        "title": "Jeni i sigurt?",
+        "description": "Fshirja e këtij modeli ndalon detyrat automatike të gjeneruara prej tij. Ky veprim nuk mund të zhbëhet.",
+        "deleting": "Duke fshirë…",
+        "confirm": "Po, fshije"
+      },
+      "deleteRule": {
+        "title": "Fshij rregullin",
+        "description": "Jeni i sigurt se doni të fshini këtë rregull inteligjent përgatitjeje? Llogaritja e sugjerimeve do të ndalet për këtë rregull."
+      },
+      "cancel": "Anulo",
+      "delete": "Fshije"
+    }
+  },
+  "templateModal": {
+    "editTitle": "Ndrysho modelin",
+    "createTitle": "Model i ri përgatitjeje",
+    "enabled": "Aktivizuar",
+    "branch": "Dega",
+    "selectBranch": "Zgjidh degën…",
+    "station": "Stacioni i kuzhinës",
+    "noStation": "I përgjithshëm (pa stacion)",
+    "stationsLoading": "Duke ngarkuar stacionet…",
+    "templateName": "Emri i modelit",
+    "titlePlaceholder": "p.sh. Përgatitja ditore e brumit",
+    "targetQty": "Sasia e synuar",
+    "unit": "Njësia",
+    "unitPlaceholder": "KG, COPË…",
+    "activationTime": "Koha e ekzekutimit",
+    "validDays": "Ditët aktive",
+    "days": {
+      "mon": "Hën",
+      "tue": "Mar",
+      "wed": "Mër",
+      "thu": "Enj",
+      "fri": "Pre",
+      "sat": "Sht",
+      "sun": "Die"
+    },
+    "assignedTo": "Cakto te",
+    "assignedToEveryone": "Të gjithë (I përgjithshëm)",
+            "namePlaceholder": "Shkruani emrin...",
+    "cancel": "Anulo",
+    "saving": "Duke ruajtur…",
+    "update": "Përditëso",
+    "create": "Krijo modelin"
+  },
+  "smartRuleModal": {
+    "editTitle": "Ndrysho rregullin",
+    "createTitle": "Rregull i ri inteligjent",
+    "enabled": "Aktivizuar",
+    "ruleTitle": "Titulli i rregullit",
+    "titlePlaceholder": "p.sh. Përgatitja e petave të burgerit",
+    "baseProduct": "Produkti bazë (shitjet)",
+    "selectProduct": "Zgjidh produktin…",
+    "productsLoading": "Duke ngarkuar produktet…",
+    "targetItem": "Artikulli për t'u përgatitur",
+    "targetPlaceholder": "p.sh. Petat e ngrira të burgerit",
+    "ratio": "Raporti (për 1 produkt)",
+    "unit": "Njësia",
+    "unitPlaceholder": "COPË, G…",
+    "cancel": "Anulo",
+    "saving": "Duke ruajtur…",
+    "update": "Përditëso",
+    "create": "Krijo rregullin"
+  }
+}

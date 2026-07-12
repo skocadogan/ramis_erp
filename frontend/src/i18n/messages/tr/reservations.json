@@ -1,0 +1,105 @@
+{
+  "page": {
+    "title": "Rezervasyonlar",
+    "subtitle": "Rezerve masaları görüntüleyin; misafir gelişi, düzenleme ve iptal işlemlerini yönetin.",
+    "branchLabel": "Şube: {name}",
+    "branchSelectAria": "Şube seçin",
+    "refresh": "Yenile",
+    "noBranch": "Rezervasyonları listelemek için şube seçin veya hesabınıza şube atanması gerekir.",
+    "emptyTablesTitle": "Bu şubede şu an rezerve masa yok.",
+    "emptyTablesHint": "Yeni rezervasyon için <link>Masa Yönetimi</link> üzerinden boş bir masayı rezerve edebilirsiniz."
+  },
+  "cards": {
+    "badgeReserved": "Rezerve",
+    "partyRow": "Rezervasyon: {party} · Masa {min}–{max} kişi",
+    "people": "{count} kişi",
+    "dash": "—"
+  },
+  "actions": {
+    "guestArrived": "Misafir geldi",
+    "edit": "Düzenle",
+    "cancel": "İptal"
+  },
+  "cancelModal": {
+    "title": "Rezervasyonu iptal et",
+    "description": "<bold>{name}</bold> masasının rezervasyonunu kaldırıp masayı boşa çıkarmak istediğinize emin misiniz?",
+    "dismiss": "Vazgeç",
+    "confirm": "İptal et"
+  },
+  "editModal": {
+    "title": "Rezervasyonu düzenle",
+    "closeAria": "Kapat",
+    "infoLabel": "Rezervasyon bilgisi",
+    "requiredMark": "*",
+    "scheduledLabel": "Planlanan saat",
+    "scheduledHint": "Boş bırakılabilir.",
+    "partyLabel": "Kişi sayısı",
+    "partyPlaceholder": "Örn. 4",
+    "errorInfoRequired": "Rezervasyon bilgisi zorunludur.",
+    "errorPartyInvalid": "Kişi sayısı geçerli bir pozitif sayı olmalı.",
+    "cancel": "İptal",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor..."
+  },
+  "toast": {
+    "guestArrived": "{name}: Misafir geldi, masa dolu olarak işaretlendi.",
+    "operationFailed": "İşlem yapılamadı.",
+    "cancelReservationSuccess": "Rezervasyon iptal edildi, masa boşaltıldı.",
+    "cancelReservationFailed": "İptal edilemedi.",
+    "updateSuccess": "Rezervasyon güncellendi.",
+    "updateFailed": "Güncellenemedi.",
+    "customerNameRequired": "Müşteri adı gerekli.",
+    "createSuccess": "Rezervasyon oluşturuldu.",
+    "saveFailed": "Kaydedilemedi.",
+    "deleteSuccess": "Rezervasyon silindi.",
+    "deleteFailed": "Silinemedi.",
+    "confirmSuccess": "Onaylandı",
+    "seatSuccess": "Oturdu",
+    "cancelShortSuccess": "İptal",
+    "actionFailed": "İşlem başarısız."
+  },
+  "ledger": {
+    "title": "Rezervasyon defteri",
+    "description": "Kayıtlar sayfa üstünde seçilen şubeye göre filtrelenir. Masaya bağlı yeni kayıtta masa planında \"Rezerve\" durumu güncellenir.",
+    "new": "Yeni",
+    "columns": {
+      "time": "Saat",
+      "customer": "Müşteri",
+      "party": "Kişi",
+      "table": "Masa",
+      "status": "Durum",
+      "actions": "İşlem"
+    },
+    "emptyDay": "Bu tarihte kayıt yok.",
+    "createTitle": "Yeni rezervasyon",
+    "namePlaceholder": "Müşteri adı",
+    "phonePlaceholder": "Telefon",
+    "partyPlaceholder": "Kişi",
+    "tableLabel": "Masa (isteğe bağlı, müsait masalar)",
+    "tableNone": "— Masa seçilmedi —",
+    "loadingTables": "Masalar yükleniyor…",
+    "save": "Kaydet",
+    "deleteTitle": "Rezervasyonu sil",
+    "deleteDescription": "<bold>{customer}</bold> ({time}) kaydı kalıcı olarak silinecek. Bekleyen veya onaylı masalı rezervasyonda masa planındaki rezervasyon da kaldırılır.",
+    "deleting": "Siliniyor…",
+    "delete": "Sil",
+    "dismiss": "Vazgeç",
+    "confirmSeatTitle": "Oturdu",
+    "confirmApproveTitle": "Onayla",
+    "cancelActionTitle": "İptal",
+    "deleteActionTitle": "Kalıcı sil"
+  },
+  "alertSettings": {
+    "title": "Geliş bildirimi ayarları",
+    "description": "Rezervasyon saatine yaklaşan misafirler için garson, POS ve mobil ekranlara giden uyarıların zamanlamasını şube bazında ayarlayın.",
+    "leadLabel": "Kaç dakika önce başlasın",
+    "leadHint": "0 = yalnızca rezervasyon saatinde; en fazla 180 dk.",
+    "intervalLabel": "Tekrar aralığı (dk)",
+    "intervalHint": "Uyarı, misafir gelene veya rezervasyon kapanana kadar bu aralıkla tekrarlanır.",
+    "save": "Kaydet",
+    "saving": "Kaydediliyor…",
+    "saveSuccess": "Bildirim ayarları kaydedildi.",
+    "saveFailed": "Ayarlar kaydedilemedi.",
+    "loadFailed": "Bildirim ayarları yüklenemedi."
+  }
+}

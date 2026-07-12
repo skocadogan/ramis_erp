@@ -1,0 +1,75 @@
+{
+  "unauthorized": {
+    "title": "Access denied",
+    "description": "The Recycle Bin is only available to system administrators."
+  },
+  "sidebar": {
+    "categories": "Categories",
+    "refreshTitle": "Refresh"
+  },
+  "emptySummary": "The recycle bin is empty.",
+  "header": {
+    "title": "Recycle Bin",
+    "subtitle": "Review data deleted from the system, restore it, or remove it permanently."
+  },
+  "selectCategoryHint": "Select a category from the menu on the left to view items.",
+  "toolbar": {
+    "deletedRecords": "Deleted {model} records",
+    "restoreAll": "Restore all",
+    "emptyBin": "Empty bin",
+    "searchPlaceholder": "Search…"
+  },
+  "table": {
+    "id": "ID",
+    "name": "Name",
+    "deletedAt": "Deleted at",
+    "actions": "Actions"
+  },
+  "actions": {
+    "restore": "Restore",
+    "hardDelete": "Delete permanently",
+    "forceDelete": "Force delete"
+  },
+  "noSearchResults": "No records match your search.",
+  "toast": {
+    "restored": "Record restored.",
+    "restoreFailed": "Restore failed.",
+    "hardDeleted": "Record permanently deleted.",
+    "hardDeleteFailed": "Delete failed.",
+    "forceHardDeleted": "Record and dependencies permanently deleted.",
+    "forceHardDeleteFailed": "Force delete failed.",
+    "forceDeletePreviewFailed": "Could not load dependency list.",
+    "allRestored": "All records restored.",
+    "restoreAllFailed": "Bulk restore failed.",
+    "binEmptied": "Recycle bin emptied.",
+    "emptyFailed": "Empty operation failed."
+  },
+  "modal": {
+    "cancel": "Cancel",
+    "hardDelete": {
+      "title": "Permanently delete record",
+      "description": "“{name}” ({model}) will be permanently removed. This deletes the row from the database and cannot be undone. Do you want to continue?",
+      "confirm": "Delete permanently"
+    },
+    "restoreAll": {
+      "title": "Restore all?",
+      "description": "All deleted records in “{model}” will be restored.",
+      "confirm": "Restore all"
+    },
+    "emptyBin": {
+      "title": "Empty recycle bin?",
+      "description": "All records in “{model}” will be permanently deleted. This cannot be undone.",
+      "confirm": "Delete all permanently"
+    },
+    "forceDelete": {
+      "title": "Force delete with dependencies",
+      "description": "“{name}” ({model}) cannot be deleted directly. If you confirm, the linked records below will also be permanently removed.",
+      "warning": "Warning: this cannot be undone",
+      "dependenciesTitle": "Records that will also be deleted",
+      "loadingDeps": "Loading dependencies…",
+      "noDeps": "No extra dependencies found; only the selected record will be deleted.",
+      "confirm": "Yes, force delete",
+      "confirming": "Deleting…"
+    }
+  }
+}

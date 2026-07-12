@@ -1,0 +1,288 @@
+import { spawn, type ChildProcess } from "child_process";
+import path from "path";
+import net from "net";
+import fs from "fs";
+import fsPromises from "fs/promises";
+import { app } from "electron";
+import { getServerDir } from "./constants";
+import { log, error, warn } from "./logger";
+
+/** Kullanıcı girdisini kök origin'e çevirir (sondaki /api/v1 ve slash temizlenir). */
+export function normalizeApiOrigin(apiUrl: string): string {
+  let base = apiUrl.trim().replace(/\/+$/, "");
+  if (!/^https?:\/\//i.test(base)) {
+    base = `http://${base}`;
+  }
+  return base.replace(/\/api\/v1$/i, "");
+}
+
+export function toApiBaseUrl(apiUrl: string): string {
+  return `${normalizeApiOrigin(apiUrl)}/api/v1`;
+}
+
+export async function validatePrepDisplayApi(
+  apiUrl: string,
+): Promise<{ ok: true; apiOrigin: string; apiBaseUrl: string } | { ok: false; error: string }> {
+  const apiOrigin = normalizeApiOrigin(apiUrl);
+  const apiBaseUrl = `${apiOrigin}/api/v1`;
+
+  try {
+    const healthRes = await fetch(`${apiBaseUrl}/health/`, { method: "GET" });
+    if (!healthRes.ok) {
+      return {
+        ok: false,
+        error: `Sunucu yanıt verdi (${healthRes.status}). Adres: ${apiBaseUrl}`,
+      };
+    }
+
+    const branchesRes = await fetch(`${apiBaseUrl}/prep-display/setup/branches/`, { method: "GET" });
+    if (branchesRes.status === 404) {
+      return {
+        ok: false,
+        error:
+          `prep-display API bulunamadı (404). Backend güncel mi? Sunucuyu yeniden başlatın. (${apiBaseUrl})`,
+      };
+    }
+    if (!branchesRes.ok) {
+      return {
+        ok: false,
+        error: `Şube listesi alınamadı (${branchesRes.status}). Adres: ${apiBaseUrl}`,
+      };
+    }
+
+    return { ok: true, apiOrigin, apiBaseUrl };
+  } catch (err) {
+    return {
+      ok: false,
+      error: `Sunucuya bağlanılamadı: ${err instanceof Error ? err.message : String(err)} (${apiBaseUrl})`,
+    };
+  }
+}
+
+export interface ServerInfo {
+  port: number;
+  process: ChildProcess;
+}
+
+export type ServerCrashHandler = (code: number | null) => void;
+
+let crashHandler: ServerCrashHandler | null = null;
+
+export function setServerCrashHandler(handler: ServerCrashHandler | null): void {
+  crashHandler = handler;
+}
+
+function getFreePort(): Promise<number> {
+  return new Promise((resolve, reject) => {
+    const server = net.createServer();
+    server.listen(0, () => {
+      const address = server.address();
+      const port = typeof address === "string" ? 0 : (address?.port ?? 0);
+      server.close(() => {
+        resolve(port);
+      });
+    });
+    server.on("error", (err) => {
+      reject(err);
+    });
+  });
+}
+
+function getNodeExecutable(): string {
+  return app.isPackaged ? process.execPath : "node";
+}
+
+async function ensureServerCopied(
+  sourceDir: string,
+  targetDir: string,
+  currentVersion: string,
+): Promise<void> {
+  const versionFile = path.join(targetDir, ".version");
+  const serverScript = path.join(targetDir, "server.js");
+
+  let shouldCopy = false;
+  if (!fs.existsSync(targetDir) || !fs.existsSync(versionFile) || !fs.existsSync(serverScript)) {
+    shouldCopy = true;
+  } else {
+    const installedVer = fs.readFileSync(versionFile, "utf-8").trim();
+    if (installedVer !== currentVersion) {
+      shouldCopy = true;
+    }
+  }
+
+  if (!shouldCopy) {
+    return;
+  }
+
+  log("[Next.js Server] Standalone sunucu dosyaları kopyalanıyor...");
+  const stagingDir = `${targetDir}.staging`;
+
+  try {
+    await fsPromises.rm(stagingDir, { recursive: true, force: true });
+    await fsPromises.mkdir(stagingDir, { recursive: true });
+    await fsPromises.cp(sourceDir, stagingDir, { recursive: true });
+
+    const prodModules = path.join(stagingDir, "node_modules_prod");
+    const targetModules = path.join(stagingDir, "node_modules");
+    if (fs.existsSync(prodModules)) {
+      await fsPromises.rename(prodModules, targetModules);
+    }
+
+    await fsPromises.writeFile(path.join(stagingDir, ".version"), currentVersion, "utf-8");
+
+    await fsPromises.rm(targetDir, { recursive: true, force: true });
+    await fsPromises.rename(stagingDir, targetDir);
+    log("[Next.js Server] Kopyalama tamamlandı.");
+  } catch (err) {
+    await fsPromises.rm(stagingDir, { recursive: true, force: true }).catch(() => {});
+    error("[Next.js Server] Kopyalama hatası:", err);
+    throw new Error(
+      `Next.js sunucu dosyaları kopyalanamadı: ${err instanceof Error ? err.message : String(err)}`,
+    );
+  }
+}
+
+function ensureDevNodeModules(serverDir: string): void {
+  if (app.isPackaged) {
+    return;
+  }
+
+  const prodModules = path.join(serverDir, "node_modules_prod");
+  const nodeModules = path.join(serverDir, "node_modules");
+  if (!fs.existsSync(prodModules)) {
+    return;
+  }
+
+  try {
+    if (fs.existsSync(nodeModules)) {
+      return;
+    }
+    fs.symlinkSync(prodModules, nodeModules, "dir");
+    log("[Next.js Server] Dev symlink oluşturuldu: node_modules -> node_modules_prod");
+  } catch (err) {
+    warn("[Next.js Server] node_modules symlink oluşturulamadı:", err);
+  }
+}
+
+export async function startNextServer(apiUrl: string): Promise<ServerInfo> {
+  const port = await getFreePort();
+  let serverDir = getServerDir();
+
+  if (app.isPackaged) {
+    const sourceDir = serverDir;
+    const targetDir = path.join(app.getPath("userData"), "next-server");
+    await ensureServerCopied(sourceDir, targetDir, app.getVersion());
+    serverDir = targetDir;
+  }
+
+  ensureDevNodeModules(serverDir);
+
+  const serverScript = path.join(serverDir, "server.js");
+  if (!fs.existsSync(serverScript)) {
+    throw new Error(`Next.js sunucu betiği bulunamadı: ${serverScript}`);
+  }
+
+  const apiOrigin = normalizeApiOrigin(apiUrl);
+  const apiBaseUrl = `${apiOrigin}/api/v1`;
+  const runtimeConfigPath = path.join(app.getPath("userData"), "runtime-config.json");
+  try {
+    const configData = {
+      apiBaseUrl,
+      posOfflineQueue: true,
+      apiInterceptorToasts: false,
+    };
+    fs.writeFileSync(runtimeConfigPath, JSON.stringify(configData, null, 2), "utf-8");
+    log(`[Next.js Server] Runtime config: ${runtimeConfigPath} → ${apiBaseUrl}`);
+  } catch (err) {
+    error("[Next.js Server] Runtime config yazılamadı:", err);
+  }
+
+  return new Promise((resolve, reject) => {
+    let nodePath = process.env.NODE_PATH || "";
+    if (!app.isPackaged) {
+      const devModules = path.join(serverDir, "node_modules_prod");
+      nodePath = nodePath ? `${devModules}${path.delimiter}${nodePath}` : devModules;
+    }
+
+    const spawnEnv: NodeJS.ProcessEnv = {
+      ...process.env,
+      PORT: String(port),
+      NEXT_PUBLIC_API_URL: apiUrl,
+      RAMIS_RUNTIME_CONFIG_PATH: runtimeConfigPath,
+      NODE_ENV: process.env.NODE_ENV ?? "production",
+      ...(nodePath ? { NODE_PATH: nodePath } : {}),
+    };
+
+    if (app.isPackaged) {
+      spawnEnv.ELECTRON_RUN_AS_NODE = "1";
+    }
+
+    const nodeExec = getNodeExecutable();
+    log(
+      `[Next.js Server] Başlatılıyor: Node=${nodeExec}, Port=${port}, API=${apiUrl}`,
+    );
+
+    const child = spawn(nodeExec, [serverScript], {
+      cwd: serverDir,
+      env: spawnEnv,
+      stdio: ["ignore", "pipe", "pipe"],
+      detached: false,
+      shell: false,
+    });
+
+    let settled = false;
+    const timeout = setTimeout(() => {
+      if (!settled) {
+        settled = true;
+        child.kill("SIGTERM");
+        reject(new Error("Next.js standalone sunucusu 30 saniye içinde yanıt vermedi."));
+      }
+    }, 30_000);
+
+    const onData = (data: Buffer) => {
+      const text = data.toString();
+      log(`[Next.js stdout] ${text.trim()}`);
+
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
+        resolve({ port, process: child });
+      }
+    };
+
+    child.stdout?.on("data", onData);
+    child.stderr?.on("data", (data) => {
+      error(`[Next.js stderr] ${data.toString().trim()}`);
+    });
+
+    child.on("error", (err) => {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
+        reject(err);
+      }
+    });
+
+    child.on("exit", (code) => {
+      if (!settled) {
+        settled = true;
+        clearTimeout(timeout);
+        reject(new Error(`Next.js sunucusu beklenmedik şekilde sonlandı (exit code: ${code})`));
+      } else if (code !== 0 && code !== null) {
+        error(`[Next.js Server] Sunucu çalışırken sonlandı (exit code: ${code})`);
+        crashHandler?.(code);
+      }
+    });
+  });
+}
+
+export function stopNextServer(serverInfo: ServerInfo): void {
+  if (serverInfo.process && !serverInfo.process.killed) {
+    serverInfo.process.kill("SIGTERM");
+    setTimeout(() => {
+      if (!serverInfo.process.killed) {
+        serverInfo.process.kill("SIGKILL");
+      }
+    }, 5000);
+  }
+}

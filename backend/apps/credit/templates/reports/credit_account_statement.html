@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8"/>
+  <title>{{ report_name }}</title>
+  <style>
+    body { font-family: DejaVu Sans, sans-serif; font-size: 11px; color: #1e293b; margin: 24px; }
+    h1 { font-size: 18px; margin: 0 0 4px; }
+    .muted { color: #64748b; margin-bottom: 16px; }
+    .summary { display: table; width: 100%; margin-bottom: 20px; border: 1px solid #e2e8f0; border-radius: 6px; }
+    .summary-row { display: table-row; }
+    .summary-cell { display: table-cell; padding: 10px 12px; border-bottom: 1px solid #f1f5f9; }
+    .summary-cell.label { font-weight: bold; width: 140px; background: #f8fafc; }
+    table.data { width: 100%; border-collapse: collapse; }
+    table.data th, table.data td { border: 1px solid #e2e8f0; padding: 6px 8px; text-align: left; }
+    table.data th { background: #f1f5f9; font-weight: bold; }
+    .amount { text-align: right; white-space: nowrap; }
+    .charge { color: #b91c1c; }
+    .topup { color: #047857; }
+  </style>
+</head>
+<body>
+  <h1>{{ report_name }}</h1>
+  <p class="muted">{{ report_description }}</p>
+
+  <div class="summary">
+    <div class="summary-row">
+      <div class="summary-cell label">Hesap</div>
+      <div class="summary-cell">{{ account.full_name }}</div>
+    </div>
+    {% if account.phone %}
+    <div class="summary-row">
+      <div class="summary-cell label">Telefon</div>
+      <div class="summary-cell">{{ account.phone }}</div>
+    </div>
+    {% endif %}
+    <div class="summary-row">
+      <div class="summary-cell label">Toplam Yüklenen</div>
+      <div class="summary-cell amount topup">{{ balance.total_credited|currency }}</div>
+    </div>
+    <div class="summary-row">
+      <div class="summary-cell label">Toplam Harcanan</div>
+      <div class="summary-cell amount charge">{{ balance.total_spent|currency }}</div>
+    </div>
+    <div class="summary-row">
+      <div class="summary-cell label">Güncel Bakiye</div>
+      <div class="summary-cell amount"><strong>{{ balance.balance|currency }}</strong></div>
+    </div>
+  </div>
+
+  <table class="data">
+    <thead>
+      <tr>
+        <th>Tarih</th>
+        <th>Tür</th>
+        <th class="amount">Tutar</th>
+        <th>Sipariş</th>
+        <th>Açıklama</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for tx in transactions %}
+      <tr>
+        <td>{{ tx.created_at.strftime('%d.%m.%Y %H:%M') if tx.created_at else '—' }}</td>
+        <td>{{ tx.get_transaction_type_display() }}</td>
+        <td class="amount {% if tx.transaction_type == 'CHARGE' %}charge{% else %}topup{% endif %}">{{ tx.amount|currency }}</td>
+        <td>{% if tx.sale and tx.sale.order %}{{ tx.sale.order.order_number }}{% else %}—{% endif %}</td>
+        <td>{{ tx.notes or '' }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5">Hareket bulunamadı.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>

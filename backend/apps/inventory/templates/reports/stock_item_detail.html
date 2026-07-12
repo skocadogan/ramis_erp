@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #1e293b;
+            line-height: 1.4;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 18pt;
+            color: #1e3a8a;
+            margin: 0;
+        }
+        .header p {
+            font-size: 10pt;
+            color: #64748b;
+            margin: 5px 0 0;
+        }
+        
+        .section-title {
+            font-size: 12pt;
+            font-weight: bold;
+            color: #1e3a8a;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin: 20px 0 10px;
+            text-transform: uppercase;
+        }
+
+        .info-grid {
+            width: 100%;
+            margin-bottom: 20px;
+        }
+        .info-grid td {
+            padding: 4px 0;
+        }
+        .label {
+            color: #64748b;
+            font-weight: bold;
+            width: 120px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+            padding: 8px;
+            text-align: left;
+            font-size: 8pt;
+            color: #475569;
+            text-transform: uppercase;
+        }
+        td {
+            border-bottom: 1px solid #f1f5f9;
+            padding: 8px;
+            vertical-align: top;
+        }
+        .text-right { text-align: right; }
+        .text-center { text-align: center; }
+        .font-mono { font-family: 'Courier', monospace; font-size: 8pt; }
+        
+        .badge {
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 7.5pt;
+            font-weight: bold;
+        }
+        .badge-in { background-color: #dcfce7; color: #166534; }
+        .badge-out { background-color: #fee2e2; color: #991b1b; }
+        .badge-adj { background-color: #fef3c7; color: #92400e; }
+        .badge-trans { background-color: #e0e7ff; color: #3730a3; }
+        .badge-waste { background-color: #ffedd5; color: #9a3412; }
+        .badge-return { background-color: #f3e8ff; color: #6b21a8; }
+        .badge-cancel { background-color: #fce7f3; color: #9d174d; }
+        .badge-disposal { background-color: #e5e7eb; color: #374151; }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 7pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ _('Ürün Durum ve Hareket Detay Raporu') }} | {{ _('Tarih:') }} {{ now()|date_tr }}</p>
+    </div>
+
+    <table class="info-grid">
+        <tr>
+            <td class="label">{{ _('ÜRÜN ADI:') }}</td>
+            <td><strong>{{ item.name }}</strong></td>
+            <td class="label">{{ _('SKU / KOD:') }}</td>
+            <td class="font-mono">{{ item.sku }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ _('KATEGORİ:') }}</td>
+            <td>{{ item.category_name or '-' }}</td>
+            <td class="label">{{ _('BİRİM:') }}</td>
+            <td>{{ item.unit }}</td>
+        </tr>
+        <tr>
+            <td class="label">{{ _('TOPLAM STOK:') }}</td>
+            <td><strong>{{ item.current_quantity|currency('') }} {{ item.unit }}</strong></td>
+            <td class="label">{{ _('BARKOD:') }}</td>
+            <td class="font-mono">{{ item.barcode or '-' }}</td>
+        </tr>
+    </table>
+
+    <div class="section-title">{{ _('DEPO STOK DAĞILIMI') }}</div>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Depo Adı') }}</th>
+                <th class="text-right">{{ _('Mevcut Miktar') }}</th>
+                <th class="text-right">{{ _('Minimum Seviye') }}</th>
+                <th class="text-center">{{ _('Durum') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for level in warehouse_levels %}
+            <tr>
+                <td>{{ level.warehouse_name }} <br><small style="color:#94a3b8">{{ level.warehouse_code }}</small></td>
+                <td class="text-right"><strong>{{ level.quantity|currency('') }} {{ item.unit }}</strong></td>
+                <td class="text-right">{{ level.minimum_quantity|currency('') if level.minimum_quantity else '-' }}</td>
+                <td class="text-center">
+                    {% if level.is_low_stock %}
+                    <span style="color: #b45309; font-weight: bold;">{{ _('KRİTİK') }}</span>
+                    {% else %}
+                    <span style="color: #94a3b8;">{{ _('Normal') }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center" style="padding: 20px; color: #94a3b8;">{{ _('Depo stok kaydı bulunamadı.') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="section-title">{{ _('SON STOK HAREKETLERİ (EN SON 50)') }}</div>
+    <table>
+        <thead>
+            <tr>
+                <th width="15%">{{ _('Tarih') }}</th>
+                <th width="15%">{{ _('Depo') }}</th>
+                <th width="10%">{{ _('İşlem') }}</th>
+                <th class="text-right" width="12%">{{ _('Miktar') }}</th>
+                <th width="18%">{{ _('Referans') }}</th>
+                <th width="30%">{{ _('Notlar') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mov in movements %}
+            <tr>
+                <td style="font-size: 8pt;">{{ mov.created_at|date_tr }}</td>
+                <td>{{ mov.warehouse_name|default("-") }}</td>
+                <td>
+                    {% if mov.movement_type == 'IN' %}<span class="badge badge-in">{{ _('GİRİŞ') }}</span>{% endif %}
+                    {% if mov.movement_type == 'OUT' %}<span class="badge badge-out">{{ _('ÇIKIŞ') }}</span>{% endif %}
+                    {% if mov.movement_type == 'ADJUSTMENT' %}<span class="badge badge-adj">{{ _('DÜZELTME') }}</span>{% endif %}
+                    {% if mov.movement_type == 'TRANSFER' %}<span class="badge badge-trans">{{ _('TRANSFER') }}</span>{% endif %}
+                    {% if mov.movement_type == 'WASTE' %}<span class="badge badge-waste">{{ _('FİRE') }}</span>{% endif %}
+                    {% if mov.movement_type == 'RETURN' %}<span class="badge badge-return">{{ _('İADE') }}</span>{% endif %}
+                    {% if mov.movement_type == 'CANCEL' %}<span class="badge badge-cancel">{{ _('İPTAL') }}</span>{% endif %}
+                    {% if mov.movement_type == 'DISPOSAL' %}<span class="badge badge-disposal">{{ _('İMHA') }}</span>{% endif %}
+                </td>
+                <td class="text-right">
+                    {% with signed=mov.signed_quantity %}
+                    <strong style="color: {% if signed > 0 %}#15803d{% else %}#b91c1c{% endif %};">
+                        {% if signed > 0 %}+{% elif signed < 0 %}-{% endif %}{{ (signed|abs)|currency('') }}
+                    </strong>
+                    {% endwith %}
+                </td>
+                <td class="font-mono">{{ mov.reference|default("-") }}</td>
+                <td style="font-size: 8pt;">
+                    {{ mov.notes|default("-") }}
+                    {% if mov.performed_by_name %}<br><small style="color:#94a3b8">{{ _('İşlem:') }} {{ mov.performed_by_name }}</small>{% endif %}
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="6" class="text-center" style="padding: 20px; color: #94a3b8;">{{ _('Hareket kaydı bulunamadı.') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+</html>

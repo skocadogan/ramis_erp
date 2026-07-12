@@ -1,0 +1,103 @@
+"use client"
+
+import { useTranslations } from "next-intl"
+import { Plus, Edit, Trash2 } from "lucide-react"
+
+interface Role {
+  id: number; name: string; description: string | null; parent_role: number | null
+  permissions: number[]; permission_codes: string[]; is_active: boolean
+}
+
+interface PermissionRow {
+  id: number
+  name: string
+  code: string
+}
+
+interface PermissionCategory {
+  id: number; name: string; code: string; description: string | null; permissions: PermissionRow[]
+}
+
+interface RolesTabProps {
+  roles: Role[]; permCategories: PermissionCategory[]
+  onAddRole: () => void; onEditRole: (role: Role) => void; onDeleteRole: (roleId: number) => void
+}
+
+export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDeleteRole }: RolesTabProps) {
+  const t = useTranslations("admin")
+
+  return (
+    <div className="space-y-6">
+      <div className="flex items-center justify-between">
+        <div>
+          <h2 className="text-lg font-ui-semibold text-foreground">{t('roles.title')}</h2>
+          <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">{t('roles.description')}</p>
+        </div>
+        <button onClick={onAddRole}
+          className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-blue-700 transition-all">
+          <Plus size={15} /> {t('roles.addNew')}
+        </button>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ maxHeight: "calc(100vh - 220px)" }}>
+        <div className="bg-white rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700 flex flex-col min-h-0">
+          <div className="bg-slate-50 rounded-t-lg px-4 py-3 border-b border-border dark:bg-slate-800/40 dark:border-slate-800 shrink-0">
+            <h3 className="text-ui-sm font-ui-semibold text-foreground">{t('roles.rolesCount', { count: roles.length })}</h3>
+          </div>
+          <div className="divide-y divide-slate-100 dark:divide-slate-700 overflow-y-auto flex-1 min-h-0">
+            {roles.map(role => (
+              <div key={role.id} className="px-4 py-3 flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+                <div>
+                  <span className="text-ui font-ui-medium text-foreground dark:text-slate-200">{role.name}</span>
+                  {role.description && <p className="text-xs text-muted-foreground mt-0.5 dark:text-muted-foreground">{role.description}</p>}
+                  <div className="flex flex-wrap gap-1 mt-2">
+                    {permCategories
+                      .flatMap(cat => cat.permissions)
+                      .filter(perm => role.permission_codes.includes(perm.code))
+                      .slice(0, 5)
+                      .map(perm => (
+                        <span key={perm.code} className="rounded-md bg-slate-50 border border-border px-1.5 py-0.5 text-xs text-slate-600 dark:bg-slate-800 dark:border-slate-700 dark:text-muted-foreground">{perm.name}</span>
+                      ))}
+                    {role.permission_codes.length > 5 && (
+                      <span className="text-2xs font-ui-medium text-muted-foreground dark:text-muted-foreground self-center ml-1">{t('roles.more', { count: role.permission_codes.length - 5 })}</span>
+                    )}
+                  </div>
+                </div>
+                <div className="flex items-center gap-1">
+                  <button onClick={() => onEditRole(role)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-blue-600 dark:hover:bg-slate-800" title={t('common.edit')}>
+                    <Edit size={14} />
+                  </button>
+                  <button onClick={() => onDeleteRole(role.id)} className="p-1.5 rounded-md hover:bg-red-50 text-muted-foreground hover:text-red-600 dark:hover:bg-red-900/30" title={t('common.delete')}>
+                    <Trash2 size={14} />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-white rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700 flex flex-col min-h-0">
+          <div className="bg-slate-50 rounded-t-lg px-4 py-3 border-b border-border dark:bg-slate-800/40 dark:border-slate-800 shrink-0">
+            <h3 className="text-ui-sm font-ui-semibold text-foreground">{t('roles.permCategories')}</h3>
+          </div>
+          <div className="divide-y divide-slate-100 overflow-y-auto flex-1 min-h-0 dark:divide-slate-700">
+            {permCategories.map(cat => (
+              <div key={cat.id} className="px-4 py-3 hover:bg-slate-50/30 dark:hover:bg-slate-800/20 transition-colors">
+                <div className="flex items-center gap-2 mb-2.5">
+                  <span className="text-ui font-ui-medium text-foreground dark:text-slate-200">{cat.name}</span>
+                  <span className="rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-ui-medium text-muted-foreground dark:bg-slate-800 dark:text-muted-foreground">{cat.permissions.length}</span>
+                </div>
+                <div className="flex flex-wrap gap-1">
+                  {cat.permissions.map(perm => (
+                    <span key={perm.id} className="rounded-md bg-slate-50 border border-border px-2 py-1 text-xs text-slate-600 dark:bg-slate-800 dark:border-slate-700 dark:text-muted-foreground" title={perm.code}>
+                      {perm.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

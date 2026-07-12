@@ -1,0 +1,32 @@
+{
+  "name": "ramis-kds-electron",
+  "version": "1.0.0",
+  "desktopName": "Ramis KDS",
+  "description": "Ramis ERP — KDS (Kitchen Display System) Electron Uygulaması",
+  "main": "dist/electron/main.js",
+  "author": {
+    "name": "Ramis ERP",
+    "email": "info@ramis.com.tr"
+  },
+  "homepage": "https://ramis.com.tr",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "npm run build:electron && electron . --no-sandbox --disable-gpu",
+    "dev:direct": "electron . --no-sandbox --disable-gpu",
+    "dev:log-out": "electron . --no-sandbox --disable-gpu --log-out",
+    "build:next": "bash bin/build-next.sh",
+    "build:electron": "tsc -p tsconfig.json && cp electron/login.html dist/electron/ && cp resources/icon.png dist/electron/",
+    "build": "npm run build:next && npm run build:electron",
+    "package:linux": "npm run build && electron-builder --linux",
+    "package:win": "npm run build && electron-builder --win",
+    "nsis:setup": "bash ../setup-nsis-wine.sh",
+    "package:mac": "npm run build && electron-builder --mac"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.7.0"
+  }
+}

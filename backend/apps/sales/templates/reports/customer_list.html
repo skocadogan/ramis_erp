@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1.5cm;
+            @bottom-right {
+                content: "{{ _('Sayfa') }} " counter(page) " / " counter(pages);
+                font-size: 9pt;
+            }
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 10pt;
+            color: #333;
+            line-height: 1.4;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #1e3a8a;
+            font-size: 20pt;
+        }
+        .report-info {
+            margin-bottom: 20px;
+            font-size: 9pt;
+            color: #666;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th {
+            background-color: #f1f5f9;
+            color: #475569;
+            font-weight: bold;
+            text-align: left;
+            padding: 10px 8px;
+            border-bottom: 2px solid #e2e8f0;
+            font-size: 9pt;
+        }
+        td {
+            padding: 8px;
+            border-bottom: 1px solid #f1f5f9;
+            font-size: 9pt;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+        .footer {
+            margin-top: 50px;
+            font-size: 8pt;
+            color: #94a3b8;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+    </div>
+
+    <div class="report-info">
+        <strong>{{ _('Oluşturulma:') }}</strong> {{ report_date|date_tr('%d.%m.%Y %H:%M') }}<br>
+        <strong>{{ _('Toplam Kayıt:') }}</strong> {{ count }}
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Müşteri/Firma Adı') }}</th>
+                <th>{{ _('Tip') }}</th>
+                <th>{{ _('Telefon') }}</th>
+                <th>{{ _('E-posta') }}</th>
+                <th>{{ _('Vergi No / T.C. No') }}</th>
+                <th>{{ _('Adres') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for customer in customers %}
+            <tr>
+                <td><strong>{{ customer.name }}</strong></td>
+                <td>{{ customer.customer_type_display }}</td>
+                <td>{{ customer.phone }}</td>
+                <td>{{ customer.email }}</td>
+                <td>
+                    {% if customer.tax_no %}{{ customer.tax_no }}{% elif customer.tc_no %}{{ customer.tc_no }}{% else %}—{% endif %}
+                </td>
+                <td>{{ customer.address }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Bu rapor otomatik olarak Ramis ERP tarafından oluşturulmuştur.') }}
+    </div>
+</body>
+</html>

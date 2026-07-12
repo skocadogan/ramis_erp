@@ -1,0 +1,61 @@
+{
+  "unauthorized": {
+    "title": "Qasja e mohuar",
+    "description": "Koshi i riciklimit është i disponueshëm vetëm për administratorët e sistemit."
+  },
+  "sidebar": {
+    "categories": "Kategoritë",
+    "refreshTitle": "Rifresko"
+  },
+  "emptySummary": "Koshi i riciklimit është bosh.",
+  "header": {
+    "title": "Koshi i riciklimit",
+    "subtitle": "Shqyrto të dhënat e fshira nga sistemi, rivendosi ose hiqi përgjithmonë."
+  },
+  "selectCategoryHint": "Zgjidh një kategori nga menyja në të majtë për të parë artikujt.",
+  "toolbar": {
+    "deletedRecords": "Regjistrimet e fshira të {model}",
+    "restoreAll": "Rivendos të gjitha",
+    "emptyBin": "Zbraz koshen",
+    "searchPlaceholder": "Kërko…"
+  },
+  "table": {
+    "id": "ID",
+    "name": "Emri",
+    "deletedAt": "Fshirë më",
+    "actions": "Veprimet"
+  },
+  "actions": {
+    "restore": "Rivendos",
+    "hardDelete": "Fshij përgjithmonë"
+  },
+  "noSearchResults": "Asnjë regjistrim nuk përputhet me kërkimin tuaj.",
+  "toast": {
+    "restored": "Regjistrimi u rivendos.",
+    "restoreFailed": "Rivendosja dështoi.",
+    "hardDeleted": "Regjistrimi u fshi përgjithmonë.",
+    "hardDeleteFailed": "Fshirja dështoi.",
+    "allRestored": "Të gjitha regjistrimet u rivendosën.",
+    "restoreAllFailed": "Rivendosja masive dështoi.",
+    "binEmptied": "Koshi i riciklimit u zbraz.",
+    "emptyFailed": "Operacioni i zbrazjes dështoi."
+  },
+  "modal": {
+    "cancel": "Anulo",
+    "hardDelete": {
+      "title": "Fshij përgjithmonë regjistrimin",
+      "description": "\"{name}\" ({model}) do të hiqet përgjithmonë. Kjo fshin rreshtin nga baza e të dhënave dhe nuk mund të zhbëhet. Dëshironi të vazhdoni?",
+      "confirm": "Fshij përgjithmonë"
+    },
+    "restoreAll": {
+      "title": "Rivendos të gjitha?",
+      "description": "Të gjitha regjistrimet e fshira në \"{model}\" do të rivendosen.",
+      "confirm": "Rivendos të gjitha"
+    },
+    "emptyBin": {
+      "title": "Zbraz koshen e riciklimit?",
+      "description": "Të gjitha regjistrimet në \"{model}\" do të fshihen përgjithmonë. Ky veprim nuk mund të zhbëhet.",
+      "confirm": "Fshij të gjitha përgjithmonë"
+    }
+  }
+}

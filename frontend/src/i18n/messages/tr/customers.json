@@ -1,0 +1,55 @@
+{
+  "title": "Müşteri Yönetimi",
+  "addNew": "Yeni Müşteri Ekle",
+  "edit": "Müşteriyi Düzenle",
+  "detailTitle": "Müşteri Detayı",
+  "customerType": "Müşteri Tipi",
+  "types": {
+    "INDIVIDUAL": "Bireysel",
+    "CORPORATE": "Kurumsal",
+    "ALL": "Tüm Tipler"
+  },
+  "fields": {
+    "name": "Müşteri / Firma Adı",
+    "address": "Adres",
+    "phone": "Telefon",
+    "email": "E-posta",
+    "webAddress": "Web Adresi",
+    "taxOffice": "Vergi Dairesi",
+    "taxNo": "Vergi No",
+    "tcNo": "T.C. No",
+    "mersisNo": "Mersis No"
+  },
+  "table": {
+    "empty": "Henüz müşteri kaydı bulunmamaktadır.",
+    "colName": "Müşteri / Firma Adı",
+    "colType": "Tip",
+    "colPhone": "Telefon",
+    "colEmail": "E-posta",
+    "colTax": "Vergi / T.C. No",
+    "colActions": "İşlemler"
+  },
+  "sales": {
+    "title": "Yapılan Satışlar",
+    "empty": "Bu müşteri adına yapılmış satış bulunmamaktadır.",
+    "colSaleNo": "Satış No",
+    "colDate": "Tarih",
+    "colBranch": "Şube",
+    "colPayment": "Ödeme",
+    "colAmount": "Tutar",
+    "totalNet": "Toplam Net Tahsilat",
+    "totalDiscount": "Toplam İndirim",
+    "totalGross": "Toplam Brüt Ciro",
+    "loadingMore": "Daha fazla satış yükleniyor..."
+  },
+  "messages": {
+    "createSuccess": "Müşteri başarıyla oluşturuldu.",
+    "updateSuccess": "Müşteri bilgileri güncellendi.",
+    "deleteSuccess": "Müşteri başarıyla silindi.",
+    "deleteConfirm": "Bu müşteriyi silmek istediğinize emin misiniz?",
+    "exportPdf": "PDF",
+    "exportExcel": "Excel",
+    "exportPdfSuccess": "PDF raporu başarıyla indirildi.",
+    "exportExcelSuccess": "Excel raporu başarıyla indirildi."
+  }
+}

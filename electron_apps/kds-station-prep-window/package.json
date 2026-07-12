@@ -1,0 +1,32 @@
+{
+  "name": "ramis-kds-station-prep-window",
+  "version": "1.0.0",
+  "desktopName": "Ramis PREP KDS",
+  "description": "Ramis ERP — İstasyon Hazırlık Ekranı (Kiosk)",
+  "main": "dist/electron/main.js",
+  "author": {
+    "name": "Ramis ERP",
+    "email": "info@ramis.com.tr"
+  },
+  "homepage": "http://[Server IP]",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "dev": "npm run build:electron && electron . --no-sandbox --disable-gpu",
+    "dev:direct": "electron . --no-sandbox --disable-gpu",
+    "dev:reset-setup": "electron . --no-sandbox --disable-gpu --reset-setup",
+    "build:next": "bash bin/build-next.sh",
+    "build:electron": "tsc -p tsconfig.json && cp electron/setup.html dist/electron/ && cp resources/icon.png dist/electron/",
+    "build": "npm run build:next && npm run build:electron",
+    "package:linux": "npm run build && electron-builder --linux",
+    "package:win": "npm run build && electron-builder --win",
+    "nsis:setup": "bash ../setup-nsis-wine.sh",
+    "package:mac": "npm run build && electron-builder --mac"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "electron": "^42.4.1",
+    "electron-builder": "^26.15.3",
+    "typescript": "^5.7.0"
+  }
+}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1cm;
+        }
+
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 8pt;
+            color: #333;
+            margin: 0;
+            padding: 15px;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 14pt;
+            color: #1e40af;
+        }
+
+        .header p {
+            margin: 2px 0;
+            color: #666;
+            font-size: 8pt;
+        }
+
+        .filters {
+            background-color: #f8fafc;
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filters span {
+            font-weight: bold;
+            margin-right: 12px;
+            font-size: 7pt;
+            color: #64748b;
+        }
+
+        .item-row {
+            background-color: #f1f5f9;
+            padding: 8px;
+            margin-top: 15px;
+            border-radius: 4px;
+            border-left: 4px solid #2563eb;
+        }
+
+        .item-info {
+            font-weight: bold;
+            font-size: 10pt;
+            color: #1e40af;
+        }
+
+        .item-meta {
+            font-size: 7pt;
+            color: #64748b;
+            margin-top: 2px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+            margin-left: 10px;
+            width: calc(100% - 10px);
+        }
+
+        th,
+        td {
+            padding: 4px 6px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        th {
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 7pt;
+            color: #475569;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        .tabular-nums {
+            font-family: 'Courier New', monospace;
+        }
+
+        .expiry-near {
+            color: #b45309;
+            font-weight: bold;
+        }
+
+        .expiry-critical {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        .footer {
+            clear: both;
+            text-align: center;
+            margin-top: 40px;
+            font-size: 7pt;
+            color: #94a3b8;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ _('Son Kullanma Tarihi (SKT) Bazlı Stok Detayları') }}</p>
+        <p>{{ _('Rapor Tarihi:') }} {{ now()|date_tr }}</p>
+    </div>
+
+    <div class="filters">
+        <span>{{ _('FİLTRELER:') }}</span>
+        {% if filters.warehouse_id %}<span>{{ _('Depo:') }} {{ warehouse_name }}</span>{% endif %}
+        {% if filters.category_id %}<span>{{ _('Kategori:') }} {{ category_name }}</span>{% endif %}
+        {% if filters.stock_status %}<span>{{ _('Durum:') }} {% if filters.stock_status == 'normal' %}{{ _('NORMAL') }}{% elif filters.stock_status == 'low' %}{{ _('DÜŞÜK') }}{% elif filters.stock_status == 'critical' %}{{ _('KRİTİK') }}{% elif filters.stock_status == 'warning' %}{{ _('UYARI') }}{% else %}{{ filters.stock_status|upper }}{% endif %}</span>{% endif %}
+        {% if filters.search %}<span>{{ _('Arama:') }} "{{ filters.search }}"</span>{% endif %}
+    </div>
+
+    {% if limit_reached %}
+    <div
+        style="background-color: #fffbeb; border: 1px solid #fde68a; color: #92400e; padding: 6px 10px; border-radius: 4px; margin-bottom: 15px; font-size: 7.5pt;">
+        <strong>{{ _('DİKKAT:') }}</strong> {{ (_('Toplam %(total)s ürün bulundu. Performans nedeniyle sadece ilk %(shown)s ürün gösteriliyor.') % {'total': total_count, 'shown': count}) }}
+    </div>
+    {% endif %}
+
+    {% for item in data %}
+    <div class="item-row">
+        <div class="item-info">{{ item.name }}</div>
+        <div class="item-meta">{{ _('SKU:') }} {{ item.sku }} | {{ _('Toplam Envanter:') }} {{ item.total_quantity|currency('') }} {{
+            item.unit }}</div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 20%;">{{ _('Hareket No.') }}</th>
+                <th style="width: 25%;">{{ _('Depo') }}</th>
+                <th style="width: 20%;">{{ _('Giriş Tarihi') }}</th>
+                <th style="width: 20%;">{{ _('SKT (Vade)') }}</th>
+                <th style="width: 15%; text-align: right;">{{ _('Hareket Miktarı') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for lot in item.lots %}
+            <tr>
+                <td class="tabular-nums">{{ lot.lot_number or _('STANDART') }}</td>
+                <td>{{ lot.warehouse_name }}</td>
+                <td class="tabular-nums">{{ lot.received_at|date_tr('%d.%m.%Y') }}</td>
+                <td>
+                    {% if lot.expiry_date %}
+                    <span class="tabular-nums {% if lot.expiry_date <= now().date() %}expiry-critical{% endif %}">
+                        {{ lot.expiry_date|date_tr }}
+                    </span>
+                    {% else %}
+                    <span style="color: #94a3b8;">{{ _('Süresiz') }}</span>
+                    {% endif %}
+                </td>
+                <td class="text-right tabular-nums" style="font-weight: bold;">{{ lot.quantity|currency('') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endfor %}
+
+    <div class="footer">
+        {{ _('Ramis ERP — Bulut Tabanlı Restoran Otomasyon Sistemi tarafından üretilmiştir.') }}
+    </div>
+</body>
+
+</html>

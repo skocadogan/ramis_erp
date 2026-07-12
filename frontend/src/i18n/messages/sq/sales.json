@@ -1,0 +1,317 @@
+{
+  "tabs": {
+    "sales": "Shitjet",
+    "summary": "Përmbledhje",
+    "products": "Analiza e produkteve",
+    "menuEngineering": "Menu Engineering",
+    "cancellations": "Anulimet & kthimet"
+  },
+  "periodFilter": {
+    "label": "Periudha",
+    "selectPlaceholder": "Zgjidh periudhën…",
+    "groupAriaLabel": "Periudha e shitjeve",
+    "selectAriaLabel": "Periudha e shitjeve"
+  },
+  "presets": {
+    "today": "Sot",
+    "this_week": "Këtë javë",
+    "last_week": "Javën e kaluar",
+    "this_month": "Këtë muaj",
+    "last_month": "Muajin e kaluar",
+    "last_3_months": "3 muajt e fundit",
+    "last_6_months": "6 muajt e fundit",
+    "last_9_months": "9 muajt e fundit",
+    "this_year": "Këtë vit",
+    "custom": "Intervali i datave"
+  },
+  "list": {
+    "searchPlaceholder": "Kërko tavolinë, arkëtar…",
+    "discountOnly": "Vetëm me zbritje",
+    "reset": "Rivendos",
+    "exportExcel": "Excel",
+    "exportPdf": "PDF",
+    "exportBusy": "…",
+    "netTotal": "Totali neto",
+    "discount": "Zbritja",
+    "quantity": "Numri",
+    "filterAmountLine": "Filtro: {amount}",
+    "loadingHint": "Duke rifreskuar të dhënat…",
+    "paginationTotal": "Gjithsej {count} regjistrime"
+  },
+  "filters": {
+    "tablePlaceholder": "Zgjidh tavolinën…",
+    "cashierPlaceholder": "Zgjidh arkëtarin…",
+    "allTables": "Të gjitha tavolinat",
+    "allCashiers": "Të gjithë arkëtarët"
+  },
+  "payment": {
+    "all": "Të gjitha pagesat",
+    "cash": "Para të gatshme",
+    "card": "Kartë",
+    "other": "Tjetër",
+    "credit": "Kredia e dyqanit",
+    "cashFull": "Para të gatshme",
+    "cardFull": "Kartë krediti"
+  },
+  "export": {
+    "pdfLoading": "Duke përgatitur raportin PDF…",
+    "pdfSuccess": "Raporti PDF u shkarkua.",
+    "pdfError": "Nuk mund të gjenerohej raporti PDF.",
+    "excelLoading": "Duke përgatitur raportin Excel…",
+    "excelSuccess": "Raporti Excel u shkarkua.",
+    "excelError": "Nuk mund të gjenerohej raporti Excel.",
+    "salesPdfFilename": "sales_report_{date}.pdf",
+    "salesExcelFilename": "sales_report_{date}.xlsx",
+    "productAnalyticsPdf": "product_analytics_{date}.pdf",
+    "productAnalyticsExcel": "product_analytics_{date}.xlsx",
+    "menuEngineeringPdf": "menu_engineering_{date}.pdf",
+    "menuEngineeringExcel": "menu_engineering_{date}.xlsx",
+    "productReportLoading": "Duke përgatitur raportin {format}…",
+    "productReportSuccess": "Raporti u shkarkua.",
+    "productReportError": "Nuk mund të gjenerohej raporti.",
+    "cancellationsPdfFilename": "cancellations_returns_{date}.pdf",
+    "cancellationsExcelFilename": "cancellations_returns_{date}.xlsx"
+  },
+  "table": {
+    "empty": "Ende pa regjistrime shitjesh.",
+    "colCheck": "",
+    "colIndex": "#",
+    "colBranch": "Dega",
+    "colTable": "Tavolina",
+    "colCashier": "Arkëtari",
+    "colPayment": "Mënyra e pagesës",
+    "colAmounts": "Shumat",
+    "colNotes": "Shënime",
+    "colDate": "Data",
+    "colActions": "",
+    "takeaway": "Për të marrë",
+    "splitPayment": "(ndarë)",
+    "listPrice": "Lista L{amount}",
+    "discountLine": "Zbritja −L{amount}",
+    "grandTotal": "Totali i përgjithshëm L{amount}",
+    "editTitle": "Ndrysho",
+    "deleteTitle": "Fshije",
+    "invoiceTitle": "Krijo faturë",
+    "dash": "—"
+  },
+  "stats": {
+    "expandAllLabel": "Zgjero / mbyll të gjitha",
+    "expandAllAriaExpand": "Zgjero të gjitha kartat përmbledhëse",
+    "expandAllAriaCollapse": "Mbyll të gjitha kartat përmbledhëse",
+    "periods": {
+      "today": "Sot",
+      "this_week": "Këtë javë",
+      "last_week": "Javën e kaluar",
+      "this_month": "Këtë muaj",
+      "last_month": "Muajin e kaluar",
+      "last_3_months": "3 muajt e fundit",
+      "last_6_months": "6 muajt e fundit",
+      "last_9_months": "9 muajt e fundit",
+      "this_year": "Këtë vit"
+    }
+  },
+  "summaryCard": {
+    "transactions": "{count} transaksione",
+    "tableGross": "Bruto në tavolinë:",
+    "takeawayGross": "Bruto për të marrë:",
+    "discountsAllMethods": "Zbritjet (të gjitha mënyrat e pagesës):",
+    "netGain": "Të ardhurat neto:",
+    "discountDetailTitle": "Detajet e shitjeve me zbritje",
+    "discountCountLabel": "Zbritjet e aplikuara",
+    "discountCountUnit": "{count}",
+    "discountedNetLabel": "Neto e mbledhur nga shitjet me zbritje",
+    "paymentTypesTitle": "Llojet e pagesës",
+    "paymentTypesSubtitle": "(Bruto / neto)",
+    "paymentAllTypes": "{label} (të gjitha llojet)",
+    "paymentNetLine": "{count} transaksione (neto)",
+    "grossAmount": "Bruto L{amount}",
+    "grossMasked": "Bruto {mask}",
+    "paymentLabels": {
+      "CASH": "Para të gatshme",
+      "CARD": "Kartë",
+      "OTHER": "Tjetër"
+    }
+  },
+  "productAnalytics": {
+    "loading": "Duke ngarkuar analizën e produkteve…",
+    "filterLabel": "Filtro",
+    "clearFilters": "Pastro filtrat",
+    "statTotalProducts": "Produkte të shitura",
+    "statTopSeller": "Më i shituri",
+    "statTop2": "I dyti më i shitur",
+    "statTop3": "I treti më i shitur",
+    "unitsSold": "{count} njësi të shitura",
+    "tableTitle": "Statistikat e shitjeve për të gjitha produktet",
+    "searchPlaceholder": "Kërko produkt ose kategori…",
+    "colProduct": "Produkti",
+    "colCategory": "Kategoria",
+    "colQty": "Njësi të shitura",
+    "colRevenue": "Të ardhurat totale",
+    "emptyData": "Nuk u gjetën të dhëna.",
+    "chartTitle": "Tendencat ditore të shitjeve (5 produktet më të mira)",
+    "legendIsolated": "{count} produkte të izoluara",
+    "formatPdf": "PDF",
+    "formatExcel": "Excel"
+  },
+  "menuEngineering": {
+    "loading": "Loading menu engineering analytics…",
+    "filterLabel": "Filter",
+    "allCategories": "All categories",
+    "allClasses": "All classes",
+    "searchPlaceholder": "Search product or category…",
+    "clearFilters": "Clear filters",
+    "disclaimerTitle": "Estimated profitability view",
+    "disclaimerBody": "This report is calculated from sales, recipe data and the current FEFO view. It is not an accounting-grade actual cost report.",
+    "actualDisclaimerTitle": "Actual cost view",
+    "actualDisclaimerBody": "Marzhi aktual llogaritet vetëm për shitjet, kostoja e të cilave është regjistruar në sistem. Nëse mungojnë të dhënat e kostos, fushat e marzhit aktual lihen bosh.",
+    "analysisModes": {
+      "estimated": "Estimated",
+      "actual": "Actual"
+    },
+    "stats": {
+      "totalProducts": "Products covered",
+      "classifiedProductsLine": "{count} products classified",
+      "totalEstimatedProfit": "Estimated total profit",
+      "totalActualProfit": "Actual total profit",
+      "profitThresholdLine": "Profit threshold: {amount}",
+      "actualProfitThresholdLine": "Actual profit threshold: {amount}",
+      "avgMargin": "Average estimated margin",
+      "avgActualMargin": "Average actual margin",
+      "popularityThresholdLine": "Popularity threshold: {qty}",
+      "actualPopularityThresholdLine": "Actual view threshold: {qty}",
+      "stockVarianceCost": "Stock variance cost",
+      "stockVarianceQtyLine": "Total variance: {qty}",
+      "actualCoverage": "Actual coverage",
+      "actualCoverageLine": "Full: {full} • Partial: {partial} • None: {none}"
+    },
+    "classes": {
+      "STAR": "Star",
+      "PLOWHORSE": "Plowhorse",
+      "PUZZLE": "Puzzle",
+      "DOG": "Dog"
+    },
+    "classDescriptions": {
+      "STAR": "High popularity and strong margin.",
+      "PLOWHORSE": "Popular but margin needs attention.",
+      "PUZZLE": "Profitable but not yet popular.",
+      "DOG": "Low popularity and weak margin."
+    },
+    "tableTitle": "Product profitability matrix",
+    "tableSubtitle": "Profitability, menu class and coverage warnings per product",
+    "actualTableTitle": "Actual cost matrix by product",
+    "actualTableSubtitle": "Actual cost and margin view derived from ledger-covered sales",
+    "cols": {
+      "product": "Product",
+      "class": "Class",
+      "qty": "Sold",
+      "revenue": "Revenue",
+      "unitCost": "Estimated unit cost",
+      "actualUnitCost": "Actual unit cost",
+      "grossProfit": "Estimated profit",
+      "actualGrossProfit": "Actual profit",
+      "margin": "Margin",
+      "coverage": "Coverage",
+      "actions": "Actions"
+    },
+    "actionsTitle": "Action recommendations",
+    "actionsSubtitle": "Automatic suggestions based on menu class and actual vs estimated cost variance",
+    "actionsEmpty": "No action recommendations for the selected period.",
+    "actions": {
+      "INCREASE_PRICE": "Increase price",
+      "FEATURE": "Feature product",
+      "REMOVE_FROM_MENU": "Remove from menu",
+      "COST_INCREASED": "Cost increased"
+    },
+    "actionDescriptions": {
+      "INCREASE_PRICE": "Popular but low margin — review pricing",
+      "FEATURE": "Strong contribution or profit potential — highlight on the menu",
+      "REMOVE_FROM_MENU": "Low demand and low contribution — consider removing from menu",
+      "COST_INCREASED": "Actual cost is more than 5% above estimate — review recipe and supply costs"
+    },
+    "emptyData": "No analytics data found.",
+    "unclassified": "Unclassified",
+    "recipeMissing": "Recipe / cost data missing",
+    "popularityIndexLine": "Popularity index: {value}",
+    "coverageMode": {
+      "INGREDIENT": "Ingredient mode",
+      "PRODUCT": "Product mode",
+      "MIXED": "Mixed mode"
+    },
+    "actualCoverage": {
+      "FULL": "Full coverage",
+      "PARTIAL": "Partial coverage",
+      "NONE": "No coverage"
+    },
+    "actualCoverageQtyLine": "Covered sales qty: {qty}",
+    "actualCoverageEntriesLine": "{count} cost entries",
+    "varianceCoverage": {
+      "NONE": "No product-level variance",
+      "STOCK_ONLY": "Stock-level variance only"
+    },
+    "costSource": {
+      "RECIPE_FEFO_ESTIMATE": "FEFO recipe estimate",
+      "RECIPE_LAST_COST": "Recipe last cost fallback"
+    },
+    "varianceTitle": "Stock variance summary",
+    "varianceSubtitle": "Operational waste, return and adjustment movements for the selected period",
+    "varianceCards": {
+      "waste": "Waste",
+      "cancel": "Cancel",
+      "return": "Return",
+      "disposal": "Disposal",
+      "adjustment": "Adjustment"
+    },
+    "varianceTable": {
+      "stockItem": "Stock item",
+      "breakdown": "Breakdown",
+      "qty": "Qty",
+      "cost": "Cost"
+    },
+    "varianceEmpty": "No variance movement found.",
+    "varianceRecentTitle": "Recent variance movements",
+    "varianceRecentSubtitle": "Most recent stock movements affecting waste / return / adjustment totals",
+    "varianceRecentTable": {
+      "date": "Date",
+      "stockItem": "Stock item",
+      "warehouse": "Warehouse",
+      "type": "Type",
+      "qty": "Qty",
+      "cost": "Cost"
+    },
+    "varianceRecentEmpty": "No recent variance movement found."
+  },
+  "productSelect": {
+    "allProducts": "Të gjitha produktet",
+    "searchPlaceholder": "Kërko produkte…",
+    "empty": "Nuk u gjetën produkte."
+  },
+  "editModal": {
+    "title": "Ndrysho shitjen",
+    "paymentMethod": "Mënyra e pagesës",
+    "totalAmount": "Shuma totale",
+    "notes": "Shënimet",
+    "notesPlaceholder": "Shto një shënim për këtë shitje…",
+    "cancel": "Anulo",
+    "save": "Ruaj"
+  },
+  "deleteModal": {
+    "title": "Fshij shitjen?",
+    "description": "Jeni i sigurt se doni të fshini këtë shitje? Ajo do të zhvendoset te skeda \"Të fshira\".",
+    "cancel": "Anulo",
+    "confirm": "Po, fshije"
+  },
+  "cancellations": {
+    "searchPlaceholder": "Kërko tavolinë, produkt ose përdorues…",
+    "empty": "Nuk ka anulime ose kthime në periudhën e zgjedhur.",
+    "colDate": "Data",
+    "colCancelledBy": "Anuluar nga",
+    "colReason": "Arsyeja",
+    "colProduct": "Produkti / sasia",
+    "colAmounts": "Shuma",
+    "totalAmount": "Shuma totale",
+    "totalQuantity": "Sasia totale",
+    "quantityLine": "{qty} njësi",
+    "unitPrice": "Njësia L{amount}",
+    "noReason": "E paspecifikuar"
+  }
+}

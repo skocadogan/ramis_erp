@@ -1,0 +1,182 @@
+{
+  "header": {
+    "toggleSidebar": "Ndërro shiritin anësor",
+    "searchLabel": "Kërkim global",
+    "search": "Kërkim i shpejtë",
+    "searchMobileLabel": "Kërko",
+    "logoutLabel": "Dil",
+    "logout": "Dil",
+    "brandName": "Ramis ERP"
+  },
+  "nav": {
+    "overview": "Përmbledhje",
+    "definitions": "Përkufizime",
+    "users": "Përdoruesit",
+    "kitchenStations": "Stacionet e kuzhinës",
+    "rolesPermissions": "Rolet & Lejet",
+    "branches": "Degët",
+    "posSettings": "Cilësimet e POS",
+    "waiterAssignments": "Caktimet e kamerierëve",
+    "cashierPins": "PIN-i i arkëtarit",
+    "cookAssignments": "Caktimet e kuzhinierëve",
+    "managerAssignments": "Caktimet e menaxherëve",
+    "reportTemplates": "Modelet e raporteve",
+    "printers": "Printerët",
+    "restaurant": "Operacionet e restorantit",
+    "restaurantSummary": "Përmbledhja e restorantit",
+    "tables": "Menaxhimi i tavolinave",
+    "menuManagement": "Menaxhimi i menysë",
+    "reservations": "Rezervimet",
+    "credit": "Kredia e dyqanit",
+    "shiftCashier": "Ndryshimet & Paratë",
+    "sales": "Shitjet",
+    "surveys": "Anketat",
+    "customers": "Klientët",
+    "invoices": "Faturat",
+    "inventoryManagement": "Menaxhimi i inventarit",
+    "allergens": "Alergjenët",
+    "warehouseManagement": "Menaxhimi i depove",
+    "stockWarehouse": "Stoku / Depoja",
+    "personnel": "Personeli",
+    "kitchen": "Menaxhimi i kuzhinës",
+    "recipes": "Recetat",
+    "productionPlanning": "Planifikimi i prodhimit",
+    "prepManagement": "Menaxhimi i përgatitjes",
+    "performanceManagement": "Menaxhimi i performancës",
+    "kds": "Ekrani i kuzhinës (KDS)",
+    "pos": "Ekrani i shitjeve (POS)",
+    "waiter": "Ekrani i kamerierit",
+    "system": "Sistemi",
+    "auditLogs": "Regjistrat e auditimit",
+    "recycleBin": "Koshi i riciklimit",
+    "defSubgroupUsers": "Përdoruesit & Lejet",
+    "defSubgroupStore": "Dega, POS & Kuzhinë",
+    "defSubgroupStaff": "Caktimet e Stafit",
+    "defSubgroupReports": "Raportet & Regjistrat",
+    "collapse": "Mbyll"
+  },
+  "authGuard": {
+    "checkingPermission": "Duke kontrolluar lejet…"
+  },
+  "languageSwitcher": {
+    "ariaLabel": "Zgjidh gjuhën"
+  },
+  "theme": {
+    "triggerAriaLabel": "Cilësimet e pamjes",
+    "triggerTitle": "Pamja",
+    "colorTheme": "Tema e ngjyrave",
+    "density": "Dendësia e ndërfaqes",
+    "light": "E çelët",
+    "dark": "E errët",
+    "highContrast": "Kontrast i lartë",
+    "outdoor": "Jashtë (ndriçim i lartë)",
+    "system": "Sistemi",
+    "densityCompact": "Kompakt",
+    "densityComfortable": "Rehatshëm",
+    "densitySpacious": "Hapësiror"
+  },
+  "backendHealth": {
+    "statusOk": "Serveri është në funksion (kontrolli shëndetësor OK)",
+    "statusDown": "Serveri nuk përgjigjet — kliko për të riprovuar",
+    "statusChecking": "Duke kontrolluar serverin…",
+    "banner": "Nuk arrihet të kontaktohet serveri. Mund të jetë i ndërprerë.",
+    "retry": "Provo përsëri"
+  },
+  "notFound": {
+    "title": "Faqja nuk u gjet",
+    "description": "Faqja që po kërkoni mund të jetë hequr, zhvendosur ose të jetë përkohësisht e padisponueshme.",
+    "goBack": "Kthehu",
+    "goHome": "Kthehu në aplikacion"
+  },
+  "orderStatus": {
+    "PENDING": "Në pritje",
+    "PREPARING": "Duke u përgatitur",
+    "READY": "Gati",
+    "DELIVERED": "Dorëzuar",
+    "CANCELLED": "Anuluar",
+    "COMPLETED": "Përfunduar"
+  },
+  "feedback": {
+    "success": "Sukses",
+    "error": "Gabim"
+  },
+  "timeline": {
+    "emptySteps": "Nuk ka hapa për të shfaqur."
+  },
+  "dialog": {
+    "close": "Mbylle"
+  },
+  "offline": {
+    "title": "Offline",
+    "description": "Nuk ka lidhje interneti. Rifresko faqen kur të kthehesh në internet."
+  },
+  "globalSearch": {
+    "dialogAriaLabel": "Kërkim global",
+    "searchingAriaLabel": "Duke kërkuar",
+    "inputPlaceholder": "Kërko… (kod, emër produkti, klient, datë…)",
+    "inputAriaLabel": "Pyetje kërkimi",
+    "clearAriaLabel": "Pastro kërkimin",
+    "resultsAriaLabel": "Rezultatet e kërkimit",
+    "errorMessage": "Diçka shkoi keq gjatë kërkimit.",
+    "noResults": "Asnjë rezultat për “{query}”.",
+    "uuidSearchHint": "Kërkimi i kodit: modulet që nuk mund t'i aksesoni janë të fshehura.",
+    "startPrompt": "Shtypni për të filluar kërkimin.",
+    "startHint": "Emër faqeje, produkt, tavolinë, kod porosie, klient, datë, etj.",
+    "pagesGroupTitle": "Faqet",
+    "pagesGroupBadge": "Faqe",
+    "modules": {
+      "menu_products": { "label": "Produktet", "badge": "Menu" },
+      "menu_categories": { "label": "Kategoritë", "badge": "Kategori" },
+      "orders": { "label": "Porositë", "badge": "Porosi" },
+      "inventory_items": { "label": "Artikujt e stokut", "badge": "Stok" },
+      "inventory_suppliers": { "label": "Furnitorët", "badge": "Furnitor" },
+      "branches": { "label": "Degët", "badge": "Degë" },
+      "tables": { "label": "Tavolinat", "badge": "Tavolinë" },
+      "users": { "label": "Përdoruesit", "badge": "Përdorues" },
+      "customers": { "label": "Klientët", "badge": "Klient" },
+      "warehouses": { "label": "Depot", "badge": "Depo" },
+      "purchase_orders": { "label": "Porositë e blerjes", "badge": "Blerje" },
+      "deficiency_reports": { "label": "Raportet e mungesave", "badge": "Mungesë" },
+      "goods_receivings": { "label": "Pranimi i mallrave", "badge": "Pranim" },
+      "transfers": { "label": "Transferimet", "badge": "Transfer" },
+      "stock_countings": { "label": "Numërimi i stokut", "badge": "Numërim" },
+      "reservations": { "label": "Rezervimet", "badge": "Rezervim" },
+      "invoices": { "label": "Faturat", "badge": "Faturë" },
+      "recipes": { "label": "Recetat", "badge": "Recetë" },
+      "sales": { "label": "Shitjet", "badge": "Shitje" }
+    },
+    "resultCount": "{count, plural, one {# rezultat u gjet} other {# rezultate u gjetën}}",
+    "footerHint": "Klikoni një rezultat për të hapur faqen e tij."
+  },
+  "virtualKeyboard": {
+    "ariaGroup": "Tastiera në ekran",
+    "numericMode": "Tastiera numerike",
+    "numericShort": "Numrat",
+    "alphaMode": "Tastiera e shkronjave",
+    "alphaShort": "Shkronjat",
+    "digit": "Shifra {n}",
+    "backspace": "Backspace",
+    "plus": "Plus",
+    "minus": "Minus",
+    "decimalSeparator": "Ndarësi dhjetor (pikë)",
+    "cancel": "Anulo",
+    "enter": "Enter",
+    "letter": "Shkronja {letter}",
+    "shiftOnce": "Shift (shkronja tjetër e madhe)",
+    "escape": "Esc",
+    "space": "Hapësirë",
+    "digit0": "Shifra 0"
+  },
+  "asyncState": {
+    "loading": "Duke u ngarkuar...",
+    "empty": "Nuk ka të dhëna për të shfaqur.",
+    "error": "Nuk mund të ngarkoheshin të dhënat.",
+    "retry": "Provo përsëri"
+  },
+  "export": {
+    "pdf": "Eksporto PDF",
+    "preparing": "Duke përgatitur PDF...",
+    "retry": "Provo përsëri",
+    "failed": "Eksportimi i PDF dështoi"
+  }
+}

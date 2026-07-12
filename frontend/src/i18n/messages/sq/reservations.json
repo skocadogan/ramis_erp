@@ -1,0 +1,105 @@
+{
+  "page": {
+    "title": "Rezervimet",
+    "subtitle": "Shiko tavolinat e rezervuara; menaxho ardhjen e mysafirëve, ndryshimet dhe anulimet.",
+    "branchLabel": "Dega: {name}",
+    "branchSelectAria": "Zgjidh degën",
+    "refresh": "Rifresko",
+    "noBranch": "Zgjidh një degë ose cakto një degë për llogarinë tënde për të listuar rezervimet.",
+    "emptyTablesTitle": "Nuk ka tavolina të rezervuara në këtë degë tani.",
+    "emptyTablesHint": "Për rezervime të reja, rezervo një tavolinë bosh nga <link>Menaxhimi i tavolinave</link>."
+  },
+  "cards": {
+    "badgeReserved": "Rezervuar",
+    "partyRow": "Rezervimi: {party} · Tavolina ka {min}–{max} vende",
+    "people": "{count} mysafirë",
+    "dash": "—"
+  },
+  "actions": {
+    "guestArrived": "Mysafiri mbërriti",
+    "edit": "Ndrysho",
+    "cancel": "Anulo"
+  },
+  "cancelModal": {
+    "title": "Anulo rezervimin",
+    "description": "Jeni i sigurt se doni të pastroni rezervimin për tavolinën <bold>{name}</bold> dhe ta shënoni si të disponueshme?",
+    "dismiss": "Kthehu mbrapa",
+    "confirm": "Anulo rezervimin"
+  },
+  "editModal": {
+    "title": "Ndrysho rezervimin",
+    "closeAria": "Mbylle",
+    "infoLabel": "Detajet e rezervimit",
+    "requiredMark": "*",
+    "scheduledLabel": "Koha e planifikuar",
+    "scheduledHint": "Opsionale.",
+    "partyLabel": "Madhësia e grupit",
+    "partyPlaceholder": "p.sh. 4",
+    "errorInfoRequired": "Detajet e rezervimit janë të nevojshme.",
+    "errorPartyInvalid": "Madhësia e grupit duhet të jetë një numër pozitiv.",
+    "cancel": "Anulo",
+    "save": "Ruaj",
+    "saving": "Duke ruajtur…"
+  },
+  "toast": {
+    "guestArrived": "{name}: Mysafiri mbërriti; tavolina u shënua e zënë.",
+    "operationFailed": "Nuk mund të përfundohej veprimi.",
+    "cancelReservationSuccess": "Rezervimi u anulua; tavolina u pastrua.",
+    "cancelReservationFailed": "Nuk mund të anulohej.",
+    "updateSuccess": "Rezervimi u përditësua.",
+    "updateFailed": "Nuk mund të përditësohej.",
+    "customerNameRequired": "Emri i klientit është i detyrueshëm.",
+    "createSuccess": "Rezervimi u krijua.",
+    "saveFailed": "Nuk mund të ruhej.",
+    "deleteSuccess": "Rezervimi u fshi.",
+    "deleteFailed": "Nuk mund të fshihej.",
+    "confirmSuccess": "Konfirmuar",
+    "seatSuccess": "U ul",
+    "cancelShortSuccess": "Anuluar",
+    "actionFailed": "Veprimi dështoi."
+  },
+  "ledger": {
+    "title": "Regjistri i rezervimeve",
+    "description": "Regjistrimet filtrohen nga dega e zgjedhur në krye. Caktimi i një tavoline për hyrjet e reja përditëson planimetrinë në \"Rezervuar\".",
+    "new": "I ri",
+    "columns": {
+      "time": "Koha",
+      "customer": "Klienti",
+      "party": "Mysafirët",
+      "table": "Tavolina",
+      "status": "Statusi",
+      "actions": "Veprimet"
+    },
+    "emptyDay": "Nuk ka hyrje për këtë datë.",
+    "createTitle": "Rezervim i ri",
+    "namePlaceholder": "Emri i klientit",
+    "phonePlaceholder": "Telefoni",
+    "partyPlaceholder": "Mysafirët",
+    "tableLabel": "Tavolina (opsionale, tavolina të disponueshme)",
+    "tableNone": "— Pa tavolinë të zgjedhur —",
+    "loadingTables": "Duke ngarkuar tavolinat…",
+    "save": "Ruaj",
+    "deleteTitle": "Fshij rezervimin",
+    "deleteDescription": "Rezervimi për <bold>{customer}</bold> ({time}) do të fshihet përgjithmonë. Për rezervimet në pritje ose të konfirmuara me tavolinë, rezervimi në planimetri hiqet gjithashtu.",
+    "deleting": "Duke fshirë…",
+    "delete": "Fshije",
+    "dismiss": "Kthehu mbrapa",
+    "confirmSeatTitle": "Ul",
+    "confirmApproveTitle": "Konfirmo",
+    "cancelActionTitle": "Anulo",
+    "deleteActionTitle": "Fshij përgjithmonë"
+  },
+  "alertSettings": {
+    "title": "Cilësimet e njoftimeve të mbërritjes",
+    "description": "Konfiguro se kur dërgohen njoftime të përsëritura të mbërritjes në ekranet e kamerierit, POS dhe mobile para çdo kohe rezervimi.",
+    "leadLabel": "Fillo sa minuta para",
+    "leadHint": "0 = vetëm në kohën e rezervimit; maks. 180 min.",
+    "intervalLabel": "Intervali i përsëritjes (min)",
+    "intervalHint": "Njoftimet përsëriten në këtë interval derisa mysafiri të ulet ose rezervimi të mbyllet.",
+    "save": "Ruaj",
+    "saving": "Duke ruajtur…",
+    "saveSuccess": "Cilësimet e njoftimeve u ruajtën.",
+    "saveFailed": "Nuk mund të ruheshin cilësimet.",
+    "loadFailed": "Nuk mund të ngarkoheshin cilësimet e njoftimeve."
+  }
+}

@@ -1,0 +1,317 @@
+{
+  "tabs": {
+    "sales": "Продажби",
+    "summary": "Обобщение",
+    "products": "Анализ на продукти",
+    "menuEngineering": "Menu Engineering",
+    "cancellations": "Отмени и връщания"
+  },
+  "periodFilter": {
+    "label": "Период",
+    "selectPlaceholder": "Избор на период…",
+    "groupAriaLabel": "Период на продажби",
+    "selectAriaLabel": "Период на продажби"
+  },
+  "presets": {
+    "today": "Днес",
+    "this_week": "Тази седмица",
+    "last_week": "Миналата седмица",
+    "this_month": "Този месец",
+    "last_month": "Миналия месец",
+    "last_3_months": "Последните 3 месеца",
+    "last_6_months": "Последните 6 месеца",
+    "last_9_months": "Последните 9 месеца",
+    "this_year": "Тази година",
+    "custom": "Месечен обхват"
+  },
+  "list": {
+    "searchPlaceholder": "Търсене на маса, касиер…",
+    "discountOnly": "Само с отстъпка",
+    "reset": "Нулиране",
+    "exportExcel": "Excel",
+    "exportPdf": "PDF",
+    "exportBusy": "…",
+    "netTotal": "Нетно общо",
+    "discount": "Отстъпка",
+    "quantity": "Брой",
+    "filterAmountLine": "Филтър: {amount}",
+    "loadingHint": "Опресняване на данни…",
+    "paginationTotal": "Общо {count} записа"
+  },
+  "filters": {
+    "tablePlaceholder": "Изберете маса…",
+    "cashierPlaceholder": "Изберете касиер…",
+    "allTables": "Всички маси",
+    "allCashiers": "Всички касиери"
+  },
+  "payment": {
+    "all": "Всички плащания",
+    "cash": "В брой",
+    "card": "Карта",
+    "other": "Други",
+    "credit": "Магазинен кредит",
+    "cashFull": "В брой",
+    "cardFull": "Кредитна карта"
+  },
+  "export": {
+    "pdfLoading": "Подготовка на PDF отчет…",
+    "pdfSuccess": "PDF отчетът е изтеглен.",
+    "pdfError": "Неуспешно генериране на PDF отчет.",
+    "excelLoading": "Подготовка на Excel отчет…",
+    "excelSuccess": "Excel отчетът е изтеглен.",
+    "excelError": "Неуспешно генериране на Excel отчет.",
+    "salesPdfFilename": "sales_report_{date}.pdf",
+    "salesExcelFilename": "sales_report_{date}.xlsx",
+    "productAnalyticsPdf": "product_analytics_{date}.pdf",
+    "productAnalyticsExcel": "product_analytics_{date}.xlsx",
+    "menuEngineeringPdf": "menu_engineering_{date}.pdf",
+    "menuEngineeringExcel": "menu_engineering_{date}.xlsx",
+    "productReportLoading": "Подготовка на {format} отчет…",
+    "productReportSuccess": "Отчетът е изтеглен.",
+    "productReportError": "Неуспешно генериране на отчет.",
+    "cancellationsPdfFilename": "cancellations_returns_{date}.pdf",
+    "cancellationsExcelFilename": "cancellations_returns_{date}.xlsx"
+  },
+  "table": {
+    "empty": "Все още няма записи за продажби.",
+    "colCheck": "",
+    "colIndex": "#",
+    "colBranch": "Клон",
+    "colTable": "Маса",
+    "colCashier": "Касиер",
+    "colPayment": "Метод на плащане",
+    "colAmounts": "Суми",
+    "colNotes": "Бележки",
+    "colDate": "Дата",
+    "colActions": "",
+    "takeaway": "За вкъщи",
+    "splitPayment": "(разделено)",
+    "listPrice": "Цена €{amount}",
+    "discountLine": "Отстъпка −€{amount}",
+    "grandTotal": "Общо €{amount}",
+    "editTitle": "Редактирай",
+    "deleteTitle": "Изтрий",
+    "invoiceTitle": "Създай фактура",
+    "dash": "—"
+  },
+  "stats": {
+    "expandAllLabel": "Разшири / свий всички",
+    "expandAllAriaExpand": "Разшири всички обобщени карти",
+    "expandAllAriaCollapse": "Свий всички обобщени карти",
+    "periods": {
+      "today": "Днес",
+      "this_week": "Тази седмица",
+      "last_week": "Миналата седмица",
+      "this_month": "Този месец",
+      "last_month": "Миналия месец",
+      "last_3_months": "Последните 3 месеца",
+      "last_6_months": "Последните 6 месеца",
+      "last_9_months": "Последните 9 месеца",
+      "this_year": "Тази година"
+    }
+  },
+  "summaryCard": {
+    "transactions": "{count} транзакции",
+    "tableGross": "На място бруто:",
+    "takeawayGross": "За вкъщи бруто:",
+    "discountsAllMethods": "Отстъпки (всички видове плащания):",
+    "netGain": "Нетен приход:",
+    "discountDetailTitle": "Детайли за продажби с отстъпка",
+    "discountCountLabel": "Приложени отстъпки",
+    "discountCountUnit": "{count}",
+    "discountedNetLabel": "Нетно събрано от продажби с отстъпка",
+    "paymentTypesTitle": "Видове плащания",
+    "paymentTypesSubtitle": "(Бруто / нетно)",
+    "paymentAllTypes": "{label} (всички видове)",
+    "paymentNetLine": "{count} транзакции (нетно)",
+    "grossAmount": "Бруто €{amount}",
+    "grossMasked": "Бруто {mask}",
+    "paymentLabels": {
+      "CASH": "В брой",
+      "CARD": "Карта",
+      "OTHER": "Други"
+    }
+  },
+  "productAnalytics": {
+    "loading": "Зареждане на продуктов анализ…",
+    "filterLabel": "Филтър",
+    "clearFilters": "Изчисти филтрите",
+    "statTotalProducts": "Продадени продукти",
+    "statTopSeller": "Най-продаван",
+    "statTop2": "Втори най-продаван",
+    "statTop3": "Трети най-продаван",
+    "unitsSold": "{count} продадени единици",
+    "tableTitle": "Статистика на продажбите за всички продукти",
+    "searchPlaceholder": "Търсене на продукт или категория…",
+    "colProduct": "Продукт",
+    "colCategory": "Категория",
+    "colQty": "Продадени единици",
+    "colRevenue": "Общ приход",
+    "emptyData": "Няма намерени данни.",
+    "chartTitle": "Дневни тенденции на продажбите (топ 5 продукта)",
+    "legendIsolated": "{count} изолирани продукта",
+    "formatPdf": "PDF",
+    "formatExcel": "Excel"
+  },
+  "menuEngineering": {
+    "loading": "Loading menu engineering analytics…",
+    "filterLabel": "Filter",
+    "allCategories": "All categories",
+    "allClasses": "All classes",
+    "searchPlaceholder": "Search product or category…",
+    "clearFilters": "Clear filters",
+    "disclaimerTitle": "Estimated profitability view",
+    "disclaimerBody": "This report is calculated from sales, recipe data and the current FEFO view. It is not an accounting-grade actual cost report.",
+    "actualDisclaimerTitle": "Actual cost view",
+    "actualDisclaimerBody": "Реалният марж се изчислява само за продажби, чиято себестойност е записана в системата. Ако липсват данни за себестойността, полетата за реален марж се оставят празни.",
+    "analysisModes": {
+      "estimated": "Estimated",
+      "actual": "Actual"
+    },
+    "stats": {
+      "totalProducts": "Products covered",
+      "classifiedProductsLine": "{count} products classified",
+      "totalEstimatedProfit": "Estimated total profit",
+      "totalActualProfit": "Actual total profit",
+      "profitThresholdLine": "Profit threshold: {amount}",
+      "actualProfitThresholdLine": "Actual profit threshold: {amount}",
+      "avgMargin": "Average estimated margin",
+      "avgActualMargin": "Average actual margin",
+      "popularityThresholdLine": "Popularity threshold: {qty}",
+      "actualPopularityThresholdLine": "Actual view threshold: {qty}",
+      "stockVarianceCost": "Stock variance cost",
+      "stockVarianceQtyLine": "Total variance: {qty}",
+      "actualCoverage": "Actual coverage",
+      "actualCoverageLine": "Full: {full} • Partial: {partial} • None: {none}"
+    },
+    "classes": {
+      "STAR": "Star",
+      "PLOWHORSE": "Plowhorse",
+      "PUZZLE": "Puzzle",
+      "DOG": "Dog"
+    },
+    "classDescriptions": {
+      "STAR": "High popularity and strong margin.",
+      "PLOWHORSE": "Popular but margin needs attention.",
+      "PUZZLE": "Profitable but not yet popular.",
+      "DOG": "Low popularity and weak margin."
+    },
+    "tableTitle": "Product profitability matrix",
+    "tableSubtitle": "Profitability, menu class and coverage warnings per product",
+    "actualTableTitle": "Actual cost matrix by product",
+    "actualTableSubtitle": "Actual cost and margin view derived from ledger-covered sales",
+    "cols": {
+      "product": "Product",
+      "class": "Class",
+      "qty": "Sold",
+      "revenue": "Revenue",
+      "unitCost": "Estimated unit cost",
+      "actualUnitCost": "Actual unit cost",
+      "grossProfit": "Estimated profit",
+      "actualGrossProfit": "Actual profit",
+      "margin": "Margin",
+      "coverage": "Coverage",
+      "actions": "Actions"
+    },
+    "actionsTitle": "Action recommendations",
+    "actionsSubtitle": "Automatic suggestions based on menu class and actual vs estimated cost variance",
+    "actionsEmpty": "No action recommendations for the selected period.",
+    "actions": {
+      "INCREASE_PRICE": "Increase price",
+      "FEATURE": "Feature product",
+      "REMOVE_FROM_MENU": "Remove from menu",
+      "COST_INCREASED": "Cost increased"
+    },
+    "actionDescriptions": {
+      "INCREASE_PRICE": "Popular but low margin — review pricing",
+      "FEATURE": "Strong contribution or profit potential — highlight on the menu",
+      "REMOVE_FROM_MENU": "Low demand and low contribution — consider removing from menu",
+      "COST_INCREASED": "Actual cost is more than 5% above estimate — review recipe and supply costs"
+    },
+    "emptyData": "No analytics data found.",
+    "unclassified": "Unclassified",
+    "recipeMissing": "Recipe / cost data missing",
+    "popularityIndexLine": "Popularity index: {value}",
+    "coverageMode": {
+      "INGREDIENT": "Ingredient mode",
+      "PRODUCT": "Product mode",
+      "MIXED": "Mixed mode"
+    },
+    "actualCoverage": {
+      "FULL": "Full coverage",
+      "PARTIAL": "Partial coverage",
+      "NONE": "No coverage"
+    },
+    "actualCoverageQtyLine": "Covered sales qty: {qty}",
+    "actualCoverageEntriesLine": "{count} cost entries",
+    "varianceCoverage": {
+      "NONE": "No product-level variance",
+      "STOCK_ONLY": "Stock-level variance only"
+    },
+    "costSource": {
+      "RECIPE_FEFO_ESTIMATE": "FEFO recipe estimate",
+      "RECIPE_LAST_COST": "Recipe last cost fallback"
+    },
+    "varianceTitle": "Stock variance summary",
+    "varianceSubtitle": "Operational waste, return and adjustment movements for the selected period",
+    "varianceCards": {
+      "waste": "Waste",
+      "cancel": "Cancel",
+      "return": "Return",
+      "disposal": "Disposal",
+      "adjustment": "Adjustment"
+    },
+    "varianceTable": {
+      "stockItem": "Stock item",
+      "breakdown": "Breakdown",
+      "qty": "Qty",
+      "cost": "Cost"
+    },
+    "varianceEmpty": "No variance movement found.",
+    "varianceRecentTitle": "Recent variance movements",
+    "varianceRecentSubtitle": "Most recent stock movements affecting waste / return / adjustment totals",
+    "varianceRecentTable": {
+      "date": "Date",
+      "stockItem": "Stock item",
+      "warehouse": "Warehouse",
+      "type": "Type",
+      "qty": "Qty",
+      "cost": "Cost"
+    },
+    "varianceRecentEmpty": "No recent variance movement found."
+  },
+  "productSelect": {
+    "allProducts": "Всички продукти",
+    "searchPlaceholder": "Търсене на продукти…",
+    "empty": "Няма намерени продукти."
+  },
+  "editModal": {
+    "title": "Редактиране на продажба",
+    "paymentMethod": "Метод на плащане",
+    "totalAmount": "Обща сума",
+    "notes": "Бележки",
+    "notesPlaceholder": "Добавете бележка за тази продажба…",
+    "cancel": "Отказ",
+    "save": "Запази"
+  },
+  "deleteModal": {
+    "title": "Изтриване на продажба?",
+    "description": "Сигурни ли сте, че искате да изтриете тази продажба? Тя ще бъде преместена в раздела „Изтрити“.",
+    "cancel": "Отказ",
+    "confirm": "Да, изтрий"
+  },
+  "cancellations": {
+    "searchPlaceholder": "Търсене на маса, продукт или потребител…",
+    "empty": "Няма отмени или връщания в избрания период.",
+    "colDate": "Дата",
+    "colCancelledBy": "Отменено от",
+    "colReason": "Причина",
+    "colProduct": "Продукт / кол.",
+    "colAmounts": "Сума",
+    "totalAmount": "Обща сума",
+    "totalQuantity": "Общо количество",
+    "quantityLine": "{qty} единици",
+    "unitPrice": "Единица €{amount}",
+    "noReason": "Не е посочено"
+  }
+}

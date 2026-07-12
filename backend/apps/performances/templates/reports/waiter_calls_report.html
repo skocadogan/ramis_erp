@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ _('Garson Çağrı Performans Raporu') }}</title>
+    <style>
+        @page {
+            size: A4 landscape;
+            margin: 1.2cm;
+            @bottom-right {
+                content: "{{ _('Sayfa') }} " counter(page) " / " counter(pages);
+                font-size: 9pt;
+            }
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #333;
+            line-height: 1.35;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #3b82f6;
+            padding-bottom: 8px;
+        }
+        .header h1 {
+            margin: 0;
+            color: #1d4ed8;
+            font-size: 18pt;
+        }
+        .report-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 16px;
+            font-size: 8pt;
+            color: #666;
+        }
+        .summary-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+            border-spacing: 10px;
+        }
+        .summary-box {
+            display: table-cell;
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 12px;
+            text-align: center;
+            border-radius: 6px;
+        }
+        .summary-box .value {
+            font-size: 16pt;
+            font-weight: bold;
+            color: #1d4ed8;
+        }
+        .summary-box .label {
+            font-size: 8pt;
+            color: #64748b;
+            margin-top: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            border: 1px solid #e2e8f0;
+            padding: 6px 8px;
+            text-align: left;
+        }
+        th {
+            background: #f1f5f9;
+            font-weight: bold;
+            font-size: 8pt;
+        }
+        tr:nth-child(even) {
+            background: #f8fafc;
+        }
+        h2 {
+            font-size: 11pt;
+            color: #334155;
+            margin: 16px 0 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ _('Garson Çağrı Performans Raporu') }}</h1>
+    </div>
+
+    <div class="report-info">
+        <span>{{ _('Rapor tarihi') }}: {{ report_date|date_tr('%d.%m.%Y %H:%M') }}</span>
+        <span>
+            {% if filters.start_date %}{{ _('Başlangıç') }}: {{ filters.start_date }}{% endif %}
+            {% if filters.end_date %} — {{ _('Bitiş') }}: {{ filters.end_date }}{% endif %}
+        </span>
+    </div>
+
+    <div class="summary-grid">
+        <div class="summary-box">
+            <div class="value">{{ totals.total_calls }}</div>
+            <div class="label">{{ _('Toplam çağrı') }}</div>
+        </div>
+        <div class="summary-box">
+            <div class="value">{{ totals.dismissed_calls }}</div>
+            <div class="label">{{ _('Görüldü') }}</div>
+        </div>
+        <div class="summary-box">
+            <div class="value">{{ totals.pending_calls }}</div>
+            <div class="label">{{ _('Bekleyen') }}</div>
+        </div>
+        <div class="summary-box">
+            <div class="value">{{ totals.avg_response_seconds }} sn</div>
+            <div class="label">{{ _('Ort. yanıt süresi') }}</div>
+        </div>
+    </div>
+
+    {% if staff_performance %}
+    <h2>{{ _('Personel performansı') }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Personel') }}</th>
+                <th>{{ _('Çağrı adedi') }}</th>
+                <th>{{ _('Ort. yanıt (sn)') }}</th>
+                <th>{{ _('Min (sn)') }}</th>
+                <th>{{ _('Max (sn)') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in staff_performance %}
+            <tr>
+                <td>{{ row.staff_name }}</td>
+                <td>{{ row.call_count }}</td>
+                <td>{{ row.avg_response_seconds }}</td>
+                <td>{{ row.min_response_seconds|default('—') }}</td>
+                <td>{{ row.max_response_seconds|default('—') }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+
+    <h2>{{ _('Çağrı geçmişi') }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Tarih') }}</th>
+                <th>{{ _('Şube') }}</th>
+                <th>{{ _('Masa') }}</th>
+                <th>{{ _('Bölge') }}</th>
+                <th>{{ _('Görüldü yapan') }}</th>
+                <th>{{ _('Yanıt (sn)') }}</th>
+                <th>{{ _('Durum') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log.called_at|date_tr('%d.%m.%Y %H:%M') }}</td>
+                <td>{{ log.branch.name }}</td>
+                <td>{{ log.table_name }}</td>
+                <td>{{ log.zone_name }}</td>
+                <td>{% if log.dismissed_by %}{{ log.dismissed_by.get_full_name() or log.dismissed_by.username }}{% else %}—{% endif %}</td>
+                <td>{{ log.response_seconds|default('—') }}</td>
+                <td>{{ log.get_status_display() }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="7">{{ _('Kayıt bulunamadı.') }}</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

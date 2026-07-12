@@ -1,0 +1,325 @@
+{
+  "tabs": {
+    "sales": "Satışlar",
+    "summary": "Özet",
+    "products": "Ürün Analizi",
+    "menuEngineering": "Menü Mühendisliği",
+    "cancellations": "İptaller & iadeler"
+  },
+  "periodFilter": {
+    "label": "Dönem",
+    "selectPlaceholder": "Dönem seçin…",
+    "groupAriaLabel": "Satış dönemi",
+    "selectAriaLabel": "Satış dönemi"
+  },
+  "presets": {
+    "today": "Bugün",
+    "this_week": "Bu hafta",
+    "last_week": "Geçen hafta",
+    "this_month": "Bu ay",
+    "last_month": "Geçen ay",
+    "last_3_months": "Geçen son 3 ay",
+    "last_6_months": "Geçen son 6 ay",
+    "last_9_months": "Geçen son 9 ay",
+    "this_year": "Bu yıl",
+    "custom": "Tarih aralığı"
+  },
+  "list": {
+    "searchPlaceholder": "Masa, kasiyer ara…",
+    "discountOnly": "Sadece indirimliler",
+    "reset": "Sıfırla",
+    "exportExcel": "Excel",
+    "exportPdf": "PDF",
+    "exportBusy": "…",
+    "netTotal": "Net toplam",
+    "discount": "İndirim",
+    "quantity": "Adet",
+    "filterAmountLine": "Filtre: {amount}",
+    "loadingHint": "Veriler güncelleniyor…",
+    "paginationTotal": "Toplam {count} kayıt"
+  },
+  "filters": {
+    "tablePlaceholder": "Masa seçin…",
+    "cashierPlaceholder": "Kasiyer seçin…",
+    "allTables": "Tüm Masalar",
+    "allCashiers": "Tüm Kasiyerler"
+  },
+  "payment": {
+    "all": "Tüm ödemeler",
+    "cash": "Nakit",
+    "card": "Kart",
+    "other": "Diğer",
+    "credit": "Ödenmez",
+    "cashFull": "Nakit",
+    "cardFull": "Kredi kartı"
+  },
+  "export": {
+    "pdfLoading": "PDF raporu hazırlanıyor…",
+    "pdfSuccess": "PDF raporu indirildi.",
+    "pdfError": "PDF raporu üretilemedi.",
+    "excelLoading": "Excel raporu hazırlanıyor…",
+    "excelSuccess": "Excel raporu indirildi.",
+    "excelError": "Excel raporu üretilemedi.",
+    "salesPdfFilename": "satis_raporu_{date}.pdf",
+    "salesExcelFilename": "satis_raporu_{date}.xlsx",
+    "productAnalyticsPdf": "urun_analizi_{date}.pdf",
+    "productAnalyticsExcel": "urun_analizi_{date}.xlsx",
+    "menuEngineeringPdf": "menu_muhendisligi_{date}.pdf",
+    "menuEngineeringExcel": "menu_muhendisligi_{date}.xlsx",
+    "productReportLoading": "{format} raporu hazırlanıyor…",
+    "productReportSuccess": "Rapor indirildi.",
+    "productReportError": "Rapor üretilemedi.",
+    "cancellationsPdfFilename": "iptaller_iadeler_{date}.pdf",
+    "cancellationsExcelFilename": "iptaller_iadeler_{date}.xlsx"
+  },
+  "table": {
+    "empty": "Henüz satış kaydı yok.",
+    "colCheck": "",
+    "colIndex": "#",
+    "colBranch": "Şube",
+    "colTable": "Masa",
+    "colCashier": "Kasiyer",
+    "colPayment": "Ödeme yöntemi",
+    "colAmounts": "Tutarlar",
+    "colNotes": "Notlar",
+    "colDate": "Tarih",
+    "colActions": "",
+    "takeaway": "Paket",
+    "splitPayment": "(bölünmüş)",
+    "listPrice": "Liste ₺{amount}",
+    "discountLine": "İndirim −₺{amount}",
+    "grandTotal": "Genel toplam ₺{amount}",
+    "editTitle": "Düzenle",
+    "deleteTitle": "Sil",
+    "invoiceTitle": "Fatura oluştur",
+    "dash": "—"
+  },
+  "stats": {
+    "expandAllLabel": "Tümünü aç / kapa",
+    "expandAllAriaExpand": "Tüm özet kartlarını genişlet",
+    "expandAllAriaCollapse": "Tüm özet kartlarını daralt",
+    "periods": {
+      "today": "Bugün",
+      "this_week": "Bu Hafta",
+      "last_week": "Geçen Hafta",
+      "this_month": "Bu Ay",
+      "last_month": "Geçen Ay",
+      "last_3_months": "Son 3 Ay",
+      "last_6_months": "Son 6 Ay",
+      "last_9_months": "Son 9 Ay",
+      "this_year": "Bu Yıl"
+    }
+  },
+  "summaryCard": {
+    "transactions": "{count} işlem",
+    "tableGross": "Masa satışları brüt:",
+    "takeawayGross": "Paket satışlar brüt:",
+    "discountsAllMethods": "Tüm ödeme türü indirimleri:",
+    "netGain": "Kazanç (net):",
+    "discountDetailTitle": "İndirimli satışlar detayı",
+    "discountCountLabel": "Uygulanan indirim adedi",
+    "discountCountUnit": "{count} adet",
+    "discountedNetLabel": "İndirimli yapılan tüm tahsilat (net)",
+    "paymentTypesTitle": "Ödeme türleri",
+    "paymentTypesSubtitle": "(Brüt / net)",
+    "paymentAllTypes": "{label} (tüm türler)",
+    "paymentNetLine": "{count} işlem tahsilatı (net)",
+    "grossAmount": "Brüt ₺{amount}",
+    "grossMasked": "Brüt {mask}",
+    "paymentLabels": {
+      "CASH": "Nakit",
+      "CARD": "Kart",
+      "OTHER": "Diğer"
+    }
+  },
+  "productAnalytics": {
+    "loading": "Ürün analizleri hazırlanıyor…",
+    "filterLabel": "Filtrele",
+    "clearFilters": "Filtreleri temizle",
+    "statTotalProducts": "Toplam satılan ürün",
+    "statTopSeller": "En çok satan",
+    "statTop2": "En çok satan 2.",
+    "statTop3": "En çok satan 3.",
+    "unitsSold": "{count} adet satıldı",
+    "tableTitle": "Tüm ürünlerin satış istatistikleri",
+    "searchPlaceholder": "Ürün veya kategori ara…",
+    "colProduct": "Ürün",
+    "colCategory": "Kategori",
+    "colQty": "Satılan adet",
+    "colRevenue": "Toplam ciro",
+    "emptyData": "Veri bulunamadı.",
+    "chartTitle": "Günlük satış trendleri (ilk 5 ürün)",
+    "legendIsolated": "{count} ürün izole edildi",
+    "formatPdf": "PDF",
+    "formatExcel": "Excel"
+  },
+  "productSelect": {
+    "allProducts": "Tüm ürünler",
+    "searchPlaceholder": "Ürün ara…",
+    "empty": "Ürün bulunamadı."
+  },
+  "menuEngineering": {
+    "loading": "Menü mühendisliği verileri hazırlanıyor…",
+    "filterLabel": "Filtrele",
+    "allCategories": "Tüm kategoriler",
+    "allClasses": "Tüm sınıflar",
+    "searchPlaceholder": "Ürün veya kategori ara…",
+    "clearFilters": "Filtreleri temizle",
+    "disclaimerTitle": "Tahmini karlılık görünümü",
+    "disclaimerBody": "Bu rapor satış verisi, reçete bilgisi ve mevcut FEFO görünümüne göre hesaplanır. Muhasebesel gerçek maliyet raporu değildir.",
+    "actualDisclaimerTitle": "Gerçek maliyet görünümü",
+    "actualDisclaimerBody": "Bu görünümdeki gerçek kâr hesabı, yalnızca maliyeti sistemde kaydedilmiş satışlar için yapılır. Maliyet kaydı eksikse gerçek kâr alanları boş bırakılır.",
+    "analysisModes": {
+      "estimated": "Tahmini",
+      "actual": "Gerçek"
+    },
+    "stats": {
+      "totalProducts": "Ürün kapsamı",
+      "classifiedProductsLine": "{count} ürün sınıflandırıldı",
+      "totalEstimatedProfit": "Tahmini toplam kar",
+      "totalActualProfit": "Gerçek toplam kar",
+      "profitThresholdLine": "Kar eşiği: {amount}",
+      "actualProfitThresholdLine": "Gerçek kar eşiği: {amount}",
+      "avgMargin": "Ortalama tahmini marj",
+      "avgActualMargin": "Ortalama gerçek marj",
+      "popularityThresholdLine": "Popülerlik eşiği: {qty}",
+      "actualPopularityThresholdLine": "Gerçek görünüm eşiği: {qty}",
+      "stockVarianceCost": "Stok sapma maliyeti",
+      "stockVarianceQtyLine": "Toplam sapma: {qty}",
+      "actualCoverage": "Gerçek kapsam",
+      "actualCoverageLine": "Tam: {full} • Kısmi: {partial} • Yok: {none}"
+    },
+    "classes": {
+      "STAR": "Yıldız",
+      "PLOWHORSE": "At",
+      "PUZZLE": "Bulmaca",
+      "DOG": "Köpek"
+    },
+    "classDescriptions": {
+      "STAR": "Yüksek satış ve yüksek katkı",
+      "PLOWHORSE": "Popüler ama marjı düşük",
+      "PUZZLE": "Karlılığı iyi ama talebi zayıf",
+      "DOG": "Zayıf talep ve zayıf katkı"
+    },
+    "tableTitle": "Ürün bazlı karlılık matrisi",
+    "tableSubtitle": "Ürün karlılığı, menü sınıfı ve kapsam uyarıları",
+    "actualTableTitle": "Ürün bazlı gerçek maliyet matrisi",
+    "actualTableSubtitle": "Satış kayıtlarında bulunan siparişlerden türetilen gerçek maliyet ve marj görünümü",
+    "cols": {
+      "product": "Ürün",
+      "class": "Sınıf",
+      "qty": "Satılan",
+      "revenue": "Ciro",
+      "unitCost": "Tahmini birim maliyet",
+      "actualUnitCost": "Gerçek birim maliyet",
+      "grossProfit": "Tahmini kar",
+      "actualGrossProfit": "Gerçek kar",
+      "margin": "Marj",
+      "coverage": "Kapsam",
+      "actions": "Öneriler"
+    },
+    "actionsTitle": "Aksiyon önerileri",
+    "actionsSubtitle": "Menü sınıfı ve gerçek/tahmini maliyet farkına göre otomatik öneriler",
+    "actionsEmpty": "Seçilen dönemde aksiyon önerisi üretilemedi.",
+    "actions": {
+      "INCREASE_PRICE": "Fiyat artır",
+      "FEATURE": "Öne çıkar",
+      "REMOVE_FROM_MENU": "Menüden çıkar",
+      "COST_INCREASED": "Maliyet arttı"
+    },
+    "actionDescriptions": {
+      "INCREASE_PRICE": "Popüler ama düşük marj — fiyatı gözden geçirin",
+      "FEATURE": "Yüksek katkı veya karlılık potansiyeli — menüde öne çıkarın",
+      "REMOVE_FROM_MENU": "Düşük talep ve düşük katkı — menüden çıkarmayı değerlendirin",
+      "COST_INCREASED": "Gerçek maliyet tahminin %5 üzerinde — reçete ve tedarik maliyetini kontrol edin"
+    },
+    "recipeMissing": "Reçete / maliyet eksik",
+    "unclassified": "Sınıflandırılamadı",
+    "popularityIndexLine": "Popülerlik endeksi: {value}",
+    "coverageMode": {
+      "INGREDIENT": "Malzeme modu",
+      "PRODUCT": "Ürün modu",
+      "MIXED": "Karma mod"
+    },
+    "actualCoverage": {
+      "FULL": "Tam Kapsama",
+      "PARTIAL": "Kısmi Kapsama",
+      "NONE": "Kapsama yok"
+    },
+    "actualCoverageQtyLine": "Kapsanan satış miktarı: {qty}",
+    "actualCoverageEntriesLine": "{count} maliyet satırı",
+    "varianceCoverage": {
+      "NONE": "Ürün bazlı sapma yok",
+      "STOCK_ONLY": "Yalnızca stok bazlı sapma"
+    },
+    "costSource": {
+      "RECIPE_LAST_COST": "Reçete son maliyet",
+      "RECIPE_FEFO_ESTIMATE": "FEFO tahmini"
+    },
+    "emptyData": "Seçilen filtrelerde ürün analizi bulunamadı.",
+    "combinedBadge": "Birleşik ürün",
+    "combinedDialog": {
+      "openHint": "Bileşenleri görüntüle",
+      "title": "Birleşik ürün bileşenleri",
+      "description": "{productName} ürününün alt kalemleri ve satış birimleri.",
+      "descriptionFallback": "Birleşik ürün bileşenleri",
+      "empty": "Bu birleşik ürün için tanımlı alt kalem bulunamadı.",
+      "standardUnit": "Standart",
+      "cols": {
+        "product": "Alt ürün",
+        "quantity": "Miktar",
+        "salesUnit": "Satış birimi",
+        "multiplier": "Çarpan",
+        "effectiveQty": "Etkin miktar"
+      }
+    },
+    "varianceTitle": "Stok bazlı sapma özeti",
+    "varianceSubtitle": "Fire, iptal, iade, imha ve sayım farkları ürün karlılığından ayrı gösterilir.",
+    "varianceCards": {
+      "waste": "Fire",
+      "cancel": "İptal",
+      "return": "İade",
+      "disposal": "İmha",
+      "adjustment": "Düzeltme"
+    },
+    "varianceTable": {
+      "stockItem": "Stok kalemi",
+      "breakdown": "Dağılım",
+      "qty": "Toplam miktar",
+      "cost": "Toplam maliyet"
+    },
+    "varianceEmpty": "Seçilen aralıkta stok sapması bulunamadı.",
+    "recentVarianceTitle": "Son sapma hareketleri",
+    "recentVarianceSubtitle": "Operasyon ekiplerinin inceleyebileceği son sapma kayıtları",
+    "recentVarianceEmpty": "Son sapma hareketi bulunamadı."
+  },
+  "editModal": {
+    "title": "Satışı düzenle",
+    "paymentMethod": "Ödeme yöntemi",
+    "totalAmount": "Toplam tutar",
+    "notes": "Notlar",
+    "notesPlaceholder": "Satış hakkında not ekleyin…",
+    "cancel": "İptal",
+    "save": "Kaydet"
+  },
+  "deleteModal": {
+    "title": "Satışı sil?",
+    "description": "Bu satış kaydını silmek istediğinize emin misiniz? Satış \"Silinenler\" sekmesine taşınacaktır.",
+    "cancel": "Vazgeç",
+    "confirm": "Evet, sil"
+  },
+  "cancellations": {
+    "searchPlaceholder": "Masa, ürün veya iptal eden ara…",
+    "empty": "Seçilen dönemde iptal veya iade kaydı yok.",
+    "colDate": "Tarih",
+    "colCancelledBy": "İptal eden",
+    "colReason": "Neden",
+    "colProduct": "Ürün / miktar",
+    "colAmounts": "Tutar",
+    "totalAmount": "Toplam tutar",
+    "totalQuantity": "Toplam miktar",
+    "quantityLine": "{qty} adet",
+    "unitPrice": "Birim ₺{amount}",
+    "noReason": "Belirtilmedi"
+  }
+}

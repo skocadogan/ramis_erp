@@ -1,0 +1,67 @@
+{
+  "page": {
+    "title": "Referenca e alergjenëve",
+    "subtitle": "Kodet e alergjenëve, përhapja dhe rezultatet e rrezikut",
+    "searchPh": "Kërko kod ose emër…",
+    "deleteTitle": "Fshij alergjenin",
+    "deleteDesc": "Ky alergjen do të çaktivizohet. Vazhdoni?",
+    "cancel": "Anulo",
+    "confirmDelete": "Fshije",
+    "paginationTotal": "Gjithsej {count} regjistrime",
+    "paginationInfo": "Duke shfaqur {start}-{end} nga {total}",
+    "allStatuses": "Të gjitha statuset",
+    "addNew": "Alergjen i ri"
+  },
+  "table": {
+    "title": "Lista e alergjenëve",
+    "new": "Alergjen i ri",
+    "colCode": "Kodi",
+    "colName": "Emri",
+    "colPrevalence": "Përhapja",
+    "colRisk": "Rreziku",
+    "colSortOrder": "Renditja",
+    "colActions": "Veprimet",
+    "loading": "Duke u ngarkuar…",
+    "loadingHint": "Duke rifreskuar të dhënat…",
+    "empty": "Nuk u gjetën regjistrime",
+    "active": "Aktiv",
+    "passive": "Pasiv"
+  },
+  "form": {
+    "titleNew": "Alergjen i ri",
+    "titleEdit": "Ndrysho alergjenin",
+    "code": "Kodi",
+    "codePh": "GLUTEN",
+    "name": "Emri",
+    "namePh": "Gluten",
+    "prevalence": "Përhapja (%)",
+    "riskScore": "Rezultati i rrezikut (1-10)",
+    "sortOrder": "Renditja",
+    "cancel": "Anulo",
+    "add": "Shto",
+    "update": "Përditëso",
+    "closeAria": "Mbylle"
+  },
+  "referenceModal": {
+    "title": "Tabela referuese e alergjenëve",
+    "subtitle": "Përhapja dhe rezultatet e rrezikut",
+    "colCode": "Kodi",
+    "colName": "Emri",
+    "colPrevalence": "Përhapja",
+    "colRisk": "Rreziku",
+    "loading": "Duke u ngarkuar…",
+    "empty": "Nuk u gjetën alergjenë",
+    "closeAria": "Mbylle"
+  },
+  "stockForm": {
+    "label": "Alergjenët",
+    "hint": "Alergjenët e pranishëm direkt në këtë artikull stoku",
+    "reference": "Tabela referuese",
+    "none": "Asnjë alergjen i caktuar"
+  },
+  "toasts": {
+    "created": "Alergjeni u krijua",
+    "updated": "Alergjeni u përditësua",
+    "deleted": "Alergjeni u fshi"
+  }
+}

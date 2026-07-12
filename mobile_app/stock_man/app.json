@@ -1,0 +1,85 @@
+{
+  "expo": {
+    "name": "Stock Man",
+    "slug": "stock-man",
+    "version": "0.0.1",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "scheme": "stockman",
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ramiserp.stockman",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Depo personeli ürün barkodlarını okutmak için kameraya erişim verir.",
+        "NSAppTransportSecurity": {
+          "NSAllowsLocalNetworking": true,
+          "NSExceptionDomains": {
+            "localhost": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSIncludesSubdomains": false
+            }
+          }
+        },
+        "NSLocationWhenInUseUsageDescription": "Yakındaki WiFi ağlarını listelemek için konum izni gereklidir."
+      }
+    },
+    "android": {
+      "package": "com.ramiserp.stockman",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_NETWORK_STATE",
+        "android.permission.RECORD_AUDIO"
+      ]
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "experiments": {
+      "reactCompiler": true,
+      "typedRoutes": true
+    },
+    "plugins": [
+      "expo-router",
+      "expo-secure-store",
+      [
+        "expo-splash-screen",
+        {
+          "image": "./assets/icon.png",
+          "resizeMode": "contain",
+          "backgroundColor": "#FFFFFF"
+        }
+      ],
+      "expo-image",
+      "expo-status-bar",
+      "expo-sqlite",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Depo personeli ürün ve tedarikçi barkodlarını okutmak için kamera izni gereklidir."
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "usesCleartextTraffic": true
+          }
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "http://192.168.0.11/api/v1",
+      "eas": {
+        "projectId": "92e45f2a-d824-4816-a86a-e21af4095c54"
+      },
+      "router": {}
+    },
+    "owner": "skocadogan"
+  }
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <title>{{ supplier_name }} — {{ report_name }}</title>
+  <style>
+    body {
+      font-family: DejaVu Sans, Helvetica, Arial, sans-serif;
+      font-size: 9pt;
+      color: #1e293b;
+      margin: 0;
+      padding: 18px 20px;
+    }
+    .doc-title {
+      font-size: 11pt;
+      font-weight: bold;
+      color: #047857;
+      margin: 0 0 2px 0;
+      letter-spacing: 0.02em;
+    }
+    .supplier-name {
+      font-size: 13pt;
+      font-weight: bold;
+      color: #0f172a;
+      margin: 0 0 12px 0;
+    }
+    .summary {
+      margin-bottom: 14px;
+      font-size: 8.5pt;
+      color: #475569;
+    }
+    table.lines {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+    table.lines th,
+    table.lines td {
+      padding: 6px 4px;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    table.lines th {
+      background: #ecfdf5;
+      font-size: 7pt;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: #475569;
+      text-align: left;
+    }
+    table.lines th.right,
+    table.lines td.right { text-align: right; }
+    table.lines td.center { text-align: center; }
+    .footer {
+      margin-top: 18px;
+      font-size: 7pt;
+      color: #94a3b8;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <p class="doc-title">{{ report_name }}</p>
+  <p class="supplier-name">{{ supplier_name }}</p>
+
+  <p class="summary">
+    {{ _('Toplam mal kabul kaydı:') }} {{ count }}
+    {% if limit_reached %}<span style="color:#b91c1c;"> ({{ _('Gösterim sınırına ulaşıldı (2000)') }})</span>{% endif %}
+  </p>
+
+  <table class="lines">
+    <thead>
+      <tr>
+        <th style="width:18%">{{ _('Mal Kabul No') }}</th>
+        <th style="width:10%">{{ _('Tarih') }}</th>
+        <th style="width:12%">{{ _('Durum') }}</th>
+        <th style="width:12%">{{ _('Depo') }}</th>
+        <th style="width:10%" class="right">{{ _('Toplam Tutar') }}</th>
+        <th style="width:7%" class="center">{{ _('Kalem') }}</th>
+        <th style="width:7%" class="center">{{ _('Red') }}</th>
+        <th style="width:12%">{{ _('Fatura No') }}</th>
+        <th style="width:12%">{{ _('İrsaliye No') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for rec in records %}
+      <tr>
+        <td>{{ rec.receiving_number }}</td>
+        <td>{{ rec.received_date }}</td>
+        <td>{{ rec.status }}</td>
+        <td>{{ rec.warehouse_name }}</td>
+        <td class="right">{{ rec.total_amount | currency }}</td>
+        <td class="center">{{ rec.items_count }}</td>
+        <td class="center" {% if rec.rejected_items_count > 0 %}style="color:#b91c1c;font-weight:bold;"{% endif %}>{{ rec.rejected_items_count }}</td>
+        <td>{{ rec.invoice_number }}</td>
+        <td>{{ rec.waybill_number }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <p class="footer">{{ _('Bu belge Ramis ERP üzerinden üretilmiştir.') }}</p>
+</body>
+</html>

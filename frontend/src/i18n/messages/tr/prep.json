@@ -1,0 +1,244 @@
+{
+  "drawer": {
+    "title": "Hazırlık Takibi",
+    "sidebarLabel": "Hazırlık Listesi",
+    "tooltip": "Hazırlık Listesi",
+    "activeTasks": "{count} Aktif Görev",
+    "addTask": "Görev Ekle",
+    "placeholder": "Görev adı... (Örn: Domates Doğra)",
+    "quantity": "Miktar",
+    "unit": "Birim",
+    "defaultUnit": "ADET",
+    "emptyList": "Hazırlık listesi boş",
+    "urgent": "Acil",
+    "footerNote": "+/− ile miktar güncelleyin; Bitir görevi kapatır. Tamamlananlar gün sonunda arşivlenir.",
+    "successAdd": "Hazırlık görevi eklendi",
+    "errorAdd": "Görev kaydedilemedi.",
+    "errorBranch": "Şube bilgisi eksik. KDS üst bardan şube seçin veya istasyonun şubesini kontrol edin.",
+    "errorAssign": "Görev ataması kaydedilemedi.",
+    "assignPlaceholder": "Kişi seçin...",
+            "assignedTo": "Atananlar",
+            "namePlaceholder": "İsim yazın...",
+    "unassigned": "Atanmamış",
+    "loading": "Yükleniyor...",
+    "filters": {
+      "all": "TÜMÜ",
+      "pending": "BEKLEYEN",
+      "inProgress": "SÜREÇTE",
+      "completed": "BİTTİ"
+    },
+    "status": {
+      "pending": "Bekliyor",
+      "inProgress": "Hazırlanıyor",
+      "completed": "Tamamlandı",
+      "cancelled": "İptal",
+      "ready": "Hazır"
+    },
+    "actions": {
+      "finish": "Bitir",
+      "start": "Başla",
+      "increase": "Artır",
+      "decrease": "Azalt"
+    }
+  },
+  "toasts": {
+    "tasks": {
+      "statusUpdated": "Hazırlık durumu güncellendi",
+      "completed": "Hazırlık tamamlandı",
+      "progressError": "İlerleme güncellenemedi.",
+      "created": "Hazırlık görevi oluşturuldu",
+      "deleted": "Hazırlık görevi silindi"
+    },
+    "templates": {
+      "created": "Hazırlık şablonu oluşturuldu",
+      "createError": "Şablon oluşturulurken hata oluştu",
+      "updated": "Şablon güncellendi",
+      "deleted": "Şablon silindi"
+    },
+    "smartRules": {
+      "created": "Akıllı kural oluşturuldu",
+      "createError": "Kural oluşturulurken hata oluştu",
+      "updated": "Kural güncellendi",
+      "updateError": "Kural güncellenirken hata oluştu",
+      "deleted": "Kural silindi",
+      "deleteError": "Kural silinirken hata oluştu"
+    },
+    "settingsLoadFailed": "Hazırlık ayarları yüklenemedi.",
+    "settingsSaveFailed": "Ayar kaydedilemedi."
+  },
+  "management": {
+    "title": "Hazırlık Yönetimi",
+    "allBranches": "Tüm Şubeler",
+    "noBranchAssigned": "Şube Atanmamış",
+    "newTemplate": "Yeni Şablon",
+    "newRule": "Yeni Kural",
+    "refresh": "Yenile",
+    "tabs": {
+      "tasks": "Aktif Görevler",
+      "templates": "Hazırlık Şablonları",
+      "smartRules": "Akıllı Kurallar",
+      "settings": "Ayarlar"
+    },
+    "stats": {
+      "activeTasks": "Aktif Görev",
+      "completed": "Tamamlanan",
+      "activeTemplates": "Aktif Şablon",
+      "smartSuggestions": "Akıllı Öneri"
+    },
+    "searchPlaceholder": "Ara...",
+    "filter": "Filtrele",
+    "edit": "Düzenle",
+    "delete": "Sil",
+    "smartSubTabs": {
+      "suggestions": "Öneriler",
+      "ruleManagement": "Kural Yönetimi"
+    },
+    "columns": {
+      "tasks": {
+        "nameStation": "Görev Adı / İstasyon",
+        "status": "Durum",
+        "progress": "İlerleme",
+        "actions": "İşlemler"
+      },
+      "templates": {
+        "nameSchedule": "Şablon Adı / Zamanlama",
+        "station": "İstasyon",
+        "target": "Hedef",
+        "actions": "İşlemler"
+      },
+      "suggestions": {
+        "materialBase": "Malzeme / Baz Ürün",
+        "salesAnalysis": "Satış Analizi",
+        "suggestion": "Öneri",
+        "action": "İşlem"
+      },
+      "rules": {
+        "nameMatch": "Kural Adı / Eşleşme",
+        "ratio": "Oran",
+        "status": "Durum",
+        "actions": "İşlemler"
+      }
+    },
+    "defaultStation": "Genel İstasyon",
+    "taskStatus": {
+      "completed": "Tamamlandı",
+      "inProgress": "Hazırlanıyor",
+      "pending": "Bekliyor"
+    },
+    "progressDecreaseAria": "İlerlemeyi azalt",
+    "progressIncreaseAria": "İlerlemeyi artır",
+    "changeStatus": "Durum Değiştir",
+    "setPending": "Bekliyor Yap",
+    "setInProgress": "Hazırlanıyor Yap",
+    "setCompleted": "Tamamlandı Yap",
+    "deleteTask": "Görevi Sil",
+    "emptyTasks": "Aktif hazırlık görevi bulunmuyor.",
+    "emptyCompletedTasks": "Tamamlanan hazırlık görevi bulunmuyor.",
+    "emptyAllTasks": "Hazırlık görevi bulunmuyor.",
+    "emptyTemplates": "Henüz bir şablon tanımlanmamış.",
+    "createFirstTemplate": "İlk şablonu oluştur",
+    "dailyAtTime": "Her gün saat {time}",
+    "emptySuggestions": "Öneri bulunamadı.",
+    "emptySuggestionsHint": "Lütfen akıllı kurallarınızı kontrol edin veya satış verisi oluşmasını bekleyin.",
+    "salesBasedOn": "{product} satışlarına göre",
+    "avgSales": "Ort. Satış: {avg}",
+    "start": "Başlat",
+    "suggestionTaskTitle": "{item} Hazırlanacak (Akıllı Öneri)",
+    "rulesSectionTitle": "Aktif Kurallar ({count})",
+    "ruleState": {
+      "active": "Etkin",
+      "inactive": "Pasif"
+    },
+    "systemSuggestedRules": "Sistem Tarafından Önerilen Kurallar ({count})",
+    "prepForProduct": "{product} için Hazırlık",
+    "soldIn30Days": "30 günde {count} adet satıldı",
+    "discoveryCta": "{reason} Bir hazırlık kuralı oluşturarak stok yönetimini otomatize edin.",
+    "addRule": "Kural Ekle",
+    "discoveryRuleTitle": "{product} Hazırlık Kuralı",
+    "discoveryTargetMaterial": "{product} Malzemesi",
+    "emptyRulesAndDiscovery": "Henüz kural tanımlanmamış ve yeterli veri toplanmamış.",
+    "createManualRule": "Manuel kural oluştur",
+    "moduleSettings": "Modül Ayarları",
+    "autoArchive": {
+      "label": "Otomatik Arşivleme",
+      "description": "Açıkken, önceki günlerde oluşturulmuş ve tamamlanmış görevler bu listede gösterilmez (yalnızca bugünkü tamamlananlar ve açık görevler). Tercih şubeye kaydedilir.",
+      "branchRequired": "Ayarı kaydetmek için üstten bir şube seçin."
+    },
+    "tipsTitle": "Hızlı İpuçları",
+    "tips": {
+      "templatesFire": "Şablonlar her gün belirlenen saatte tetiklenir.",
+      "smartRulesTrend": "Akıllı kurallar satış trendlerini analiz eder."
+    },
+    "dialogs": {
+      "deleting": "Siliniyor...",
+      "deleteTask": {
+        "title": "Görevi Sil",
+        "description": "Bu aktif hazırlık görevini silmek istediğinizden emin misiniz? Bu işlem geri alınamaz."
+      },
+      "deleteTemplate": {
+        "title": "Emin misiniz?",
+        "description": "Bu hazırlık şablonunu sildiğinizde, bu şablona bağlı otomatik görev üretimi durdurulacaktır. Bu işlem geri alınamaz.",
+        "deleting": "Siliniyor...",
+        "confirm": "Evet, Sil"
+      },
+      "deleteRule": {
+        "title": "Kuralı Sil",
+        "description": "Bu akıllı hazırlık kuralını silmek istediğinizden emin misiniz? Bu işlem öneri hesaplamasını durduracaktır."
+      },
+      "cancel": "Vazgeç",
+      "delete": "Sil"
+    }
+  },
+  "templateModal": {
+    "editTitle": "Şablonu Düzenle",
+    "createTitle": "Yeni Hazırlık Şablonu",
+    "enabled": "Etkin",
+    "branch": "Şube",
+    "selectBranch": "Şube Seçiniz...",
+    "station": "Mutfak İstasyonu",
+    "noStation": "Genel (İstasyon Yok)",
+    "stationsLoading": "İstasyonlar yükleniyor...",
+    "templateName": "Şablon Adı",
+    "titlePlaceholder": "Örn: Günlük Hamur Hazırlığı",
+    "targetQty": "Hedef Miktar",
+    "unit": "Birim",
+    "unitPlaceholder": "KG, ADET...",
+    "activationTime": "Oluşturulma Saati",
+    "validDays": "Geçerli Günler",
+    "days": {
+      "mon": "Pzt",
+      "tue": "Sal",
+      "wed": "Çar",
+      "thu": "Per",
+      "fri": "Cum",
+      "sat": "Cmt",
+      "sun": "Paz"
+    },
+    "assignedTo": "Atanan Kişi",
+    "assignedToEveryone": "Herkese (Genel)",
+            "namePlaceholder": "İsim yazın...",
+    "cancel": "İptal",
+    "saving": "Kaydediliyor...",
+    "update": "Güncelle",
+    "create": "Şablonu Oluştur"
+  },
+  "smartRuleModal": {
+    "editTitle": "Kuralı Düzenle",
+    "createTitle": "Yeni Akıllı Kural",
+    "enabled": "Etkin",
+    "ruleTitle": "Kural Başlığı",
+    "titlePlaceholder": "Örn: Burger Köftesi Hazırlığı",
+    "baseProduct": "Baz Ürün (Satış)",
+    "selectProduct": "Ürün Seçiniz...",
+    "productsLoading": "Ürünler yükleniyor...",
+    "targetItem": "Hazırlanacak Malzeme",
+    "targetPlaceholder": "Örn: Burger Köftesi (Dondurulmuş)",
+    "ratio": "Oran (1 Ürün İçin)",
+    "unit": "Birim",
+    "unitPlaceholder": "ADET, GR...",
+    "cancel": "İptal",
+    "saving": "Kaydediliyor...",
+    "update": "Güncelle",
+    "create": "Kuralı Oluştur"
+  }
+}

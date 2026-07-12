@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ report_name }}</title>
+    <style>
+        @page {
+            size: A4 portrait;
+            margin: 1cm;
+        }
+        body {
+            font-family: 'DejaVu Sans', sans-serif;
+            font-size: 9pt;
+            color: #333;
+            margin: 0;
+            padding: 10px;
+        }
+        .header {
+            text-align: center;
+            border-bottom: 2px solid #2563eb;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 16pt;
+            color: #1e40af;
+        }
+        .header p {
+            margin: 4px 0;
+            color: #666;
+        }
+        .info-grid {
+            display: table;
+            width: 100%;
+            margin-bottom: 20px;
+            background-color: #f8fafc;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #e2e8f0;
+        }
+        .info-row {
+            display: table-row;
+        }
+        .info-label {
+            display: table-cell;
+            font-weight: bold;
+            width: 120px;
+            padding: 2px 0;
+            color: #64748b;
+        }
+        .info-value {
+            display: table-cell;
+            padding: 2px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 8px 4px;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        th {
+            background-color: #f1f5f9;
+            font-weight: bold;
+            color: #475569;
+            text-transform: uppercase;
+            font-size: 8pt;
+        }
+        .text-right {
+            text-align: right;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .status-badge {
+            padding: 2px 6px;
+            border-radius: 999px;
+            font-size: 7pt;
+            font-weight: bold;
+        }
+        .status-error {
+            background-color: #fef2f2;
+            color: #991b1b;
+        }
+        .status-success {
+            background-color: #f0fdf4;
+            color: #166534;
+        }
+        .status-neutral {
+            background-color: #f1f5f9;
+            color: #64748b;
+        }
+        .footer {
+            text-align: center;
+            font-size: 8pt;
+            color: #94a3b8;
+            margin-top: 30px;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>{{ report_name }}</h1>
+        <p>{{ _('Malzeme İhtiyaç Analizi') }}</p>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-row">
+            <span class="info-label">{{ _('Şube:') }}</span>
+            <span class="info-value">{{ plan.branch.name }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">{{ _('Plan Tarihi:') }}</span>
+            <span class="info-value">{{ plan.plan_date|date_tr }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">{{ _('Depo:') }}</span>
+            <span class="info-value">{{ mrp.warehouse_name }}</span>
+        </div>
+        <div class="info-row">
+            <span class="info-label">{{ _('İstasyon:') }}</span>
+            <span class="info-value">{{ station_name }}</span>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ _('Malzeme') }}</th>
+                <th>{{ _('İstasyon') }}</th>
+                <th class="text-right">{{ _('Gereken') }}</th>
+                <th class="text-right">{{ _('Mevcut') }}</th>
+                <th class="text-right">{{ _('Eksik') }}</th>
+                <th class="text-center">{{ _('Durum') }}</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in mrp['items'] %}
+            <tr>
+                <td style="font-weight: 500;">{{ item.stock_item_name }}</td>
+                <td style="font-size: 8pt; color: #64748b;">{{ item.kitchen_station }}</td>
+                <td class="text-right">{{ item.required_quantity|qty }} {{ item.unit }}</td>
+                <td class="text-right">{% if item.is_minimum_unlimited %}<span style="color: #94a3b8; font-style: italic;">{{ _('Sınırsız') }}</span>{% else %}{{ item.on_hand|qty }} {{ item.unit }}{% endif %}</td>
+                <td class="text-right" style="font-weight: bold; {% if not item.is_minimum_unlimited and item.gap > 0 %}color: #dc2626;{% endif %}">
+                    {% if item.is_minimum_unlimited %}<span style="color: #94a3b8; font-weight: normal; font-style: italic;">—</span>{% else %}{{ item.gap|qty }} {{ item.unit }}{% endif %}
+                </td>
+                <td class="text-center">
+                    {% if item.is_minimum_unlimited %}
+                        <span class="status-badge status-neutral">{{ _('İzlenmiyor') }}</span>
+                    {% elif item.gap > 0 %}
+                        <span class="status-badge status-error">{{ _('EKSİK') }}</span>
+                    {% else %}
+                        <span class="status-badge status-success">{{ _('YETERLİ') }}</span>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+            {% if not mrp['items'] %}
+            <tr>
+                <td colspan="6" style="text-align: center; padding: 20px; color: #64748b; font-style: italic;">
+                    {{ _('Bu kriterlere uygun malzeme gereksinimi bulunamadı.') }}
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+
+    <div class="footer">
+        {{ _('Oluşturulma:') }} {{ now()|date_tr }} | Ramis ERP
+    </div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+{
+  "messages": {
+    "loadFailed": "Veri yüklenemedi.",
+    "saveFailed": "Atama kaydedilemedi."
+  },
+  "title": "Şube Yönetimi",
+  "titlePersonal": "Şube bilgileriniz",
+  "description": "Restoran şubelerini yönetin",
+  "descriptionPersonal": "Hesabınıza atanan şube kayıtları",
+  "addNew": "Yeni Şube",
+  "activeBranches": "Aktif Şubeler ({count})",
+  "deletedBranches": "Silinen Şubeler ({count})",
+  "name": "Şube Adı",
+  "code": "Kod",
+  "phone": "Telefon",
+  "email": "E-posta",
+  "website": "Web Adresi",
+  "address": "Adres",
+  "taxOffice": "Vergi Dairesi",
+  "taxNumber": "Vergi No",
+  "registryNo": "Sicil No",
+  "mersisNo": "Mersis No",
+  "logo": "Şube Logosu",
+  "users": "Kullanıcılar",
+  "details": "Detay",
+  "hardDelete": "Kalıcı Olarak Sil",
+  "empty": {
+    "personal": "Atanan şube kaydı bulunamadı.",
+    "deleted": "Silinen şube bulunmuyor.",
+    "active": "Kayıtlı aktif şube yok.",
+    "noMatch": "Aramanıza uygun şube bulunamadı."
+  },
+  "modals": {
+    "deleteTitle": "Şubeyi Sil",
+    "hardDeleteTitle": "Şubeyi Kalıcı Olarak Sil",
+    "deleteDesc": "\"{name}\" şubesi silinecek. Silinen şubeleri daha sonra görüntüleyebilir veya geri yükleyebilirsiniz.",
+    "hardDeleteDesc": "\"{name}\" şubesi sistemden tamamen silinecek. Bu işlem geri alınamaz ve şubeye bağlı tüm veriler etkilenebilir.",
+    "deleteConfirm": "Şubeyi Sil",
+    "hardDeleteConfirm": "Kalıcı Olarak Sil"
+  },
+  "formModal": {
+    "namePlaceholder": "Merkez Şube",
+    "codePlaceholder": "MAIN",
+    "phonePlaceholder": "0555 123 4567",
+    "addressPlaceholder": "Mahalle, sokak, ilçe, il…"
+  },
+  "editModal": {
+    "title": "Şube Düzenle",
+    "subtitle": "{branchName} bilgilerini güncelleyin",
+    "monthlyTargetLabel": "Aylık Ciro Hedefi (₺)",
+    "monthlyTargetPlaceholder": "1.000.000",
+    "monthlyTargetHint": "Cari ay için dashboard üzerinde ilerleme çubuğunu besler.",
+    "validationNameRequired": "Şube adı zorunludur.",
+    "validationCodeRequired": "Şube kodu zorunludur.",
+    "updateFailed": "Şube güncellenemedi.",
+    "uploadLogo": "Logo Yükle",
+    "changeLogo": "Logo Değiştir",
+    "removeLogo": "Logoyu Kaldır",
+    "emailPlaceholder": "ornek@firma.com",
+    "websitePlaceholder": "https://firma.com",
+    "taxOfficePlaceholder": "Örn: Kadıköy V.D.",
+    "taxNumberPlaceholder": "1234567890",
+    "registryNoPlaceholder": "123456",
+    "mersisNoPlaceholder": "0123456789012345"
+  },
+  "detailModal": {
+    "usersAssignedSummary": "{count} kullanıcı atanmış",
+    "zoneManagement": "Bölge yönetimi",
+    "noAssignableUsers": "Atanabilecek kullanıcı yok",
+    "assigning": "Atanıyor…",
+    "assignUsersButton": "{count} Kullanıcı Ata",
+    "assignedUsers": "Atanmış Kullanıcılar",
+    "addUser": "Kullanıcı Ekle",
+    "emptyNoUsers": "Bu şubeye henüz kullanıcı atanmamış",
+    "noRole": "Rol yok",
+    "removeUser": "Kaldır",
+    "close": "Kapat",
+    "assignFailed": "Kullanıcı atama başarısız oldu.",
+    "removeUserFailed": "Kullanıcı kaldırılamadı.",
+    "confirmRemoveUser": "Bu kullanıcıyı şubeden kaldırmak istediğinize emin misiniz?"
+  },
+  "branchUserModal": {
+    "title": "Kullanıcı Ata",
+    "subtitle": "{branchName} şubesi için kullanıcı seçin ({selectedCount} seçili)",
+    "searchPlaceholder": "Kullanıcı ara…",
+    "empty": "Kullanıcı bulunamadı",
+    "selectAllToggle": "Tümünü Seç / Kaldır",
+    "footerSummary": "{selected} / {total} kullanıcı seçili"
+  },
+  "branchSelect": {
+    "placeholder": "Şube seçin",
+    "loading": "Yükleniyor…",
+    "allBranches": "Tüm Şubeler"
+  }
+}

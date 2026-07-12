@@ -1,0 +1,81 @@
+{
+  "themes": {
+    "light": {
+      "background": "oklch(1 0 0)",
+      "foreground": "oklch(0.145 0 0)",
+      "primary": "oklch(0.205 0 0)",
+      "primary-foreground": "oklch(0.985 0 0)",
+      "secondary": "oklch(0.97 0 0)",
+      "secondary-foreground": "oklch(0.205 0 0)",
+      "muted": "oklch(0.97 0 0)",
+      "muted-foreground": "oklch(0.556 0 0)",
+      "accent": "oklch(0.97 0 0)",
+      "accent-foreground": "oklch(0.205 0 0)",
+      "border": "oklch(0.922 0 0)",
+      "input": "oklch(0.922 0 0)",
+      "ring": "oklch(0.708 0 0)"
+    },
+    "dark": {
+      "background": "oklch(0.145 0 0)",
+      "foreground": "oklch(0.985 0 0)",
+      "primary": "oklch(0.922 0 0)",
+      "primary-foreground": "oklch(0.205 0 0)",
+      "secondary": "oklch(0.269 0 0)",
+      "secondary-foreground": "oklch(0.985 0 0)",
+      "muted": "oklch(0.269 0 0)",
+      "muted-foreground": "oklch(0.708 0 0)",
+      "accent": "oklch(0.269 0 0)",
+      "accent-foreground": "oklch(0.985 0 0)",
+      "border": "oklch(1 0 0 / 10%)",
+      "input": "oklch(1 0 0 / 15%)",
+      "ring": "oklch(0.556 0 0)"
+    },
+    "high-contrast": {
+      "background": "oklch(1 0 0)",
+      "foreground": "oklch(0 0 0)",
+      "primary": "oklch(0 0 0)",
+      "primary-foreground": "oklch(1 0 0)",
+      "secondary": "oklch(0.9 0 0)",
+      "secondary-foreground": "oklch(0 0 0)",
+      "muted": "oklch(0.9 0 0)",
+      "muted-foreground": "oklch(0.1 0 0)",
+      "accent": "oklch(0.1 0 0)",
+      "accent-foreground": "oklch(1 0 0)",
+      "border": "oklch(0 0 0)",
+      "input": "oklch(0 0 0)",
+      "ring": "oklch(0 0 0)"
+    },
+    "outdoor": {
+      "background": "oklch(1 0 0)",
+      "foreground": "oklch(0 0 0)",
+      "primary": "oklch(0.35 0.1 240)",
+      "primary-foreground": "oklch(1 0 0)",
+      "secondary": "oklch(0.95 0 0)",
+      "secondary-foreground": "oklch(0 0 0)",
+      "muted": "oklch(0.95 0 0)",
+      "muted-foreground": "oklch(0.2 0 0)",
+      "accent": "oklch(0.4 0.15 30)",
+      "accent-foreground": "oklch(1 0 0)",
+      "border": "oklch(0.8 0 0)",
+      "input": "oklch(0.8 0 0)",
+      "ring": "oklch(0.35 0.1 240)"
+    }
+  },
+  "densities": {
+    "compact": {
+      "radius": "0.125rem",
+      "spacing-multiplier": "0.75",
+      "font-size-base": "0.8125rem"
+    },
+    "comfortable": {
+      "radius": "0.625rem",
+      "spacing-multiplier": "1",
+      "font-size-base": "0.875rem"
+    },
+    "spacious": {
+      "radius": "1rem",
+      "spacing-multiplier": "1.25",
+      "font-size-base": "1rem"
+    }
+  }
+}

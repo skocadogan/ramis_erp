@@ -249,7 +249,7 @@ export function RecommendedProductsModal({
               {/* Ürün tablosu */}
               <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden p-4">
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-xs font-semibold tracking-widertext-muted-foreground">
                     {t("productsCount", { count: filteredProducts.length })}
                   </p>
                   <button

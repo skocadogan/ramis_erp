@@ -145,7 +145,7 @@ export function UserList() {
         </select>
       </div>
 
-      <div className="rounded-lg border border-border bg-card border-border">
+      <div className="rounded-lg border bg-card border-border">
         {usersQuery.isLoading ? (
           <div className="flex items-center justify-center py-16"><Loader2 className="h-8 w-8 animate-spin text-blue-600" /></div>
         ) : users.length === 0 ? (
@@ -163,19 +163,19 @@ export function UserList() {
             header={
               <thead className={virtualTableStickyHeadClass}>
                 <tr>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">
                     <button onClick={() => toggleSort("username")} className="flex items-center gap-1 hover: dark:hover:">{t('table.user')} <SortIcon field="username" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">
                     <button onClick={() => toggleSort("email")} className="flex items-center gap-1 hover: dark:hover:">{t('table.email')} <SortIcon field="email" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.branch')}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.roles')}</th>
-                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.status')}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('table.branch')}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('table.roles')}</th>
+                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('table.status')}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">
                     <button onClick={() => toggleSort("last_login")} className="flex items-center gap-1 hover: dark:hover:">{t('table.lastLogin')} <SortIcon field="last_login" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
-                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.actions')}</th>
+                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('table.actions')}</th>
                 </tr>
               </thead>
             }

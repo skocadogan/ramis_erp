@@ -53,7 +53,7 @@ export function WarehouseStats({ summary, isLoading, onOverdueClick }: Warehouse
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sub font-medium text-muted-foreground uppercase tracking-wider mb-1">
+                <p className="text-sub font-medium text-muted-foreground tracking-widermb-1">
                   {t(key)}
                 </p>
                 <p className={cn(

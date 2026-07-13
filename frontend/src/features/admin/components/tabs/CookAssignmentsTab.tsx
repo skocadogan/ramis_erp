@@ -87,7 +87,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="text-xs font-semibold tracking-widertext-muted-foreground">
             {t('assignments.common.branch')}
           </span>
           <select
@@ -106,7 +106,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
           </select>
         </div>
         <div className="space-y-1.5">
-          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-xs font-semibold tracking-widertext-muted-foreground">
            
             {t('assignments.cook.staffLabel')}
           </span>

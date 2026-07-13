@@ -57,7 +57,7 @@ export function DeleteConfirmModal({
               
               {isHardDelete && (
                 <div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-lg dark:bg-red-900/10 dark:border-red-900/20">
-                  <p className="text-sub font-bold text-red-700 uppercase tracking-wider flex items-center gap-1.5 dark:text-red-400">
+                  <p className="text-sub font-bold text-red-700 tracking-widerflex items-center gap-1.5 dark:text-red-400">
                     <AlertTriangle size={12} /> DİKKAT: BU İŞLEM GERİ ALINAMAZ
                   </p>
                 </div>

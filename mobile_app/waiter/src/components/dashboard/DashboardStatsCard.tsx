@@ -14,7 +14,7 @@ export function DashboardStatsCard({ t, branchLabel, tables, ready, delivered }:
     <View className="bg-card border border-border rounded-2xl shadow-sm p-5 mb-6">
       <View className="flex-row justify-between items-center mb-4">
         <View className="flex-1 mr-2">
-          <Text className="text-muted-foreground text-[10px] font-bold uppercase tracking-wider mb-0.5">
+          <Text className="text-muted-foreground text-[10px] font-bold tracking-widermb-0.5">
             {t("dashboard.activeBranch")}
           </Text>
           <Text className="text-foreground text-lg font-bold" numberOfLines={2}>

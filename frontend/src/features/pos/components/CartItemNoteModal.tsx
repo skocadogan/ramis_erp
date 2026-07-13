@@ -70,7 +70,7 @@ export function CartItemNoteModal({
 
         <div className="space-y-4 p-6">
           <div>
-            <label className="mb-1.5 block text-2xs font-bold uppercase tracking-wider text-muted-foreground">
+            <label className="mb-1.5 block text-2xs font-bold tracking-widertext-muted-foreground">
               {t("itemNoteLabel")}
             </label>
             <textarea

@@ -108,15 +108,15 @@ export function BranchesTab({
         <table className="w-full text-sm">
           <thead className="border-b border-border bg-muted border-border">
             <tr>
-              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('name')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('code')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('phone')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('address')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('name')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('code')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('phone')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('address')}</th>
               {canManageBranches ? (
-                <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('users')}</th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t('users')}</th>
               ) : null}
               {canManageBranches ? (
-                <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{tAdmin('common.actions')}</th>
+                <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{tAdmin('common.actions')}</th>
               ) : null}
             </tr>
           </thead>

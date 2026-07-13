@@ -321,10 +321,10 @@ export function ProductSalesAnalytics({
                                 header={
                                     <thead className={virtualTableStickyHeadClass}>
                                         <tr>
-                                            <th className="text-left px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colProduct')}</th>
-                                            <th className="text-left px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colCategory')}</th>
-                                            <th className="text-right px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colQty')}</th>
-                                            <th className="text-right px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colRevenue')}</th>
+                                            <th className="text-left px-4 py-3 font-semibold tracking-widertext-2xs">{t('productAnalytics.colProduct')}</th>
+                                            <th className="text-left px-4 py-3 font-semibold tracking-widertext-2xs">{t('productAnalytics.colCategory')}</th>
+                                            <th className="text-right px-4 py-3 font-semibold tracking-widertext-2xs">{t('productAnalytics.colQty')}</th>
+                                            <th className="text-right px-4 py-3 font-semibold tracking-widertext-2xs">{t('productAnalytics.colRevenue')}</th>
                                         </tr>
                                     </thead>
                                 }

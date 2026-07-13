@@ -114,7 +114,7 @@ export const UnitSelectionModal: React.FC<UnitSelectionModalProps> = ({
               <Text className="text-foreground text-lg font-black tracking-tight">
                 {product.name}
               </Text>
-              <Text className="text-primary text-[10px] font-black uppercase tracking-wider mt-0.5">
+              <Text className="text-primary text-[10px] font-black tracking-widermt-0.5">
                 Satış Birimi & Adet Seçin
               </Text>
             </View>

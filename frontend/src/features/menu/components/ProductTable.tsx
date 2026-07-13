@@ -208,12 +208,12 @@ export default function ProductTable({
               <thead className="border-b border-border sticky top-0 bg-muted border-border z-10">
                 <tr>
                   {canManage && <th className="w-8"></th>}
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.product")}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.branch")}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.category")}</th>
-                  {isCombinedTab && <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.contents")}</th>}
-                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.price")}</th>
-                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.status")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.product")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.branch")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.category")}</th>
+                  {isCombinedTab && <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.contents")}</th>}
+                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.price")}</th>
+                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.status")}</th>
                   {canManage && <th className="w-12 px-4 py-2.5"></th>}
                 </tr>
               </thead>

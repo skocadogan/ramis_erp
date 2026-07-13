@@ -645,7 +645,7 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
       {/* Palet */}
       <div className="px-3 py-2 border-b
  border-border border-border bg-muted/60">
-        <p className="text-2xs uppercase tracking-wider mb-2
+        <p className="text-2xs tracking-widermb-2
  text-muted-foreground dark:text-muted-foreground">{t("reporting.blockEditor.addBlockTitle")}</p>
         <div className="flex flex-wrap gap-1.5">
           {palette.map(p => (

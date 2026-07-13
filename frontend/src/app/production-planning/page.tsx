@@ -259,14 +259,14 @@ function ProductionPlanningContent() {
             <TabsContent value="availability" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 rounded-lg p-0">
               <div className="shrink-0 p-4 border-b border-border flex flex-wrap items-center gap-4 /50 bg-muted/20">
                 <div className="w-48">
-                  <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("page.filters.branch")}</Label>
+                  <Label className="text-2xs tracking-widertext-muted-foreground mb-1 block">{t("page.filters.branch")}</Label>
                   <BranchSelect
                     value={availFilters.branch_id}
                     onChange={(val) => setAvailFilters(prev => ({ ...prev, branch_id: val }))}
                   />
                 </div>
                 <div className="w-40">
-                  <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("page.filters.date")}</Label>
+                  <Label className="text-2xs tracking-widertext-muted-foreground mb-1 block">{t("page.filters.date")}</Label>
                   <Input
                     type="date"
                     className="h-9 text-xs"
@@ -275,7 +275,7 @@ function ProductionPlanningContent() {
                   />
                 </div>
                 <div className="w-64">
-                  <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("page.filters.product")}</Label>
+                  <Label className="text-2xs tracking-widertext-muted-foreground mb-1 block">{t("page.filters.product")}</Label>
                   <ProductSelect
                     value={availFilters.product_id}
                     allProducts={products}

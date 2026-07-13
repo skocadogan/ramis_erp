@@ -252,7 +252,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
           {/* Right Side: Sales History */}
           <div className="flex min-h-[min(420px,50vh)] flex-1 flex-col overflow-hidden p-6 lg:min-h-0">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-              <h4 className="text-sm font-bold uppercase tracking-wider text-foreground">
+              <h4 className="text-sm font-bold tracking-widertext-foreground">
                 {t("sales.title")} ({totalCount})
               </h4>
               <div className="flex gap-2">
@@ -284,7 +284,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
             {/* Totals Summary Widgets */}
             <div className="mb-4 grid grid-cols-3 gap-4">
               <div className="rounded-xl border border-border bg-background p-3">
-                <span className="block text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="block text-2xs font-semibold tracking-widertext-muted-foreground">
                   {t("sales.totalGross")}
                 </span>
                 <span className="mt-1 block text-sm font-bold text-foreground">
@@ -292,7 +292,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
                 </span>
               </div>
               <div className="rounded-xl border border-border bg-background p-3">
-                <span className="block text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="block text-2xs font-semibold tracking-widertext-muted-foreground">
                   {t("sales.totalDiscount")}
                 </span>
                 <span className="mt-1 block text-sm font-bold text-rose-600">
@@ -300,7 +300,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
                 </span>
               </div>
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-3">
-                <span className="block text-2xs font-semibold uppercase tracking-wider text-primary">
+                <span className="block text-2xs font-semibold tracking-widertext-primary">
                   {t("sales.totalNet")}
                 </span>
                 <span className="mt-1 block text-sm font-bold text-primary">

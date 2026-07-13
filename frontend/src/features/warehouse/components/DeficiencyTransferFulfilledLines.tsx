@@ -29,7 +29,7 @@ const variants = {
   kds: {
     root: "flex min-h-0 flex-1 flex-col border-t border-border",
     title:
-      "shrink-0 border-b border-border bg-muted px-3 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground",
+      "shrink-0 border-b border-border bg-muted px-3 py-2 text-xs font-bold tracking-widertext-muted-foreground",
     searchBox: "p-2 shrink-0 border-b border-border bg-background",
     transferBar: "flex flex-wrap items-center gap-x-2 gap-y-0.5 bg-muted/40 px-3 py-2 text-sub border-b border-border",
     transferNo: "font-mono font-bold text-amber-600 dark:text-amber-400",

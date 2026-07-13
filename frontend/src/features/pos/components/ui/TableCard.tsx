@@ -212,21 +212,21 @@ const TableCard = memo(function TableCard({
         )}
 
         {hasOrphanOrder && (
-          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 ${currentStyle.badge}`}>
+          <span className={`w-fit text-3xs font-bold tracking-widerpx-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 ${currentStyle.badge}`}>
             <AlertTriangle size={10} aria-hidden="true" />
             {t("orphanOrderHint")}
           </span>
         )}
 
         {table.status === "CLEANING" && (
-          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
+          <span className={`w-fit text-3xs font-bold tracking-widerpx-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
             <Brush size={10} aria-hidden="true" />
             {cleaningSeconds != null ? formatCleaningCountdown(cleaningSeconds) : t("cleaning")}
           </span>
         )}
 
         {table.status === "OCCUPIED" && elapsedMinutes !== null && (
-          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${isKitchen ? "bg-muted text-amber-600" : "bg-muted text-rose-600"}`}>
+          <span className={`w-fit text-3xs font-bold tracking-widerpx-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${isKitchen ? "bg-muted text-amber-600" : "bg-muted text-rose-600"}`}>
             <UtensilsCrossed size={10} className="shrink-0" aria-hidden="true" />
             <Clock size={10} className="shrink-0" />
             {t("occupiedMinutes", { minutes: elapsedMinutes })}
@@ -234,7 +234,7 @@ const TableCard = memo(function TableCard({
         )}
 
         {isKitchen && (
-          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
+          <span className={`w-fit text-3xs font-bold tracking-widerpx-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
             <ChefHat size={10} aria-hidden="true" />
             {t("waiting")}
           </span>

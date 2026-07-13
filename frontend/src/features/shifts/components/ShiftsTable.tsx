@@ -230,28 +230,28 @@ export const ShiftsTable = memo(function ShiftsTable({
       <table className="w-full text-sm">
         <thead className="sticky top-0 z-10 border-b border-border border-border bg-muted">
           <tr>
-            <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-left text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.status")}
             </th>
-            <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-left text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.terminal")}
             </th>
-            <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-left text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.openedAt")}
             </th>
-            <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-left text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.closedAt")}
             </th>
-            <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-right text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.expectedCash")}
             </th>
-            <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-right text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.countedCash")}
             </th>
-            <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-right text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.difference")}
             </th>
-            <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <th className="px-3 py-2 text-right text-xs font-semibold tracking-widertext-muted-foreground">
               {t("table.actions")}
             </th>
           </tr>

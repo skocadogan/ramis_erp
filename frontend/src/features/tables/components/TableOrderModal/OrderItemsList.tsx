@@ -253,7 +253,7 @@ const OrderItemsListImpl = ({
                         {orders.length > 1 && (
                             <>
                                 <div className="mb-2 flex flex-wrap items-center gap-2 sm:mb-3">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground sm:text-sm">
+                                    <span className="text-xs font-bold tracking-widertext-muted-foreground sm:text-sm">
                                         {order.order_number || t('orderNum', { num: idx + 1 })}
                                     </span>
                                     <span

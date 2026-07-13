@@ -65,12 +65,12 @@ export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
               className="bg-destructive/5 dark:bg-destructive/10 p-4 rounded-[22px] border border-destructive/20 mb-6"
               style={{ borderCurve: "continuous" }}
             >
-              <Text className="text-destructive text-[10px] font-black uppercase tracking-wider text-center">
+              <Text className="text-destructive text-[10px] font-black tracking-widertext-center">
                 Denetim Kaydı (Audit Log) Olarak İşlenecektir
               </Text>
             </View>
 
-            <Text className="text-muted-foreground font-black text-[10px] uppercase tracking-wider mb-3">
+            <Text className="text-muted-foreground font-black text-[10px] tracking-widermb-3">
               {t("tableDetail.cancelOrderReason")}
             </Text>
 
@@ -112,7 +112,7 @@ export const CancelOrderModal: React.FC<CancelOrderModalProps> = ({
               })}
             </View>
 
-            <Text className="text-muted-foreground font-black text-[10px] uppercase tracking-wider mb-3">
+            <Text className="text-muted-foreground font-black text-[10px] tracking-widermb-3">
               AÇIKLAMA (OPSİYONEL)
             </Text>
 

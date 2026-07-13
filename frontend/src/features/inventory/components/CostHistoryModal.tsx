@@ -221,7 +221,7 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
         </DialogBody>
 
         <DialogFooter className="justify-center">
-          <div className="flex items-center justify-center gap-2 text-center text-sub font-bold uppercase tracking-wider text-muted-foreground">
+          <div className="flex items-center justify-center gap-2 text-center text-sub font-bold tracking-widertext-muted-foreground">
             <ArrowDownToLine size={14} className="shrink-0" />
             <p>{t("footerNote")}</p>
           </div>

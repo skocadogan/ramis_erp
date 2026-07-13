@@ -220,11 +220,11 @@ export function ReturnCancelReportsTab({ branchId }: ReturnCancelReportsTabProps
 
       <div className="grid shrink-0 grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-border/80 bg-blue-50/80 p-4 dark:bg-blue-950/20">
-          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">{t("totalQuantity")}</p>
+          <p className="text-sub font-medium tracking-widertext-muted-foreground">{t("totalQuantity")}</p>
           <p className="mt-1 text-2xl font-bold tabular-nums">{totalQty.toFixed(2)}</p>
         </div>
         <div className="rounded-xl border border-border/80 bg-rose-50/80 p-4 dark:bg-rose-950/20">
-          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">{t("totalCostEstimate")}</p>
+          <p className="text-sub font-medium tracking-widertext-muted-foreground">{t("totalCostEstimate")}</p>
           <p className={cn("mt-1 text-2xl font-bold tabular-nums", totalAmount > 0 && "text-rose-600 dark:text-rose-400")}>
             {currency.format(totalAmount)}
           </p>

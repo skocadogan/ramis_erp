@@ -280,12 +280,12 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colReportNo")}</th>
-              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colStation")}</th>
-              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colStatus")}</th>
-              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colDate")}</th>
-              <th className="text-center px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colLines")}</th>
-              <th className="text-right px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colActions")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground tracking-widertext-2xs">{t("deficiencyReports.colReportNo")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground tracking-widertext-2xs">{t("deficiencyReports.colStation")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground tracking-widertext-2xs">{t("deficiencyReports.colStatus")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground tracking-widertext-2xs">{t("deficiencyReports.colDate")}</th>
+              <th className="text-center px-6 py-4 font-bold text-muted-foreground tracking-widertext-2xs">{t("deficiencyReports.colLines")}</th>
+              <th className="text-right px-6 py-4 font-bold text-muted-foreground tracking-widertext-2xs">{t("deficiencyReports.colActions")}</th>
             </tr>
           </thead>
         }

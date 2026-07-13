@@ -186,7 +186,7 @@ export const SalesSummaryPeriodCard = memo(({
 
             {expanded && hasDiscountDetail && disc && (
                 <div className="mt-3 rounded-lg border border-amber-200/90 bg-amber-50/90 px-3 py-2.5 dark:border-amber-800/60 dark:bg-amber-950/35">
-                    <div className="flex items-center gap-1.5 text-2xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 mb-2">
+                    <div className="flex items-center gap-1.5 text-2xs font-bold tracking-widertext-amber-800 dark:text-amber-300 mb-2">
                         <Tag size={12} className="shrink-0" />
                         {t("summaryCard.discountDetailTitle")}
                     </div>
@@ -209,7 +209,7 @@ export const SalesSummaryPeriodCard = memo(({
 
             {expanded && hasBreakdown && (
                 <div className="mt-4 pt-3 border-t border-border flex flex-col gap-2 flex-1">
-                    <p className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">
+                    <p className="text-2xs font-bold tracking-widertext-muted-foreground">
                         {t("summaryCard.paymentTypesTitle")}{" "}
                         <span className="font-normal normal-case">{t("summaryCard.paymentTypesSubtitle")}</span>
                     </p>

@@ -351,7 +351,7 @@ export function ReportingTab({ canManage }: Props) {
             <tr>
               {[t('reporting.table.name'), t('reporting.table.category'), t('reporting.table.paper'), t('reporting.table.blocks'), t('reporting.table.default'), t('common.actions')].map(h => (
                 <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground
- uppercase tracking-wider dark:text-muted-foreground">
+ tracking-widerdark:text-muted-foreground">
                   {h}
                 </th>
               ))}

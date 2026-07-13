@@ -188,7 +188,7 @@ export const CartModal: React.FC<CartModalProps> = ({
           <View className="mt-4 pt-4 border-t border-border/10 shrink-0">
             {/* Notes Section */}
             <View className="mb-4 shrink-0 px-2">
-              <Text className="text-muted-foreground text-[10px] font-black uppercase tracking-wider mb-2">
+              <Text className="text-muted-foreground text-[10px] font-black tracking-widermb-2">
                 {t("order.notesLabel") || "Sipariş Açıklaması / Notu"}
               </Text>
               <TextInput

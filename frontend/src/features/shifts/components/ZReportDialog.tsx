@@ -50,7 +50,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
             </div>
             <div>
               <DialogTitle className="text-lg font-bold">{t("zReport.title")}</DialogTitle>
-              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
+              <p className="text-xs font-medium tracking-widertext-muted-foreground">
                 {t("zReport.subtitle")}
               </p>
             </div>

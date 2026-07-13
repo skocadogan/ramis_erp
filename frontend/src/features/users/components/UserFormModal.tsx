@@ -508,7 +508,7 @@ function SectionTitle({
   return (
     <h4
       className={cn(
-        "mb-3 text-sub font-semibold uppercase tracking-wider text-muted-foreground",
+        "mb-3 text-sub font-semibold tracking-widertext-muted-foreground",
         className
       )}
     >

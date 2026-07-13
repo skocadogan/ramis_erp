@@ -203,7 +203,7 @@ export function SurveyResponsesDialog({
                     className="h-[540px]"
                     header={
                       <thead className={virtualTableStickyHeadClass}>
-                        <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
+                        <tr className="text-left text-xs tracking-widertext-muted-foreground">
                           <th className="px-4 py-3">{t("surveys.results.table.date")}</th>
                           <th className="px-4 py-3">{t("surveys.results.table.context")}</th>
                           <th className="px-4 py-3">{t("surveys.results.table.metrics")}</th>
@@ -294,7 +294,7 @@ export function SurveyResponsesDialog({
 
                     <div className="flex-1 space-y-4 overflow-y-auto p-4">
                       <div className="space-y-2">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        <div className="text-xs font-semibold tracking-widertext-muted-foreground">
                           {t("surveys.results.detailAnswers")}
                         </div>
                         <div className="space-y-2">
@@ -310,7 +310,7 @@ export function SurveyResponsesDialog({
                       </div>
 
                       <div className="space-y-2">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        <div className="text-xs font-semibold tracking-widertext-muted-foreground">
                           {t("surveys.results.detailPreview")}
                         </div>
                         <p className="rounded-lg border border-border /70 p-3 text-sm text-muted-foreground bg-card/40">
@@ -319,7 +319,7 @@ export function SurveyResponsesDialog({
                       </div>
 
                       <div className="space-y-2">
-                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                        <div className="text-xs font-semibold tracking-widertext-muted-foreground">
                           {t("surveys.results.detailAttention")}
                         </div>
                         <Select

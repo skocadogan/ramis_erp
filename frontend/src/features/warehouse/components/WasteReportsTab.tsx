@@ -111,7 +111,7 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
 
       <div className="grid shrink-0 grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-border/80 bg-amber-50/80 p-4 border-border dark:bg-amber-950/20">
-          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="text-sub font-medium tracking-widertext-muted-foreground">
             {t("waste.totalWaste")}
           </p>
           <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
@@ -119,7 +119,7 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
           </p>
         </div>
         <div className="rounded-xl border border-border/80 bg-rose-50/80 p-4 border-border dark:bg-rose-950/20">
-          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="text-sub font-medium tracking-widertext-muted-foreground">
             {t("waste.totalCostEstimate")}
           </p>
           <p

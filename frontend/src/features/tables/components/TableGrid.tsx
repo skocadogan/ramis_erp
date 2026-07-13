@@ -225,10 +225,10 @@ export function TableGrid({ tables, zones, isLoading, canManage, onEdit, onDelet
                         <thead className="border-b border-border bg-muted border-border">
                             <tr>
                                 {[tGrid('header.table'), tGrid('header.zone'), tGrid('header.capacity'), tGrid('header.size'), tGrid('header.shape'), tGrid('header.status'), tGrid('header.reservation'), tGrid('header.activeOrder')].map(h => (
-                                    <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{h}</th>
+                                    <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{h}</th>
                                 ))}
                                 {canManage && (
-                                    <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground w-[1%] whitespace-nowrap">
+                                    <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground w-[1%] whitespace-nowrap">
                                         {tGrid('header.actions')}
                                     </th>
                                 )}

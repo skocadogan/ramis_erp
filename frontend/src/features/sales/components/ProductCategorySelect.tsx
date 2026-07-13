@@ -96,7 +96,7 @@ export function ProductCategorySelect({
           
           {groupedProducts.map((cat) => (
             <div key={cat.id} className="mt-2">
-              <div className="px-2 py-1 text-2xs font-bold uppercase tracking-wider text-muted-foreground dark:text-muted-foreground">
+              <div className="px-2 py-1 text-2xs font-bold tracking-widertext-muted-foreground dark:text-muted-foreground">
                 {cat.name}
               </div>
               {cat.items.map((product) => (

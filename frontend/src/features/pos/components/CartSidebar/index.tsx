@@ -418,10 +418,10 @@ const CartSidebar = memo(function CartSidebar({
                   </div>
 
                   <div className="ml-5 mt-2 grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1.5 rounded-md p-3 bg-muted/50">
-                    <div className="text-2xs uppercase tracking-wider text-muted-foreground">{tStock("physical")}</div>
+                    <div className="text-2xs tracking-widertext-muted-foreground">{tStock("physical")}</div>
                     <div className="text-right text-sub font-medium tabular-nums text-foreground">{formatQuantityWithUnit(physicalQty, i.unit)}</div>
 
-                    <div className="text-2xs uppercase tracking-wider text-muted-foreground">{tStock("reserved")}</div>
+                    <div className="text-2xs tracking-widertext-muted-foreground">{tStock("reserved")}</div>
                     <div className="space-y-0.5 text-right text-sub font-medium tabular-nums text-amber-600 dark:text-amber-400">
                       {reservedQty > 0 ? (
                         <div>-{formatQuantityWithUnit(reservedQty, i.unit)}</div>
@@ -434,7 +434,7 @@ const CartSidebar = memo(function CartSidebar({
                       ) : null}
                     </div>
 
-                    <div className="border-t pt-1.5 text-2xs font-bold uppercase tracking-wider text-muted-foreground border-border">{tStock("available")}</div>
+                    <div className="border-t pt-1.5 text-2xs font-bold tracking-widertext-muted-foreground border-border">{tStock("available")}</div>
                     <div className={`border-t pt-1.5 text-right text-sub font-bold tabular-nums border-border ${availableQty <= 0 ? "text-rose-600 dark:text-rose-400" : "text-blue-600 dark:text-blue-400"}`}>
                       {formatQuantityWithUnit(availableQty, i.unit)}
                     </div>

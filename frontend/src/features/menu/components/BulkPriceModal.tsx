@@ -74,7 +74,7 @@ export default function BulkPriceModal({
 
         <DialogBody className="flex min-h-0 flex-1 overflow-hidden p-0">
           <div className="w-48 shrink-0 border-r border-border p-4 overflow-y-auto">
-            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("bulkPrice.categories")}</p>
+            <p className="text-xs font-semibold text-muted-foreground tracking-widermb-2 dark:text-muted-foreground">{t("bulkPrice.categories")}</p>
             <div className="flex flex-col gap-0.5">
               <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover: dark:hover: cursor-pointer">
                 <Checkbox
@@ -97,7 +97,7 @@ export default function BulkPriceModal({
 
           <div className="flex-1 overflow-y-auto overflow-x-auto p-4">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+              <p className="text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">
                 {t("bulkPrice.products", { count: bulkFilteredProducts.length })}
               </p>
               <button onClick={onToggleAll} className="text-xs text-blue-600 hover:underline dark:text-blue-400">

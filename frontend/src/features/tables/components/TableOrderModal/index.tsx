@@ -318,7 +318,7 @@ export function TableOrderModal(props: TableOrderModalProps) {
                                                 <div className="flex items-center gap-2.5">
                                                     <Users size={16} className="text-muted-foreground" />
                                                     <div className="min-w-0">
-                                                        <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider block">
+                                                        <span className="text-2xs font-semibold text-muted-foreground tracking-widerblock">
                                                             Müşteri Bilgisi
                                                         </span>
                                                         <span className="text-xs font-bold text-foreground truncate block">

@@ -82,7 +82,7 @@ const OrderCard = memo(function OrderCard({
 
       {orderNotes ? (
         <View className="mb-4 rounded-xl border border-amber-200/60 bg-amber-50/70 px-3.5 py-3">
-          <Text className="text-amber-700 text-[10px] font-black uppercase tracking-wider mb-1">
+          <Text className="text-amber-700 text-[10px] font-black tracking-widermb-1">
             {t("order.notesLabel")}
           </Text>
           <Text className="text-amber-900 text-sm font-semibold leading-snug">{orderNotes}</Text>
@@ -652,7 +652,7 @@ export default function TableDetailScreen() {
     <View>
       <View className="bg-primary p-6 rounded-2xl mb-6 flex-row justify-between items-center">
         <View>
-          <Text className="text-white/70 text-[10px] font-black uppercase tracking-wider mb-1">{t("tableDetail.totalAmount")}</Text>
+          <Text className="text-white/70 text-[10px] font-black tracking-widermb-1">{t("tableDetail.totalAmount")}</Text>
           <Text className="text-white text-3xl font-black tracking-tight">{totalAmount.toFixed(2)}</Text>
         </View>
         <View className="bg-white/15 px-4 py-2 rounded-xl">
@@ -700,7 +700,7 @@ export default function TableDetailScreen() {
         </Pressable>
         <View className="items-center">
           <Text className="text-foreground font-black text-lg tracking-tight">{table?.name}</Text>
-          <Text className="text-muted-foreground text-[9px] font-black uppercase tracking-wider mt-0.5">{table?.zone_name}</Text>
+          <Text className="text-muted-foreground text-[9px] font-black tracking-widermt-0.5">{table?.zone_name}</Text>
         </View>
         <Pressable
           onPress={() => void fetchTableDetail()}

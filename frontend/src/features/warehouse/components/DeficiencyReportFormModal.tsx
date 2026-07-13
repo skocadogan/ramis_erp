@@ -212,7 +212,7 @@ export function DeficiencyReportFormModal({
           )}
           <div className="grid grid-cols-1 gap-4">
             <div>
-              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5">{t("deficiencyForm.labelStation")}</label>
+              <label className="block text-xs font-bold text-muted-foreground tracking-widermb-1.5">{t("deficiencyForm.labelStation")}</label>
               <select
                 value={form.kitchen_station_id}
                 onChange={(e) => {
@@ -321,7 +321,7 @@ export function DeficiencyReportFormModal({
           </div>
 
           <div>
-            <label className="block text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5">{t("deficiencyForm.generalNotes")}</label>
+            <label className="block text-xs font-bold text-muted-foreground tracking-widermb-1.5">{t("deficiencyForm.generalNotes")}</label>
             <textarea
               value={form.description}
               onChange={(e) => {

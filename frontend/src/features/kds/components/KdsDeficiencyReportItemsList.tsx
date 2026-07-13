@@ -39,7 +39,7 @@ export function KdsDeficiencyReportItemsList({
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
-      <div className="grid shrink-0 grid-cols-[minmax(0,1fr)_auto] gap-x-2 border-b border-border bg-muted/50 px-3 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground sm:grid-cols-[minmax(0,1fr)_auto_6rem]">
+      <div className="grid shrink-0 grid-cols-[minmax(0,1fr)_auto] gap-x-2 border-b border-border bg-muted/50 px-3 py-2 text-xs font-bold tracking-widertext-muted-foreground sm:grid-cols-[minmax(0,1fr)_auto_6rem]">
         <span>{t('itemsList.product')}</span>
         <span className="whitespace-nowrap text-right">{t('itemsList.quantity')}</span>
         <span className="hidden max-w-[6rem] truncate sm:block">{t('itemsList.sku')}</span>

@@ -134,7 +134,7 @@ export function TableSelect({
                 {/* Gruplanmış masalar */}
                 {filteredGroups.map(group => (
                     <SelectGroup key={group.zone.id}>
-                        <SelectLabel className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider px-1.5 py-1">
+                        <SelectLabel className="text-2xs font-semibold text-muted-foreground tracking-widerpx-1.5 py-1">
                             {group.zone.name}
                         </SelectLabel>
                         {group.tables.map(tb => (

@@ -20,7 +20,7 @@ export function CartSummary({
   return (
     <>
       <div className="mb-4 shrink-0">
-        <label className="mb-1.5 block text-2xs font-bold uppercase tracking-wider text-muted-foreground">
+        <label className="mb-1.5 block text-2xs font-bold tracking-widertext-muted-foreground">
           {tCart("orderNote") || "Sipariş Açıklaması / Notu"}
         </label>
         <textarea

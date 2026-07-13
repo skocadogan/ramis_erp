@@ -137,7 +137,7 @@ const ProductCard = memo(function ProductCard({
                   </Text>
                 </View>
               ) : (
-                <Text className="text-muted-foreground dark:text-muted-foreground text-[10px] font-black uppercase tracking-wider text-center px-2">
+                <Text className="text-muted-foreground dark:text-muted-foreground text-[10px] font-black tracking-widertext-center px-2">
                   {product.category_name}
                 </Text>
               )}

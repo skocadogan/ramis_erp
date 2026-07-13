@@ -39,11 +39,11 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
         </Button>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ maxHeight: "calc(100vh - 220px)" }}>
-        <div className="rounded-lg border border-border bg-card border-border flex flex-col min-h-0">
-          <div className="rounded-t-lg px-4 py-3 border-b border-border bg-muted/40 border-border shrink-0">
+        <div className="rounded-lg border bg-card border-border flex flex-col min-h-0">
+          <div className="rounded-t-lg px-4 py-3 border-b border-border bg-background shrink-0">
             <h3 className="text-ui-sm font-semibold text-foreground">{t('roles.rolesCount', { count: roles.length })}</h3>
           </div>
-          <div className="divide-y divide-slate-100 dark:divide-slate-700 overflow-y-auto flex-1 min-h-0">
+          <div className="divide-y overflow-y-auto flex-1 min-h-0">
             {roles.map(role => (
               <div key={role.id} className="px-4 py-3 flex items-center justify-between hover:/50 dark:hover:/50">
                 <div>
@@ -75,11 +75,11 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
           </div>
         </div>
 
-        <div className="rounded-lg border border-border bg-card border-border flex flex-col min-h-0">
-          <div className="rounded-t-lg px-4 py-3 border-b border-border bg-muted/40 border-border shrink-0">
+        <div className="rounded-lg border bg-card border-border flex flex-col min-h-0">
+          <div className="rounded-t-lg px-4 py-3 border-b border-border bg-background shrink-0">
             <h3 className="text-ui-sm font-semibold text-foreground">{t('roles.permCategories')}</h3>
           </div>
-          <div className="divide-y divide-slate-100 overflow-y-auto flex-1 min-h-0 dark:divide-slate-700">
+          <div className="divide-y overflow-y-auto flex-1 min-h-0">
             {permCategories.map(cat => (
               <div key={cat.id} className="px-4 py-3 hover:/30 dark:hover:/20 transition-colors">
                 <div className="flex items-center gap-2 mb-2.5">

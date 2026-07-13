@@ -63,7 +63,7 @@ export function ManagerAssignmentsTab() {
 
       <div className="max-w-md">
         <div className="space-y-1.5">
-          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-xs font-semibold tracking-widertext-muted-foreground">
            
             {t('assignments.manager.staffLabel')}
           </span>

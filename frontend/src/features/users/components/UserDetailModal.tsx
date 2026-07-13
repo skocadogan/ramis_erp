@@ -189,7 +189,7 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
               </div>
 
               <div className="border-t border-border pt-5">
-                <h4 className="mb-2.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <h4 className="mb-2.5 flex items-center gap-2 text-xs font-semibold tracking-widertext-muted-foreground">
                   <Shield size={14} className="text-muted-foreground" />
                   {t("table.roles")}
                 </h4>
@@ -208,7 +208,7 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
 
               {groupedUserPermissions.length > 0 && (
                 <div className="border-t border-border pt-5">
-                  <h4 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <h4 className="mb-4 flex items-center gap-2 text-xs font-semibold tracking-widertext-muted-foreground">
                     <Shield size={14} className="text-primary" />
                     {t("detail.modulePermissions", { count: user.all_permissions.length })}
                   </h4>
@@ -266,7 +266,7 @@ function InfoRow({
     <div className="flex items-start gap-2.5">
       <Icon size={14} className="mt-0.5 shrink-0 text-muted-foreground" />
       <div className="min-w-0">
-        <p className="text-2xs font-medium uppercase tracking-wider text-muted-foreground">
+        <p className="text-2xs font-medium tracking-widertext-muted-foreground">
           {label}
         </p>
         <div className="mt-0.5 text-sm font-medium text-foreground">{value}</div>

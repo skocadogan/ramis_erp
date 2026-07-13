@@ -267,7 +267,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         )}
                         {item.selectedUnit && (
                           <p
-                            className={`text-xs font-semibold uppercase tracking-wider mt-0 ${
+                            className={`text-xs font-semibold tracking-widermt-0 ${
  lineCancelled
  ? "text-rose-600/80 line-through"
  : "text-muted-foreground"

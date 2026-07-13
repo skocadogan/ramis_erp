@@ -282,7 +282,7 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="login-username"
-                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    className="text-xs font-semibold tracking-widertext-muted-foreground"
                   >
                     {t("username")}
                   </label>
@@ -339,7 +339,7 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="login-password"
-                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
+                    className="text-xs font-semibold tracking-widertext-muted-foreground"
                   >
                     {t("password")}
                   </label>
@@ -423,7 +423,7 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="login-pin"
-                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block text-center"
+                    className="text-xs font-semibold tracking-widertext-muted-foreground block text-center"
                   >
                     {t("pinLabel")}
                   </label>

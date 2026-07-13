@@ -676,7 +676,7 @@ export function SurveysTab() {
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-muted/60">
-              <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
+              <tr className="text-left text-xs tracking-widertext-muted-foreground">
                 <th className="px-4 py-3">{t("surveys.table.title")}</th>
                 <th className="px-4 py-3">{t("surveys.table.branches")}</th>
                 <th className="px-4 py-3">{t("surveys.table.channels")}</th>

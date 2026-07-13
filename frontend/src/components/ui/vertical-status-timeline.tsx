@@ -183,7 +183,7 @@ export function VerticalStatusTimeline({ title, steps, className }: VerticalStat
         className
       )}
     >
-      <h3 className="text-base font-bold uppercase tracking-wider leading-snug text-foreground">
+      <h3 className="text-base font-bold tracking-widerleading-snug text-foreground">
         {title}
       </h3>
 

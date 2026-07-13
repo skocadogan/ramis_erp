@@ -212,7 +212,7 @@ function KdsItemRow({
               {item.product_name}
               {!nested && item.is_combined_product ? (
                 <span
-                  className={`ml-1.5 align-middle text-3xs font-black uppercase tracking-wider ${pendingLate ? "text-white/90" : "text-purple-600 dark:text-purple-400"}`}
+                  className={`ml-1.5 align-middle text-3xs font-black tracking-wider${pendingLate ? "text-white/90" : "text-purple-600 dark:text-purple-400"}`}
                 >
                   {t("ticket.combinedBadge")}
                 </span>
@@ -224,7 +224,7 @@ function KdsItemRow({
               className={`mt-1.5 rounded-md border px-2 py-1.5 ${pendingLate ? "border-white/30 bg-white/10" : "border-purple-500/25 bg-purple-500/5 dark:bg-purple-950/30"}`}
             >
               <p
-                className={`mb-1 text-3xs font-black uppercase tracking-wider ${pendingLate ? "text-white/90" : "text-purple-700 dark:text-purple-300"}`}
+                className={`mb-1 text-3xs font-black tracking-wider${pendingLate ? "text-white/90" : "text-purple-700 dark:text-purple-300"}`}
               >
                 {t("ticket.combinedContents")}
               </p>
@@ -322,7 +322,7 @@ function KdsItemRow({
             <>
               <button
                 onClick={() => onUpdateStatus(item.id, "PREPARING")}
-                className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-xl px-4 font-black uppercase tracking-wider shadow-sm transition-colors active:scale-95 ${
+                className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-xl px-4 font-black tracking-widershadow-sm transition-colors active:scale-95 ${
                   pendingLate
                     ? "bg-kds-late-foreground text-kds-late shadow-md ring-2 ring-kds-late-foreground/80 hover:bg-kds-late-foreground/95"
                     : "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-500/30"
@@ -338,7 +338,7 @@ function KdsItemRow({
           {item.status === "PREPARING" && (
             <button
               onClick={() => onUpdateStatus(item.id, "READY")}
-              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-green-600 px-4 font-black uppercase tracking-wider text-white shadow-sm shadow-green-500/30 transition-colors hover:bg-green-700 active:scale-95"
+              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-green-600 px-4 font-black tracking-widertext-white shadow-sm shadow-green-500/30 transition-colors hover:bg-green-700 active:scale-95"
               title={t("status.ready")}
             >
               <CheckCircle2 size={20} strokeWidth={3} />
@@ -512,7 +512,7 @@ function OrderCardImpl({
                     <p className="break-words text-sm font-bold leading-snug text-foreground">
                       {row.parentName}
                     </p>
-                    <p className="mt-1 text-2xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                    <p className="mt-1 text-2xs font-black tracking-widertext-purple-700 dark:text-purple-300">
                       {t("ticket.combinedContents")}
                     </p>
                   </div>
@@ -554,7 +554,7 @@ function OrderCardImpl({
                 }
               })();
             }}
-            className="flex w-full items-center justify-center gap-2 rounded py-2 text-sub font-bold uppercase tracking-wider border border-kds-warning/50 bg-kds-warning/15 text-kds-warning-foreground shadow-sm transition-colors hover:bg-kds-warning/25 disabled:opacity-60 dark:text-kds-warning-foreground dark:hover:bg-kds-warning/20"
+            className="flex w-full items-center justify-center gap-2 rounded py-2 text-sub font-bold tracking-widerborder border-kds-warning/50 bg-kds-warning/15 text-kds-warning-foreground shadow-sm transition-colors hover:bg-kds-warning/25 disabled:opacity-60 dark:text-kds-warning-foreground dark:hover:bg-kds-warning/20"
           >
             <Timer size={16} strokeWidth={2.5} className="shrink-0" />
             {t("actions.snoozeAllPending5Min")}
@@ -568,7 +568,7 @@ function OrderCardImpl({
                 .filter((i) => i.status === "PENDING" || i.status === "PREPARING")
                 .forEach((i) => onUpdateStatus(i.id, "READY"));
             }}
-            className={`flex-1 rounded py-2 text-sub font-bold uppercase tracking-wider shadow-sm transition-colors ${isUrgent ? "bg-kds-urgent text-kds-urgent-foreground hover:bg-kds-urgent/90" : "bg-kds-normal text-kds-normal-foreground hover:bg-kds-normal/90"
+            className={`flex-1 rounded py-2 text-sub font-bold tracking-widershadow-sm transition-colors ${isUrgent ? "bg-kds-urgent text-kds-urgent-foreground hover:bg-kds-urgent/90" : "bg-kds-normal text-kds-normal-foreground hover:bg-kds-normal/90"
               }`}
           >
             {t("actions.markAllReady")}

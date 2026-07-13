@@ -920,7 +920,7 @@ export default function OrderScreen() {
               : tableQuery.data?.name || "Masa"}
           </Text>
           {!isVirtualTable ? (
-            <Text className="text-muted-foreground text-[9px] font-black uppercase tracking-wider mt-0.5">
+            <Text className="text-muted-foreground text-[9px] font-black tracking-widermt-0.5">
               {tableQuery.data?.zone_name}
             </Text>
           ) : null}

@@ -259,7 +259,7 @@ export default function CreatePrepTasksModal({
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pl-9">
                   {/* Start Time */}
                   <div>
-                    <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 flex items-center gap-1">
+                    <Label className="text-2xs tracking-widertext-muted-foreground mb-1 flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {t("page.createTasks.startTime")}
                     </Label>
@@ -281,7 +281,7 @@ export default function CreatePrepTasksModal({
 
                   {/* Deadline */}
                   <div>
-                    <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 flex items-center gap-1">
+                    <Label className="text-2xs tracking-widertext-muted-foreground mb-1 flex items-center gap-1">
                       <Clock className="h-3 w-3" />
                       {t("page.createTasks.deadline")}
                     </Label>
@@ -303,7 +303,7 @@ export default function CreatePrepTasksModal({
 
                   {/* Staff Assignment */}
                   <div className="space-y-2">
-                    <Label className="text-2xs uppercase tracking-wider text-muted-foreground flex items-center gap-1">
+                    <Label className="text-2xs tracking-widertext-muted-foreground flex items-center gap-1">
                       <Users className="h-3 w-3" />
                       {t("page.createTasks.staff")}
                     </Label>

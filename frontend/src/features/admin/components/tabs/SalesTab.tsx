@@ -194,16 +194,16 @@ export function SalesTab({
                 <table className="w-full text-sm border-collapse table-fixed min-w-[1344px]">
                     <thead className="bg-muted border-b border-border border-border sticky top-0 z-10 shadow-sm">
                         <tr>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-16">{t('sales.table.index')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.table')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-40">{t('sales.table.cashier')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.method')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.gross')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.discount')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.total')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.branch')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-48">{t('sales.table.notes')}</th>
-                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-40">{t('sales.table.date')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-16">{t('sales.table.index')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-32">{t('sales.table.table')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-40">{t('sales.table.cashier')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-32">{t('sales.table.method')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-32">{t('sales.table.gross')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-32">{t('sales.table.discount')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-32">{t('sales.table.total')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-32">{t('sales.table.branch')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-48">{t('sales.table.notes')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs tracking-widerw-40">{t('sales.table.date')}</th>
                         </tr>
                     </thead>
                     <tbody>

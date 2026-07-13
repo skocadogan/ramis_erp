@@ -88,7 +88,7 @@ export function TableQRCodeModal({ table, onClose }: TableQRCodeModalProps) {
                     ) : (
                         <div className="flex flex-col items-center space-y-4">
                             <div className="relative flex flex-col items-center rounded-2xl border border-border bg-background p-5 shadow-md">
-                                <div className="mb-2 text-xs font-bold uppercase tracking-wider text-indigo-600 dark:text-indigo-400">
+                                <div className="mb-2 text-xs font-bold tracking-widertext-indigo-600 dark:text-indigo-400">
                                     RAMIS ERP
                                 </div>
                                 <div className="mb-1 text-sm font-bold text-foreground">

@@ -75,7 +75,7 @@ export const CartItemNoteModal: React.FC<CartItemNoteModalProps> = ({
             </Pressable>
           </View>
 
-          <Text className="text-muted-foreground text-[10px] font-black uppercase tracking-wider mb-2">
+          <Text className="text-muted-foreground text-[10px] font-black tracking-widermb-2">
             {t("order.itemNoteLabel")}
           </Text>
           <TextInput

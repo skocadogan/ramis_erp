@@ -249,7 +249,7 @@ export function PrinterStatusIndicator({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-72 p-1">
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="px-2 py-1.5 text-2xs font-bold uppercase tracking-wider text-muted-foreground">
+          <DropdownMenuLabel className="px-2 py-1.5 text-2xs font-bold tracking-widertext-muted-foreground">
             {t("statusTitle")}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />

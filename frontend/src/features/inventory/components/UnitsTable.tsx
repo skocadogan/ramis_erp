@@ -30,10 +30,10 @@ export function UnitsTable({ units, onEdit, onDelete, onNew, isLoading }: UnitsT
         <table className="w-full text-left border-collapse">
           <thead className="border-b border-border bg-muted border-border">
             <tr>
-              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colName")}</th>
-              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colShort")}</th>
-              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colMultiplier")}</th>
-              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider text-right dark:text-muted-foreground">{t("colActions")}</th>
+              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("colName")}</th>
+              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("colShort")}</th>
+              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("colMultiplier")}</th>
+              <th className="px-3 py-2 text-xs font-semibold text-muted-foreground tracking-widertext-right dark:text-muted-foreground">{t("colActions")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-700">

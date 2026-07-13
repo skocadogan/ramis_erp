@@ -404,21 +404,21 @@ export default function PurchaseRecommendScreen() {
                       </Text>
                       {/* Mevcut */}
                       <Text
-                        className="w-[80px] shrink-0 py-2 pr-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider text-right"
+                        className="w-[80px] shrink-0 py-2 pr-2 text-[10px] font-bold text-muted-foreground tracking-widertext-right"
                         numberOfLines={1}
                       >
                         {t("purchase.table.colCurrent")}
                       </Text>
                       {/* Haftalık ort. */}
                       <Text
-                        className="w-[72px] shrink-0 py-2 pr-2 text-[10px] font-bold text-muted-foreground uppercase tracking-wider text-right"
+                        className="w-[72px] shrink-0 py-2 pr-2 text-[10px] font-bold text-muted-foreground tracking-widertext-right"
                         numberOfLines={1}
                       >
                         {t("purchase.table.colWeeklyAvg")}
                       </Text>
                       {/* Önerilen */}
                       <Text
-                        className="w-[76px] shrink-0 py-2 pr-3 text-[10px] font-bold text-primary uppercase tracking-wider text-right"
+                        className="w-[76px] shrink-0 py-2 pr-3 text-[10px] font-bold text-primary tracking-widertext-right"
                         numberOfLines={1}
                       >
                         {t("purchase.table.colRecommended")}

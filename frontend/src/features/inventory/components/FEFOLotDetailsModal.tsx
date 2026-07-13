@@ -250,7 +250,7 @@ export function FEFOLotDetailsModal({ item, open, onOpenChange, warehouseId }: F
         <DialogBody className="flex min-h-0 flex-col overflow-hidden p-0">
           <div className="grid shrink-0 grid-cols-1 gap-0 border-b border-border bg-background md:grid-cols-3">
             <div className="flex flex-col items-center justify-center border-b border-border p-4 md:border-b-0 md:border-r">
-              <span className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="mb-1 text-xs font-bold tracking-widertext-muted-foreground">
                 {t("totalStock")}
               </span>
               <span className="text-2xl font-bold text-foreground">
@@ -258,7 +258,7 @@ export function FEFOLotDetailsModal({ item, open, onOpenChange, warehouseId }: F
               </span>
             </div>
             <div className="flex flex-col items-center justify-center border-b border-border p-4 md:border-b-0 md:border-r">
-              <span className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="mb-1 text-xs font-bold tracking-widertext-muted-foreground">
                 {t("avgCost")}
               </span>
               <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
@@ -266,7 +266,7 @@ export function FEFOLotDetailsModal({ item, open, onOpenChange, warehouseId }: F
               </span>
             </div>
             <div className="flex flex-col items-center justify-center bg-blue-50/30 p-4 dark:bg-blue-900/10">
-              <span className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
+              <span className="mb-1 text-xs font-bold tracking-widertext-muted-foreground">
                 {t("fefoTotalValue")}
               </span>
               <span className="text-2xl font-bold text-blue-700 dark:text-blue-400">

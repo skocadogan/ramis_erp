@@ -12,7 +12,7 @@ interface Props {
 export function DashboardActionList({ t, terminalId, onChangeTerminal, onSettings }: Props) {
   return (
     <View className="mb-8">
-      <Text className="text-muted-foreground text-xs font-bold uppercase tracking-wider mb-3 ml-1">
+      <Text className="text-muted-foreground text-xs font-bold tracking-widermb-3 ml-1">
         {t("dashboard.settings")}
       </Text>
       <ActionItem

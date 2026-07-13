@@ -64,7 +64,7 @@ REPLACEMENTS: tuple[tuple[str, str], ...] = (
         "sticky top-0 z-10 bg-muted text-muted-foreground",
     ),
     (
-        "text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground",
+        "text-xs font-ui-semibold text-muted-foreground tracking-widerdark:text-muted-foreground",
         "font-ui-medium",
     ),
     (

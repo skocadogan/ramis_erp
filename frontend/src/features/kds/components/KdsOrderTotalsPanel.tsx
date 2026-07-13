@@ -112,7 +112,7 @@ export function KdsOrderTotalsPanel({ groupedOrders }: Props) {
 
                       {row.combinedParts && row.combinedParts.length > 0 ? (
                         <div className="mt-2 border-l-2 border-purple-500/45 pl-2.5">
-                          <p className="text-3xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                          <p className="text-3xs font-black tracking-widertext-purple-700 dark:text-purple-300">
                             {tt("combinedSubtitle")}
                           </p>
                           <ul className="mt-1 space-y-1">

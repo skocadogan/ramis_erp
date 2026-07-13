@@ -142,7 +142,7 @@ function RecipesPageContent() {
                   <ChefHat size={16} />
                 </div>
                 <div>
-                  <p className="text-2xs font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{t("statTotalRecipes")}</p>
+                  <p className="text-2xs font-bold text-muted-foreground tracking-widerleading-none mb-1">{t("statTotalRecipes")}</p>
                   <p className="text-base font-bold text-foreground leading-none">{recipes.recipes.length}</p>
                 </div>
               </div>
@@ -151,7 +151,7 @@ function RecipesPageContent() {
                   <Layers size={16} />
                 </div>
                 <div>
-                  <p className="text-2xs font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{t("statCategories")}</p>
+                  <p className="text-2xs font-bold text-muted-foreground tracking-widerleading-none mb-1">{t("statCategories")}</p>
                   <p className="text-base font-bold text-foreground leading-none">{recipes.recipeCategories.length}</p>
                 </div>
               </div>
@@ -160,7 +160,7 @@ function RecipesPageContent() {
                   <Package size={16} />
                 </div>
                 <div>
-                  <p className="text-2xs font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{tInvItems("label")}</p>
+                  <p className="text-2xs font-bold text-muted-foreground tracking-widerleading-none mb-1">{tInvItems("label")}</p>
                   <p className="text-base font-bold text-foreground leading-none">{recipes.stockItems.length}</p>
                 </div>
               </div>

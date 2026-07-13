@@ -96,6 +96,8 @@
   --color-blue-900: hsl(217 38% 18%);
   --color-blue-950: hsl(217 40% 10%);
 
+  
+
   /* Semantic Font Weights */
   --font-weight-ui-thin: 300;
   --font-weight-ui-normal: 400;
@@ -187,7 +189,7 @@
   --accent-foreground: 217 25% 70%;
   --destructive: 0 55% 42%;
   --destructive-foreground: 0 0% 100%;
-  --border: 217 12% 26%;
+  --border: 217 0% 26%;
   --input: 217 12% 24%;
   --ring: 217 25% 55%;
   --sidebar: 217 20% 10%;

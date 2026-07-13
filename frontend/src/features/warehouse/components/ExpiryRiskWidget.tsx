@@ -74,7 +74,7 @@ export function ExpiryRiskWidget({
     >
       <div className="flex items-center justify-between gap-3">
         <div>
-          <p className="mb-1 text-sub font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="mb-1 text-sub font-medium tracking-widertext-muted-foreground">
             {t("expiryWidget.title")}
           </p>
           <p className="text-2xl font-bold text-foreground">

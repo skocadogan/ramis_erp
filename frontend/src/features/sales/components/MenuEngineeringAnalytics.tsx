@@ -605,23 +605,23 @@ export function MenuEngineeringAnalytics({
                     header={
                         <thead className={virtualTableStickyHeadClass}>
                             <tr>
-                                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.product")}</th>
-                                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.class")}</th>
-                                <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.qty")}</th>
-                                <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.revenue")}</th>
-                                <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                <th className="px-4 py-3 text-left text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.product")}</th>
+                                <th className="px-4 py-3 text-left text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.class")}</th>
+                                <th className="px-4 py-3 text-right text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.qty")}</th>
+                                <th className="px-4 py-3 text-right text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.revenue")}</th>
+                                <th className="px-4 py-3 text-right text-xs font-bold tracking-widertext-muted-foreground">
                                     {analysisMode === "actual"
                                         ? t("menuEngineering.cols.actualUnitCost")
                                         : t("menuEngineering.cols.unitCost")}
                                 </th>
-                                <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">
+                                <th className="px-4 py-3 text-right text-xs font-bold tracking-widertext-muted-foreground">
                                     {analysisMode === "actual"
                                         ? t("menuEngineering.cols.actualGrossProfit")
                                         : t("menuEngineering.cols.grossProfit")}
                                 </th>
-                                <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.margin")}</th>
-                                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.coverage")}</th>
-                                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.cols.actions")}</th>
+                                <th className="px-4 py-3 text-right text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.margin")}</th>
+                                <th className="px-4 py-3 text-left text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.coverage")}</th>
+                                <th className="px-4 py-3 text-left text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.cols.actions")}</th>
                             </tr>
                         </thead>
                     }
@@ -759,31 +759,31 @@ export function MenuEngineeringAnalytics({
 
                     <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
                         <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
-                            <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.waste")}</div>
+                            <div className="text-2xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceCards.waste")}</div>
                             <div className="mt-1 text-base font-bold text-rose-600 dark:text-rose-400">
                                 {formatNumber(variance?.totals.waste_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
                         <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
-                            <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.cancel")}</div>
+                            <div className="text-2xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceCards.cancel")}</div>
                             <div className="mt-1 text-base font-bold text-amber-600 dark:text-amber-400">
                                 {formatNumber(variance?.totals.cancel_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
                         <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
-                            <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.return")}</div>
+                            <div className="text-2xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceCards.return")}</div>
                             <div className="mt-1 text-base font-bold text-blue-600 dark:text-blue-400">
                                 {formatNumber(variance?.totals.return_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
                         <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
-                            <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.disposal")}</div>
+                            <div className="text-2xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceCards.disposal")}</div>
                             <div className="mt-1 text-base font-bold text-purple-600 dark:text-purple-400">
                                 {formatNumber(variance?.totals.disposal_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
                         <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
-                            <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.adjustment")}</div>
+                            <div className="text-2xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceCards.adjustment")}</div>
                             <div className="mt-1 text-base font-bold text-foreground">
                                 {formatNumber(variance?.totals.adjustment_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
@@ -794,10 +794,10 @@ export function MenuEngineeringAnalytics({
                         <table className="min-w-full">
                             <thead>
                                 <tr className="border-b border-border">
-                                    <th className="px-2 py-2 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.stockItem")}</th>
-                                    <th className="px-2 py-2 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.breakdown")}</th>
-                                    <th className="px-2 py-2 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.qty")}</th>
-                                    <th className="px-2 py-2 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.cost")}</th>
+                                    <th className="px-2 py-2 text-left text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceTable.stockItem")}</th>
+                                    <th className="px-2 py-2 text-left text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceTable.breakdown")}</th>
+                                    <th className="px-2 py-2 text-right text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceTable.qty")}</th>
+                                    <th className="px-2 py-2 text-right text-xs font-bold tracking-widertext-muted-foreground">{t("menuEngineering.varianceTable.cost")}</th>
                                 </tr>
                             </thead>
                             <tbody>

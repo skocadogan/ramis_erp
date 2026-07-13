@@ -136,7 +136,7 @@ export const CreditAccountsTable = memo(function CreditAccountsTable({
       className="max-h-[min(70vh,640px)] overflow-auto rounded-xl border border-border border-border bg-card"
     >
       <table className="w-full min-w-[720px] text-sm">
-        <thead className="sticky top-0 z-10 text-left text-xs font-bold uppercase text-muted-foreground bg-muted/95">
+        <thead className="sticky top-0 z-10 text-left text-xs bg-background">
           <tr>
             <th className="px-4 py-3">{t("table.name")}</th>
             <th className="px-4 py-3">{t("table.user")}</th>

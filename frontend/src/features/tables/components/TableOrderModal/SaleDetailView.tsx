@@ -12,7 +12,7 @@ function SalePaymentMethodRow({ sale }: { sale: SaleDetail }) {
     if (sale.is_split_payment && sale.payments && sale.payments.length > 0) {
         return (
             <div className="space-y-1.5 pt-1 mt-1 border-t border-dashed border-border border-border">
-                <span className="text-2xs uppercase tracking-wider font-bold text-muted-foreground block mb-1">
+                <span className="text-2xs tracking-widerfont-bold text-muted-foreground block mb-1">
                     {t('paymentBreakdown')}
                 </span>
                 {sale.payments.map((p) => {

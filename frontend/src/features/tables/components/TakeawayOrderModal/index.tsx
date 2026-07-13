@@ -709,7 +709,7 @@ export function TakeawayOrderModal({
                                                 </tr>
                                                 {/* Expanded Items */}
                                                 {expandedOrders[order.id] && (
-                                                    <tr className="/50 bg-muted/20">
+                                                    <tr className="bg-muted/20">
                                                         <td colSpan={5} className="px-8 py-4 border-l-4 border-emerald-500/50">
                                                             <div className="space-y-3">
                                                                 {order.notes?.trim() && (

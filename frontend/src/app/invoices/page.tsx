@@ -112,7 +112,7 @@ function InvoicesPageContent() {
           <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
         </div>
       ) : (
-        <Card className="p-0 gap-0 border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
+        <Card className="p-0 gap-0 border-border shadow-md border-border bg-card ring-1 py-0 gap-0">
           <div className="border-b border-border px-4 py-3 border-border bg-muted/40">
             <h2 className="text-sm font-semibold text-foreground">{t("page.listTitle")}</h2>
             <p className="mt-0.5 text-xs text-muted-foreground">

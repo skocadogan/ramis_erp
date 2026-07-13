@@ -207,7 +207,7 @@ function ProductionPlanningContent() {
 
           {/* Main Content Area */}
           <div className="flex-1 min-h-0 flex flex-col overflow-hidden bg-background p-6">
-            <TabsContent value="plans" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 ring-slate-900/5 dark:ring-white/5 rounded-lg p-0">
+            <TabsContent value="plans" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 rounded-lg p-0">
 
               <PlansList
                 plans={plans}
@@ -256,7 +256,7 @@ function ProductionPlanningContent() {
               />
             </TabsContent>
 
-            <TabsContent value="availability" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 ring-slate-900/5 dark:ring-white/5 rounded-lg p-0">
+            <TabsContent value="availability" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 rounded-lg p-0">
               <div className="shrink-0 p-4 border-b border-border flex flex-wrap items-center gap-4 /50 bg-muted/20">
                 <div className="w-48">
                   <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("page.filters.branch")}</Label>
@@ -319,7 +319,7 @@ function ProductionPlanningContent() {
               />
             </TabsContent>
 
-            <TabsContent value="settings" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 ring-slate-900/5 dark:ring-white/5 rounded-lg p-0">
+            <TabsContent value="settings" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 rounded-lg p-0">
               <SettingsPanel />
             </TabsContent>
           </div>

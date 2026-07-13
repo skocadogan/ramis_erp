@@ -43,7 +43,7 @@ export function SlideTable({
         <Dialog open={isDialogOpen} onOpenChange={onDialogOpenChange}>
           <DialogTrigger
             render={
-              <Button size="sm" className="h-8">
+              <Button className="bg-blue-600 hover:bg-blue-700 h-8 text-white">
                 <Plus className="mr-1.5 h-3.5 w-3.5" /> {t('admin_settings.slides.addNew')}
               </Button>
             }

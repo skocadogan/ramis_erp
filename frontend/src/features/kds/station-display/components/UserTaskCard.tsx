@@ -49,8 +49,8 @@ export function UserTaskCard({
   return (
     <div
       className={cn(
-        "flex flex-col gap-4 rounded-2xl border /80 p-5 transition-colors duration-300",
-        "/60 hover:/60"
+        "flex flex-col gap-4 rounded-2xl border border-border p-5 transition-colors duration-300",
+        "hover:bg-muted/60"
       )}
     >
       {/* ─── User Header ─── */}

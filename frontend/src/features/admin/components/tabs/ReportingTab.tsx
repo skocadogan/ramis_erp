@@ -8,6 +8,7 @@ import {
   ChevronLeft, Save, AlertCircle, Loader2, Layers,
   HelpCircle, Copy, Download, Upload
 } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   adminApi,
   type ReceiptTemplate,
@@ -313,11 +314,9 @@ export function ReportingTab({ canManage }: Props) {
               <Upload size={15} /> {t('reporting.import')}
               <input type="file" accept=".json" className="hidden" onChange={handleImport} />
             </label>
-            <button onClick={openCreate}
-              className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5
- text-sm font-medium text-white hover:bg-indigo-700 transition-all">
+            <Button onClick={openCreate} className="gap-2">
               <Plus size={15} /> {t('reporting.addNew')}
-            </button>
+            </Button>
           </div>
         )}
       </div>

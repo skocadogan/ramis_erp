@@ -314,7 +314,7 @@ function ShiftsPageContent() {
                     : "border-transparent text-muted-foreground hover:text-foreground"
                 )}
               >
-                {t("tabs.shifts") || "Vardiyalar"}
+                {t("tabs.shifts")}
               </button>
               <button
                 type="button"
@@ -366,135 +366,134 @@ function ShiftsPageContent() {
                     <Loader2 className="h-10 w-10 animate-spin text-primary" />
                   </div>
                 ) : (
-                  <Card className="border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
-            <div className="border-b border-border px-4 py-3 border-border bg-muted/40">
-              <h2 className="text-sm font-semibold text-foreground">
-              {t("listCard.title")}
+                  <Card className="bg-card py-0 gap-0">
+                    <div className="border-b border-border px-4 py-3 border-border bg-muted/40">
+                      <h2 className="text-sm font-semibold text-foreground">
+                      {t("listCard.title")}
 
-              </h2>
-             
-              <div className="mt-3 flex flex-wrap items-end gap-3">
-                <div className="flex min-w-[9.5rem] flex-col gap-1">
-                  <label
-                    className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
-                    htmlFor="shift-filter-date-from"
-                  >
-                    {t("filters.dateFrom")}
-                  </label>
-                  <input
-                    id="shift-filter-date-from"
-                    type="date"
-                    value={filterDateFrom}
-                    onChange={(e) => setFilterDateFrom(e.target.value)}
-                    className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
-                  />
-                </div>
-                <div className="flex min-w-[9.5rem] flex-col gap-1">
-                  <label
-                    className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
-                    htmlFor="shift-filter-date-to"
-                  >
-                    {t("filters.dateTo")}
-                  </label>
-                  <input
-                    id="shift-filter-date-to"
-                    type="date"
-                    value={filterDateTo}
-                    onChange={(e) => setFilterDateTo(e.target.value)}
-                    className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
-                  />
-                </div>
-                <div className="flex min-w-[8rem] flex-col gap-1">
-                  <label
-                    className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
-                    htmlFor="shift-filter-status"
-                  >
-                    {t("filters.status")}
-                  </label>
-                  <select
-                    id="shift-filter-status"
-                    value={filterStatus}
-                    onChange={(e) => setFilterStatus(e.target.value as "all" | ShiftStatus)}
-                    className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
-                  >
-                    <option value="all">{t("filters.all")}</option>
-                    <option value="OPEN">{t("filters.statusOpen")}</option>
-                    <option value="CLOSED">{t("filters.statusClosed")}</option>
-                  </select>
-                </div>
-                <div className="flex min-w-[11rem] flex-1 flex-col gap-1 sm:min-w-[12rem]">
-                  <label
-                    className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
-                    htmlFor="shift-filter-terminal"
-                  >
-                    {t("filters.terminal")}
-                  </label>
-                  <select
-                    id="shift-filter-terminal"
-                    value={filterTerminalId}
-                    onChange={(e) => setFilterTerminalId(e.target.value)}
-                    disabled={terminalsQuery.isLoading}
-                    className="rounded-lg border border-border px-2 py-1.5 text-sm disabled:opacity-60 border-input bg-card text-foreground"
-                  >
-                    <option value="">{t("filters.all")}</option>
-                    {terminalOptions.map((term) => (
-                      <option key={term.id} value={term.id}>
-                        {term.name}
-                        {term.code ? ` (${term.code})` : ""}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setFilterDateFrom("");
-                    setFilterDateTo("");
-                    setFilterStatus("all");
-                    setFilterTerminalId("");
-                  }}
-                  className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
-                >
-                  {t("filters.reset")}
-                </button>
-                <AsyncPdfExportButton
-                  reportSlug="shift-list"
-                  params={exportParams}
-                  filename={`${t("export.filenamePrefix")}-${new Date().toISOString().split("T")[0]}.pdf`}
-                  size="sm"
-                  variant="default"
-                  className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-bold text-white shadow-sm transition-all hover:bg-indigo-700"
-                />
-              </div>
-            </div>
-            <CardContent className="p-0">
-              {shifts.length === 0 ? (
-                <p className="px-4 py-12 text-center text-sm text-muted-foreground dark:text-muted-foreground">{t("table.empty")}</p>
-              ) : (
-                <ShiftsTable
-                  shifts={shifts}
-                  canViewAmounts={canViewAmounts}
-                  canManageShift={canManageShift}
-                  canEditClosedShift={canEditClosedShift}
-                  canClose={canClose}
-                  onLoadZ={(id) => void loadZ(id)}
-                  onLoadCash={(id) => void loadCash(id)}
-                  onExpense={setExpShift}
-                  onCashMovement={(id) => {
-                    setCashMoveShift(id);
-                    setCashMoveType("IN");
-                  }}
-                  onEdit={handleOpenEditDialog}
-                  onClose={(shift) => void handleOpenCloseDialog(shift)}
-                  infiniteControls={{
-                    fetchNextPage: listQuery.fetchNextPage,
-                    hasNextPage: !!listQuery.hasNextPage,
-                    isFetchingNextPage: listQuery.isFetchingNextPage,
-                  }}
-                />
-              )}
-            </CardContent>
-          </Card>
+                      </h2>
+                    
+                      <div className="mt-3 flex flex-wrap items-end gap-3">
+                        <div className="flex min-w-[9.5rem] flex-col gap-1">
+                          <label
+                            className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
+                            htmlFor="shift-filter-date-from"
+                          >
+                            {t("filters.dateFrom")}
+                          </label>
+                          <input
+                            id="shift-filter-date-from"
+                            type="date"
+                            value={filterDateFrom}
+                            onChange={(e) => setFilterDateFrom(e.target.value)}
+                            className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
+                          />
+                        </div>
+                        <div className="flex min-w-[9.5rem] flex-col gap-1">
+                          <label
+                            className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
+                            htmlFor="shift-filter-date-to"
+                          >
+                            {t("filters.dateTo")}
+                          </label>
+                          <input
+                            id="shift-filter-date-to"
+                            type="date"
+                            value={filterDateTo}
+                            onChange={(e) => setFilterDateTo(e.target.value)}
+                            className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
+                          />
+                        </div>
+                        <div className="flex min-w-[8rem] flex-col gap-1">
+                          <label
+                            className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
+                            htmlFor="shift-filter-status"
+                          >
+                            {t("filters.status")}
+                          </label>
+                          <select
+                            id="shift-filter-status"
+                            value={filterStatus}
+                            onChange={(e) => setFilterStatus(e.target.value as "all" | ShiftStatus)}
+                            className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
+                          >
+                            <option value="all">{t("filters.all")}</option>
+                            <option value="OPEN">{t("filters.statusOpen")}</option>
+                            <option value="CLOSED">{t("filters.statusClosed")}</option>
+                          </select>
+                        </div>
+                        <div className="flex min-w-[11rem] flex-1 flex-col gap-1 sm:min-w-[12rem]">
+                          <label
+                            className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
+                            htmlFor="shift-filter-terminal"
+                          >
+                            {t("filters.terminal")}
+                          </label>
+                          <select
+                            id="shift-filter-terminal"
+                            value={filterTerminalId}
+                            onChange={(e) => setFilterTerminalId(e.target.value)}
+                            disabled={terminalsQuery.isLoading}
+                            className="rounded-lg border border-border px-2 py-1.5 text-sm disabled:opacity-60 border-input bg-card text-foreground"
+                          >
+                            <option value="">{t("filters.all")}</option>
+                            {terminalOptions.map((term) => (
+                              <option key={term.id} value={term.id}>
+                                {term.name}
+                                {term.code ? ` (${term.code})` : ""}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setFilterDateFrom("");
+                            setFilterDateTo("");
+                            setFilterStatus("all");
+                            setFilterTerminalId("");
+                          }}
+                          className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
+                        >
+                          {t("filters.reset")}
+                        </button>
+                        <AsyncPdfExportButton
+                          reportSlug="shift-list"
+                          params={exportParams}
+                          filename={`${t("export.filenamePrefix")}-${new Date().toISOString().split("T")[0]}.pdf`}
+                          variant="default"
+                          className="gap-2 text-white"
+                        />
+                      </div>
+                    </div>
+                    <CardContent className="p-0">
+                      {shifts.length === 0 ? (
+                        <p className="px-4 py-12 text-center text-sm text-muted-foreground dark:text-muted-foreground">{t("table.empty")}</p>
+                      ) : (
+                        <ShiftsTable
+                          shifts={shifts}
+                          canViewAmounts={canViewAmounts}
+                          canManageShift={canManageShift}
+                          canEditClosedShift={canEditClosedShift}
+                          canClose={canClose}
+                          onLoadZ={(id) => void loadZ(id)}
+                          onLoadCash={(id) => void loadCash(id)}
+                          onExpense={setExpShift}
+                          onCashMovement={(id) => {
+                            setCashMoveShift(id);
+                            setCashMoveType("IN");
+                          }}
+                          onEdit={handleOpenEditDialog}
+                          onClose={(shift) => void handleOpenCloseDialog(shift)}
+                          infiniteControls={{
+                            fetchNextPage: listQuery.fetchNextPage,
+                            hasNextPage: !!listQuery.hasNextPage,
+                            isFetchingNextPage: listQuery.isFetchingNextPage,
+                          }}
+                        />
+                      )}
+                    </CardContent>
+                  </Card>
         )}
               </>
             )}

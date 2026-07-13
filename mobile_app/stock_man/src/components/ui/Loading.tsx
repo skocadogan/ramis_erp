@@ -38,7 +38,7 @@ export function Loading({
         accessibilityRole="progressbar"
         accessibilityLabel={a11yLabel}
       >
-        <ActivityIndicator size={size} color="#1E40AF" />
+        <ActivityIndicator size={size}" className="text-primary"/>
         {label ? (
           <Text className="mt-3 text-sm text-muted-foreground">{label}</Text>
         ) : null}
@@ -54,7 +54,7 @@ export function Loading({
       accessibilityRole="progressbar"
       accessibilityLabel={a11yLabel}
     >
-      <ActivityIndicator size={size} color="#1E40AF" />
+      <ActivityIndicator size={size} className="text-primary" />
       {label ? (
         <Text className="mt-2 text-sm text-muted-foreground">{label}</Text>
       ) : null}

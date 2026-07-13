@@ -49,7 +49,7 @@ export function WarehouseNotificationDrawer() {
         >
           <Bell size={22} aria-hidden />
           {pendingCount > 0 && (
-            <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-rose-600 text-2xs font-bold text-white ring-2 ring-white dark:ring-slate-900">
+            <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-rose-600 text-2xs font-bold text-white ring-2">
               {pendingCount > 9 ? "9+" : pendingCount}
             </span>
           )}

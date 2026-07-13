@@ -58,7 +58,7 @@ function CompletedTaskChip({ task }: { task: PrepTask }) {
       className={cn(
         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
         isCancelled
-          ? "/20 /30  opacity-60"
+          ? "border-red-900/30 bg-red-950/30 text-red-300/80 opacity-60"
           : "border-emerald-900/30 bg-emerald-950/30 text-emerald-300/80"
       )}
     >

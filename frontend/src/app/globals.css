@@ -35,6 +35,7 @@
   --color-input: hsl(var(--input));
   --color-border: hsl(var(--border));
   --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-accent: hsl(var(--accent));
   --color-muted-foreground: hsl(var(--muted-foreground));
@@ -80,6 +81,21 @@
   --text-ui: var(--font-size-ui);
   --text-lg: var(--font-size-lg);
 
+  /* Text Colors */
+
+  /* Custom Blue Palette — based on primary hue 217 */
+  --color-blue-50: hsl(217 60% 95%);
+  --color-blue-100: hsl(217 55% 90%);
+  --color-blue-200: hsl(217 50% 80%);
+  --color-blue-300: hsl(217 45% 68%);
+  --color-blue-400: hsl(217 50% 58%);
+  --color-blue-500: hsl(217 55% 48%);
+  --color-blue-600: hsl(217 55% 40%);
+  --color-blue-700: hsl(217 48% 32%);
+  --color-blue-800: hsl(217 42% 24%);
+  --color-blue-900: hsl(217 38% 18%);
+  --color-blue-950: hsl(217 40% 10%);
+
   /* Semantic Font Weights */
   --font-weight-ui-thin: 300;
   --font-weight-ui-normal: 400;
@@ -90,6 +106,11 @@
   /* Shadows */
   --shadow-glow: 0 0 8px rgba(59, 130, 246, 0.5);
   --shadow-glow-emerald: 0 0 24px rgba(52, 211, 153, 0.25);
+
+  /* Animations */
+  --animate-bounce-soft: bounce-soft 0.6s ease-in-out;
+  --animate-swing: swing 0.6s ease-in-out;
+  --animate-spin-slow: spin-slow 3s linear infinite;
 
   /* Extra Border Radius */
   --radius-5xl: 2rem;
@@ -114,6 +135,7 @@
   --accent: 30 10% 90%;
   --accent-foreground: 24 10% 10%;
   --destructive: 0 65% 48%;
+  --destructive-foreground: 0 0% 100%;
   --border: 20 6% 85%;
   --input: 20 6% 85%;
   --ring: 217 33% 17%;
@@ -164,6 +186,7 @@
   --accent: 217 12% 18%;
   --accent-foreground: 217 25% 70%;
   --destructive: 0 55% 42%;
+  --destructive-foreground: 0 0% 100%;
   --border: 217 12% 26%;
   --input: 217 12% 24%;
   --ring: 217 25% 55%;
@@ -175,6 +198,11 @@
   --sidebar-accent-foreground: 217 25% 65%;
   --sidebar-border: 217 15% 15%;
   --sidebar-ring: 217 25% 45%;
+
+
+  /* Button colors */
+  
+   
 }
 
 [data-theme="high-contrast"] {
@@ -193,6 +221,7 @@
   --accent: 0 0% 10%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 100% 40%;
+  --destructive-foreground: 0 0% 100%;
   --border: 0 0% 0%;
   --input: 0 0% 0%;
   --ring: 217 40% 20%;
@@ -226,6 +255,7 @@
   --accent: 30 100% 40%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 100% 40%;
+  --destructive-foreground: 0 0% 100%;
   --border: 0 0% 70%;
   --input: 0 0% 70%;
   --ring: 220 100% 30%;
@@ -323,6 +353,22 @@ select option {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes bounce-soft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@keyframes swing {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(12deg); }
+  75% { transform: rotate(-12deg); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 /* intense-pulse removed — GPU-heavy; replaced with static bright background */

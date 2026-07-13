@@ -7,6 +7,8 @@ import { toast } from "sonner";
 import { Loader2, Wallet } from "lucide-react";
 import { useDebounce } from "@/hooks/useDebounce";
 import { toastApiError } from "@/lib/operationalToast";
+import { Button } from "@/components/ui/button";
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -120,17 +122,17 @@ export function CreditAccountList({ branchId, canManage }: CreditAccountListProp
           className="min-w-[200px] flex-1 rounded-lg border border-border px-3 py-2 text-sm border-border bg-card"
         />
         {canManage && (
-          <button
-            type="button"
+          <Button
+            
             onClick={() => {
               setEditAccount(null);
               setFormOpen(true);
             }}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
+            className="gap-2"
           >
             <Wallet size={16} />
             {t("page.newAccount")}
-          </button>
+          </Button>
         )}
       </div>
 

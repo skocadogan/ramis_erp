@@ -12,6 +12,9 @@ import {
   useSensors,
   DragEndEvent,
 } from '@dnd-kit/core';
+
+import { Button } from "@/components/ui/button"
+
 import {
   arrayMove,
   SortableContext,
@@ -182,10 +185,10 @@ export default function ProductTable({
               className="flex items-center gap-1.5 rounded-md border border-border px-3.5 py-1.5 text-sm font-medium hover: transition-all bg-muted border-input text-muted-foreground dark:hover:">
               <TrendingUp size={15} />{t("productTable.bulkPrice")}
             </button>
-            <button type="button" onClick={onAdd}
-              className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
-              <Plus size={15} />{t("productTable.newProduct")}
-            </button>
+            <Button type="button" onClick={onAdd}
+              className="gap-2">
+              <Plus size={16} />{t("productTable.newProduct")}
+            </Button>
           </div>
         )}
 

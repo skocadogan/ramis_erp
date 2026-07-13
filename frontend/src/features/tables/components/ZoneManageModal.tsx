@@ -252,8 +252,8 @@ export function ZoneManageModal({
                         {canManage && (
                             <Button
                                 type="button"
-                                size="sm"
-                                className="shrink-0"
+                                
+                                className="gap-2"
                                 onClick={() => {
                                     setEditingZone(null);
                                     setFormMode('create');

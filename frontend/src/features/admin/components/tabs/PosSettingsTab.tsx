@@ -11,7 +11,7 @@ import {
   AlertDialogContent, AlertDialogDescription,
   AlertDialogFooter, AlertDialogHeader, AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
-
+import { Button } from "@/components/ui/button"
 import { SettingsForm } from "./pos-settings/SettingsForm"
 import { SlideTable } from "./pos-settings/SlideTable"
 import { PosTerminalsPanel } from "./pos-settings/PosTerminalsPanel"
@@ -269,10 +269,10 @@ export function PosSettingsTab() {
           </p>
         </div>
         {effectiveBranchId && (
-          <button
+          <Button
             onClick={handleApplyChanges}
             disabled={isApplying}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors cursor-pointer self-start md:self-auto"
+            className="gap-2"
           >
             {isApplying ? (
               <>
@@ -282,7 +282,7 @@ export function PosSettingsTab() {
             ) : (
               t('posSettings.applyChanges')
             )}
-          </button>
+          </Button>
         )}
       </div>
 

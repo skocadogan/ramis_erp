@@ -6,6 +6,8 @@ import { Plus, Search, Users, Edit, Trash2, RotateCcw, Eye } from "lucide-react"
 import { BranchDetailModal } from "../modals/BranchDetailModal"
 import { BranchEditModal } from "../modals/BranchEditModal"
 import { DeleteConfirmModal } from "../modals/DeleteConfirmModal"
+import { Button } from "@/components/ui/button"
+
 import { cn } from "@/lib/utils"
 import type { Branch } from "@/types/user.types"
 
@@ -62,10 +64,10 @@ export function BranchesTab({
           </p>
         </div>
         {canManageBranches ? (
-          <button onClick={onAdd}
-            className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
+          <Button onClick={onAdd}
+            className="gap-2">
             <Plus size={15} /> {t('addNew')}
-          </button>
+          </Button>
         ) : null}
       </div>
 

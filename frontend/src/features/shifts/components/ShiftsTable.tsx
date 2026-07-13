@@ -117,14 +117,14 @@ const ShiftRow = memo(function ShiftRow({
           <button
             type="button"
             onClick={() => onLoadZ(shift.id)}
-            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
+            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium  transition-colors hover: border-input bg-muted text-foreground dark:hover:"
           >
             <FileBarChart size={14} /> {t("actions.zReport")}
           </button>
           <button
             type="button"
             onClick={() => onLoadCash(shift.id)}
-            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
+            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium  transition-colors hover: border-input bg-muted text-foreground dark:hover:"
           >
             <FileText size={14} className="text-indigo-600 dark:text-indigo-400" />{" "}
             {t("actions.cashReport")}
@@ -134,14 +134,14 @@ const ShiftRow = memo(function ShiftRow({
               <button
                 type="button"
                 onClick={() => onExpense(shift.id)}
-                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
+                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium  transition-colors hover: border-input bg-muted text-foreground dark:hover:"
               >
                 <PlusCircle size={14} /> {t("actions.expense")}
               </button>
               <button
                 type="button"
                 onClick={() => onCashMovement(shift.id)}
-                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
+                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium  transition-colors hover: border-input bg-muted text-foreground dark:hover:"
               >
                 <ArrowUpCircle size={14} className="text-emerald-500" /> {t("actions.cashMovement")}
               </button>
@@ -151,7 +151,7 @@ const ShiftRow = memo(function ShiftRow({
             <button
               type="button"
               onClick={() => onEdit(shift)}
-              className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
+              className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium  transition-colors hover: border-input bg-muted text-foreground dark:hover:"
             >
               <Edit2 size={14} /> {t("actions.edit")}
             </button>
@@ -160,7 +160,7 @@ const ShiftRow = memo(function ShiftRow({
             <button
               type="button"
               onClick={() => onClose(shift)}
-              className="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover: dark:hover:bg-white"
+              className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium  transition-colors hover: border-input bg-destructive text-white text-foreground dark:hover:"
             >
               <Lock size={14} /> {t("actions.closeShift")}
             </button>

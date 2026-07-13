@@ -61,7 +61,7 @@
   "ledger": {
     "title": "Rezervasyon defteri",
     "description": "Kayıtlar sayfa üstünde seçilen şubeye göre filtrelenir. Masaya bağlı yeni kayıtta masa planında \"Rezerve\" durumu güncellenir.",
-    "new": "Yeni",
+    "new": "Yeni Rezervasyon",
     "columns": {
       "time": "Saat",
       "customer": "Müşteri",

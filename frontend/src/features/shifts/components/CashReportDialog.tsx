@@ -53,7 +53,7 @@ function MetricCard({
   icon: React.ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
+    <div className="rounded-xl border border-border bg-background p-4 ">
       <p className="mb-1 text-2xs font-bold uppercase text-muted-foreground">{label}</p>
       <div className="flex items-end justify-between">
         <span className={cn("text-xl font-bold font-mono", valueClassName ?? "text-foreground")}>

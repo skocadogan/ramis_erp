@@ -36,6 +36,7 @@ import type { Table, TableCreatePayload, TableReservePayload } from '@/features/
 import { mergeZoneSummaryWithTables } from '@/features/tables/utils/mergeZoneSummaryWithTables';
 import { TableSettingsPanel } from '@/features/tables/components/TableSettingsPanel';
 import type { Branch } from '@/types/user.types';
+import { Button } from "@/components/ui/button"
 
 function TablesPageContent() {
     const { canManage } = useModulePermissions();
@@ -262,13 +263,13 @@ function TablesPageContent() {
                                 </button>
                             )}
                             {canManageTables && !noBranchContext && (
-                                <button
+                                <Button
                                     onClick={() => setIsCreating(true)}
-                                    className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-sm"
+                                    className="gap-2"
                                 >
                                     <Plus size={15} />
                                     {tGrid('addTable')}
-                                </button>
+                                </Button>
                             )}
                         </div>
                     </div>

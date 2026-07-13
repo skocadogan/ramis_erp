@@ -155,7 +155,7 @@ export function ProductOptionsModal({
                 type="button"
                 aria-label={tProduct("allergenIconAria")}
                 onClick={() => handleAllergenOpenChange(true)}
-                className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500 text-white shadow-md ring-2 ring-white dark:ring-slate-900"
+                className="flex h-9 w-9 items-center justify-center rounded-full bg-amber-500 text-white shadow-md ring-2"
               >
                 <ShieldAlert size={16} strokeWidth={2.25} />
               </button>

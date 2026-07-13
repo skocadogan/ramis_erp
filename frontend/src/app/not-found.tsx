@@ -13,7 +13,7 @@ export default async function NotFound() {
           className="text-blue-600 dark:text-blue-500"
           strokeWidth={1.5}
         />
-        <div className="absolute -bottom-2 -right-2 flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-sm font-bold text-rose-600 shadow-md ring-4 ring-slate-50 dark:bg-rose-900/30 dark:text-rose-500 dark:ring-slate-950">
+        <div className="absolute -bottom-2 -right-2 flex h-10 w-10 items-center justify-center rounded-full bg-rose-100 text-sm font-bold text-rose-600 shadow-md ring-4 dark:bg-rose-900/30 dark:text-rose-500">
           404
         </div>
       </div>

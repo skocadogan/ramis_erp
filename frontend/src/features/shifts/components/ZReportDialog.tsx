@@ -71,7 +71,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
             <div className="space-y-6">
               {/* --- Özet Kartları --- */}
               <div className="grid grid-cols-2 gap-4">
-                <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
+                <div className="rounded-xl border border-border bg-background p-4 ">
                   <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.totalSales")}</p>
                   <div className="flex items-end justify-between">
                     <span className="text-xl font-bold text-foreground font-mono">
@@ -84,7 +84,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
+                <div className="rounded-xl border border-border bg-background p-4 ">
                   <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.expensesOut")}</p>
                   <div className="flex items-end justify-between">
                     <span className="text-xl font-bold text-foreground font-mono">
@@ -97,7 +97,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                   </p>
                 </div>
 
-                <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
+                <div className="rounded-xl border border-border bg-background p-4 ">
                   <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.cashNet")}</p>
                   <div className="flex items-end justify-between">
                     <span className={cn(
@@ -112,7 +112,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                   <p className="text-2xs text-muted-foreground mt-1">{t("zReport.cashInOutLabel")}</p>
                 </div>
 
-                <div className="rounded-xl border border-orange-200 bg-background p-4 shadow-sm dark:border-orange-900/30">
+                <div className="rounded-xl border border-orange-200 bg-background p-4  dark:border-orange-900/30">
                   <p className="text-2xs uppercase font-bold text-orange-600 dark:text-orange-400 mb-1">{t("zReport.creditLabel")}</p>
                   <div className="flex items-end justify-between">
                     <span className="text-xl font-bold text-orange-600 dark:text-orange-400 font-mono">
@@ -125,7 +125,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
               </div>
 
               {/* --- Kasa Nakit Toplamı --- */}
-              <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
+              <div className="rounded-xl border border-border bg-background p-4 ">
                 <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.cashRegisterTotal")}</p>
                 <div className="flex items-end justify-between">
                   <span className={cn(

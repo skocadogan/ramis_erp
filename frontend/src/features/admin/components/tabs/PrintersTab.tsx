@@ -258,10 +258,10 @@ export function PrintersTab({ branches, canManage }: Props) {
           </p>
         </div>
         {canManage && (
-          <button onClick={openCreate}
-            className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 transition-all">
+          <Button onClick={openCreate}
+            className="gap-2">
             <Plus size={15} /> {t('printers.addNew')}
-          </button>
+          </Button>
         )}
       </div>
 

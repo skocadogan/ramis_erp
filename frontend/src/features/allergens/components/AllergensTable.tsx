@@ -3,6 +3,7 @@
 import { memo } from "react"
 import { Edit2, Trash2, Loader2, ShieldAlert, ArrowUpDown, ArrowUp, ArrowDown, Search, Filter, Plus } from "lucide-react"
 import { useTranslations } from "next-intl"
+import { Button } from "@/components/ui/button"
 import { VirtualTable } from "@/components/ui/virtual-table"
 import type { Allergen } from "@/features/allergens/types"
 import type { SortField, SortDir } from "@/features/allergens/hooks/useAllergens"
@@ -72,13 +73,13 @@ export const AllergensTable = memo(function AllergensTable({
           </p>
         </div>
         {canManage && onNew && (
-          <button
+          <Button
             onClick={onNew}
-            className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all"
+            className="gap-2"
           >
-            <Plus size={15} />
+            <Plus size={16} />
             {t("page.addNew")}
-          </button>
+          </Button>
         )}
       </div>
 

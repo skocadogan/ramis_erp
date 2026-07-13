@@ -43,7 +43,7 @@ export function CustomerSelectModal({ onClose, onSelect }: CustomerSelectModalPr
   }, [debouncedSearch]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 /60 backdrop-blur-xs">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
       <div className="w-full max-w-lg rounded-xl shadow-xl overflow-hidden border border-border flex flex-col max-h-[80vh] bg-card border-border animate-in fade-in zoom-in-95 duration-155">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-border">

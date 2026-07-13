@@ -2,7 +2,7 @@
 
 import { useTranslations } from "next-intl"
 import { Plus, Edit, Trash2 } from "lucide-react"
-
+import { Button } from "@/components/ui/button"
 interface Role {
   id: number; name: string; description: string | null; parent_role: number | null
   permissions: number[]; permission_codes: string[]; is_active: boolean
@@ -33,10 +33,10 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
           <h2 className="text-lg font-semibold text-foreground">{t('roles.title')}</h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">{t('roles.description')}</p>
         </div>
-        <button onClick={onAddRole}
-          className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
+        <Button onClick={onAddRole}
+          className="gap-2">
           <Plus size={15} /> {t('roles.addNew')}
-        </button>
+        </Button>
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ maxHeight: "calc(100vh - 220px)" }}>
         <div className="rounded-lg border border-border bg-card border-border flex flex-col min-h-0">

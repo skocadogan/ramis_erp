@@ -50,7 +50,7 @@ export function OpenShiftPanel({
   };
 
   return (
-    <div className="mx-auto max-w-md rounded-2xl border border-border p-8 shadow-md border-border bg-card">
+    <div className="mx-auto max-w-md rounded-2xl border border-border p-8 border-border bg-card">
       <div className="mb-6 flex flex-col items-center text-center">
         <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white">
           <Vault size={28} />

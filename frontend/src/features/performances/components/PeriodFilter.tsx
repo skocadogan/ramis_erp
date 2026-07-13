@@ -115,7 +115,7 @@ const PRESET_BUTTON_THEME: Record<
     custom: {
         active: '  text-white shadow-md shadow-slate-700/30   ',
         idle: '  hover: hover: border-input text-muted-foreground bg-card dark:hover: dark:hover:',
-        ring: 'focus-visible:ring-slate-500/40',
+        ring: 'focus-visible:ring-muted-foreground/40',
     },
 };
 
@@ -197,7 +197,7 @@ export function PeriodFilter({
                         className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold border shrink-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-900
  ${theme.ring}
  ${isActive ? theme.active : theme.idle}
- ${isActive ? 'ring-2 ring-offset-1 ring-slate-900/15 dark:ring-white/25' : ''}
+ ${isActive ? 'ring-2 ring-offset-1' : ''}
  disabled:opacity-45 disabled:cursor-not-allowed disabled:shadow-none`}
                     >
                         {label}

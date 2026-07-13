@@ -74,7 +74,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
           <div className="mt-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
             {/* Specs: Times & Servings */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="/50 bg-card/30 p-2.5 rounded-xl border /80 border-border/50">
+              <div className="bg-card/30 p-2.5 rounded-xl border border-border/50">
                 <div className="flex items-center gap-1.5 text-xs font-semibold mb-2">
                   <Clock size={14} className="text-blue-500" /> {t("times")}
                 </div>
@@ -90,7 +90,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
                 </div>
               </div>
 
-              <div className="/50 bg-card/30 p-2.5 rounded-xl border /80 border-border/50">
+              <div className="bg-card/30 p-2.5 rounded-xl border border-border/50">
                 <div className="flex items-center gap-1.5 text-xs font-semibold mb-2">
                   <Users size={14} className="text-amber-500" /> {t("portion")}
                 </div>

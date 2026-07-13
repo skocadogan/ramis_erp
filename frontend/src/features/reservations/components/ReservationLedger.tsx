@@ -37,6 +37,9 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+
+
+
 interface ReservationLedgerProps {
   branchId: string;
   canManage: boolean;
@@ -131,13 +134,12 @@ export function ReservationLedger({
             className="rounded-lg border border-border px-2 py-1.5 text-sm border-border bg-muted"
           />
           {canManage && (
-            <button
-              type="button"
+            <Button
+            
               onClick={() => setOpen(true)}
-              className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white"
-            >
-              <Plus size={14} /> {t("ledger.new")}
-            </button>
+              className="gap-2">
+              <Plus size={16} /> {t("ledger.new")}
+            </Button>
           )}
         </div>
       </div>

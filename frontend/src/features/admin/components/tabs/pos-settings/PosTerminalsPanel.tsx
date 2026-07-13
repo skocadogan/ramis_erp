@@ -328,7 +328,7 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
           </CardDescription>
         </div>
         {canManage && (
-          <Button type="button" onClick={openNew} size="sm" className="bg-blue-600 hover:bg-blue-700 h-8">
+          <Button type="button" onClick={openNew} size="sm" className="bg-blue-600 hover:bg-blue-700 h-8 text-white">
             <Plus className="mr-1.5 h-3.5 w-3.5" /> {t('admin_settings.terminals.addNew')}
           </Button>
         )}
@@ -336,7 +336,7 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
       <CardContent className="p-4">
         <div className="rounded-xl border border-border overflow-x-auto">
           <Table>
-            <TableHeader className="/50 bg-card/50">
+            <TableHeader className="bg-card/50">
               <TableRow>
                 <TableHead>{t('admin_settings.terminals.tableCode')}</TableHead>
                 <TableHead>{t('admin_settings.terminals.tableName')}</TableHead>

@@ -20,7 +20,7 @@ import { Badge } from "@/components/ui/badge"
 import { VirtualTable, virtualTableStickyHeadClass } from "@/components/ui/virtual-table"
 import { formatDate } from "@/lib/formatters"
 import { pageFromDrfNext } from "@/lib/pagination"
-
+import { Button } from "@/components/ui/button"
 const USER_PAGE_SIZE = 50
 
 type SortField = "username" | "email" | "date_joined" | "last_login"
@@ -119,10 +119,10 @@ export function UserList() {
           <h2 className="text-lg font-semibold text-foreground">{t('title')}</h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">{t('description', { count: totalCount })}</p>
         </div>
-        <button onClick={() => { setEditingUser(null); setShowUserForm(true) }}
-          className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
+        <Button onClick={() => { setEditingUser(null); setShowUserForm(true) }}
+          className="gap-2">
           <Plus size={15} />{t('addNew')}
-        </button>
+        </Button>
       </div>
 
       <div className="flex flex-wrap items-center gap-3">

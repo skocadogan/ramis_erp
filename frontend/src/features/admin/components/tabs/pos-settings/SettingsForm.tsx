@@ -85,7 +85,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             </CardTitle>
             <div className="space-y-4 /50 bg-card/30 p-4 rounded-lg border border-border">
               <div className="space-y-2">
-                <Label className="text-2xs font-bold uppercase text-blue-500">{t('admin_settings.display.orderSuccessTitleLabel')}</Label>
+                <Label className="text-2xs font-bold uppercase text-primary">{t('admin_settings.display.orderSuccessTitleLabel')}</Label>
                 <Input value={settings.order_success_title} onChange={e => set({ order_success_title: e.target.value })} className="h-9 text-sm" placeholder={t('admin_settings.display.titleLabel')} />
                 <Input value={settings.order_success_subtitle} onChange={e => set({ order_success_subtitle: e.target.value })} className="h-9 text-xs" placeholder={t('admin_settings.display.subtitleLabel')} />
               </div>
@@ -101,7 +101,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             </div>
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 h-9 text-sm font-semibold" disabled={isSaving}>
+          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 h-9 text-sm-white" disabled={isSaving}>
             {isSaving ? t('admin_settings.display.saving') : <><Save className="mr-2 h-4 w-4" /> {t('admin_settings.display.saveSettings')}</>}
           </Button>
         </form>

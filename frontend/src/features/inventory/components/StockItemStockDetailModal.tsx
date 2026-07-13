@@ -186,7 +186,7 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
 
         <DialogBody className="flex min-h-0 flex-col overflow-hidden p-0">
           <div className="shrink-0 border-b border-border py-3">
-            <div className="mb-2 flex items-center gap-2 px-5 text-ui-sm font-ui-semibold uppercase tracking-wide text-muted-foreground">
+            <div className="mb-2 flex items-center gap-2 px-5 text-ui-sm font-semibold uppercase tracking-wide text-muted-foreground">
               <Warehouse className="size-4" />
               {t("warehouseDist")}
             </div>
@@ -200,7 +200,7 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
             ) : (
               <div className="max-h-40 w-full overflow-auto border-y border-border">
                 <table className="w-full table-fixed text-ui">
-                  <thead className="sticky top-0 bg-background text-left text-ui-sm font-ui-semibold text-muted-foreground">
+                  <thead className="sticky top-0 bg-background text-left text-ui-sm font-semibold text-muted-foreground">
                     <tr className="border-b border-border">
                       <th className="px-3 py-2">{t("colWarehouse")}</th>
                       <th className="px-3 py-2 text-right">{t("colQty")}</th>
@@ -212,7 +212,7 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
                     {levels.map((row) => (
                       <tr key={row.warehouse_id}>
                         <td className="px-3 py-2.5">
-                          <div className="font-ui-medium text-foreground text-ui-sm">{row.warehouse_name}</div>
+                          <div className="font-medium text-foreground text-ui-sm">{row.warehouse_name}</div>
                           <div className="font-mono text-sub text-muted-foreground">{row.warehouse_code}</div>
                         </td>
                         <td className="px-3 py-2.5 text-right tabular-nums">
@@ -224,9 +224,9 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
                         <td className="px-3 py-2.5 text-center text-ui-sm">
                           <div className="flex items-center justify-center gap-3">
                             {row.is_low_stock ? (
-                              <span className="text-rose-600 dark:text-rose-400 font-ui-bold">{t("statusCritical")}</span>
+                              <span className="text-rose-600 dark:text-rose-400 font-bold">{t("statusCritical")}</span>
                             ) : (
-                              <span className="text-muted-foreground font-ui-normal">{t("statusNormal")}</span>
+                              <span className="text-muted-foreground font-normal">{t("statusNormal")}</span>
                             )}
                             <Link
                               href={`/warehouse?warehouseId=${row.warehouse_id}`}
@@ -247,7 +247,7 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
             <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-5 py-3">
-              <div className="mr-2 flex items-center gap-2 text-ui-sm font-ui-semibold uppercase tracking-wide text-muted-foreground">
+              <div className="mr-2 flex items-center gap-2 text-ui-sm font-semibold uppercase tracking-wide text-muted-foreground">
                 <ArrowRightLeft className="size-4" />
                 {t("movementsSection")}
               </div>
@@ -283,7 +283,7 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
 
             <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
               <div
-                className={`sticky top-0 z-10 border-b border-border bg-background pb-2 text-ui-sm font-ui-semibold text-muted-foreground ${movementRowGridClass}`}
+                className={`sticky top-0 z-10 border-b border-border bg-background pb-2 text-ui-sm font-semibold text-muted-foreground ${movementRowGridClass}`}
               >
                 <span className="min-w-0 text-left">{t("colDate")}</span>
                 <span className="min-w-0 text-left">{t("colWhMove")}</span>
@@ -331,13 +331,13 @@ export function StockItemStockDetailModal({ item, open, onOpenChange }: StockIte
                             </div>
                             <div className="min-w-0">
                               <span
-                                className={`inline-flex max-w-full rounded px-2 py-0.5 text-sub font-ui-medium ${stockMovementTypeBadgeClass(m.movement_type)}`}
+                                className={`inline-flex max-w-full rounded px-2 py-0.5 text-sub font-medium ${stockMovementTypeBadgeClass(m.movement_type)}`}
                               >
                                 {labelForMovement(m.movement_type)}
                               </span>
                             </div>
                             <div
-                              className={`min-w-0 text-right text-ui-sm font-ui-medium tabular-nums ${stockMovementQuantityTextClass(m)}`}
+                              className={`min-w-0 text-right text-ui-sm font-medium tabular-nums ${stockMovementQuantityTextClass(m)}`}
                             >
                               {formatStockMovementQuantitySign(m)}
                               {formatQuantityWithUnit(Math.abs(getStockMovementSignedQuantity(m)), m.unit)}

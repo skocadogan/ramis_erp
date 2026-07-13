@@ -163,7 +163,7 @@ export function AuditTab({
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-ui-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <ShieldAlert className="h-5 w-5 text-blue-600" />
             {t('audit.title')}
           </h2>
@@ -174,7 +174,7 @@ export function AuditTab({
         <div className="flex items-center gap-2">
           {branches.length > 1 && (
             <Select value={selectedBranchId || "all"} onValueChange={(val) => onBranchChange(!val || val === "all" ? "" : val)}>
-              <SelectTrigger className="w-[200px] bg-white border-border text-sm h-9 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200">
+              <SelectTrigger className="w-[200px] border-border text-sm h-9 bg-card border-border text-foreground">
                 <Building2 className="h-3.5 w-3.5 mr-2 text-muted-foreground" />
                 <SelectValue placeholder={t('audit.allBranches')}>
                   {selectedBranchId
@@ -183,7 +183,7 @@ export function AuditTab({
                 </SelectValue>
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all" className="text-sm font-ui-semibold text-muted-foreground">
+                <SelectItem value="all" className="text-sm font-semibold text-muted-foreground">
                   {t('audit.allBranches')}
                 </SelectItem>
                 {branches.map(b => (
@@ -195,7 +195,7 @@ export function AuditTab({
             </Select>
           )}
           <Select value={selectedAction || "all"} onValueChange={(val) => onActionChange(!val || val === "all" ? "" : val)}>
-            <SelectTrigger className="w-[200px] bg-white border-border text-sm h-9 dark:bg-slate-900 dark:border-slate-700 dark:text-slate-200">
+            <SelectTrigger className="w-[200px] border-border text-sm h-9 bg-card border-border text-foreground">
               <ListFilter className="h-3.5 w-3.5 mr-2 text-muted-foreground" />
               <SelectValue placeholder={t('audit.allActions')}>
                 {selectedAction
@@ -204,7 +204,7 @@ export function AuditTab({
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all" className="text-sm font-ui-semibold text-muted-foreground">
+              <SelectItem value="all" className="text-sm font-semibold text-muted-foreground">
                 {t('audit.allActions')}
               </SelectItem>
               {actions.map(a => (
@@ -230,13 +230,13 @@ export function AuditTab({
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="lg:col-span-2 overflow-hidden border-border bg-white/95 dark:bg-slate-900/95 flex flex-col min-h-[420px] max-h-[calc(100vh-10rem)]">
-          <div className="p-4 border-b border-border flex flex-col sm:flex-row items-start sm:items-center gap-3 dark:border-slate-800">
+        <Card className="lg:col-span-2 overflow-hidden border-border bg-white/95 bg-card/95 flex flex-col min-h-[420px] max-h-[calc(100vh-10rem)]">
+          <div className="p-4 border-b border-border flex flex-col sm:flex-row items-start sm:items-center gap-3 border-border">
             <div className="relative flex-1 w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
                 placeholder={t('audit.searchPlaceholder')}
-                className="pl-9 bg-white dark:bg-slate-950 border-border dark:border-slate-800"
+                className="pl-9 bg-card border-border border-border"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -247,7 +247,7 @@ export function AuditTab({
                 type="date"
                 value={startDate}
                 onChange={(e) => onStartDateChange(e.target.value)}
-                className="w-[140px] bg-white dark:bg-slate-950 border-border dark:border-slate-800 text-sm h-9"
+                className="w-[140px] bg-card border-border border-border text-sm h-9"
                 placeholder={t('audit.startDate')}
               />
               <span className="text-muted-foreground text-sm">—</span>
@@ -255,7 +255,7 @@ export function AuditTab({
                 type="date"
                 value={endDate}
                 onChange={(e) => onEndDateChange(e.target.value)}
-                className="w-[140px] bg-white dark:bg-slate-950 border-border dark:border-slate-800 text-sm h-9"
+                className="w-[140px] bg-card border-border border-border text-sm h-9"
                 placeholder={t('audit.endDate')}
               />
             </div>
@@ -282,7 +282,7 @@ export function AuditTab({
                 tableClassName="border-collapse"
                 header={
                   <thead className={virtualTableStickyHeadClass}>
-                    <tr className="text-sub font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                    <tr className="text-sub font-semibold text-muted-foreground uppercase tracking-wider">
                       <th className="px-4 py-3 text-left">{t('audit.table.dateActor')}</th>
                       <th className="px-4 py-3 text-left">{t('audit.table.action')}</th>
                       <th className="px-4 py-3 text-left">{t('audit.table.target')}</th>
@@ -312,7 +312,7 @@ export function AuditTab({
                         onClick={() => setSelectedLog(log)}
                       >
                         <div className="flex flex-col">
-                          <span className="text-sub font-ui-medium text-slate-900 dark:text-slate-200">
+                          <span className="text-sub font-medium text-slate-900 text-foreground">
                             {format(new Date(log.created_at), "d MMM, HH:mm", { locale: dateLocale })}
                           </span>
                           <div className="flex items-center gap-1 text-sub text-muted-foreground">
@@ -322,7 +322,7 @@ export function AuditTab({
                         </div>
                       </td>
                       <td className="px-4 py-3 cursor-pointer" onClick={() => setSelectedLog(log)}>
-                        <Badge variant="outline" className={`text-sub px-1.5 py-0 font-ui-medium border ${getActionColor(log.action)}`}>
+                        <Badge variant="outline" className={`text-sub px-1.5 py-0 font-medium border ${getActionColor(log.action)}`}>
                           {getActionLabel(log.action)}
                         </Badge>
                         {reasonText ? (
@@ -356,9 +356,9 @@ export function AuditTab({
 
         <div className="space-y-6">
           {selectedLog ? (
-            <Card className="border-border bg-card overflow-hidden sticky top-6 dark:border-slate-800">
-              <div className="p-4 border-b border-border bg-slate-50/50 dark:bg-slate-800/50 flex items-center justify-between dark:border-slate-800">
-                <h3 className="font-ui-semibold text-slate-900 dark:text-white flex items-center gap-2">
+            <Card className="border-border bg-card overflow-hidden sticky top-6 border-border">
+              <div className="p-4 border-b border-border bg-slate-50/50 bg-muted/50 flex items-center justify-between border-border">
+                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
                   <Activity className="h-4 w-4 text-blue-600" />
                   {t('audit.details.title')}
                 </h3>
@@ -370,7 +370,7 @@ export function AuditTab({
                     <p className="text-sub text-muted-foreground flex items-center gap-1">
                       <Clock className="h-3 w-3" /> {t('audit.details.date')}
                     </p>
-                    <p className="text-ui-sm text-foreground dark:text-slate-200">
+                    <p className="text-ui-sm text-foreground text-foreground">
                       {format(new Date(selectedLog.created_at), "d MMMM yyyy, HH:mm:ss", { locale: dateLocale })}
                     </p>
                   </div>
@@ -378,22 +378,22 @@ export function AuditTab({
                     <p className="text-sub text-muted-foreground flex items-center gap-1">
                       <MapPin className="h-3 w-3" /> {t('audit.details.branch')}
                     </p>
-                    <p className="text-ui-sm text-foreground dark:text-slate-200">
+                    <p className="text-ui-sm text-foreground text-foreground">
                       {selectedLog.branch_details?.name || t('audit.details.global')}
                     </p>
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800">
-                  <p className="text-sub text-muted-foreground mb-2 uppercase font-ui-bold tracking-tight">{t('audit.details.context')}</p>
+                <div className="p-3 rounded-lg bg-muted/50 border border-slate-100 border-border">
+                  <p className="text-sub text-muted-foreground mb-2 uppercase font-bold tracking-tight">{t('audit.details.context')}</p>
                   <div className="space-y-2 text-ui-sm">
                     <div className="flex justify-between">
                       <span className="text-muted-foreground">{t('audit.details.ip')}:</span>
-                      <span className="font-mono text-foreground dark:text-slate-200">{selectedLog.actor_ip || "N/A"}</span>
+                      <span className="font-mono text-foreground text-foreground">{selectedLog.actor_ip || "N/A"}</span>
                     </div>
                     <div className="flex flex-col gap-1">
                       <span className="text-muted-foreground">{t('audit.details.ua')}:</span>
-                      <span className="text-sub text-muted-foreground break-all leading-relaxed bg-white/50 dark:bg-slate-950/50 p-1.5 rounded">
+                      <span className="text-sub text-muted-foreground break-all leading-relaxed bg-white/50 bg-card/50 p-1.5 rounded">
                         {selectedLog.user_agent || "N/A"}
                       </span>
                     </div>
@@ -402,7 +402,7 @@ export function AuditTab({
 
                 {selectedLog.metadata && Object.keys(selectedLog.metadata).length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-sub text-muted-foreground uppercase font-ui-bold">{t('audit.details.metadata')}</p>
+                    <p className="text-sub text-muted-foreground uppercase font-bold">{t('audit.details.metadata')}</p>
                     <div className="p-2 rounded bg-amber-50 dark:bg-amber-900/10 border border-amber-100 dark:border-amber-900/30">
                       <pre className="text-sub text-amber-800 dark:text-amber-400 whitespace-pre-wrap font-mono">
                         {JSON.stringify(selectedLog.metadata, null, 2)}
@@ -412,21 +412,21 @@ export function AuditTab({
                 )}
 
                 {(selectedLog.before_json || selectedLog.after_json) && (
-                  <div className="space-y-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                    <p className="text-sub text-muted-foreground uppercase font-ui-bold flex items-center gap-1">
+                  <div className="space-y-2 pt-2 border-t border-slate-100 border-border">
+                    <p className="text-sub text-muted-foreground uppercase font-bold flex items-center gap-1">
                       <FileJson className="h-3 w-3" /> {t('audit.details.dataChange')}
                     </p>
                     <div className="flex items-center gap-2 text-sub">
                       <div className="flex-1 p-2 rounded bg-rose-50/50 dark:bg-rose-900/10 border border-rose-100 dark:border-rose-900/20">
-                        <span className="block text-rose-600 dark:text-rose-400 font-ui-bold mb-1">{t('audit.details.before')}</span>
-                        <pre className="font-mono text-2xs overflow-auto max-h-[100px] dark:text-slate-300">
+                        <span className="block text-rose-600 dark:text-rose-400 font-bold mb-1">{t('audit.details.before')}</span>
+                        <pre className="font-mono text-2xs overflow-auto max-h-[100px] text-muted-foreground">
                           {JSON.stringify(selectedLog.before_json, null, 2)}
                         </pre>
                       </div>
                       <ArrowRight className="h-4 w-4 text-slate-300 shrink-0" />
                       <div className="flex-1 p-2 rounded bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/20">
-                        <span className="block text-emerald-600 dark:text-emerald-400 font-ui-bold mb-1">{t('audit.details.after')}</span>
-                        <pre className="font-mono text-2xs overflow-auto max-h-[100px] dark:text-slate-300">
+                        <span className="block text-emerald-600 dark:text-emerald-400 font-bold mb-1">{t('audit.details.after')}</span>
+                        <pre className="font-mono text-2xs overflow-auto max-h-[100px] text-muted-foreground">
                           {JSON.stringify(selectedLog.after_json, null, 2)}
                         </pre>
                       </div>
@@ -436,13 +436,13 @@ export function AuditTab({
               </div>
             </Card>
           ) : (
-            <Card className="border-dashed border-border bg-slate-50/30 dark:bg-slate-900/30 dark:border-slate-800 h-[400px] flex items-center justify-center text-center p-6">
+            <Card className="border-dashed border-border bg-slate-50/30 bg-card/30 border-border h-[400px] flex items-center justify-center text-center p-6">
               <div className="space-y-3">
-                <div className="h-12 w-12 bg-white dark:bg-slate-800 rounded-full flex items-center justify-center mx-auto shadow-sm">
+                <div className="h-12 w-12 bg-card rounded-full flex items-center justify-center mx-auto shadow-sm">
                   <Activity className="h-6 w-6 text-slate-300" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-ui-medium text-slate-900 dark:text-slate-200">{t('audit.details.noSelection')}</h4>
+                  <h4 className="text-sm font-medium text-slate-900 text-foreground">{t('audit.details.noSelection')}</h4>
                   <p className="text-xs text-muted-foreground max-w-[200px] mt-1">
                     {t('audit.details.selectionDesc')}
                   </p>

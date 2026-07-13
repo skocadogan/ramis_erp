@@ -37,7 +37,7 @@ export function WarehouseInventoryToolbar({
 
       <div className="flex flex-wrap items-end gap-3 rounded-xl border border-border/90 bg-muted/50 p-3">
         <div className="min-w-[180px] flex-1">
-          <label className="mb-1 block text-xs font-ui-medium text-muted-foreground">{t("targetWarehouse")}</label>
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("targetWarehouse")}</label>
           <select
             value={targetWarehouseId}
             onChange={(e) => setTargetWarehouseId(e.target.value)}
@@ -52,7 +52,7 @@ export function WarehouseInventoryToolbar({
           </select>
         </div>
         <div className="w-[150px]">
-          <label className="mb-1 block text-xs font-ui-medium text-muted-foreground">{t("transferDate")}</label>
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("transferDate")}</label>
           <input
             type="date"
             value={transferDate}
@@ -65,7 +65,7 @@ export function WarehouseInventoryToolbar({
             type="button"
             onClick={handleTransferSelected}
             disabled={createMutIsPending || selectedRowsLength === 0 || !targetWarehouseId}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-ui-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-indigo-600 px-3 py-2 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 disabled:opacity-50"
           >
             <Truck className="size-4" />
             {t("transferSelected", { count: selectedRowsLength })}
@@ -81,7 +81,7 @@ export function WarehouseInventoryToolbar({
             type="button"
             onClick={handleOpenTransferAllDialog}
             disabled={createMutIsPending || prefetchTransferAll || !targetWarehouseId}
-            className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm font-ui-medium text-indigo-800 hover:bg-indigo-100 disabled:opacity-50 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-200 dark:hover:bg-indigo-900/50"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-200 bg-indigo-50 px-3 py-2 text-sm font-medium text-indigo-800 hover:bg-indigo-100 disabled:opacity-50 dark:border-indigo-800 dark:bg-indigo-950/40 dark:text-indigo-200 dark:hover:bg-indigo-900/50"
           >
             {prefetchTransferAll ? (
               <Loader2 className="size-4 shrink-0 animate-spin" aria-hidden />

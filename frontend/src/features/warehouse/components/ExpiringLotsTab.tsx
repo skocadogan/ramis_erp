@@ -151,9 +151,9 @@ export function ExpiringLotsTab({ branchId }: { branchId?: string }) {
       <div className="flex flex-wrap items-center gap-3 shrink-0">
         <div className="flex items-center gap-2 text-foreground">
           <Clock size={18} />
-          <span className="text-sm font-ui-semibold">{t("expiringLots.title")}</span>
+          <span className="text-sm font-semibold">{t("expiringLots.title")}</span>
           {totalCount > 0 ? (
-            <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-ui-semibold text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+            <span className="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:bg-amber-950 dark:text-amber-200">
               {totalCount}
             </span>
           ) : null}
@@ -167,7 +167,7 @@ export function ExpiringLotsTab({ branchId }: { branchId?: string }) {
                 type="button"
                 onClick={() => setDaysAhead(d)}
                 className={cn(
-                  "rounded-md px-3 py-1.5 text-sm font-ui-medium transition-colors",
+                  "rounded-md px-3 py-1.5 text-sm font-medium transition-colors",
                   daysAhead === d
                     ? "bg-blue-600 text-white"
                     : "text-muted-foreground hover:text-foreground",
@@ -213,7 +213,7 @@ export function ExpiringLotsTab({ branchId }: { branchId?: string }) {
 
         <aside className="flex w-full shrink-0 flex-col rounded-xl border border-border/80 bg-card/50 dark:border-slate-800 lg:w-80 lg:min-h-0">
           <div className="border-b border-border px-4 py-3">
-            <h3 className="text-sm font-ui-semibold text-foreground">{t("expiryActions.historyTitle")}</h3>
+            <h3 className="text-sm font-semibold text-foreground">{t("expiryActions.historyTitle")}</h3>
             <p className="text-xs text-muted-foreground">
               {selectedLot
                 ? t("expiryActions.historyFiltered", { name: selectedLot.stock_item_name })
@@ -229,7 +229,7 @@ export function ExpiringLotsTab({ branchId }: { branchId?: string }) {
               <ul className="space-y-3">
                 {history.map((item) => (
                   <li key={item.id} className="rounded-lg border border-border/60 bg-background/80 p-3 text-sm">
-                    <div className="font-ui-medium text-foreground">{item.action_type_label}</div>
+                    <div className="font-medium text-foreground">{item.action_type_label}</div>
                     <div className="text-xs text-muted-foreground">
                       {item.stock_item_name} · {item.warehouse_name}
                     </div>

@@ -227,7 +227,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t("inputPlaceholder")}
-            className="flex-1 bg-transparent text-sm text-slate-800 dark:text-slate-100 placeholder:text-muted-foreground dark:placeholder:text-muted-foreground outline-none"
+            className="flex-1 bg-transparent text-sm text-slate-800 text-foreground placeholder:text-muted-foreground dark:placeholder:text-muted-foreground outline-none"
             aria-label={t("inputAriaLabel")}
             autoComplete="off"
             spellCheck={false}
@@ -262,7 +262,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
 
           {showEmptyState && (
             <div className="flex flex-col items-center gap-2 px-4 py-8 text-center">
-              <Search size={32} className="text-slate-300 dark:text-slate-600" />
+              <Search size={32} className="text-muted-foreground" />
               <p className="text-sm text-muted-foreground">
                 {t("noResults", { query })}
               </p>
@@ -280,7 +280,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
                 <div className="px-2">
                   <div className="flex items-center gap-2 px-2 py-2">
                     <Clock size={14} className="text-muted-foreground shrink-0" />
-                    <span className="text-xs font-ui-medium text-muted-foreground uppercase tracking-wide">
+                    <span className="text-xs font-medium text-muted-foreground uppercase tracking-wide">
                       {t("recentSearchesTitle")}
                     </span>
                   </div>
@@ -292,7 +292,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
                         tabIndex={0}
                         onClick={() => setQuery(search)}
                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setQuery(search) } }}
-                        className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm text-slate-800 dark:text-slate-200 transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 group cursor-pointer"
+                        className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm text-slate-800 text-foreground transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 group cursor-pointer"
                       >
                         <Clock size={13} className="text-muted-foreground shrink-0" />
                         <span className="flex-1 truncate">{search}</span>
@@ -312,7 +312,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
                 </div>
               ) : (
                 <div className="flex flex-col items-center gap-2 px-4 py-8 text-center">
-                  <Search size={28} className="text-slate-300 dark:text-slate-600" />
+                  <Search size={28} className="text-muted-foreground" />
                   <p className="text-sm text-muted-foreground">{t("startPrompt")}</p>
                   <p className="text-xs text-muted-foreground dark:text-muted-foreground mt-1">
                     {t("startHint")}
@@ -348,7 +348,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
         </div>
 
         {queryLongEnough && hasAnyResults && (
-          <div className="flex items-center justify-between border-t border-slate-100 dark:border-slate-800 px-4 py-2">
+          <div className="flex items-center justify-between border-t border-slate-100 border-border px-4 py-2">
             <span className="text-xs text-muted-foreground dark:text-muted-foreground">
               {t("resultCount", { count: totalResultCount })}
             </span>

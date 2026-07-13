@@ -113,11 +113,11 @@ const TimelineStep = memo(function TimelineStep({
               "min-w-0 flex-1 text-sm leading-snug break-words",
               isLast
                 ? step.state === "completed"
-                  ? "font-ui-normal text-foreground"
-                  : "font-ui-normal text-muted-foreground"
+                  ? "font-normal text-foreground"
+                  : "font-normal text-muted-foreground"
                 : isCompleted
-                  ? "font-ui-semibold text-foreground"
-                  : "font-ui-normal text-muted-foreground"
+                  ? "font-semibold text-foreground"
+                  : "font-normal text-muted-foreground"
             )}
           >
             {step.label}
@@ -125,7 +125,7 @@ const TimelineStep = memo(function TimelineStep({
           {step.time ? (
             <span
               className={cn(
-                "shrink-0 self-start tabular-nums text-xs font-ui-semibold text-muted-foreground",
+                "shrink-0 self-start tabular-nums text-xs font-semibold text-muted-foreground",
                 isLast && "text-foreground"
               )}
             >
@@ -136,7 +136,7 @@ const TimelineStep = memo(function TimelineStep({
         {step.date ? (
           <p
             className={cn(
-              "mt-1 text-xs text-muted-foreground font-ui-medium",
+              "mt-1 text-xs text-muted-foreground font-medium",
               isLast && "text-muted-foreground"
             )}
           >
@@ -170,7 +170,7 @@ export function VerticalStatusTimeline({ title, steps, className }: VerticalStat
           className
         )}
       >
-        <h3 className="text-base font-ui-bold uppercase tracking-wider text-slate-100">{title}</h3>
+        <h3 className="text-base font-bold uppercase tracking-wider text-slate-100">{title}</h3>
         <p className="mt-3 text-sm text-muted-foreground italic">{t("emptySteps")}</p>
       </div>
     );
@@ -183,7 +183,7 @@ export function VerticalStatusTimeline({ title, steps, className }: VerticalStat
         className
       )}
     >
-      <h3 className="text-base font-ui-bold uppercase tracking-wider leading-snug text-foreground">
+      <h3 className="text-base font-bold uppercase tracking-wider leading-snug text-foreground">
         {title}
       </h3>
 

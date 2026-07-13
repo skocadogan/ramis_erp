@@ -117,8 +117,8 @@ export function RecipeFormModal({
   }
 
   const sectionClass = "space-y-3 border-b border-border pb-5"
-  const sectionTitleClass = "text-sm font-ui-bold text-foreground"
-  const fieldLabelClass = "text-xs font-ui-semibold text-muted-foreground"
+  const sectionTitleClass = "text-sm font-bold text-foreground"
+  const fieldLabelClass = "text-xs font-semibold text-muted-foreground"
   const selectClass =
     "mt-1 w-full rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-sm outline-none focus-visible:ring-1 focus-visible:ring-ring appearance-none"
   const inlineSelectClass =
@@ -198,26 +198,26 @@ export function RecipeFormModal({
                     <div className="group relative">
                       <div className="flex items-center gap-1 px-1.5 py-0.5 bg-blue-50 text-blue-600 rounded border border-blue-100 cursor-help">
                         <ChefHat size={10} />
-                        <span className="text-[9px] font-ui-bold uppercase">{t("badgeLearnedFromKitchen")}</span>
+                        <span className="text-3xs font-bold uppercase">{t("badgeLearnedFromKitchen")}</span>
                       </div>
                       {/* Tooltip-like dropdown */}
                       <div className="absolute right-0 top-full mt-1 w-64 rounded-lg border border-border bg-popover p-3 text-popover-foreground shadow-lg z-50 invisible group-hover:visible opacity-0 group-hover:opacity-100 transition-all">
-                        <h4 className="text-2xs font-ui-bold text-foreground mb-2 border-b border-border pb-1">{t("learnedTimingTitle")}</h4>
+                        <h4 className="text-2xs font-bold text-foreground mb-2 border-b border-border pb-1">{t("learnedTimingTitle")}</h4>
                         <div className="space-y-2 max-h-48 overflow-y-auto custom-scrollbar">
                           {formData.learned_timing.map((lt, idx) => (
                             <div key={idx} className="flex justify-between items-center text-2xs border-b border-border pb-1 last:border-0">
                               <div className="flex flex-col">
-                                <span className="font-ui-bold text-foreground">{lt.branch_name}</span>
-                                <span className="text-[9px] text-muted-foreground">{lt.station_name}</span>
+                                <span className="font-bold text-foreground">{lt.branch_name}</span>
+                                <span className="text-3xs text-muted-foreground">{lt.station_name}</span>
                               </div>
                               <div className="flex flex-col items-end">
-                                <span className="text-blue-600 font-ui-bold">{t("minutesShort", { n: lt.ema_minutes })}</span>
-                                <span className="text-[8px] text-muted-foreground">{t("learnedSampleCount", { count: lt.sample_count })}</span>
+                                <span className="text-blue-600 font-bold">{t("minutesShort", { n: lt.ema_minutes })}</span>
+                                <span className="text-4xs text-muted-foreground">{t("learnedSampleCount", { count: lt.sample_count })}</span>
                               </div>
                             </div>
                           ))}
                         </div>
-                        <p className="mt-2 text-[8px] text-muted-foreground leading-tight italic">
+                        <p className="mt-2 text-4xs text-muted-foreground leading-tight italic">
                           {t("learnedFootnote")}
                         </p>
                       </div>
@@ -271,7 +271,7 @@ export function RecipeFormModal({
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-1">
-                      <label className="text-xs font-ui-bold text-blue-600">{t("fieldPrepPerServing")}</label>
+                      <label className="text-xs font-bold text-blue-600">{t("fieldPrepPerServing")}</label>
                       <HelpTooltip text={t("help.prepPerServing")} />
                     </div>
                     <NumberInput
@@ -283,7 +283,7 @@ export function RecipeFormModal({
                   </div>
                   <div className="space-y-0.5">
                     <div className="flex items-center gap-1">
-                      <label className="text-xs font-ui-bold text-amber-600">{t("fieldCookPerServing")}</label>
+                      <label className="text-xs font-bold text-amber-600">{t("fieldCookPerServing")}</label>
                       <HelpTooltip text={t("help.cookPerServing")} />
                     </div>
                     <NumberInput
@@ -337,7 +337,7 @@ export function RecipeFormModal({
                           onChange={() => toggleBranch(branch.id)}
                           className="w-3 h-3 text-blue-600 rounded border-border focus:ring-blue-500 cursor-pointer"
                         />
-                        <span className="text-2xs font-ui-medium text-muted-foreground group-hover:text-blue-600 transition-colors">
+                        <span className="text-2xs font-medium text-muted-foreground group-hover:text-blue-600 transition-colors">
                           {branch.name}
                         </span>
                       </label>
@@ -353,7 +353,7 @@ export function RecipeFormModal({
                     <ShieldAlert size={14} className="text-amber-600" />
                     <span className={sectionTitleClass}>{t("sectionAllergens")}</span>
                     {editingRecipe?.is_allergenic && (
-                      <span className="rounded-md bg-amber-100 px-1.5 py-0.5 text-[10px] font-ui-bold uppercase text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+                      <span className="rounded-md bg-amber-100 px-1.5 py-0.5 text-2xs font-bold uppercase text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
                         {t("allergenicBadge")}
                       </span>
                     )}
@@ -361,7 +361,7 @@ export function RecipeFormModal({
                   <button
                     type="button"
                     onClick={() => setShowAllergenRef(true)}
-                    className="inline-flex items-center gap-1 text-xs font-ui-semibold text-blue-600 hover:text-blue-700"
+                    className="inline-flex items-center gap-1 text-xs font-semibold text-blue-600 hover:text-blue-700"
                   >
                     <BookOpen size={12} />
                     {t("allergenReference")}
@@ -372,11 +372,11 @@ export function RecipeFormModal({
                     {editingRecipe.allergens.map((a) => (
                       <span
                         key={a.id}
-                        className="rounded-md border border-amber-200/70 px-2 py-1 text-xs font-ui-medium text-amber-900 dark:border-amber-800 dark:text-amber-100"
+                        className="rounded-md border border-amber-200/70 px-2 py-1 text-xs font-medium text-amber-900 dark:border-amber-800 dark:text-amber-100"
                         title={`${a.code} · ${Number(a.prevalence_pct).toFixed(2)}%`}
                       >
                         {a.name}
-                        <span className="ml-1 text-[10px] opacity-70">({a.risk_score})</span>
+                        <span className="ml-1 text-2xs opacity-70">({a.risk_score})</span>
                       </span>
                     ))}
                   </div>
@@ -384,7 +384,7 @@ export function RecipeFormModal({
                   <p className="text-xs text-muted-foreground">{t("noAllergens")}</p>
                 )}
                 {editingRecipe?.allergen_sources && editingRecipe.allergen_sources.length > 0 && (
-                  <ul className="mt-1 space-y-0.5 text-[10px] text-muted-foreground">
+                  <ul className="mt-1 space-y-0.5 text-2xs text-muted-foreground">
                     {editingRecipe.allergen_sources.map((src, idx) => (
                       <li key={`${src.type}-${src.name}-${idx}`}>
                         {src.type === "sub_recipe"
@@ -417,7 +417,7 @@ export function RecipeFormModal({
               </div>
 
               {/* Table Headers */}
-              <div className="grid shrink-0 grid-cols-12 gap-2 border-b border-border px-6 py-2 text-xs font-ui-bold text-muted-foreground">
+              <div className="grid shrink-0 grid-cols-12 gap-2 border-b border-border px-6 py-2 text-xs font-bold text-muted-foreground">
                 <div className="col-span-2">{t("colType")}</div>
                 <div className="col-span-5">{tInv("pickRows.colStockItem")}</div>
                 <div className="col-span-2 text-center">{tInv("movementsTable.colQty")}</div>
@@ -445,7 +445,7 @@ export function RecipeFormModal({
                       <select
                         value={ing.kind}
                         onChange={e => updateIngredient(i, "kind", e.target.value)}
-                        className={`${inlineSelectClass} font-ui-bold`}
+                        className={`${inlineSelectClass} font-bold`}
                       >
                         <option value="stock_item">{t("ingredientTypeStock")}</option>
                         <option value="sub_recipe">{t("ingredientTypeSubRecipe")}</option>
@@ -456,7 +456,7 @@ export function RecipeFormModal({
                         <select
                           value={ing.sub_recipe_id}
                           onChange={e => updateIngredient(i, "sub_recipe_id", e.target.value)}
-                          className={`${inlineSelectClass} font-ui-medium`}
+                          className={`${inlineSelectClass} font-medium`}
                         >
                           <option value="">{t("selectSubRecipe")}</option>
                           {selectableSubRecipes.map(r => (
@@ -483,7 +483,7 @@ export function RecipeFormModal({
                       <select
                         value={ing.unit}
                         onChange={e => updateIngredient(i, "unit", e.target.value)}
-                        className={`${inlineSelectClass} font-ui-bold`}
+                        className={`${inlineSelectClass} font-bold`}
                       >
                         <option value="">{tInv("itemsTable.colUnit")}</option>
                         {stockUnits.map(u => (
@@ -502,7 +502,7 @@ export function RecipeFormModal({
                 {ingredients.length === 0 && (
                   <div className="h-full flex flex-col items-center justify-center py-12 text-center">
                     <ChefHat size={28} className="text-muted-foreground/30 mb-2" />
-                    <p className="text-sub font-ui-bold text-muted-foreground">{t("emptyIngredients")}</p>
+                    <p className="text-sub font-bold text-muted-foreground">{t("emptyIngredients")}</p>
                   </div>
                 )}
               </div>
@@ -523,7 +523,7 @@ export function RecipeFormModal({
         </DialogBody>
 
         <DialogFooter className="flex-row flex-wrap items-center justify-between gap-2 sm:justify-between">
-          <div className="text-2xs font-ui-medium italic text-muted-foreground">
+          <div className="text-2xs font-medium italic text-muted-foreground">
             {t("footerRequiredHint")}
           </div>
           <div className="flex items-center gap-2">

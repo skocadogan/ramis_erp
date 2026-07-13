@@ -173,7 +173,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
         onClick={openDialog}
         disabled={blockCloseForOpenChecks}
         className={cn(
-          "flex items-center gap-2 rounded-lg border border-border bg-white py-2 text-sm font-ui-medium text-slate-700 shadow-sm transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-amber-700 dark:hover:bg-amber-950/30",
+          "flex items-center gap-2 rounded-lg border border-border py-2 text-sm font-medium text-slate-700 shadow-sm transition hover:border-amber-300 hover:bg-amber-50 hover:text-amber-900 disabled:cursor-not-allowed disabled:opacity-50 border-input bg-card text-foreground dark:hover:border-amber-700 dark:hover:bg-amber-950/30",
           labelBreakpoint === "fullhd" ? "px-2 fullhd:px-3" : "px-3",
         )}
         title={
@@ -234,7 +234,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
           <div className="space-y-4">
             {/* Nakit */}
             <div className="space-y-1">
-              <div className="flex justify-between items-center text-xs font-ui-medium text-muted-foreground uppercase tracking-wider">
+              <div className="flex justify-between items-center text-xs font-medium text-muted-foreground uppercase tracking-wider">
                 <label>{tPay("cashRegister")}</label>
                 {zQuery.isSuccess && (
                   <span>{tPay("system")}: {formatAmount(expectedCash, canViewAmounts)}</span>
@@ -247,7 +247,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
                 value={actualCash}
                 onFocus={() => setActiveKbdField("cash")}
                 onChange={(e) => setActualCash(normalizeDecimalCashInput(e.target.value))}
-                className="w-full rounded-lg border border-border px-3 py-2.5 text-lg font-ui-semibold tracking-tight text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                className="w-full rounded-lg border border-border px-3 py-2.5 text-lg font-semibold tracking-tight text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/10 border-input bg-card text-foreground"
                 placeholder="0.00"
               />
             </div>
@@ -255,7 +255,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
             <div className="grid grid-cols-2 gap-4">
               {/* Kredi Kartı */}
               <div className="space-y-1">
-                <div className="flex justify-between items-center text-2xs font-ui-medium text-muted-foreground uppercase tracking-wider">
+                <div className="flex justify-between items-center text-2xs font-medium text-muted-foreground uppercase tracking-wider">
                   <label>{tPay("card")}</label>
                   {zQuery.isSuccess && (
                     <span>{formatAmount(expectedCard, canViewAmounts)}</span>
@@ -268,14 +268,14 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
                   onFocus={() => setActiveKbdField("card")}
                   value={actualCard}
                   onChange={(e) => setActualCard(normalizeDecimalCashInput(e.target.value))}
-                  className="w-full rounded-lg border border-border px-3 py-2 text-slate-900 focus:border-blue-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-slate-900 focus:border-blue-500 border-input bg-card text-foreground"
                   placeholder="0.00"
                 />
               </div>
 
               {/* Diğer */}
               <div className="space-y-1">
-                <div className="flex justify-between items-center text-2xs font-ui-medium text-muted-foreground uppercase tracking-wider">
+                <div className="flex justify-between items-center text-2xs font-medium text-muted-foreground uppercase tracking-wider">
                   <label>{tPay("other")}</label>
                   {zQuery.isSuccess && (
                     <span>{formatAmount(expectedOther, canViewAmounts)}</span>
@@ -288,7 +288,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
                   onFocus={() => setActiveKbdField("other")}
                   value={actualOther}
                   onChange={(e) => setActualOther(normalizeDecimalCashInput(e.target.value))}
-                  className="w-full rounded-lg border border-border px-3 py-2 text-slate-900 focus:border-blue-500 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="w-full rounded-lg border border-border px-3 py-2 text-slate-900 focus:border-blue-500 border-input bg-card text-foreground"
                   placeholder="0.00"
                 />
               </div>
@@ -296,13 +296,13 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
 
             {/* Notlar */}
             <div className="space-y-1">
-              <label className="text-xs font-ui-medium text-muted-foreground uppercase tracking-wider">{tShift("notes")}</label>
+              <label className="text-xs font-medium text-muted-foreground uppercase tracking-wider">{tShift("notes")}</label>
               <textarea
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 onFocus={() => setActiveKbdField("notes")}
                 rows={2}
-                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                className="w-full rounded-lg border border-border px-3 py-2 text-sm focus:border-blue-500 focus:ring-1 focus:ring-blue-500/20 border-input bg-card text-foreground"
                 placeholder={tShift("notesPlaceholder")}
               />
             </div>
@@ -312,7 +312,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
                 type="button"
                 disabled={closing || blockCloseForOpenChecks}
                 onClick={() => void submitClose()}
-                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 py-3 text-sm font-ui-bold text-white shadow-md shadow-slate-900/10 transition hover:bg-slate-800 disabled:opacity-50 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
+                className="mt-6 flex w-full items-center justify-center gap-2 rounded-xl bg-slate-900 py-3 text-sm font-bold text-white shadow-md shadow-slate-900/10 transition hover:bg-slate-800 disabled:opacity-50 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
               >
                 {closing ? <Loader2 className="size-4 animate-spin" /> : null}
                 {closing ? tShift("closing") : tShift("close")}
@@ -322,14 +322,14 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
             {/* Sağ Taraftaki Klavye Konteyneri */}
             {activeKbdField && (
               <div className="w-full md:w-[380px] shrink-0 animate-in fade-in slide-in-from-right-4 duration-300">
-                <div className="rounded-xl border border-slate-100 bg-slate-50/50 p-1 dark:border-slate-800 dark:bg-slate-900/50">
-                  <div className="flex items-center justify-between px-3 py-2 border-b border-white dark:border-slate-800 mb-2">
-                    <span className="text-2xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+                <div className="rounded-xl border border-slate-100 bg-slate-50/50 p-1 border-border bg-card/50">
+                  <div className="flex items-center justify-between px-3 py-2 border-b border-white border-border mb-2">
+                    <span className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">
                       {activeKbdField === "notes" ? tShift("kbdAlpha") : tShift("kbdNumeric")}
                     </span>
                     <button 
                       onClick={() => setActiveKbdField(null)}
-                      className="text-2xs font-ui-medium text-blue-600 hover:underline"
+                      className="text-2xs font-medium text-blue-600 hover:underline"
                     >
                       {tShift("kbdClose")}
                     </button>

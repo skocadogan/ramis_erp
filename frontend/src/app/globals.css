@@ -56,17 +56,29 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 
   /* Semantic Font Sizes */
-  --font-size-2xs: 0.625rem;
-  --font-size-sub: 0.6875rem;
-  --font-size-ui-sm: 0.8125rem;
-  --font-size-xs: 0.875rem;
+  --font-size-4xs: 0.6rem;
+  --font-size-3xs: 0.625rem;
+  --font-size-2xs: 0.785rem;
+  --font-size-sub: 0.85rem;
+  --font-size-ui-sm: 0.9125rem;
+  --font-size-ui-md: 0.9375rem;
+  --font-size-xs: 0.925rem;
   --font-size-ui: 1rem;
+  --font-size-lg: 1.125rem;
 
   /* Tailwind Utility Mappings */
+  --text-4xs: var(--font-size-4xs);
+  --text-3xs: var(--font-size-3xs);
   --text-2xs: var(--font-size-2xs);
+  --text-xs:  var(--font-size-xs);
   --text-sub: var(--font-size-sub);
+  --text-base: var(--font-size-lg);
+
+
   --text-ui-sm: var(--font-size-ui-sm);
+  --text-ui-md: var(--font-size-ui-md);
   --text-ui: var(--font-size-ui);
+  --text-lg: var(--font-size-lg);
 
   /* Semantic Font Weights */
   --font-weight-ui-thin: 300;
@@ -74,6 +86,13 @@
   --font-weight-ui-medium: 500;
   --font-weight-ui-semibold: 600;
   --font-weight-ui-bold: 700;
+
+  /* Shadows */
+  --shadow-glow: 0 0 8px rgba(59, 130, 246, 0.5);
+  --shadow-glow-emerald: 0 0 24px rgba(52, 211, 153, 0.25);
+
+  /* Extra Border Radius */
+  --radius-5xl: 2rem;
 }
 
 
@@ -130,16 +149,16 @@
 }
 
 [data-theme="dark"] {
-  --background: 217 15% 7%;
-  --foreground: 30 10% 92%;
-  --card: 217 14% 13%;
+  --background: 240 30% 4%;
+  --foreground: 0 0% 90%;
+  --card: 0 0% 14%;
   --card-foreground: 30 10% 92%;
-  --popover: 217 14% 13%;
+  --popover: 238 48% 12%;
   --popover-foreground: 30 10% 92%;
-  --primary: 217 30% 55%;
+  --primary: 36 85% 55%;
   --primary-foreground: 0 0% 7%;
-  --secondary: 217 10% 14%;
-  --secondary-foreground: 30 10% 92%;
+  --secondary: 158 58% 36%;
+  --secondary-foreground: 0 0% 90%;
   --muted: 217 10% 14%;
   --muted-foreground: 30 5% 60%;
   --accent: 217 12% 18%;
@@ -251,6 +270,7 @@
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
     font-family: var(--font-sans);
+    font-size: var(--font-size-ui);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -263,28 +283,7 @@
   }
 }
 
-.modal-input {
-  width: 100%;
-  padding: 0.5rem 0.75rem;
-  border-width: 1px;
-  border-color: hsl(var(--border));
-  border-radius: var(--radius-md);
-  font-size: var(--font-size-ui-sm);
-  background-color: hsl(var(--background));
-  transition: all 0.2s;
-  outline: none;
-}
 
-.modal-input:focus {
-  box-shadow: 0 0 0 2px hsl(var(--ring) / 0.2);
-  border-color: hsl(var(--ring));
-}
-
-[data-theme="dark"] .modal-input {
-  background-color: hsl(var(--muted));
-  border-color: hsl(var(--border));
-  color: hsl(var(--foreground));
-}
 
 input,
 textarea,

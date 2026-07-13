@@ -94,7 +94,7 @@ export function ItemFormModal({
             <div className="grid grid-cols-2 gap-3">
               <div className="grid gap-2">
                 <Label htmlFor="item-unit">{t("unit")}</Label>
-                <select id="item-unit" value={formData.unit} onChange={(e) => setFormData({ ...formData, unit: e.target.value })} className="modal-input">
+                <select id="item-unit" value={formData.unit} onChange={(e) => setFormData({ ...formData, unit: e.target.value })} className="w-full px-3 py-2 border border-border rounded-md text-ui-sm bg-background transition-all outline-none focus:ring-2 focus:ring-ring/20 focus:border-ring">
                   <option value="">{t("select")}</option>
                   {stockUnits.map((u) => (
                     <option key={u.id} value={u.short_name}>

@@ -52,7 +52,7 @@ export function AsyncStatePanel({
         aria-hidden
       />
       <div className="space-y-1">
-        <p className="text-sm font-ui-bold text-foreground">{resolvedTitle}</p>
+        <p className="text-sm font-bold text-foreground">{resolvedTitle}</p>
         {description ? (
           <p className="text-xs text-muted-foreground">{description}</p>
         ) : null}

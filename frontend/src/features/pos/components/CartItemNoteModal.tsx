@@ -46,16 +46,16 @@ export function CartItemNoteModal({
       aria-labelledby="cart-item-note-title"
     >
       <div className="w-full max-w-md overflow-hidden rounded-xl border border-border bg-background shadow-md motion-safe:animate-in motion-safe:fade-in motion-safe:zoom-in duration-200">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-6 py-5 dark:border-slate-800 dark:bg-slate-800/20">
+        <div className="flex items-center justify-between border-b border-slate-100 bg-slate-50/50 px-6 py-5 border-border bg-muted/20">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-blue-100 p-2 dark:bg-blue-900/30">
               <MessageSquareText size={20} className="text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h3 id="cart-item-note-title" className="font-ui-bold leading-tight text-foreground">
+              <h3 id="cart-item-note-title" className="font-bold leading-tight text-foreground">
                 {t("itemNoteTitle")}
               </h3>
-              <p className="text-xs font-ui-medium text-muted-foreground">{productName}</p>
+              <p className="text-xs font-medium text-muted-foreground">{productName}</p>
             </div>
           </div>
           <button
@@ -70,7 +70,7 @@ export function CartItemNoteModal({
 
         <div className="space-y-4 p-6">
           <div>
-            <label className="mb-1.5 block text-2xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+            <label className="mb-1.5 block text-2xs font-bold uppercase tracking-wider text-muted-foreground">
               {t("itemNoteLabel")}
             </label>
             <textarea
@@ -78,7 +78,7 @@ export function CartItemNoteModal({
               onChange={(e) => setDraft(e.target.value.slice(0, MAX_ITEM_NOTES_LENGTH))}
               placeholder={t("itemNotePlaceholder")}
               rows={4}
-              className="w-full resize-none rounded-xl border border-slate-200/80 bg-slate-50/50 px-3 py-2 text-sm text-foreground outline-none transition-all focus:border-blue-500 focus:bg-background focus:ring-2 focus:ring-blue-500/15 dark:border-slate-700 dark:bg-slate-800/40 dark:focus:border-blue-400 dark:focus:ring-blue-400/15"
+              className="w-full resize-none rounded-xl border border-slate-200/80 bg-slate-50/50 px-3 py-2 text-sm text-foreground outline-none transition-all focus:border-blue-500 focus:bg-background focus:ring-2 focus:ring-blue-500/15 border-border bg-muted/40 dark:focus:border-blue-400 dark:focus:ring-blue-400/15"
               autoFocus
             />
             <p className="mt-1 text-right text-2xs text-muted-foreground tabular-nums">

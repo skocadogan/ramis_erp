@@ -249,7 +249,7 @@ export function RecommendedProductsModal({
               {/* Ürün tablosu */}
               <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden p-4">
                 <div className="mb-2 flex items-center justify-between gap-2">
-                  <p className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                  <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     {t("productsCount", { count: filteredProducts.length })}
                   </p>
                   <button
@@ -265,7 +265,7 @@ export function RecommendedProductsModal({
                 <div
                   className={cn(
                     productRowGridClass,
-                    "shrink-0 border-b border-border px-3 pb-2 text-xs font-ui-semibold uppercase tracking-wide text-muted-foreground",
+                    "shrink-0 border-b border-border px-3 pb-2 text-xs font-semibold uppercase tracking-wide text-muted-foreground",
                   )}
                 >
                   <span className="text-center">#</span>
@@ -315,7 +315,7 @@ export function RecommendedProductsModal({
                               aria-label={t("selectProduct", { name: product.name })}
                               onClick={(e) => e.stopPropagation()}
                             />
-                            <span className="truncate text-sm font-ui-medium text-foreground">
+                            <span className="truncate text-sm font-medium text-foreground">
                               {product.name}
                             </span>
                             <div onClick={(e) => e.preventDefault()}>
@@ -351,7 +351,7 @@ export function RecommendedProductsModal({
 
             {selectedSummary.length > 0 && (
               <div className="shrink-0 border-t border-border bg-muted/10 px-6 py-3">
-                <p className="mb-2 text-sm font-ui-semibold">{t("selectedTitle")}</p>
+                <p className="mb-2 text-sm font-semibold">{t("selectedTitle")}</p>
                 <div className="max-h-32 overflow-y-auto">
                   <table className="w-full text-sm">
                     <thead>
@@ -369,7 +369,7 @@ export function RecommendedProductsModal({
                             : row.product.units?.find((u) => u.id === row.unitId)?.name ?? "—"
                         return (
                           <tr key={row.product.id} className="border-t border-border/60">
-                            <td className="py-1.5 pr-4 font-ui-medium">{row.product.name}</td>
+                            <td className="py-1.5 pr-4 font-medium">{row.product.name}</td>
                             <td className="py-1.5 pr-4 text-muted-foreground">{unitLabel}</td>
                             <td className="py-1.5 text-right font-mono tabular-nums">
                               {canViewAmounts ? formatCurrency(row.price) : "—"}

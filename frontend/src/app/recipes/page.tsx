@@ -80,7 +80,7 @@ function RecipesPageContent() {
     <AppShell>
       <div className="flex h-full bg-background overflow-hidden">
         {/* Sol Sidebar: Kategoriler */}
-        <div className="w-64 flex-shrink-0 border-r border-border bg-white dark:border-slate-800 dark:bg-slate-900/50 flex flex-col overflow-hidden">
+        <div className="w-64 flex-shrink-0 border-r border-border border-border bg-card flex flex-col overflow-hidden">
           <RecipeCategoryTreeView
             categories={recipes.recipeCategories}
             selectedCategoryId={recipes.selectedCategoryId}
@@ -94,7 +94,7 @@ function RecipesPageContent() {
           <div className="flex-1 overflow-hidden p-6 flex flex-col gap-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <h1 className="text-xl font-ui-bold text-foreground flex items-center gap-3">
+                <h1 className="text-xl font-bold text-foreground flex items-center gap-3">
                   
                   {t("title")}
                   <TooltipProvider>
@@ -121,13 +121,13 @@ function RecipesPageContent() {
                     placeholder={t("searchPlaceholder")}
                     value={recipes.searchTerm}
                     onChange={(e) => recipes.setSearchTerm(e.target.value)}
-                    className="pl-9 pr-4 py-2 bg-white border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 w-64 transition-all shadow-sm"
+                    className="pl-9 pr-4 py-2 border border-border rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground w-64 transition-all shadow-sm"
                   />
                 </div>
                 {canManageRecipes && (
                   <button
                     onClick={() => actions.openForm()}
-                    className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2 text-sm font-ui-semibold text-white hover:bg-blue-700 hover:shadow-lg transition-all active:scale-[0.98]"
+                    className="flex items-center gap-2 rounded-xl bg-blue-600 px-5 py-2 text-sm font-semibold text-white hover:bg-blue-700 hover:shadow-lg transition-all active:scale-[0.98]"
                   >
                     <Plus size={18} />{t("newRecipe")}
                   </button>
@@ -137,31 +137,31 @@ function RecipesPageContent() {
 
             {/* Stats Summary Bar */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <div className="bg-white dark:bg-slate-900/40 p-3 rounded-xl border border-border shadow-sm flex items-center gap-3">
+              <div className="bg-card/40 p-3 rounded-xl border border-border shadow-sm flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 shrink-0">
                   <ChefHat size={16} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-ui-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{t("statTotalRecipes")}</p>
-                  <p className="text-base font-ui-bold text-foreground leading-none">{recipes.recipes.length}</p>
+                  <p className="text-2xs font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{t("statTotalRecipes")}</p>
+                  <p className="text-base font-bold text-foreground leading-none">{recipes.recipes.length}</p>
                 </div>
               </div>
-              <div className="bg-white dark:bg-slate-900/40 p-3 rounded-xl border border-border shadow-sm flex items-center gap-3">
+              <div className="bg-card/40 p-3 rounded-xl border border-border shadow-sm flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center text-amber-600 shrink-0">
                   <Layers size={16} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-ui-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{t("statCategories")}</p>
-                  <p className="text-base font-ui-bold text-foreground leading-none">{recipes.recipeCategories.length}</p>
+                  <p className="text-2xs font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{t("statCategories")}</p>
+                  <p className="text-base font-bold text-foreground leading-none">{recipes.recipeCategories.length}</p>
                 </div>
               </div>
-              <div className="bg-white dark:bg-slate-900/40 p-3 rounded-xl border border-border shadow-sm flex items-center gap-3">
+              <div className="bg-card/40 p-3 rounded-xl border border-border shadow-sm flex items-center gap-3">
                 <div className="w-8 h-8 rounded-lg bg-emerald-50 dark:bg-emerald-900/20 flex items-center justify-center text-emerald-600 shrink-0">
                   <Package size={16} />
                 </div>
                 <div>
-                  <p className="text-[10px] font-ui-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{tInvItems("label")}</p>
-                  <p className="text-base font-ui-bold text-foreground leading-none">{recipes.stockItems.length}</p>
+                  <p className="text-2xs font-bold text-muted-foreground uppercase tracking-wider leading-none mb-1">{tInvItems("label")}</p>
+                  <p className="text-base font-bold text-foreground leading-none">{recipes.stockItems.length}</p>
                 </div>
               </div>
             </div>
@@ -169,13 +169,13 @@ function RecipesPageContent() {
             <div className="flex-1 overflow-auto custom-scrollbar">
               {recipes.filteredRecipes.length === 0 ? (
                 <div className="flex flex-col items-center justify-center min-h-[300px] text-muted-foreground bg-card/50 rounded-2xl border-2 border-dashed border-border">
-                  <div className="p-4 rounded-full bg-slate-50 dark:bg-slate-800 mb-4">
-                    <ChefHat size={48} className="text-slate-300 dark:text-slate-700" />
+                  <div className="p-4 rounded-full bg-muted mb-4">
+                    <ChefHat size={48} className="text-muted-foreground" />
                   </div>
-                  <span className="text-sm font-ui-medium">{t("emptyState")}</span>
+                  <span className="text-sm font-medium">{t("emptyState")}</span>
                   <button 
                     onClick={() => { recipes.setSearchTerm(""); recipes.setSelectedCategoryId(null); }}
-                    className="mt-2 text-xs text-blue-600 hover:underline font-ui-semibold"
+                    className="mt-2 text-xs text-blue-600 hover:underline font-semibold"
                   >
                     {t("clearFilters")}
                   </button>

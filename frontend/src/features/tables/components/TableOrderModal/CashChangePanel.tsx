@@ -44,7 +44,7 @@ export const CashChangePanel: React.FC<CashChangePanelProps> = ({
             <button
                 type="button"
                 onClick={() => setExpanded(!expanded)}
-                className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-ui-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors dark:bg-emerald-900/20 dark:text-emerald-400 dark:hover:bg-emerald-900/30"
+                className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 transition-colors dark:bg-emerald-900/20 dark:text-emerald-400 dark:hover:bg-emerald-900/30"
             >
                 <span className="flex items-center gap-1.5"><Coins size={14} />{t('cashChange')}</span>
                 {expanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -87,8 +87,8 @@ export const CashChangePanel: React.FC<CashChangePanelProps> = ({
                                 ? 'bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400'
                                 : 'bg-rose-50 text-rose-700 dark:bg-rose-900/20 dark:text-rose-400'
                         }`}>
-                            <span className="font-ui-semibold">{t('changeAmount')}</span>
-                            <span className="font-ui-bold text-lg">
+                            <span className="font-semibold">{t('changeAmount')}</span>
+                            <span className="font-bold text-lg">
                                 {changeAmount >= 0
                                     ? formatAmount(changeAmount, canViewAmounts)
                                     : `-${formatAmount(Math.abs(changeAmount), canViewAmounts)}`}

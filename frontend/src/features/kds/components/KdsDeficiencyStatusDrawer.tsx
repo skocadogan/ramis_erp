@@ -424,7 +424,7 @@ export function KdsDeficiencyStatusDrawer({
     >
       <History size={28} className="shrink-0" />
       {!collapsed && (
-        <span className="max-w-[10rem] truncate text-xs font-ui-semibold sm:text-sm">{t('deficiency.sidebarLabel')}</span>
+        <span className="max-w-[10rem] truncate text-xs font-semibold sm:text-sm">{t('deficiency.sidebarLabel')}</span>
       )}
     </button>
   );
@@ -435,7 +435,7 @@ export function KdsDeficiencyStatusDrawer({
         <TooltipProvider delay={0}>
           <Tooltip>
             <TooltipTrigger render={buttonContent} />
-            <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-ui-semibold text-xs">
+            <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-semibold text-xs">
               {t('deficiency.sidebarLabel')}
             </TooltipContent>
           </Tooltip>
@@ -458,7 +458,7 @@ export function KdsDeficiencyStatusDrawer({
             <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted px-4 py-3">
               <div className="flex items-center gap-2">
                 <Package size={18} className="text-amber-500" />
-                <h3 className="font-ui-bold text-sm text-foreground">{t('deficiency.title')}</h3>
+                <h3 className="font-bold text-sm text-foreground">{t('deficiency.title')}</h3>
               </div>
               <button
                 type="button"
@@ -479,7 +479,7 @@ export function KdsDeficiencyStatusDrawer({
               ) : stationReports.length === 0 ? (
                 <div className="py-20 flex flex-col items-center justify-center text-muted-foreground">
                   <AlertCircle size={40} className="opacity-20 mb-4" />
-                  <span className="text-sm font-ui-medium italic">{t('deficiency.emptyHistory')}</span>
+                  <span className="text-sm font-medium italic">{t('deficiency.emptyHistory')}</span>
                 </div>
               ) : (
                 stationReports.map((report) => (
@@ -488,7 +488,7 @@ export function KdsDeficiencyStatusDrawer({
                     className="bg-muted border border-border hover:border-primary/30 rounded-xl p-3 shadow-sm flex flex-col gap-2 transition-[colors,border-color] group"
                   >
                     <div className="flex items-center justify-between gap-2 min-w-0">
-                      <span className="font-mono text-xs font-ui-bold text-amber-400 truncate">
+                      <span className="font-mono text-xs font-bold text-amber-400 truncate">
                         {report.report_number}
                       </span>
                       <StatusBadge domain="deficiency" status={report.status} />
@@ -502,7 +502,7 @@ export function KdsDeficiencyStatusDrawer({
                         </span>
                       </div>
                       <div className="flex items-center gap-1.5 shrink-0">
-                        <span className="text-foreground font-ui-bold tabular-nums">
+                        <span className="text-foreground font-bold tabular-nums">
                           {t('deficiency.itemsCount', { count: report.items?.length ?? 0 })}
                         </span>
                       </div>
@@ -513,7 +513,7 @@ export function KdsDeficiencyStatusDrawer({
                         {report.transfers.map((xfer) => (
                           <span
                             key={xfer.id}
-                            className="text-2xs rounded px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-500/20 font-ui-medium"
+                            className="text-2xs rounded px-2 py-0.5 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-700 dark:text-indigo-200 border border-indigo-200 dark:border-indigo-500/20 font-medium"
                           >
                             {xfer.transfer_number}: {translateTransferStatus(xfer.status)}
                           </span>
@@ -526,7 +526,7 @@ export function KdsDeficiencyStatusDrawer({
                       onClick={() => {
                         startTransition(() => setDetailReport(report));
                       }}
-                      className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg py-2 text-xs font-ui-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/5 hover:bg-amber-100 dark:hover:bg-amber-500/15 border border-amber-200 dark:border-amber-500/10 hover:border-amber-300 dark:hover:border-amber-500/30 transition-[colors,border-color]"
+                      className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg py-2 text-xs font-bold text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-500/5 hover:bg-amber-100 dark:hover:bg-amber-500/15 border border-amber-200 dark:border-amber-500/10 hover:border-amber-300 dark:hover:border-amber-500/30 transition-[colors,border-color]"
                     >
                       <ListOrdered className="h-3.5 w-3.5" />
                       {t('deficiency.viewDetails')}
@@ -536,7 +536,7 @@ export function KdsDeficiencyStatusDrawer({
               )}
             </div>
 
-            <div className="p-4 border-t border-border bg-muted/50 text-sub text-muted-foreground font-ui-medium italic text-center">
+            <div className="p-4 border-t border-border bg-muted/50 text-sub text-muted-foreground font-medium italic text-center">
               {t('deficiency.limitNote')}
             </div>
           </aside>
@@ -556,13 +556,13 @@ export function KdsDeficiencyStatusDrawer({
             className="flex h-[min(85vh,720px)] w-[calc(100vw-1.5rem)] max-w-4xl flex-col gap-0 overflow-hidden p-0 sm:max-w-5xl sm:w-full bg-background border-border shadow-lg"
           >
             <DialogHeader className="shrink-0 space-y-1 border-b border-border px-6 py-4 pr-10 bg-muted/50">
-              <DialogTitle className="flex flex-wrap items-center gap-2 text-sm font-ui-bold text-foreground">
+              <DialogTitle className="flex flex-wrap items-center gap-2 text-sm font-bold text-foreground">
                 <span className="font-mono text-amber-500">
                   {detailReport.report_number}
                 </span>
                 <StatusBadge domain="deficiency" status={detailReport.status} />
               </DialogTitle>
-              <DialogDescription className="line-clamp-2 text-left text-xs font-ui-medium text-muted-foreground">
+              <DialogDescription className="line-clamp-2 text-left text-xs font-medium text-muted-foreground">
                 <span className="text-foreground">
                   {translateDeficiencyStatus(detailReport.status)}
                 </span>
@@ -589,12 +589,12 @@ export function KdsDeficiencyStatusDrawer({
                 detailReport.transfers.length > 0 &&
                 !detailHasTransferLineItems ? (
                   <div className="shrink-0 border-b border-border bg-muted/30 px-3 py-2">
-                    <p className="text-2xs font-ui-bold text-muted-foreground">{t('deficiency.transfersTitle')}</p>
+                    <p className="text-2xs font-bold text-muted-foreground">{t('deficiency.transfersTitle')}</p>
                     <div className="mt-1.5 flex flex-wrap gap-1">
                       {detailReport.transfers.map((xfer) => (
                         <span
                           key={xfer.id}
-                          className="text-2xs rounded-md border border-border bg-muted px-2 py-0.5 font-ui-bold text-foreground"
+                          className="text-2xs rounded-md border border-border bg-muted px-2 py-0.5 font-bold text-foreground"
                         >
                           {xfer.transfer_number}: {translateTransferStatus(xfer.status)}
                         </span>

@@ -137,13 +137,13 @@ export function ProductOptionsModal({
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4">
       <div className="bg-background max-h-[90vh] w-full max-w-lg overflow-hidden rounded-xl border border-border shadow-md">
-        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 dark:border-slate-800">
+        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 border-border">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-blue-100 p-2 dark:bg-blue-900/30">
               <SlidersHorizontal size={18} className="text-blue-600 dark:text-blue-400" />
             </div>
             <div>
-              <h3 className="font-ui-bold text-foreground">{product.name}</h3>
+              <h3 className="font-bold text-foreground">{product.name}</h3>
               <p className="text-xs text-muted-foreground">
                 {step === "unit" ? tUnit("select") : t("selectModifiers")}
               </p>
@@ -172,10 +172,10 @@ export function ProductOptionsModal({
               <button
                 type="button"
                 onClick={() => goModifiers(null)}
-                className="flex items-center justify-between rounded-lg border-2 border-slate-100 p-4 hover:border-blue-500 dark:border-slate-800"
+                className="flex items-center justify-between rounded-lg border-2 border-slate-100 p-4 hover:border-blue-500 border-border"
               >
-                <span className="font-ui-bold">{tUnit("standard")}</span>
-                <span className="font-mono font-ui-bold">
+                <span className="font-bold">{tUnit("standard")}</span>
+                <span className="font-mono font-bold">
                   {canViewAmounts ? formatCurrency(unitPrice(product, null)) : AMOUNT_DISPLAY_MASK}
                 </span>
               </button>
@@ -184,10 +184,10 @@ export function ProductOptionsModal({
                   key={unit.id || unit.name}
                   type="button"
                   onClick={() => goModifiers(unit)}
-                  className="flex items-center justify-between rounded-lg border-2 border-slate-100 p-4 hover:border-blue-500 dark:border-slate-800"
+                  className="flex items-center justify-between rounded-lg border-2 border-slate-100 p-4 hover:border-blue-500 border-border"
                 >
-                  <span className="font-ui-bold">{unit.name}</span>
-                  <span className="font-mono font-ui-bold">
+                  <span className="font-bold">{unit.name}</span>
+                  <span className="font-mono font-bold">
                     {canViewAmounts ? formatCurrency(unitPrice(product, unit)) : AMOUNT_DISPLAY_MASK}
                   </span>
                 </button>
@@ -199,7 +199,7 @@ export function ProductOptionsModal({
             <div className="space-y-4">
               {groups.map((group) => (
                 <div key={group.id}>
-                  <p className="mb-2 text-sm font-ui-semibold text-foreground">
+                  <p className="mb-2 text-sm font-semibold text-foreground">
                     {group.name}
                     {group.is_required && (
                       <span className="ml-2 text-2xs uppercase text-amber-600">{t("required")}</span>
@@ -213,10 +213,10 @@ export function ProductOptionsModal({
                           key={mod.id}
                           type="button"
                           onClick={() => toggleModifier(group.id, mod, group.is_multiple)}
-                          className={`rounded-lg border px-3 py-2 text-sm font-ui-medium transition-colors ${
+                          className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
                             active
                               ? "border-blue-600 bg-blue-600 text-white"
-                              : "border-border bg-slate-50 text-slate-700 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200"
+                              : "border-border bg-slate-50 text-slate-700 border-border bg-muted text-foreground"
                           }`}
                         >
                           {mod.name}
@@ -237,8 +237,8 @@ export function ProductOptionsModal({
         </div>
 
         {step === "modifiers" && (
-          <div className="flex items-center justify-between border-t border-slate-100 px-5 py-4 dark:border-slate-800">
-            <span className="text-sm font-ui-bold text-blue-600">
+          <div className="flex items-center justify-between border-t border-slate-100 px-5 py-4 border-border">
+            <span className="text-sm font-bold text-blue-600">
               {canViewAmounts
                 ? t("lineTotal", { total: formatCurrency(baseUnitPrice + modifierTotal) })
                 : AMOUNT_DISPLAY_MASK}
@@ -247,7 +247,7 @@ export function ProductOptionsModal({
               type="button"
               disabled={Boolean(validationError)}
               onClick={handleConfirm}
-              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-ui-bold text-white hover:bg-blue-700 disabled:opacity-50"
+              className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700 disabled:opacity-50"
             >
               {t("addToCart")}
             </button>
@@ -263,7 +263,7 @@ export function ProductOptionsModal({
               {tProduct("allergenDialogTitle")}
             </DialogTitle>
           </DialogHeader>
-          <p className="mb-2 text-sm font-ui-semibold text-foreground">{product.name}</p>
+          <p className="mb-2 text-sm font-semibold text-foreground">{product.name}</p>
           {(product.allergens?.length ?? 0) > 0 ? (
             <ul className="space-y-2">
               {product.allergens!.map((a) => (
@@ -271,8 +271,8 @@ export function ProductOptionsModal({
                   key={a.id}
                   className="flex items-center justify-between rounded-lg border border-amber-100 bg-amber-50/50 px-3 py-2 text-sm dark:border-amber-900/40 dark:bg-amber-950/20"
                 >
-                  <span className="font-ui-medium">{a.name}</span>
-                  <span className="text-xs font-ui-bold text-amber-700 dark:text-amber-300">
+                  <span className="font-medium">{a.name}</span>
+                  <span className="text-xs font-bold text-amber-700 dark:text-amber-300">
                     {tProduct("allergenRisk", { score: a.risk_score })}
                   </span>
                 </li>

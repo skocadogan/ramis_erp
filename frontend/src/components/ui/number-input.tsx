@@ -77,7 +77,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
           value={value}
           onChange={(e) => onChange(e.target.value)}
           className={cn(
-            "w-full rounded-lg border border-input bg-background text-sm font-ui-semibold transition-all outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
+            "w-full rounded-lg border border-input bg-background text-sm font-semibold transition-all outline-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none",
             isCompact
               ? "h-8 px-6 text-right tabular-nums sm:text-sm"
               : "h-9 px-9 text-center sm:text-sm",
@@ -87,7 +87,7 @@ const NumberInput = forwardRef<HTMLInputElement, NumberInputProps>(
 
         <div className={cn("absolute flex items-center gap-1", btnRightInset)}>
           {suffix && (
-            <span className="mr-1 select-none text-2xs font-ui-bold uppercase text-muted-foreground">
+            <span className="mr-1 select-none text-2xs font-bold uppercase text-muted-foreground">
               {suffix}
             </span>
           )}

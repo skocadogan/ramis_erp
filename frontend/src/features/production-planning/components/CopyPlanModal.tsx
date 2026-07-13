@@ -78,7 +78,7 @@ export function CopyPlanModal({ isOpen, onClose, plan, onCopy, isSubmitting }: C
         <form id="copy-plan-form" onSubmit={handleSubmit} className="space-y-4 py-2">
           <div className="rounded-md border border-border bg-background px-3 py-2 text-sm">
             <div className="text-muted-foreground">{t("sourceDate")}</div>
-            <div className="font-ui-medium text-foreground">{sourceDateLabel}</div>
+            <div className="font-medium text-foreground">{sourceDateLabel}</div>
           </div>
 
           <div className="space-y-2">

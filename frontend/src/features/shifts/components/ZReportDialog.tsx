@@ -49,8 +49,8 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
               <FileBarChart size={20} />
             </div>
             <div>
-              <DialogTitle className="text-lg font-ui-bold">{t("zReport.title")}</DialogTitle>
-              <p className="text-xs font-ui-medium uppercase tracking-wider text-muted-foreground">
+              <DialogTitle className="text-lg font-bold">{t("zReport.title")}</DialogTitle>
+              <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 {t("zReport.subtitle")}
               </p>
             </div>
@@ -72,9 +72,9 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
               {/* --- Özet Kartları --- */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
-                  <p className="text-2xs uppercase font-ui-bold text-muted-foreground mb-1">{t("zReport.totalSales")}</p>
+                  <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.totalSales")}</p>
                   <div className="flex items-end justify-between">
-                    <span className="text-xl font-ui-bold text-foreground font-mono">
+                    <span className="text-xl font-bold text-foreground font-mono">
                       {formatAmount(data.totals.gross_sales, canViewAmounts)}
                     </span>
                     <TrendingUp size={18} className="text-emerald-500 mb-1" />
@@ -85,9 +85,9 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                 </div>
 
                 <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
-                  <p className="text-2xs uppercase font-ui-bold text-muted-foreground mb-1">{t("zReport.expensesOut")}</p>
+                  <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.expensesOut")}</p>
                   <div className="flex items-end justify-between">
-                    <span className="text-xl font-ui-bold text-foreground font-mono">
+                    <span className="text-xl font-bold text-foreground font-mono">
                       {formatAmount(data.expenses_total, canViewAmounts)}
                     </span>
                     <TrendingDown size={18} className="text-rose-500 mb-1" />
@@ -98,10 +98,10 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                 </div>
 
                 <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
-                  <p className="text-2xs uppercase font-ui-bold text-muted-foreground mb-1">{t("zReport.cashNet")}</p>
+                  <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.cashNet")}</p>
                   <div className="flex items-end justify-between">
                     <span className={cn(
-                      "text-xl font-ui-bold font-mono",
+                      "text-xl font-bold font-mono",
                       data.cash_movements_net >= 0 ? "text-foreground" : "text-rose-600"
                     )}>
                       {data.cash_movements_net >= 0 ? "+" : ""}
@@ -113,9 +113,9 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                 </div>
 
                 <div className="rounded-xl border border-orange-200 bg-background p-4 shadow-sm dark:border-orange-900/30">
-                  <p className="text-2xs uppercase font-ui-bold text-orange-600 dark:text-orange-400 mb-1">{t("zReport.creditLabel")}</p>
+                  <p className="text-2xs uppercase font-bold text-orange-600 dark:text-orange-400 mb-1">{t("zReport.creditLabel")}</p>
                   <div className="flex items-end justify-between">
-                    <span className="text-xl font-ui-bold text-orange-600 dark:text-orange-400 font-mono">
+                    <span className="text-xl font-bold text-orange-600 dark:text-orange-400 font-mono">
                       {formatAmount(data.payment_breakdown.CREDIT ?? 0, canViewAmounts)}
                     </span>
                     <CreditCard size={18} className="text-orange-400 mb-1" />
@@ -126,10 +126,10 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
 
               {/* --- Kasa Nakit Toplamı --- */}
               <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
-                <p className="text-2xs uppercase font-ui-bold text-muted-foreground mb-1">{t("zReport.cashRegisterTotal")}</p>
+                <p className="text-2xs uppercase font-bold text-muted-foreground mb-1">{t("zReport.cashRegisterTotal")}</p>
                 <div className="flex items-end justify-between">
                   <span className={cn(
-                    "text-xl font-ui-bold font-mono",
+                    "text-xl font-bold font-mono",
                     (data.cash_movements_net + (data.payment_breakdown.CASH ?? 0) - data.expenses_total) >= 0
                       ? "text-foreground"
                       : "text-rose-600"
@@ -148,7 +148,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
 
               {/* --- Ödeme Kırılımı --- */}
               <div className="space-y-3">
-                <h3 className="text-xs font-ui-bold text-muted-foreground uppercase tracking-widest flex items-center gap-2">
+                <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest flex items-center gap-2">
                   <Receipt size={14} /> {t("zReport.paymentTypes")}
                 </h3>
                 <div className="divide-y divide-border rounded-xl border border-border bg-background">
@@ -157,36 +157,36 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                       <div className="bg-blue-50 text-blue-600 p-1.5 rounded-lg dark:bg-blue-900/20 dark:text-blue-400">
                         <Wallet size={16} />
                       </div>
-                      <span className="text-sm font-ui-medium">{t("zReport.cashCash")}</span>
+                      <span className="text-sm font-medium">{t("zReport.cashCash")}</span>
                     </div>
-                    <span className="font-ui-bold">{formatAmount(data.payment_breakdown.CASH ?? 0, canViewAmounts)}</span>
+                    <span className="font-bold">{formatAmount(data.payment_breakdown.CASH ?? 0, canViewAmounts)}</span>
                   </div>
                   <div className="px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="bg-purple-50 text-purple-600 p-1.5 rounded-lg dark:bg-purple-900/20 dark:text-purple-400">
                         <CreditCard size={16} />
                       </div>
-                      <span className="text-sm font-ui-medium">{t("zReport.cardCard")}</span>
+                      <span className="text-sm font-medium">{t("zReport.cardCard")}</span>
                     </div>
-                    <span className="font-ui-bold">{formatAmount(data.payment_breakdown.CARD ?? 0, canViewAmounts)}</span>
+                    <span className="font-bold">{formatAmount(data.payment_breakdown.CARD ?? 0, canViewAmounts)}</span>
                   </div>
                   <div className="px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="bg-amber-50 text-amber-600 p-1.5 rounded-lg dark:bg-amber-900/20 dark:text-amber-400">
                         <Info size={16} />
                       </div>
-                      <span className="text-sm font-ui-medium">{t("zReport.otherPayments")}</span>
+                      <span className="text-sm font-medium">{t("zReport.otherPayments")}</span>
                     </div>
-                    <span className="font-ui-bold">{formatAmount(data.payment_breakdown.OTHER ?? 0, canViewAmounts)}</span>
+                    <span className="font-bold">{formatAmount(data.payment_breakdown.OTHER ?? 0, canViewAmounts)}</span>
                   </div>
                   <div className="px-4 py-3 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <div className="bg-orange-50 text-orange-600 p-1.5 rounded-lg dark:bg-orange-900/20 dark:text-orange-400">
                         <CreditCard size={16} />
                       </div>
-                      <span className="text-sm font-ui-medium">{t("zReport.creditLabel")}</span>
+                      <span className="text-sm font-medium">{t("zReport.creditLabel")}</span>
                     </div>
-                    <span className="font-ui-bold text-orange-600 dark:text-orange-400">{formatAmount(data.payment_breakdown.CREDIT ?? 0, canViewAmounts)}</span>
+                    <span className="font-bold text-orange-600 dark:text-orange-400">{formatAmount(data.payment_breakdown.CREDIT ?? 0, canViewAmounts)}</span>
                   </div>
                 </div>
               </div>
@@ -194,21 +194,21 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
 
             {/* --- Sütun 2: Vardiya Giderleri (Tablo) --- */}
             <div className="space-y-2">
-              <h3 className="text-xs font-ui-bold text-muted-foreground uppercase tracking-widest">{t("zReport.shiftExpenses")}</h3>
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{t("zReport.shiftExpenses")}</h3>
               <div className="overflow-hidden rounded-xl border border-border bg-background">
                 {data.expenses.length > 0 ? (
                   <table className="w-full text-left text-xs">
                     <thead>
                       <tr className="bg-background">
-                        <th className="px-3 py-2 text-muted-foreground font-ui-medium">{t("zReport.expenseDescription")}</th>
-                        <th className="px-3 py-2 text-right text-muted-foreground font-ui-medium">{t("zReport.expenseAmount")}</th>
+                        <th className="px-3 py-2 text-muted-foreground font-medium">{t("zReport.expenseDescription")}</th>
+                        <th className="px-3 py-2 text-right text-muted-foreground font-medium">{t("zReport.expenseAmount")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
                       {data.expenses.map((exp) => (
                         <tr key={exp.id}>
                           <td className="px-3 py-2 text-muted-foreground">{exp.description}</td>
-                          <td className="px-3 py-2 text-right font-ui-bold text-rose-600 font-mono">{formatAmount(Number(exp.amount), canViewAmounts)}</td>
+                          <td className="px-3 py-2 text-right font-bold text-rose-600 font-mono">{formatAmount(Number(exp.amount), canViewAmounts)}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -221,14 +221,14 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
 
             {/* --- Sütun 3: Kasa Giriş Çıkış (Tablo) --- */}
             <div className="space-y-2">
-              <h3 className="text-xs font-ui-bold text-muted-foreground uppercase tracking-widest">{t("zReport.cashMovements")}</h3>
+              <h3 className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{t("zReport.cashMovements")}</h3>
               <div className="overflow-hidden rounded-xl border border-border bg-background">
                 {data.cash_movements.length > 0 ? (
                   <table className="w-full text-left text-xs">
                     <thead>
                       <tr className="bg-background">
-                        <th className="px-3 py-2 text-muted-foreground font-ui-medium">{t("zReport.movementDescription")}</th>
-                        <th className="px-3 py-2 text-right text-muted-foreground font-ui-medium">{t("zReport.movementAmount")}</th>
+                        <th className="px-3 py-2 text-muted-foreground font-medium">{t("zReport.movementDescription")}</th>
+                        <th className="px-3 py-2 text-right text-muted-foreground font-medium">{t("zReport.movementAmount")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
@@ -245,7 +245,7 @@ export function ZReportDialog({ isOpen, onOpenChange, data, shiftId }: ZReportDi
                             </span>
                           </td>
                           <td className={cn(
-                            "px-3 py-2 text-right font-ui-bold font-mono whitespace-nowrap",
+                            "px-3 py-2 text-right font-bold font-mono whitespace-nowrap",
                             mov.movement_type === "IN" ? "text-emerald-600" : "text-rose-600"
                           )}>
                             {mov.movement_type === "IN" ? "+" : "-"}

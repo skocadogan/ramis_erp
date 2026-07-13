@@ -92,7 +92,7 @@ export function InventoryHeader({
           <span className={compact ? "hidden sm:inline" : undefined}>{t("header.criticalStockEntry")}</span>
           <span
             className={cn(
-              "inline-flex items-center justify-center rounded-full bg-rose-600 font-ui-bold text-white",
+              "inline-flex items-center justify-center rounded-full bg-rose-600 font-bold text-white",
               compact ? "h-4 min-w-4 px-1 text-2xs" : "ml-1 h-5 min-w-5 px-1 text-2xs",
             )}
           >

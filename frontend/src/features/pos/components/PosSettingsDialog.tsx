@@ -43,18 +43,18 @@ function OrderPrintingSettings({
   return (
     <div className="space-y-3">
       <div className="flex flex-col gap-0.5">
-        <label className="text-sm font-ui-semibold text-foreground">{t("printingOrder")}</label>
-        <span className="text-2xs font-ui-medium text-muted-foreground">
+        <label className="text-sm font-semibold text-foreground">{t("printingOrder")}</label>
+        <span className="text-2xs font-medium text-muted-foreground">
           {t("printingOrderDesc")}
         </span>
       </div>
 
       <div className="flex items-center justify-between gap-3 bg-background p-2 rounded-md">
         <div className="flex flex-col gap-0.5">
-          <Label htmlFor="auto-print-order" className="text-xs font-ui-bold text-foreground">
+          <Label htmlFor="auto-print-order" className="text-xs font-bold text-foreground">
             {t("autoPrintOrder")}
           </Label>
-          <span className="text-[9px] text-muted-foreground uppercase tracking-tight">{t("autoPrintOrderDesc")}</span>
+          <span className="text-3xs text-muted-foreground uppercase tracking-tight">{t("autoPrintOrderDesc")}</span>
         </div>
         <Switch
           id="auto-print-order"
@@ -179,7 +179,7 @@ export function PosSettingsDialog({
             <div className="rounded-lg bg-blue-600/15 p-2 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400">
               <Settings className="h-4 w-4" />
             </div>
-            <DialogTitle className="text-base font-ui-bold tracking-tight text-foreground">
+            <DialogTitle className="text-base font-bold tracking-tight text-foreground">
               {t("title")}
             </DialogTitle>
           </div>
@@ -193,10 +193,10 @@ export function PosSettingsDialog({
           <div className="space-y-5">
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-col gap-0.5">
-                <Label htmlFor="pos-notif-panel" className="text-sm font-ui-semibold text-foreground">
+                <Label htmlFor="pos-notif-panel" className="text-sm font-semibold text-foreground">
                   {t("notifPanel")}
                 </Label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("notifPanelDesc")}
                 </span>
               </div>
@@ -211,10 +211,10 @@ export function PosSettingsDialog({
 
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-col gap-0.5">
-                <Label htmlFor="pos-waiter-call-notifs" className="text-sm font-ui-semibold text-foreground">
+                <Label htmlFor="pos-waiter-call-notifs" className="text-sm font-semibold text-foreground">
                   {t("waiterCallNotifs")}
                 </Label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("waiterCallNotifsDesc")}
                 </span>
               </div>
@@ -230,7 +230,7 @@ export function PosSettingsDialog({
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-col gap-0.5">
                 <div className="flex items-center gap-1.5">
-                  <Label htmlFor="pos-notif-sound" className="text-sm font-ui-semibold text-foreground">
+                  <Label htmlFor="pos-notif-sound" className="text-sm font-semibold text-foreground">
                     {t("notifSound")}
                   </Label>
                   {playNotifSound ? (
@@ -239,7 +239,7 @@ export function PosSettingsDialog({
                     <VolumeX size={12} className="text-muted-foreground" />
                   )}
                 </div>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("notifSoundDesc")}
                 </span>
               </div>
@@ -255,10 +255,10 @@ export function PosSettingsDialog({
             {variant === "pos" ? (
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-col gap-0.5">
-                <Label htmlFor="pos-customer-display" className="text-sm font-ui-semibold text-foreground">
+                <Label htmlFor="pos-customer-display" className="text-sm font-semibold text-foreground">
                   {t("showCustomerDisplay")}
                 </Label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("showCustomerDisplayDesc")}
                 </span>
               </div>
@@ -274,8 +274,8 @@ export function PosSettingsDialog({
 
             <div className="space-y-2">
               <div className="flex flex-col gap-0.5">
-                <label className="text-sm font-ui-semibold text-foreground">{t("stockTracking")}</label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <label className="text-sm font-semibold text-foreground">{t("stockTracking")}</label>
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("stockTrackingDesc")}
                 </span>
               </div>
@@ -283,7 +283,7 @@ export function PosSettingsDialog({
                 <button
                   type="button"
                   onClick={() => setStockTrackingMode("PRODUCT")}
-                  className={`flex-1 rounded-lg py-2 text-center text-xs font-ui-bold transition-all ${stockTrackingMode === "PRODUCT"
+                  className={`flex-1 rounded-lg py-2 text-center text-xs font-bold transition-all ${stockTrackingMode === "PRODUCT"
                       ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 dark:shadow-blue-900/40"
                       : "border border-border bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
@@ -293,7 +293,7 @@ export function PosSettingsDialog({
                 <button
                   type="button"
                   onClick={() => setStockTrackingMode("INGREDIENT")}
-                  className={`flex-1 rounded-lg py-2 text-center text-xs font-ui-bold transition-all ${stockTrackingMode === "INGREDIENT"
+                  className={`flex-1 rounded-lg py-2 text-center text-xs font-bold transition-all ${stockTrackingMode === "INGREDIENT"
                       ? "bg-blue-600 text-white shadow-md shadow-blue-600/25 dark:shadow-blue-900/40"
                       : "border border-border bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
                     }`}
@@ -308,10 +308,10 @@ export function PosSettingsDialog({
             {/* Performance Mode (F-9) */}
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-col gap-0.5">
-                <Label htmlFor="pos-perf-mode" className="text-sm font-ui-semibold text-foreground">
+                <Label htmlFor="pos-perf-mode" className="text-sm font-semibold text-foreground">
                   {t("lowPowerMode")}
                 </Label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("lowPowerModeDesc")}
                 </span>
               </div>
@@ -326,8 +326,8 @@ export function PosSettingsDialog({
 
             <div className="space-y-2">
               <div className="flex flex-col gap-0.5">
-                <label className="text-sm font-ui-semibold text-foreground">{t("appearance")}</label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <label className="text-sm font-semibold text-foreground">{t("appearance")}</label>
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("appearanceDesc")}
                 </span>
               </div>
@@ -337,7 +337,7 @@ export function PosSettingsDialog({
                     key={opt.id}
                     type="button"
                     onClick={() => setPreference(opt.id)}
-                    className={`rounded-lg py-1.5 text-center text-2xs font-ui-bold transition-all ${preference === opt.id
+                    className={`rounded-lg py-1.5 text-center text-2xs font-bold transition-all ${preference === opt.id
                         ? "bg-blue-600 text-white shadow-sm"
                         : "border border-border bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
                       }`}
@@ -352,8 +352,8 @@ export function PosSettingsDialog({
 
             <div className="space-y-2">
               <div className="flex flex-col gap-0.5">
-                <label className="text-sm font-ui-semibold text-foreground">{t("density")}</label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <label className="text-sm font-semibold text-foreground">{t("density")}</label>
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("densityDesc")}
                 </span>
               </div>
@@ -363,7 +363,7 @@ export function PosSettingsDialog({
                     key={opt.id}
                     type="button"
                     onClick={() => setDensity(opt.id)}
-                    className={`flex-1 rounded-lg py-1.5 text-center text-2xs font-ui-bold transition-all ${density === opt.id
+                    className={`flex-1 rounded-lg py-1.5 text-center text-2xs font-bold transition-all ${density === opt.id
                         ? "bg-blue-600 text-white shadow-sm"
                         : "border border-border bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
                       }`}
@@ -378,8 +378,8 @@ export function PosSettingsDialog({
 
             <div className="space-y-2">
               <div className="flex flex-col gap-0.5">
-                <label className="text-sm font-ui-semibold text-foreground">{t("tableLayoutCols")}</label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <label className="text-sm font-semibold text-foreground">{t("tableLayoutCols")}</label>
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("tableLayoutColsDesc")}
                 </span>
               </div>
@@ -389,7 +389,7 @@ export function PosSettingsDialog({
                     key={colVal}
                     type="button"
                     onClick={() => setTableGridColumns(colVal)}
-                    className={`flex-1 min-w-[70px] rounded-lg py-1.5 text-center text-2xs font-ui-bold transition-all ${tableGridColumns === colVal
+                    className={`flex-1 min-w-[70px] rounded-lg py-1.5 text-center text-2xs font-bold transition-all ${tableGridColumns === colVal
                         ? "bg-blue-600 text-white shadow-sm"
                         : "border border-border bg-muted/60 text-muted-foreground hover:bg-muted hover:text-foreground"
                       }`}
@@ -404,8 +404,8 @@ export function PosSettingsDialog({
 
             <div className="space-y-2">
               <div className="flex flex-col gap-0.5">
-                <label className="text-sm font-ui-semibold text-foreground">{t("terminal")}</label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <label className="text-sm font-semibold text-foreground">{t("terminal")}</label>
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("terminalDesc")}
                 </span>
               </div>
@@ -474,18 +474,18 @@ export function PosSettingsDialog({
 
             <div className="space-y-3">
               <div className="flex flex-col gap-0.5">
-                <label className="text-sm font-ui-semibold text-foreground">{t("printingPayment")}</label>
-                <span className="text-2xs font-ui-medium text-muted-foreground">
+                <label className="text-sm font-semibold text-foreground">{t("printingPayment")}</label>
+                <span className="text-2xs font-medium text-muted-foreground">
                   {t("printingPaymentDesc")}
                 </span>
               </div>
 
               <div className="flex items-center justify-between gap-3 bg-background p-2 rounded-md">
                 <div className="flex flex-col gap-0.5">
-                  <Label htmlFor="auto-print-payment" className="text-xs font-ui-bold text-foreground">
+                  <Label htmlFor="auto-print-payment" className="text-xs font-bold text-foreground">
                     {t("autoPrintPayment")}
                   </Label>
-                  <span className="text-[9px] text-muted-foreground uppercase tracking-tight">{t("autoPrintPaymentDesc")}</span>
+                  <span className="text-3xs text-muted-foreground uppercase tracking-tight">{t("autoPrintPaymentDesc")}</span>
                 </div>
                 <Switch
                   id="auto-print-payment"
@@ -543,7 +543,7 @@ export function PosSettingsDialog({
                 <button
                   type="button"
                   onClick={() => setPaymentPrinters([...paymentPrinters, { printerId: "", templateSlug: "" }])}
-                  className="w-full py-1 text-sub font-ui-bold border border-dashed border-border rounded hover:bg-muted transition-colors"
+                  className="w-full py-1 text-sub font-bold border border-dashed border-border rounded hover:bg-muted transition-colors"
                 >
                   {t("addPrinter")}
                 </button>
@@ -557,7 +557,7 @@ export function PosSettingsDialog({
           <button
             type="button"
             onClick={() => onOpenChange(false)}
-            className="rounded-lg bg-primary px-6 py-2 text-xs font-ui-bold text-primary-foreground shadow-md transition-all hover:bg-primary/90 active:scale-95"
+            className="rounded-lg bg-primary px-6 py-2 text-xs font-bold text-primary-foreground shadow-md transition-all hover:bg-primary/90 active:scale-95"
           >
             {t("close")}
           </button>

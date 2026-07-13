@@ -45,7 +45,7 @@ export const StatusBadge = memo(function StatusBadge({ domain, status, className
   return (
     <span
       className={cn(
-        "inline-flex items-center px-2.5 py-0.5 rounded-full text-sub font-ui-semibold tracking-wide whitespace-nowrap",
+        "inline-flex items-center px-2.5 py-0.5 rounded-full text-sub font-semibold tracking-wide whitespace-nowrap",
         colorClass,
         className,
       )}

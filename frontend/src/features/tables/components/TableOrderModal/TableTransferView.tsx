@@ -26,11 +26,11 @@ export const TableTransferView: React.FC<TableTransferViewProps> = ({
     const tStatus = useTranslations('tables.status');
     return (
         <div className="flex flex-col h-full">
-            <div className="p-4 border-b border-slate-50 dark:border-slate-800 space-y-3">
-                <p className="text-xs text-muted-foreground leading-relaxed font-ui-medium">
+            <div className="p-4 border-b border-slate-50 border-border space-y-3">
+                <p className="text-xs text-muted-foreground leading-relaxed font-medium">
                     {t.rich('transferInstructions', {
                         name: tableName,
-                        b: (chunk) => <span className="text-blue-600 font-ui-bold uppercase">{chunk}</span>
+                        b: (chunk) => <span className="text-blue-600 font-bold uppercase">{chunk}</span>
                     })}
                 </p>
                 <div className="relative">
@@ -38,7 +38,7 @@ export const TableTransferView: React.FC<TableTransferViewProps> = ({
                     <input 
                         type="text" 
                         placeholder={tGrid('search')}
-                        className="w-full pl-9 pr-4 py-2 text-xs rounded-lg border border-border bg-slate-50 dark:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+                        className="w-full pl-9 pr-4 py-2 text-xs rounded-lg border border-border bg-muted focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                         value={searchTable}
                         onChange={e => setSearchTable(e.target.value)}
                         autoFocus
@@ -57,21 +57,21 @@ export const TableTransferView: React.FC<TableTransferViewProps> = ({
                                 className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all h-20
                                     ${tbl.status === 'OCCUPIED' 
                                         ? 'bg-amber-50 border-amber-200 dark:bg-amber-900/10 dark:border-amber-800 shadow-sm' 
-                                        : 'bg-white border-border hover:border-blue-400 hover:bg-blue-50 dark:bg-slate-800 dark:border-slate-700 shadow-sm'
+                                        : 'border-border hover:border-blue-400 hover:bg-blue-50 bg-muted border-border shadow-sm'
                                     }`}
                             >
-                                <span className={`text-2xs font-ui-bold uppercase tracking-tighter mb-1 ${tbl.status === 'OCCUPIED' ? 'text-amber-600' : 'text-muted-foreground'}`}>
+                                <span className={`text-2xs font-bold uppercase tracking-tighter mb-1 ${tbl.status === 'OCCUPIED' ? 'text-amber-600' : 'text-muted-foreground'}`}>
                                     {tbl.status === 'OCCUPIED' ? t('occupiedMerge') : tStatus('free')}
                                 </span>
-                                <span className="text-sm font-ui-bold text-slate-800 dark:text-slate-100">{tbl.name}</span>
+                                <span className="text-sm font-bold text-slate-800 text-foreground">{tbl.name}</span>
                             </button>
                         ))}
                 </div>
                 {isTransferLoading && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 dark:bg-slate-900/60 dark:motion-reduce:bg-slate-900/75">
-                        <div className="bg-white dark:bg-slate-800 p-4 rounded-2xl shadow-lg border border-border flex items-center gap-3">
+                    <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 bg-card/60 dark:motion-reduce:bg-slate-900/75">
+                        <div className="bg-card p-4 rounded-2xl shadow-lg border border-border flex items-center gap-3">
                             <Loader2 size={18} className="animate-spin text-blue-600" />
-                            <span className="text-xs font-ui-bold text-foreground">{t('transferring')}</span>
+                            <span className="text-xs font-bold text-foreground">{t('transferring')}</span>
                         </div>
                     </div>
                 )}

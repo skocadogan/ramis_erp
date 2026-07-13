@@ -55,7 +55,7 @@ export function OrderModalHeader({
     const showKitchenPrintOption = showActiveOrderPrintMenu && Boolean(onReprintKitchen);
 
     return (
-        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 px-3 py-2.5 dark:border-slate-700 sm:px-5 sm:py-3.5">
+        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 px-3 py-2.5 border-border sm:px-5 sm:py-3.5">
             <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-2.5">
                 {isTransferring ? (
                     <button 
@@ -69,7 +69,7 @@ export function OrderModalHeader({
                     <ReceiptText size={20} className="shrink-0 text-blue-600" aria-hidden />
                 )}
                 <div className="min-w-0">
-                    <h2 className="truncate text-sm font-ui-bold text-slate-800 sm:text-base dark:text-slate-100">
+                    <h2 className="truncate text-sm font-bold text-slate-800 sm:text-base text-foreground">
                         {isTransferring ? t('selectTargetTable') : isHistoricalSaleView ? t('saleDetail') : t('orderDetail')}
                     </h2>
                     {isHistoricalSaleView && saleId && (
@@ -93,7 +93,7 @@ export function OrderModalHeader({
                             setIsTransferring(true);
                             fetchAllTables();
                         }}
-                        className="flex touch-manipulation items-center gap-1 rounded-lg border border-blue-200 px-2 py-1.5 text-2xs font-ui-bold text-blue-600 transition-all hover:bg-blue-50 dark:border-blue-800 dark:hover:bg-blue-900/20 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
+                        className="flex touch-manipulation items-center gap-1 rounded-lg border border-blue-200 px-2 py-1.5 text-2xs font-bold text-blue-600 transition-all hover:bg-blue-50 dark:border-blue-800 dark:hover:bg-blue-900/20 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
                     >
                         <ArrowRightLeft size={14} className="shrink-0" aria-hidden />
                         {t('transfer')}
@@ -105,7 +105,7 @@ export function OrderModalHeader({
                             type="button"
                             disabled={isReprinting}
                             onClick={() => setPrintChoiceOpen(true)}
-                            className="flex min-h-10 touch-manipulation items-center gap-1.5 rounded-lg border border-violet-200 px-3 py-2 text-xs font-ui-bold text-violet-600 transition-all hover:bg-violet-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-violet-800 dark:hover:bg-violet-900/20 sm:px-3.5 sm:text-sm"
+                            className="flex min-h-10 touch-manipulation items-center gap-1.5 rounded-lg border border-violet-200 px-3 py-2 text-xs font-bold text-violet-600 transition-all hover:bg-violet-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-violet-800 dark:hover:bg-violet-900/20 sm:px-3.5 sm:text-sm"
                         >
                             {isReprinting ? (
                                 <Loader2 size={16} className="shrink-0 animate-spin" aria-hidden />
@@ -128,7 +128,7 @@ export function OrderModalHeader({
                      <button
                         type="button"
                         onClick={onNewOrder}
-                        className="flex touch-manipulation items-center gap-1 rounded-lg border border-emerald-200 px-2 py-1.5 text-2xs font-ui-bold text-emerald-600 transition-all hover:bg-emerald-50 dark:border-emerald-800 dark:hover:bg-emerald-900/20 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
+                        className="flex touch-manipulation items-center gap-1 rounded-lg border border-emerald-200 px-2 py-1.5 text-2xs font-bold text-emerald-600 transition-all hover:bg-emerald-50 dark:border-emerald-800 dark:hover:bg-emerald-900/20 sm:gap-1.5 sm:px-3 sm:py-2 sm:text-xs"
                      >
                          {t('newOrder')}
                      </button>

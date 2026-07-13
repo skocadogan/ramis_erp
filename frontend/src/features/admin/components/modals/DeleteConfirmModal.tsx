@@ -47,7 +47,7 @@ export function DeleteConfirmModal({
             
             <div className="flex-1 min-w-0">
               <DialogHeader className="text-left space-y-1">
-                <DialogTitle className="text-xl font-ui-bold text-foreground">
+                <DialogTitle className="text-xl font-bold text-foreground">
                   {title}
                 </DialogTitle>
                 <DialogDescription className="text-muted-foreground text-sm leading-relaxed dark:text-muted-foreground">
@@ -57,7 +57,7 @@ export function DeleteConfirmModal({
               
               {isHardDelete && (
                 <div className="mt-4 p-3 bg-red-50 border border-red-100 rounded-lg dark:bg-red-900/10 dark:border-red-900/20">
-                  <p className="text-sub font-ui-bold text-red-700 uppercase tracking-wider flex items-center gap-1.5 dark:text-red-400">
+                  <p className="text-sub font-bold text-red-700 uppercase tracking-wider flex items-center gap-1.5 dark:text-red-400">
                     <AlertTriangle size={12} /> DİKKAT: BU İŞLEM GERİ ALINAMAZ
                   </p>
                 </div>
@@ -71,7 +71,7 @@ export function DeleteConfirmModal({
               variant="outline"
               onClick={onClose}
               disabled={isLoading}
-              className="flex-1 h-11 rounded-xl font-ui-medium"
+              className="flex-1 h-11 rounded-xl font-medium"
             >
               {cancelText}
             </Button>
@@ -83,7 +83,7 @@ export function DeleteConfirmModal({
               }}
               disabled={isLoading}
               className={cn(
-                "flex-1 h-11 rounded-xl font-ui-bold shadow-lg shadow-opacity-20 transition-all active:scale-[0.98]",
+                "flex-1 h-11 rounded-xl font-bold shadow-lg shadow-opacity-20 transition-all active:scale-[0.98]",
                 isHardDelete 
                   ? "bg-red-600 hover:bg-red-700 text-white shadow-red-500/20" 
                   : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20 dark:bg-blue-600 dark:hover:bg-blue-700"

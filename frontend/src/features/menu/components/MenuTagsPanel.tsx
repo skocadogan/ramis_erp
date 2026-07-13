@@ -46,10 +46,10 @@ export default function MenuTagsPanel({
 
   return (
     <div className="flex flex-1 min-h-0 gap-4 overflow-hidden">
-      <div className="w-72 shrink-0 flex flex-col rounded-lg border border-border bg-white dark:border-slate-700 dark:bg-slate-900 overflow-hidden">
-        <div className="border-b border-border px-3 py-2 space-y-2 dark:border-slate-700">
+      <div className="w-72 shrink-0 flex flex-col rounded-lg border border-border border-border bg-card overflow-hidden">
+        <div className="border-b border-border px-3 py-2 space-y-2 border-border">
           <div className="flex items-center justify-between">
-            <h2 className="flex items-center gap-1.5 text-sm font-ui-semibold text-slate-700 dark:text-slate-300">
+            <h2 className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 text-muted-foreground">
               <Tag size={14} className="text-violet-600" />
               {t("listTitle")}
             </h2>
@@ -98,7 +98,7 @@ export default function MenuTagsPanel({
                   className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-sm ${
                     active
                       ? "bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300"
-                      : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+                      : "text-slate-600 hover:bg-slate-100 text-muted-foreground dark:hover:bg-slate-800"
                   }`}
                 >
                   <button type="button" className="flex flex-1 items-center gap-1.5 text-left truncate min-w-0" onClick={() => onSelectTag(tag.id)}>
@@ -127,17 +127,17 @@ export default function MenuTagsPanel({
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col rounded-lg border border-border bg-white dark:border-slate-700 dark:bg-slate-900 overflow-hidden">
+      <div className="flex flex-1 flex-col rounded-lg border border-border border-border bg-card overflow-hidden">
         {!selected ? (
           <div className="flex flex-1 items-center justify-center text-sm text-muted-foreground">
             {branchId ? t("selectTagHint") : t("selectBranchHint")}
           </div>
         ) : (
           <>
-            <div className="border-b border-border px-4 py-4 dark:border-slate-700">
+            <div className="border-b border-border px-4 py-4 border-border">
               <div className="flex items-start justify-between gap-3">
                 <div>
-                  <h3 className="flex items-center gap-2 text-lg font-ui-semibold text-foreground">
+                  <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
                     <Hash size={18} className="text-violet-500" />
                     {selected.name}
                   </h3>
@@ -152,7 +152,7 @@ export default function MenuTagsPanel({
                     <button
                       type="button"
                       onClick={() => onEditTag(selected)}
-                      className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-ui-medium hover:bg-slate-50 dark:hover:bg-slate-800"
+                      className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800"
                     >
                       <Pencil size={12} />
                       {t("edit")}
@@ -161,7 +161,7 @@ export default function MenuTagsPanel({
                       type="button"
                       onClick={() => void onDeleteTag(selected)}
                       disabled={isSubmitting}
-                      className="inline-flex items-center gap-1 rounded-md border border-destructive/30 px-2.5 py-1.5 text-xs font-ui-medium text-destructive hover:bg-destructive/10"
+                      className="inline-flex items-center gap-1 rounded-md border border-destructive/30 px-2.5 py-1.5 text-xs font-medium text-destructive hover:bg-destructive/10"
                     >
                       <Trash2 size={12} />
                       {t("delete")}

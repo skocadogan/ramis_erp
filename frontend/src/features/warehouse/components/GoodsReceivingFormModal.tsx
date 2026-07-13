@@ -50,10 +50,10 @@ const EMPTY_ITEM: ItemRow = {
 const inp =
   "w-full px-2 py-1 bg-background border border-border rounded-md text-xs outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all"
 
-const lbl = "block text-xs font-ui-medium text-muted-foreground mb-1"
+const lbl = "block text-xs font-medium text-muted-foreground mb-1"
 
 const TH = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <th className={`px-2 py-1.5 text-left text-sub font-ui-semibold text-muted-foreground uppercase tracking-wide whitespace-nowrap bg-muted/80 ${className}`}>
+  <th className={`px-2 py-1.5 text-left text-sub font-semibold text-muted-foreground uppercase tracking-wide whitespace-nowrap bg-muted/80 ${className}`}>
     {children}
   </th>
 )
@@ -157,7 +157,7 @@ export function GoodsReceivingFormModal({ open, onSave, onClose, isLoading }: Go
         >
         {/* ── Sol: Form alanları ── */}
         <div className="md:w-72 shrink-0 overflow-y-auto p-5 space-y-4">
-          <p className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wide">{t("goodsReceivingForm.generalInfo")}</p>
+          <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">{t("goodsReceivingForm.generalInfo")}</p>
 
           {/* PO seçimi */}
           <div>
@@ -267,12 +267,12 @@ export function GoodsReceivingFormModal({ open, onSave, onClose, isLoading }: Go
           <div className="shrink-0 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Package size={15} className="text-muted-foreground" />
-              <p className="text-xs font-ui-semibold text-foreground">{t("goodsReceivingForm.linesTitle")}</p>
-              <span className="text-xs font-ui-semibold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+              <p className="text-xs font-semibold text-foreground">{t("goodsReceivingForm.linesTitle")}</p>
+              <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
                 {t("goodsReceivingForm.rowCount", { count: items.length })}
               </span>
               {validCount > 0 && (
-                <span className="text-xs font-ui-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
+                <span className="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-50 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800">
                   {t("goodsReceivingForm.validCount", { count: validCount })}
                 </span>
               )}
@@ -280,7 +280,7 @@ export function GoodsReceivingFormModal({ open, onSave, onClose, isLoading }: Go
             <button
               type="button"
               onClick={addItem}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-ui-medium bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800 hover:bg-emerald-100 dark:hover:bg-emerald-900/40 transition-colors"
             >
               <Plus size={13} /> {t("goodsReceivingForm.addLine")}
             </button>
@@ -294,7 +294,7 @@ export function GoodsReceivingFormModal({ open, onSave, onClose, isLoading }: Go
                   <TH className="w-8 text-center">#</TH>
                   <TH className="min-w-[180px]">{t("goodsReceiving.colProduct")}</TH>
                   <TH className="w-24 text-right">
-                    {t("goodsReceivingForm.colReceived")} <span className="text-rose-500 font-ui-bold">*</span>
+                    {t("goodsReceivingForm.colReceived")} <span className="text-rose-500 font-bold">*</span>
                   </TH>
                   <TH className="w-24 text-right">{t("goodsReceivingForm.colExpected")}</TH>
                   <TH className="w-20 text-right">{t("goodsReceivingForm.colRejected")}</TH>
@@ -429,7 +429,7 @@ export function GoodsReceivingFormModal({ open, onSave, onClose, isLoading }: Go
                           <button
                             type="button"
                             onClick={() => removeItem(i)}
-                            className="p-1 rounded text-slate-300 dark:text-slate-600 hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors"
+                            className="p-1 rounded text-muted-foreground hover:text-rose-500 dark:hover:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors"
                           >
                             <Trash2 size={13} />
                           </button>

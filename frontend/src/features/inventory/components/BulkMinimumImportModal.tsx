@@ -62,7 +62,7 @@ export function BulkMinimumImportModal({
 
           <div className="text-xs text-muted-foreground">
             {t("bulkMinimum.preview")}{" "}
-            <span className="font-ui-semibold">{t("bulkMinimum.previewRows", { count: rows.length })}</span>
+            <span className="font-semibold">{t("bulkMinimum.previewRows", { count: rows.length })}</span>
           </div>
         </DialogBody>
 

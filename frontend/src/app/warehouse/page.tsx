@@ -146,12 +146,12 @@ function WarehousePageContent() {
     <AppShell>
       <div className="flex h-full flex-col bg-background overflow-hidden">
         {/* Üst: &lt; lg yatay sekmeler + şube; lg+ yalnızca şube (dikey nav solda) */}
-        <div className="flex shrink-0 items-center gap-2 border-b border-border bg-white px-2 py-2 dark:border-slate-700 dark:bg-slate-900 sm:px-4">
+        <div className="flex shrink-0 items-center gap-2 border-b border-border px-2 py-2 border-border bg-card sm:px-4">
           <div className="min-w-0 flex-1 lg:hidden">
             <WarehouseModuleNavHorizontal {...navProps} />
           </div>
           <div className="ms-auto flex shrink-0 items-center gap-3 sm:gap-4">
-            <div className="hidden sm:block text-2xs font-ui-bold text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">
+            <div className="hidden sm:block text-2xs font-bold text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">
               {tw("filterLabel")}
             </div>
             <BranchSelect
@@ -168,7 +168,7 @@ function WarehousePageContent() {
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden p-4">
             <div className={cn(
-              "flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900/50",
+              "flex min-h-0 flex-1 flex-col overflow-hidden rounded-lg border border-border shadow-sm border-border bg-card/50",
               activeTab === "summary" && "border-none bg-transparent shadow-none dark:bg-transparent"
             )}>
               {activeTab !== "summary" && (

@@ -47,17 +47,17 @@ export function OrderGrid({
     return (
       <div className="flex min-h-0 flex-1 flex-col items-center justify-center bg-zinc-100 dark:bg-zinc-950 transition-colors duration-300">
         <Loader2 className="mb-4 h-10 w-10 animate-spin text-primary" />
-        <span className="font-ui-medium italic text-zinc-600">{t('fetching')}</span>
+        <span className="font-medium italic text-zinc-600">{t('fetching')}</span>
       </div>
     );
   }
 
   return (
-    <main className="min-h-0 flex-1 overflow-x-auto overflow-y-hidden bg-zinc-100 dark:bg-zinc-950 p-2 scrollbar-thin transition-colors duration-300">
+    <main className="min-h-0 flex-1 overflow-x-auto overflow-y-hidden bg-background p-2 scrollbar-thin transition-colors duration-300">
       {visibleGroups.length === 0 ? (
         <div className="flex h-full min-h-[40vh] w-full flex-col items-center justify-center text-zinc-500">
           <Utensils size={64} className="mb-6 text-zinc-400" />
-          <h2 className="text-2xl font-ui-bold">{t('empty')}</h2>
+          <h2 className="text-2xl font-bold">{t('empty')}</h2>
         </div>
       ) : (
         <div className="flex h-full min-h-0 flex-row items-stretch gap-2">

@@ -85,10 +85,10 @@ export function WarehouseStockLevelsModal({
               <table className="w-full text-sm">
                 <thead>
                   <tr className="bg-background">
-                    <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("colStock")}</th>
-                    <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">{t("colCurrent")}</th>
-                    <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">{t("colMinimum")}</th>
-                    <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{t("colAction")}</th>
+                    <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("colStock")}</th>
+                    <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t("colCurrent")}</th>
+                    <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t("colMinimum")}</th>
+                    <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t("colAction")}</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-border">
@@ -111,7 +111,7 @@ export function WarehouseStockLevelsModal({
                           <div className="flex items-center gap-2">
                             {r.is_low_stock ? <AlertTriangle className="text-amber-600" size={16} /> : null}
                             <div>
-                              <div className="font-ui-medium text-foreground">{r.stock_item_name}</div>
+                              <div className="font-medium text-foreground">{r.stock_item_name}</div>
                               <div className="text-xs text-muted-foreground">{r.stock_item_sku}</div>
                             </div>
                           </div>

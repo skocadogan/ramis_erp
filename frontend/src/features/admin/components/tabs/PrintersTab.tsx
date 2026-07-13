@@ -252,14 +252,14 @@ export function PrintersTab({ branches, canManage }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground">{t('printers.title')}</h2>
+          <h2 className="text-lg font-semibold text-foreground">{t('printers.title')}</h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">
             {t('printers.description')}
           </p>
         </div>
         {canManage && (
           <button onClick={openCreate}
-            className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-indigo-700 transition-all">
+            className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 transition-all">
             <Plus size={15} /> {t('printers.addNew')}
           </button>
         )}
@@ -270,7 +270,7 @@ export function PrintersTab({ branches, canManage }: Props) {
         <select
           value={filterBranch}
           onChange={e => setFilterBranch(e.target.value)}
-          className="px-3 py-1.5 text-sm border border-border rounded-md bg-white dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
+          className="px-3 py-1.5 text-sm border border-border rounded-md bg-card border-input text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
           <option value="">{t('stations.allBranches')}</option>
           {branches.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
@@ -283,18 +283,18 @@ export function PrintersTab({ branches, canManage }: Props) {
       )}
 
       {/* Table */}
-      <div className="bg-white rounded-lg border border-border overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+      <div className="rounded-lg border border-border overflow-hidden bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border dark:bg-slate-800 dark:border-slate-700">
+          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
             <tr>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.printer')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.usage')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.station')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.connection')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.address')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.model')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.status')}</th>
-              <th className="text-right px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.actions')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.printer')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.usage')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.station')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.connection')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.address')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.model')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.status')}</th>
+              <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.actions')}</th>
             </tr>
           </thead>
           <tbody>
@@ -309,10 +309,10 @@ export function PrintersTab({ branches, canManage }: Props) {
               </tr>
             ) : (
               printers.map(p => (
-                <tr key={p.id} className="border-b border-slate-100 hover:bg-slate-50/50 dark:border-slate-700 dark:hover:bg-slate-800/50">
-                  <td className="px-4 py-3 font-ui-medium text-foreground">{p.name}</td>
+                <tr key={p.id} className="border-b border-slate-100 hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50">
+                  <td className="px-4 py-3 font-medium text-foreground">{p.name}</td>
                   <td className="px-4 py-3">
-                    <span className={`text-2xs px-1.5 py-0.5 rounded font-ui-bold uppercase ${p.usage_type === "KITCHEN" ? "bg-amber-100 text-amber-700" : "bg-blue-100 text-blue-700"}`}>
+                    <span className={`text-2xs px-1.5 py-0.5 rounded font-bold uppercase ${p.usage_type === "KITCHEN" ? "bg-amber-100 text-amber-700" : "bg-blue-100 text-blue-700"}`}>
                       {p.usage_type_display}
                     </span>
                   </td>
@@ -332,7 +332,7 @@ export function PrintersTab({ branches, canManage }: Props) {
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">{p.printer_type_display}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-ui-semibold ${p.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-slate-100 text-muted-foreground dark:bg-slate-800"}`}>
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${p.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-slate-100 text-muted-foreground bg-muted"}`}>
                       {p.is_active ? t('common.active') : t('common.passive')}
                     </span>
                   </td>

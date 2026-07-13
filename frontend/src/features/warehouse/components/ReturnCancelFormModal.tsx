@@ -149,7 +149,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
         <form id="return-cancel-form" onSubmit={handleSubmit}>
           <DialogBody className="space-y-4">
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("formWarehouse")}
               </label>
               <select
@@ -170,7 +170,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
               </select>
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("formStockItem")}
               </label>
               <StockItemSelect
@@ -185,7 +185,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("formPurchaseOrder")}
               </label>
               <select
@@ -211,7 +211,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("formMovementType")}
                 </label>
                 <select
@@ -224,7 +224,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
                 </select>
               </div>
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("formReason")}
                 </label>
                 <select
@@ -240,7 +240,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
             </div>
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("formQuantity")}
                 </label>
                 <input
@@ -252,14 +252,14 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("formUnit")}
                 </label>
                 <input value={unit} readOnly className="w-full rounded-lg border border-border bg-muted px-3 py-2 text-sm" />
               </div>
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("formUnitPrice")}
               </label>
               <input
@@ -270,7 +270,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
               />
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("formSupplier")}
               </label>
               <select
@@ -285,7 +285,7 @@ export function ReturnCancelFormModal({ open, defaultWarehouseId, onClose }: Pro
               </select>
             </div>
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("formNotes")}
               </label>
               <textarea

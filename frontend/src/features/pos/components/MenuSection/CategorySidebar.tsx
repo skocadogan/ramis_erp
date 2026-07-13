@@ -27,10 +27,10 @@ function CategorySidebarBtn({
       <button
         type="button"
         onClick={onClick}
-        className={`mb-1 flex w-full items-center gap-2 rounded-lg border px-4 py-3.5 text-left text-sm font-ui-bold transition-colors ${
+        className={`mb-1 flex w-full items-center gap-2 rounded-lg border px-4 py-3.5 text-left text-sm font-bold transition-colors ${
           isActive
             ? "border-amber-500 bg-amber-500 text-white shadow-md"
-            : "border-transparent bg-card text-slate-600 hover:bg-muted/50 dark:bg-slate-800/40 dark:text-slate-300 dark:hover:bg-slate-800"
+            : "border-transparent bg-card text-slate-600 hover:bg-muted/50 text-muted-foreground dark:hover:bg-muted"
         }`}
       >
         {children}
@@ -41,10 +41,10 @@ function CategorySidebarBtn({
     <button
       type="button"
       onClick={onClick}
-      className={`flex w-full items-center justify-between rounded-lg border px-4 py-3.5 text-left text-sm font-ui-bold transition-colors ${
+      className={`flex w-full items-center justify-between rounded-lg border px-4 py-3.5 text-left text-sm font-bold transition-colors ${
         isActive
           ? "shadow-md"
-          : "border-transparent bg-card text-slate-600 hover:bg-muted/50 dark:bg-slate-800/40 dark:text-slate-300 dark:hover:bg-slate-800"
+          : "border-transparent bg-card text-slate-600 hover:bg-muted/50 bg-muted/40 text-muted-foreground dark:hover:bg-slate-800"
       }`}
       style={
         isActive
@@ -79,10 +79,10 @@ function CategoryMobilePill({
       <button
         type="button"
         onClick={onClick}
-        className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border px-5 py-2.5 text-sm font-ui-bold transition-colors ${
+        className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border px-5 py-2.5 text-sm font-bold transition-colors ${
           isActive
             ? "border-amber-500 bg-amber-500 text-white shadow-sm"
-            : "border-border bg-card text-slate-600 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"
+            : "border-border bg-card text-slate-600 text-muted-foreground"
         }`}
       >
         {children}
@@ -93,10 +93,10 @@ function CategoryMobilePill({
     <button
       type="button"
       onClick={onClick}
-      className={`shrink-0 whitespace-nowrap rounded-lg border px-5 py-2.5 text-sm font-ui-bold transition-colors ${
+      className={`shrink-0 whitespace-nowrap rounded-lg border px-5 py-2.5 text-sm font-bold transition-colors ${
         isActive
           ? "text-white shadow-sm"
-          : "border-border bg-card text-slate-600 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300"
+          : "border-border bg-card text-slate-600 border-border bg-muted text-muted-foreground"
       }`}
       style={isActive ? { backgroundColor: accent, borderColor: accent } : undefined}
     >
@@ -122,8 +122,8 @@ export function CategorySidebar({
 }: CategorySidebarProps) {
   return (
     <>
-      <div className="no-scrollbar hidden w-48 shrink-0 flex-col gap-1 overflow-y-auto border-r border-slate-100 bg-slate-50/30 p-3 md:flex dark:border-slate-800 dark:bg-slate-800/20">
-        <h3 className="mb-1 px-3 py-2 text-2xs font-ui-bold uppercase tracking-widest text-muted-foreground dark:text-muted-foreground">
+      <div className="no-scrollbar hidden w-48 shrink-0 flex-col gap-1 overflow-y-auto border-r border-slate-100 bg-slate-50/30 p-3 md:flex border-border bg-muted/20">
+        <h3 className="mb-1 px-3 py-2 text-2xs font-bold uppercase tracking-widest text-muted-foreground dark:text-muted-foreground">
           {tMenu("categories")}
         </h3>
 
@@ -155,7 +155,7 @@ export function CategorySidebar({
         })}
       </div>
 
-      <div className="no-scrollbar flex w-full shrink-0 gap-2 overflow-x-auto border-b border-slate-100 px-3 py-2.5 md:hidden dark:border-slate-800">
+      <div className="no-scrollbar flex w-full shrink-0 gap-2 overflow-x-auto border-b border-slate-100 px-3 py-2.5 md:hidden border-border">
         {hasFeatured && (
           <CategoryMobilePill
             featured

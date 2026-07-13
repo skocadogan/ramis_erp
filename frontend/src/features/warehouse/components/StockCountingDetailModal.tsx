@@ -205,7 +205,7 @@ export default function StockCountingDetailModal({
           </div>
           <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-sm text-muted-foreground">
             <span>
-              <span className="font-ui-medium text-foreground">{t("countingDetail.labelDate")} </span>
+              <span className="font-medium text-foreground">{t("countingDetail.labelDate")} </span>
               {new Date(counting.counting_date).toLocaleDateString("tr-TR")}
             </span>
           </div>
@@ -220,7 +220,7 @@ export default function StockCountingDetailModal({
             <div
               className={cn(
                 COUNTING_GRID,
-                "sticky top-0 z-10 border-b border-border bg-muted/80 px-5 py-2.5 text-xs font-ui-semibold text-foreground sm:px-6 sm:text-sm",
+                "sticky top-0 z-10 border-b border-border bg-muted/80 px-5 py-2.5 text-xs font-semibold text-foreground sm:px-6 sm:text-sm",
               )}
             >
               <div className="min-w-0 leading-snug">{t("countingDetail.colStockItem")}</div>
@@ -242,7 +242,7 @@ export default function StockCountingDetailModal({
                       "items-start px-5 py-2.5 text-sm text-foreground sm:px-6",
                     )}
                   >
-                    <div className="min-w-0 break-words font-ui-medium leading-snug">{item.stock_item_name}</div>
+                    <div className="min-w-0 break-words font-medium leading-snug">{item.stock_item_name}</div>
                     <div className="pt-0.5 text-right tabular-nums">{formatQuantity(item.system_quantity)}</div>
                     <div className="pt-0.5 text-right">
                       {isEditable ? (
@@ -260,7 +260,7 @@ export default function StockCountingDetailModal({
                     </div>
                     <div
                       className={cn(
-                        "pt-0.5 text-right font-ui-semibold tabular-nums",
+                        "pt-0.5 text-right font-semibold tabular-nums",
                         diff > 0 ? "text-green-600" : diff < 0 ? "text-red-600" : "",
                       )}
                     >

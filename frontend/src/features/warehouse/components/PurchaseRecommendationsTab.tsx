@@ -174,7 +174,7 @@ export function PurchaseRecommendationsTab({ branchId }: { branchId?: string }) 
       <div className="flex shrink-0 flex-wrap items-center gap-3">
         <div className="flex items-center gap-2 text-foreground">
           <Sparkles size={18} className="text-amber-500" />
-          <span className="text-sm font-ui-semibold">{t("purchaseRecommendationsTab.title")}</span>
+          <span className="text-sm font-semibold">{t("purchaseRecommendationsTab.title")}</span>
           <button
             type="button"
             onClick={() => setInfoOpen(true)}
@@ -318,7 +318,7 @@ export function PurchaseRecommendationsTab({ branchId }: { branchId?: string }) 
             </div>
             {conflictRows.map((row) => (
               <div key={row.stock_item_id} className="rounded-lg border border-border p-3">
-                <div className="font-ui-medium text-sm mb-2">{row.stock_item_name}</div>
+                <div className="font-medium text-sm mb-2">{row.stock_item_name}</div>
                 <select
                   value={preferredSuppliers[row.stock_item_id] ?? ""}
                   onChange={(e) =>
@@ -391,7 +391,7 @@ export function PurchaseRecommendationsTab({ branchId }: { branchId?: string }) 
               ] as const
             ).map((section) => (
               <section key={section}>
-                <h4 className="mb-1 font-ui-semibold text-foreground">
+                <h4 className="mb-1 font-semibold text-foreground">
                   {t(`purchaseRecommendationsTab.info.${section}Title`)}
                 </h4>
                 <p>{t(`purchaseRecommendationsTab.info.${section}Body`)}</p>

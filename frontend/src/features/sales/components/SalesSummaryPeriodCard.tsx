@@ -46,7 +46,7 @@ const PAYMENT_ROW_STYLES: Record<string, string> = {
     CASH:
         'border-emerald-200 bg-emerald-50/90 dark:border-emerald-800/70 dark:bg-emerald-950/35',
     CARD: 'border-blue-200 bg-blue-50/90 dark:border-blue-800/70 dark:bg-blue-950/35',
-    OTHER: 'border-border bg-slate-100/90 dark:border-slate-600 dark:bg-slate-800/80',
+    OTHER: 'border-border bg-slate-100/90 border-border bg-muted/80',
 };
 
 const PAYMENT_ACCENT: Record<string, string> = {
@@ -115,7 +115,7 @@ export const SalesSummaryPeriodCard = memo(({
 
     return (
         <div
-            className={`rounded-xl border border-border bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-700 flex flex-col ${className}`}
+            className={`rounded-xl border border-border p-4 shadow-sm bg-card border-border flex flex-col ${className}`}
         >
             <button
                 type="button"
@@ -125,16 +125,16 @@ export const SalesSummaryPeriodCard = memo(({
             >
                 <div className="min-w-0 flex-1">
                     <div className="mb-1 flex items-center gap-2">
-                        <span className="text-xs font-ui-semibold uppercase tracking-wide text-muted-foreground dark:text-muted-foreground">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground dark:text-muted-foreground">
                             {label}
                         </span>
                         {!expanded && (
-                            <TrendingUp size={14} className="text-slate-300 dark:text-slate-600 shrink-0" />
+                            <TrendingUp size={14} className="text-muted-foreground shrink-0" />
                         )}
                     </div>
                     {!expanded && (
                         <>
-                            <p className="text-base font-ui-bold tabular-nums text-foreground">
+                            <p className="text-base font-bold tabular-nums text-foreground">
                                 {formatAmount(net, canViewAmounts)}
                             </p>
                             <p className="mt-0.5 text-xs text-muted-foreground">
@@ -152,29 +152,29 @@ export const SalesSummaryPeriodCard = memo(({
                 <>
                     <dl className="mb-1 mt-1 space-y-1.5">
                         <div className="flex items-center justify-between gap-2 text-sm">
-                            <dt className="font-ui-medium text-slate-600 dark:text-slate-300">{t("summaryCard.tableGross")}</dt>
-                            <dd className="font-ui-semibold tabular-nums text-foreground">
+                            <dt className="font-medium text-slate-600 text-muted-foreground">{t("summaryCard.tableGross")}</dt>
+                            <dd className="font-semibold tabular-nums text-foreground">
                                 {formatAmount(gross - num(data.takeaway?.total), canViewAmounts)}
                             </dd>
                         </div>
                         {data.takeaway && data.takeaway.count > 0 && (
                             <div className="flex items-center justify-between gap-2 text-sm">
-                                <dt className="font-ui-medium text-slate-600 dark:text-slate-300">{t("summaryCard.takeawayGross")}</dt>
-                                <dd className="font-ui-semibold tabular-nums text-foreground">
+                                <dt className="font-medium text-slate-600 text-muted-foreground">{t("summaryCard.takeawayGross")}</dt>
+                                <dd className="font-semibold tabular-nums text-foreground">
                                     {formatAmount(data.takeaway.total, canViewAmounts)}</dd>
                             </div>
                         )}
                         {hasDiscount && (
                             <div className="flex items-center justify-between gap-2 text-sm">
-                                <dt className="font-ui-medium text-amber-700 dark:text-amber-400">{t("summaryCard.discountsAllMethods")}</dt>
-                                <dd className="font-ui-semibold tabular-nums text-amber-800 dark:text-amber-300">
+                                <dt className="font-medium text-amber-700 dark:text-amber-400">{t("summaryCard.discountsAllMethods")}</dt>
+                                <dd className="font-semibold tabular-nums text-amber-800 dark:text-amber-300">
                                     {canViewAmounts ? `−${formatCurrency(discountTotal)}` : AMOUNT_DISPLAY_MASK}
                                 </dd>
                             </div>
                         )}
-                        <div className="flex items-center justify-between gap-2 border-t border-border pt-1 text-sm dark:border-slate-700">
-                            <dt className="font-ui-bold text-foreground">{t("summaryCard.netGain")}</dt>
-                            <dd className="font-ui-bold tabular-nums text-slate-900 dark:text-slate-200 leading-tight">
+                        <div className="flex items-center justify-between gap-2 border-t border-border pt-1 text-sm border-border">
+                            <dt className="font-bold text-foreground">{t("summaryCard.netGain")}</dt>
+                            <dd className="font-bold tabular-nums text-slate-900 text-foreground leading-tight">
                                 {formatAmount(net, canViewAmounts)}
                             </dd>
                         </div>
@@ -186,20 +186,20 @@ export const SalesSummaryPeriodCard = memo(({
 
             {expanded && hasDiscountDetail && disc && (
                 <div className="mt-3 rounded-lg border border-amber-200/90 bg-amber-50/90 px-3 py-2.5 dark:border-amber-800/60 dark:bg-amber-950/35">
-                    <div className="flex items-center gap-1.5 text-2xs font-ui-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 mb-2">
+                    <div className="flex items-center gap-1.5 text-2xs font-bold uppercase tracking-wider text-amber-800 dark:text-amber-300 mb-2">
                         <Tag size={12} className="shrink-0" />
                         {t("summaryCard.discountDetailTitle")}
                     </div>
                     <dl className="space-y-1 text-xs">
                         <div className="flex items-center justify-between gap-2">
                             <dt className="text-amber-800/90 dark:text-amber-200/85">{t("summaryCard.discountCountLabel")}</dt>
-                            <dd className="font-ui-bold tabular-nums text-amber-900 dark:text-amber-100">
+                            <dd className="font-bold tabular-nums text-amber-900 dark:text-amber-100">
                                 {t("summaryCard.discountCountUnit", { count: discountCount })}
                             </dd>
                         </div>
                         <div className="flex items-center justify-between gap-2 pt-1 border-t border-amber-200/70 dark:border-amber-800/50">
                             <dt className="text-amber-800/90 dark:text-amber-200/85">{t("summaryCard.discountedNetLabel")}</dt>
-                            <dd className="font-ui-bold tabular-nums text-amber-900 dark:text-amber-100">
+                            <dd className="font-bold tabular-nums text-amber-900 dark:text-amber-100">
                                 {formatAmount(discountRevenue, canViewAmounts)}
                             </dd>
                         </div>
@@ -209,9 +209,9 @@ export const SalesSummaryPeriodCard = memo(({
 
             {expanded && hasBreakdown && (
                 <div className="mt-4 pt-3 border-t border-border flex flex-col gap-2 flex-1">
-                    <p className="text-2xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+                    <p className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">
                         {t("summaryCard.paymentTypesTitle")}{" "}
-                        <span className="font-ui-normal normal-case">{t("summaryCard.paymentTypesSubtitle")}</span>
+                        <span className="font-normal normal-case">{t("summaryCard.paymentTypesSubtitle")}</span>
                     </p>
                     <ul className="space-y-2">
                         {orderedBreakdownKeys(breakdown).map((method) => {
@@ -231,12 +231,12 @@ export const SalesSummaryPeriodCard = memo(({
                                 >
                                     <div className="flex items-center gap-2 min-w-0">
                                         <span
-                                            className={`flex size-9 shrink-0 items-center justify-center rounded-md bg-white/80 dark:bg-slate-900/50 ${labelCls}`}
+                                            className={`flex size-9 shrink-0 items-center justify-center rounded-md bg-white/80 bg-card/50 ${labelCls}`}
                                         >
                                             <Icon size={18} strokeWidth={2} />
                                         </span>
                                         <div className="min-w-0">
-                                            <p className={`text-sm font-ui-bold leading-tight ${labelCls}`}>
+                                            <p className={`text-sm font-bold leading-tight ${labelCls}`}>
                                                 {t("summaryCard.paymentAllTypes", { label: paymentName })}
                                             </p>
                                             <p className="text-sub text-muted-foreground">
@@ -246,13 +246,13 @@ export const SalesSummaryPeriodCard = memo(({
                                     </div>
                                     <div className={`text-right shrink-0 ${amtCls}`}>
                                         {grossM > netM + 0.005 && (
-                                            <p className="text-xs font-ui-medium text-muted-foreground tabular-nums">
+                                            <p className="text-xs font-medium text-muted-foreground tabular-nums">
                                                 {canViewAmounts
                                                     ? t("summaryCard.grossAmount", { amount: formatCurrency(grossM) })
                                                     : t("summaryCard.grossMasked", { mask: AMOUNT_DISPLAY_MASK })}
                                             </p>
                                         )}
-                                        <p className="text-base font-ui-bold tabular-nums tracking-tight">
+                                        <p className="text-base font-bold tabular-nums tracking-tight">
                                             {formatAmount(netM, canViewAmounts)}
                                         </p>
 
@@ -275,10 +275,10 @@ export interface SalesSummaryPeriodCardSkeletonProps {
 export function SalesSummaryPeriodCardSkeleton({ className = '' }: SalesSummaryPeriodCardSkeletonProps) {
     return (
         <div
-            className={`rounded-xl border border-border bg-muted/30 p-4 dark:bg-slate-900 dark:border-slate-700 ${className}`}
+            className={`rounded-xl border border-border bg-muted/30 p-4 ${className}`}
         >
-            <div className="h-3 w-20 bg-slate-200 dark:bg-slate-700 rounded mb-3" />
-            <div className="h-7 w-28 bg-slate-200 dark:bg-slate-700 rounded mb-2" />
+            <div className="h-3 w-20 bg-slate-200 bg-accent rounded mb-3" />
+            <div className="h-7 w-28 bg-slate-200 bg-accent rounded mb-2" />
             <div className="h-3 w-24 bg-muted rounded mb-4" />
             <div className="space-y-2">
                 <div className="h-10 bg-muted rounded-lg" />

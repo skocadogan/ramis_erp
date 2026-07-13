@@ -46,13 +46,13 @@ const FefoMainRow = memo(
       >
         <td className="px-4 py-2">
           <div className="flex flex-col">
-            <span className="font-ui-medium text-foreground">{item.name}</span>
+            <span className="font-medium text-foreground">{item.name}</span>
             <span className="text-2xs font-mono uppercase text-muted-foreground">{item.sku}</span>
           </div>
         </td>
         <td className="px-4 py-2 text-xs text-muted-foreground">{item.category_name}</td>
         <td className="px-4 py-2 text-xs text-muted-foreground">{item.unit}</td>
-        <td className="px-4 py-2 text-right font-ui-medium text-foreground">
+        <td className="px-4 py-2 text-right font-medium text-foreground">
           {item.total_quantity.toFixed(2)}
         </td>
         <td className="px-4 py-2 text-right font-mono text-xs text-muted-foreground">
@@ -60,7 +60,7 @@ const FefoMainRow = memo(
             ? formatCurrency(item.total_value / item.total_quantity)
             : "-"}
         </td>
-        <td className="px-4 py-2 text-right font-ui-semibold text-foreground">
+        <td className="px-4 py-2 text-right font-semibold text-foreground">
           {formatAmount(item.total_value, canViewAmounts)}
         </td>
         <td className="px-4 py-2 text-right">
@@ -122,13 +122,13 @@ export const FEFOReportTable = memo(({
       <table className="w-full text-sm">
         <thead className="sticky top-0 z-10 bg-muted text-muted-foreground">
           <tr>
-            <th className="px-4 py-2 text-left font-ui-medium">{t("colProductSku")}</th>
-            <th className="px-4 py-2 text-left font-ui-medium">{t("colCategory")}</th>
-            <th className="px-4 py-2 text-left font-ui-medium">{t("colUnit")}</th>
-            <th className="px-4 py-2 text-right font-ui-medium">{t("colStockTotal")}</th>
-            <th className="px-4 py-2 text-right font-ui-medium">{t("colAvgCost")}</th>
-            <th className="px-4 py-2 text-right font-ui-medium">{t("colFefoValue")}</th>
-            <th className="px-4 py-2 text-right font-ui-medium">{t("colDetail")}</th>
+            <th className="px-4 py-2 text-left font-medium">{t("colProductSku")}</th>
+            <th className="px-4 py-2 text-left font-medium">{t("colCategory")}</th>
+            <th className="px-4 py-2 text-left font-medium">{t("colUnit")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("colStockTotal")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("colAvgCost")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("colFefoValue")}</th>
+            <th className="px-4 py-2 text-right font-medium">{t("colDetail")}</th>
           </tr>
         </thead>
         <tbody>

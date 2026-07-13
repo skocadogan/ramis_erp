@@ -69,7 +69,7 @@ export function TableQRCodeModal({ table, onClose }: TableQRCodeModalProps) {
                         <span className="font-medium text-foreground">{table.name}</span>
                         {' · '}
                         {table.zone_name}
-                        <span className="mt-0.5 block font-mono text-[10px] text-muted-foreground">
+                        <span className="mt-0.5 block font-mono text-2xs text-muted-foreground">
                             {t('tableIdLabel', { id: table.id })}
                         </span>
                     </DialogDescription>
@@ -83,7 +83,7 @@ export function TableQRCodeModal({ table, onClose }: TableQRCodeModalProps) {
                         </div>
                     ) : error ? (
                         <div className="flex flex-col items-center justify-center py-8 text-center">
-                            <p className="text-sm font-ui-semibold text-destructive">{error}</p>
+                            <p className="text-sm font-semibold text-destructive">{error}</p>
                         </div>
                     ) : (
                         <div className="flex flex-col items-center space-y-4">
@@ -109,7 +109,7 @@ export function TableQRCodeModal({ table, onClose }: TableQRCodeModalProps) {
                                     </div>
                                 )}
 
-                                <div className="mt-4 max-w-[180px] text-center text-[10px] leading-relaxed text-muted-foreground">
+                                <div className="mt-4 max-w-[180px] text-center text-2xs leading-relaxed text-muted-foreground">
                                     Sipariş vermek veya menüyü incelemek için taratın.
                                 </div>
                             </div>

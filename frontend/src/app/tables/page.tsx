@@ -209,7 +209,7 @@ function TablesPageContent() {
                     <div className="flex flex-wrap items-center justify-between gap-4">
                         <div>
                             <div className="flex items-center gap-2">
-                                <h1 className="text-xl font-ui-bold text-foreground">{t('pageTitle')}</h1>
+                                <h1 className="text-xl font-bold text-foreground">{t('pageTitle')}</h1>
                                 {canManageTables && !noBranchContext && (
                                     <button
                                         type="button"
@@ -230,7 +230,7 @@ function TablesPageContent() {
                                 <select
                                     value={effectiveBranchId}
                                     onChange={e => setBranchOverride(e.target.value)}
-                                    className="text-sm border border-border rounded-lg px-3 py-1.5 bg-card dark:border-slate-700 dark:text-slate-100"
+                                    className="text-sm border border-border rounded-lg px-3 py-1.5 bg-card border-border text-foreground"
                                     aria-label={tPos('gate.branchSelectPlaceholder')}
                                 >
                                     {branchList.map(b => (
@@ -243,7 +243,7 @@ function TablesPageContent() {
                             <button
                                 onClick={() => void handleRefresh()}
                                 disabled={tablesLoading || zonesLoading || zonesSummaryLoading || noBranchContext}
-                                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 border border-border rounded-lg hover:bg-slate-50 disabled:opacity-40 transition-colors dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 border border-border rounded-lg hover:bg-slate-50 disabled:opacity-40 transition-colors border-border text-muted-foreground dark:hover:bg-slate-800"
                             >
                                 <RefreshCw
                                     size={13}
@@ -255,7 +255,7 @@ function TablesPageContent() {
                                 <button
                                     type="button"
                                     onClick={() => setZoneManageOpen(true)}
-                                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-ui-medium text-slate-700 bg-white border border-border rounded-lg hover:bg-slate-50 transition-colors dark:bg-slate-900 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-800"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-700 border border-border rounded-lg hover:bg-slate-50 transition-colors bg-card border-input text-foreground dark:hover:bg-slate-800"
                                 >
                                     <MapPinned size={15} />
                                     {tZones('title')}
@@ -264,7 +264,7 @@ function TablesPageContent() {
                             {canManageTables && !noBranchContext && (
                                 <button
                                     onClick={() => setIsCreating(true)}
-                                    className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-ui-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-sm"
+                                    className="flex items-center gap-1.5 px-3.5 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors shadow-sm"
                                 >
                                     <Plus size={15} />
                                     {tGrid('addTable')}

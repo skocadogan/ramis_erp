@@ -159,7 +159,7 @@ function ProductionPlanningContent() {
       <div className="flex h-full flex-col bg-background overflow-hidden">
         <Tabs value={activeTab} onValueChange={(v) => setActiveTab(v as ProductionTabKey)} className="flex min-h-0 flex-1 flex-col overflow-hidden">
           {/* Top Tab Navigation */}
-          <div className="flex items-center justify-between border-b border-border bg-white px-4 dark:bg-slate-900 dark:border-slate-700 shrink-0">
+          <div className="flex items-center justify-between border-b border-border px-4 bg-card border-border shrink-0">
             <div className="flex items-center gap-1">
               {([
                 { value: 'plans' as const, label: t("page.tabs.plans"), info: productionPlanTabInfo },
@@ -169,7 +169,7 @@ function ProductionPlanningContent() {
                 <button
                   key={tab.value}
                   onClick={() => setActiveTab(tab.value)}
-                  className={`flex items-center gap-1.5 px-3 py-3 text-sm font-ui-medium border-b-2 transition-colors whitespace-nowrap
+                  className={`flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap
                     ${activeTab === tab.value
                       ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
                       : 'border-transparent text-muted-foreground hover:text-slate-700 hover:border-slate-300 dark:text-muted-foreground dark:hover:text-slate-200'
@@ -257,7 +257,7 @@ function ProductionPlanningContent() {
             </TabsContent>
 
             <TabsContent value="availability" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 ring-slate-900/5 dark:ring-white/5 rounded-lg p-0">
-              <div className="shrink-0 p-4 border-b border-slate-100 dark:border-slate-800 flex flex-wrap items-center gap-4 bg-slate-50/50 dark:bg-slate-800/20">
+              <div className="shrink-0 p-4 border-b border-slate-100 border-border flex flex-wrap items-center gap-4 bg-slate-50/50 bg-muted/20">
                 <div className="w-48">
                   <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("page.filters.branch")}</Label>
                   <BranchSelect

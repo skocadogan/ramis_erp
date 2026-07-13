@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo } from "react"
 import { Warehouse, ShieldAlert } from "lucide-react"
-import Link from "next/link"
 import { useTranslations } from "next-intl"
 import { cn } from "@/lib/utils"
 import {
@@ -11,6 +10,20 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+import {
+  useIsMdUpForTooltip,
+  TabDivider,
+  sidebarNavItemBase,
+  sidebarActiveBar,
+  horizontalNavContainer,
+  horizontalTabActive,
+  horizontalTabInactive,
+  verticalNavItemActive,
+  verticalNavItemInactive,
+  verticalIconInactive,
+  HorizontalTooltipLink,
+  VerticalTooltipLink,
+} from "@/components/shared/ModuleNav"
 import type { TabType } from "@/features/inventory/types"
 import { INVENTORY_TAB_META } from "@/config/moduleNav/inventoryNavConfig"
 
@@ -35,35 +48,6 @@ function useInventoryNavTabs(): InventoryNavTab[] {
   )
 }
 
-function useIsMdUpForTooltip() {
-  const [isMdUp, setIsMdUp] = useState(true)
-  useEffect(() => {
-    const mq = window.matchMedia("(min-width: 768px)")
-    const sync = () => setIsMdUp(mq.matches)
-    sync()
-    mq.addEventListener("change", sync)
-    return () => mq.removeEventListener("change", sync)
-  }, [])
-  return isMdUp
-}
-
-function TabDivider({ variant }: { variant: "horizontal" | "vertical" }) {
-  if (variant === "vertical") {
-    return (
-      <div
-        className="my-1 h-px w-full shrink-0 bg-muted"
-        aria-hidden
-      />
-    )
-  }
-  return (
-    <div
-      className="mx-2 h-7 w-px shrink-0 bg-slate-200 dark:bg-slate-600"
-      aria-hidden
-    />
-  )
-}
-
 type NavButtonProps = {
   tab: InventoryNavTab
   isActive: boolean
@@ -71,11 +55,6 @@ type NavButtonProps = {
   variant: "horizontal" | "vertical"
   isMdUp: boolean
 }
-
-const sidebarNavItemBase =
-  "relative flex shrink-0 items-center gap-3 rounded-xl text-xs font-ui-medium transition-all group outline-none"
-const sidebarActiveBar =
-  "absolute left-1.5 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]"
 
 function InventoryNavButton({
   tab,
@@ -99,28 +78,22 @@ function InventoryNavButton({
   const buttonClass = cn(
     isVertical
       ? cn(
-        sidebarNavItemBase,
-        "w-full justify-start px-3 py-1.5",
-        isActive
-          ? "bg-blue-50 font-ui-semibold text-blue-600 dark:bg-blue-600/10 dark:text-blue-400"
-          : "text-muted-foreground hover:bg-slate-100 hover:text-slate-900 dark:text-muted-foreground dark:hover:bg-slate-800/30 dark:hover:text-slate-200"
-      )
+          sidebarNavItemBase,
+          "w-full justify-start px-3 py-1.5",
+          isActive ? verticalNavItemActive : verticalNavItemInactive,
+        )
       : cn(
-        "relative flex shrink-0 items-center gap-2 border-b-2 px-3 py-2 text-ui font-ui-medium transition-colors sm:gap-3",
-        isActive
-          ? "border-blue-600 bg-blue-50/30 font-ui-semibold text-blue-600 dark:border-blue-400 dark:bg-blue-900/10 dark:text-blue-400"
-          : "border-transparent text-muted-foreground hover:border-slate-300 hover:text-slate-700 dark:text-muted-foreground dark:hover:border-slate-600 dark:hover:text-slate-200"
-      )
+          "relative flex shrink-0 items-center gap-2 border-b-2 px-3 py-2 text-ui font-medium transition-colors sm:gap-3",
+          isActive ? horizontalTabActive : horizontalTabInactive,
+        ),
   )
 
   const iconSize = isVertical ? 18 : 16
   const iconClass = isVertical
     ? cn(
-      "shrink-0 transition-colors",
-      isActive
-        ? "text-blue-500"
-        : "text-muted-foreground group-hover:text-slate-600 dark:text-muted-foreground dark:group-hover:text-slate-300"
-    )
+        "shrink-0 transition-colors",
+        isActive ? "text-primary" : verticalIconInactive,
+      )
     : cn("shrink-0", isActive ? color : "text-muted-foreground")
 
   const inner = (
@@ -160,7 +133,7 @@ function InventoryNavButton({
           </button>
         }
       />
-      <TooltipContent side="bottom" sideOffset={6} className="max-w-xs text-xs font-ui-normal">
+      <TooltipContent side="bottom" sideOffset={6} className="max-w-xs text-xs font-normal">
         {label}
       </TooltipContent>
     </Tooltip>
@@ -196,32 +169,22 @@ export function InventoryModuleNavHorizontal({
 
   return (
     <TooltipProvider delay={300}>
-      <nav
-        className={cn(
-          "flex min-w-0 flex-1 items-stretch gap-1 overflow-x-auto overflow-y-hidden pb-px [-webkit-overflow-scrolling:touch]",
-          "scrollbar-thin"
-        )}
-        aria-label={t("nav.aria")}
-      >
+      <nav className={horizontalNavContainer} aria-label={t("nav.aria")}>
         {items}
       </nav>
       <TabDivider variant="horizontal" />
-      <Link
+      <HorizontalTooltipLink
         href="/allergens"
-        className="relative flex shrink-0 items-center gap-2 border-b-2 border-transparent px-3 py-2 text-ui font-ui-medium transition-colors sm:gap-3 text-muted-foreground hover:border-slate-300 hover:text-slate-700 dark:text-muted-foreground dark:hover:border-slate-600 dark:hover:text-slate-200"
-      >
-        <ShieldAlert size={16} className="shrink-0 text-muted-foreground" aria-hidden />
-        <span className="md:hidden">{t("nav.linkAllergens.short")}</span>
-        <span className="hidden md:inline">{t("nav.linkAllergens.long")}</span>
-      </Link>
-      <Link
+        icon={ShieldAlert}
+        label={t("nav.linkAllergens.long")}
+        shortLabel={t("nav.linkAllergens.short")}
+      />
+      <HorizontalTooltipLink
         href="/warehouse"
-        className="relative flex shrink-0 items-center gap-2 border-b-2 border-transparent px-3 py-2 text-ui font-ui-medium transition-colors sm:gap-3 text-muted-foreground hover:border-slate-300 hover:text-slate-700 dark:text-muted-foreground dark:hover:border-slate-600 dark:hover:text-slate-200"
-      >
-        <Warehouse size={16} className="shrink-0 text-muted-foreground" aria-hidden />
-        <span className="md:hidden">{t("nav.linkWarehouse.short")}</span>
-        <span className="hidden md:inline">{t("nav.linkWarehouse.long")}</span>
-      </Link>
+        icon={Warehouse}
+        label={t("nav.linkWarehouse.long")}
+        shortLabel={t("nav.linkWarehouse.short")}
+      />
     </TooltipProvider>
   )
 }
@@ -248,30 +211,15 @@ export function InventoryModuleNavVertical({
 
   return (
     <aside
-      className={cn(
-        "hidden w-56 shrink-0 flex-col border-r border-border bg-white dark:border-slate-900 dark:bg-[#020817]",
-        "lg:flex"
-      )}
+      className="hidden w-56 shrink-0 flex-col border-r border-border lg:flex"
       aria-label={t("nav.aria")}
     >
       <nav className="flex min-h-0 flex-1 flex-col gap-1.5 overflow-y-auto overflow-x-hidden px-3 py-4 scrollbar-thin">
         {items}
       </nav>
       <div className="p-3 border-t border-border space-y-1">
-        <Link
-          href="/allergens"
-          className="relative flex shrink-0 items-center gap-3 rounded-xl text-xs font-ui-medium transition-all group outline-none w-full justify-start px-3 py-1.5 text-muted-foreground hover:bg-slate-100 hover:text-slate-900 dark:text-muted-foreground dark:hover:bg-slate-800/30 dark:hover:text-slate-200"
-        >
-          <ShieldAlert size={18} className="shrink-0 transition-colors text-muted-foreground group-hover:text-slate-600 dark:text-muted-foreground dark:group-hover:text-slate-300" aria-hidden />
-          <span className="min-w-0 flex-1 truncate text-left">{t("nav.linkAllergens.long")}</span>
-        </Link>
-        <Link
-          href="/warehouse"
-          className="relative flex shrink-0 items-center gap-3 rounded-xl text-xs font-ui-medium transition-all group outline-none w-full justify-start px-3 py-1.5 text-muted-foreground hover:bg-slate-100 hover:text-slate-900 dark:text-muted-foreground dark:hover:bg-slate-800/30 dark:hover:text-slate-200"
-        >
-          <Warehouse size={18} className="shrink-0 transition-colors text-muted-foreground group-hover:text-slate-600 dark:text-muted-foreground dark:group-hover:text-slate-300" aria-hidden />
-          <span className="min-w-0 flex-1 truncate text-left">{t("nav.linkWarehouse.long")}</span>
-        </Link>
+        <VerticalTooltipLink href="/allergens" icon={ShieldAlert} label={t("nav.linkAllergens.long")} />
+        <VerticalTooltipLink href="/warehouse" icon={Warehouse} label={t("nav.linkWarehouse.long")} />
       </div>
     </aside>
   )

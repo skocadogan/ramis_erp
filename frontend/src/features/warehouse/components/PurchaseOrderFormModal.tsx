@@ -287,7 +287,7 @@ export function PurchaseOrderFormModal({
 
             <div>
               <div className="mb-3 flex items-center justify-between gap-3">
-                <h4 className="text-sm font-ui-semibold text-foreground">{t("purchaseOrders.linesTitle")}</h4>
+                <h4 className="text-sm font-semibold text-foreground">{t("purchaseOrders.linesTitle")}</h4>
                 <Button type="button" variant="outline" size="sm" onClick={addItem}>
                   <Plus size={14} />
                   {t("purchaseOrders.addLine")}
@@ -354,7 +354,7 @@ export function PurchaseOrderFormModal({
                 </div>
               )}
 
-              <div className="mt-3 text-right text-sm font-ui-semibold text-foreground">
+              <div className="mt-3 text-right text-sm font-semibold text-foreground">
                 {t("purchaseOrders.totalLabel")}{" "}
                 <span className="text-blue-600">{formatAmount(total, canViewAmounts)}</span>
               </div>

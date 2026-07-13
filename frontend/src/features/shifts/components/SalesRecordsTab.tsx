@@ -218,15 +218,15 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
           <Loader2 className="h-10 w-10 animate-spin text-primary" />
         </div>
       ) : (
-        <Card className="border-border shadow-md dark:border-slate-700 dark:bg-slate-900 ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
-          <div className="border-b border-border bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-800/40">
-            <h2 className="text-sm font-ui-semibold text-foreground">
+        <Card className="border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
+          <div className="border-b border-border bg-slate-50 px-4 py-3 border-border bg-muted/40">
+            <h2 className="text-sm font-semibold text-foreground">
               {t("salesListCard.title") || "POS Satış Kayıtları"}
             </h2>
 
             <div className="mt-3 flex flex-wrap items-end gap-3">
               <div className="flex min-w-[9.5rem] flex-col gap-1">
-                <label className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-date-from">
+                <label className="text-sub font-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-date-from">
                   {t("filters.dateFrom")}
                 </label>
                 <input
@@ -234,11 +234,11 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                   type="date"
                   value={salesDateFrom}
                   onChange={(e) => { setSalesDateFrom(e.target.value); }}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[9.5rem] flex-col gap-1">
-                <label className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-date-to">
+                <label className="text-sub font-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-date-to">
                   {t("filters.dateTo")}
                 </label>
                 <input
@@ -246,18 +246,18 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                   type="date"
                   value={salesDateTo}
                   onChange={(e) => { setSalesDateTo(e.target.value); }}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[8rem] flex-col gap-1">
-                <label className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-payment">
+                <label className="text-sub font-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-payment">
                   {t("filters.paymentMethod") || "Ödeme Yöntemi"}
                 </label>
                 <select
                   id="sales-filter-payment"
                   value={salesPaymentMethod}
                   onChange={(e) => { setSalesPaymentMethod(e.target.value); }}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 >
                   <option value="">{t("filters.all")}</option>
                   <option value="CASH">{paymentMethodLabel("CASH")}</option>
@@ -267,14 +267,14 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                 </select>
               </div>
               <div className="flex min-w-[8rem] flex-col gap-1">
-                <label className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-terminal">
+                <label className="text-sub font-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-terminal">
                   {tAdmin("pos.terminals") || "Terminal"}
                 </label>
                 <select
                   id="sales-filter-terminal"
                   value={salesTerminalId}
                   onChange={(e) => { setSalesTerminalId(e.target.value); }}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 >
                   <option value="">{t("filters.all")}</option>
                   {terminalOptions.map((t) => (
@@ -283,14 +283,14 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                 </select>
               </div>
               <div className="flex min-w-[8rem] flex-col gap-1">
-                <label className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-user">
+                <label className="text-sub font-medium uppercase tracking-wide text-muted-foreground" htmlFor="sales-filter-user">
                   {tAdmin("users.title") || "Kullanıcı"}
                 </label>
                 <select
                   id="sales-filter-user"
                   value={salesCreatedById}
                   onChange={(e) => { setSalesCreatedById(e.target.value); }}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 >
                   <option value="">{t("filters.all")}</option>
                   {(posUsersQuery.data || []).map((u) => (
@@ -305,7 +305,7 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
             <div className="mt-3 flex flex-wrap items-center gap-2">
               <div className="flex items-center gap-1 text-xs text-muted-foreground">
                 {t("salesListCard.totals") || "Toplam:"}
-                <span className="font-ui-semibold text-foreground">
+                <span className="font-semibold text-foreground">
                   {formatAmount(salesTotals.net_total ?? 0, canViewAmounts)}
                 </span>
                 {salesFetching && <Loader2 className="size-3 animate-spin text-blue-500" />}
@@ -321,14 +321,14 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
 
           <div ref={salesContainerRef} className="h-full max-h-[calc(100vh-20rem)] overflow-auto">
             <table className="w-full text-xs border-collapse">
-              <thead className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-900">
-                <tr className="border-b border-border dark:border-slate-700">
-                  <th className="px-3 py-2 text-left font-ui-medium text-muted-foreground">{t("table.date")}</th>
-                  <th className="px-3 py-2 text-left font-ui-medium text-muted-foreground">{t("table.orderNo")}</th>
-                  <th className="px-3 py-2 text-left font-ui-medium text-muted-foreground">{t("table.payment")}</th>
-                  <th className="px-3 py-2 text-right font-ui-medium text-muted-foreground">{t("table.total")}</th>
-                  <th className="px-3 py-2 text-left font-ui-medium text-muted-foreground">{t("table.terminal")}</th>
-                  <th className="px-3 py-2 text-center font-ui-medium text-muted-foreground">#</th>
+              <thead className="sticky top-0 z-10 bg-muted">
+                <tr className="border-b border-border border-border">
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground">{t("table.date")}</th>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground">{t("table.orderNo")}</th>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground">{t("table.payment")}</th>
+                  <th className="px-3 py-2 text-right font-medium text-muted-foreground">{t("table.total")}</th>
+                  <th className="px-3 py-2 text-left font-medium text-muted-foreground">{t("table.terminal")}</th>
+                  <th className="px-3 py-2 text-center font-medium text-muted-foreground">#</th>
                 </tr>
               </thead>
               <tbody>
@@ -354,17 +354,17 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                               transform: `translateY(${vi.start}px)`,
                             }}
                           >
-                            <div className="flex items-center border-b border-border/60 px-3 py-2 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-800/30">
+                            <div className="flex items-center border-b border-border/60 px-3 py-2 hover:bg-slate-50 border-border dark:hover:bg-slate-800/30">
                               <div className="flex-1 grid grid-cols-6 gap-2 items-center min-w-0">
                                 <span className="truncate text-muted-foreground">
                                   {sale.created_at ? new Date(sale.created_at).toLocaleDateString("tr-TR") : "-"}
                                 </span>
-                                <span className="truncate font-ui-medium text-foreground">#{sale.order_number || sale.id}</span>
+                                <span className="truncate font-medium text-foreground">#{sale.order_number || sale.id}</span>
                                 <span className="flex items-center gap-1 truncate">
                                   {paymentMethodIcon(sale.payment_method)}
                                   <span className="text-muted-foreground">{paymentMethodLabel(sale.payment_method)}</span>
                                 </span>
-                                <span className="text-right font-ui-semibold tabular-nums text-foreground">
+                                <span className="text-right font-semibold tabular-nums text-foreground">
                                   {formatAmount(sale.net_total ?? sale.total_amount, canViewAmounts)}
                                 </span>
                                 <span className="truncate text-muted-foreground">{sale.terminal_name || "-"}</span>
@@ -431,7 +431,7 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                         )}
                       </DetailRow>
                       <div className="border-t pt-3">
-                        <h3 className="mb-2 text-sm font-ui-semibold">{t("orderDetail.items")}</h3>
+                        <h3 className="mb-2 text-sm font-semibold">{t("orderDetail.items")}</h3>
                         {(visibleOrderDetailItems(o.items as OrderDetailItem[])).map((item, idx) => (
                           <OrderDetailItemRow
                             key={item.id ?? `item-${idx}`}
@@ -501,7 +501,7 @@ function OrderDetailItemRow({
         <span className="min-w-0 text-foreground">
           {String(item.quantity ?? 0)}× {String(item.product_name ?? "")}
         </span>
-        <span className="shrink-0 tabular-nums font-ui-medium text-foreground">
+        <span className="shrink-0 tabular-nums font-medium text-foreground">
           {formatAmount(item.total_price ?? 0, canViewAmounts)}
         </span>
       </div>
@@ -539,9 +539,9 @@ function DetailRow({
   emphasized?: boolean;
 }) {
   return (
-    <div className={`grid grid-cols-[120px_1fr] gap-2 ${emphasized ? "text-base font-ui-semibold" : ""}`}>
+    <div className={`grid grid-cols-[120px_1fr] gap-2 ${emphasized ? "text-base font-semibold" : ""}`}>
       <span className="text-muted-foreground shrink-0">{label}</span>
-      <div className="text-foreground min-w-0 break-words dark:text-slate-200">{children}</div>
+      <div className="text-foreground min-w-0 break-words text-foreground">{children}</div>
     </div>
   );
 }

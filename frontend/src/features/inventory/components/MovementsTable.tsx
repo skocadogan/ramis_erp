@@ -77,13 +77,13 @@ export function MovementsTable({
       <table className="w-full text-sm">
         <thead className="sticky top-0 z-10 bg-muted text-muted-foreground">
           <tr>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("movementsTable.colDate")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("movementsTable.colProduct")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("movementsTable.colType")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("movementsTable.colQty")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("movementsTable.colRef")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("movementsTable.colNotes")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("movementsTable.colAction")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("movementsTable.colDate")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("movementsTable.colProduct")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("movementsTable.colType")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("movementsTable.colQty")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("movementsTable.colRef")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("movementsTable.colNotes")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("movementsTable.colAction")}</th>
           </tr>
         </thead>
         <tbody>
@@ -92,7 +92,7 @@ export function MovementsTable({
               <td colSpan={MOV_COL_SPAN} className="text-center py-12">
                 <div className="flex flex-col items-center gap-2">
                   <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-600 border-t-transparent" />
-                  <span className="text-sm text-muted-foreground font-ui-medium">{t("movementsTable.loading")}</span>
+                  <span className="text-sm text-muted-foreground font-medium">{t("movementsTable.loading")}</span>
                 </div>
               </td>
             </tr>
@@ -113,13 +113,13 @@ export function MovementsTable({
                     className="border-b border-border transition-colors hover:bg-muted/20"
                   >
                     <td className="whitespace-nowrap px-4 py-2 text-muted-foreground">{formatDate(m.created_at)}</td>
-                    <td className="px-4 py-2 font-ui-medium text-foreground">{m.stock_item_name}</td>
+                    <td className="px-4 py-2 font-medium text-foreground">{m.stock_item_name}</td>
                     <td className="px-4 py-2">
-                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-ui-medium ${stockMovementTypeBadgeClass(m.movement_type)}`}>
+                      <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${stockMovementTypeBadgeClass(m.movement_type)}`}>
                         {getStockMovementTypeLabel(m.movement_type, (key) => t(`movementType.${key}`))}
                       </span>
                     </td>
-                    <td className={`px-4 py-2 text-right font-ui-semibold ${stockMovementQuantityTextClass(m)}`}>
+                    <td className={`px-4 py-2 text-right font-semibold ${stockMovementQuantityTextClass(m)}`}>
                       {formatStockMovementQuantitySign(m)}
                       {formatQuantityWithUnit(Math.abs(getStockMovementSignedQuantity(m)), m.unit)}
                     </td>

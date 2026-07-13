@@ -46,24 +46,24 @@ export function WarehouseStats({ summary, isLoading, onOverdueClick }: Warehouse
                 : undefined
             }
             className={cn(
-              `group relative overflow-hidden rounded-xl border border-border/80 dark:border-slate-800 ${bg} p-4 transition-all`,
+              `group relative overflow-hidden rounded-xl border border-border/80 border-border ${bg} p-4 transition-all`,
               isClickable && "cursor-pointer hover:shadow-md hover:shadow-slate-200/50 dark:hover:shadow-slate-900/50",
               isOverdueCard && value > 0 && "border-red-200 dark:border-red-900/50",
             )}
           >
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sub font-ui-medium text-muted-foreground uppercase tracking-wider mb-1">
+                <p className="text-sub font-medium text-muted-foreground uppercase tracking-wider mb-1">
                   {t(key)}
                 </p>
                 <p className={cn(
-                  "text-2xl font-ui-bold text-foreground",
+                  "text-2xl font-bold text-foreground",
                   isOverdueCard && value > 0 && "text-red-600 dark:text-red-400",
                 )}>
                   {isLoading ? "—" : value}
                 </p>
               </div>
-              <div className={`p-2 rounded-lg bg-white/60 dark:bg-slate-900/40 ${color}`}>
+              <div className={`p-2 rounded-lg bg-white/60 bg-card/40 ${color}`}>
                 <Icon size={22} />
               </div>
             </div>

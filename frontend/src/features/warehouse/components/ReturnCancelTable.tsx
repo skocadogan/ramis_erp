@@ -67,7 +67,7 @@ const ReturnCancelRow = memo(function ReturnCancelRow({
       <td className="px-4 py-3">
         <span
           className={cn(
-            "inline-flex rounded-md px-2 py-0.5 text-xs font-ui-semibold",
+            "inline-flex rounded-md px-2 py-0.5 text-xs font-semibold",
             isReturn
               ? "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300"
               : "bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-200",
@@ -76,13 +76,13 @@ const ReturnCancelRow = memo(function ReturnCancelRow({
           {isReturn ? t("movementTypeReturn") : t("movementTypeCancel")}
         </span>
       </td>
-      <td className="px-4 py-3 font-ui-medium text-foreground">{row.stock_item_name}</td>
+      <td className="px-4 py-3 font-medium text-foreground">{row.stock_item_name}</td>
       <td className="px-4 py-3 text-muted-foreground">{row.warehouse_name}</td>
-      <td className="px-4 py-3 text-right font-ui-semibold tabular-nums text-rose-600 dark:text-rose-400">
+      <td className="px-4 py-3 text-right font-semibold tabular-nums text-rose-600 dark:text-rose-400">
         {qty} {row.unit}
       </td>
       <td className="px-4 py-3 text-right tabular-nums text-foreground">{currency.format(price)}</td>
-      <td className="px-4 py-3 text-right font-ui-medium tabular-nums text-foreground">
+      <td className="px-4 py-3 text-right font-medium tabular-nums text-foreground">
         {currency.format(qty * price)}
       </td>
       <td className="px-4 py-3 text-muted-foreground">
@@ -159,7 +159,7 @@ export const ReturnCancelTable = memo(function ReturnCancelTable({
   if (rows.length === 0 && !infiniteControls?.isFetchingNextPage) {
     return (
       <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border py-16 text-muted-foreground">
-        <p className="text-sm font-ui-medium">{t("empty")}</p>
+        <p className="text-sm font-medium">{t("empty")}</p>
       </div>
     )
   }
@@ -173,15 +173,15 @@ export const ReturnCancelTable = memo(function ReturnCancelTable({
   return (
     <div
       ref={containerRef}
-      className="min-h-0 flex-1 overflow-auto rounded-xl border border-border/80 bg-card/50 dark:border-slate-800"
+      className="min-h-0 flex-1 overflow-auto rounded-xl border border-border/80 bg-card/50 border-border"
     >
       <table className="w-full text-sm">
-        <thead className="sticky top-0 z-10 border-b border-border bg-slate-50 dark:bg-slate-800/50">
+        <thead className="sticky top-0 z-10 border-b border-border bg-muted/50">
           <tr>
             {headers.map((h) => (
               <th
                 key={h}
-                className="px-4 py-3 text-left text-xs font-ui-semibold uppercase tracking-wide text-muted-foreground first:text-left last:text-right"
+                className="px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted-foreground first:text-left last:text-right"
               >
                 {h}
               </th>
@@ -218,7 +218,7 @@ export const ReturnCancelTable = memo(function ReturnCancelTable({
               <td colSpan={headers.length} className="py-4">
                 <div className="flex items-center justify-center gap-2 text-blue-600">
                   <Loader2 className="h-4 w-4 animate-spin" />
-                  <span className="text-xs font-ui-medium">{t("loadingMore")}</span>
+                  <span className="text-xs font-medium">{t("loadingMore")}</span>
                 </div>
               </td>
             </tr>

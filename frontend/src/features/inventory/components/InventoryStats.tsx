@@ -121,8 +121,8 @@ export const InventoryStats = memo(
                 <div className="min-w-0">
                   {compact ? (
                     <div className="flex items-center gap-1.5 whitespace-nowrap">
-                      <span className="text-2xs font-ui-medium text-muted-foreground">{card.label}</span>
-                      <span className={`text-xs font-ui-semibold tabular-nums ${card.valueColor}`}>{display}</span>
+                      <span className="text-2xs font-medium text-muted-foreground">{card.label}</span>
+                      <span className={`text-xs font-semibold tabular-nums ${card.valueColor}`}>{display}</span>
                       {showInfo && (
                         <button
                           type="button"
@@ -137,7 +137,7 @@ export const InventoryStats = memo(
                         </button>
                       )}
                       {card.id === "total" && totalReservedQty > 0 && (
-                        <span className="text-2xs font-ui-medium text-amber-600 dark:text-amber-400">
+                        <span className="text-2xs font-medium text-amber-600 dark:text-amber-400">
                           -{totalReservedQty}
                         </span>
                       )}
@@ -145,7 +145,7 @@ export const InventoryStats = memo(
                   ) : (
                     <>
                       <div className="flex items-start justify-between gap-1">
-                        <p className="text-xs font-ui-medium text-muted-foreground">{card.label}</p>
+                        <p className="text-xs font-medium text-muted-foreground">{card.label}</p>
                         {showInfo && (
                           <button
                             type="button"
@@ -161,9 +161,9 @@ export const InventoryStats = memo(
                         )}
                       </div>
                       <div className="flex items-baseline gap-2">
-                        <p className={`text-lg font-ui-semibold ${card.valueColor}`}>{display}</p>
+                        <p className={`text-lg font-semibold ${card.valueColor}`}>{display}</p>
                         {card.id === "total" && totalReservedQty > 0 && (
-                          <span className="text-2xs font-ui-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 px-1 rounded">
+                          <span className="text-2xs font-medium text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-950/30 px-1 rounded">
                             -{totalReservedQty} {t("stats.reservedSuffix")}
                           </span>
                         )}

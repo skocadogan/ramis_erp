@@ -35,12 +35,12 @@ export function DashboardPaymentBreakdown({
   return (
     <div className={cn("grid gap-6 lg:grid-cols-2", className)}>
       <div className="rounded-xl border border-border bg-card p-4">
-        <h2 className="mb-3 text-sm font-ui-semibold">{t("paymentBreakdown.title")}</h2>
+        <h2 className="mb-3 text-sm font-semibold">{t("paymentBreakdown.title")}</h2>
         <ul className="space-y-2 text-sm">
           {payData.map((row) => (
             <li key={row.key} className="flex justify-between">
               <span className="text-muted-foreground">{row.label}</span>
-              <span className="font-ui-semibold">
+              <span className="font-semibold">
                 {formatAmount(row.value, canViewAmounts)}
               </span>
             </li>
@@ -48,7 +48,7 @@ export function DashboardPaymentBreakdown({
         </ul>
       </div>
       <div className="rounded-xl border border-border bg-card p-4">
-        <h2 className="mb-3 text-sm font-ui-semibold">{t("topSellers.title")}</h2>
+        <h2 className="mb-3 text-sm font-semibold">{t("topSellers.title")}</h2>
         <ul className="space-y-2 text-sm">
           {(topProducts ?? []).slice(0, 10).map((p) => (
             <li key={p.name} className="flex justify-between gap-2">

@@ -127,11 +127,11 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
 
   return (
     <>
-      <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+      <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border shadow-sm border-border bg-card">
       {/* STICKY HEADER AREA */}
-      <div className="z-20 flex shrink-0 flex-col border-b border-slate-50 bg-white px-3 pt-4 pb-2 dark:border-slate-800 dark:bg-slate-900 sm:px-6 sm:pt-2">
+      <div className="z-20 flex shrink-0 flex-col border-b border-slate-50 px-3 pt-4 pb-2 border-border bg-card sm:px-6 sm:pt-2">
         <div className="mb-4 flex flex-col gap-3 sm:mb-2 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
-          <h2 className="shrink-0 text-xl font-ui-bold tracking-tight text-slate-800 sm:text-2xl dark:text-slate-100">
+          <h2 className="shrink-0 text-xl font-bold tracking-tight text-slate-800 sm:text-2xl text-foreground">
             {t("select")}
           </h2>
           <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center sm:gap-3">
@@ -142,10 +142,10 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
                 placeholder={t("search")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full rounded-lg border border-border bg-slate-50 py-2 pr-4 pl-9 text-sm text-slate-900 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-muted-foreground"
+                className="w-full rounded-lg border border-border bg-slate-50 py-2 pr-4 pl-9 text-sm text-slate-900 placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/50 border-input bg-muted text-foreground dark:placeholder:text-muted-foreground"
               />
             </div>
-            <span className="inline-flex shrink-0 self-start rounded-lg bg-slate-100 px-3 py-2 text-sm font-ui-medium text-muted-foreground sm:self-center dark:bg-slate-800 dark:text-muted-foreground">
+            <span className="inline-flex shrink-0 self-start rounded-lg bg-slate-100 px-3 py-2 text-sm font-medium text-muted-foreground sm:self-center bg-muted dark:text-muted-foreground">
               {t("count", { count: tables.length })}
             </span>
           </div>
@@ -155,10 +155,10 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
         <div className="flex gap-2 overflow-x-auto scroll-py-2 pb-2 pl-0.5 pr-4 [-webkit-overflow-scrolling:touch] sm:pr-6 no-scrollbar">
           <button
             onClick={() => setSelectedZone("ALL")}
-            className={`shrink-0 rounded-xl border px-4 py-2.5 text-sm font-ui-semibold transition-colors
+            className={`shrink-0 rounded-xl border px-4 py-2.5 text-sm font-semibold transition-colors
             ${selectedZone === "ALL"
                 ? "border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-600/20"
-                : "border-border bg-white text-slate-600 hover:border-blue-400 hover:text-blue-600 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-blue-500 dark:hover:text-blue-400"}`}
+                : "border-border text-slate-600 hover:border-blue-400 hover:text-blue-600 border-border bg-muted text-muted-foreground dark:hover:border-blue-500 dark:hover:text-blue-400"}`}
           >
             {t("all")}
           </button>
@@ -170,10 +170,10 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
               <button
                 key={z.id}
                 onClick={() => setSelectedZone(z.id)}
-                className={`flex shrink-0 items-center rounded-xl border px-4 py-2.5 text-sm font-ui-bold transition-colors
+                className={`flex shrink-0 items-center rounded-xl border px-4 py-2.5 text-sm font-bold transition-colors
                   ${isActive 
                     ? "shadow-md" 
-                    : "border-border bg-white text-slate-600 hover:border-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:border-slate-500"}`}
+                    : "border-border text-slate-600 hover:border-slate-400 border-border bg-muted text-muted-foreground dark:hover:border-slate-500"}`}
                 style={isActive ? {
                   backgroundColor: `${zColor}15`,
                   borderColor: zColor,
@@ -204,15 +204,15 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
           {zoneTablesList.map(({ zone: z, zoneTables }) => (
             <div
               key={z.id}
-              className={`space-y-1 rounded-2xl border-l-4 p-2 transition-colors ${z.color ? "" : "bg-slate-50 dark:bg-slate-800/50"}`}
+              className={`space-y-1 rounded-2xl border-l-4 p-2 transition-colors ${z.color ? "" : "bg-muted/50"}`}
               style={{
                 backgroundColor: z.color ? `${z.color}15` : undefined,
                 borderLeftColor: z.color || "var(--color-border)",
               }}
             >
               <div className="flex items-center gap-3">
-                <h3 className="text-sm font-ui-bold uppercase tracking-widest text-muted-foreground">{z.name}</h3>
-                <div className="h-px flex-1 bg-slate-200/50 dark:bg-slate-600/40" />
+                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground">{z.name}</h3>
+                <div className="h-px flex-1 bg-slate-200/50 bg-accent/40" />
               </div>
 
               <div className={getGridClassName()}>

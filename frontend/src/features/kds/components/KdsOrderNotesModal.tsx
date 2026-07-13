@@ -43,9 +43,9 @@ export function KdsOrderNotesModal({ open, notes, tableName, onClose }: Props) {
             notes.map((note, idx) => (
               <div
                 key={idx}
-                className="flex items-start gap-3 p-3.5 rounded-xl border border-amber-500/25 bg-amber-500/5 text-sm font-ui-medium text-foreground"
+                className="flex items-start gap-3 p-3.5 rounded-xl border border-amber-500/25 bg-amber-500/5 text-sm font-medium text-foreground"
               >
-                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/10 text-xs font-ui-black text-amber-600 dark:text-amber-400">
+                <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-amber-500/10 text-xs font-black text-amber-600 dark:text-amber-400">
                   {idx + 1}
                 </span>
                 <p className="flex-1 leading-relaxed whitespace-pre-wrap select-text">{note}</p>

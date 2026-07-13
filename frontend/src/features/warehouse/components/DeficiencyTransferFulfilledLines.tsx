@@ -13,14 +13,14 @@ const variants = {
   warehouse: {
     root: "rounded-2xl border border-border overflow-hidden flex flex-col bg-background",
     title:
-      "border-b border-border bg-background px-4 py-2.5 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground",
+      "border-b border-border bg-background px-4 py-2.5 text-xs font-bold uppercase tracking-widest text-muted-foreground",
     searchBox: "border-b border-border bg-background p-2",
     transferBar:
       "flex flex-wrap items-center gap-x-2 gap-y-0.5 border-b border-border bg-background px-4 py-2 text-sub last:border-b-0",
-    transferNo: "font-mono font-ui-bold text-amber-600 dark:text-amber-400",
+    transferNo: "font-mono font-bold text-amber-600 dark:text-amber-400",
     transferStatus: "text-muted-foreground",
     row: "flex items-baseline justify-between gap-2 bg-background px-4 py-2.5 text-sm hover:bg-muted/20",
-    name: "min-w-0 flex-1 font-ui-bold text-foreground",
+    name: "min-w-0 flex-1 font-bold text-foreground",
     qty: "shrink-0 tabular-nums text-muted-foreground",
     divider: "divide-y divide-border",
     blockOuter: "border-b border-border last:border-b-0",
@@ -29,14 +29,14 @@ const variants = {
   kds: {
     root: "flex min-h-0 flex-1 flex-col border-t border-border",
     title:
-      "shrink-0 border-b border-border bg-muted px-3 py-2 text-xs font-ui-bold uppercase tracking-wider text-muted-foreground",
+      "shrink-0 border-b border-border bg-muted px-3 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground",
     searchBox: "p-2 shrink-0 border-b border-border bg-background",
     transferBar: "flex flex-wrap items-center gap-x-2 gap-y-0.5 bg-muted/40 px-3 py-2 text-sub border-b border-border",
-    transferNo: "font-mono font-ui-bold text-amber-600 dark:text-amber-400",
-    transferStatus: "text-muted-foreground font-ui-medium uppercase tracking-widest text-2xs",
+    transferNo: "font-mono font-bold text-amber-600 dark:text-amber-400",
+    transferStatus: "text-muted-foreground font-medium uppercase tracking-widest text-2xs",
     row: "flex items-baseline justify-between gap-2 px-3 py-2 text-sm leading-snug hover:bg-muted transition-colors",
-    name: "min-w-0 flex-1 truncate font-ui-bold text-foreground",
-    qty: "shrink-0 tabular-nums font-ui-bold text-foreground",
+    name: "min-w-0 flex-1 truncate font-bold text-foreground",
+    qty: "shrink-0 tabular-nums font-bold text-foreground",
     divider: "divide-y divide-border",
     blockOuter: "border-b border-border last:border-b-0",
     scrollArea: "flex-1 overflow-y-auto custom-scrollbar",

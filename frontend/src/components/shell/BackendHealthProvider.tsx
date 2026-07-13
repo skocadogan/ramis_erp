@@ -134,7 +134,7 @@ export function BackendHealthIndicator({ className }: { className?: string }) {
       <Monitor
         strokeWidth={2}
         className={cn(
-          "h-[18px] w-[18px] transition-[color,filter]",
+          "size-4 transition-[color,filter]",
           status === "ok" && "text-emerald-500 [filter:drop-shadow(0_0_5px_rgba(34,197,94,0.55))]",
           status === "down" && "text-red-500 [filter:drop-shadow(0_0_5px_rgba(239,68,68,0.5))]",
           status === "checking" && "text-muted-foreground/60"
@@ -154,7 +154,7 @@ export function BackendHealthBanner({ className }: { className?: string }) {
     <div
       role="alert"
       className={cn(
-        "flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-red-800/80 bg-red-600 px-3 py-2 text-center text-xs font-ui-medium text-white sm:text-sm sm:gap-3",
+        "flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-red-800/80 bg-red-600 px-3 py-2 text-center text-xs font-medium text-white sm:text-sm sm:gap-3",
         className
       )}
     >

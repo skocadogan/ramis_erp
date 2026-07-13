@@ -43,7 +43,7 @@ const CancellationRow = memo(({
             data-index={idx}
             ref={measureElement}
             onClick={() => onRowClick?.(row)}
-            className={`border-b border-slate-100 dark:border-slate-700/60 last:border-0 cursor-pointer transition-colors ${ROW_HOVER}`}
+            className={`border-b border-slate-100 border-border/60 last:border-0 cursor-pointer transition-colors ${ROW_HOVER}`}
         >
             <td className="px-4 py-3 text-xs text-muted-foreground font-mono tabular-nums">{idx + 1}</td>
             <td className="px-4 py-3 text-xs text-muted-foreground">
@@ -51,16 +51,16 @@ const CancellationRow = memo(({
             </td>
             <td className="px-4 py-3 text-foreground">
                 <div className="flex flex-col">
-                    <span className="text-sm font-ui-medium">{row.branch_name}</span>
+                    <span className="text-sm font-medium">{row.branch_name}</span>
                 </div>
             </td>
-            <td className="px-4 py-3 font-ui-semibold text-foreground">
+            <td className="px-4 py-3 font-semibold text-foreground">
                 <div className="flex flex-col">
                     {row.table_name ?? (
                         <span className="text-muted-foreground">{t('table.dash')}</span>
                     )}
                     {row.order_type === 'TAKEAWAY' && (
-                        <span className="text-2xs text-amber-600 font-ui-bold uppercase">{t('table.takeaway')}</span>
+                        <span className="text-2xs text-amber-600 font-bold uppercase">{t('table.takeaway')}</span>
                     )}
                 </div>
             </td>
@@ -74,7 +74,7 @@ const CancellationRow = memo(({
             </td>
             <td className="px-4 py-3 text-foreground">
                 <div className="flex flex-col">
-                    <span className="text-sm font-ui-medium">{row.product_name}</span>
+                    <span className="text-sm font-medium">{row.product_name}</span>
                     <span className="text-xs text-muted-foreground">
                         {t('cancellations.quantityLine', { qty: row.quantity })}
                     </span>
@@ -82,13 +82,13 @@ const CancellationRow = memo(({
             </td>
             <td className="px-4 py-3 text-foreground">
                 {!canViewAmounts ? (
-                    <span className="text-sm font-ui-bold tabular-nums">{AMOUNT_DISPLAY_MASK}</span>
+                    <span className="text-sm font-bold tabular-nums">{AMOUNT_DISPLAY_MASK}</span>
                 ) : (
                     <div className="flex flex-col gap-0.5 min-w-[7rem]">
                         <span className="text-xs text-muted-foreground tabular-nums">
                             {t('cancellations.unitPrice', { amount: unitStr })}
                         </span>
-                        <span className="text-sm font-ui-bold tabular-nums">{totalStr}</span>
+                        <span className="text-sm font-bold tabular-nums">{totalStr}</span>
                     </div>
                 )}
             </td>
@@ -141,7 +141,7 @@ export const CancellationsTable = memo(({
         return (
             <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border py-16 text-muted-foreground">
                 <ShoppingBag size={36} className="mb-3 opacity-30" />
-                <p className="text-sm font-ui-medium">{t('cancellations.empty')}</p>
+                <p className="text-sm font-medium">{t('cancellations.empty')}</p>
             </div>
         );
     }
@@ -163,14 +163,14 @@ export const CancellationsTable = memo(({
         : 0;
 
     return (
-        <div ref={containerRef} className="rounded-xl border border-border bg-card dark:border-slate-700 overflow-auto h-full scrollbar-thin">
+        <div ref={containerRef} className="rounded-xl border border-border bg-card border-border overflow-auto h-full scrollbar-thin">
             <table className="w-full text-sm relative">
-                <thead className="bg-slate-50 dark:bg-slate-800 border-b border-border sticky top-0 z-10 shadow-sm">
+                <thead className="bg-muted border-b border-border sticky top-0 z-10 shadow-sm">
                     <tr>
                         {headers.map((h) => (
                             <th
                                 key={h}
-                                className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider"
+                                className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider"
                             >
                                 {h}
                             </th>
@@ -202,7 +202,7 @@ export const CancellationsTable = memo(({
                             <td colSpan={headers.length} className="py-4">
                                 <div className="flex items-center justify-center gap-2 text-blue-600">
                                     <Loader2 className="animate-spin" size={20} />
-                                    <span className="text-xs font-ui-medium">{t('list.loadingHint')}</span>
+                                    <span className="text-xs font-medium">{t('list.loadingHint')}</span>
                                 </div>
                             </td>
                         </tr>

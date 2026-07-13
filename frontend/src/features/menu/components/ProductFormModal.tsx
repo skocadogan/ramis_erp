@@ -305,7 +305,7 @@ export default function ProductFormModal({
           <div className="space-y-4 min-h-0 lg:overflow-y-auto lg:pr-1">
             <div className="flex gap-4 mb-6">
               <div className="shrink-0">
-                <label className="text-sm font-ui-semibold text-foreground block mb-3">{t("productForm.image")}</label>
+                <label className="text-sm font-semibold text-foreground block mb-3">{t("productForm.image")}</label>
                 {form.image ? (
                   <div className="relative h-32 w-32 overflow-hidden rounded-lg border border-border bg-background shadow-sm transition-all group/img">
                     <AppImage
@@ -332,7 +332,7 @@ export default function ProductFormModal({
                 ) : (
                   <label className="flex h-32 w-32 cursor-pointer flex-col items-center justify-center rounded-lg border-2 border-dashed border-border bg-muted/20 text-muted-foreground transition-all hover:border-primary/50 hover:bg-muted/40 hover:text-foreground">
                     <ImageIcon size={28} className="mb-1" />
-                    <span className="text-2xs font-ui-medium text-center px-2">{t("productForm.uploadImage")}</span>
+                    <span className="text-2xs font-medium text-center px-2">{t("productForm.uploadImage")}</span>
                     <input
                       type="file"
                       className="hidden"
@@ -347,7 +347,7 @@ export default function ProductFormModal({
               </div>
               <div className="flex-1 min-w-0 space-y-4">
                 <div>
-                  <label className="text-sm font-ui-medium text-foreground">{t("productForm.category")}</label>
+                  <label className="text-sm font-medium text-foreground">{t("productForm.category")}</label>
                   <CategorySelectTree
                     categories={categories}
                     value={form.category ?? ""}
@@ -358,7 +358,7 @@ export default function ProductFormModal({
                 </div>
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-sm font-ui-medium text-foreground">{t("productForm.order")}</label>
+                    <label className="text-sm font-medium text-foreground">{t("productForm.order")}</label>
                     <input
                       type="text"
                       inputMode="numeric"
@@ -377,7 +377,7 @@ export default function ProductFormModal({
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-ui-medium text-foreground">{t("productForm.calories")}</label>
+                    <label className="text-sm font-medium text-foreground">{t("productForm.calories")}</label>
                     <input
                       type="text"
                       inputMode="numeric"
@@ -401,13 +401,13 @@ export default function ProductFormModal({
             </div>
 
             <div>
-              <label className="text-sm font-ui-medium text-foreground">{t("productForm.name")}</label>
+              <label className="text-sm font-medium text-foreground">{t("productForm.name")}</label>
               <input value={form.name} onChange={e => onChange({ ...form, name: e.target.value })}
                 className={inputClass} placeholder={t("productForm.namePlaceholder")} />
             </div>
 
             <div>
-              <label className="text-sm font-ui-medium text-foreground">{t("productForm.tags")}</label>
+              <label className="text-sm font-medium text-foreground">{t("productForm.tags")}</label>
               <MenuTagSelect
                 className="mt-1"
                 value={form.tag_ids}
@@ -417,7 +417,7 @@ export default function ProductFormModal({
             </div>
 
             <div>
-              <label className="text-sm font-ui-medium text-foreground">{t("productForm.description")}</label>
+              <label className="text-sm font-medium text-foreground">{t("productForm.description")}</label>
               <textarea
                 value={form.description}
                 onChange={(e) => onChange({ ...form, description: e.target.value })}
@@ -461,7 +461,7 @@ export default function ProductFormModal({
                                 : rec.product_unit_name ?? "—"
                             return (
                               <tr key={rec.id} className="border-t border-border/60">
-                                <td className="px-3 py-1.5 pr-3 font-ui-medium">{rec.recommended_product_name}</td>
+                                <td className="px-3 py-1.5 pr-3 font-medium">{rec.recommended_product_name}</td>
                                 <td className="py-1.5 pr-3 text-muted-foreground">{unitLabel}</td>
                                 <td className="px-3 py-1.5 text-right font-mono tabular-nums">
                                   {canViewAmounts ? formatCurrency(price) : "—"}
@@ -483,7 +483,7 @@ export default function ProductFormModal({
             <div className="space-y-3 rounded-lg border border-border bg-background p-3">
               <div className="flex items-center justify-between gap-4">
                 <div className="min-w-0">
-                  <p className="text-sm font-ui-semibold text-foreground">
+                  <p className="text-sm font-semibold text-foreground">
                     {t("productForm.menuActive")}
                   </p>
                   <p className="mt-0.5 text-xs text-muted-foreground">
@@ -497,7 +497,7 @@ export default function ProductFormModal({
               </div>
               <div className="flex items-center justify-between gap-4 border-t border-border/80 pt-3">
                 <div className="min-w-0">
-                  <p className="text-sm font-ui-semibold text-foreground">{t("productForm.feature")}</p>
+                  <p className="text-sm font-semibold text-foreground">{t("productForm.feature")}</p>
                 </div>
                 <ToggleSwitch
                   checked={form.is_featured}
@@ -507,7 +507,7 @@ export default function ProductFormModal({
               </div>
               <div className="flex items-center justify-between gap-4 border-t border-border/80 pt-3">
                 <div className="min-w-0">
-                  <p className="text-sm font-ui-semibold text-foreground">{t("productForm.combinedProduct")}</p>
+                  <p className="text-sm font-semibold text-foreground">{t("productForm.combinedProduct")}</p>
                 </div>
                 <ToggleSwitch
                   checked={form.is_combined}
@@ -519,7 +519,7 @@ export default function ProductFormModal({
 
             {modifierGroups.length > 0 && (
               <div className="border-t border-border pt-4">
-                <h3 className="text-sm font-ui-semibold text-foreground mb-3">{t("productForm.modifierGroups")}</h3>
+                <h3 className="text-sm font-semibold text-foreground mb-3">{t("productForm.modifierGroups")}</h3>
                 <div className="flex flex-wrap gap-2">
                   {modifierGroups.map((group) => {
                     const isSelected = form.modifier_group_ids.includes(group.id)
@@ -534,7 +534,7 @@ export default function ProductFormModal({
                           onChange({ ...form, modifier_group_ids: next })
                         }}
                         className={cn(
-                          "px-3 py-1.5 rounded-full text-xs font-ui-semibold border transition-all",
+                          "px-3 py-1.5 rounded-full text-xs font-semibold border transition-all",
                           isSelected
                             ? "border-emerald-600 bg-emerald-600 text-white"
                             : cn("border", chipUnselectedClass, "hover:border-emerald-500/50")
@@ -549,7 +549,7 @@ export default function ProductFormModal({
             )}
 
             <div className="border-t border-border pt-4">
-              <h3 className="mb-3 flex items-center gap-2 text-sm font-ui-semibold text-foreground">
+              <h3 className="mb-3 flex items-center gap-2 text-sm font-semibold text-foreground">
                 <Building2 size={16} className="text-primary" /> {t("productForm.branchAccess")}
               </h3>
               <div className="flex flex-wrap gap-2">
@@ -569,7 +569,7 @@ export default function ProductFormModal({
                           onChange({ ...form, branches: newBranches })
                         }}
                         className={cn(
-                          "px-3 py-1.5 rounded-full text-xs font-ui-semibold border transition-all",
+                          "px-3 py-1.5 rounded-full text-xs font-semibold border transition-all",
                           isSelected
                             ? "border-primary bg-primary text-primary-foreground shadow-sm"
                             : cn("border", chipUnselectedClass)
@@ -584,13 +584,13 @@ export default function ProductFormModal({
             </div>
 
             <div className="rounded-lg border border-border bg-background p-3">
-              <label className="text-sm font-ui-semibold text-foreground">{t("productForm.pricing")}</label>
+              <label className="text-sm font-semibold text-foreground">{t("productForm.pricing")}</label>
               <p className="mt-1 text-xs text-muted-foreground">
                 {t("productForm.pricingHint")}
               </p>
               <div className="mt-3 grid grid-cols-2 gap-4">
                 <div>
-                  <label className="text-sm font-ui-medium text-foreground">{t("productForm.grossPrice")}</label>
+                  <label className="text-sm font-medium text-foreground">{t("productForm.grossPrice")}</label>
                   <div className="mt-1 flex items-center gap-1.5">
                     <input
                       type="text"
@@ -604,7 +604,7 @@ export default function ProductFormModal({
                   </div>
                 </div>
                 <div>
-                  <label className="text-sm font-ui-medium text-foreground">{t("productForm.taxRate")}</label>
+                  <label className="text-sm font-medium text-foreground">{t("productForm.taxRate")}</label>
                   <input
                     type="text"
                     inputMode="decimal"
@@ -617,7 +617,7 @@ export default function ProductFormModal({
                 </div>
               </div>
               <div className="mt-3">
-                <label className="text-sm font-ui-medium text-foreground">{t("productForm.netPrice")}</label>
+                <label className="text-sm font-medium text-foreground">{t("productForm.netPrice")}</label>
                 <div className="mt-1 flex items-center gap-1.5">
                   <input
                     type="text"
@@ -635,7 +635,7 @@ export default function ProductFormModal({
                   {recipeCostPerServing != null ? (
                     <>
                       {t("productForm.recipeCost")}
-                      <span className="font-ui-medium text-foreground">
+                      <span className="font-medium text-foreground">
                         {formatAmount(recipeCostPerServing, canViewAmounts)}
                       </span>
                     </>
@@ -652,7 +652,7 @@ export default function ProductFormModal({
             {!form.is_combined ? (
               <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="flex items-center gap-2 text-sm font-ui-semibold text-foreground">
+                  <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
                     <Scale size={16} className="text-primary" /> {t("productForm.sellingUnits")}
                   </h3>
                   <button
@@ -661,7 +661,7 @@ export default function ProductFormModal({
                       ...form,
                       units: [...form.units, { name: "", multiplier: 1.0, price_override: null, order: form.units.length }]
                     })}
-                    className="flex items-center gap-1 text-xs font-ui-medium text-primary hover:text-primary/80"
+                    className="flex items-center gap-1 text-xs font-medium text-primary hover:text-primary/80"
                   >
                     <Plus size={14} /> {t("productForm.addUnit")}
                   </button>
@@ -680,7 +680,7 @@ export default function ProductFormModal({
                               newUnits[index] = { ...unit, name: e.target.value }
                               onChange({ ...form, units: newUnits })
                             }}
-                            className="h-6 border-none bg-transparent p-0 text-ui-sm font-ui-semibold placeholder:font-ui-normal focus:ring-0"
+                            className="h-6 border-none bg-transparent p-0 text-ui-sm font-semibold placeholder:font-normal focus:ring-0"
                           />
                           <button
                             type="button"
@@ -696,7 +696,7 @@ export default function ProductFormModal({
                         
                         <div className="grid grid-cols-2 gap-3">
                           <div className="flex flex-col gap-0.5">
-                            <label className="text-2xs font-ui-medium text-muted-foreground">{t("productForm.multiplier")}</label>
+                            <label className="text-2xs font-medium text-muted-foreground">{t("productForm.multiplier")}</label>
                             <div className="flex items-center gap-1">
                               <MenuDecimalInput
                                 value={unit.multiplier > 0 ? unit.multiplier : 1}
@@ -719,7 +719,7 @@ export default function ProductFormModal({
                             </div>
                           </div>
                           <div className="flex flex-col gap-0.5">
-                            <label className="text-2xs font-ui-medium text-muted-foreground">{t("productForm.price")}</label>
+                            <label className="text-2xs font-medium text-muted-foreground">{t("productForm.price")}</label>
                             <div className="flex items-center gap-1">
                               <input
                                 type="text"
@@ -753,7 +753,7 @@ export default function ProductFormModal({
             ) : (
               <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
                 <div className="mb-2 flex items-center justify-between pr-2">
-                  <h3 className="flex items-center gap-1.5 text-xs font-ui-semibold text-foreground">
+                  <h3 className="flex items-center gap-1.5 text-xs font-semibold text-foreground">
                     <Plus size={14} className="text-purple-500" /> {t("productForm.packageContents")}
                   </h3>
                   <button
@@ -762,7 +762,7 @@ export default function ProductFormModal({
                       ...form,
                       combined_items: [...form.combined_items, { product: "", quantity: 1, product_unit: null }]
                     })}
-                    className="text-xs font-ui-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 flex items-center gap-1"
+                    className="text-xs font-medium text-purple-600 hover:text-purple-700 dark:text-purple-400 flex items-center gap-1"
                   >
                     <Plus size={14} /> {t("productForm.addProduct")}
                   </button>
@@ -772,10 +772,10 @@ export default function ProductFormModal({
                   <div className="mb-2 shrink-0 pr-2">
                     <div className="rounded-md border border-purple-200 bg-purple-50 px-2.5 py-2 dark:border-purple-800/60 dark:bg-purple-950/35">
                       <div className="flex flex-wrap items-baseline justify-between gap-x-2 gap-y-0.5">
-                        <p className="text-2xs font-ui-medium uppercase tracking-wide text-purple-800 dark:text-purple-200/90">
+                        <p className="text-2xs font-medium uppercase tracking-wide text-purple-800 dark:text-purple-200/90">
                           {t("productForm.suggestedPrice")}
                         </p>
-                        <p className="text-base font-ui-semibold tabular-nums text-purple-900 dark:text-purple-100">
+                        <p className="text-base font-semibold tabular-nums text-purple-900 dark:text-purple-100">
                           {formatCurrency(suggestedCombinedPackagePrice)}
                         </p>
                       </div>
@@ -787,18 +787,18 @@ export default function ProductFormModal({
                             if (net == null || !Number.isFinite(net) || net <= 0) return
                             syncFromNetAndTax(net.toFixed(2), form.tax_rate)
                           }}
-                          className="rounded border border-purple-300 bg-background px-2 py-0.5 text-2xs font-ui-medium text-purple-800 hover:bg-muted dark:border-purple-700 dark:text-purple-200"
+                          className="rounded border border-purple-300 bg-background px-2 py-0.5 text-2xs font-medium text-purple-800 hover:bg-muted dark:border-purple-700 dark:text-purple-200"
                         >
                           {t("productForm.applyNetPrice")}
                         </button>
                       </div>
-                      <p className="mt-1 text-[9px] leading-snug text-purple-800/80 dark:text-purple-200/65">
+                      <p className="mt-1 text-3xs leading-snug text-purple-800/80 dark:text-purple-200/65">
                         {t("productForm.suggestedHelp")}
                       </p>
                     </div>
                   </div>
                 ) : form.combined_items.length > 0 ? (
-                  <p className="mb-2 shrink-0 pr-2 text-[9px] text-muted-foreground">
+                  <p className="mb-2 shrink-0 pr-2 text-3xs text-muted-foreground">
                     {t("productForm.suggestedHint")}
                   </p>
                 ) : null}
@@ -837,7 +837,7 @@ export default function ProductFormModal({
                                 newItems[index] = { ...item, quantity: n }
                                 onChange({ ...form, combined_items: newItems })
                               }}
-                              className={cn(smallNumericInputClass, "h-7 px-1 text-center text-xs font-ui-semibold")}
+                              className={cn(smallNumericInputClass, "h-7 px-1 text-center text-xs font-semibold")}
                             />
                           </div>
                           <button
@@ -883,7 +883,7 @@ export default function ProductFormModal({
                                 ))}
                               </select>
                               {sel && child ? (
-                                <p className="text-[9px] text-muted-foreground">
+                                <p className="text-3xs text-muted-foreground">
                                   {t("productForm.unitSelected")}{combinedChildUnitDisplayPrice(sel, child.base_price)}
                                   {t("productForm.perPiece")}
                                 </p>

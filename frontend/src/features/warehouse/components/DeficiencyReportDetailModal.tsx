@@ -167,7 +167,7 @@ export function DeficiencyReportDetailModal({
         <div className="grid grid-cols-2 gap-8 text-sm">
           <div className="space-y-4">
             <div className="flex flex-col gap-1">
-              <span className="text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest">
+              <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest">
                 {t("deficiencyReports.detailLabelCreated")}
               </span>
               <span className="text-foreground flex items-center gap-2">
@@ -176,7 +176,7 @@ export function DeficiencyReportDetailModal({
               </span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest">
+              <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest">
                 {t("deficiencyReports.detailLabelCreatedBy")}
               </span>
               <span className="text-foreground">{report.created_by_name || "—"}</span>
@@ -184,7 +184,7 @@ export function DeficiencyReportDetailModal({
           </div>
           <div className="space-y-4">
             <div className="flex flex-col gap-1">
-              <span className="text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest">
+              <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest">
                 {t("deficiencyReports.detailLabelApprovedOrCancel")}
               </span>
               <span className="text-foreground flex items-center gap-2">
@@ -198,7 +198,7 @@ export function DeficiencyReportDetailModal({
               </span>
             </div>
             <div className="flex flex-col gap-1">
-              <span className="text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest">
+              <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest">
                 {t("deficiencyReports.detailLabelActor")}
               </span>
               <span className="text-foreground">{report.approved_by_name || "—"}</span>
@@ -214,7 +214,7 @@ export function DeficiencyReportDetailModal({
         )}
 
         <div className="space-y-3">
-          <h3 className="text-ui font-ui-bold uppercase tracking-[0.2em] text-foreground">
+          <h3 className="text-ui font-bold uppercase tracking-[0.2em] text-foreground">
             {t("deficiencyReports.detailMaterialsTitle")}
           </h3>
           {(report.items?.length ?? 0) > 0 ? (
@@ -223,17 +223,17 @@ export function DeficiencyReportDetailModal({
                 <table className="w-full text-sm">
                   <thead className="sticky top-0 z-10 border-b border-border bg-background shadow-[0_1px_0_0_hsl(var(--border))]">
                     <tr>
-                      <th className="text-left px-4 py-3 font-ui-bold text-muted-foreground text-xs uppercase">
+                      <th className="text-left px-4 py-3 font-bold text-muted-foreground text-xs uppercase">
                         {t("deficiencyReports.detailColProduct")}
                       </th>
-                      <th className="text-left px-4 py-3 font-ui-bold text-muted-foreground text-xs uppercase">
+                      <th className="text-left px-4 py-3 font-bold text-muted-foreground text-xs uppercase">
                         {t("deficiencyReports.detailColStockStatus")}
                       </th>
-                      <th className="text-right px-4 py-3 font-ui-bold text-muted-foreground text-xs uppercase">
+                      <th className="text-right px-4 py-3 font-bold text-muted-foreground text-xs uppercase">
                         {t("deficiencyReports.detailColMinimum")}
                       </th>
                       {canProcess ? (
-                        <th className="text-left px-4 py-3 font-ui-bold text-muted-foreground text-xs uppercase min-w-[12rem]">
+                        <th className="text-left px-4 py-3 font-bold text-muted-foreground text-xs uppercase min-w-[12rem]">
                           {t("deficiencyReports.detailColAction")}
                         </th>
                       ) : null}
@@ -263,28 +263,28 @@ export function DeficiencyReportDetailModal({
                               </span>
                             ) : useBranchAvailability && avail ? (
                               avail.can_fully_fulfill ? (
-                                <span className="inline-flex items-center gap-1 text-xs font-ui-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full">
+                                <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-600 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-0.5 rounded-full">
                                   <CheckCircle size={12} />{" "}
                                   {t("deficiencyReports.detailInStock", {
                                     qty: formatQuantityWithUnit(avail.total_available, item.unit),
                                   })}
                                 </span>
                               ) : avail.can_partially_fulfill ? (
-                                <span className="inline-flex items-center gap-1 text-2xs font-ui-bold text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded-full">
+                                <span className="inline-flex items-center gap-1 text-2xs font-bold text-amber-600 bg-amber-50 dark:bg-amber-900/20 px-2 py-0.5 rounded-full">
                                   <Clock size={10} />{" "}
                                   {t("deficiencyReports.detailPartialStock", {
                                     qty: formatQuantityWithUnit(avail.total_available, item.unit),
                                   })}
                                 </span>
                               ) : (
-                                <span className="inline-flex items-center gap-1 text-2xs font-ui-bold text-rose-600 bg-rose-50 dark:bg-rose-900/20 px-2 py-0.5 rounded-full">
+                                <span className="inline-flex items-center gap-1 text-2xs font-bold text-rose-600 bg-rose-50 dark:bg-rose-900/20 px-2 py-0.5 rounded-full">
                                   <XCircle size={10} /> {t("deficiencyReports.detailOutOfStock")}
                                 </span>
                               )
                             ) : hasTargetLevel ? (
                               <span
                                 className={cn(
-                                  "inline-flex flex-col gap-0.5 text-sub font-ui-semibold px-2 py-0.5 rounded-lg",
+                                  "inline-flex flex-col gap-0.5 text-sub font-semibold px-2 py-0.5 rounded-lg",
                                   item.is_low_stock
                                     ? "text-amber-800 bg-amber-50 dark:bg-amber-950/40 dark:text-amber-200"
                                     : "text-emerald-700 bg-emerald-50 dark:bg-emerald-950/30 dark:text-emerald-200",
@@ -300,7 +300,7 @@ export function DeficiencyReportDetailModal({
                               <span className="text-2xs text-muted-foreground">—</span>
                             )}
                           </td>
-                          <td className="px-4 py-3 text-right font-ui-bold text-foreground align-top">
+                          <td className="px-4 py-3 text-right font-bold text-foreground align-top">
                             {formatQuantityWithUnit(item.quantity, item.unit)}
                           </td>
                           {canProcess ? (

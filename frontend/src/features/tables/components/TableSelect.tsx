@@ -111,7 +111,7 @@ export function TableSelect({
             </SelectTrigger>
             <SelectContent className="max-h-80">
                 {/* Arama */}
-                <div className="sticky top-0 z-10 border-b border-border bg-popover px-3 py-2.5 dark:border-slate-700">
+                <div className="sticky top-0 z-10 border-b border-border bg-popover px-3 py-2.5 border-border">
                     <div className="relative">
                         <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
                         <input
@@ -119,7 +119,7 @@ export function TableSelect({
                             placeholder={t('tableSelect.searchPlaceholder')}
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
+                            className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
                             onKeyDown={(e) => e.stopPropagation()}
                             onPointerDown={(e) => e.stopPropagation()}
                         />
@@ -127,14 +127,14 @@ export function TableSelect({
                 </div>
 
                 {/* Tümü */}
-                <SelectItem value="all" className="text-sm font-ui-semibold text-muted-foreground italic">
+                <SelectItem value="all" className="text-sm font-semibold text-muted-foreground italic">
                     {allLabel || t('tableSelect.allTables')}
                 </SelectItem>
 
                 {/* Gruplanmış masalar */}
                 {filteredGroups.map(group => (
                     <SelectGroup key={group.zone.id}>
-                        <SelectLabel className="text-2xs font-ui-semibold text-muted-foreground uppercase tracking-wider px-1.5 py-1">
+                        <SelectLabel className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider px-1.5 py-1">
                             {group.zone.name}
                         </SelectLabel>
                         {group.tables.map(tb => (

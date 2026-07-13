@@ -112,7 +112,7 @@ export function KDSSidebar({
           <TooltipContent
             side="top"
             sideOffset={8}
-            className="border-border bg-popover font-ui-semibold text-popover-foreground text-xs"
+            className="border-border bg-popover font-semibold text-popover-foreground text-xs"
           >
             {label}
           </TooltipContent>
@@ -126,7 +126,7 @@ export function KDSSidebar({
       <button type="button" onClick={onClick} className={baseClasses}>
         <span className="flex shrink-0">{icon}</span>
         {!collapsed ? (
-          <span className="max-w-[11rem] truncate text-xs font-ui-semibold sm:text-sm">{label}</span>
+          <span className="max-w-[11rem] truncate text-xs font-semibold sm:text-sm">{label}</span>
         ) : null}
       </button>
     );
@@ -146,7 +146,7 @@ export function KDSSidebar({
           <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-blue-600 text-white">
             <Utensils size={18} />
           </div>
-          <h1 className="truncate text-base font-ui-bold tracking-tight text-foreground sm:text-lg">
+          <h1 className="truncate text-base font-bold tracking-tight text-foreground sm:text-lg">
             RAMIS KDS
           </h1>
         </div>
@@ -207,7 +207,7 @@ export function KDSSidebar({
                 <span className="relative flex shrink-0">
                   <RotateCcw size={28} />
                   {recallItemCount > 0 ? (
-                    <span className="absolute -right-1 -top-1 min-w-[1.1rem] rounded-full bg-amber-500 px-1 py-0.5 text-center text-[9px] font-ui-black tabular-nums text-white">
+                    <span className="absolute -right-1 -top-1 min-w-[1.1rem] rounded-full bg-amber-500 px-1 py-0.5 text-center text-3xs font-black tabular-nums text-white">
                       {recallPulse && (
                         <span className="absolute inset-0 rounded-full bg-amber-500 animate-ping" />
                       )}
@@ -244,7 +244,7 @@ export function KDSSidebar({
               <TooltipContent
                 side="top"
                 sideOffset={8}
-                className="border-border bg-popover font-ui-semibold text-popover-foreground text-xs"
+                className="border-border bg-popover font-semibold text-popover-foreground text-xs"
               >
                 {t("sidebar.expand")}
               </TooltipContent>
@@ -257,7 +257,7 @@ export function KDSSidebar({
               aria-expanded={true}
             >
               <ChevronLeft size={28} />
-              <span className="hidden max-w-[5rem] truncate text-xs font-ui-semibold sm:inline">
+              <span className="hidden max-w-[5rem] truncate text-xs font-semibold sm:inline">
                 {t("sidebar.collapse")}
               </span>
             </button>

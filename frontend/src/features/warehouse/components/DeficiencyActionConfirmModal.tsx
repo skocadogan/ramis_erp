@@ -63,13 +63,13 @@ export function DeficiencyActionConfirmModal({
 
               {summary.transfers.length > 0 ? (
                 <section>
-                  <h4 className="mb-2 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                  <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                     {t("deficiencyReports.actionConfirmTransfers")}
                   </h4>
                   <ul className="space-y-2">
                     {summary.transfers.map((tr, idx) => (
                       <li key={idx} className="rounded-xl border border-border bg-background p-3">
-                        <div className="font-ui-semibold text-foreground">{tr.source_warehouse_name}</div>
+                        <div className="font-semibold text-foreground">{tr.source_warehouse_name}</div>
                         <ul className="mt-1 space-y-0.5 text-xs text-muted-foreground">
                           {tr.items.map((it, i) => (
                             <li key={i}>
@@ -85,7 +85,7 @@ export function DeficiencyActionConfirmModal({
 
               {summary.purchases.length > 0 ? (
                 <section>
-                  <h4 className="mb-2 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                  <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                     {t("deficiencyReports.actionConfirmPurchases")}
                   </h4>
                   <ul className="mb-3 space-y-1 text-xs text-muted-foreground">
@@ -97,7 +97,7 @@ export function DeficiencyActionConfirmModal({
                   </ul>
                   <div className="grid gap-3">
                     <div>
-                      <label className="mb-1 block text-2xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                      <label className="mb-1 block text-2xs font-bold uppercase tracking-widest text-muted-foreground">
                         {t("deficiencyReports.labelSupplier")}
                       </label>
                       <select
@@ -114,7 +114,7 @@ export function DeficiencyActionConfirmModal({
                       </select>
                     </div>
                     <div>
-                      <label className="mb-1 block text-2xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                      <label className="mb-1 block text-2xs font-bold uppercase tracking-widest text-muted-foreground">
                         {t("deficiencyReports.labelTargetWarehouse")}
                       </label>
                       <select
@@ -136,7 +136,7 @@ export function DeficiencyActionConfirmModal({
 
               {summary.rejected.length > 0 ? (
                 <section>
-                  <h4 className="mb-2 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                  <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                     {t("deficiencyReports.actionConfirmRejected")}
                   </h4>
                   <ul className="space-y-1 text-xs text-muted-foreground">
@@ -148,7 +148,7 @@ export function DeficiencyActionConfirmModal({
               ) : null}
 
               <section>
-                <h4 className="mb-2 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                <h4 className="mb-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                   {t("deficiencyReports.actionConfirmLines")}
                 </h4>
                 <ul className="max-h-40 space-y-1 overflow-y-auto text-xs">

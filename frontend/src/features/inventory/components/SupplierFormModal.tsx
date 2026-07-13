@@ -45,7 +45,7 @@ interface SupplierFormModalProps {
   stockItems?: StockItem[]
 }
 
-const lbl = "text-xs font-ui-semibold text-muted-foreground uppercase tracking-wide"
+const lbl = "text-xs font-semibold text-muted-foreground uppercase tracking-wide"
 
 export function SupplierFormModal({
   showSupplierForm,
@@ -154,7 +154,7 @@ export function SupplierFormModal({
             <div className="flex shrink-0 items-center justify-between">
               <p className={lbl}>{t("suppliedProducts")}</p>
               {selectedItems.length > 0 && (
-                <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-xs font-ui-semibold text-blue-600 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
+                <span className="rounded-full border border-blue-200 bg-blue-50 px-2.5 py-0.5 text-xs font-semibold text-blue-600 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-400">
                   {t("selectedCount", { count: selectedItems.length })}
                 </span>
               )}
@@ -171,7 +171,7 @@ export function SupplierFormModal({
                     <button
                       type="button"
                       onClick={() => setCatOpen((v) => !v)}
-                      className="flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-ui-medium text-foreground transition-colors hover:border-blue-400 dark:hover:border-blue-600"
+                      className="flex items-center gap-1.5 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-blue-400 dark:hover:border-blue-600"
                     >
                       <span className="max-w-[120px] truncate">{selectedCatName}</span>
                       <ChevronDown size={12} />
@@ -182,7 +182,7 @@ export function SupplierFormModal({
                           <button
                             type="button"
                             onClick={() => { setCategoryFilter("all"); setCatOpen(false) }}
-                            className={`w-full px-3 py-2 text-left text-sm transition-colors hover:bg-muted ${categoryFilter === "all" ? "font-ui-semibold text-blue-600 dark:text-blue-400" : "text-foreground"}`}
+                            className={`w-full px-3 py-2 text-left text-sm transition-colors hover:bg-muted ${categoryFilter === "all" ? "font-semibold text-blue-600 dark:text-blue-400" : "text-foreground"}`}
                           >
                             {t("allCategories")}
                           </button>
@@ -191,7 +191,7 @@ export function SupplierFormModal({
                               key={cat.id}
                               type="button"
                               onClick={() => { setCategoryFilter(cat.id); setCatOpen(false) }}
-                              className={`w-full px-3 py-2 text-left text-sm transition-colors hover:bg-muted ${categoryFilter === cat.id ? "font-ui-semibold text-blue-600 dark:text-blue-400" : "text-foreground"}`}
+                              className={`w-full px-3 py-2 text-left text-sm transition-colors hover:bg-muted ${categoryFilter === cat.id ? "font-semibold text-blue-600 dark:text-blue-400" : "text-foreground"}`}
                             >
                               {cat.name}
                             </button>
@@ -221,7 +221,7 @@ export function SupplierFormModal({
                     type="button"
                     onClick={toggleAllFiltered}
                     disabled={filteredItems.length === 0}
-                    className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-ui-medium transition-colors disabled:opacity-40 ${
+                    className={`shrink-0 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-40 ${
                       allFilteredSelected
                         ? "border-rose-200 bg-rose-50 text-rose-600 hover:bg-rose-100 dark:border-rose-800 dark:bg-rose-900/20 dark:text-rose-400"
                         : "border-blue-200 bg-blue-50 text-blue-600 hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-400"
@@ -231,7 +231,7 @@ export function SupplierFormModal({
                   </button>
                 </div>
 
-                <div className="grid shrink-0 grid-cols-[1.25rem_1fr_10rem] items-center gap-3 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-ui-semibold uppercase tracking-wide text-muted-foreground">
+                <div className="grid shrink-0 grid-cols-[1.25rem_1fr_10rem] items-center gap-3 rounded-lg border border-border bg-background px-3 py-1.5 text-xs font-semibold uppercase tracking-wide text-muted-foreground">
                   <span />
                   <span>{t("colProductName")}</span>
                   <span className="text-right">{t("colCode")}</span>
@@ -257,7 +257,7 @@ export function SupplierFormModal({
                           }`}>
                             {isSelected && <Check size={10} className="text-white" strokeWidth={3} />}
                           </span>
-                          <span className={`truncate text-sm font-ui-medium ${isSelected ? "text-blue-700 dark:text-blue-300" : "text-foreground"}`}>
+                          <span className={`truncate text-sm font-medium ${isSelected ? "text-blue-700 dark:text-blue-300" : "text-foreground"}`}>
                             {item.name}
                           </span>
                           <span className="truncate text-right font-mono text-xs text-muted-foreground">{item.sku}</span>

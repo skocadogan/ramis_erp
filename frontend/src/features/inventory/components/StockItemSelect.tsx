@@ -105,7 +105,7 @@ export default function StockItemSelect({
       >
         {displayItem ? (
           <div className="flex justify-between w-full pr-2">
-            <span className="truncate font-ui-medium text-foreground">{displayItem.name}</span>
+            <span className="truncate font-medium text-foreground">{displayItem.name}</span>
             <span className="text-2xs text-muted-foreground font-mono ml-2 shrink-0">{displayItem.sku}</span>
           </div>
         ) : (
@@ -144,7 +144,7 @@ export default function StockItemSelect({
                 className="flex w-full items-center justify-between px-3 py-2.5 text-left text-sm transition-colors hover:bg-muted/50"
               >
                 <div className="flex min-w-0 flex-col">
-                  <span className="font-ui-medium text-foreground">{item.name}</span>
+                  <span className="font-medium text-foreground">{item.name}</span>
                   <span className="text-2xs text-muted-foreground">
                     {warehouseId && item.current_quantity != null
                       ? t("availableQty", {

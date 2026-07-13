@@ -89,7 +89,7 @@ export function RecipeCategorySelectTree({
               className
             )}
           >
-            <span className={cn("truncate font-ui-semibold text-ui-sm text-foreground", !selectedCategory && "text-muted-foreground")}>
+            <span className={cn("truncate font-semibold text-ui-sm text-foreground", !selectedCategory && "text-muted-foreground")}>
               {selectedCategory ? `${selectedCategory.name}` : resolvedPlaceholder}
             </span>
             <ChevronDown className="h-4 w-4 shrink-0 opacity-50" />
@@ -121,9 +121,9 @@ export function RecipeCategorySelectTree({
                 )}
               >
                 <div className="flex h-5 w-5 items-center justify-center">
-                  <div className={cn("h-2 w-2 rounded-full", !value ? "bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" : "bg-muted-foreground/30")} />
+                  <div className={cn("h-2 w-2 rounded-full", !value ? "bg-blue-500 shadow-glow" : "bg-muted-foreground/30")} />
                 </div>
-                <span className="text-xs font-ui-semibold text-muted-foreground">{t("allCategories")}</span>
+                <span className="text-xs font-semibold text-muted-foreground">{t("allCategories")}</span>
               {!value && <Check className="h-4 w-4 ml-auto text-blue-500" />}
             </div>
 
@@ -139,7 +139,7 @@ export function RecipeCategorySelectTree({
                   }}
                   className={cn(
                     "group mb-0.5 flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-3 py-2 transition-all hover:bg-foreground/5",
-                    value === cat.id && "border-blue-100 bg-blue-50 font-ui-bold text-blue-600 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-400"
+                    value === cat.id && "border-blue-100 bg-blue-50 font-bold text-blue-600 dark:border-blue-500/20 dark:bg-blue-500/10 dark:text-blue-400"
                   )}
                   style={{ paddingLeft: `${cat.depth * 1.5 + 0.75}rem` }}
                 >

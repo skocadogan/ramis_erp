@@ -85,7 +85,7 @@ export function SupplierPerformanceModal({
 
           {(overdue.data?.overdue_orders?.length ?? 0) > 0 ? (
             <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-4 dark:border-amber-900/50 dark:bg-amber-950/20">
-              <p className="text-sm font-ui-semibold text-amber-900 dark:text-amber-100">
+              <p className="text-sm font-semibold text-amber-900 dark:text-amber-100">
                 {t("overdueOrdersTitle", { count: overdue.data?.overdue_orders_count ?? 0 })}
               </p>
               <ul className="mt-2 space-y-2">
@@ -94,7 +94,7 @@ export function SupplierPerformanceModal({
                     key={po.po_id}
                     className="flex flex-wrap items-center justify-between gap-2 text-sm text-amber-900/90 dark:text-amber-100/90"
                   >
-                    <span className="font-ui-medium">{po.order_number}</span>
+                    <span className="font-medium">{po.order_number}</span>
                     <span className="text-xs">
                       {t("overdueDays", { days: po.days_overdue, date: po.expected_date })}
                     </span>
@@ -132,8 +132,8 @@ function Card({
       tabIndex={clickable ? 0 : undefined}
       onKeyDown={clickable ? (e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); onClick?.() } } : undefined}
     >
-      <p className="text-xs font-ui-medium uppercase text-muted-foreground">{label}</p>
-      <p className="mt-1 text-2xl font-ui-bold text-foreground">{loading ? "—" : (value ?? 0)}</p>
+      <p className="text-xs font-medium uppercase text-muted-foreground">{label}</p>
+      <p className="mt-1 text-2xl font-bold text-foreground">{loading ? "—" : (value ?? 0)}</p>
     </div>
   )
 }

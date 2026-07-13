@@ -82,7 +82,7 @@ function orderStatusBadgeClass(status: string): string {
     case "CANCELLED":
       return "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300"
     default:
-      return "bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300"
+      return "bg-slate-100 text-slate-600 bg-muted text-muted-foreground"
   }
 }
 
@@ -175,13 +175,13 @@ export function OrdersTab({
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-ui-bold text-foreground">{t('orders.title')}</h2>
+          <h2 className="text-2xl font-bold text-foreground">{t('orders.title')}</h2>
           <p className="text-sm text-muted-foreground mt-1">{t('orders.description')}</p>
         </div>
         {canOpenPos && (
         <Link
           href="/pos"
-          className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-ui-medium text-white hover:bg-slate-800 shadow-sm dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors"
+          className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 shadow-sm dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors"
         >
           <ShoppingBag size={16} />
           {t('orders.goToPage')}
@@ -197,7 +197,7 @@ export function OrdersTab({
             placeholder={t('orders.searchPlaceholder')}
             value={searchTerm}
             onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 bg-card border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 dark:focus:border-blue-500 dark:bg-slate-800 dark:border-slate-600"
+            className="w-full pl-9 pr-4 py-2 w-full border border-border rounded-lg text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500 dark:focus:border-blue-500 bg-background"
           />
         </div>
       </div>
@@ -209,15 +209,15 @@ export function OrdersTab({
         fetchMore={fetchNextPage}
         hasMore={hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        className="max-h-[calc(100vh-14rem)] bg-card rounded-2xl border border-border shadow-sm dark:bg-slate-900 dark:border-slate-700"
+        className="max-h-[calc(100vh-14rem)] bg-card rounded-2xl border border-border shadow-sm bg-card border-border"
         tableClassName="w-full text-sm"
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-ui-semibold text-slate-600 dark:text-slate-300">{t('orders.fields.id')}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-slate-600 dark:text-slate-300">{t('orders.fields.date')}</th>
-              <th className="text-center px-4 py-3 font-ui-semibold text-slate-600 dark:text-slate-300">{t('orders.fields.status')}</th>
-              <th className="text-right px-4 py-3 font-ui-semibold text-slate-600 dark:text-slate-300">{t('orders.fields.total')}</th>
+              <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.id')}</th>
+              <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.date')}</th>
+              <th className="text-center px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.status')}</th>
+              <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.total')}</th>
             </tr>
           </thead>
         }
@@ -245,7 +245,7 @@ export function OrdersTab({
             >
               <button
                 type="button"
-                className="font-mono text-xs text-blue-600 dark:text-blue-400 font-ui-medium hover:underline text-left"
+                className="font-mono text-xs text-blue-600 dark:text-blue-400 font-medium hover:underline text-left"
                 onClick={e => {
                   e.stopPropagation()
                   setDetailOrder(o)
@@ -265,13 +265,13 @@ export function OrdersTab({
               onClick={() => setDetailOrder(o)}
             >
               <span
-                className={`inline-flex rounded-full px-2.5 py-1 text-xs font-ui-semibold ${orderStatusBadgeClass(o.status)}`}
+                className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold ${orderStatusBadgeClass(o.status)}`}
               >
                 {t(`orders.status.${o.status}`)}
               </span>
             </td>
             <td
-              className="px-4 py-3 text-right font-ui-bold text-foreground cursor-pointer"
+              className="px-4 py-3 text-right font-bold text-foreground cursor-pointer"
               onClick={() => setDetailOrder(o)}
             >
               {formatAmount(o.total_amount, canViewAmounts)}
@@ -281,7 +281,7 @@ export function OrdersTab({
       />
 
       <Dialog open={!!detailOrder} onOpenChange={open => !open && setDetailOrder(null)}>
-        <DialogContent className="sm:max-w-2xl max-h-[min(90vh,640px)] overflow-y-auto gap-4 dark:bg-slate-900" showCloseButton>
+        <DialogContent className="sm:max-w-2xl max-h-[min(90vh,640px)] overflow-y-auto gap-4 bg-card" showCloseButton>
           {detailOrder && (
             <>
               <DialogHeader>
@@ -293,7 +293,7 @@ export function OrdersTab({
 
               <div className="grid gap-3 text-sm">
                 <DetailRow label={t('orders.fields.status')}>
-                  <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-ui-semibold ${orderStatusBadgeClass(detailOrder.status)}`}>
+                  <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${orderStatusBadgeClass(detailOrder.status)}`}>
                     {t(`orders.status.${detailOrder.status}`)}
                   </span>
                 </DetailRow>
@@ -316,8 +316,8 @@ export function OrdersTab({
                 </DetailRow>
               </div>
 
-              <div className="border-t border-border pt-4 dark:border-slate-700">
-                <h4 className="text-xs font-ui-semibold uppercase tracking-wide text-muted-foreground mb-2">
+              <div className="border-t border-border pt-4 border-border">
+                <h4 className="text-xs font-semibold uppercase tracking-wide text-muted-foreground mb-2">
                   {t('orders.items', { count: detailOrder.items?.length ?? 0 })}
                 </h4>
                 {!detailOrder.items?.length ? (
@@ -327,27 +327,27 @@ export function OrdersTab({
                     {detailOrder.items.map(item => (
                       <li
                         key={item.id}
-                        className="rounded-lg border border-border bg-slate-50/80 dark:bg-slate-800/40 dark:border-slate-700 px-3 py-2"
+                        className="rounded-lg border border-border bg-slate-50/80 bg-muted/40 border-border px-3 py-2"
                       >
                         <div className="flex flex-wrap items-baseline justify-between gap-2">
-                          <span className="font-ui-medium text-foreground">
+                          <span className="font-medium text-foreground">
                             {item.quantity}× {item.product_name}
                             {item.variant_name ? (
-                              <span className="text-muted-foreground font-ui-normal"> ({item.variant_name})</span>
+                              <span className="text-muted-foreground font-normal"> ({item.variant_name})</span>
                             ) : null}
                           </span>
-                          <span className="text-xs font-ui-semibold text-foreground">
+                          <span className="text-xs font-semibold text-foreground">
                             {formatAmount(item.total_price, canViewAmounts)}
                           </span>
                         </div>
-                        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-[11px] text-muted-foreground">
+                        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-sub text-muted-foreground">
                           <span>
                             {t('orders.fields.unitPrice')}:{" "}
                             {formatAmount(item.unit_price, canViewAmounts)}
                           </span>
                           {item.station_name ? <span>{t('orders.fields.station')}: {item.station_name}</span> : null}
                           <span
-                            className={`inline-flex rounded-full px-2 py-0.5 text-[10px] font-ui-semibold ${orderStatusBadgeClass(item.status)}`}
+                            className={`inline-flex rounded-full px-2 py-0.5 text-2xs font-semibold ${orderStatusBadgeClass(item.status)}`}
                           >
                             {t(`orders.status.${item.status}`)}
                           </span>
@@ -356,7 +356,7 @@ export function OrdersTab({
                           <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">{t('orders.fields.itemNote')}: {item.notes}</p>
                         ) : null}
                         {item.modifiers && item.modifiers.length > 0 ? (
-                          <ul className="mt-1.5 text-[11px] text-slate-600 dark:text-slate-300 list-disc pl-4">
+                          <ul className="mt-1.5 text-sub text-slate-600 text-muted-foreground list-disc pl-4">
                             {item.modifiers.map(m => (
                               <li key={m.id}>
                                 {m.modifier_name}
@@ -377,7 +377,7 @@ export function OrdersTab({
                   </ul>
                 )}
               </div>
-              <div className="border-t border-border pt-4 flex justify-end gap-3 dark:border-slate-700">
+              <div className="border-t border-border pt-4 flex justify-end gap-3 border-border">
                 {detailOrder.status !== "COMPLETED" && detailOrder.status !== "CANCELLED" && (
                   <div className="flex gap-2">
                     <Button
@@ -402,7 +402,7 @@ export function OrdersTab({
                     </Button>
                   </div>
                 )}
-                <Button variant="secondary" size="sm" onClick={() => setDetailOrder(null)} className="dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700">
+                <Button variant="secondary" size="sm" onClick={() => setDetailOrder(null)} className="bg-muted text-foreground dark:hover:bg-slate-700">
                   {t('common.cancel')}
                 </Button>
               </div>
@@ -455,9 +455,9 @@ function DetailRow({
   emphasized?: boolean
 }) {
   return (
-    <div className={`grid grid-cols-[120px_1fr] gap-2 ${emphasized ? "text-base font-ui-semibold" : ""}`}>
+    <div className={`grid grid-cols-[120px_1fr] gap-2 ${emphasized ? "text-base font-semibold" : ""}`}>
       <span className="text-muted-foreground shrink-0">{label}</span>
-      <div className="text-foreground min-w-0 break-words dark:text-slate-200">{children}</div>
+      <div className="text-foreground min-w-0 break-words text-foreground">{children}</div>
     </div>
   )
 }

@@ -85,7 +85,7 @@ export function AppHeader({ onToggleSidebar }: AppHeaderProps) {
                 <polyline points="9 22 9 12 15 12 15 22" />
               </svg>
             </div>
-            <span className="text-sm font-ui-semibold text-foreground">{t("brandName")}</span>
+            <span className="text-sm font-semibold text-foreground">{t("brandName")}</span>
           </div>
         </div>
 
@@ -125,10 +125,10 @@ export function AppHeader({ onToggleSidebar }: AppHeaderProps) {
             onClick={() => setShowProfile(true)}
             className="flex items-center gap-2 ps-2 border-s border-border hover:bg-muted rounded-md px-2 py-1 transition-colors cursor-pointer"
           >
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-ui-semibold">
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-semibold">
               {initials}
             </div>
-            <span className="text-sm font-ui-medium text-foreground hidden sm:block">
+            <span className="text-sm font-medium text-foreground hidden sm:block">
               {displayName}
             </span>
           </button>
@@ -136,7 +136,7 @@ export function AppHeader({ onToggleSidebar }: AppHeaderProps) {
           {/* Çıkış */}
           <button
             onClick={handleLogout}
-            className="flex h-8 items-center gap-1.5 rounded-md px-2.5 text-sm font-ui-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
+            className="flex h-8 items-center gap-1.5 rounded-md px-2.5 text-sm font-medium text-muted-foreground hover:bg-destructive/10 hover:text-destructive transition-colors"
             aria-label={t("logoutLabel")}
           >
             <LogOut size={15} />

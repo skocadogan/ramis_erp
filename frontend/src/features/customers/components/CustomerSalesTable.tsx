@@ -59,7 +59,7 @@ const CustomerSaleRow = memo(function CustomerSaleRow({
       <td className="px-4 py-2.5">
         <Badge variant="outline">{sale.payment_method_display || "—"}</Badge>
       </td>
-      <td className="px-4 py-2.5 text-right font-ui-semibold text-foreground">
+      <td className="px-4 py-2.5 text-right font-semibold text-foreground">
         {formatCurrency(sale.total_amount)}
       </td>
     </tr>
@@ -117,19 +117,19 @@ export const CustomerSalesTable = memo(function CustomerSalesTable({
       <table className="w-full text-sm">
         <thead className="sticky top-0 z-10 border-b border-border bg-background">
           <tr>
-            <th className="px-4 py-2.5 text-left text-xs font-ui-semibold uppercase text-muted-foreground">
+            <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase text-muted-foreground">
               {t("sales.colSaleNo")}
             </th>
-            <th className="px-4 py-2.5 text-left text-xs font-ui-semibold uppercase text-muted-foreground">
+            <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase text-muted-foreground">
               {t("sales.colDate")}
             </th>
-            <th className="px-4 py-2.5 text-left text-xs font-ui-semibold uppercase text-muted-foreground">
+            <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase text-muted-foreground">
               {t("sales.colBranch")}
             </th>
-            <th className="px-4 py-2.5 text-left text-xs font-ui-semibold uppercase text-muted-foreground">
+            <th className="px-4 py-2.5 text-left text-xs font-semibold uppercase text-muted-foreground">
               {t("sales.colPayment")}
             </th>
-            <th className="px-4 py-2.5 text-right text-xs font-ui-semibold uppercase text-muted-foreground">
+            <th className="px-4 py-2.5 text-right text-xs font-semibold uppercase text-muted-foreground">
               {t("sales.colAmount")}
             </th>
           </tr>

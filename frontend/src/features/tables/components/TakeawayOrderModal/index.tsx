@@ -559,24 +559,24 @@ export function TakeawayOrderModal({
 
     return (
         <ModalOverlay onClose={onClose} zIndex="z-50">
-            <div className="w-full max-w-4xl rounded-2xl border border-border bg-white dark:bg-slate-900 dark:border-slate-800 flex flex-col max-h-[90vh] overflow-hidden">
+            <div className="w-full max-w-4xl rounded-2xl border border-border bg-card border-border flex flex-col max-h-[90vh] overflow-hidden">
                 
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-slate-100 dark:border-slate-800 px-6 py-4 bg-slate-50/50 dark:bg-slate-800/20">
+                <div className="flex items-center justify-between border-b border-slate-100 border-border px-6 py-4 bg-slate-50/50 bg-muted/20">
                     <div className="flex items-center gap-3">
                         <div className="h-10 w-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center">
                             <ReceiptText className="text-emerald-600 dark:text-emerald-400" size={20} />
                         </div>
                         <div>
-                            <h2 className="text-lg font-ui-bold text-slate-800 dark:text-slate-100 uppercase tracking-tight">{t('title')}</h2>
-                            <p className="text-xs font-ui-bold text-muted-foreground uppercase tracking-widest">{tableName}</p>
+                            <h2 className="text-lg font-bold text-slate-800 text-foreground uppercase tracking-tight">{t('title')}</h2>
+                            <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{tableName}</p>
                         </div>
                     </div>
                     <div className="flex items-center gap-2">
                         {onNewOrder && canManageTakeaway && (
                             <button
                                 onClick={onNewOrder}
-                                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-ui-bold transition-all active:scale-95"
+                                className="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl text-sm font-bold transition-all active:scale-95"
                             >
                                 <span className="text-lg">+</span> {t('newOrder')}
                             </button>
@@ -595,10 +595,10 @@ export function TakeawayOrderModal({
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            <div className="overflow-hidden rounded-xl border border-slate-100 dark:border-slate-800">
+                            <div className="overflow-hidden rounded-xl border border-slate-100 border-border">
                                 <table className="w-full border-collapse text-left">
                                     <thead>
-                                        <tr className="bg-slate-50 dark:bg-slate-800/50 text-sub font-ui-bold uppercase tracking-widest text-muted-foreground">
+                                        <tr className="bg-muted/50 text-sub font-bold uppercase tracking-widest text-muted-foreground">
                                             <th className="px-4 py-3 w-10 text-center">{t('colIndex')}</th>
                                             <th className="px-4 py-3">{t('colTime')}</th>
                                             <th className="px-4 py-3">{t('colProducts')}</th>
@@ -620,7 +620,7 @@ export function TakeawayOrderModal({
                                                     </td>
                                                     <td className="px-4 py-4">
                                                         <div className="flex flex-col">
-                                                            <span className="text-sm font-ui-bold text-foreground">
+                                                            <span className="text-sm font-bold text-foreground">
                                                                 {new Date(order.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                                                             </span>
                                                             <span className="text-2xs text-muted-foreground font-mono">#{order.id.slice(-6).toUpperCase()}</span>
@@ -630,16 +630,16 @@ export function TakeawayOrderModal({
                                                         <div className="flex flex-col gap-1.5 max-w-xs">
                                                             <div className="flex flex-wrap gap-1">
                                                                 {order.items.slice(0, 3).map(i => (
-                                                                    <span key={i.id} className="text-2xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground font-ui-medium">
+                                                                    <span key={i.id} className="text-2xs bg-muted px-1.5 py-0.5 rounded text-muted-foreground font-medium">
                                                                         {i.quantity}x {i.product_name}
                                                                     </span>
                                                                 ))}
                                                                 {order.items.length > 3 && (
-                                                                    <span className="text-2xs text-muted-foreground font-ui-bold ml-1">+{order.items.length - 3}</span>
+                                                                    <span className="text-2xs text-muted-foreground font-bold ml-1">+{order.items.length - 3}</span>
                                                                 )}
                                                             </div>
                                                             {order.notes?.trim() && (
-                                                                <p className="text-2xs text-amber-800/90 dark:text-amber-200/80 font-ui-medium line-clamp-2" title={order.notes.trim()}>
+                                                                <p className="text-2xs text-amber-800/90 dark:text-amber-200/80 font-medium line-clamp-2" title={order.notes.trim()}>
                                                                     {order.notes.trim()}
                                                                 </p>
                                                             )}
@@ -647,11 +647,11 @@ export function TakeawayOrderModal({
                                                     </td>
                                                     <td className="px-4 py-4 text-right">
                                                         <div className="flex flex-col items-end">
-                                                            <span className="text-base font-ui-bold text-slate-800 dark:text-slate-100">
+                                                            <span className="text-base font-bold text-slate-800 text-foreground">
                                                                 {canViewAmounts ? formatCurrency(order.total_amount) : AMOUNT_DISPLAY_MASK}
                                                             </span>
                                                             {(Number(order.discount_amount) || 0) > 0 && (
-                                                                <span className="text-2xs text-emerald-500 font-ui-bold">
+                                                                <span className="text-2xs text-emerald-500 font-bold">
                                                                     {canViewAmounts
                                                                         ? `-${formatCurrency(order.discount_amount ?? 0)} ${t('discountSuffix')}`
                                                                         : AMOUNT_DISPLAY_MASK}
@@ -709,25 +709,25 @@ export function TakeawayOrderModal({
                                                 </tr>
                                                 {/* Expanded Items */}
                                                 {expandedOrders[order.id] && (
-                                                    <tr className="bg-slate-50/50 dark:bg-slate-800/20">
+                                                    <tr className="bg-slate-50/50 bg-muted/20">
                                                         <td colSpan={5} className="px-8 py-4 border-l-4 border-emerald-500/50">
                                                             <div className="space-y-3">
                                                                 {order.notes?.trim() && (
                                                                     <div className="rounded-lg border border-amber-200/60 bg-amber-50/60 px-3 py-2.5 dark:border-amber-800/40 dark:bg-amber-900/10">
-                                                                        <p className="text-2xs font-ui-bold uppercase tracking-widest text-amber-700 dark:text-amber-400 mb-1">
+                                                                        <p className="text-2xs font-bold uppercase tracking-widest text-amber-700 dark:text-amber-400 mb-1">
                                                                             {t('orderNoteLabel')}
                                                                         </p>
-                                                                        <p className="text-sm font-ui-medium text-amber-900 dark:text-amber-100 whitespace-pre-wrap">
+                                                                        <p className="text-sm font-medium text-amber-900 dark:text-amber-100 whitespace-pre-wrap">
                                                                             {order.notes.trim()}
                                                                         </p>
                                                                     </div>
                                                                 )}
                                                                 <div className="flex items-center justify-between">
-                                                                    <h4 className="text-sub font-ui-bold uppercase tracking-widest text-muted-foreground">{t('productDetailsHeading')}</h4>
+                                                                    <h4 className="text-sub font-bold uppercase tracking-widest text-muted-foreground">{t('productDetailsHeading')}</h4>
                                                                     {Number(order.discount_amount || 0) > 0 && (
                                                                         <button 
                                                                             onClick={() => handleRemoveDiscount(order.id)}
-                                                                            className="text-2xs font-ui-bold text-rose-500 hover:underline flex items-center gap-1"
+                                                                            className="text-2xs font-bold text-rose-500 hover:underline flex items-center gap-1"
                                                                         >
                                                                             {t('removeDiscount')}
                                                                         </button>
@@ -739,25 +739,25 @@ export function TakeawayOrderModal({
                                                                         return parentItems.map(parent => (
                                                                             <React.Fragment key={parent.id}>
                                                                                 {/* Parent Item */}
-                                                                                <div className="flex items-center justify-between p-2 bg-card rounded-lg border border-slate-100 dark:border-slate-800">
+                                                                                <div className="flex items-center justify-between p-2 bg-card rounded-lg border border-slate-100 border-border">
                                                                                     <div className="flex items-center gap-3 min-w-0">
-                                                                                        <span className="w-6 h-6 shrink-0 rounded bg-muted flex items-center justify-center text-xs font-ui-bold text-muted-foreground">
+                                                                                        <span className="w-6 h-6 shrink-0 rounded bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground">
                                                                                             {parent.quantity}
                                                                                         </span>
                                                                                         <div className="min-w-0">
                                                                                             <div className="flex flex-wrap items-center gap-x-2">
-                                                                                                <span className="text-sm font-ui-medium text-foreground">{parent.product_name}</span>
-                                                                                                {parent.unit_name && <span className="text-2xs text-muted-foreground font-ui-bold uppercase">{parent.unit_name}</span>}
+                                                                                                <span className="text-sm font-medium text-foreground">{parent.product_name}</span>
+                                                                                                {parent.unit_name && <span className="text-2xs text-muted-foreground font-bold uppercase">{parent.unit_name}</span>}
                                                                                             </div>
                                                                                             {parent.notes?.trim() && (
-                                                                                                <p className="text-2xs text-amber-800/90 dark:text-amber-200/80 font-ui-medium mt-0.5">
+                                                                                                <p className="text-2xs text-amber-800/90 dark:text-amber-200/80 font-medium mt-0.5">
                                                                                                     {parent.notes.trim()}
                                                                                                 </p>
                                                                                             )}
                                                                                         </div>
                                                                                     </div>
                                                                                     <div className="flex items-center gap-4">
-                                                                        <span className="text-sm font-ui-bold text-muted-foreground">
+                                                                        <span className="text-sm font-bold text-muted-foreground">
                                                                             {canViewAmounts
                                                                                 ? formatCurrency(parent.total_price)
                                                                                 : AMOUNT_DISPLAY_MASK}
@@ -768,16 +768,16 @@ export function TakeawayOrderModal({
 
                                                                                 {/* Child Items */}
                                                                                 {order.items.filter(child => child.parent_item === parent.id).map(child => (
-                                                                                    <div key={child.id} className="flex items-center justify-between p-1.5 ml-8 bg-slate-50/50 dark:bg-slate-800/10 rounded-lg border border-dashed border-border/50">
+                                                                                    <div key={child.id} className="flex items-center justify-between p-1.5 ml-8 bg-slate-50/50 bg-muted/10 rounded-lg border border-dashed border-border/50">
                                                                                         <div className="flex items-center gap-2 min-w-0">
                                                                                             <CornerDownRight size={14} className="text-muted-foreground shrink-0" />
-                                                                                            <span className="w-5 h-5 shrink-0 rounded bg-card flex items-center justify-center text-2xs font-ui-bold text-muted-foreground">
+                                                                                            <span className="w-5 h-5 shrink-0 rounded bg-card flex items-center justify-center text-2xs font-bold text-muted-foreground">
                                                                                                 {child.quantity}
                                                                                             </span>
                                                                                             <div className="min-w-0">
-                                                                                                <span className="text-xs font-ui-medium text-muted-foreground">{child.product_name}</span>
+                                                                                                <span className="text-xs font-medium text-muted-foreground">{child.product_name}</span>
                                                                                                 {child.notes?.trim() && (
-                                                                                                    <p className="text-2xs text-amber-800/90 dark:text-amber-200/80 font-ui-medium">
+                                                                                                    <p className="text-2xs text-amber-800/90 dark:text-amber-200/80 font-medium">
                                                                                                         {child.notes.trim()}
                                                                                                     </p>
                                                                                                 )}
@@ -807,7 +807,7 @@ export function TakeawayOrderModal({
 
                 {/* Footer */}
                 {!isLoading && orders.length > 0 && !orderId && (
-                    <div className="p-6 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-100 dark:border-slate-800">
+                    <div className="p-6 bg-muted/50 border-t border-slate-100 border-border">
                         <OrderFooter 
                             orders={orders}
                             totalOrderDiscount={totalOrderDiscount}
@@ -844,16 +844,16 @@ export function TakeawayOrderModal({
                     </DialogHeader>
                     
                     <div className="py-4 space-y-4">
-                        <div className="p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl flex justify-between items-center">
-                            <span className="text-sm font-ui-bold text-muted-foreground uppercase tracking-tighter">{tOrder('grandTotal')}</span>
-                            <span className="text-2xl font-ui-bold text-slate-900 dark:text-white">
+                        <div className="p-4 bg-muted/50 rounded-xl flex justify-between items-center">
+                            <span className="text-sm font-bold text-muted-foreground uppercase tracking-tighter">{tOrder('grandTotal')}</span>
+                            <span className="text-2xl font-bold text-slate-900 dark:text-white">
                                 {canViewAmounts
                                     ? formatCurrency(paymentOrder?.total_amount ?? 0)
                                     : AMOUNT_DISPLAY_MASK}
                             </span>
                         </div>
 
-                        <label className="flex cursor-pointer items-center gap-2 text-xs font-ui-medium text-slate-600">
+                        <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-slate-600">
                             <input
                                 type="checkbox"
                                 checked={singleSplit}
@@ -867,14 +867,14 @@ export function TakeawayOrderModal({
                         </label>
 
                         {singleSplit ? (
-                            <div className="space-y-2 rounded-xl border border-border bg-slate-50 p-3 dark:border-slate-700 dark:bg-slate-800/50">
+                            <div className="space-y-2 rounded-xl border border-border bg-slate-50 p-3 border-border bg-muted/50">
                                 {PAYMENT_METHODS.map(({ value }) => (
                                     <div key={value} className="flex items-center gap-2">
-                                        <span className="w-14 text-sub font-ui-semibold text-muted-foreground">{tPos(`payment.${value.toLowerCase() as 'cash' | 'card' | 'other'}`)}</span>
+                                        <span className="w-14 text-sub font-semibold text-muted-foreground">{tPos(`payment.${value.toLowerCase() as 'cash' | 'card' | 'other'}`)}</span>
                                         <input
                                             type="number"
                                             step="0.01"
-                                            className="flex-1 rounded-lg border border-border px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-900"
+                                            className="flex-1 rounded-lg border border-border px-2 py-1.5 text-sm border-border bg-card"
                                             value={singleSplitAmt[value]}
                                             onChange={(e) =>
                                                 setSingleSplitAmt((p) => ({ ...p, [value]: e.target.value }))
@@ -890,33 +890,33 @@ export function TakeawayOrderModal({
                                 className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all gap-2 ${
                                     singlePaymentMethod === 'CASH' 
                                     ? 'bg-emerald-50 border-emerald-500 text-emerald-600' 
-                                    : 'bg-white border-slate-100 text-muted-foreground hover:border-border'
+                                    : 'border-slate-100 text-muted-foreground hover:border-border'
                                 }`}
                             >
                                 <Banknote size={24} />
-                                <span className="text-xs font-ui-bold uppercase">{tPos('payment.cash')}</span>
+                                <span className="text-xs font-bold uppercase">{tPos('payment.cash')}</span>
                             </button>
                             <button
                                 onClick={() => setSinglePaymentMethod('CARD')}
                                 className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all gap-2 ${
                                     singlePaymentMethod === 'CARD' 
                                     ? 'bg-blue-50 border-blue-500 text-blue-600' 
-                                    : 'bg-white border-slate-100 text-muted-foreground hover:border-border'
+                                    : 'border-slate-100 text-muted-foreground hover:border-border'
                                 }`}
                             >
                                 <CreditCard size={24} />
-                                <span className="text-xs font-ui-bold uppercase">{tPos('payment.card')}</span>
+                                <span className="text-xs font-bold uppercase">{tPos('payment.card')}</span>
                             </button>
                         </div>
                         )}
-                        {payError && <p className="text-xs text-rose-500 font-ui-bold text-center">{payError}</p>}
+                        {payError && <p className="text-xs text-rose-500 font-bold text-center">{payError}</p>}
                     </div>
 
                     <DialogFooter>
                         <button
                             onClick={handleSinglePayment}
                             disabled={isPaying}
-                            className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-ui-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+                            className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
                         >
                             {isPaying ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
                             {singleSplit ? t('payButtonSplit') : singlePaymentMethod === 'CASH' ? t('payButtonCash') : t('payButtonCard')}
@@ -940,18 +940,18 @@ export function TakeawayOrderModal({
 
                     <div className="py-6 space-y-6">
                         <div className="space-y-2">
-                             <label className="text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest ml-1">{t('discountAmountLabel')}</label>
+                             <label className="text-2xs font-bold text-muted-foreground uppercase tracking-widest ml-1">{t('discountAmountLabel')}</label>
                              <NumberInput 
                                 value={discountAmount}
                                 onChange={setDiscountAmount}
                                 placeholder="0.00"
-                                className="h-14 text-2xl font-ui-bold text-slate-800 border-2 focus:border-amber-500 transition-all"
+                                className="h-14 text-2xl font-bold text-slate-800 border-2 focus:border-amber-500 transition-all"
                                 autoFocus
                              />
                         </div>
 
                         <div className="p-4 bg-amber-50 dark:bg-amber-900/10 rounded-xl border border-amber-200/50 dark:border-amber-800/30">
-                            <div className="flex justify-between items-center text-xs font-ui-bold text-amber-700 dark:text-amber-400">
+                            <div className="flex justify-between items-center text-xs font-bold text-amber-700 dark:text-amber-400">
                                 <span className="uppercase">{t('currentTotal')}</span>
                                 <span>
                                     {canViewAmounts
@@ -959,7 +959,7 @@ export function TakeawayOrderModal({
                                         : AMOUNT_DISPLAY_MASK}
                                 </span>
                             </div>
-                            <div className="flex justify-between items-center text-xs font-ui-bold mt-1 text-slate-800 dark:text-slate-100">
+                            <div className="flex justify-between items-center text-xs font-bold mt-1 text-slate-800 text-foreground">
                                 <span className="uppercase">{t('newTotal')}</span>
                                 <span>
                                     {canViewAmounts
@@ -969,14 +969,14 @@ export function TakeawayOrderModal({
                             </div>
                         </div>
 
-                        {discountError && <p className="text-xs font-ui-bold text-rose-500 text-center">{discountError}</p>}
+                        {discountError && <p className="text-xs font-bold text-rose-500 text-center">{discountError}</p>}
                     </div>
 
                     <DialogFooter>
                         <button
                             onClick={applyOrderDiscount}
                             disabled={isApplyingDiscount || (parseFloat(discountAmount) || 0) <= 0}
-                            className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-slate-300 text-white font-ui-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all"
+                            className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-slate-300 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all"
                         >
                             {isApplyingDiscount ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
                             {t('applyDiscountCta')}
@@ -1001,7 +1001,7 @@ export function TakeawayOrderModal({
                                 void stockWarning?.onConfirm();
                             }} 
                             disabled={isPaying}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-ui-bold"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
                         >
                             {isPaying && <Loader2 size={14} className="animate-spin mr-1.5" />}
                             {t('confirm')}

@@ -61,7 +61,7 @@ export default function BulkPriceModal({
               <select
                 value={bulkBranchId || ""}
                 onChange={(e) => onBranchChange(e.target.value || null)}
-                className="border-none bg-transparent pr-8 text-xs font-ui-medium text-foreground focus:ring-0"
+                className="border-none bg-transparent pr-8 text-xs font-medium text-foreground focus:ring-0"
               >
                 <option value="">{t("bulkPrice.allBranches")}</option>
                 {branches.map(b => (
@@ -74,7 +74,7 @@ export default function BulkPriceModal({
 
         <DialogBody className="flex min-h-0 flex-1 overflow-hidden p-0">
           <div className="w-48 shrink-0 border-r border-border p-4 overflow-y-auto">
-            <p className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("bulkPrice.categories")}</p>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("bulkPrice.categories")}</p>
             <div className="flex flex-col gap-0.5">
               <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
                 <Checkbox
@@ -97,7 +97,7 @@ export default function BulkPriceModal({
 
           <div className="flex-1 overflow-y-auto overflow-x-auto p-4">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
                 {t("bulkPrice.products", { count: bulkFilteredProducts.length })}
               </p>
               <button onClick={onToggleAll} className="text-xs text-blue-600 hover:underline dark:text-blue-400">
@@ -107,7 +107,7 @@ export default function BulkPriceModal({
             </div>
             <div className="flex flex-col gap-1">
               {bulkFilteredProducts.length === 0 ? (
-                <p className="text-sm text-muted-foreground py-12 text-center bg-slate-50/50 rounded-lg dark:bg-slate-800/30">{t("bulkPrice.noProducts")}</p>
+                <p className="text-sm text-muted-foreground py-12 text-center bg-slate-50/50 rounded-lg bg-muted/30">{t("bulkPrice.noProducts")}</p>
               ) : (
                 bulkFilteredProducts.map(p => {
                   const preview = !isNaN(rate) && rate !== 0
@@ -123,14 +123,14 @@ export default function BulkPriceModal({
                         checked={isSelected}
                         onCheckedChange={() => onToggleProduct(p.id)}
                       />
-                      <span className="text-sm font-ui-medium text-foreground truncate">{p.name}</span>
-                      <span className="text-xs text-muted-foreground truncate text-center bg-slate-100 px-2 py-0.5 rounded-full dark:bg-slate-800 dark:text-muted-foreground">{p.category_name}</span>
-                      <span className="text-sm font-ui-semibold text-foreground text-right font-mono">
+                      <span className="text-sm font-medium text-foreground truncate">{p.name}</span>
+                      <span className="text-xs text-muted-foreground truncate text-center bg-slate-100 px-2 py-0.5 rounded-full bg-muted dark:text-muted-foreground">{p.category_name}</span>
+                      <span className="text-sm font-semibold text-foreground text-right font-mono">
                         {formatCurrency(p.base_price)}
                       </span>
                       <div className="flex justify-end min-w-[90px]">
                         {preview !== null && isSelected && (
-                          <span className={`text-sm font-ui-bold flex items-center gap-1 font-mono ${rate > 0 ? "text-emerald-600" : "text-red-500"}`}>
+                          <span className={`text-sm font-bold flex items-center gap-1 font-mono ${rate > 0 ? "text-emerald-600" : "text-red-500"}`}>
                             <span>→</span>
                             {formatCurrency(preview)}
                           </span>
@@ -146,7 +146,7 @@ export default function BulkPriceModal({
 
         <DialogFooter className="flex-row flex-wrap items-center gap-4 sm:justify-between">
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
-            <label className="shrink-0 text-sm font-ui-medium text-foreground">{t("bulkPrice.rate")}</label>
+            <label className="shrink-0 text-sm font-medium text-foreground">{t("bulkPrice.rate")}</label>
             <NumberInput
               step="0.1"
               value={bulkRate}
@@ -156,7 +156,7 @@ export default function BulkPriceModal({
               containerClassName="w-40"
             />
             {bulkRate && !isNaN(rate) && rate !== 0 && (
-              <span className={`text-sm font-ui-medium ${rate > 0 ? "text-emerald-600" : "text-red-500"}`}>
+              <span className={`text-sm font-medium ${rate > 0 ? "text-emerald-600" : "text-red-500"}`}>
                 {rate > 0
                   ? t("bulkPrice.summaryIncrease", { rate: bulkRate, count: affectedCount })
                   : t("bulkPrice.summaryDecrease", { rate: bulkRate, count: affectedCount })}

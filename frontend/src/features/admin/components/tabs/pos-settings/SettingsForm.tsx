@@ -21,9 +21,9 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
   const set = (partial: Partial<DisplaySettings>) => onChange({ ...settings, ...partial })
 
   return (
-    <Card className="p-0 gap-0 border-border bg-card dark:border-slate-700 overflow-hidden">
-      <CardHeader className="bg-slate-50 p-4 border-b border-border dark:bg-slate-800/40 dark:border-slate-800">
-        <CardTitle className="text-sm font-ui-semibold flex items-center">
+    <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden">
+      <CardHeader className="bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+        <CardTitle className="text-sm font-semibold flex items-center">
            {t('admin_settings.display.title')}
         </CardTitle>
         <CardDescription className="text-xs">{t('admin_settings.display.description')}</CardDescription>
@@ -31,7 +31,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
       <CardContent className="p-4">
         <form onSubmit={onSubmit} className="space-y-5">
           <div className="space-y-1.5">
-            <Label className="text-xs font-ui-semibold text-muted-foreground">{t('admin_settings.display.idleLabel')}</Label>
+            <Label className="text-xs font-semibold text-muted-foreground">{t('admin_settings.display.idleLabel')}</Label>
             <div className="relative">
               <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -46,7 +46,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
           </div>
 
           <div className="space-y-1.5">
-            <Label className="text-xs font-ui-semibold text-muted-foreground">{t('admin_settings.display.transitionLabel')}</Label>
+            <Label className="text-xs font-semibold text-muted-foreground">{t('admin_settings.display.transitionLabel')}</Label>
             <div className="relative">
               <Zap className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
               <Input
@@ -60,48 +60,48 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             <p className="text-2xs text-muted-foreground">{t('admin_settings.display.transitionHint')}</p>
           </div>
 
-          <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-border dark:bg-slate-800/30 dark:border-slate-800">
+          <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-border bg-muted/30 border-border">
             <div className="space-y-0.5">
-              <Label className="text-sm font-ui-semibold text-foreground">{t('admin_settings.display.showClock')}</Label>
+              <Label className="text-sm font-semibold text-foreground">{t('admin_settings.display.showClock')}</Label>
               <p className="text-2xs text-muted-foreground">{t('admin_settings.display.showClockHint')}</p>
             </div>
             <Switch checked={settings.show_clock} onCheckedChange={val => set({ show_clock: val })} />
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-slate-100 dark:border-slate-800">
+          <div className="space-y-3 pt-2 border-t border-slate-100 border-border">
             <div className="space-y-1.5">
-              <Label className="text-xs font-ui-semibold text-muted-foreground">{t('admin_settings.display.welcomeTitleLabel')}</Label>
+              <Label className="text-xs font-semibold text-muted-foreground">{t('admin_settings.display.welcomeTitleLabel')}</Label>
               <Input value={settings.welcome_title} onChange={e => set({ welcome_title: e.target.value })} className="h-9" placeholder="RAMIS ERP" />
             </div>
             <div className="space-y-1.5">
-              <Label className="text-xs font-ui-semibold text-muted-foreground">{t('admin_settings.display.welcomeSubtitleLabel')}</Label>
+              <Label className="text-xs font-semibold text-muted-foreground">{t('admin_settings.display.welcomeSubtitleLabel')}</Label>
               <Input value={settings.welcome_subtitle} onChange={e => set({ welcome_subtitle: e.target.value })} className="h-9" placeholder="Şeffaf ve Profesyonel Hizmet" />
             </div>
           </div>
 
-          <div className="space-y-3 pt-4 border-t border-slate-100 dark:border-slate-800">
-            <CardTitle className="text-sm font-ui-semibold flex items-center gap-2">
+          <div className="space-y-3 pt-4 border-t border-slate-100 border-border">
+            <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <Zap className="h-4 w-4 text-emerald-500" /> {t('admin_settings.display.successMessagesTitle')}
             </CardTitle>
-            <div className="space-y-4 bg-slate-50/50 dark:bg-slate-900/30 p-4 rounded-lg border border-border">
+            <div className="space-y-4 bg-slate-50/50 bg-card/30 p-4 rounded-lg border border-border">
               <div className="space-y-2">
-                <Label className="text-2xs font-ui-bold uppercase text-blue-500">{t('admin_settings.display.orderSuccessTitleLabel')}</Label>
+                <Label className="text-2xs font-bold uppercase text-blue-500">{t('admin_settings.display.orderSuccessTitleLabel')}</Label>
                 <Input value={settings.order_success_title} onChange={e => set({ order_success_title: e.target.value })} className="h-9 text-sm" placeholder={t('admin_settings.display.titleLabel')} />
                 <Input value={settings.order_success_subtitle} onChange={e => set({ order_success_subtitle: e.target.value })} className="h-9 text-xs" placeholder={t('admin_settings.display.subtitleLabel')} />
               </div>
               <div className="space-y-2 mt-4">
-                <Label className="text-2xs font-ui-bold uppercase text-emerald-500">{t('admin_settings.display.paymentSuccessTitleLabel')}</Label>
+                <Label className="text-2xs font-bold uppercase text-emerald-500">{t('admin_settings.display.paymentSuccessTitleLabel')}</Label>
                 <Input value={settings.payment_success_title} onChange={e => set({ payment_success_title: e.target.value })} className="h-9 text-sm" placeholder={t('admin_settings.display.titleLabel')} />
                 <Input value={settings.payment_success_subtitle} onChange={e => set({ payment_success_subtitle: e.target.value })} className="h-9 text-xs" placeholder={t('admin_settings.display.subtitleLabel')} />
               </div>
               <div className="space-y-1.5 mt-4">
-                <Label className="text-2xs font-ui-bold uppercase text-muted-foreground">{t('admin_settings.display.durationLabel')}</Label>
+                <Label className="text-2xs font-bold uppercase text-muted-foreground">{t('admin_settings.display.durationLabel')}</Label>
                 <Input type="number" value={settings.success_message_duration} onChange={e => set({ success_message_duration: parseInt(e.target.value) })} className="h-9 text-sm" min={1} />
               </div>
             </div>
           </div>
 
-          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 h-9 text-sm font-ui-semibold" disabled={isSaving}>
+          <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 h-9 text-sm font-semibold" disabled={isSaving}>
             {isSaving ? t('admin_settings.display.saving') : <><Save className="mr-2 h-4 w-4" /> {t('admin_settings.display.saveSettings')}</>}
           </Button>
         </form>

@@ -81,11 +81,11 @@ export function SmartRuleFormModal({ open, onClose, onSave, isLoading, branchId,
     <Dialog open={open} onOpenChange={(val) => !val && onClose()}>
       <DialogContent size="md">
         <DialogHeader className="flex flex-row items-center justify-between">
-          <DialogTitle className="text-lg font-ui-bold uppercase tracking-tight">
+          <DialogTitle className="text-lg font-bold uppercase tracking-tight">
             {initialData && "id" in initialData && initialData.id ? t("smartRuleModal.editTitle") : t("smartRuleModal.createTitle")}
           </DialogTitle>
           <div className="flex items-center gap-2 pr-6">
-            <Label htmlFor="is_active" className="text-2xs font-ui-bold uppercase text-muted-foreground">{t("smartRuleModal.enabled")}</Label>
+            <Label htmlFor="is_active" className="text-2xs font-bold uppercase text-muted-foreground">{t("smartRuleModal.enabled")}</Label>
             <Switch 
               id="is_active"
               checked={formData.is_active}
@@ -97,7 +97,7 @@ export function SmartRuleFormModal({ open, onClose, onSave, isLoading, branchId,
         <form id="smart-rule-form" onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-4">
             <div className="grid gap-2">
-              <Label htmlFor="title" className="text-xs font-ui-bold uppercase text-muted-foreground">{t("smartRuleModal.ruleTitle")}</Label>
+              <Label htmlFor="title" className="text-xs font-bold uppercase text-muted-foreground">{t("smartRuleModal.ruleTitle")}</Label>
               <Input
                 id="title"
                 required
@@ -108,7 +108,7 @@ export function SmartRuleFormModal({ open, onClose, onSave, isLoading, branchId,
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="base_product" className="text-xs font-ui-bold uppercase text-muted-foreground">{t("smartRuleModal.baseProduct")}</Label>
+              <Label htmlFor="base_product" className="text-xs font-bold uppercase text-muted-foreground">{t("smartRuleModal.baseProduct")}</Label>
               <select
                 id="base_product"
                 required
@@ -125,7 +125,7 @@ export function SmartRuleFormModal({ open, onClose, onSave, isLoading, branchId,
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="target_item" className="text-xs font-ui-bold uppercase text-muted-foreground">{t("smartRuleModal.targetItem")}</Label>
+              <Label htmlFor="target_item" className="text-xs font-bold uppercase text-muted-foreground">{t("smartRuleModal.targetItem")}</Label>
               <Input
                 id="target_item"
                 required
@@ -137,7 +137,7 @@ export function SmartRuleFormModal({ open, onClose, onSave, isLoading, branchId,
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("smartRuleModal.ratio")}</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground">{t("smartRuleModal.ratio")}</Label>
                 <Input
                   type="number"
                   required
@@ -147,7 +147,7 @@ export function SmartRuleFormModal({ open, onClose, onSave, isLoading, branchId,
                 />
               </div>
               <div className="grid gap-2">
-                <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("smartRuleModal.unit")}</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground">{t("smartRuleModal.unit")}</Label>
                 <Input
                   placeholder={t("smartRuleModal.unitPlaceholder")}
                   value={formData.unit || ""}

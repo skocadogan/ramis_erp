@@ -54,7 +54,7 @@ function KdsFireCountdown({ scheduledStartTs, status }: { scheduledStartTs: numb
   if (status !== 'PENDING' || remaining <= 0 || !formatted) return null;
 
   return (
-    <div className="mt-1 flex w-fit items-center gap-1 rounded border border-kds-warning/80 bg-kds-warning/10 px-2 py-0.5 text-2xs font-ui-bold text-kds-warning">
+    <div className="mt-1 flex w-fit items-center gap-1 rounded border border-kds-warning/80 bg-kds-warning/10 px-2 py-0.5 text-2xs font-bold text-kds-warning">
       <button
         className="flex items-center gap-1"
         aria-label={t('smartFiring.options')}
@@ -199,7 +199,7 @@ function KdsItemRow({
     >
       <div className="flex items-start gap-2.5">
         <span
-          className={`shrink-0 text-[15px] font-ui-bold ${isCancelled ? "text-red-200" : pendingLate ? "text-white" : "text-foreground"}`}
+          className={`shrink-0 text-sm font-bold ${isCancelled ? "text-red-200" : pendingLate ? "text-white" : "text-foreground"}`}
         >
           {item.quantity}x
         </span>
@@ -207,12 +207,12 @@ function KdsItemRow({
         <div className="min-w-0 flex-1">
           <RecentChangePulse lastChangeTs={hist?.changeTimestamp || 0} nowMs={nowMs}>
             <span
-              className={`break-words text-[15px] font-ui-bold leading-snug ${isCancelled ? "text-red-100/70 line-through" : pendingLate ? "text-white" : "text-foreground"} ${isReady ? "text-emerald-600 dark:text-emerald-400" : ""} ${nested ? "text-[14px]" : ""}`}
+              className={`break-words text-sm font-bold leading-snug ${isCancelled ? "text-red-100/70 line-through" : pendingLate ? "text-white" : "text-foreground"} ${isReady ? "text-emerald-600 dark:text-emerald-400" : ""} ${nested ? "text-sm" : ""}`}
             >
               {item.product_name}
               {!nested && item.is_combined_product ? (
                 <span
-                  className={`ml-1.5 align-middle text-[9px] font-ui-black uppercase tracking-wider ${pendingLate ? "text-white/90" : "text-purple-600 dark:text-purple-400"}`}
+                  className={`ml-1.5 align-middle text-3xs font-black uppercase tracking-wider ${pendingLate ? "text-white/90" : "text-purple-600 dark:text-purple-400"}`}
                 >
                   {t("ticket.combinedBadge")}
                 </span>
@@ -224,7 +224,7 @@ function KdsItemRow({
               className={`mt-1.5 rounded-md border px-2 py-1.5 ${pendingLate ? "border-white/30 bg-white/10" : "border-purple-500/25 bg-purple-500/5 dark:bg-purple-950/30"}`}
             >
               <p
-                className={`mb-1 text-[9px] font-ui-black uppercase tracking-wider ${pendingLate ? "text-white/90" : "text-purple-700 dark:text-purple-300"}`}
+                className={`mb-1 text-3xs font-black uppercase tracking-wider ${pendingLate ? "text-white/90" : "text-purple-700 dark:text-purple-300"}`}
               >
                 {t("ticket.combinedContents")}
               </p>
@@ -232,9 +232,9 @@ function KdsItemRow({
                 {item.combined_parts!.map((p, idx) => (
                   <li
                     key={`${p.product_name}-${idx}`}
-                    className={`flex flex-wrap items-baseline gap-x-1 text-[11px] font-ui-semibold leading-tight ${pendingLate ? "text-white/95" : "text-muted-foreground"}`}
+                    className={`flex flex-wrap items-baseline gap-x-1 text-sub font-semibold leading-tight ${pendingLate ? "text-white/95" : "text-muted-foreground"}`}
                   >
-                    <span className="font-ui-bold tabular-nums">
+                    <span className="font-bold tabular-nums">
                       {formatNumber(p.quantity_total, {
                         minimumFractionDigits: 0,
                         maximumFractionDigits: 4,
@@ -244,7 +244,7 @@ function KdsItemRow({
                     <span>{p.product_name}</span>
                     {p.unit_name ? (
                       <span
-                        className={`text-[10px] uppercase ${pendingLate ? "text-white/75" : "opacity-80"}`}
+                        className={`text-2xs uppercase ${pendingLate ? "text-white/75" : "opacity-80"}`}
                       >
                         ({p.unit_name})
                       </span>
@@ -259,7 +259,7 @@ function KdsItemRow({
 
       <div className="mt-1 flex flex-col">
         {pendingLate && (
-          <div className="mb-1 flex items-center gap-1.5 text-[11px] font-ui-black uppercase tracking-[0.15em] text-white/80">
+          <div className="mb-1 flex items-center gap-1.5 text-sub font-black uppercase tracking-[0.15em] text-white/80">
             <Zap size={14} className="fill-white" />
             <span>{t("ticket.fireNow")}</span>
           </div>
@@ -276,7 +276,7 @@ function KdsItemRow({
           <div className="mt-0.5 space-y-0.5">
             {item.unit_name && (
               <span
-                className={`text-[11px] font-ui-bold uppercase ${pendingLate ? "text-white/90" : "text-muted-foreground"}`}
+                className={`text-sub font-bold uppercase ${pendingLate ? "text-white/90" : "text-muted-foreground"}`}
               >
                 {item.unit_name}
               </span>
@@ -284,14 +284,14 @@ function KdsItemRow({
             {item.modifiers?.map((mod) => (
               <span
                 key={mod.id}
-                className={`block text-[11px] font-ui-semibold ${pendingLate ? "text-white/90" : "text-emerald-700 dark:text-emerald-400"}`}
+                className={`block text-sub font-semibold ${pendingLate ? "text-white/90" : "text-emerald-700 dark:text-emerald-400"}`}
               >
                 + {mod.modifier_name}
               </span>
             ))}
             {item.notes && (
               <p
-                className={`font-ui-semibold uppercase leading-tight text-[11px] ${pendingLate ? "text-white/90" : "text-muted-foreground"}`}
+                className={`font-semibold uppercase leading-tight text-sub ${pendingLate ? "text-white/90" : "text-muted-foreground"}`}
               >
                 {item.notes}
               </p>
@@ -301,7 +301,7 @@ function KdsItemRow({
 
         {isCancelled && (
           <p
-            className={`mt-1 text-[11px] font-ui-bold uppercase tracking-wide ${pendingLate ? "text-white" : "text-red-600"}`}
+            className={`mt-1 text-sub font-bold uppercase tracking-wide ${pendingLate ? "text-white" : "text-red-600"}`}
           >
             CANCELED! {item.quantity}x-{item.product_name}
           </p>
@@ -309,7 +309,7 @@ function KdsItemRow({
 
         {hist?.lastChangeType === "PLUS" && nowMs - (hist.changeTimestamp ?? 0) < 300_000 && (
           <span
-            className={`mt-1 text-[10px] font-ui-bold uppercase ${pendingLate ? "text-white" : "text-emerald-600"}`}
+            className={`mt-1 text-2xs font-bold uppercase ${pendingLate ? "text-white" : "text-emerald-600"}`}
           >
             + {t("ticket.addon")}
           </span>
@@ -322,7 +322,7 @@ function KdsItemRow({
             <>
               <button
                 onClick={() => onUpdateStatus(item.id, "PREPARING")}
-                className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-xl px-4 font-ui-black uppercase tracking-wider shadow-sm transition-colors active:scale-95 ${
+                className={`flex h-11 flex-1 items-center justify-center gap-2 rounded-xl px-4 font-black uppercase tracking-wider shadow-sm transition-colors active:scale-95 ${
                   pendingLate
                     ? "bg-kds-late-foreground text-kds-late shadow-md ring-2 ring-kds-late-foreground/80 hover:bg-kds-late-foreground/95"
                     : "bg-blue-600 text-white hover:bg-blue-700 shadow-blue-500/30"
@@ -330,7 +330,7 @@ function KdsItemRow({
                 title={t("actions.prepare")}
               >
                 <Clock size={20} strokeWidth={3} />
-                <span className="text-[11px]">{t("actions.prepare")}</span>
+                <span className="text-sub">{t("actions.prepare")}</span>
               </button>
               {canUseSmartFiringActions && <KdsFiringOverflow itemId={item.id} />}
             </>
@@ -338,11 +338,11 @@ function KdsItemRow({
           {item.status === "PREPARING" && (
             <button
               onClick={() => onUpdateStatus(item.id, "READY")}
-              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-green-600 px-4 font-ui-black uppercase tracking-wider text-white shadow-sm shadow-green-500/30 transition-colors hover:bg-green-700 active:scale-95"
+              className="flex h-11 flex-1 items-center justify-center gap-2 rounded-xl bg-green-600 px-4 font-black uppercase tracking-wider text-white shadow-sm shadow-green-500/30 transition-colors hover:bg-green-700 active:scale-95"
               title={t("status.ready")}
             >
               <CheckCircle2 size={20} strokeWidth={3} />
-              <span className="text-[11px]">{t("status.ready")}</span>
+              <span className="text-sub">{t("status.ready")}</span>
             </button>
           )}
           {item.status === "READY" && (
@@ -352,7 +352,7 @@ function KdsItemRow({
               title={t("actions.undo") || "Geri Al"}
             >
               <RotateCcw size={20} strokeWidth={3} />
-              <span className="text-[11px]">{t("actions.undo") || "Geri Al"}</span>
+              <span className="text-sub">{t("actions.undo") || "Geri Al"}</span>
             </button>
           )}
         </div>
@@ -437,7 +437,7 @@ function OrderCardImpl({
         className={`relative flex shrink-0 flex-col px-3 py-2 transition-colors duration-300 ${isUrgent ? "bg-kds-urgent text-kds-urgent-foreground" : "bg-kds-normal text-kds-normal-foreground"
           }`}
       >
-        <div className="flex items-center justify-between font-ui-bold text-[13px] leading-tight">
+        <div className="flex items-center justify-between font-bold text-ui-sm leading-tight">
           <span>
             {new Date(group.oldest_created_at_ts).toLocaleTimeString([], {
               hour: "2-digit",
@@ -449,11 +449,11 @@ function OrderCardImpl({
             <span>#{group.order_number || group.order_id.slice(-4).toUpperCase()}</span>
           </div>
         </div>
-        <div className="mt-1 text-[15px] font-ui-bold uppercase tracking-tight flex items-center justify-between">
+        <div className="mt-1 text-sm font-bold uppercase tracking-tight flex items-center justify-between">
           <div>
             {t("ticket.table")}: {kdsTableHeadlineDisplay(group.table_name)}
             {group.order_type === "TAKEAWAY" && (
-              <span className="ml-2 rounded bg-white/20 px-1 text-[10px]">
+              <span className="ml-2 rounded bg-white/20 px-1 text-2xs">
                 {t("ticket.takeaway")}
               </span>
             )}
@@ -464,7 +464,7 @@ function OrderCardImpl({
                 e.stopPropagation();
                 setShowNotesModal(true);
               }}
-              className="flex items-center gap-1 bg-kds-warning text-kds-warning-foreground border border-kds-warning/80 font-ui-black px-2 py-0.5 rounded-full text-[10px] hover:bg-kds-warning/80 active:scale-95 transition-colors shadow-[0_0_8px_rgba(234,179,8,0.6)]"
+              className="flex items-center gap-1 bg-kds-warning text-kds-warning-foreground border border-kds-warning/80 font-black px-2 py-0.5 rounded-full text-2xs hover:bg-kds-warning/80 active:scale-95 transition-colors shadow-[0_0_8px_rgba(234,179,8,0.6)]"
               title={t("ticket.notes") || "Açıklamalar"}
             >
               <ClipboardList size={12} className="shrink-0" />
@@ -477,8 +477,8 @@ function OrderCardImpl({
       {peerForThisTable.length > 0 && (
         <div className="space-y-1 border-b border-kds-warning/20 bg-kds-warning/5 px-3 py-1.5">
           {peerForThisTable.map((line, idx) => (
-            <p key={idx} className="text-[10px] font-ui-semibold text-kds-warning">
-              <span className="font-ui-bold text-kds-warning">{line.station_name}</span>{" "}
+            <p key={idx} className="text-2xs font-semibold text-kds-warning">
+              <span className="font-bold text-kds-warning">{line.station_name}</span>{" "}
               {line.quantity}x {line.product_name} {t("status.pending")}
             </p>
           ))}
@@ -505,14 +505,14 @@ function OrderCardImpl({
             <div key={row.parentItemId} className="flex flex-col divide-y divide-border/60">
               <div className="border-b border-purple-500/20 bg-purple-500/5 px-3 py-2.5 dark:bg-purple-950/20">
                 <div className="flex items-start gap-2.5">
-                  <span className="shrink-0 text-[15px] font-ui-bold text-foreground">
+                  <span className="shrink-0 text-sm font-bold text-foreground">
                     {row.parentQty}x
                   </span>
                   <div className="min-w-0 flex-1">
-                    <p className="break-words text-[15px] font-ui-bold leading-snug text-foreground">
+                    <p className="break-words text-sm font-bold leading-snug text-foreground">
                       {row.parentName}
                     </p>
-                    <p className="mt-1 text-[10px] font-ui-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
+                    <p className="mt-1 text-2xs font-black uppercase tracking-wider text-purple-700 dark:text-purple-300">
                       {t("ticket.combinedContents")}
                     </p>
                   </div>
@@ -554,7 +554,7 @@ function OrderCardImpl({
                 }
               })();
             }}
-            className="flex w-full items-center justify-center gap-2 rounded py-2 text-[11px] font-ui-bold uppercase tracking-wider border border-kds-warning/50 bg-kds-warning/15 text-kds-warning-foreground shadow-sm transition-colors hover:bg-kds-warning/25 disabled:opacity-60 dark:text-kds-warning-foreground dark:hover:bg-kds-warning/20"
+            className="flex w-full items-center justify-center gap-2 rounded py-2 text-sub font-bold uppercase tracking-wider border border-kds-warning/50 bg-kds-warning/15 text-kds-warning-foreground shadow-sm transition-colors hover:bg-kds-warning/25 disabled:opacity-60 dark:text-kds-warning-foreground dark:hover:bg-kds-warning/20"
           >
             <Timer size={16} strokeWidth={2.5} className="shrink-0" />
             {t("actions.snoozeAllPending5Min")}
@@ -568,7 +568,7 @@ function OrderCardImpl({
                 .filter((i) => i.status === "PENDING" || i.status === "PREPARING")
                 .forEach((i) => onUpdateStatus(i.id, "READY"));
             }}
-            className={`flex-1 rounded py-2 text-[11px] font-ui-bold uppercase tracking-wider shadow-sm transition-colors ${isUrgent ? "bg-kds-urgent text-kds-urgent-foreground hover:bg-kds-urgent/90" : "bg-kds-normal text-kds-normal-foreground hover:bg-kds-normal/90"
+            className={`flex-1 rounded py-2 text-sub font-bold uppercase tracking-wider shadow-sm transition-colors ${isUrgent ? "bg-kds-urgent text-kds-urgent-foreground hover:bg-kds-urgent/90" : "bg-kds-normal text-kds-normal-foreground hover:bg-kds-normal/90"
               }`}
           >
             {t("actions.markAllReady")}

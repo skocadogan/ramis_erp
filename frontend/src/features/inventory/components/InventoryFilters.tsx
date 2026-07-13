@@ -58,12 +58,12 @@ export function InventoryFilters({
 }: InventoryFiltersProps) {
   const t = useTranslations("inventory")
   return (
-    <div className="p-3 border-b border-border flex flex-col md:flex-row gap-4 items-center justify-between bg-slate-50 dark:bg-slate-800/40 dark:border-slate-800 shrink-0">
+    <div className="p-3 border-b border-border flex flex-col md:flex-row gap-4 items-center justify-between bg-muted/40 border-border shrink-0">
       <div className="relative w-full md:w-80">
         <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-3.5 w-3.5 text-muted-foreground" />
         <Input
           placeholder={t("filters.searchPlaceholder")}
-          className="pl-8 bg-white dark:bg-slate-800 dark:border-slate-700 h-[34px] text-xs"
+          className="pl-8 bg-card border-border h-[34px] text-xs"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
@@ -75,7 +75,7 @@ export function InventoryFilters({
             <Filter className="h-3.5 w-3.5 text-muted-foreground" />
             <div className="w-48 relative">
               <select
-                className="w-full bg-white border border-border rounded-md px-2.5 py-1 text-xs outline-none dark:bg-slate-800 dark:border-slate-700 h-[34px]"
+                className="w-full border border-border rounded-md px-2.5 py-1 text-xs outline-none bg-muted border-border h-[34px]"
                 value={selectedWarehouseId || ""}
                 onChange={(e) => setSelectedWarehouseId(e.target.value || null)}
               >
@@ -91,13 +91,13 @@ export function InventoryFilters({
                 value={selectedCategoryId || ""}
                 onChange={(val) => setSelectedCategoryId(val || null)}
                 placeholder={t("filters.allCategories")}
-                className="bg-white border border-border rounded-md px-2.5 py-1 text-xs outline-none dark:bg-slate-800 dark:border-slate-700 h-[34px]"
+                className="border border-border rounded-md px-2.5 py-1 text-xs outline-none bg-muted border-border h-[34px]"
               />
             </div>
 
             <div className="w-40 relative">
               <select
-                className="w-full bg-white border border-border rounded-md px-2.5 py-1 text-xs outline-none dark:bg-slate-800 dark:border-slate-700 h-[34px]"
+                className="w-full border border-border rounded-md px-2.5 py-1 text-xs outline-none bg-muted border-border h-[34px]"
                 value={stockStatus}
                 onChange={(e) => setStockStatus(e.target.value)}
               >
@@ -116,19 +116,19 @@ export function InventoryFilters({
             <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
             <Input
               type="date"
-              className="w-32 h-[34px] bg-white dark:bg-slate-800 dark:border-slate-700 text-xs px-2"
+              className="w-32 h-[34px] bg-card border-border text-xs px-2"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
             />
             <span className="text-muted-foreground text-xs">-</span>
             <Input
               type="date"
-              className="w-32 h-[34px] bg-white dark:bg-slate-800 dark:border-slate-700 text-xs px-2"
+              className="w-32 h-[34px] bg-card border-border text-xs px-2"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
             />
             <select
-              className="bg-white border border-border rounded-md px-2.5 py-1 text-xs outline-none ml-1 dark:bg-slate-800 dark:border-slate-700 h-[34px]"
+              className="border border-border rounded-md px-2.5 py-1 text-xs outline-none ml-1 bg-muted border-border h-[34px]"
               value={movementTypeFilter}
               onChange={(e) => setMovementTypeFilter(e.target.value)}
             >
@@ -152,7 +152,7 @@ export function InventoryFilters({
                 size="sm"
                 onClick={onRefresh}
                 disabled={isLoading}
-                className="h-[34px] px-3 gap-2 border-border hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
+                className="h-[34px] px-3 gap-2 border-border hover:bg-slate-100 border-border dark:hover:bg-slate-800"
                 title={t("filters.refreshTitle")}
               >
                 <RotateCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />

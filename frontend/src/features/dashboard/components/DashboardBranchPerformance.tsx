@@ -28,15 +28,15 @@ export function DashboardBranchPerformance({
 
   return (
     <div className={cn("rounded-xl border border-border bg-card p-4", className)}>
-      <h2 className="mb-1 text-sm font-ui-semibold text-foreground">
+      <h2 className="mb-1 text-sm font-semibold text-foreground">
         {t("branchPerformance.title")}
       </h2>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-border">
-              <th className="text-left py-2 text-muted-foreground font-ui-medium">{t("branchPerformance.branch")}</th>
-              <th className="text-right py-2 text-muted-foreground font-ui-medium">{t("branchPerformance.revenue")}</th>
+              <th className="text-left py-2 text-muted-foreground font-medium">{t("branchPerformance.branch")}</th>
+              <th className="text-right py-2 text-muted-foreground font-medium">{t("branchPerformance.revenue")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
@@ -51,8 +51,8 @@ export function DashboardBranchPerformance({
             ) : (
               branchRevenue!.map((b) => (
                 <tr key={b.branch_id}>
-                  <td className="py-2 text-foreground dark:text-slate-200">{b.branch_name}</td>
-                  <td className="py-2 text-right font-ui-semibold text-foreground dark:text-slate-200">
+                  <td className="py-2 text-foreground">{b.branch_name}</td>
+                  <td className="py-2 text-right font-semibold text-foreground">
                     {formatAmount(b.revenue, canViewAmounts)}
                   </td>
                 </tr>

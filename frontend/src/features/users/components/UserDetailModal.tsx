@@ -114,12 +114,12 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
           {user && !isLoading && !error && (
             <div className="space-y-6">
               <div className="flex items-center gap-4 pb-2">
-                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 text-xl font-ui-semibold text-primary">
+                <div className="flex h-14 w-14 items-center justify-center rounded-lg bg-primary/10 text-xl font-semibold text-primary">
                   {user.username.charAt(0).toUpperCase()}
                 </div>
                 <div className="space-y-0.5">
                   <div className="flex items-center gap-2">
-                    <h3 className="text-lg font-ui-semibold text-foreground">
+                    <h3 className="text-lg font-semibold text-foreground">
                       {user.first_name || user.last_name
                         ? `${user.first_name} ${user.last_name}`.trim()
                         : user.username}
@@ -127,7 +127,7 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
                     {user.is_superuser && (
                       <Badge
                         variant="outline"
-                        className="border-amber-200 bg-amber-50 text-2xs font-ui-medium tracking-wider text-amber-700 uppercase dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
+                        className="border-amber-200 bg-amber-50 text-2xs font-medium tracking-wider text-amber-700 uppercase dark:border-amber-800 dark:bg-amber-900/30 dark:text-amber-400"
                       >
                         {t("isSuperuser")}
                       </Badge>
@@ -135,7 +135,7 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
                     {!user.is_active && (
                       <Badge
                         variant="destructive"
-                        className="text-2xs font-ui-medium tracking-wider uppercase"
+                        className="text-2xs font-medium tracking-wider uppercase"
                       >
                         {tAdmin("common.passive")}
                       </Badge>
@@ -189,14 +189,14 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
               </div>
 
               <div className="border-t border-border pt-5">
-                <h4 className="mb-2.5 flex items-center gap-2 text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                <h4 className="mb-2.5 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   <Shield size={14} className="text-muted-foreground" />
                   {t("table.roles")}
                 </h4>
                 {user.roles && user.roles.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
                     {user.roles.map((role) => (
-                      <Badge key={role.id} variant="secondary" className="px-2.5 py-1 text-sub font-ui-medium">
+                      <Badge key={role.id} variant="secondary" className="px-2.5 py-1 text-sub font-medium">
                         {role.name}
                       </Badge>
                     ))}
@@ -208,7 +208,7 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
 
               {groupedUserPermissions.length > 0 && (
                 <div className="border-t border-border pt-5">
-                  <h4 className="mb-4 flex items-center gap-2 text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                  <h4 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                     <Shield size={14} className="text-primary" />
                     {t("detail.modulePermissions", { count: user.all_permissions.length })}
                   </h4>
@@ -218,9 +218,9 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
                         key={cat.id}
                         className="flex flex-col gap-2 rounded-lg border border-border bg-background p-3"
                       >
-                        <h5 className="flex items-center justify-between text-sub font-ui-semibold uppercase tracking-tight text-foreground">
+                        <h5 className="flex items-center justify-between text-sub font-semibold uppercase tracking-tight text-foreground">
                           <span>{cat.name}</span>
-                          <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[9px] font-ui-medium text-primary">
+                          <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-3xs font-medium text-primary">
                             {cat.userCategoryPermissions.length}
                           </span>
                         </h5>
@@ -228,7 +228,7 @@ export function UserDetailModal({ userId, onClose }: UserDetailModalProps) {
                           {cat.userCategoryPermissions.map((p) => (
                             <span
                               key={p.id}
-                              className="inline-flex items-center rounded-md border border-border bg-background px-1.5 py-0.5 text-2xs font-ui-medium text-muted-foreground"
+                              className="inline-flex items-center rounded-md border border-border bg-background px-1.5 py-0.5 text-2xs font-medium text-muted-foreground"
                             >
                               {p.name}
                             </span>
@@ -266,10 +266,10 @@ function InfoRow({
     <div className="flex items-start gap-2.5">
       <Icon size={14} className="mt-0.5 shrink-0 text-muted-foreground" />
       <div className="min-w-0">
-        <p className="text-2xs font-ui-medium uppercase tracking-wider text-muted-foreground">
+        <p className="text-2xs font-medium uppercase tracking-wider text-muted-foreground">
           {label}
         </p>
-        <div className="mt-0.5 text-sm font-ui-medium text-foreground">{value}</div>
+        <div className="mt-0.5 text-sm font-medium text-foreground">{value}</div>
       </div>
     </div>
   )

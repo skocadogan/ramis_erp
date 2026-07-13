@@ -54,9 +54,9 @@ function MetricCard({
 }) {
   return (
     <div className="rounded-xl border border-border bg-background p-4 shadow-sm">
-      <p className="mb-1 text-2xs font-ui-bold uppercase text-muted-foreground">{label}</p>
+      <p className="mb-1 text-2xs font-bold uppercase text-muted-foreground">{label}</p>
       <div className="flex items-end justify-between">
-        <span className={cn("text-xl font-ui-bold font-mono", valueClassName ?? "text-foreground")}>
+        <span className={cn("text-xl font-bold font-mono", valueClassName ?? "text-foreground")}>
           {value}
         </span>
         {icon}
@@ -79,9 +79,9 @@ function PaymentRow({
     <div className="flex items-center justify-between px-4 py-3">
       <div className="flex items-center gap-3">
         {icon}
-        <span className="text-sm font-ui-medium">{label}</span>
+        <span className="text-sm font-medium">{label}</span>
       </div>
-      <span className="font-ui-bold">{amount}</span>
+      <span className="font-bold">{amount}</span>
     </div>
   );
 }
@@ -107,8 +107,8 @@ export function CashReportDialog({ isOpen, onOpenChange, data, shiftId }: CashRe
               <FileText size={20} />
             </div>
             <div className="min-w-0">
-              <DialogTitle className="font-ui-bold">{t("cashReport.title")}</DialogTitle>
-              <DialogDescription className="text-xs font-ui-medium uppercase tracking-wider">
+              <DialogTitle className="font-bold">{t("cashReport.title")}</DialogTitle>
+              <DialogDescription className="text-xs font-medium uppercase tracking-wider">
                 {t("cashReport.subtitle")}
               </DialogDescription>
             </div>
@@ -130,15 +130,15 @@ export function CashReportDialog({ isOpen, onOpenChange, data, shiftId }: CashRe
                 <div className="flex items-start gap-2 text-muted-foreground">
                   <Calendar size={14} className="mt-0.5 shrink-0 text-primary" />
                   <div>
-                    <span className="font-ui-medium">{t("cashReport.openedAt")}: </span>
-                    <span className="font-ui-semibold text-foreground">{dateFmt(data.shift.opened_at)}</span>
+                    <span className="font-medium">{t("cashReport.openedAt")}: </span>
+                    <span className="font-semibold text-foreground">{dateFmt(data.shift.opened_at)}</span>
                   </div>
                 </div>
                 <div className="flex items-start gap-2 text-muted-foreground">
                   <Clock size={14} className="mt-0.5 shrink-0 text-primary" />
                   <div>
-                    <span className="font-ui-medium">{t("cashReport.closedAt")}: </span>
-                    <span className="font-ui-semibold text-foreground">
+                    <span className="font-medium">{t("cashReport.closedAt")}: </span>
+                    <span className="font-semibold text-foreground">
                       {data.shift.closed_at
                         ? dateFmt(data.shift.closed_at)
                         : t("cashReport.openStatus")}
@@ -148,8 +148,8 @@ export function CashReportDialog({ isOpen, onOpenChange, data, shiftId }: CashRe
                 <div className="flex items-start gap-2 text-muted-foreground">
                   <User size={14} className="mt-0.5 shrink-0 text-primary" />
                   <div>
-                    <span className="font-ui-medium">{t("cashReport.cashier")}: </span>
-                    <span className="font-ui-semibold text-foreground">
+                    <span className="font-medium">{t("cashReport.cashier")}: </span>
+                    <span className="font-semibold text-foreground">
                       {data.shift.opened_by_name || "—"}
                     </span>
                   </div>
@@ -157,8 +157,8 @@ export function CashReportDialog({ isOpen, onOpenChange, data, shiftId }: CashRe
                 <div className="flex items-start gap-2 text-muted-foreground">
                   <CheckCircle2 size={14} className="mt-0.5 shrink-0 text-primary" />
                   <div>
-                    <span className="font-ui-medium">{t("cashReport.branch")}: </span>
-                    <span className="font-ui-semibold text-foreground">{data.shift.branch_name}</span>
+                    <span className="font-medium">{t("cashReport.branch")}: </span>
+                    <span className="font-semibold text-foreground">{data.shift.branch_name}</span>
                   </div>
                 </div>
               </div>
@@ -185,7 +185,7 @@ export function CashReportDialog({ isOpen, onOpenChange, data, shiftId }: CashRe
               />
 
               <div className="space-y-2">
-                <h3 className="flex items-center gap-2 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+                <h3 className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                   <Receipt size={14} />
                   {t("cashReport.paymentBreakdown")}
                 </h3>
@@ -223,7 +223,7 @@ export function CashReportDialog({ isOpen, onOpenChange, data, shiftId }: CashRe
 
             {/* Sağ — cihaz tablosu */}
             <section className="relative flex min-h-[min(420px,42vh)] min-w-0 flex-1 flex-col gap-3 overflow-hidden lg:min-h-0">
-              <h3 className="flex shrink-0 items-center gap-2 text-xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+              <h3 className="flex shrink-0 items-center gap-2 text-xs font-bold uppercase tracking-widest text-muted-foreground">
                 <Laptop size={14} />
                 {t("cashReport.terminalBreakdown")}
               </h3>

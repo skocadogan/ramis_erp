@@ -70,7 +70,7 @@ export function CreditPaymentModal({ open, branchId, onClose, onSelect }: Credit
                       : "border-border hover:bg-muted",
                   )}
                 >
-                  <div className="font-ui-semibold">{acc.full_name}</div>
+                  <div className="font-semibold">{acc.full_name}</div>
                   <div className="mt-0.5 text-xs text-muted-foreground">
                     {t("pos.balance")}: {formatAmount(acc.balance, canViewAmounts)}
                   </div>

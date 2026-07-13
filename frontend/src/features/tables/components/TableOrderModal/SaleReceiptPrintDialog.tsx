@@ -121,7 +121,7 @@ export function SaleReceiptPrintDialog({
                 ) : (
                     <div className="space-y-4 py-2">
                         <div className="space-y-1.5">
-                            <label className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                                 {t('printDialogPrinter')}
                             </label>
                             <div className="flex items-center gap-2">
@@ -150,7 +150,7 @@ export function SaleReceiptPrintDialog({
                         </div>
 
                         <div className="space-y-1.5">
-                            <label className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                                 {t('printDialogTemplate')}
                             </label>
                             <div className="flex items-center gap-2">

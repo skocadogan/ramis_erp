@@ -32,17 +32,17 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
   )) + modifierSum;
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-border bg-slate-50 p-3 dark:border-slate-600 dark:bg-slate-800/50">
+    <div className="flex flex-col gap-2 rounded-xl border border-border bg-slate-50 p-3 border-border bg-muted/50">
       <div className="flex items-start justify-between">
         <div className="flex w-3/4 flex-col">
-          <span className="text-lg font-ui-bold text-slate-800 dark:text-slate-100">{product.name}</span>
+          <span className="text-lg font-bold text-slate-800 text-foreground">{product.name}</span>
           {selectedUnit && (
-            <span className="text-xs font-ui-bold text-blue-600 uppercase tracking-tighter">
+            <span className="text-xs font-bold text-blue-600 uppercase tracking-tighter">
               {selectedUnit.name} 
             </span>
           )}
           {(selectedModifiers ?? []).map((m) => (
-            <span key={m.id} className="text-sm font-ui-medium text-emerald-700 dark:text-emerald-400">
+            <span key={m.id} className="text-sm font-medium text-emerald-700 dark:text-emerald-400">
               + {m.name}
               {m.price_adjustment ? (
                 <span className="ml-1 text-xs font-mono text-emerald-900/80 dark:text-emerald-400/70">
@@ -52,7 +52,7 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
             </span>
           ))}
         </div>
-        <span className="font-ui-medium text-slate-900 dark:text-slate-200 text-lg font-mono">
+        <span className="font-medium text-slate-900 text-foreground text-lg font-mono">
           {formatAmount((effectivePrice * quantity), canViewAmounts)}
         </span>
       </div>
@@ -73,7 +73,7 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
                 ? ` — ${ci.product_unit_name}`
                 : "";
             return (
-              <span key={subKey} className="text-xs font-ui-medium text-muted-foreground">
+              <span key={subKey} className="text-xs font-medium text-muted-foreground">
                 • {q}x {label}
                 {unitLabel}
               </span>
@@ -92,12 +92,12 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
               <span className="text-xs line-through text-muted-foreground font-mono">
                 {canViewAmounts ? t("pricePerPiece", { price: formatCurrency(product.base_price) }) : AMOUNT_DISPLAY_MASK}
               </span>
-              <span className="text-xs text-amber-600 font-ui-semibold font-mono">
+              <span className="text-xs text-amber-600 font-semibold font-mono">
                 {canViewAmounts ? t("pricePerPiece", { price: formatCurrency(effectivePrice) }) : AMOUNT_DISPLAY_MASK}
               </span>
             </>
           ) : (
-            <span className="text-xs text-slate-900  dark:text-slate-100 font-mono">
+            <span className="text-xs text-slate-900  text-foreground font-mono">
               {canViewAmounts ? t("pricePerPiece", { price: formatCurrency(product.base_price) }) : AMOUNT_DISPLAY_MASK}
             </span>
           )}
@@ -105,7 +105,7 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
             type="button"
             onClick={() => setNoteModalOpen(true)}
             className={cn(
-              "inline-flex w-fit max-w-full items-center gap-1 rounded-lg px-2 py-1 text-2xs font-ui-semibold transition-colors touch-manipulation",
+              "inline-flex w-fit max-w-full items-center gap-1 rounded-lg px-2 py-1 text-2xs font-semibold transition-colors touch-manipulation",
               hasNotes
                 ? "bg-amber-50 text-amber-800 hover:bg-amber-100 dark:bg-amber-950/40 dark:text-amber-200 dark:hover:bg-amber-950/60"
                 : "text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/40"
@@ -120,16 +120,16 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
             </p>
           ) : null}
         </div>
-        <div className="flex items-stretch overflow-hidden rounded-xl border border-border bg-white dark:border-slate-600 dark:bg-slate-900">
+        <div className="flex items-stretch overflow-hidden rounded-xl border border-border border-border bg-card">
           <button
             type="button"
             onClick={() => onUpdateQuantity(item.cartId, -1)}
-            className="flex h-11 min-w-[2.75rem] touch-manipulation items-center justify-center bg-slate-50 text-slate-700 transition-colors hover:bg-rose-50 hover:text-rose-700 active:bg-rose-100 dark:bg-slate-800/80 dark:text-slate-200 dark:hover:bg-rose-950/40 dark:hover:text-rose-300 dark:active:bg-rose-950/60"
+            className="flex h-11 min-w-[2.75rem] touch-manipulation items-center justify-center bg-slate-50 text-slate-700 transition-colors hover:bg-rose-50 hover:text-rose-700 active:bg-rose-100 bg-muted/80 text-foreground dark:hover:bg-rose-950/40 dark:hover:text-rose-300 dark:active:bg-rose-950/60"
             title={t("decreaseQty")}
           >
             <Minus size={22} strokeWidth={2.75} aria-hidden />
           </button>
-          <span className="flex min-w-[2.75rem] items-center justify-center border-x-2 border-border bg-slate-100/90 px-3 text-center text-base font-ui-bold tabular-nums text-slate-900 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100">
+          <span className="flex min-w-[2.75rem] items-center justify-center border-x-2 border-border bg-slate-100/90 px-3 text-center text-base font-bold tabular-nums text-slate-900 border-input bg-muted text-foreground">
             {quantity}
           </span>
           <button

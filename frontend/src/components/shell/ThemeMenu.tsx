@@ -45,11 +45,11 @@ export function ThemeMenu({ className }: { className?: string } = {}) {
         aria-label={t("triggerAriaLabel")}
         title={t("triggerTitle")}
       >
-        {mounted ? <TriggerIcon preference={preference} /> : <div className="h-[18px] w-[18px]" />}
+        {mounted ? <TriggerIcon preference={preference} /> : <div className="size-4" />}
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="min-w-[13rem]">
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-xs font-ui-semibold text-muted-foreground">
+          <DropdownMenuLabel className="text-xs font-semibold text-muted-foreground">
             {t("colorTheme")}
           </DropdownMenuLabel>
           <DropdownMenuItem
@@ -105,7 +105,7 @@ export function ThemeMenu({ className }: { className?: string } = {}) {
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="text-xs font-ui-semibold text-muted-foreground">
+          <DropdownMenuLabel className="text-xs font-semibold text-muted-foreground">
             {t("density")}
           </DropdownMenuLabel>
           <DropdownMenuItem

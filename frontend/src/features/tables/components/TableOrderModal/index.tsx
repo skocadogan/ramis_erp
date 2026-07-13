@@ -209,12 +209,12 @@ export function TableOrderModal(props: TableOrderModalProps) {
             <div className="relative flex max-h-[min(94dvh,900px)] min-h-0 w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-border bg-card lg:max-w-6xl">
                 {isPaying && (
                     <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-sm transition-opacity duration-200">
-                        <div className="flex flex-col items-center rounded-xl bg-white p-6 shadow-xl dark:bg-slate-900 border border-slate-100 dark:border-slate-800 max-w-xs text-center">
+                        <div className="flex flex-col items-center rounded-xl p-6 shadow-xl bg-card border border-slate-100 border-border max-w-xs text-center">
                             <Loader2 className="h-10 w-10 animate-spin text-blue-600 dark:text-blue-400 mb-3" />
-                            <h3 className="text-sm font-ui-bold text-slate-950 dark:text-slate-50 mb-1">
+                            <h3 className="text-sm font-bold text-foreground mb-1">
                                 Mali İşlem Yapılıyor
                             </h3>
-                            <p className="text-2xs text-slate-500 dark:text-slate-400 animate-pulse">
+                            <p className="text-2xs text-slate-500 text-muted-foreground animate-pulse">
                                 Fiş düzenleniyor ve ödeme kaydediliyor. Lütfen bekleyin...
                             </p>
                         </div>
@@ -313,15 +313,15 @@ export function TableOrderModal(props: TableOrderModalProps) {
                             <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
                                 <div className="space-y-4 p-4 pb-0">
                                     {!isHistoricalSaleView && orders.length > 0 && (
-                                        <div className="rounded-xl border border-border bg-slate-50/50 p-3.5 dark:bg-slate-900/40 dark:border-slate-800">
+                                        <div className="rounded-xl border border-border bg-slate-50/50 p-3.5 bg-card/40 border-border">
                                             <div className="flex items-center justify-between">
                                                 <div className="flex items-center gap-2.5">
                                                     <Users size={16} className="text-muted-foreground" />
                                                     <div className="min-w-0">
-                                                        <span className="text-2xs font-ui-semibold text-muted-foreground uppercase tracking-wider block">
+                                                        <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider block">
                                                             Müşteri Bilgisi
                                                         </span>
-                                                        <span className="text-xs font-ui-bold text-foreground truncate block">
+                                                        <span className="text-xs font-bold text-foreground truncate block">
                                                             {orders[0]?.customer_name || "Müşteri Seçilmedi"}
                                                         </span>
                                                     </div>
@@ -331,15 +331,15 @@ export function TableOrderModal(props: TableOrderModalProps) {
                                                         <button
                                                             type="button"
                                                             onClick={() => setShowCustomerSelect(true)}
-                                                            className="text-2xs font-ui-semibold text-blue-600 hover:text-blue-700 hover:underline dark:text-blue-400"
+                                                            className="text-2xs font-semibold text-blue-600 hover:text-blue-700 hover:underline dark:text-blue-400"
                                                         >
                                                             Değiştir
                                                         </button>
-                                                        <span className="text-slate-350 dark:text-slate-700 text-xs">|</span>
+                                                        <span className="text-muted-foreground text-xs">|</span>
                                                         <button
                                                             type="button"
                                                             onClick={() => handleSelectCustomer(null)}
-                                                            className="text-2xs font-ui-semibold text-rose-600 hover:text-rose-700 hover:underline"
+                                                            className="text-2xs font-semibold text-rose-600 hover:text-rose-700 hover:underline"
                                                         >
                                                             Kaldır
                                                         </button>
@@ -348,7 +348,7 @@ export function TableOrderModal(props: TableOrderModalProps) {
                                                     <button
                                                         type="button"
                                                         onClick={() => setShowCustomerSelect(true)}
-                                                        className="text-2xs font-ui-bold bg-blue-50 text-blue-600 hover:bg-blue-100 px-2.5 py-1.5 rounded-lg dark:bg-blue-950/30 dark:text-blue-400 transition-colors shrink-0"
+                                                        className="text-2xs font-bold bg-blue-50 text-blue-600 hover:bg-blue-100 px-2.5 py-1.5 rounded-lg dark:bg-blue-950/30 dark:text-blue-400 transition-colors shrink-0"
                                                     >
                                                         Müşteri Seç
                                                     </button>
@@ -500,7 +500,7 @@ export function TableOrderModal(props: TableOrderModalProps) {
                                 void stockWarning?.onConfirm();
                             }}
                             disabled={isPaying}
-                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-ui-bold"
+                            className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
                         >
                             {isPaying && <Loader2 size={14} className="animate-spin mr-1.5" />}
                             {t('confirm')}

@@ -129,7 +129,7 @@ export function ReturnCancelReportsTab({ branchId }: ReturnCancelReportsTabProps
     <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden">
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-sm font-ui-semibold text-foreground">{t("title")}</h2>
+          <h2 className="text-sm font-semibold text-foreground">{t("title")}</h2>
           <p className="text-xs text-muted-foreground">{t("subtitle")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -137,7 +137,7 @@ export function ReturnCancelReportsTab({ branchId }: ReturnCancelReportsTabProps
             <button
               type="button"
               onClick={() => setShowCreate(true)}
-              className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-ui-medium text-primary-foreground"
+              className="inline-flex h-9 items-center gap-2 rounded-lg bg-primary px-3 text-sm font-medium text-primary-foreground"
             >
               <Plus className="h-4 w-4" />
               {t("createButton")}
@@ -164,7 +164,7 @@ export function ReturnCancelReportsTab({ branchId }: ReturnCancelReportsTabProps
 
       <div className="flex shrink-0 flex-wrap items-center gap-2 rounded-lg border border-border bg-card px-3 py-2.5 dark:border-slate-700">
         <Filter size={16} className="text-muted-foreground" />
-        <span className="text-xs font-ui-medium text-muted-foreground">{t("filterLabel")}</span>
+        <span className="text-xs font-medium text-muted-foreground">{t("filterLabel")}</span>
         <div className="relative min-w-[160px] flex-1 max-w-xs">
           <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input
@@ -220,12 +220,12 @@ export function ReturnCancelReportsTab({ branchId }: ReturnCancelReportsTabProps
 
       <div className="grid shrink-0 grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="rounded-xl border border-border/80 bg-blue-50/80 p-4 dark:border-slate-800 dark:bg-blue-950/20">
-          <p className="text-sub font-ui-medium uppercase tracking-wider text-muted-foreground">{t("totalQuantity")}</p>
-          <p className="mt-1 text-2xl font-ui-bold tabular-nums">{totalQty.toFixed(2)}</p>
+          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">{t("totalQuantity")}</p>
+          <p className="mt-1 text-2xl font-bold tabular-nums">{totalQty.toFixed(2)}</p>
         </div>
         <div className="rounded-xl border border-border/80 bg-rose-50/80 p-4 dark:border-slate-800 dark:bg-rose-950/20">
-          <p className="text-sub font-ui-medium uppercase tracking-wider text-muted-foreground">{t("totalCostEstimate")}</p>
-          <p className={cn("mt-1 text-2xl font-ui-bold tabular-nums", totalAmount > 0 && "text-rose-600 dark:text-rose-400")}>
+          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">{t("totalCostEstimate")}</p>
+          <p className={cn("mt-1 text-2xl font-bold tabular-nums", totalAmount > 0 && "text-rose-600 dark:text-rose-400")}>
             {currency.format(totalAmount)}
           </p>
         </div>

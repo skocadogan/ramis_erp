@@ -37,7 +37,7 @@ const PAYMENT_ROW_COLOR: Record<string, string> = {
 const PAYMENT_BADGE: Record<string, string> = {
     CASH: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700/40',
     CARD: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-700/40',
-    OTHER: 'bg-slate-100 text-slate-600 border-border dark:bg-slate-800 dark:text-muted-foreground dark:border-slate-700',
+    OTHER: 'bg-slate-100 text-slate-600 border-border bg-muted dark:text-muted-foreground border-border',
     CREDIT: 'bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-900/20 dark:text-violet-400 dark:border-violet-700/40',
 };
 
@@ -96,12 +96,12 @@ const SaleRow = memo(({
             data-index={idx}
             ref={measureElement}
             onClick={() => onRowClick(sale)}
-            className={`border-b border-slate-100 dark:border-slate-700/60 last:border-0 cursor-pointer transition-colors ${isSelected ? 'bg-rose-50/40 dark:bg-rose-900/10' : PAYMENT_ROW_COLOR[sale.payment_method] ?? PAYMENT_ROW_COLOR.OTHER}`}
+            className={`border-b border-slate-100 border-border/60 last:border-0 cursor-pointer transition-colors ${isSelected ? 'bg-rose-50/40 dark:bg-rose-900/10' : PAYMENT_ROW_COLOR[sale.payment_method] ?? PAYMENT_ROW_COLOR.OTHER}`}
         >
             {isSelectable && (
                 <td className="px-4 py-3 w-8" onClick={e => e.stopPropagation()}>
                     <label className="flex items-center gap-2 px-2.5 py-1.5 rounded-md cursor-pointer transition text-left">
-                        <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${isSelected ? "bg-blue-600 border-blue-600" : "border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-800"}`}>
+                        <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${isSelected ? "bg-blue-600 border-blue-600" : "border-slate-300 border-border bg-muted"}`}>
                             {isSelected && <Check size={10} className="text-white" strokeWidth={3} />}
                         </span>
                         <input
@@ -116,14 +116,14 @@ const SaleRow = memo(({
             <td className="px-4 py-3 text-xs text-muted-foreground dark:text-muted-foreground font-mono tabular-nums">{idx + 1}</td>
             <td className="px-4 py-3 text-foreground">
                 <div className="flex flex-col">
-                    <span className="text-sm font-ui-medium">{sale.branch_name}</span>
+                    <span className="text-sm font-medium">{sale.branch_name}</span>
                 </div>
             </td>
-            <td className="px-4 py-3 font-ui-semibold text-foreground">
+            <td className="px-4 py-3 font-semibold text-foreground">
                 <div className="flex flex-col">
                     {sale.table_name ?? <span className="text-muted-foreground dark:text-muted-foreground">{t('table.dash')}</span>}
                     {sale.order_type === 'TAKEAWAY' && (
-                        <span className="text-2xs text-amber-600 font-ui-bold uppercase">{t('table.takeaway')}</span>
+                        <span className="text-2xs text-amber-600 font-bold uppercase">{t('table.takeaway')}</span>
                     )}
                 </div>
             </td>
@@ -131,30 +131,30 @@ const SaleRow = memo(({
                 {sale.created_by_name ?? <span className="text-muted-foreground dark:text-muted-foreground">{t('table.dash')}</span>}
             </td>
             <td className="px-4 py-3">
-                <span className={`inline-flex items-center gap-1 text-sub font-ui-semibold px-2 py-0.5 rounded-full border ${PAYMENT_BADGE[sale.payment_method] ?? PAYMENT_BADGE.OTHER}`}>
+                <span className={`inline-flex items-center gap-1 text-sub font-semibold px-2 py-0.5 rounded-full border ${PAYMENT_BADGE[sale.payment_method] ?? PAYMENT_BADGE.OTHER}`}>
                     <Icon size={10} />
                     {sale.payment_method_display}
-                    {sale.is_split_payment ? <span className="ml-1 text-[9px] opacity-80">{t('table.splitPayment')}</span> : null}
+                    {sale.is_split_payment ? <span className="ml-1 text-3xs opacity-80">{t('table.splitPayment')}</span> : null}
                 </span>
             </td>
             <td className="px-4 py-3 text-foreground">
                 {!canViewAmounts ? (
-                    <span className="text-sm font-ui-bold tabular-nums text-foreground min-w-[9rem] inline-block">
+                    <span className="text-sm font-bold tabular-nums text-foreground min-w-[9rem] inline-block">
                         {AMOUNT_DISPLAY_MASK}
                     </span>
                 ) : !prices.hasDisc ? (
-                    <span className="text-sm font-ui-bold tabular-nums text-foreground min-w-[9rem] inline-block">
+                    <span className="text-sm font-bold tabular-nums text-foreground min-w-[9rem] inline-block">
                         {prices.netStr}
                     </span>
                 ) : (
                     <div className="flex flex-col gap-1 items-start min-w-[9rem]">
-                        <span className="text-sm font-ui-semibold tabular-nums text-foreground">
+                        <span className="text-sm font-semibold tabular-nums text-foreground">
                             {t('table.listPrice', { amount: prices.listAmountStr })}
                         </span>
-                        <span className="text-sm font-ui-semibold tabular-nums text-amber-700 dark:text-amber-400">
+                        <span className="text-sm font-semibold tabular-nums text-amber-700 dark:text-amber-400">
                             {t('table.discountLine', { amount: prices.discAmountStr })}
                         </span>
-                        <span className="text-sm font-ui-bold tabular-nums text-foreground">
+                        <span className="text-sm font-bold tabular-nums text-foreground">
                             {t('table.grandTotal', { amount: prices.netAmountStr })}
                         </span>
                     </div>
@@ -242,7 +242,7 @@ export const SalesTable = memo(({
         return (
             <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border py-16 text-muted-foreground dark:text-muted-foreground">
                 <ShoppingBag size={36} className="mb-3 opacity-30" />
-                <p className="text-sm font-ui-medium">{t('table.empty')}</p>
+                <p className="text-sm font-medium">{t('table.empty')}</p>
             </div>
         );
     }
@@ -258,14 +258,14 @@ export const SalesTable = memo(({
         : 0;
 
     return (
-        <div ref={containerRef} className="rounded-xl border border-border bg-card dark:border-slate-700 overflow-auto h-full scrollbar-thin">
+        <div ref={containerRef} className="rounded-xl border border-border bg-card border-border overflow-auto h-full scrollbar-thin">
             <table className="w-full text-sm relative">
-                <thead className="bg-slate-50 dark:bg-slate-800 border-b border-border sticky top-0 z-10 shadow-sm">
+                <thead className="bg-muted border-b border-border sticky top-0 z-10 shadow-sm">
                     <tr>
                         {isSelectable && (
                             <th className="px-4 py-2.5 w-8" onClick={e => e.stopPropagation()}>
                                 <label className="flex items-center gap-2 px-2.5 py-1.5 rounded-md cursor-pointer transition text-left">
-                                    <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${allSelected ? "bg-blue-600 border-blue-600" : "border-slate-300 bg-white dark:border-slate-600 dark:bg-slate-800"}`}>
+                                    <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${allSelected ? "bg-blue-600 border-blue-600" : "border-slate-300 border-border bg-muted"}`}>
                                         {allSelected && <Check size={10} className="text-white" strokeWidth={3} />}
                                     </span>
                                     <input
@@ -279,7 +279,7 @@ export const SalesTable = memo(({
                             </th>
                         )}
                         {headers.filter(h => h !== '').map(h => (
-                            <th key={h} className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">{h}</th>
+                            <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">{h}</th>
                         ))}
                         {canManage && <th className="px-4 py-2.5" />}
                     </tr>
@@ -312,7 +312,7 @@ export const SalesTable = memo(({
                             <td colSpan={headers.length} className="py-4">
                                 <div className="flex items-center justify-center gap-2 text-blue-600">
                                     <Loader2 className="animate-spin" size={20} />
-                                    <span className="text-xs font-ui-medium">{t('list.loadingHint')}</span>
+                                    <span className="text-xs font-medium">{t('list.loadingHint')}</span>
                                 </div>
                             </td>
                         </tr>

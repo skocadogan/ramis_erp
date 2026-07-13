@@ -85,7 +85,7 @@ const KeyButton = memo(function KeyButton({
       onClick={handlePress}
       onFocus={handleFocus}
       className={cn(
-        "inline-flex min-h-[48px] min-w-[44px] shrink-0 items-center justify-center rounded-xl border px-2 py-2 text-base font-ui-semibold transition-[transform,background-color] select-none touch-manipulation active:scale-[0.97] focus:outline-none",
+        "inline-flex min-h-[48px] min-w-[44px] shrink-0 items-center justify-center rounded-xl border px-2 py-2 text-base font-semibold transition-[transform,background-color] select-none touch-manipulation active:scale-[0.97] focus:outline-none",
         "border-border bg-card text-foreground hover:bg-muted",
         variant === "accent" &&
           "border-primary/30 bg-primary/5 text-primary hover:bg-primary/10 dark:border-primary/50 dark:bg-primary/10 dark:text-primary dark:hover:bg-primary/15",
@@ -308,7 +308,7 @@ export function VirtualKeyboard({
             onPress={handleNumericMode}
           >
             <span className="font-mono">123</span>
-            <span className="text-xs font-ui-normal text-muted-foreground">{t("numericShort")}</span>
+            <span className="text-xs font-normal text-muted-foreground">{t("numericShort")}</span>
           </KeyButton>
           <KeyButton
             label={t("alphaMode")}
@@ -317,7 +317,7 @@ export function VirtualKeyboard({
             onPress={handleAlphaMode}
           >
             <Keyboard className="size-4 shrink-0 opacity-80" aria-hidden />
-            <span className="text-xs font-ui-normal text-muted-foreground">{t("alphaShort")}</span>
+            <span className="text-xs font-normal text-muted-foreground">{t("alphaShort")}</span>
           </KeyButton>
         </div>
       )}

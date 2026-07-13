@@ -85,7 +85,7 @@ export function CategorySelectTree({
             aria-expanded={open}
             aria-controls={listId}
             className={cn(
-              "w-full flex items-center justify-between px-3 py-2 bg-slate-50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100",
+              "w-full flex items-center justify-between px-3 py-2 bg-slate-50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground",
               className
             )}
           >
@@ -117,7 +117,7 @@ export function CategorySelectTree({
               }}
               className={cn(
                 "flex items-center gap-2 px-2 py-2 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group mb-1",
-                !value && "bg-slate-100 text-slate-900 border border-border dark:bg-slate-800 dark:text-slate-100"
+                !value && "bg-slate-100 text-slate-900 border border-border bg-muted text-foreground"
               )}
             >
               <div className="w-5 h-5 flex items-center justify-center">
@@ -139,7 +139,7 @@ export function CategorySelectTree({
                   }}
                   className={cn(
                     "flex items-center gap-1 px-2 py-2 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group",
-                    value === cat.id && "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-ui-semibold"
+                    value === cat.id && "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-semibold"
                   )}
                   style={{ paddingLeft: `${cat.depth * 1.5 + 0.75}rem` }}
                 >
@@ -157,7 +157,7 @@ export function CategorySelectTree({
                           )}
                         </button>
                       ) : (
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-200 ml-1 dark:bg-slate-700" />
+                        <div className="w-1.5 h-1.5 rounded-full bg-slate-200 ml-1 bg-accent" />
                       )}
                     </div>
                     {cat.hasChildren ? (

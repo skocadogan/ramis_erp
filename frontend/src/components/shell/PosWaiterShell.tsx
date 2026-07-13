@@ -294,9 +294,9 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     if (showTerminalFlow && !posTerminalsLoading && activePosTerminals.length === 0) {
       return (
         <AuthGuard module={variant}>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 dark:bg-slate-950">
+          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
             <MonitorSmartphone className="mb-3 h-12 w-12 text-amber-500" />
-            <p className="mb-2 max-w-md text-center text-sm font-ui-medium text-foreground">
+            <p className="mb-2 max-w-md text-center text-sm font-medium text-foreground">
               {tPosPage("noTerminal")}
             </p>
             <p className="max-w-md text-center text-xs text-muted-foreground">
@@ -307,12 +307,12 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-auto min-h-11 w-full gap-2 rounded-xl px-4 py-2.5 text-sm font-ui-semibold shadow-sm"
+                  className="h-auto min-h-11 w-full gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm"
                   onClick={() => setPickPosMode(false)}
                 >
                   {t("shift.backFromPosPick")}
                 </Button>
-                <GateHomeButton className="min-h-11 w-full justify-center px-4 py-2.5 text-sm font-ui-semibold shadow-sm" />
+                <GateHomeButton className="min-h-11 w-full justify-center px-4 py-2.5 text-sm font-semibold shadow-sm" />
               </div>
             ) : (
               <GateHomeButton className="mt-6" />
@@ -326,9 +326,9 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     if (showTerminalFlow && activePosTerminals.length > 0) {
       return (
         <AuthGuard module={variant}>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 dark:bg-slate-950">
+          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
             <MonitorSmartphone className="mb-4 h-14 w-14 text-blue-600" />
-            <h2 className="mb-2 text-lg font-ui-bold text-foreground">
+            <h2 className="mb-2 text-lg font-bold text-foreground">
               {tPosPage("selectTerminal")}
             </h2>
 
@@ -338,11 +338,11 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                   key={terminal.id}
                   type="button"
                   onClick={() => persistTerminalSelection(terminal.code, terminal.id)}
-                  className="flex items-start justify-between gap-3 rounded-xl border border-border bg-white px-4 py-3 text-left text-sm font-ui-semibold text-slate-800 shadow-sm transition-colors hover:border-blue-400 hover:bg-blue-50/80 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:hover:bg-slate-800"
+                  className="flex items-start justify-between gap-3 rounded-xl border border-border px-4 py-3 text-left text-sm font-semibold text-slate-800 shadow-sm transition-colors hover:border-blue-400 hover:bg-blue-50/80 border-border bg-card text-foreground dark:hover:bg-slate-800"
                 >
                   <span className="min-w-0">
                     <span className="block">{terminal.name}</span>
-                    <span className="block font-mono text-xs font-ui-normal text-muted-foreground">
+                    <span className="block font-mono text-xs font-normal text-muted-foreground">
                       {terminal.code}
                     </span>
                   </span>
@@ -362,12 +362,12 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-auto min-h-11 w-full gap-2 rounded-xl px-4 py-2.5 text-sm font-ui-semibold shadow-sm"
+                  className="h-auto min-h-11 w-full gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold shadow-sm"
                   onClick={() => setPickPosMode(false)}
                 >
                   {t("shift.backFromPosPick")}
                 </Button>
-                <GateHomeButton className="min-h-11 w-full justify-center px-4 py-2.5 text-sm font-ui-semibold shadow-sm" />
+                <GateHomeButton className="min-h-11 w-full justify-center px-4 py-2.5 text-sm font-semibold shadow-sm" />
               </div>
             ) : (
               <GateHomeButton className="mt-6" />
@@ -381,7 +381,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     if (variant === "pos") {
       return (
         <AuthGuard module={variant}>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 dark:bg-slate-950">
+          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
             <p className="mb-4 max-w-md text-center text-sm text-muted-foreground">
               {t("shiftRequired")}
             </p>
@@ -401,7 +401,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               <button
                 type="button"
                 onClick={() => persistTerminalSelection("", null)}
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-ui-semibold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-800 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-border bg-card text-foreground dark:hover:bg-slate-800"
               >
                 <MonitorSmartphone className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <span>{t("selectTerminal")}</span>
@@ -416,24 +416,24 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     /* -- Waiter: No shift (shift closed screen) -- */
     return (
       <AuthGuard module={variant}>
-        <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 dark:bg-slate-950">
+        <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
           <AlertCircle className="mb-4 h-14 w-14 text-amber-500" />
-          <h2 className="mb-2 text-xl font-ui-bold tracking-tight text-foreground">
+          <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
             {username ? `${username} — ${t("shift.closed")}` : t("shift.closed")}
           </h2>
-          <div className="max-w-md rounded-2xl border border-amber-200 bg-amber-50 px-6 py-5 text-center text-sm font-ui-medium text-amber-900 shadow-sm dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
+          <div className="max-w-md rounded-2xl border border-amber-200 bg-amber-50 px-6 py-5 text-center text-sm font-medium text-amber-900 shadow-sm dark:border-amber-800 dark:bg-amber-950/40 dark:text-amber-200">
             {t("shift.requiredMessage")}
           </div>
           <div className="mx-auto mt-6 flex w-full max-w-md flex-col gap-3">
             <Button
               type="button"
-              className="h-auto min-h-11 w-full gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-ui-semibold text-white shadow-sm hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500"
+              className="h-auto min-h-11 w-full gap-2 rounded-xl bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500"
               onClick={() => setPickPosMode(true)}
             >
               <MonitorSmartphone className="h-4 w-4 shrink-0" aria-hidden />
               {t("shift.selectPos")}
             </Button>
-            <GateHomeButton className="min-h-11 w-full justify-center px-4 py-2.5 text-sm font-ui-semibold shadow-sm" />
+            <GateHomeButton className="min-h-11 w-full justify-center px-4 py-2.5 text-sm font-semibold shadow-sm" />
           </div>
         </div>
       </AuthGuard>
@@ -476,7 +476,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               onWaiterCallOpenChange={setIsWaiterCallNotifOpen}
             />
             <BackendHealthBanner />
-            <main className="flex flex-1 overflow-hidden p-2 gap-2">
+            <main className="flex flex-1 overflow-hidden p-2 gap-2 bg-background">
               <div className="flex flex-1 flex-col overflow-hidden">
                 {!selectedTable ? <TableGrid /> : <MenuSection />}
               </div>
@@ -505,27 +505,27 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                   <AlertDialogTitle>{tPosPage("reservation.title")}</AlertDialogTitle>
                   <AlertDialogDescription>
                     {reservationConfirmTable?.reservation_info && (
-                      <div className="mb-3 text-base font-ui-bold text-foreground">
+                      <div className="mb-3 text-base font-bold text-foreground">
                         {reservationConfirmTable.reservation_info}
                       </div>
                     )}
                     <div className="space-y-1.5 text-sm">
                       {reservationConfirmTable?.reservation_scheduled_at && (
-                        <div className="flex justify-between border-b border-slate-100 py-1 dark:border-slate-800">
+                        <div className="flex justify-between border-b border-slate-100 py-1 border-border">
                           <span className="text-muted-foreground">{tPosPage("reservation.scheduledTime")}</span>
-                          <span className="font-ui-semibold">{formatDate(reservationConfirmTable.reservation_scheduled_at)}</span>
+                          <span className="font-semibold">{formatDate(reservationConfirmTable.reservation_scheduled_at)}</span>
                         </div>
                       )}
                       {reservationConfirmTable?.reservation_party_size && (
-                        <div className="flex justify-between border-b border-slate-100 py-1 dark:border-slate-800">
+                        <div className="flex justify-between border-b border-slate-100 py-1 border-border">
                           <span className="text-muted-foreground">{tPosPage("reservation.partySize")}</span>
-                          <span className="font-ui-semibold">
+                          <span className="font-semibold">
                             {tPosPage("reservation.partySizeVal", { count: reservationConfirmTable.reservation_party_size })}
                           </span>
                         </div>
                       )}
                     </div>
-                    <div className="mt-4 rounded-lg bg-blue-50 p-3 text-xs font-ui-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                    <div className="mt-4 rounded-lg bg-blue-50 p-3 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                       {tPosPage("reservation.confirmDesc")}
                     </div>
                   </AlertDialogDescription>
@@ -573,7 +573,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
         <div className="flex h-[100dvh] flex-col overflow-hidden bg-background">
           <POSHeader variant="waiter" />
           <BackendHealthBanner />
-          <main className="flex flex-1 flex-col gap-3 overflow-hidden p-3 pb-[calc(4.25rem+env(safe-area-inset-bottom))] lg:flex-row lg:gap-6 lg:p-6 lg:pb-6">
+          <main className="flex flex-1 flex-col gap-3 overflow-hidden p-3 pb-[calc(4.25rem+env(safe-area-inset-bottom))] lg:flex-row lg:gap-6 lg:p-6 lg:pb-6 bg-background">
             <div className="flex min-h-0 flex-1 flex-col overflow-hidden lg:min-h-0">
               {!selectedTable ? <TableGrid layout="waiter" /> : <MenuSection layout="waiter" />}
             </div>
@@ -601,7 +601,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
           <Dialog open={cartSheetOpen} onOpenChange={setCartSheetOpen}>
             <DialogContent
               showCloseButton
-              className="fixed top-auto right-0 bottom-0 left-0 z-50 max-h-[min(88dvh,640px)] w-full max-w-none translate-x-0 translate-y-0 gap-0 overflow-hidden rounded-t-2xl rounded-b-none border-t border-border bg-background p-0 ring-1 ring-foreground/10 outline-none duration-200 data-open:animate-in data-open:slide-in-from-bottom dark:border-slate-700"
+              className="fixed top-auto right-0 bottom-0 left-0 z-50 max-h-[min(88dvh,640px)] w-full max-w-none translate-x-0 translate-y-0 gap-0 overflow-hidden rounded-t-2xl rounded-b-none border-t border-border bg-background p-0 ring-1 ring-foreground/10 outline-none duration-200 data-open:animate-in data-open:slide-in-from-bottom border-border"
               backdropClassName="bg-black/40 motion-reduce:bg-black/55 motion-reduce:backdrop-blur-none"
             >
               <DialogHeader className="sr-only">
@@ -629,25 +629,25 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                 <AlertDialogTitle>{t("reservation.title")}</AlertDialogTitle>
                 <AlertDialogDescription render={<div />}>
                   {reservationConfirmTable?.reservation_info && (
-                    <div className="mb-3 text-base font-ui-bold text-foreground">
+                    <div className="mb-3 text-base font-bold text-foreground">
                       {reservationConfirmTable.reservation_info}
                     </div>
                   )}
                   <div className="space-y-1.5 text-sm">
                     {reservationConfirmTable?.reservation_scheduled_at && (
-                      <div className="flex justify-between border-b border-slate-100 py-1 dark:border-slate-800">
+                      <div className="flex justify-between border-b border-slate-100 py-1 border-border">
                         <span className="text-muted-foreground">{t("reservation.scheduledAt")}</span>
-                        <span className="font-ui-semibold">{formatDate(reservationConfirmTable.reservation_scheduled_at)}</span>
+                        <span className="font-semibold">{formatDate(reservationConfirmTable.reservation_scheduled_at)}</span>
                       </div>
                     )}
                     {reservationConfirmTable?.reservation_party_size && (
-                      <div className="flex justify-between border-b border-slate-100 py-1 dark:border-slate-800">
+                      <div className="flex justify-between border-b border-slate-100 py-1 border-border">
                         <span className="text-muted-foreground">{t("reservation.partySize")}</span>
-                        <span className="font-ui-semibold">{reservationConfirmTable.reservation_party_size} {t("reservation.pax")}</span>
+                        <span className="font-semibold">{reservationConfirmTable.reservation_party_size} {t("reservation.pax")}</span>
                       </div>
                     )}
                   </div>
-                  <div className="mt-4 rounded-lg bg-blue-50 p-3 text-xs font-ui-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                  <div className="mt-4 rounded-lg bg-blue-50 p-3 text-xs font-medium text-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
                     {t("reservation.confirmationHint")}
                   </div>
                 </AlertDialogDescription>

@@ -213,7 +213,7 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
               )
             ) : null}
           </td>
-          <td className="px-4 py-2 font-ui-medium text-foreground">{item.product_name}</td>
+          <td className="px-4 py-2 font-medium text-foreground">{item.product_name}</td>
           <td className="px-4 py-2 text-xs text-muted-foreground">{item.station_name}</td>
           <td className="px-4 py-2 text-right">{item.quantity}</td>
           <td className="px-4 py-2 text-right text-muted-foreground">
@@ -223,7 +223,7 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
               <span className="italic text-xs">{t("noRecipe")}</span>
             )}
           </td>
-          <td className="px-4 py-2 text-right font-ui-semibold text-foreground">
+          <td className="px-4 py-2 text-right font-semibold text-foreground">
             {formatAmount(item.line_total, canViewAmounts)}
           </td>
         </tr>
@@ -234,17 +234,17 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
       return (
         <tr className="bg-background">
           <td className="w-10" />
-          <td className="px-4 py-1 text-2xs font-ui-bold text-muted-foreground uppercase">
+          <td className="px-4 py-1 text-2xs font-bold text-muted-foreground uppercase">
             {t("ingredientColumns.stockItem")}
           </td>
           <td />
-          <td className="px-4 py-1 text-right text-2xs font-ui-bold text-muted-foreground uppercase">
+          <td className="px-4 py-1 text-right text-2xs font-bold text-muted-foreground uppercase">
             {t("ingredientColumns.quantity")}
           </td>
-          <td className="px-4 py-1 text-right text-2xs font-ui-bold text-muted-foreground uppercase">
+          <td className="px-4 py-1 text-right text-2xs font-bold text-muted-foreground uppercase">
             {unitCostColumnLabel}
           </td>
-          <td className="px-4 py-1 text-right text-2xs font-ui-bold text-muted-foreground uppercase">
+          <td className="px-4 py-1 text-right text-2xs font-bold text-muted-foreground uppercase">
             {t("ingredientColumns.lineTotal")}
           </td>
         </tr>
@@ -265,7 +265,7 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
         <td className="px-4 py-1.5 text-right text-muted-foreground">
           {formatAmount(ing.unit_cost, canViewAmounts)}
         </td>
-        <td className="px-4 py-1.5 text-right font-ui-medium">
+        <td className="px-4 py-1.5 text-right font-medium">
           {formatAmount(ing.line_total, canViewAmounts)}
         </td>
       </tr>
@@ -297,7 +297,7 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
                   onValueChange={setSelectedStationId}
                   disabled={stations.length === 0}
                 >
-                  <SelectTrigger className="h-8 border-none bg-transparent focus:ring-0 w-[180px] p-0 text-xs font-ui-medium">
+                  <SelectTrigger className="h-8 border-none bg-transparent focus:ring-0 w-[180px] p-0 text-xs font-medium">
                     <SelectValue placeholder={t("filterStations")}>{stationLabel}</SelectValue>
                   </SelectTrigger>
                   <SelectContent>
@@ -333,22 +333,22 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
           {meta && !isLoading && (
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
               <div className="rounded-lg border border-border bg-background px-3 py-2">
-                <span className="text-xs text-muted-foreground uppercase font-ui-bold tracking-wider">
+                <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider">
                   {t("infoWarehouse")}
                 </span>
-                <p className="font-ui-medium text-foreground">{meta.warehouse_name}</p>
+                <p className="font-medium text-foreground">{meta.warehouse_name}</p>
               </div>
               <div className="rounded-lg border border-border bg-background px-3 py-2">
-                <span className="text-xs text-muted-foreground uppercase font-ui-bold tracking-wider">
+                <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider">
                   {t("infoStation")}
                 </span>
-                <p className="font-ui-medium text-foreground">{stationLabel}</p>
+                <p className="font-medium text-foreground">{stationLabel}</p>
               </div>
               <div className="rounded-lg border border-border bg-background px-3 py-2">
-                <span className="text-xs text-muted-foreground uppercase font-ui-bold tracking-wider">
+                <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider">
                   {t("infoPlanDate")}
                 </span>
-                <p className="font-ui-medium text-foreground">{formattedDate}</p>
+                <p className="font-medium text-foreground">{formattedDate}</p>
               </div>
             </div>
           )}
@@ -370,13 +370,13 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
                 <thead className="sticky top-0 z-10 bg-muted text-muted-foreground">
                   <tr>
                     <th className="w-10" />
-                    <th className="text-left px-4 py-2 font-ui-medium">{t("columns.product")}</th>
-                    <th className="text-left px-4 py-2 font-ui-medium">{t("columns.station")}</th>
-                    <th className="text-right px-4 py-2 font-ui-medium">{t("columns.quantity")}</th>
-                    <th className="text-right px-4 py-2 font-ui-medium max-w-[140px] leading-tight">
+                    <th className="text-left px-4 py-2 font-medium">{t("columns.product")}</th>
+                    <th className="text-left px-4 py-2 font-medium">{t("columns.station")}</th>
+                    <th className="text-right px-4 py-2 font-medium">{t("columns.quantity")}</th>
+                    <th className="text-right px-4 py-2 font-medium max-w-[140px] leading-tight">
                       {unitCostColumnLabel}
                     </th>
-                    <th className="text-right px-4 py-2 font-ui-medium">{t("columns.lineTotal")}</th>
+                    <th className="text-right px-4 py-2 font-medium">{t("columns.lineTotal")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -433,10 +433,10 @@ export function ApproximateCostModal({ isOpen, onClose, plan }: ApproximateCostM
             {t("productCount", { count: meta?.count ?? items.length })}
           </span>
           <div className="text-right">
-            <span className="text-xs text-muted-foreground uppercase font-ui-bold tracking-wider block">
+            <span className="text-xs text-muted-foreground uppercase font-bold tracking-wider block">
               {t("grandTotalLabel")}
             </span>
-            <span className="text-lg font-ui-bold text-emerald-700 dark:text-emerald-400">
+            <span className="text-lg font-bold text-emerald-700 dark:text-emerald-400">
               {formatAmount(grandTotal, canViewAmounts)}
             </span>
           </div>

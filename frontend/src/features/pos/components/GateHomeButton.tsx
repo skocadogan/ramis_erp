@@ -17,7 +17,7 @@ export const GateHomeButton = memo(function GateHomeButton({ className }: GateHo
     <Link
       href="/panel"
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl border border-border bg-white px-4 py-2.5 text-sm font-ui-semibold text-slate-700 shadow-sm transition-colors hover:border-blue-400 hover:bg-blue-50 hover:text-blue-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-500 dark:hover:bg-slate-800",
+        "inline-flex items-center justify-center gap-2 rounded-xl border border-border px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:border-blue-400 hover:bg-blue-50 hover:text-blue-800 border-input bg-card text-foreground dark:hover:border-blue-500 dark:hover:bg-slate-800",
         className
       )}
     >

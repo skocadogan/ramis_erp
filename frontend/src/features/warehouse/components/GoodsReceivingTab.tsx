@@ -87,7 +87,7 @@ export function GoodsReceivingTab({ branchId }: { branchId?: string }) {
           <option value="REJECTED">{tw("status.gr.REJECTED")}</option>
         </select>
         <button onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-ui-medium hover:bg-emerald-700 transition-colors shadow-sm ml-auto">
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition-colors shadow-sm ml-auto">
           <Plus size={16} /><span>{tw("goodsReceiving.newReceiving")}</span>
         </button>
       </div>
@@ -104,14 +104,14 @@ export function GoodsReceivingTab({ branchId }: { branchId?: string }) {
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colReceivingNo")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colOrderNo")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colSupplier")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colWarehouse")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colStatus")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colDate")}</th>
-              <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colAmount")}</th>
-              <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{tw("goodsReceiving.colActions")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colReceivingNo")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colOrderNo")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colSupplier")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colWarehouse")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colStatus")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colDate")}</th>
+              <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colAmount")}</th>
+              <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{tw("goodsReceiving.colActions")}</th>
             </tr>
           </thead>
         }
@@ -133,11 +133,11 @@ export function GoodsReceivingTab({ branchId }: { branchId?: string }) {
           <>
             <td className="px-4 py-3 font-mono text-xs text-emerald-600 dark:text-emerald-400">{r.receiving_number}</td>
             <td className="px-4 py-3 text-xs text-muted-foreground">{r.purchase_order_number ?? "—"}</td>
-            <td className="px-4 py-3 font-ui-medium text-slate-900 dark:text-slate-200">{r.supplier_name ?? "—"}</td>
+            <td className="px-4 py-3 font-medium text-foreground">{r.supplier_name ?? "—"}</td>
             <td className="px-4 py-3 text-muted-foreground">{r.warehouse_name ?? "—"}</td>
             <td className="px-4 py-3"><StatusBadge domain="gr" status={r.status} /></td>
             <td className="px-4 py-3 text-muted-foreground text-xs">{r.received_date}</td>
-            <td className="px-4 py-3 text-right font-ui-semibold text-slate-900 dark:text-slate-200">
+            <td className="px-4 py-3 text-right font-semibold text-foreground">
               {formatAmount(r.total_amount, canViewAmounts)}
             </td>
             <td className="px-4 py-3">
@@ -210,19 +210,19 @@ export function GoodsReceivingTab({ branchId }: { branchId?: string }) {
               </DialogHeader>
               <DialogBody>
                 <div className="grid grid-cols-2 gap-3 text-sm mb-4">
-                  <div><span className="text-muted-foreground">{tw("goodsReceiving.invoiceLabel")}</span> <span className="ml-2 font-ui-medium">{selectedItem.invoice_number ?? "—"}</span></div>
-                  <div><span className="text-muted-foreground">{tw("goodsReceiving.waybillLabel")}</span> <span className="ml-2 font-ui-medium">{selectedItem.waybill_number ?? "—"}</span></div>
-                  <div><span className="text-muted-foreground">{tw("goodsReceiving.receivedByLabel")}</span> <span className="ml-2 font-ui-medium">{selectedItem.received_by_name ?? "—"}</span></div>
-                  <div><span className="text-muted-foreground">{tw("goodsReceiving.inspectedByLabel")}</span> <span className="ml-2 font-ui-medium">{selectedItem.inspected_by_name ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{tw("goodsReceiving.invoiceLabel")}</span> <span className="ml-2 font-medium">{selectedItem.invoice_number ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{tw("goodsReceiving.waybillLabel")}</span> <span className="ml-2 font-medium">{selectedItem.waybill_number ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{tw("goodsReceiving.receivedByLabel")}</span> <span className="ml-2 font-medium">{selectedItem.received_by_name ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{tw("goodsReceiving.inspectedByLabel")}</span> <span className="ml-2 font-medium">{selectedItem.inspected_by_name ?? "—"}</span></div>
                 </div>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="text-left py-2 text-muted-foreground font-ui-medium">{tw("goodsReceiving.colProduct")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("goodsReceiving.colExpected")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("goodsReceiving.colReceived")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("goodsReceiving.colRejected")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("goodsReceiving.colUnitPrice")}</th>
+                      <th className="text-left py-2 text-muted-foreground font-medium">{tw("goodsReceiving.colProduct")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("goodsReceiving.colExpected")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("goodsReceiving.colReceived")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("goodsReceiving.colRejected")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("goodsReceiving.colUnitPrice")}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">

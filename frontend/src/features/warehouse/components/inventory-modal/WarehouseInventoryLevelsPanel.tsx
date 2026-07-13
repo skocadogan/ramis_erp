@@ -65,7 +65,7 @@ export function WarehouseInventoryLevelsPanel({
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-xl border border-border/80 bg-background">
       <div
-        className={`${productGridClass} shrink-0 border-b border-border bg-muted/80 text-xs font-ui-semibold text-muted-foreground`}
+        className={`${productGridClass} shrink-0 border-b border-border bg-muted/80 text-xs font-semibold text-muted-foreground`}
       >
         <span className="flex justify-center">
           <input
@@ -87,7 +87,7 @@ export function WarehouseInventoryLevelsPanel({
         {showTransferQtyColumn ? <span className="text-center">{t("colTransferQty")}</span> : null}
         <span className="text-right">{t("colMinimum")}</span>
         <span className="text-center">{t("colMovement")}</span>
-        <span className="text-center text-xs font-ui-normal text-muted-foreground">{t("colActions")}</span>
+        <span className="text-center text-xs font-normal text-muted-foreground">{t("colActions")}</span>
       </div>
 
       {isLoading && !inventoryLevelsData?.pages?.length ? (
@@ -134,9 +134,9 @@ export function WarehouseInventoryLevelsPanel({
                           aria-label={t("rowSelectAria", { name: r.stock_item_name })}
                         />
                       </div>
-                      <div className="min-w-0 font-ui-medium text-slate-900 dark:text-slate-200">{r.stock_item_name}</div>
+                      <div className="min-w-0 font-medium text-foreground">{r.stock_item_name}</div>
                       <div className="min-w-0 truncate font-mono text-xs text-muted-foreground">{r.stock_item_sku}</div>
-                      <div className="text-right text-slate-900 dark:text-slate-200">
+                      <div className="text-right text-foreground">
                         {formatQuantityWithUnit(r.quantity, r.stock_item_unit)}
                       </div>
                       {showTransferQtyColumn ? (
@@ -169,7 +169,7 @@ export function WarehouseInventoryLevelsPanel({
                           <button
                             type="button"
                             title={t("transferQtyFillRowTitle")}
-                            className="shrink-0 rounded border border-border px-1 py-0.5 text-[10px] font-ui-medium text-indigo-700 hover:bg-indigo-50 disabled:opacity-40 dark:border-slate-600 dark:text-indigo-300 dark:hover:bg-indigo-950/50"
+                            className="shrink-0 rounded border border-border px-1 py-0.5 text-2xs font-medium text-indigo-700 hover:bg-indigo-50 disabled:opacity-40 dark:border-slate-600 dark:text-indigo-300 dark:hover:bg-indigo-950/50"
                             disabled={!stockQtyPositive(r)}
                             onClick={() =>
                               setTransferQtyByItem((prev) => ({
@@ -189,7 +189,7 @@ export function WarehouseInventoryLevelsPanel({
                         <button
                           type="button"
                           onClick={() => toggleHistory(r.stock_item)}
-                          className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-ui-medium text-foreground hover:bg-muted/80"
+                          className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium text-foreground hover:bg-muted/80"
                         >
                           <History className="size-3.5" />
                           {t("history")}

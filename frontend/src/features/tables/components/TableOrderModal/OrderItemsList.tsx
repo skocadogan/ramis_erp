@@ -55,14 +55,14 @@ const OrderItemRow = memo(({
             <div className="flex gap-2 sm:gap-3">
                 <div className="min-w-0 flex-1">
                     <div className="flex items-start gap-2">
-                        <span className="mt-0.5 flex h-7 min-w-[1.75rem] shrink-0 items-center justify-center rounded-md bg-blue-600 px-1 text-xs font-ui-bold text-white shadow-sm sm:h-8 sm:min-w-[2rem] sm:text-sm">
+                        <span className="mt-0.5 flex h-7 min-w-[1.75rem] shrink-0 items-center justify-center rounded-md bg-blue-600 px-1 text-xs font-bold text-white shadow-sm sm:h-8 sm:min-w-[2rem] sm:text-sm">
                             {displayQuantity}×
                         </span>
                         <div className="min-w-0 flex-1">
-                            <p className="text-sm font-ui-medium leading-snug text-slate-800 dark:text-slate-100">
+                            <p className="text-sm font-medium leading-snug text-slate-800 text-foreground">
                                 {item.product_name}
                                 {item.unit_name && (
-                                    <span className="ml-1 text-sub font-ui-semibold italic text-blue-600 dark:text-blue-400">
+                                    <span className="ml-1 text-sub font-semibold italic text-blue-600 dark:text-blue-400">
                                         ({item.unit_name})
                                     </span>
                                 )}
@@ -73,33 +73,33 @@ const OrderItemRow = memo(({
                                 </p>
                             )}
                             {(item.modifiers ?? []).length > 0 && (
-                                <p className="text-2xs font-ui-semibold text-emerald-700 dark:text-emerald-400">
+                                <p className="text-2xs font-semibold text-emerald-700 dark:text-emerald-400">
                                     * {(item.modifiers ?? []).map((m) => m.modifier_name).join(", ")}
                                 </p>
                             )}
                             {item.notes?.trim() && (
-                                <p className="mt-0.5 flex items-start gap-1 text-xs text-slate-800 dark:text-slate-200">
+                                <p className="mt-0.5 flex items-start gap-1 text-xs text-slate-800 text-foreground">
                                     <MessageSquare size={10} className="mt-0.5 shrink-0" />
                                     <span>{item.notes}</span>
                                 </p>
                             )}
                             <div className="mt-1 flex flex-wrap items-center gap-2">
                                 {showQuantityControls && (
-                                    <div className="flex items-center overflow-hidden rounded-lg border border-border bg-slate-100 dark:border-slate-600 dark:bg-slate-800">
+                                    <div className="flex items-center overflow-hidden rounded-lg border border-border bg-slate-100 border-border bg-muted">
                                         <button
                                             type="button"
                                             onClick={() => handleUpdateItemQuantity(item.id, displayQuantity - 1)}
                                             disabled={isUpdatingItem}
-                                            className="touch-manipulation p-1.5 text-slate-600 transition-colors hover:bg-slate-200 active:bg-slate-300 dark:text-slate-300 dark:hover:bg-slate-700 sm:p-2"
+                                            className="touch-manipulation p-1.5 text-slate-600 transition-colors hover:bg-slate-200 active:bg-slate-300 text-muted-foreground dark:hover:bg-slate-700 sm:p-2"
                                         >
                                             <Minus size={16} aria-hidden />
                                         </button>
-                                        <div className="h-6 w-px bg-slate-200 dark:bg-slate-600" />
+                                        <div className="h-6 w-px bg-slate-200 bg-accent" />
                                         <button
                                             type="button"
                                             onClick={() => handleUpdateItemQuantity(item.id, displayQuantity + 1)}
                                             disabled={isUpdatingItem}
-                                            className="touch-manipulation p-1.5 text-slate-600 transition-colors hover:bg-slate-200 active:bg-slate-300 dark:text-slate-300 dark:hover:bg-slate-700 sm:p-2"
+                                            className="touch-manipulation p-1.5 text-slate-600 transition-colors hover:bg-slate-200 active:bg-slate-300 text-muted-foreground dark:hover:bg-slate-700 sm:p-2"
                                         >
                                             <Plus size={16} aria-hidden />
                                         </button>
@@ -110,7 +110,7 @@ const OrderItemRow = memo(({
                                         type="button"
                                         onClick={() => handleCancelOrderItem(item.id, item.product_name)}
                                         disabled={isUpdatingItem}
-                                        className="flex items-center gap-0.5 text-2xs font-ui-medium text-rose-600 hover:text-rose-700 dark:text-rose-400"
+                                        className="flex items-center gap-0.5 text-2xs font-medium text-rose-600 hover:text-rose-700 dark:text-rose-400"
                                     >
                                         <Trash2 size={10} /> {t('cancel')}
                                     </button>
@@ -120,11 +120,11 @@ const OrderItemRow = memo(({
                     </div>
                 </div>
                 <div className="flex shrink-0 flex-col items-end gap-0.5 text-right">
-                    <p className="text-sm font-ui-semibold font-mono tabular-nums text-slate-800 dark:text-slate-100 sm:text-base">
+                    <p className="text-sm font-semibold font-mono tabular-nums text-slate-800 text-foreground sm:text-base">
                         {formatAmount(item.total_price, canViewAmounts)}
                     </p>
                     <span
-                        className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-[9px] font-ui-medium sm:text-2xs ${(STATUS_CONFIG[item.status] ?? { className: 'bg-slate-100 text-muted-foreground' }).className}`}
+                        className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-3xs font-medium sm:text-2xs ${(STATUS_CONFIG[item.status] ?? { className: 'bg-slate-100 text-muted-foreground' }).className}`}
                     >
                         {t(`status.${(STATUS_CONFIG[item.status] ?? { labelKey: item.status.toLowerCase() }).labelKey}`)}
                     </span>
@@ -132,22 +132,22 @@ const OrderItemRow = memo(({
             </div>
 
             {visibleChildren.length > 0 ? (
-                <div className="mt-1.5 border-l-2 border-slate-200 pl-3 dark:border-slate-700 sm:ml-8 sm:pl-3">
-                    <p className="text-[10px] font-ui-semibold uppercase tracking-wide text-muted-foreground">
+                <div className="mt-1.5 border-l-2 border-slate-200 pl-3 border-border sm:ml-8 sm:pl-3">
+                    <p className="text-2xs font-semibold uppercase tracking-wide text-muted-foreground">
                         {t('combinedContents')}
                     </p>
                     <ul className="mt-0.5 space-y-0">
                         {visibleChildren.map((child) => (
                             <li
                                 key={child.id}
-                                className="flex items-baseline justify-between gap-2 py-0.5 text-[11px] leading-snug"
+                                className="flex items-baseline justify-between gap-2 py-0.5 text-sub leading-snug"
                             >
-                                <span className="min-w-0 truncate text-slate-600 dark:text-slate-300">
-                                    <span className="font-ui-bold tabular-nums">{child.quantity}×</span>{' '}
+                                <span className="min-w-0 truncate text-slate-600 text-muted-foreground">
+                                    <span className="font-bold tabular-nums">{child.quantity}×</span>{' '}
                                     {child.product_name}
                                 </span>
                                 <span
-                                    className={`shrink-0 text-[10px] font-ui-medium ${(STATUS_CONFIG[child.status] ?? { className: 'text-muted-foreground' }).className}`}
+                                    className={`shrink-0 text-2xs font-medium ${(STATUS_CONFIG[child.status] ?? { className: 'text-muted-foreground' }).className}`}
                                 >
                                     {t(`status.${(STATUS_CONFIG[child.status] ?? { labelKey: child.status.toLowerCase() }).labelKey}`)}
                                 </span>
@@ -221,7 +221,7 @@ const OrderItemsListImpl = ({
     return (
         <div className="flex min-h-0 flex-col">
             {showSearchBar && (
-                <div className="sticky top-0 z-10 border-b border-slate-100 bg-white px-2 py-2 dark:border-slate-800 dark:bg-slate-900 sm:px-3">
+                <div className="sticky top-0 z-10 border-b border-slate-100 px-2 py-2 border-border bg-card sm:px-3">
                     <div className="relative">
                         <Search
                             className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground dark:text-muted-foreground"
@@ -234,11 +234,11 @@ const OrderItemsListImpl = ({
                             placeholder={t('searchProducts')}
                             enterKeyHint="search"
                             autoComplete="off"
-                            className="w-full rounded-lg border border-border bg-slate-50 py-2 pl-8 pr-3 text-sm text-slate-900 placeholder:text-muted-foreground focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/30 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-muted-foreground"
+                            className="w-full rounded-lg border border-border bg-slate-50 py-2 pl-8 pr-3 text-sm text-slate-900 placeholder:text-muted-foreground focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/30 border-input bg-muted text-foreground dark:placeholder:text-muted-foreground"
                         />
                     </div>
                     {filterLower ? (
-                        <p className="mt-1 text-sub font-ui-medium text-muted-foreground">
+                        <p className="mt-1 text-sub font-medium text-muted-foreground">
                             {filteredParentCount === 0
                                 ? t('noProductsFound')
                                 : t('itemCount', { count: filteredParentCount, total: parentItemCount })}
@@ -253,15 +253,15 @@ const OrderItemsListImpl = ({
                         {orders.length > 1 && (
                             <>
                                 <div className="mb-2 flex flex-wrap items-center gap-2 sm:mb-3">
-                                    <span className="text-xs font-ui-bold uppercase tracking-wider text-slate-700 dark:text-slate-300 sm:text-sm">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-700 text-muted-foreground sm:text-sm">
                                         {order.order_number || t('orderNum', { num: idx + 1 })}
                                     </span>
                                     <span
-                                        className={`rounded-full px-2 py-0.5 text-[10px] font-ui-semibold sm:text-xs tracking-wide ${(STATUS_CONFIG[order.status] ?? { className: 'bg-slate-100 text-muted-foreground' }).className}`}
+                                        className={`rounded-full px-2 py-0.5 text-2xs font-semibold sm:text-xs tracking-wide ${(STATUS_CONFIG[order.status] ?? { className: 'bg-slate-100 text-muted-foreground' }).className}`}
                                     >
                                         {t(`status.${(STATUS_CONFIG[order.status] ?? { labelKey: order.status.toLowerCase() }).labelKey}`)}
                                     </span>
-                                    <span className="ml-auto text-xs font-ui-medium text-slate-500 dark:text-slate-400 sm:text-sm">
+                                    <span className="ml-auto text-xs font-medium text-slate-500 text-muted-foreground sm:text-sm">
                                         {new Intl.DateTimeFormat(locale === 'tr' ? 'tr-TR' : 'en-US', {
                                             hour: '2-digit',
                                             minute: '2-digit',
@@ -306,9 +306,9 @@ const OrderItemsListImpl = ({
                                 </div>
 
                                 {activePaymentOrderId === order.id && (
-                                    <div className="mb-3 mt-1.5 overflow-hidden rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 dark:border-slate-800 dark:bg-slate-900/30 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    <div className="mb-3 mt-1.5 overflow-hidden rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 border-border bg-card/30 animate-in fade-in slide-in-from-top-2 duration-200">
                                         <div className="flex flex-wrap items-center justify-between gap-2">
-                                            <span className="text-2xs font-ui-semibold text-slate-500 dark:text-slate-400 sm:text-xs">
+                                            <span className="text-2xs font-semibold text-slate-500 text-muted-foreground sm:text-xs">
                                                 Ödeme Yöntemi Seçin:
                                             </span>
                                             <div className="flex items-center gap-1.5">
@@ -322,7 +322,7 @@ const OrderItemsListImpl = ({
                                                         setActivePaymentOrderId(null);
                                                     }}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-emerald-500 px-3 text-xs font-ui-bold text-white shadow-sm transition-all duration-200 hover:bg-emerald-600 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-emerald-600 dark:hover:bg-emerald-700"
+                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-emerald-500 px-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:bg-emerald-600 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-emerald-600 dark:hover:bg-emerald-700"
                                                 >
                                                     {isPaying && selectedMethod === 'CASH' ? (
                                                         <Loader2 size={12} className="animate-spin" />
@@ -341,7 +341,7 @@ const OrderItemsListImpl = ({
                                                         setActivePaymentOrderId(null);
                                                     }}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 text-xs font-ui-bold text-white shadow-sm transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-700"
+                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-blue-600 px-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:bg-blue-700 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-blue-600 dark:hover:bg-blue-700"
                                                 >
                                                     {isPaying && selectedMethod === 'CARD' ? (
                                                         <Loader2 size={12} className="animate-spin" />
@@ -360,7 +360,7 @@ const OrderItemsListImpl = ({
                                                         setActivePaymentOrderId(null);
                                                     }}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-slate-600 px-3 text-xs font-ui-bold text-white shadow-sm transition-all duration-200 hover:bg-slate-700 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-750 dark:hover:bg-slate-800"
+                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-slate-600 px-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:bg-slate-700 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-750 dark:hover:bg-slate-800"
                                                 >
                                                     {isPaying && selectedMethod === 'OTHER' ? (
                                                         <Loader2 size={12} className="animate-spin" />
@@ -374,7 +374,7 @@ const OrderItemsListImpl = ({
                                                     type="button"
                                                     onClick={() => setActivePaymentOrderId(null)}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 bg-white text-slate-500 transition-colors hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400 dark:hover:bg-slate-700"
+                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700"
                                                 >
                                                     <X size={14} />
                                                 </button>
@@ -419,7 +419,7 @@ const OrderItemsListImpl = ({
 
                         {orders.length > 1 && (
                             <div className="flex justify-end pt-1">
-                                <span className="font-ui-semibold text-muted-foreground font-mono">
+                                <span className="font-semibold text-muted-foreground font-mono">
                                     {t('subtotal')}:{' '}
                                     {formatAmount(order.total_amount, canViewAmounts)}
                                 </span>

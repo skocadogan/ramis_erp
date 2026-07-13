@@ -34,7 +34,7 @@ export function BulkDraftTableRow({
   const disabled = status === "POSTED"
 
   return (
-    <tr className="border-b border-border bg-white hover:bg-slate-50/80 dark:border-slate-700 dark:bg-slate-900/40 dark:hover:bg-slate-800/50">
+    <tr className="border-b border-border hover:bg-slate-50/80 border-border bg-card/40 dark:hover:bg-slate-800/50">
       <td className="px-1.5 py-1.5 align-top text-center text-xs text-muted-foreground tabular-nums">{idx + 1}</td>
       <td className="px-1.5 py-1.5 align-top">
         <select

@@ -83,7 +83,7 @@ function InvoicesPageContent() {
     <div className="flex h-full flex-col overflow-auto p-6">
       <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
         <div>
-          <h1 className="text-xl font-ui-bold text-foreground">{t("page.title")}</h1>
+          <h1 className="text-xl font-bold text-foreground">{t("page.title")}</h1>
           <p className="text-sm text-muted-foreground">
             {t("page.description", {
               branchSuffix: branchName ? t("page.branchSuffixWithName", { name: branchName }) : "",
@@ -94,7 +94,7 @@ function InvoicesPageContent() {
           <select
             value={effectiveBranchId ?? ""}
             onChange={(e) => setBranchOverride(e.target.value)}
-            className="rounded-lg border border-border bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+            className="rounded-lg border border-border px-3 py-2 text-sm border-border bg-card text-foreground"
           >
             {branchList.map((b) => (
               <option key={b.id} value={b.id}>
@@ -112,9 +112,9 @@ function InvoicesPageContent() {
           <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
         </div>
       ) : (
-        <Card className="p-0 gap-0 bg-white border-border shadow-md dark:border-slate-700 dark:bg-slate-900 ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
-          <div className="border-b border-border bg-slate-50 px-4 py-3 dark:border-slate-800 dark:bg-slate-800/40">
-            <h2 className="text-sm font-ui-semibold text-foreground">{t("page.listTitle")}</h2>
+        <Card className="p-0 gap-0 border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
+          <div className="border-b border-border bg-slate-50 px-4 py-3 border-border bg-muted/40">
+            <h2 className="text-sm font-semibold text-foreground">{t("page.listTitle")}</h2>
             <p className="mt-0.5 text-xs text-muted-foreground">
               {totalCount > 0
                 ? t("page.listHint") + ` (${invoices.length}/${totalCount})`
@@ -123,7 +123,7 @@ function InvoicesPageContent() {
             <div className="mt-3 flex flex-wrap items-end gap-3">
               <div className="flex min-w-[9.5rem] flex-col gap-1">
                 <label
-                  className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground"
+                  className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
                   htmlFor="inv-filter-date-from"
                 >
                   {t("page.dateFrom")}
@@ -133,12 +133,12 @@ function InvoicesPageContent() {
                   type="date"
                   value={filterDateFrom}
                   onChange={(e) => setFilterDateFrom(e.target.value)}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[9.5rem] flex-col gap-1">
                 <label
-                  className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground"
+                  className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
                   htmlFor="inv-filter-date-to"
                 >
                   {t("page.dateTo")}
@@ -148,12 +148,12 @@ function InvoicesPageContent() {
                   type="date"
                   value={filterDateTo}
                   onChange={(e) => setFilterDateTo(e.target.value)}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm text-slate-800 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[9rem] flex-col gap-1">
                 <label
-                  className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground"
+                  className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
                   htmlFor="inv-filter-pdf"
                 >
                   {t("page.pdfFilter")}
@@ -162,7 +162,7 @@ function InvoicesPageContent() {
                   id="inv-filter-pdf"
                   value={filterHasPdf}
                   onChange={(e) => setFilterHasPdf(e.target.value as PdfFilter)}
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 >
                   <option value="all">{t("page.pdfAll")}</option>
                   <option value="yes">{t("page.pdfYes")}</option>
@@ -171,7 +171,7 @@ function InvoicesPageContent() {
               </div>
               <div className="flex min-w-[12rem] flex-1 flex-col gap-1 sm:min-w-[14rem]">
                 <label
-                  className="text-sub font-ui-medium uppercase tracking-wide text-muted-foreground"
+                  className="text-sub font-medium uppercase tracking-wide text-muted-foreground"
                   htmlFor="inv-filter-search"
                 >
                   {t("page.searchLabel")}
@@ -183,7 +183,7 @@ function InvoicesPageContent() {
                   onChange={(e) => setFilterSearchRaw(e.target.value)}
                   placeholder={t("page.searchPlaceholder")}
                   autoComplete="off"
-                  className="rounded-lg border border-border bg-white px-2 py-1.5 text-sm text-slate-800 placeholder:text-muted-foreground dark:border-slate-600 dark:bg-slate-900 dark:text-slate-100"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 placeholder:text-muted-foreground border-input bg-card text-foreground"
                 />
               </div>
               <button
@@ -194,7 +194,7 @@ function InvoicesPageContent() {
                   setFilterHasPdf("all");
                   setFilterSearchRaw("");
                 }}
-                className="rounded-lg border border-border bg-white px-3 py-1.5 text-xs font-ui-medium text-slate-600 shadow-sm transition-colors hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700"
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm transition-colors hover:bg-slate-100 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700"
               >
                 {t("page.resetFilters")}
               </button>
@@ -218,19 +218,19 @@ function InvoicesPageContent() {
                 header={
                   <thead className={virtualTableStickyHeadClass}>
                     <tr>
-                      <th className="px-3 py-2 text-left text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                      <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {t("table.number")}
                       </th>
-                      <th className="px-3 py-2 text-left text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                      <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {t("table.customer")}
                       </th>
-                      <th className="px-3 py-2 text-right text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                      <th className="px-3 py-2 text-right text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {t("table.amount")}
                       </th>
-                      <th className="px-3 py-2 text-left text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                      <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {t("table.date")}
                       </th>
-                      <th className="px-3 py-2 text-left text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                      <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                         {t("table.pdf")}
                       </th>
                     </tr>
@@ -245,13 +245,13 @@ function InvoicesPageContent() {
                 }
                 renderRow={(inv) => (
                   <>
-                    <td className="px-3 py-2 font-mono text-xs font-ui-medium text-foreground">
+                    <td className="px-3 py-2 font-mono text-xs font-medium text-foreground">
                       {inv.invoice_number}
                     </td>
                     <td className="px-3 py-2 text-foreground">
                       {inv.customer_name || t("table.missing")}
                     </td>
-                    <td className="px-3 py-2 text-right font-ui-medium tabular-nums text-foreground">
+                    <td className="px-3 py-2 text-right font-medium tabular-nums text-foreground">
                       {formatAmount(Number(inv.total_amount), canViewAmounts)}
                     </td>
                     <td className="px-3 py-2 text-xs text-muted-foreground">
@@ -263,12 +263,12 @@ function InvoicesPageContent() {
                           href={inv.pdf_url}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 rounded-md border border-border bg-white px-2 py-1.5 text-xs font-ui-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                          className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
                         >
                           <Download size={14} /> {t("table.download")}
                         </a>
                       ) : (
-                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-ui-medium text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 bg-accent text-muted-foreground">
                           {t("table.noPdf")}
                         </span>
                       )}

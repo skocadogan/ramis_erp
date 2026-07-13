@@ -77,7 +77,7 @@ export function RecipeCategoryManagementModal({
         </DialogHeader>
 
         <div className="flex shrink-0 items-center justify-between border-b border-border px-6 py-2.5">
-          <span className="text-2xs font-ui-bold uppercase tracking-widest text-muted-foreground">
+          <span className="text-2xs font-bold uppercase tracking-widest text-muted-foreground">
             {t("categoriesCount", { count: categories.length })}
           </span>
           <Button type="button" size="sm" onClick={() => onAddCategory()}>
@@ -90,7 +90,7 @@ export function RecipeCategoryManagementModal({
           {categories.length === 0 ? (
             <div className="py-16 text-center">
               <Folder size={32} className="mx-auto mb-3 text-muted-foreground/30" />
-              <h4 className="text-xs font-ui-semibold text-muted-foreground">{t("empty")}</h4>
+              <h4 className="text-xs font-semibold text-muted-foreground">{t("empty")}</h4>
             </div>
           ) : (
             <div>
@@ -128,8 +128,8 @@ export function RecipeCategoryManagementModal({
                       <Folder size={15} className="shrink-0 text-amber-300/60" />
                     )}
                     <div className="flex min-w-0 items-baseline gap-2">
-                      <span className="truncate text-ui-sm font-ui-medium text-foreground">{cat.name}</span>
-                      <span className="rounded bg-muted px-1 font-mono text-[9px] uppercase tracking-tighter text-muted-foreground">
+                      <span className="truncate text-ui-sm font-medium text-foreground">{cat.name}</span>
+                      <span className="rounded bg-muted px-1 font-mono text-3xs uppercase tracking-tighter text-muted-foreground">
                         {cat.code}
                       </span>
                     </div>

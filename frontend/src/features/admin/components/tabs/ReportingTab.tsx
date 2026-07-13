@@ -298,7 +298,7 @@ export function ReportingTab({ canManage }: Props) {
       {/* Başlık */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground flex items-center gap-2">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-2">
            
             {t('reporting.title')}
           </h2>
@@ -308,14 +308,14 @@ export function ReportingTab({ canManage }: Props) {
         </div>
         {canManage && (
           <div className="flex items-center gap-2">
-            <label className="flex items-center gap-1.5 rounded-md border border-slate-300 bg-white px-3 py-1.5
-              text-sm font-ui-medium text-slate-700 hover:bg-slate-50 cursor-pointer transition-all dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200 dark:hover:bg-slate-700">
+            <label className="flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-1.5
+              text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer transition-all bg-muted border-input text-foreground dark:hover:bg-slate-700">
               <Upload size={15} /> {t('reporting.import')}
               <input type="file" accept=".json" className="hidden" onChange={handleImport} />
             </label>
             <button onClick={openCreate}
               className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5
-                text-sm font-ui-medium text-white hover:bg-indigo-700 transition-all">
+                text-sm font-medium text-white hover:bg-indigo-700 transition-all">
               <Plus size={15} /> {t('reporting.addNew')}
             </button>
           </div>
@@ -334,10 +334,10 @@ export function ReportingTab({ canManage }: Props) {
       <div className="flex gap-1.5">
         {categories.map(c => (
           <button key={c.value} onClick={() => setCatFilter(c.value)}
-            className={`px-3 py-1 rounded-full text-xs font-ui-medium transition-all
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-all
               ${catFilter === c.value
                 ? "bg-indigo-600 text-white"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200 dark:bg-slate-800 dark:text-muted-foreground dark:hover:bg-slate-700"
+                : "bg-slate-100 text-slate-600 hover:bg-slate-200 bg-muted dark:text-muted-foreground dark:hover:bg-slate-700"
               }`}>
             {c.label}
           </button>
@@ -345,13 +345,13 @@ export function ReportingTab({ canManage }: Props) {
       </div>
 
       {/* Tablo */}
-      <div className="bg-white rounded-lg border border-border overflow-hidden
-        dark:bg-slate-900 dark:border-slate-700">
+      <div className="rounded-lg border border-border overflow-hidden
+        bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border dark:bg-slate-800 dark:border-slate-700">
+          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
             <tr>
               {[t('reporting.table.name'), t('reporting.table.category'), t('reporting.table.paper'), t('reporting.table.blocks'), t('reporting.table.default'), t('common.actions')].map(h => (
-                <th key={h} className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground
+                <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground
                   uppercase tracking-wider dark:text-muted-foreground">
                   {h}
                 </th>
@@ -372,12 +372,12 @@ export function ReportingTab({ canManage }: Props) {
               filtered.map(temp => (
                 <tr key={temp.id}
                   className="border-b border-slate-100 hover:bg-slate-50/50
-                  dark:border-slate-700 dark:hover:bg-slate-800/50">
-                  <td className="px-4 py-3 font-ui-medium text-foreground dark:text-slate-200">
+                  border-border dark:hover:bg-slate-800/50">
+                  <td className="px-4 py-3 font-medium text-foreground text-foreground">
                     {temp.name}
                   </td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex px-2 py-0.5 rounded border text-sub font-ui-semibold
+                    <span className={`inline-flex px-2 py-0.5 rounded border text-sub font-semibold
                       ${CATEGORY_COLORS[temp.category] ?? "bg-slate-100 text-muted-foreground"}`}>
                       {temp.category_display}
                     </span>
@@ -390,7 +390,7 @@ export function ReportingTab({ canManage }: Props) {
                   </td>
                   <td className="px-4 py-3">
                     {temp.is_default
-                      ? <span className="text-xs font-ui-semibold text-amber-500 flex items-center gap-1">
+                      ? <span className="text-xs font-semibold text-amber-500 flex items-center gap-1">
                           <Star size={11} fill="currentColor" /> {t('reporting.table.default')}
                         </span>
                       : <span className="text-xs text-muted-foreground">—</span>
@@ -481,15 +481,15 @@ export function ReportingTab({ canManage }: Props) {
     <div className="flex flex-col h-full gap-0 -mx-6 -mt-4">
       {/* Editör topbar */}
       <div className="flex items-center gap-3 px-6 py-3
-        bg-white border-b border-border
-        dark:bg-slate-900 dark:border-slate-700">
+        border-b border-border
+        bg-card border-border">
         <button onClick={() => setMode("list")}
           className="flex items-center gap-1.5 text-sm
             text-muted-foreground hover:text-slate-900
             dark:text-muted-foreground dark:hover:text-slate-200 transition">
           <ChevronLeft size={16} /> {t('reporting.editor.returnList')}
         </button>
-        <span className="text-slate-300 dark:text-slate-600">|</span>
+        <span className="text-muted-foreground">|</span>
 
         {/* Meta alanlar */}
         <input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
@@ -497,20 +497,20 @@ export function ReportingTab({ canManage }: Props) {
           className="h-8 px-2.5 text-sm rounded w-48
             bg-slate-100 border border-slate-300 text-slate-900
             focus:outline-none focus:border-indigo-500
-            dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100" />
+            bg-muted border-input text-foreground" />
         <input value={form.slug}
           onChange={e => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") }))}
           placeholder={t('reporting.editor.slug')}
           className="h-8 px-2.5 text-sm font-mono rounded w-36
             bg-slate-100 border border-slate-300 text-slate-900
             focus:outline-none focus:border-indigo-500
-            dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+            bg-muted border-input text-foreground"
           readOnly={!!editing} />
         <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value as ReceiptTemplateForm["category"] }))}
           className="h-8 px-2 text-sm rounded
           bg-slate-100 border border-slate-300 text-slate-900
           focus:outline-none focus:border-indigo-500
-          dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200">
+          bg-muted border-input text-foreground">
           <option value="POS_RECEIPT">{t('reporting.categories.pos')}</option>
           <option value="KITCHEN_TICKET">{t('reporting.categories.kitchen')}</option>
           <option value="WAITER_TICKET">{t('reporting.categories.waiter')}</option>
@@ -519,7 +519,7 @@ export function ReportingTab({ canManage }: Props) {
           className="h-8 px-2 text-sm rounded
           bg-slate-100 border border-slate-300 text-slate-900
           focus:outline-none focus:border-indigo-500
-          dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200">
+          bg-muted border-input text-foreground">
           <option value={32}>{t("reporting.paperWidth58")}</option>
           <option value={48}>{t("reporting.paperWidth80")}</option>
         </select>
@@ -534,7 +534,7 @@ export function ReportingTab({ canManage }: Props) {
 
         <button onClick={handleSave} disabled={isSaving}
           className="flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-indigo-600 text-white
-          text-sm font-ui-medium hover:bg-indigo-700 disabled:opacity-50 transition-all">
+          text-sm font-medium hover:bg-indigo-700 disabled:opacity-50 transition-all">
           {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
           {editing ? t('common.update') : t('common.save')}
         </button>
@@ -545,11 +545,10 @@ export function ReportingTab({ canManage }: Props) {
         {/* Sol: Blok editörü */}
         <div className="flex-1 overflow-hidden flex flex-col
           bg-slate-50 border-r border-border min-w-0
-          dark:bg-slate-900 dark:border-slate-700">
+          bg-card border-border">
             <div className="px-3 py-2 border-b flex items-center justify-between
-              border-border bg-white
-              dark:border-slate-700 dark:bg-slate-800/60">
-              <p className="text-xs font-ui-semibold uppercase tracking-wider
+              border-border border-border bg-muted/60">
+              <p className="text-xs font-semibold uppercase tracking-wider
                 text-muted-foreground">
                 {t('reporting.editor.blocksCount', { count: form.layout_json.length })}
               </p>
@@ -579,10 +578,10 @@ export function ReportingTab({ canManage }: Props) {
 
         {/* Sağ: Termal önizleme */}
         <div className="flex flex-col bg-slate-100
-          dark:bg-slate-950 dark:border-slate-800 transition-none shrink-0"
+          bg-card border-border transition-none shrink-0"
           style={{ width: `${previewWidth}px` }}>
           <div className="flex items-center justify-between px-3 py-1.5 border-b border-border bg-card/50">
-            <span className="text-2xs font-ui-semibold text-muted-foreground uppercase tracking-widest">{t('reporting.editor.preview')}</span>
+            <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-widest">{t('reporting.editor.preview')}</span>
           </div>
           <div className="flex-1 overflow-auto">
             <ReceiptPreview template={livePreviewTemplate} />

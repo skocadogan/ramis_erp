@@ -61,7 +61,7 @@ const FefoLotRow = memo(
             <Calendar size={14} className={isExpired ? "text-rose-500" : "text-foreground/60"} />
             <span
               className={cn(
-                isExpired ? "font-ui-bold text-rose-600 dark:text-rose-400" : "text-foreground/80"
+                isExpired ? "font-bold text-rose-600 dark:text-rose-400" : "text-foreground/80"
               )}
             >
               {lot.expiry_date ? new Date(lot.expiry_date).toLocaleDateString(locale) : noExpiryLabel}
@@ -74,11 +74,11 @@ const FefoLotRow = memo(
             <span className="text-foreground/80">{lot.warehouse_name}</span>
           </div>
         </td>
-        <td className="px-4 py-3 text-right font-ui-bold text-foreground">{lot.quantity.toFixed(2)}</td>
+        <td className="px-4 py-3 text-right font-bold text-foreground">{lot.quantity.toFixed(2)}</td>
         <td className="px-4 py-3 text-right text-foreground/75">
           {formatAmount(lot.unit_price, canViewAmounts)}
         </td>
-        <td className="px-4 py-3 text-right font-ui-bold text-primary dark:text-primary">
+        <td className="px-4 py-3 text-right font-bold text-primary dark:text-primary">
           {formatAmount(lot.quantity * lot.unit_price, canViewAmounts)}
         </td>
       </tr>
@@ -138,22 +138,22 @@ const FEFOLotsVirtualTable = memo(function FEFOLotsVirtualTable({
       <table className="w-full text-sm">
         <thead className="sticky top-0 z-10 border-b border-border bg-muted/60 dark:bg-muted/40">
           <tr>
-            <th className="px-4 py-3 text-left text-xs font-ui-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
+            <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
               {colLot}
             </th>
-            <th className="px-4 py-3 text-left text-xs font-ui-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
+            <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
               {colExp}
             </th>
-            <th className="px-4 py-3 text-left text-xs font-ui-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
+            <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
               {colWh}
             </th>
-            <th className="px-4 py-3 text-right text-xs font-ui-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
+            <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
               {colQty}
             </th>
-            <th className="px-4 py-3 text-right text-xs font-ui-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
+            <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
               {colUnitPrice}
             </th>
-            <th className="px-4 py-3 text-right text-xs font-ui-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
+            <th className="px-4 py-3 text-right text-xs font-bold uppercase tracking-wide text-foreground/75 dark:text-foreground/85">
               {colTotal}
             </th>
           </tr>
@@ -250,33 +250,33 @@ export function FEFOLotDetailsModal({ item, open, onOpenChange, warehouseId }: F
         <DialogBody className="flex min-h-0 flex-col overflow-hidden p-0">
           <div className="grid shrink-0 grid-cols-1 gap-0 border-b border-border bg-background md:grid-cols-3">
             <div className="flex flex-col items-center justify-center border-b border-border p-4 md:border-b-0 md:border-r">
-              <span className="mb-1 text-xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+              <span className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {t("totalStock")}
               </span>
-              <span className="text-2xl font-ui-bold text-foreground">
+              <span className="text-2xl font-bold text-foreground">
                 {totalQuantity.toFixed(2)} {item.unit}
               </span>
             </div>
             <div className="flex flex-col items-center justify-center border-b border-border p-4 md:border-b-0 md:border-r">
-              <span className="mb-1 text-xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+              <span className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {t("avgCost")}
               </span>
-              <span className="text-2xl font-ui-bold text-emerald-600 dark:text-emerald-400">
+              <span className="text-2xl font-bold text-emerald-600 dark:text-emerald-400">
                 {formatAmount(totalQuantity > 0 ? totalValue / totalQuantity : 0, canViewAmounts)}
               </span>
             </div>
             <div className="flex flex-col items-center justify-center bg-blue-50/30 p-4 dark:bg-blue-900/10">
-              <span className="mb-1 text-xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+              <span className="mb-1 text-xs font-bold uppercase tracking-wider text-muted-foreground">
                 {t("fefoTotalValue")}
               </span>
-              <span className="text-2xl font-ui-bold text-blue-700 dark:text-blue-400">
+              <span className="text-2xl font-bold text-blue-700 dark:text-blue-400">
                 {formatAmount(totalValue, canViewAmounts)}
               </span>
             </div>
           </div>
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden px-6 py-5">
-            <h4 className="mb-4 flex shrink-0 items-center gap-2 text-sm font-ui-bold text-foreground">
+            <h4 className="mb-4 flex shrink-0 items-center gap-2 text-sm font-bold text-foreground">
               <Coins size={16} className="text-amber-500" /> {t("lotsHeading")}
             </h4>
 

@@ -100,14 +100,14 @@ export default function CategoryPanel({
     <div className={cn("flex w-72 shrink-0 flex-col gap-2 overflow-hidden", className)}>
       {/* Başlık & araçlar */}
       <div className="flex items-center justify-between shrink-0">
-        <h2 className="text-sm font-ui-semibold text-slate-700 flex items-center gap-1.5 dark:text-slate-300">
+        <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-1.5 text-muted-foreground">
           <Layers size={13} className="text-blue-600" />{t("categoryPanel.title")}
         </h2>
         <div className="flex items-center gap-1">
-          <button onClick={expandAll} className="text-2xs font-ui-medium px-2 py-1 rounded bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400" title={t("categoryPanel.expandAll")}>
+          <button onClick={expandAll} className="text-2xs font-medium px-2 py-1 rounded bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400" title={t("categoryPanel.expandAll")}>
             +
           </button>
-          <button onClick={collapseAll} className="text-2xs font-ui-medium px-2 py-1 rounded bg-slate-100 text-slate-500 hover:bg-slate-200 dark:bg-slate-800 dark:text-muted-foreground" title={t("categoryPanel.collapseAll")}>
+          <button onClick={collapseAll} className="text-2xs font-medium px-2 py-1 rounded bg-slate-100 text-slate-500 hover:bg-slate-200 bg-muted dark:text-muted-foreground" title={t("categoryPanel.collapseAll")}>
             -
           </button>
           {canManage && onAdd && (
@@ -120,11 +120,11 @@ export default function CategoryPanel({
       </div>
 
       {/* Ağaç liste */}
-      <div className="bg-white rounded-lg border border-border flex flex-col flex-1 overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+      <div className="rounded-lg border border-border flex flex-col flex-1 overflow-hidden bg-card border-border">
         <div className="flex-1 overflow-y-auto no-scrollbar p-1.5">
           {/* "Tümü" butonu */}
           <button onClick={() => onSelect(null)}
-            className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm font-ui-medium transition-colors mb-1
+            className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors mb-1
               ${!selectedCategory
                 ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
                 : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800"}`}>
@@ -185,13 +185,13 @@ function CategoryTreeItem({ cat, isSelected, canManage, onSelect, onEdit, onDele
               {cat.hasChildren ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
             </button>
           ) : (
-            <div className="w-0.5 h-0.5 rounded-full bg-slate-300 dark:bg-slate-600 ml-1" />
+            <div className="w-0.5 h-0.5 rounded-full bg-slate-300 bg-accent ml-1" />
           )}
         </div>
 
         {/* Kategori adı / seçim */}
         <button onClick={() => onSelect(cat.id)}
-          className="flex-1 text-left px-1.5 py-1.5 text-sm font-ui-medium transition-colors min-w-0 flex items-start gap-2">
+          className="flex-1 text-left px-1.5 py-1.5 text-sm font-medium transition-colors min-w-0 flex items-start gap-2">
           {cat.hasChildren ? (
             <FolderOpen size={14} className="text-amber-500 shrink-0 mt-0.5" />
           ) : (
@@ -207,7 +207,7 @@ function CategoryTreeItem({ cat, isSelected, canManage, onSelect, onEdit, onDele
                 {branchTags.map((tag) => (
                   <span
                     key={tag.id}
-                    className="block truncate text-2xs font-ui-medium text-violet-600 dark:text-violet-400"
+                    className="block truncate text-2xs font-medium text-violet-600 dark:text-violet-400"
                   >
                     {tag.name}
                   </span>

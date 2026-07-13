@@ -124,7 +124,7 @@ export default function ProductTable({
               placeholder={t("productTable.searchPlaceholder")}
               value={searchTerm}
               onChange={e => onSearchChange(e.target.value)}
-              className="pl-8 pr-4 py-1.5 bg-white border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 w-56"
+              className="pl-8 pr-4 py-1.5 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-input text-foreground w-56"
             />
           </div>
           {tagFilterActive && onShowAllChange && (
@@ -146,7 +146,7 @@ export default function ProductTable({
                   )}
                 />
               </button>
-              <span className="text-xs font-ui-medium text-muted-foreground whitespace-nowrap">
+              <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
                 {t("productTable.showAll")}
               </span>
             </label>
@@ -175,15 +175,15 @@ export default function ProductTable({
               />
             )}
             <button type="button" onClick={onDiscount}
-              className="flex items-center gap-1.5 rounded-md border border-amber-200 bg-amber-50 px-3.5 py-1.5 text-sm font-ui-medium text-amber-700 hover:bg-amber-100 transition-all dark:bg-amber-900/20 dark:border-amber-700 dark:text-amber-300">
+              className="flex items-center gap-1.5 rounded-md border border-amber-200 bg-amber-50 px-3.5 py-1.5 text-sm font-medium text-amber-700 hover:bg-amber-100 transition-all dark:bg-amber-900/20 dark:border-amber-700 dark:text-amber-300">
               <Tag size={15} />{t("productTable.discount")}
             </button>
             <button type="button" onClick={onBulkPrice}
-              className="flex items-center gap-1.5 rounded-md border border-border bg-white px-3.5 py-1.5 text-sm font-ui-medium text-slate-700 hover:bg-slate-50 transition-all dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700">
+              className="flex items-center gap-1.5 rounded-md border border-border px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-all bg-muted border-input text-muted-foreground dark:hover:bg-slate-700">
               <TrendingUp size={15} />{t("productTable.bulkPrice")}
             </button>
             <button type="button" onClick={onAdd}
-              className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-blue-700 transition-all">
+              className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
               <Plus size={15} />{t("productTable.newProduct")}
             </button>
           </div>
@@ -191,7 +191,7 @@ export default function ProductTable({
 
       </div>
 
-      <div className="flex-1 overflow-auto bg-white rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700 no-scrollbar">
+      <div className="flex-1 overflow-auto rounded-lg border border-border bg-card border-border no-scrollbar">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -202,15 +202,15 @@ export default function ProductTable({
             strategy={verticalListSortingStrategy}
           >
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 border-b border-border sticky top-0 dark:bg-slate-800 dark:border-slate-700 z-10">
+              <thead className="bg-slate-50 border-b border-border sticky top-0 bg-muted border-border z-10">
                 <tr>
                   {canManage && <th className="w-8"></th>}
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.product")}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.branch")}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.category")}</th>
-                  {isCombinedTab && <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.contents")}</th>}
-                  <th className="text-right px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.price")}</th>
-                  <th className="text-center px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.status")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.product")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.branch")}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.category")}</th>
+                  {isCombinedTab && <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.contents")}</th>}
+                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.price")}</th>
+                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.status")}</th>
                   {canManage && <th className="w-12 px-4 py-2.5"></th>}
                 </tr>
               </thead>
@@ -299,7 +299,7 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
       )}
       <td className="px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="relative h-14 w-14 flex-shrink-0 rounded-md border border-slate-100 overflow-hidden bg-slate-50 flex items-center justify-center dark:border-slate-800 dark:bg-slate-800 shadow-sm">
+          <div className="relative h-14 w-14 flex-shrink-0 rounded-md border border-slate-100 overflow-hidden bg-slate-50 flex items-center justify-center border-border bg-muted shadow-sm">
             {product.image ? (
               <AppImage src={product.image} alt="" fill className="object-cover" sizes="56px" />
             ) : (
@@ -308,21 +308,21 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
           </div>
           <div className="flex flex-col min-w-0">
             <div className="flex items-center gap-1.5">
-              <span className="font-ui-medium text-foreground truncate">{product.name}</span>
+              <span className="font-medium text-foreground truncate">{product.name}</span>
               {product.is_featured && (
-                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs bg-amber-50 text-amber-600 border border-amber-100 font-ui-bold dark:bg-amber-900/20 dark:border-amber-800 dark:text-amber-400">
+                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs bg-amber-50 text-amber-600 border border-amber-100 font-bold dark:bg-amber-900/20 dark:border-amber-800 dark:text-amber-400">
                   <StarIcon size={14} className="text-amber-500 fill-amber-500" />
                   {t("productTable.featured")}
                 </span>
               )}
               {product.is_popular && (
-                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs bg-orange-50 text-orange-600 border border-orange-100 font-ui-bold dark:bg-orange-900/20 dark:border-orange-800 dark:text-orange-400">
+                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs bg-orange-50 text-orange-600 border border-orange-100 font-bold dark:bg-orange-900/20 dark:border-orange-800 dark:text-orange-400">
                   <Flame size={14} className="text-orange-500" />
                   {t("productTable.popular")}
                 </span>
               )}
               {product.is_chef_recommendation && (
-                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs bg-violet-50 text-violet-600 border border-violet-100 font-ui-bold dark:bg-violet-900/20 dark:border-violet-800 dark:text-violet-400">
+                <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-2xs bg-violet-50 text-violet-600 border border-violet-100 font-bold dark:bg-violet-900/20 dark:border-violet-800 dark:text-violet-400">
                   <ChefHat size={14} className="text-violet-500" />
                   {t("productTable.chefRecommendation")}
                 </span>
@@ -332,7 +332,7 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
               <p className="text-xs text-muted-foreground mt-0.5 whitespace-normal break-words max-w-[300px] lg:max-w-[500px]">{product.description}</p>
             )}
             {(branchTagLabel || (product.tags?.length ?? 0) > 0) && (
-              <p className="text-2xs text-violet-600 dark:text-violet-400 mt-0.5 font-ui-medium">
+              <p className="text-2xs text-violet-600 dark:text-violet-400 mt-0.5 font-medium">
                 {branchTagLabel || product.tags!.map((tag) => tag.name).join(" · ")}
               </p>
             )}
@@ -343,13 +343,13 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
         <div className="flex flex-wrap gap-1 max-w-[150px]">
           {product.branch_names && product.branch_names.length > 0 ? (
             product.branch_names.map((name, idx) => (
-              <span key={idx} className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-2xs bg-blue-50 text-blue-600 border border-blue-100 font-ui-bold dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-400">
+              <span key={idx} className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-2xs bg-blue-50 text-blue-600 border border-blue-100 font-bold dark:bg-blue-900/20 dark:border-blue-800 dark:text-blue-400">
                 <Building2 size={10} />
                 {name.toUpperCase()}
               </span>
             ))
           ) : (
-            <span className="text-xs font-ui-medium text-muted-foreground flex items-center gap-1 italic">
+            <span className="text-xs font-medium text-muted-foreground flex items-center gap-1 italic">
               <Utensils size={12} className="text-muted-foreground" />
               {product.branch_name || t("productTable.allBranches")}
             </span>
@@ -357,7 +357,7 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
         </div>
       </td>
       <td className="px-4 py-3">
-        <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-ui-medium text-slate-600 dark:bg-slate-700 dark:text-slate-300 whitespace-nowrap">
+        <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 bg-accent text-muted-foreground whitespace-nowrap">
           <Tag size={10} />{product.category_name}
         </span>
       </td>
@@ -384,15 +384,15 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
             <span className="text-sm line-through text-muted-foreground font-mono">
               {canViewAmounts ? formatCurrency(product.base_price) : AMOUNT_DISPLAY_MASK}
             </span>
-            <span className="text-sm font-ui-bold text-amber-600 dark:text-amber-400 font-mono">
+            <span className="text-sm font-bold text-amber-600 dark:text-amber-400 font-mono">
               {canViewAmounts ? formatCurrency(product.discounted_price) : AMOUNT_DISPLAY_MASK}
             </span>
-            <span className="text-2xs bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 px-1.5 py-0.5 rounded-full font-ui-semibold">
+            <span className="text-2xs bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 px-1.5 py-0.5 rounded-full font-semibold">
               {t("productTable.discountBadge", { pct: (product.discount_rate || 0).toFixed(0) })}
             </span>
           </div>
         ) : (
-          <span className="font-ui-semibold text-foreground">
+          <span className="font-semibold text-foreground">
             {canViewAmounts ? formatCurrency(product.base_price) : AMOUNT_DISPLAY_MASK}
           </span>
         )}
@@ -401,16 +401,16 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
       <td className="px-4 py-3 text-center">
         <div className="flex flex-col items-center gap-1">
           {menuActive ? (
-            <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-ui-medium text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
+            <span className="inline-flex rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400">
               {t("productTable.menuActive")}
             </span>
           ) : (
-            <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-ui-medium text-muted-foreground dark:bg-slate-700 dark:text-muted-foreground">
+            <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-muted-foreground bg-accent dark:text-muted-foreground">
               {t("productTable.menuInactive")}
             </span>
           )}
           {product.show_on_pos === false && (
-            <span className="inline-flex rounded-full bg-amber-50 px-2 py-0.5 text-2xs font-ui-semibold text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+            <span className="inline-flex rounded-full bg-amber-50 px-2 py-0.5 text-2xs font-semibold text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
               {t("productTable.posHidden")}
             </span>
           )}

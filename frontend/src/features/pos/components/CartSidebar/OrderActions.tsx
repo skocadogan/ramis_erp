@@ -29,16 +29,16 @@ export function OrderActions({
   return (
     <div className="shrink-0">
       {!shiftGateOk && (
-        <p className="mb-3 text-center text-xs font-ui-medium text-amber-700 dark:text-amber-400">
+        <p className="mb-3 text-center text-xs font-medium text-amber-700 dark:text-amber-400">
           {tCart("shiftRequired")}
         </p>
       )}
       <button
         disabled={disabled}
         onClick={() => submitOrder()}
-        className={`relative w-full rounded-xl py-4 font-ui-bold transition-all duration-300
+        className={`relative w-full rounded-xl py-4 font-bold transition-all duration-300
         ${disabled
-            ? "cursor-not-allowed bg-slate-100 text-muted-foreground dark:bg-slate-800 dark:text-muted-foreground"
+            ? "cursor-not-allowed bg-slate-100 text-muted-foreground bg-muted dark:text-muted-foreground"
             : isKitchenBusy
               ? "bg-amber-600 text-white hover:bg-amber-700 shadow-lg shadow-amber-600/20 ring-2 ring-amber-500/30" 
               : "bg-blue-600 text-white hover:bg-blue-700"}`}
@@ -51,7 +51,7 @@ export function OrderActions({
         ) : isKitchenBusy ? (
           <div className="flex flex-col items-center leading-tight">
             <span>{tCart("sendOrderBusy")}</span>
-            <span className="text-2xs font-ui-bold text-amber-100 uppercase">{tCart("kitchenBusy", { minutes: expectedBuffer })}</span>
+            <span className="text-2xs font-bold text-amber-100 uppercase">{tCart("kitchenBusy", { minutes: expectedBuffer })}</span>
           </div>
         ) : tCart("sendOrder")}
       </button>

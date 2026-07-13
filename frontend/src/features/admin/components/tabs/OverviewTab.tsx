@@ -157,14 +157,14 @@ export function OverviewTab({ stats, stockItems, setActiveTab, userPermissions, 
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-lg font-ui-semibold text-foreground">{t('overview.title')}</h2>
+        <h2 className="text-lg font-semibold text-foreground">{t('overview.title')}</h2>
         <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">
           {t('overview.description')}
         </p>
       </div>
 
       {visibleCards.length === 0 ? (
-        <p className="text-sm text-muted-foreground rounded-lg border border-dashed border-border bg-white px-4 py-8 text-center dark:bg-slate-900 dark:border-slate-700 dark:text-muted-foreground">
+        <p className="text-sm text-muted-foreground rounded-lg border border-dashed border-border px-4 py-8 text-center bg-card border-border dark:text-muted-foreground">
           {t('overview.noAccess')}
         </p>
       ) : (
@@ -174,18 +174,18 @@ export function OverviewTab({ stats, stockItems, setActiveTab, userPermissions, 
               key={`${c.tab}-${c.module}-${c.label}`}
               type="button"
               onClick={() => setActiveTab(c.tab)}
-              className="flex flex-col items-start gap-3 bg-white rounded-lg border border-border p-4 hover:border-slate-300 transition-all text-left dark:bg-slate-900 dark:border-slate-700 dark:hover:border-slate-600"
+              className="flex flex-col items-start gap-3 rounded-lg border border-border p-4 hover:border-slate-300 transition-all text-left bg-card border-border dark:hover:border-slate-600"
             >
               <div className={`rounded-md p-2 ${c.iconBg}`}>
                 <c.icon size={18} />
               </div>
               <div>
-                <div className="text-xl font-ui-semibold text-foreground">
+                <div className="text-xl font-semibold text-foreground">
                   {c.value === null ? "—" : c.value}
                 </div>
                 <div className="text-xs text-muted-foreground mt-0.5 dark:text-muted-foreground">{c.label}</div>
                 {c.alert ? (
-                  <div className="text-2xs font-ui-medium text-red-600 mt-1 dark:text-red-400">{c.alert}</div>
+                  <div className="text-2xs font-medium text-red-600 mt-1 dark:text-red-400">{c.alert}</div>
                 ) : null}
               </div>
             </button>
@@ -197,7 +197,7 @@ export function OverviewTab({ stats, stockItems, setActiveTab, userPermissions, 
         <div className="bg-red-50 border border-red-200 rounded-lg p-4 dark:bg-red-900/20 dark:border-red-800">
           <div className="flex items-center gap-2 mb-2">
             <AlertTriangle size={15} className="text-red-600 dark:text-red-400" />
-            <span className="text-sm font-ui-semibold text-red-800 dark:text-red-300">{t('overview.alerts.lowStockWarning')}</span>
+            <span className="text-sm font-semibold text-red-800 dark:text-red-300">{t('overview.alerts.lowStockWarning')}</span>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             {stockItems
@@ -206,10 +206,10 @@ export function OverviewTab({ stats, stockItems, setActiveTab, userPermissions, 
               .map((item) => (
                 <div
                   key={item.id}
-                  className="flex items-center justify-between bg-white rounded-md px-3 py-2 text-sm dark:bg-slate-900"
+                  className="flex items-center justify-between rounded-md px-3 py-2 text-sm bg-card"
                 >
-                  <span className="font-ui-medium text-foreground">{item.name}</span>
-                  <span className="text-red-600 font-ui-semibold dark:text-red-400">
+                  <span className="font-medium text-foreground">{item.name}</span>
+                  <span className="text-red-600 font-semibold dark:text-red-400">
                     {item.current_quantity.toFixed(1)}
                   </span>
                 </div>

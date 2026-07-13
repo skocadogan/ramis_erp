@@ -40,18 +40,18 @@ export function KitchenNotifsPanel({
   if (!isKitchenNotifOpen) return null;
 
   return (
-    <div className="mb-2 flex max-h-[70vh] w-80 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl motion-safe:animate-in motion-safe:slide-in-from-bottom-5 duration-300 dark:border-slate-700 sm:w-96">
+    <div className="mb-2 flex max-h-[70vh] w-80 flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-xl motion-safe:animate-in motion-safe:slide-in-from-bottom-5 duration-300 border-border sm:w-96">
       <div className="flex items-center justify-between bg-emerald-600 p-4 text-white">
         <div className="flex items-center gap-2">
           <Bell size={18} className="motion-safe:animate-swing [animation-iteration-count:1]" />
-          <h3 className="font-ui-bold tracking-tight">{t("kitchenTitle")}</h3>
+          <h3 className="font-bold tracking-tight">{t("kitchenTitle")}</h3>
         </div>
         <div className="flex items-center gap-2">
           {readyItems.some((i) => !i.waiter_acknowledged_at) && (
             <button
               type="button"
               onClick={acknowledgeAll}
-              className="rounded bg-white/20 px-2 py-1 text-[11px] font-ui-bold transition-colors hover:bg-white/30"
+              className="rounded bg-white/20 px-2 py-1 text-sub font-bold transition-colors hover:bg-white/30"
             >
               {t("markAllRead")}
             </button>
@@ -60,7 +60,7 @@ export function KitchenNotifsPanel({
             <button
               type="button"
               onClick={() => guestArrivedNotifs.forEach((n) => removeGuestArrivedNotif(n.id))}
-              className="rounded bg-white/20 px-2 py-1 text-[11px] font-ui-bold transition-colors hover:bg-white/30"
+              className="rounded bg-white/20 px-2 py-1 text-sub font-bold transition-colors hover:bg-white/30"
             >
               {t("deleteAll")}
             </button>
@@ -76,11 +76,11 @@ export function KitchenNotifsPanel({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto bg-slate-50/50 p-3 dark:bg-slate-800/40">
+      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto bg-slate-50/50 p-3 bg-muted/40">
         {readyItems.length === 0 && guestArrivedNotifs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-muted-foreground dark:text-muted-foreground">
             <CheckSquare size={32} className="mb-2 opacity-20" />
-            <span className="text-sm font-ui-medium">{t("noNotifications")}</span>
+            <span className="text-sm font-medium">{t("noNotifications")}</span>
           </div>
         ) : (
           <>
@@ -90,10 +90,10 @@ export function KitchenNotifsPanel({
                 className="relative flex items-center justify-between gap-3 rounded-xl border border-blue-100 bg-blue-50/50 p-3 shadow-sm motion-safe:animate-in motion-safe:slide-in-from-right-5 dark:border-blue-900/30 dark:bg-blue-900/20"
               >
                 <div className="flex flex-col gap-0.5">
-                  <span className="text-[11px] font-ui-bold text-blue-600 dark:text-blue-400">
+                  <span className="text-sub font-bold text-blue-600 dark:text-blue-400">
                     {t("guestArrived")}
                   </span>
-                  <p className="text-sm font-ui-semibold text-slate-800 dark:text-slate-100">
+                  <p className="text-sm font-semibold text-slate-800 text-foreground">
                     {notif.message}
                   </p>
                   <span className="text-2xs text-muted-foreground dark:text-muted-foreground">

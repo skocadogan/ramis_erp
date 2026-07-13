@@ -25,7 +25,7 @@ function UrgencyBadge({ urgency }: { urgency: PurchaseRecommendation["urgency"] 
   return (
     <span
       className={cn(
-        "inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-ui-semibold uppercase tracking-wide",
+        "inline-flex items-center rounded px-1.5 py-0.5 text-2xs font-semibold uppercase tracking-wide",
         urgency === "critical"
           ? "bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-300"
           : "bg-amber-100 text-amber-700 dark:bg-amber-950/40 dark:text-amber-300",
@@ -73,7 +73,7 @@ const RecommendationRow = memo(function RecommendationRow({
         </td>
       ) : null}
       <td className="px-4 py-3">
-        <div className="font-ui-medium text-slate-900 dark:text-slate-200">{row.stock_item_name}</div>
+        <div className="font-medium text-slate-900 text-foreground">{row.stock_item_name}</div>
         <div className="text-xs text-muted-foreground">{row.stock_item_sku}</div>
         <div className="mt-1 flex flex-wrap items-center gap-1">
           <UrgencyBadge urgency={row.urgency} />
@@ -96,7 +96,7 @@ const RecommendationRow = memo(function RecommendationRow({
           ? t("purchaseRecommendationsTab.daysLeft", { days: row.estimated_days_until_stockout })
           : "—"}
       </td>
-      <td className="px-4 py-3 text-right font-ui-semibold tabular-nums text-slate-900 dark:text-slate-200">
+      <td className="px-4 py-3 text-right font-semibold tabular-nums text-slate-900 text-foreground">
         {formatQuantityWithUnit(row.recommended_quantity, row.unit)}
       </td>
       {canCommit ? (
@@ -177,10 +177,10 @@ export const PurchaseRecommendationsTable = memo(function PurchaseRecommendation
   return (
     <div
       ref={scrollRef}
-      className="flex min-h-0 min-w-0 flex-1 flex-col overflow-auto rounded-xl border border-border/80 bg-card/50 dark:border-slate-800"
+      className="flex min-h-0 min-w-0 flex-1 flex-col overflow-auto rounded-xl border border-border/80 bg-card/50 border-border"
     >
       <table className="w-full text-sm">
-        <thead className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-800/50 border-b border-border">
+        <thead className="sticky top-0 z-10 bg-muted/50 border-b border-border">
           <tr>
             {canCommit ? (
               <th className="w-10 px-3 py-3">
@@ -192,26 +192,26 @@ export const PurchaseRecommendationsTable = memo(function PurchaseRecommendation
                 />
               </th>
             ) : null}
-            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-left px-4 py-3 font-semibold text-muted-foreground">
               {t("purchaseRecommendationsTab.colProduct")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("purchaseRecommendationsTab.colCurrent")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("purchaseRecommendationsTab.colInTransit")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("purchaseRecommendationsTab.colWeeklyAvg")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("purchaseRecommendationsTab.colDaysLeft")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("purchaseRecommendationsTab.colRecommended")}
             </th>
             {canCommit ? (
-              <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+              <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
                 {t("purchaseRecommendationsTab.colOrderQty")}
               </th>
             ) : null}

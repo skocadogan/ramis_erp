@@ -93,7 +93,7 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
     <div className="space-y-4">
       <div className="flex flex-col gap-0.5 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground">
+          <h2 className="text-lg font-semibold text-foreground">
             {t('assignments.waiter.title')}
           </h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
@@ -104,7 +104,7 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
 
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="space-y-1.5">
-          <span className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             {t('assignments.common.branch')}
           </span>
           <select
@@ -123,7 +123,7 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
           </select>
         </div>
         <div className="space-y-1.5">
-          <span className="flex items-center gap-1.5 text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
            
             {t('assignments.waiter.staffLabel')}
           </span>
@@ -143,16 +143,16 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
       </div>
 
       {(isLoading || (isAssignmentsLoading && userId)) && (
-        <div className="flex items-center gap-2 rounded-md border border-border bg-slate-50 px-3 py-2 text-sm text-slate-600 dark:border-slate-700 dark:bg-slate-800/80 dark:text-slate-300">
+        <div className="flex items-center gap-2 rounded-md border border-border bg-slate-50 px-3 py-2 text-sm text-slate-600 border-border bg-muted/80 text-muted-foreground">
           <Loader2 className="h-4 w-4 shrink-0 animate-spin text-blue-600 dark:text-blue-400" />
           {t('common.loading')}
         </div>
       )}
 
       <div className="grid gap-4 lg:grid-cols-2">
-        <section className="overflow-hidden rounded-lg border border-border bg-white dark:border-slate-700 dark:bg-slate-900">
-          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between dark:border-slate-700 dark:bg-slate-800/80">
-            <h3 className="flex items-center gap-2 text-sm font-ui-semibold text-foreground">
+        <section className="overflow-hidden rounded-lg border border-border border-border bg-card">
+          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
             
               {t('assignments.waiter.zonesTitle')}
             </h3>
@@ -162,23 +162,23 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
                 disabled={zones.length === 0}
                 onClick={() => setZoneIds(zones.map((z) => z.id))}
                 className={cn(
-                  "rounded-md px-2.5 py-1 text-xs font-ui-medium transition-colors",
+                  "rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
                   zones.length === 0
-                    ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
+                    ? "cursor-not-allowed text-muted-foreground"
                     : "text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/40"
                 )}
               >
                 {t('assignments.common.selectAll')}
               </button>
-              <span className="text-slate-300 dark:text-slate-600">|</span>
+              <span className="text-muted-foreground">|</span>
               <button
                 type="button"
                 disabled={zones.length === 0 || zoneIds.length === 0}
                 onClick={() => setZoneIds([])}
                 className={cn(
-                  "rounded-md px-2.5 py-1 text-xs font-ui-medium transition-colors",
+                  "rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
                   zones.length === 0 || zoneIds.length === 0
-                    ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
+                    ? "cursor-not-allowed text-muted-foreground"
                     : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800"
                 )}
               >
@@ -200,7 +200,7 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
                         checked={zoneIds.includes(z.id)}
                         onCheckedChange={() => toggleZone(z.id)}
                       />
-                      <span className="text-sm font-ui-medium text-foreground dark:text-slate-200">
+                      <span className="text-sm font-medium text-foreground text-foreground">
                         {z.name}
                       </span>
                     </Label>
@@ -209,14 +209,14 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
               </ul>
             )}
           </div>
-          <div className="border-t border-border bg-slate-50/80 px-4 py-2 text-xs text-muted-foreground dark:border-slate-700 dark:bg-slate-800/50 dark:text-muted-foreground">
+          <div className="border-t border-border bg-slate-50/80 px-4 py-2 text-xs text-muted-foreground border-border bg-muted/50 dark:text-muted-foreground">
             {t('assignments.waiter.zonesSelected', { count: zoneIds.length, total: zones.length })}
           </div>
         </section>
 
-        <section className="overflow-hidden rounded-lg border border-border bg-white dark:border-slate-700 dark:bg-slate-900">
-          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between dark:border-slate-700 dark:bg-slate-800/80">
-            <h3 className="flex items-center gap-2 text-sm font-ui-semibold text-foreground">
+        <section className="overflow-hidden rounded-lg border border-border border-border bg-card">
+          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
+            <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
              
               {t('assignments.waiter.tablesTitle')}
             </h3>
@@ -226,23 +226,23 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
                 disabled={tables.length === 0}
                 onClick={() => setTableIds(tables.map((t) => t.id))}
                 className={cn(
-                  "rounded-md px-2.5 py-1 text-xs font-ui-medium transition-colors",
+                  "rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
                   tables.length === 0
-                    ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
+                    ? "cursor-not-allowed text-muted-foreground"
                     : "text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-950/40"
                 )}
               >
                 {t('assignments.common.selectAll')}
               </button>
-              <span className="text-slate-300 dark:text-slate-600">|</span>
+              <span className="text-muted-foreground">|</span>
               <button
                 type="button"
                 disabled={tables.length === 0 || tableIds.length === 0}
                 onClick={() => setTableIds([])}
                 className={cn(
-                  "rounded-md px-2.5 py-1 text-xs font-ui-medium transition-colors",
+                  "rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
                   tables.length === 0 || tableIds.length === 0
-                    ? "cursor-not-allowed text-slate-300 dark:text-slate-600"
+                    ? "cursor-not-allowed text-muted-foreground"
                     : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800"
                 )}
               >
@@ -264,7 +264,7 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
                         checked={tableIds.includes(table_item.id)}
                         onCheckedChange={() => toggleTable(table_item.id)}
                       />
-                      <span className="text-sm font-ui-medium text-foreground dark:text-slate-200">
+                      <span className="text-sm font-medium text-foreground text-foreground">
                         {table_item.name}
                       </span>
                       <span className="ml-auto truncate text-xs text-muted-foreground">
@@ -276,13 +276,13 @@ export function WaiterAssignmentsTab({ branches }: { branches: Branch[] }) {
               </ul>
             )}
           </div>
-          <div className="border-t border-border bg-slate-50/80 px-4 py-2 text-xs text-muted-foreground dark:border-slate-700 dark:bg-slate-800/50 dark:text-muted-foreground">
+          <div className="border-t border-border bg-slate-50/80 px-4 py-2 text-xs text-muted-foreground border-border bg-muted/50 dark:text-muted-foreground">
             {t('assignments.waiter.tablesSelected', { count: tableIds.length, total: tables.length })}
           </div>
         </section>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4 dark:border-slate-700">
+      <div className="flex flex-wrap items-center gap-3 border-t border-border pt-4 border-border">
         <Button
           type="button"
           disabled={isUpdating || !userId}

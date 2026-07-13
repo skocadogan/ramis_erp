@@ -73,7 +73,7 @@ export function CancellationReasonModal({
         
         <div className="grid gap-4 py-4">
           <div className="space-y-2">
-            <label className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">{t("categoryLabel")}</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t("categoryLabel")}</label>
             <Select onValueChange={(val) => setReasonCode(val || "")} value={reasonCode}>
               <SelectTrigger className="w-full">
                 <SelectValue placeholder={t("selectPlaceholder")} />
@@ -89,7 +89,7 @@ export function CancellationReasonModal({
           </div>
           
           <div className="space-y-2">
-            <label className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">{t("detailLabel")}</label>
+            <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t("detailLabel")}</label>
             <Textarea 
               placeholder={t("detailPlaceholder")}
               value={reasonText}

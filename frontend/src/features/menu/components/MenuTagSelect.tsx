@@ -59,7 +59,7 @@ export function MenuTagSelect({
               selectedTags.map((tag) => (
                 <span
                   key={tag.id}
-                  className="inline-flex items-center gap-0.5 rounded-md bg-violet-50 px-1.5 py-0.5 text-xs font-ui-medium text-violet-700 dark:bg-violet-900/30 dark:text-violet-300"
+                  className="inline-flex items-center gap-0.5 rounded-md bg-violet-50 px-1.5 py-0.5 text-xs font-medium text-violet-700 dark:bg-violet-900/30 dark:text-violet-300"
                 >
                   <Hash size={10} className="opacity-70" />
                   {tag.name.replace(/^#/, "")}
@@ -94,7 +94,7 @@ export function MenuTagSelect({
                       {selected ? <Check size={10} /> : null}
                     </span>
                     <Hash size={12} className="text-violet-500 shrink-0" />
-                    <span className="truncate font-ui-medium">{tag.name}</span>
+                    <span className="truncate font-medium">{tag.name}</span>
                   </button>
                 )
               })
@@ -109,7 +109,7 @@ export function MenuTagSelect({
               key={tag.id}
               type="button"
               onClick={() => toggle(tag.id)}
-              className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-2xs font-ui-medium text-violet-800 dark:bg-violet-900/40 dark:text-violet-200"
+              className="inline-flex items-center gap-1 rounded-full bg-violet-100 px-2 py-0.5 text-2xs font-medium text-violet-800 dark:bg-violet-900/40 dark:text-violet-200"
             >
               {tag.name}
               <X size={10} />

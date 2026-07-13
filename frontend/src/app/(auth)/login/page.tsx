@@ -243,7 +243,7 @@ export default function LoginPage() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
               <ChefHat size={18} />
             </div>
-            <span className="text-lg font-ui-bold tracking-tight">Ramis ERP</span>
+            <span className="text-lg font-bold tracking-tight">Ramis ERP</span>
           </Link>
           <div className="flex items-center gap-2">
             <LanguageSwitcher currentLocale={locale} variant="ghost" />
@@ -255,7 +255,7 @@ export default function LoginPage() {
         <div className="overflow-hidden rounded-2xl border border-border bg-card shadow-xl shadow-foreground/5 animate-in fade-in zoom-in-95 duration-200">
           <div className="px-8 pt-10 pb-8">
             <div className="mb-8">
-              <h1 className="text-2xl font-ui-bold tracking-tight text-foreground flex items-center gap-2">
+              <h1 className="text-2xl font-bold tracking-tight text-foreground flex items-center gap-2">
                 {step === "pin" ? t("pinTitle") : t("title")}
               </h1>
               <p className="mt-2 text-sm text-muted-foreground">
@@ -267,7 +267,7 @@ export default function LoginPage() {
 
             {error ? (
               <div
-                className="mb-6 flex items-center gap-3 rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm font-ui-medium text-destructive animate-in fade-in slide-in-from-top-2"
+                className="mb-6 flex items-center gap-3 rounded-xl border border-destructive/20 bg-destructive/5 px-4 py-3 text-sm font-medium text-destructive animate-in fade-in slide-in-from-top-2"
                 role="alert"
               >
                 <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-destructive/10">
@@ -282,7 +282,7 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="login-username"
-                    className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground"
+                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                   >
                     {t("username")}
                   </label>
@@ -301,7 +301,7 @@ export default function LoginPage() {
                       placeholder={t("username")}
                       required
                       autoFocus
-                      className="block w-full rounded-xl border border-border bg-background py-3 pl-11 pr-4 text-sm font-ui-medium outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="block w-full rounded-xl border border-border bg-background py-3 pl-11 pr-4 text-sm font-medium outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
                     />
                   </div>
                 </div>
@@ -309,7 +309,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading || !username.trim()}
-                  className="relative flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-4 text-sm font-ui-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+                  className="relative flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-4 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {isLoading ? (
                     <Loader2 className="h-5 w-5 animate-spin" aria-hidden />
@@ -329,7 +329,7 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={handleBackToUsername}
-                    className="text-xs font-ui-semibold text-primary flex items-center gap-1 hover:underline"
+                    className="text-xs font-semibold text-primary flex items-center gap-1 hover:underline"
                   >
                     <ArrowLeft size={14} /> {t("back")}
                   </button>
@@ -339,7 +339,7 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="login-password"
-                    className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground"
+                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground"
                   >
                     {t("password")}
                   </label>
@@ -358,7 +358,7 @@ export default function LoginPage() {
                       placeholder={t("password")}
                       required
                       autoFocus
-                      className="block w-full rounded-xl border border-border bg-background py-3 pl-11 pr-4 text-sm font-ui-medium outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="block w-full rounded-xl border border-border bg-background py-3 pl-11 pr-4 text-sm font-medium outline-none transition-all focus:border-primary focus:ring-4 focus:ring-primary/10 disabled:cursor-not-allowed disabled:opacity-60"
                     />
                   </div>
                 </div>
@@ -375,7 +375,7 @@ export default function LoginPage() {
                       />
                       <Check className="absolute left-0.5 top-0.5 h-3 w-3 text-primary-foreground opacity-0 transition-opacity peer-checked:opacity-100" strokeWidth={4} />
                     </div>
-                    <span className="text-sm font-ui-medium text-muted-foreground transition-colors group-hover:text-foreground">
+                    <span className="text-sm font-medium text-muted-foreground transition-colors group-hover:text-foreground">
                       {t("rememberMe")}
                     </span>
                   </label>
@@ -384,7 +384,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading || !password}
-                  className="relative flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-4 text-sm font-ui-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+                  className="relative flex h-12 w-full items-center justify-center gap-2 overflow-hidden rounded-xl bg-primary px-4 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:bg-primary/90 active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {isLoading ? (
                     <>
@@ -407,14 +407,14 @@ export default function LoginPage() {
                   <button
                     type="button"
                     onClick={handleBackToUsername}
-                      className="text-xs font-ui-semibold text-primary flex items-center gap-1 hover:underline"
+                      className="text-xs font-semibold text-primary flex items-center gap-1 hover:underline"
                     >
                       <ArrowLeft size={14} /> {t("back")}
                     </button>
                     <button
                       type="button"
                       onClick={() => setStep("password")}
-                      className="text-xs font-ui-semibold text-muted-foreground flex items-center gap-1 hover:underline"
+                      className="text-xs font-semibold text-muted-foreground flex items-center gap-1 hover:underline"
                     >
                       <KeyRound size={12} /> {t("passwordLogin")}
                   </button>
@@ -423,7 +423,7 @@ export default function LoginPage() {
                 <div className="space-y-2">
                   <label
                     htmlFor="login-pin"
-                    className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground block text-center"
+                    className="text-xs font-semibold uppercase tracking-wider text-muted-foreground block text-center"
                   >
                     {t("pinLabel")}
                   </label>
@@ -434,7 +434,7 @@ export default function LoginPage() {
                         className={cn(
                           "w-4 h-4 rounded-full border-2 transition-all duration-150",
                           pin.length > index
-                            ? "bg-primary border-primary scale-110 shadow-[0_0_8px_rgba(59,130,246,0.5)]"
+                            ? "bg-primary border-primary scale-110 shadow-glow"
                             : "border-muted-foreground/30 bg-transparent"
                         )}
                       />
@@ -450,7 +450,7 @@ export default function LoginPage() {
                       type="button"
                       disabled={isLoading}
                       onClick={() => handleNumpadPress(num.toString())}
-                      className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
+                      className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
                     >
                       {num}
                     </button>
@@ -467,7 +467,7 @@ export default function LoginPage() {
                     type="button"
                     disabled={isLoading}
                     onClick={() => handleNumpadPress("0")}
-                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
+                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
                   >
                     0
                   </button>
@@ -475,7 +475,7 @@ export default function LoginPage() {
                     type="button"
                     disabled={isLoading || !pin}
                     onClick={() => handleNumpadPress("back")}
-                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-700 font-semibold text-lg transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
+                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-lg transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
                   >
                     <Delete size={18} className="text-muted-foreground" />
                   </button>
@@ -488,7 +488,7 @@ export default function LoginPage() {
         <p className="mt-8 text-center text-xs text-muted-foreground">
           <Link
             href="/"
-            className="font-ui-semibold text-foreground underline-offset-4 transition-all hover:text-primary hover:underline"
+            className="font-semibold text-foreground underline-offset-4 transition-all hover:text-primary hover:underline"
           >
             ← {t("backToHome")}
           </Link>

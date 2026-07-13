@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
 
 /** Sticky thead için opak arka plan — scroll sırasında satırların başlıktan görünmesini engeller */
 export const virtualTableStickyHeadClass =
-  "sticky top-0 z-10 bg-slate-50 border-b border-border dark:bg-slate-900 dark:border-slate-700"
+  "sticky top-0 z-10 bg-slate-50 border-b border-border bg-card border-border rounded-lg"
 
 const virtualTableHeadDefaults =
   "[&_thead]:sticky [&_thead]:top-0 [&_thead]:z-10 [&_thead]:bg-slate-50 dark:[&_thead]:bg-slate-900 [&_thead_tr]:bg-slate-50 dark:[&_thead_tr]:bg-slate-900 [&_thead_th]:bg-slate-50 dark:[&_thead_th]:bg-slate-900"

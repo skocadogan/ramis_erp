@@ -32,10 +32,10 @@ export function SlideTable({
 }: SlideTableProps) {
   const t = useTranslations("pos")
   return (
-    <Card className="p-0 gap-0 border-border shadow-sm bg-card dark:border-slate-700 overflow-hidden">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 bg-slate-50 p-4 border-b border-border dark:bg-slate-800/40 dark:border-slate-800">
+    <Card className="p-0 gap-0 border-border shadow-sm bg-card border-border overflow-hidden">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
         <div className="space-y-0.5">
-          <CardTitle className="text-sm font-ui-semibold flex items-center gap-2">
+          <CardTitle className="text-sm font-semibold flex items-center gap-2">
             {t('admin_settings.slides.title')}
           </CardTitle>
           <CardDescription className="text-xs">{t('admin_settings.slides.description')}</CardDescription>
@@ -65,7 +65,7 @@ export function SlideTable({
       <CardContent className="p-4">
         <div className="rounded-lg border border-border overflow-hidden">
           <Table>
-            <TableHeader className="bg-slate-50 dark:bg-slate-900/50">
+            <TableHeader className="bg-muted/50">
               <TableRow>
                 <TableHead className="w-[80px]">{t('admin_settings.slides.tableType')}</TableHead>
                 <TableHead className="w-[80px]">{t('admin_settings.slides.tableImage')}</TableHead>
@@ -87,12 +87,12 @@ export function SlideTable({
                 slides.map((slide) => (
                   <TableRow key={slide.id} className="hover:bg-slate-50/50 transition-colors">
                     <TableCell>
-                      <Badge variant={slide.type === "IMAGE" ? "default" : "secondary"} className="text-2xs uppercase font-ui-bold">
+                      <Badge variant={slide.type === "IMAGE" ? "default" : "secondary"} className="text-2xs uppercase font-bold">
                         {slide.type === "IMAGE" ? t('admin_settings.slides.typeImageLabel') : t('admin_settings.slides.typeTextLabel')}
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="relative h-8 w-8 rounded-md overflow-hidden border border-border bg-slate-100 flex items-center justify-center dark:border-slate-800 dark:bg-slate-800">
+                      <div className="relative h-8 w-8 rounded-md overflow-hidden border border-border bg-slate-100 flex items-center justify-center border-border bg-muted">
                         {slide.image ? (
                           <AppImage src={slide.image} alt="" fill className="object-cover" sizes="32px" />
                         ) : (
@@ -102,12 +102,12 @@ export function SlideTable({
                     </TableCell>
                     <TableCell>
                       <div className="space-y-0.5">
-                        <p className="font-ui-medium text-foreground line-clamp-1">{slide.title}</p>
+                        <p className="font-medium text-foreground line-clamp-1">{slide.title}</p>
                         {slide.sub_title && <p className="text-2xs text-muted-foreground line-clamp-1">{slide.sub_title}</p>}
                       </div>
                     </TableCell>
                     <TableCell className="text-center">
-                      <Badge variant="secondary" className="text-2xs font-ui-medium max-w-[140px] truncate" title={slideScopeLabel(slide)}>
+                      <Badge variant="secondary" className="text-2xs font-medium max-w-[140px] truncate" title={slideScopeLabel(slide)}>
                         {slideScopeLabel(slide)}
                       </Badge>
                     </TableCell>

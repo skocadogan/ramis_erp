@@ -242,10 +242,10 @@ function DashboardPageContent() {
 
   return (
     <AppShell>
-      <div className="flex h-full flex-col overflow-auto bg-background p-6">
+      <div className="flex h-full flex-col overflow-auto p-6">
         <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
           <div>
-            <h1 className="text-xl font-ui-bold text-foreground">{t("title")}</h1>
+            <h1 className="text-xl font-bold text-foreground">{t("title")}</h1>
             <p className="text-sm text-muted-foreground">
               {t("subtitle", {
                 branch: effectiveBranchId === "ALL" ? t("allBranches") : (branchName ?? ""),
@@ -365,7 +365,7 @@ function DashboardPageContent() {
                   <TooltipContent
                     side="bottom"
                     sideOffset={8}
-                    className="max-w-xs text-left text-xs font-ui-normal leading-snug"
+                    className="max-w-xs text-left text-xs font-normal leading-snug"
                   >
                     {t("liveData.tooltip", { seconds: DASHBOARD_LIVE_POLL_SEC })}
                   </TooltipContent>
@@ -404,7 +404,7 @@ function DashboardPageContent() {
                     })}
                   </p>
                   <div className="rounded-xl bg-muted p-4">
-                    <p className="mb-2 font-ui-bold text-foreground">{t("anomalyDialog.ruleTitle")}</p>
+                    <p className="mb-2 font-bold text-foreground">{t("anomalyDialog.ruleTitle")}</p>
                     <ul className="list-inside list-disc space-y-2 text-xs text-muted-foreground">
                       <li>{t("anomalyDialog.rule1")}</li>
                       <li>

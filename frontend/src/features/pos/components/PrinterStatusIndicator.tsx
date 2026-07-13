@@ -195,7 +195,7 @@ export function PrinterStatusIndicator({
         onClick={syncAllStatuses}
         disabled={syncStatusMutation.isPending}
         className={cn(
-          "flex h-10 items-center gap-2 rounded-lg border border-border bg-white text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 dark:border-slate-600 dark:bg-slate-900 dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:hover:text-blue-400",
+          "flex h-10 items-center gap-2 rounded-lg border border-border text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 border-border bg-card dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:hover:text-blue-400",
           labelBreakpoint === "fullhd" ? "px-2 fullhd:px-3" : "px-3",
           className,
         )}
@@ -207,7 +207,7 @@ export function PrinterStatusIndicator({
         </div>
         <span
           className={cn(
-            "hidden max-w-[100px] truncate text-xs font-ui-semibold",
+            "hidden max-w-[100px] truncate text-xs font-semibold",
             labelBreakpoint === "fullhd" ? "fullhd:inline" : "lg:inline",
           )}
         >
@@ -225,7 +225,7 @@ export function PrinterStatusIndicator({
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          "flex h-10 items-center gap-2 rounded-lg border border-border bg-white text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 dark:border-slate-600 dark:bg-slate-900 dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:hover:text-blue-400",
+          "flex h-10 items-center gap-2 rounded-lg border border-border text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 border-border bg-card dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:hover:text-blue-400",
           labelBreakpoint === "fullhd" ? "px-2 fullhd:px-3" : "px-3",
           className,
         )}
@@ -239,7 +239,7 @@ export function PrinterStatusIndicator({
         </div>
         <span
           className={cn(
-            "hidden text-xs font-ui-semibold",
+            "hidden text-xs font-semibold",
             labelBreakpoint === "fullhd" ? "fullhd:inline" : "lg:inline",
           )}
         >
@@ -249,7 +249,7 @@ export function PrinterStatusIndicator({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-72 p-1">
         <DropdownMenuGroup>
-          <DropdownMenuLabel className="px-2 py-1.5 text-2xs font-ui-bold uppercase tracking-wider text-muted-foreground">
+          <DropdownMenuLabel className="px-2 py-1.5 text-2xs font-bold uppercase tracking-wider text-muted-foreground">
             {t("statusTitle")}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
@@ -268,18 +268,18 @@ export function PrinterStatusIndicator({
                     <div className={cn("absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white dark:border-slate-900", statusColor)} />
                   </div>
                   <div className="flex min-w-0 flex-col">
-                    <span className="truncate text-xs font-ui-bold text-foreground">
+                    <span className="truncate text-xs font-bold text-foreground">
                       {printer.name}
                     </span>
                     <div className="flex items-center gap-1.5">
                       <span className={cn(
-                        "text-[9px] font-ui-bold",
+                        "text-3xs font-bold",
                         !printer.status_info?.online ? "text-rose-500" : "text-muted-foreground"
                       )}>
                         {statusText}
                       </span>
-                      <span className="text-[9px] text-muted-foreground">•</span>
-                      <span className="truncate text-[9px] text-muted-foreground">
+                      <span className="text-3xs text-muted-foreground">•</span>
+                      <span className="truncate text-3xs text-muted-foreground">
                         {printer.connection_type === "NETWORK" ? printer.ip_address : "USB"}
                       </span>
                     </div>
@@ -311,7 +311,7 @@ export function PrinterStatusIndicator({
           <DropdownMenuItem
             onClick={syncAllStatuses}
             disabled={syncStatusMutation.isPending}
-            className="justify-center py-2 text-2xs font-ui-bold text-blue-600 dark:text-blue-400 focus:text-blue-700"
+            className="justify-center py-2 text-2xs font-bold text-blue-600 dark:text-blue-400 focus:text-blue-700"
           >
             <RefreshCw size={12} className={cn("mr-1.5", syncStatusMutation.isPending && "animate-spin")} />
             {syncStatusMutation.isPending ? t("checking") : t("refreshAll")}

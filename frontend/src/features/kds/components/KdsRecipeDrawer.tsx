@@ -63,7 +63,7 @@ export function KdsRecipeDrawer({ collapsed = false }: KdsRecipeDrawerProps) {
     >
       <ChefHat size={28} className="shrink-0" />
       {!collapsed && (
-        <span className="max-w-[10rem] truncate text-xs font-ui-semibold sm:text-sm">{t('sidebar.recipes')}</span>
+        <span className="max-w-[10rem] truncate text-xs font-semibold sm:text-sm">{t('sidebar.recipes')}</span>
       )}
     </button>
   );
@@ -74,7 +74,7 @@ export function KdsRecipeDrawer({ collapsed = false }: KdsRecipeDrawerProps) {
         <TooltipProvider delay={0}>
           <Tooltip>
             <TooltipTrigger render={buttonContent} />
-            <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-ui-semibold text-xs">
+            <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-semibold text-xs">
               {t('sidebar.recipes')}
             </TooltipContent>
           </Tooltip>
@@ -97,7 +97,7 @@ export function KdsRecipeDrawer({ collapsed = false }: KdsRecipeDrawerProps) {
             <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted px-4 py-3">
               <div className="flex items-center gap-2">
                 <ChefHat size={18} className="text-blue-500" />
-                <h3 className="font-ui-bold text-sm text-foreground">{t('recipes.title')}</h3>
+                <h3 className="font-bold text-sm text-foreground">{t('recipes.title')}</h3>
               </div>
               <button
                 type="button"
@@ -147,12 +147,12 @@ export function KdsRecipeDrawer({ collapsed = false }: KdsRecipeDrawerProps) {
               {isLoading ? (
                 <div className="py-20 flex flex-col items-center justify-center">
                   <Loader2 className="h-8 w-8 animate-spin text-blue-500 mb-4" />
-                  <span className="text-xs text-muted-foreground font-ui-medium">{t('loading')}</span>
+                  <span className="text-xs text-muted-foreground font-medium">{t('loading')}</span>
                 </div>
               ) : filteredRecipes.length === 0 ? (
                 <div className="py-20 flex flex-col items-center justify-center text-muted-foreground">
                   <ChefHat size={48} className="opacity-10 mb-4" />
-                  <p className="text-sm font-ui-medium italic">{t('recipes.noMatch')}</p>
+                  <p className="text-sm font-medium italic">{t('recipes.noMatch')}</p>
                 </div>
               ) : (
                 filteredRecipes.map((recipe) => (
@@ -165,7 +165,7 @@ export function KdsRecipeDrawer({ collapsed = false }: KdsRecipeDrawerProps) {
                       <BookOpen size={20} />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <h4 className="text-sm font-ui-bold text-foreground truncate group-hover:text-foreground transition-colors">
+                      <h4 className="text-sm font-bold text-foreground truncate group-hover:text-foreground transition-colors">
                         {recipe.name}
                       </h4>
                       <div className="flex items-center gap-3 mt-1 text-sub text-muted-foreground">
@@ -189,7 +189,7 @@ export function KdsRecipeDrawer({ collapsed = false }: KdsRecipeDrawerProps) {
               )}
             </div>
 
-            <div className="p-4 border-t border-border bg-muted/50 text-2xs text-muted-foreground font-ui-medium text-center italic">
+            <div className="p-4 border-t border-border bg-muted/50 text-2xs text-muted-foreground font-medium text-center italic">
               {t('recipes.recipeCount', { count: filteredRecipes.length })}
             </div>
           </aside>

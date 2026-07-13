@@ -120,7 +120,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
         key={item.href}
         href={item.href}
         className={cn(
-          "relative flex items-center rounded-xl text-ui-sm font-ui-medium transition-colors group shrink-0",
+          "relative flex items-center rounded-xl text-ui-sm font-medium transition-colors group shrink-0",
           density === "compact" ? "gap-2" : (density === "spacious" ? "gap-4" : "gap-3"),
           collapsed
             ? cn("justify-center px-0", density === "compact" ? "py-1.5" : (density === "spacious" ? "py-3" : "py-2"))
@@ -132,7 +132,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
         )}
       >
         {active && !collapsed && (
-          <span className="absolute start-1.5 top-1/2 -translate-y-1/2 h-5 w-[3px] rounded-full bg-primary shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+          <span className="absolute start-1.5 top-1/2 -translate-y-1/2 h-5 w-[3px] rounded-full bg-primary shadow-glow" />
         )}
         <Icon
           size={isSubItem ? 16 : 18}
@@ -146,7 +146,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
         {showBadge && (
           <span className={cn(
             collapsed ? "absolute -top-1 -end-1" : "ms-auto",
-            "bg-red-500 text-white text-2xs font-ui-bold px-1.5 py-0.5 min-w-[18px] h-4.5 rounded-full flex items-center justify-center border-2 border-white dark:border-[#020817]"
+            "bg-red-500 text-white text-2xs font-bold px-1.5 py-0.5 min-w-[18px] h-4.5 rounded-full flex items-center justify-center border-2 border-white dark:border-border"
           )}>
             {badgeCount}
           </span>
@@ -158,7 +158,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
       return (
         <Tooltip key={item.href}>
           <TooltipTrigger render={itemContent} delay={50} />
-          <TooltipContent side="right" sideOffset={18} className="font-ui-semibold text-xs ms-1 bg-foreground text-background border-border">
+          <TooltipContent side="right" sideOffset={18} className="font-semibold text-xs ms-1 bg-foreground text-background border-border">
             {label}
           </TooltipContent>
         </Tooltip>
@@ -181,7 +181,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
       <button
         onClick={() => toggleGroup(id)}
         className={cn(
-          "w-full relative flex items-center rounded-xl text-ui font-ui-medium transition-colors shrink-0 outline-none",
+          "w-full relative flex items-center rounded-xl text-ui font-medium transition-colors shrink-0 outline-none",
           density === "compact" ? "gap-2" : (density === "spacious" ? "gap-4" : "gap-3"),
           collapsed
             ? cn("justify-center px-0", density === "compact" ? "py-2" : (density === "spacious" ? "py-3.5" : "py-2.5"))
@@ -219,7 +219,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
               sideOffset={14}
               className="w-[220px] p-0 ms-1 bg-card border-border rounded-xl overflow-hidden"
             >
-              <div className="px-4 py-3 pb-2 text-sub font-ui-bold text-muted-foreground uppercase tracking-widest border-b border-border">
+              <div className="px-4 py-3 pb-2 text-sub font-bold text-muted-foreground uppercase tracking-widest border-b border-border">
                 {groupLabel}
               </div>
               <div className="p-2 space-y-1">
@@ -229,7 +229,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
                     if (sgVisible.length === 0) return null
                     return (
                       <div key={sg.labelKey}>
-                        <div className="px-3 pt-1.5 pb-0.5 text-[9px] font-ui-bold uppercase text-muted-foreground/50 tracking-widest">
+                        <div className="px-3 pt-1.5 pb-0.5 text-3xs font-bold uppercase text-muted-foreground/50 tracking-widest">
                           {getLabel(sg.labelKey)}
                         </div>
                         {sgVisible.map(subItem => {
@@ -242,7 +242,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
                               className={cn(
                                 "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                                 subActive
-                                  ? "bg-primary/10 text-primary font-ui-semibold"
+                                  ? "bg-primary/10 text-primary font-semibold"
                                   : "text-muted-foreground hover:text-foreground hover:bg-muted"
                               )}
                             >
@@ -265,7 +265,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
                         className={cn(
                           "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
                           subActive
-                            ? "bg-primary/10 text-primary font-ui-semibold"
+                            ? "bg-primary/10 text-primary font-semibold"
                             : "text-muted-foreground hover:text-foreground hover:bg-muted"
                         )}
                       >
@@ -297,7 +297,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
                   if (sgVisible.length === 0) return null
                   return (
                     <div key={sg.labelKey}>
-                      <div className="px-2 pt-2 pb-1 text-2xs font-ui-bold uppercase text-muted-foreground/50 tracking-widest">
+                      <div className="px-2 pt-2 pb-1 text-2xs font-bold uppercase text-muted-foreground/50 tracking-widest">
                         {getLabel(sg.labelKey)}
                       </div>
                       <div className="space-y-0.5">
@@ -369,7 +369,7 @@ export function AppSidebar({ collapsed, onCollapse, userPermissions, is_superuse
             ) : (
               <>
                 <ChevronLeft size={20} />
-                <span className="text-sm font-ui-medium">{tNav("collapse")}</span>
+                <span className="text-sm font-medium">{tNav("collapse")}</span>
               </>
             )}
           </button>

@@ -191,7 +191,7 @@ export function AvailabilityFormModal({ isOpen, onClose, onSave, isSubmitting, i
               <div className="flex min-h-0 flex-col md:col-span-8">
                 <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-6 py-4">
                   <div className="min-w-0">
-                    <h3 className="truncate text-sm font-ui-bold">{t("menuProducts")}</h3>
+                    <h3 className="truncate text-sm font-bold">{t("menuProducts")}</h3>
                     <p className="truncate text-2xs text-muted-foreground">{t("menuProductsHint")}</p>
                   </div>
                   <div className="relative w-48 shrink-0">
@@ -215,9 +215,9 @@ export function AvailabilityFormModal({ isOpen, onClose, onSave, isSubmitting, i
                       <table className="w-full text-xs">
                         <thead className="sticky top-0 z-20 border-b border-border bg-background text-muted-foreground">
                           <tr>
-                            <th className="px-3 py-2 text-left font-ui-bold">{t("colProduct")}</th>
-                            <th className="w-40 px-3 py-2 text-left font-ui-bold">{t("colMode")}</th>
-                            <th className="w-32 px-3 py-2 text-right font-ui-bold">{t("colRemaining")}</th>
+                            <th className="px-3 py-2 text-left font-bold">{t("colProduct")}</th>
+                            <th className="w-40 px-3 py-2 text-left font-bold">{t("colMode")}</th>
+                            <th className="w-32 px-3 py-2 text-right font-bold">{t("colRemaining")}</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-border">
@@ -230,7 +230,7 @@ export function AvailabilityFormModal({ isOpen, onClose, onSave, isSubmitting, i
                           ) : (
                             filteredItems.map((item) => (
                               <tr key={item.product} className="transition-colors hover:bg-muted/20">
-                                <td className="px-3 py-2 font-ui-medium">{item.product_name}</td>
+                                <td className="px-3 py-2 font-medium">{item.product_name}</td>
                                 <td className="px-3 py-2">
                                   <Select
                                     value={item.mode}

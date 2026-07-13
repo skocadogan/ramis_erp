@@ -328,14 +328,14 @@ function PrepManagementContent() {
 
   return (
     <AppShell>
-      <div className="flex h-full flex-col bg-white dark:bg-slate-950 overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-100 bg-white px-4 py-2 dark:bg-slate-900 dark:border-slate-800 shrink-0">
+      <div className="flex h-full flex-col bg-card overflow-hidden">
+        <div className="flex items-center justify-between border-b border-slate-100 px-4 py-2 bg-card border-border shrink-0">
           <div className="flex items-center gap-3">
             <div>
-              <h1 className="text-lg font-ui-bold text-slate-900 dark:text-white leading-tight">
+              <h1 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
                 {t("management.title")}
-                {activeTab === 'templates' && templatesTotalCount > 0 && <span className="ml-2 text-xs font-ui-normal text-muted-foreground">({templatesTotalCount})</span>}
-                {activeTab === 'smart-rules' && rulesTotalCount > 0 && <span className="ml-2 text-xs font-ui-normal text-muted-foreground">({rulesTotalCount})</span>}
+                {activeTab === 'templates' && templatesTotalCount > 0 && <span className="ml-2 text-xs font-normal text-muted-foreground">({templatesTotalCount})</span>}
+                {activeTab === 'smart-rules' && rulesTotalCount > 0 && <span className="ml-2 text-xs font-normal text-muted-foreground">({rulesTotalCount})</span>}
               </h1>
               <div className="flex items-center gap-2 mt-0.5">
                 {showBranchSelect ? (
@@ -349,7 +349,7 @@ function PrepManagementContent() {
                     value={selId}
                     onValueChange={(val) => setLocalBranchId(val === "__all__" ? "" : val)}
                   >
-                    <SelectTrigger className="text-xs font-ui-medium bg-transparent border-none text-blue-600 outline-none cursor-pointer p-0 h-auto shadow-none hover:bg-transparent">
+                    <SelectTrigger className="text-xs font-medium bg-transparent border-none text-blue-600 outline-none cursor-pointer p-0 h-auto shadow-none hover:bg-transparent">
                       <span className="truncate">{selLabel}</span>
                     </SelectTrigger>
                     <SelectContent>
@@ -362,7 +362,7 @@ function PrepManagementContent() {
                   );
                 })()
                 ) : (
-                  <p className="text-xs text-muted-foreground font-ui-medium">
+                  <p className="text-xs text-muted-foreground font-medium">
                     {user?.branch_name || t("management.noBranchAssigned")}
                   </p>
                 )}
@@ -402,7 +402,7 @@ function PrepManagementContent() {
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex min-h-0 flex-1 flex-col overflow-hidden">
           {/* Tab Navigation */}
-          <div className="flex items-center gap-1 border-b border-border bg-white px-4 dark:bg-slate-900 dark:border-slate-800 shrink-0">
+          <div className="flex items-center gap-1 border-b border-border px-4 bg-card border-border shrink-0">
             {([
               { value: 'tasks' as const, tab: 'tasks' as const, icon: ClipboardList, visible: true },
               { value: 'templates' as const, tab: 'templates' as const, icon: CalendarClock, visible: canManageTemplates },
@@ -413,7 +413,7 @@ function PrepManagementContent() {
                 key={tab.value}
                 onClick={() => setActiveTab(tab.value)}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-3 text-sm font-ui-medium border-b-2 transition-colors whitespace-nowrap",
+                  "flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap",
                   activeTab === tab.value
                     ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
                     : 'border-transparent text-muted-foreground hover:text-slate-700 hover:border-slate-300 dark:text-muted-foreground dark:hover:text-slate-200'
@@ -426,7 +426,7 @@ function PrepManagementContent() {
           </div>
 
           {/* Main Content Area */}
-          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden p-3 bg-slate-50 dark:bg-slate-800">
+          <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden p-3 bg-muted">
 
             {/* Stats Cards */}
             <div className="grid grid-cols-1 md:grid-cols-4 gap-3 shrink-0">
@@ -475,7 +475,7 @@ function PrepManagementContent() {
                         : undefined
                     }
                     className={cn(
-                      "bg-white dark:bg-slate-900/40 p-3 rounded-xl border shadow-sm flex items-center gap-3 text-left w-full",
+                      "bg-card/40 p-3 rounded-xl border shadow-sm flex items-center gap-3 text-left w-full",
                       isTaskStatCard && "cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60",
                       isSelected
                         ? "border-blue-500 ring-2 ring-blue-500/20 dark:border-blue-400"
@@ -492,8 +492,8 @@ function PrepManagementContent() {
                       <stat.icon size={16} />
                     </div>
                     <div>
-                      <p className="text-[11px] font-ui-semibold text-muted-foreground leading-none mb-1">{t(`management.stats.${stat.labelKey}`)}</p>
-                      <p className="text-base font-ui-bold text-slate-900 dark:text-white leading-none">{stat.value}</p>
+                      <p className="text-sub font-semibold text-muted-foreground leading-none mb-1">{t(`management.stats.${stat.labelKey}`)}</p>
+                      <p className="text-base font-bold text-slate-900 dark:text-white leading-none">{stat.value}</p>
                     </div>
                   </CardTag>
                 );
@@ -501,7 +501,7 @@ function PrepManagementContent() {
             </div>
 
             <div className="flex min-h-0 flex-1 flex-col">
-              <Card className="flex min-h-0 flex-1 flex-col overflow-hidden border border-border shadow-none dark:border-slate-800 bg-card">
+              <Card className="flex min-h-0 flex-1 flex-col overflow-hidden border border-border shadow-none border-border bg-card">
                 {/* Search Bar Row (White) */}
                 <div className="p-2 flex items-center justify-between shrink-0 bg-card">
                   <div className="flex items-center gap-2">
@@ -509,7 +509,7 @@ function PrepManagementContent() {
                       <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                       <Input
                         placeholder={t("management.searchPlaceholder")}
-                        className="pl-9 h-9 text-sm bg-white dark:bg-slate-950 border-border"
+                        className="pl-9 h-9 text-sm bg-card border-border"
                       />
                     </div>
                     <div className="flex items-center gap-2">
@@ -521,12 +521,12 @@ function PrepManagementContent() {
                   </div>
 
                   {activeTab === 'smart-rules' && (
-                    <div className="flex bg-slate-100 dark:bg-slate-800 p-1 rounded-lg">
+                    <div className="flex bg-secondary p-1 rounded-lg">
                       <button
                         onClick={() => setSmartSubTab('suggestions')}
                         className={cn(
-                          "px-4 py-1.5 text-xs font-ui-semibold rounded-md transition-all",
-                          smartSubTab === 'suggestions' ? "bg-white dark:bg-slate-950 text-purple-600 shadow-sm" : "text-muted-foreground hover:text-slate-700"
+                          "px-4 py-1.5 text-xs font-semibold rounded-md transition-all",
+                          smartSubTab === 'suggestions' ? "bg-card text-purple-600 shadow-sm" : "text-muted-foreground hover:text-slate-700"
                         )}
                       >
                         {t("management.smartSubTabs.suggestions")}
@@ -534,8 +534,8 @@ function PrepManagementContent() {
                       <button
                         onClick={() => setSmartSubTab('rules')}
                         className={cn(
-                          "px-4 py-1.5 text-xs font-ui-semibold rounded-md transition-all",
-                          smartSubTab === 'rules' ? "bg-white dark:bg-slate-950 text-purple-600 shadow-sm" : "text-muted-foreground hover:text-slate-700"
+                          "px-4 py-1.5 text-xs font-semibold rounded-md transition-all",
+                          smartSubTab === 'rules' ? "bg-card text-purple-600 shadow-sm" : "text-muted-foreground hover:text-slate-700"
                         )}
                       >
                         {t("management.smartSubTabs.ruleManagement")}
@@ -628,12 +628,12 @@ function PrepManagementContent() {
                   )}
 
                   {activeTab === 'settings' && (
-                    <div className="p-6 space-y-6 bg-white dark:bg-slate-900">
-                      <h3 className="text-sm font-ui-bold text-slate-900 dark:text-white">{t("management.moduleSettings")}</h3>
+                    <div className="p-6 space-y-6 bg-card">
+                      <h3 className="text-sm font-bold text-slate-900 dark:text-white">{t("management.moduleSettings")}</h3>
                       <div className="space-y-4">
-                        <div className="flex items-center justify-between gap-4 p-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl border border-transparent dark:border-slate-800">
+                        <div className="flex items-center justify-between gap-4 p-4 bg-muted/50 rounded-xl border border-transparent border-border">
                           <div className="min-w-0 flex-1">
-                            <Label htmlFor="prep-auto-archive" className="text-sm font-ui-bold text-foreground cursor-pointer">
+                            <Label htmlFor="prep-auto-archive" className="text-sm font-bold text-foreground cursor-pointer">
                               {t("management.autoArchive.label")}
                             </Label>
                             <p className="text-xs text-muted-foreground mt-1">
@@ -677,12 +677,12 @@ function PrepManagementContent() {
               </Card>
             </div>
 
-            <div className="shrink-0 mt-4 p-4 bg-white dark:bg-slate-900 border border-border rounded-xl shadow-sm">
-              <h4 className="text-xs font-ui-bold text-slate-500 mb-3 flex items-center gap-2">
+            <div className="shrink-0 mt-4 p-4 bg-card border border-border rounded-xl shadow-sm">
+              <h4 className="text-xs font-bold text-slate-500 mb-3 flex items-center gap-2">
                 <Sparkles size={14} className="text-blue-500" />
                 {t("management.tipsTitle")}
               </h4>
-              <ul className="space-y-2 text-xs text-muted-foreground font-ui-medium">
+              <ul className="space-y-2 text-xs text-muted-foreground font-medium">
                 <li className="flex items-center gap-2">
                   <div className="w-1 h-1 rounded-full bg-blue-500 shrink-0" />
                   {t("management.tips.templatesFire")}

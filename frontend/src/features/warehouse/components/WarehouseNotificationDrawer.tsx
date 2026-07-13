@@ -43,13 +43,13 @@ export function WarehouseNotificationDrawer() {
             "relative flex size-12 items-center justify-center rounded-lg border shadow-md",
             pendingCount > 0
               ? "border-amber-600 bg-amber-600 text-white"
-              : "border-slate-300 bg-slate-800 text-slate-300 dark:border-slate-600",
+              : "border-slate-300 bg-slate-800 text-slate-300 border-input",
           )}
           aria-label={t("drawerTitle")}
         >
           <Bell size={22} aria-hidden />
           {pendingCount > 0 && (
-            <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-rose-600 text-2xs font-ui-bold text-white ring-2 ring-white dark:ring-slate-900">
+            <span className="absolute -right-1 -top-1 flex size-5 items-center justify-center rounded-full bg-rose-600 text-2xs font-bold text-white ring-2 ring-white dark:ring-slate-900">
               {pendingCount > 9 ? "9+" : pendingCount}
             </span>
           )}
@@ -83,14 +83,14 @@ export function WarehouseNotificationDrawer() {
                 >
                   <div className="min-w-0 flex-1 flex-col gap-0.5">
                     <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-mono text-2xs font-ui-semibold text-muted-foreground">
+                      <span className="font-mono text-2xs font-semibold text-muted-foreground">
                         {report.report_number}
                       </span>
-                      <span className="truncate text-sub font-ui-medium text-muted-foreground">
+                      <span className="truncate text-sub font-medium text-muted-foreground">
                         {report.kitchen_station_name}
                       </span>
                     </div>
-                    <span className="text-xs font-ui-medium text-foreground">
+                    <span className="text-xs font-medium text-foreground">
                       {t("lineItemsCount", { count: report.items?.length || 0 })}
                     </span>
                     <div className="mt-1 flex items-center gap-1 text-2xs text-muted-foreground">

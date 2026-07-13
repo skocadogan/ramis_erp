@@ -11,12 +11,12 @@ interface ReadyByTableGroupProps {
 
 export function ReadyByTableGroup({ group, deliverItem, t }: ReadyByTableGroupProps) {
   return (
-    <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm dark:border-slate-700">
-      <div className="flex items-center justify-between border-b border-border bg-muted/50 px-3 py-2 dark:bg-slate-800/80">
-        <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs font-ui-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
+    <div className="overflow-hidden rounded-xl border border-border bg-card shadow-sm border-border">
+      <div className="flex items-center justify-between border-b border-border bg-muted/50 px-3 py-2 bg-muted/80">
+        <span className="rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-800 dark:bg-emerald-900/50 dark:text-emerald-200">
           {group.tableLabel}
         </span>
-        <span className="text-2xs font-ui-medium text-muted-foreground">
+        <span className="text-2xs font-medium text-muted-foreground">
           {t("itemCount", { count: group.items.length })}
         </span>
       </div>
@@ -28,11 +28,11 @@ export function ReadyByTableGroup({ group, deliverItem, t }: ReadyByTableGroupPr
           >
             <div className="flex min-w-0 max-w-[70%] flex-col gap-0.5">
               <div className="flex items-center gap-2">
-                <span className="truncate text-[11px] font-ui-semibold text-muted-foreground dark:text-muted-foreground">
+                <span className="truncate text-sub font-semibold text-muted-foreground dark:text-muted-foreground">
                   {item.station_name}
                 </span>
               </div>
-              <span className="text-sm font-ui-bold leading-tight text-slate-800 dark:text-slate-100">
+              <span className="text-sm font-bold leading-tight text-slate-800 text-foreground">
                 {item.quantity}x {item.product_name}
                 {item.unit_name && (
                   <span className="ml-1.5 text-xs text-blue-600 dark:text-blue-400">
@@ -40,7 +40,7 @@ export function ReadyByTableGroup({ group, deliverItem, t }: ReadyByTableGroupPr
                   </span>
                 )}
               </span>
-              <div className="mt-0.5 flex items-center gap-1 text-2xs font-ui-medium text-muted-foreground dark:text-muted-foreground">
+              <div className="mt-0.5 flex items-center gap-1 text-2xs font-medium text-muted-foreground dark:text-muted-foreground">
                 <Clock size={10} />
                 {t("readyAt", {
                   time: new Date(item.updated_at).toLocaleTimeString([], {

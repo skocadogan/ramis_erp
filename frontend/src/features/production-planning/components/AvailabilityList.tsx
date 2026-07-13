@@ -43,22 +43,22 @@ export function AvailabilityList({
       header={
         <thead className={virtualTableStickyHeadClass}>
           <tr>
-            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-left px-4 py-3 font-semibold text-muted-foreground">
               {t("columns.date")}
             </th>
-            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-left px-4 py-3 font-semibold text-muted-foreground">
               {t("columns.product")}
             </th>
-            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-left px-4 py-3 font-semibold text-muted-foreground">
               {t("columns.branch")}
             </th>
-            <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-center px-4 py-3 font-semibold text-muted-foreground">
               {t("columns.mode")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("columns.remaining")}
             </th>
-            <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">
+            <th className="text-right px-4 py-3 font-semibold text-muted-foreground">
               {t("columns.actions")}
             </th>
           </tr>
@@ -84,10 +84,10 @@ export function AvailabilityList({
       }
       renderRow={(item) => (
         <>
-          <td className="px-4 py-3 font-ui-medium text-foreground align-middle">
+          <td className="px-4 py-3 font-medium text-foreground align-middle">
             {item.effective_date ? format(new Date(item.effective_date), "dd-MM-yyyy") : "-"}
           </td>
-          <td className="px-4 py-3 text-foreground font-ui-medium align-middle">
+          <td className="px-4 py-3 text-foreground font-medium align-middle">
             {item.product_name || t("unknownProduct")}
           </td>
           <td className="px-4 py-3 text-muted-foreground align-middle">
@@ -96,12 +96,12 @@ export function AvailabilityList({
           <td className="px-4 py-3 text-center align-middle">
             <span
               className={cn(
-                "inline-flex items-center px-2 py-1 rounded-full text-xs font-ui-bold",
+                "inline-flex items-center px-2 py-1 rounded-full text-xs font-bold",
                 item.mode === "SOLD_OUT"
                   ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                   : item.mode === "LIMITED"
                     ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                    : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
+                    : "bg-slate-100 text-slate-700 bg-muted text-muted-foreground",
               )}
             >
               {item.mode === "SOLD_OUT"
@@ -111,7 +111,7 @@ export function AvailabilityList({
                   : t("modeUnlimited")}
             </span>
           </td>
-          <td className="px-4 py-3 text-right font-ui-semibold text-foreground align-middle">
+          <td className="px-4 py-3 text-right font-semibold text-foreground align-middle">
             {item.mode === "LIMITED" && item.remaining_portions !== null
               ? formatNumber(item.remaining_portions, 0)
               : item.mode === "SOLD_OUT"

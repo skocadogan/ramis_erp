@@ -146,7 +146,7 @@ function RecycleBinContent() {
       <AppShell>
         <div className="flex flex-col items-center justify-center p-12 text-center">
           <ShieldAlert className="h-16 w-16 text-red-500 mb-4" />
-          <h2 className="text-xl font-ui-bold text-foreground">{t("unauthorized.title")}</h2>
+          <h2 className="text-xl font-bold text-foreground">{t("unauthorized.title")}</h2>
           <p className="text-muted-foreground max-w-md mx-auto mt-2">{t("unauthorized.description")}</p>
         </div>
       </AppShell>
@@ -156,9 +156,9 @@ function RecycleBinContent() {
   return (
     <AppShell>
       <div className="flex h-full bg-background overflow-hidden">
-        <div className="w-64 border-r border-border bg-white dark:bg-[#0f172a] dark:border-slate-800 flex flex-col shrink-0">
+        <div className="w-64 border-r border-border border-border flex flex-col shrink-0">
           <div className="p-4 border-b border-border flex items-center justify-between">
-            <h2 className="font-ui-semibold text-foreground flex items-center gap-2">
+            <h2 className="font-semibold text-foreground flex items-center gap-2">
               <Database size={16} className="text-indigo-500" />
               {t("sidebar.categories")}
             </h2>
@@ -191,12 +191,12 @@ function RecycleBinContent() {
                   className={cn(
                     "w-full text-left flex items-center justify-between px-3 py-2 text-sm rounded-md transition-colors",
                     selectedModel?.app_label === s.app_label && selectedModel?.model_name === s.model_name
-                      ? "bg-indigo-50 text-indigo-700 font-ui-medium dark:bg-indigo-900/30 dark:text-indigo-400"
+                      ? "bg-indigo-50 text-indigo-700 font-medium dark:bg-indigo-900/30 dark:text-indigo-400"
                       : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800",
                   )}
                 >
                   <span className="truncate">{s.verbose_name}</span>
-                  <span className="bg-slate-200 text-slate-600 dark:bg-slate-800 dark:text-muted-foreground text-2xs px-1.5 py-0.5 rounded-full font-ui-bold">
+                  <span className="bg-slate-200 text-slate-600 bg-muted dark:text-muted-foreground text-2xs px-1.5 py-0.5 rounded-full font-bold">
                     {s.count}
                   </span>
                 </button>
@@ -206,9 +206,9 @@ function RecycleBinContent() {
         </div>
 
         <div className="flex-1 flex flex-col min-w-0">
-          <div className="p-4 sm:p-6 border-b border-border bg-white dark:bg-[#0f172a] shadow-sm z-10 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
+          <div className="p-4 sm:p-6 border-b border-border shadow-sm z-10 flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
             <div>
-              <h2 className="text-lg font-ui-bold text-foreground flex items-center gap-2">
+              <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
                 <ArchiveRestore className="text-blue-600 dark:text-blue-500" />
                 {t("header.title")}
               </h2>
@@ -223,10 +223,10 @@ function RecycleBinContent() {
                 <p>{t("selectCategoryHint")}</p>
               </div>
             ) : (
-              <div className="bg-white rounded-t-lg border text-sm border-border rounded-lg shadow-sm dark:bg-slate-900 dark:border-slate-800 flex flex-col h-full max-h-[800px]">
-                <div className="p-3 border-b rounded-t-lg flex flex-wrap gap-3 justify-between items-center bg-slate-50 dark:bg-slate-800/50 dark:border-slate-700">
+              <div className="rounded-t-lg border text-sm border-border rounded-lg shadow-sm bg-card border-border flex flex-col h-full max-h-[800px]">
+                <div className="p-3 border-b rounded-t-lg flex flex-wrap gap-3 justify-between items-center bg-muted/50 border-border">
                   <div className="flex items-center gap-4">
-                    <h3 className="font-ui-semibold text-foreground">
+                    <h3 className="font-semibold text-foreground">
                       {t("toolbar.deletedRecords", { model: selectedModel.verbose_name })}
                     </h3>
                     <div className="flex items-center gap-2">
@@ -234,7 +234,7 @@ function RecycleBinContent() {
                         type="button"
                         onClick={() => setIsRestoreAllOpen(true)}
                         disabled={restoreAllMutation.isPending || itemsQuery.data?.length === 0}
-                        className="text-sub font-ui-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-2 py-1 rounded border border-emerald-100 transition-colors disabled:opacity-50"
+                        className="text-sub font-bold text-emerald-600 hover:text-emerald-700 flex items-center gap-1 bg-emerald-50 px-2 py-1 rounded border border-emerald-100 transition-colors disabled:opacity-50"
                       >
                         <RefreshCcw size={12} className={restoreAllMutation.isPending ? "animate-spin" : ""} />
                         {t("toolbar.restoreAll")}
@@ -243,7 +243,7 @@ function RecycleBinContent() {
                         type="button"
                         onClick={() => setIsEmptyBinOpen(true)}
                         disabled={emptyBinMutation.isPending || itemsQuery.data?.length === 0}
-                        className="text-sub font-ui-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 bg-rose-50 px-2 py-1 rounded border border-rose-100 transition-colors disabled:opacity-50"
+                        className="text-sub font-bold text-rose-600 hover:text-rose-700 flex items-center gap-1 bg-rose-50 px-2 py-1 rounded border border-rose-100 transition-colors disabled:opacity-50"
                       >
                         <Trash2 size={12} className={emptyBinMutation.isPending ? "animate-spin" : ""} />
                         {t("toolbar.emptyBin")}
@@ -279,17 +279,17 @@ function RecycleBinContent() {
                       header={
                         <thead className={virtualTableStickyHeadClass}>
                           <tr>
-                            <th className="px-4 py-3 text-xs font-ui-semibold text-muted-foreground uppercase">{t("table.id")}</th>
-                            <th className="px-4 py-3 text-xs font-ui-semibold text-muted-foreground uppercase">{t("table.name")}</th>
-                            <th className="px-4 py-3 text-xs font-ui-semibold text-muted-foreground uppercase">{t("table.deletedAt")}</th>
-                            <th className="px-4 py-3 text-right text-xs font-ui-semibold text-muted-foreground uppercase">{t("table.actions")}</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">{t("table.id")}</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">{t("table.name")}</th>
+                            <th className="px-4 py-3 text-xs font-semibold text-muted-foreground uppercase">{t("table.deletedAt")}</th>
+                            <th className="px-4 py-3 text-right text-xs font-semibold text-muted-foreground uppercase">{t("table.actions")}</th>
                           </tr>
                         </thead>
                       }
                       renderRow={(item) => (
                         <>
                           <td className="px-4 py-2 font-mono text-sub text-muted-foreground">{item.id}</td>
-                          <td className="px-4 py-2 font-ui-medium text-foreground">{item.name}</td>
+                          <td className="px-4 py-2 font-medium text-foreground">{item.name}</td>
                           <td className="px-4 py-2 text-muted-foreground text-xs">
                             {item.deleted_at
                               ? format(new Date(item.deleted_at), "dd MMM yyyy, HH:mm", { locale: dateLocale })

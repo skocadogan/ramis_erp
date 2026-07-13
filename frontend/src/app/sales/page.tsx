@@ -162,7 +162,7 @@ function SalesPageContent() {
         <AppShell>
             <div className="flex h-full flex-col bg-background overflow-hidden">
                 {/* Tab Navigation */}
-                <div className="flex items-center gap-1 border-b border-border bg-white px-4 dark:bg-slate-900 dark:border-slate-700">
+                <div className="flex items-center gap-1 border-b border-border px-4 bg-card border-border">
                     {([
                         { key: 'sales' as TabType, label: t('tabs.sales') },
                         { key: 'summary' as TabType, label: t('tabs.summary') },
@@ -173,7 +173,7 @@ function SalesPageContent() {
                         <button
                             key={key}
                             onClick={() => sales.setActiveTab(key)}
-                            className={`flex items-center gap-1.5 px-3 py-3 text-sm font-ui-medium border-b-2 transition-colors
+                            className={`flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-colors
                                 ${sales.activeTab === key
                                     ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
                                     : 'border-transparent text-muted-foreground hover:text-slate-700 hover:border-slate-300 dark:text-muted-foreground dark:hover:text-slate-200'
@@ -262,27 +262,27 @@ function SalesPageContent() {
                     {sales.activeTab === 'sales' && (
                         <>
                             {/* Filter Bar */}
-                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white px-3 py-2.5 rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700 shrink-0">
+                            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-border bg-card border-border shrink-0">
                                 <div className="flex flex-wrap items-center gap-2 flex-1">
                                     {/* Table Select */}
                                     <TableSelect
                                         value={sales.tableId}
                                         onChange={sales.setTableId}
-                                        className="w-full sm:w-[180px] h-9 bg-slate-50 border-border text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+                                        className="w-full sm:w-[180px] h-9 bg-slate-50 border-border text-sm bg-muted border-input text-foreground"
                                     />
 
                                     {/* Cashier Select */}
                                     <CashierSelect
                                         value={sales.cashierId}
                                         onChange={sales.setCashierId}
-                                        className="w-full sm:w-[200px] h-9 bg-slate-50 border-border text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+                                        className="w-full sm:w-[200px] h-9 bg-slate-50 border-border text-sm bg-muted border-input text-foreground"
                                     />
 
                                     {sales.activeTab === 'sales' && (
                                         <select
                                             value={sales.paymentFilter}
                                             onChange={e => sales.setPaymentFilter(e.target.value)}
-                                            className="bg-slate-50 border border-border rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+                                            className="bg-slate-50 border border-border rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground"
                                         >
                                             <option value="ALL">{t('payment.all')}</option>
                                             <option value="CASH">{t('payment.cash')}</option>
@@ -294,16 +294,16 @@ function SalesPageContent() {
 
                                     {sales.activeTab === 'sales' && (
                                         <div className="flex items-center gap-2 rounded-md border border-amber-200/90 bg-amber-50/80 px-2.5 py-1.5 dark:border-amber-800/50 dark:bg-amber-950/25">
-                                            <span className="text-xs font-ui-medium text-amber-900 dark:text-amber-200 whitespace-nowrap">
+                                            <span className="text-xs font-medium text-amber-900 dark:text-amber-200 whitespace-nowrap">
                                                 {t('list.discountOnly')}
                                             </span>
                                             <button
                                                 type="button"
                                                 onClick={() => sales.setDiscountOnly(!sales.discountOnly)}
-                                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${sales.discountOnly ? 'bg-amber-600' : 'bg-slate-200 dark:bg-slate-700'
+                                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${sales.discountOnly ? 'bg-amber-600' : 'bg-slate-200 bg-accent'
                                                     }`}
                                             >
-                                                <span className={`pointer-events-none block h-4 w-4 rounded-full bg-white shadow-lg ring-0 transition-transform ${sales.discountOnly ? 'translate-x-4' : 'translate-x-0'
+                                                <span className={`pointer-events-none block h-4 w-4 rounded-full shadow-lg ring-0 transition-transform ${sales.discountOnly ? 'translate-x-4' : 'translate-x-0'
                                                     }`} />
                                             </button>
                                         </div>
@@ -327,7 +327,7 @@ function SalesPageContent() {
                                                 value={sales.startDate}
                                                 onChange={e => sales.setStartDate(e.target.value)}
                                                 max={sales.endDate}
-                                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 h-9"
+                                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                                             />
                                             <span className="text-muted-foreground text-sm">-</span>
                                             <input
@@ -335,7 +335,7 @@ function SalesPageContent() {
                                                 value={sales.endDate}
                                                 onChange={e => sales.setEndDate(e.target.value)}
                                                 min={sales.startDate}
-                                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 h-9"
+                                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                                             />
                                         </div>
                                     )}
@@ -377,28 +377,28 @@ function SalesPageContent() {
                                 </div>
 
                                 {/* Summary Mini Stats */}
-                                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-slate-100 dark:border-slate-800">
+                                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-slate-100 border-border">
                                     <div className="flex flex-col items-end">
-                                        <span className="font-size-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.netTotal')}</span>
-                                        <span className="text-base font-ui-bold text-foreground leading-none">
+                                        <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.netTotal')}</span>
+                                        <span className="text-base font-bold text-foreground leading-none">
                                             {canViewAmounts ? formatCurrency(sales.salesTotals.net) : AMOUNT_DISPLAY_MASK}
                                         </span>
-                                        <span className="font-size-2xs text-muted-foreground/80 mt-1">
+                                        <span className="text-2xs text-muted-foreground/80 mt-1">
                                             {t('list.filterAmountLine', {
                                                 amount: formatAmount(filteredSalesMoney.net, canViewAmounts),
                                             })}
                                         </span>
                                     </div>
                                     <div className="flex flex-col items-end">
-                                        <span className="font-size-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.discount')}</span>
-                                        <span className="text-base font-ui-bold text-rose-600 dark:text-rose-400 leading-none">
+                                        <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.discount')}</span>
+                                        <span className="text-base font-bold text-rose-600 dark:text-rose-400 leading-none">
                                             {canViewAmounts ? formatCurrency(sales.salesTotals.discount) : AMOUNT_DISPLAY_MASK}
                                         </span>
                                         <div className="h-[14px]" /> {/* Hizalama için boşluk */}
                                     </div>
                                     <div className="flex flex-col items-end">
-                                        <span className="font-size-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.quantity')}</span>
-                                        <span className="text-base font-ui-bold text-blue-600 dark:text-blue-400 leading-none">
+                                        <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.quantity')}</span>
+                                        <span className="text-base font-bold text-blue-600 dark:text-blue-400 leading-none">
                                             {sales.totalCount}
                                         </span>
                                         <div className="h-[14px]" /> {/* Hizalama için boşluk */}
@@ -407,14 +407,14 @@ function SalesPageContent() {
                             </div>
 
                             {/* Main Content Area */}
-                            <div className="p-3 flex-1 min-h-0 bg-white rounded-lg border border-border overflow-hidden flex flex-col shadow-sm dark:bg-slate-900 dark:border-slate-700">
+                            <div className="p-3 flex-1 min-h-0 rounded-lg border border-border overflow-hidden flex flex-col shadow-sm bg-card border-border">
 
                                 <div className="flex-1 overflow-auto overflow-x-hidden relative">
                                     {(sales.isLoading || sales.isFetching) && (
-                                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 dark:bg-slate-900/60 dark:motion-reduce:bg-slate-900/75">
+                                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 bg-card/60 dark:motion-reduce:bg-slate-900/75">
                                             <div className="flex flex-col items-center gap-2">
                                                 <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={24} />
-                                                <span className="text-xs font-ui-medium text-muted-foreground">{t('list.loadingHint')}</span>
+                                                <span className="text-xs font-medium text-muted-foreground">{t('list.loadingHint')}</span>
                                             </div>
                                         </div>
                                     )}
@@ -429,8 +429,8 @@ function SalesPageContent() {
                                     />
                                 </div>
 
-                                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between dark:bg-slate-900/50 dark:border-slate-800">
-                                    <div className="text-xs text-muted-foreground font-ui-medium">
+                                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between bg-card/50 border-border">
+                                    <div className="text-xs text-muted-foreground font-medium">
                                         {t('list.paginationTotal', { count: sales.totalCount })}
                                     </div>
                                 </div>

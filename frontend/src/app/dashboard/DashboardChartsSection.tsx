@@ -77,7 +77,7 @@ export function DashboardChartsSection({
   return (
     <div className="mb-6 grid gap-6 lg:grid-cols-2">
       <div className="min-w-0 rounded-xl border border-border bg-card p-4">
-        <h2 className="mb-4 text-sm font-ui-semibold text-foreground">
+        <h2 className="mb-4 text-sm font-semibold text-foreground">
           {t("charts.revenueCurve")}
         </h2>
         <div className="h-64 min-h-[256px] min-w-0 w-full">
@@ -101,7 +101,7 @@ export function DashboardChartsSection({
         </div>
       </div>
       <div className="min-w-0 rounded-xl border border-border bg-card p-4">
-        <h2 className="mb-4 text-sm font-ui-semibold text-foreground">
+        <h2 className="mb-4 text-sm font-semibold text-foreground">
           {t("charts.categoryDay")}
         </h2>
         <div className="h-64 min-h-[256px] min-w-0 w-full">

@@ -38,17 +38,17 @@ export function PrepSuggestionsTable({
       tableClassName="w-full text-sm"
       header={
         <thead className={virtualTableStickyHeadClass}>
-          <tr className="text-xs font-ui-bold text-slate-500">
-            <th className="px-4 py-2 text-left font-ui-bold">
+          <tr className="text-xs font-bold text-slate-500">
+            <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.suggestions.materialBase")}
             </th>
-            <th className="px-4 py-2 text-left font-ui-bold">
+            <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.suggestions.salesAnalysis")}
             </th>
-            <th className="px-4 py-2 text-right font-ui-bold">
+            <th className="px-4 py-2 text-right font-bold">
               {t("management.columns.suggestions.suggestion")}
             </th>
-            <th className="px-4 py-2 text-right font-ui-bold w-[100px]">
+            <th className="px-4 py-2 text-right font-bold w-[100px]">
               {t("management.columns.suggestions.action")}
             </th>
           </tr>
@@ -62,7 +62,7 @@ export function PrepSuggestionsTable({
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
             <BrainCircuit size={48} className="opacity-10 mb-4" />
-            <p className="text-sm font-ui-medium">{t("management.emptySuggestions")}</p>
+            <p className="text-sm font-medium">{t("management.emptySuggestions")}</p>
             <p className="text-xs mt-1">{t("management.emptySuggestionsHint")}</p>
           </div>
         )
@@ -77,29 +77,29 @@ export function PrepSuggestionsTable({
       renderRow={(sug) => (
         <>
           <td className="px-4 py-3 align-middle">
-            <h4 className="text-sm font-ui-bold text-slate-800 dark:text-white leading-none">
+            <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
               {sug.target_item}
             </h4>
-            <p className="text-2xs font-ui-medium text-muted-foreground uppercase tracking-tighter mt-1">
+            <p className="text-2xs font-medium text-muted-foreground uppercase tracking-tighter mt-1">
               {t("management.salesBasedOn", { product: sug.base_product_name })}
             </p>
           </td>
           <td className="px-4 py-3 align-middle">
-            <span className="text-2xs font-ui-bold text-purple-600 dark:text-purple-400 uppercase bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded-full">
+            <span className="text-2xs font-bold text-purple-600 dark:text-purple-400 uppercase bg-purple-50 dark:bg-purple-900/30 px-2 py-0.5 rounded-full">
               {t("management.avgSales", { avg: sug.avg_sales })}
             </span>
           </td>
           <td className="px-4 py-3 text-right align-middle">
-            <span className="text-xs font-ui-bold text-foreground">
+            <span className="text-xs font-bold text-foreground">
               {formatNumber(sug.suggested_quantity, 0)}
             </span>
-            <span className="text-2xs font-ui-bold text-muted-foreground ml-1">{sug.unit}</span>
+            <span className="text-2xs font-bold text-muted-foreground ml-1">{sug.unit}</span>
           </td>
           <td className="px-4 py-3 text-right align-middle">
             <Button
               size="sm"
               variant="outline"
-              className="h-8 border-purple-200 dark:border-purple-900/50 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 font-ui-bold text-[11px]"
+              className="h-8 border-purple-200 dark:border-purple-900/50 text-purple-600 dark:text-purple-400 hover:bg-purple-50 dark:hover:bg-purple-900/20 font-bold text-sub"
               onClick={() => onCreateTask(sug)}
             >
               {t("management.start")}

@@ -277,7 +277,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
         >
         <div className="grid shrink-0 grid-cols-3 gap-4 border-b border-border px-6 py-5">
           <div>
-            <label className="mb-1 block text-xs font-ui-medium text-muted-foreground">{t("transferForm.labelSource")}</label>
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("transferForm.labelSource")}</label>
             <select
               value={form.source_warehouse_id}
               onChange={(e) => setForm({ ...form, source_warehouse_id: e.target.value })}
@@ -294,7 +294,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-ui-medium text-muted-foreground">{t("transferForm.labelTarget")}</label>
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("transferForm.labelTarget")}</label>
             <select
               value={form.target_warehouse_id}
               onChange={(e) => setForm({ ...form, target_warehouse_id: e.target.value })}
@@ -312,7 +312,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
             </select>
           </div>
           <div>
-            <label className="mb-1 block text-xs font-ui-medium text-muted-foreground">{t("transferForm.labelTransferDate")}</label>
+            <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("transferForm.labelTransferDate")}</label>
             <input
               type="date"
               value={form.transfer_date}
@@ -325,7 +325,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
 
         <div className="flex min-h-0 flex-1 flex-col gap-3 overflow-hidden px-6 py-4">
           <div className="flex shrink-0 items-center justify-between gap-4">
-            <h4 className="text-sm font-ui-semibold text-foreground">{t("transferForm.itemsTitle")}</h4>
+            <h4 className="text-sm font-semibold text-foreground">{t("transferForm.itemsTitle")}</h4>
             <div className="relative max-w-md flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={14} />
               <Input
@@ -341,7 +341,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
             <div
               className={cn(
                 transferRowGridClass,
-                "shrink-0 border-b border-border bg-muted/80 font-ui-semibold text-muted-foreground",
+                "shrink-0 border-b border-border bg-muted/80 font-semibold text-muted-foreground",
               )}
             >
               <span className="text-center">{t("transferForm.colIdx")}</span>
@@ -387,18 +387,18 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
                         <div className={transferRowGridClass}>
                           <span className="text-center text-muted-foreground font-mono text-2xs">{vi.index + 1}</span>
                           <div className="min-w-0">
-                            <div className="font-ui-medium text-foreground truncate" title={item.stock_item_name}>
+                            <div className="font-medium text-foreground truncate" title={item.stock_item_name}>
                               {item.stock_item_name}
                             </div>
                             <div className="text-2xs text-muted-foreground font-mono">{item.stock_item_sku}</div>
                           </div>
-                          <div className="text-right font-ui-semibold text-muted-foreground pr-1 flex flex-col items-end">
+                          <div className="text-right font-semibold text-muted-foreground pr-1 flex flex-col items-end">
                             <span>{formatNumber(item.on_hand, 2)}</span>
-                            <span className="text-2xs text-muted-foreground font-ui-normal">{item.unit}</span>
+                            <span className="text-2xs text-muted-foreground font-normal">{item.unit}</span>
                           </div>
-                          <div className="text-right font-ui-semibold text-muted-foreground pr-1 flex flex-col items-end">
+                          <div className="text-right font-semibold text-muted-foreground pr-1 flex flex-col items-end">
                             <span>{formatNumber(item.on_hand_target, 2)}</span>
-                            <span className="text-2xs text-muted-foreground font-ui-normal">{item.unit}</span>
+                            <span className="text-2xs text-muted-foreground font-normal">{item.unit}</span>
                           </div>
                           <Input
                             type="number"
@@ -410,7 +410,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
                             onChange={(e) => updateItem(item.rowKey, "quantity", e.target.value)}
                             className={cn(
                               inputCls, 
-                              "text-right tabular-nums font-ui-bold focus:border-indigo-500 dark:border-indigo-900",
+                              "text-right tabular-nums font-bold focus:border-indigo-500 dark:border-indigo-900",
                               parseFloat(item.quantity) > parseFloat(item.on_hand)
                                 ? "border-red-500 bg-red-50 text-red-700 dark:bg-red-950/30"
                                 : "border-border"
@@ -448,7 +448,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
 
             <div className="shrink-0 flex items-center justify-between border-t border-border bg-background px-3 py-1.5 text-sub text-muted-foreground">
               <div>{t("transferForm.footerListed", { count: filteredItems.length })}</div>
-              <div className="font-ui-bold text-indigo-600 dark:text-indigo-400">
+              <div className="font-bold text-indigo-600 dark:text-indigo-400">
                 {t("transferForm.footerSelected", { count: items.filter((it) => parseFloat(it.quantity) > 0).length })}
               </div>
             </div>
@@ -456,7 +456,7 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
         </div>
 
         <div className="shrink-0 border-t border-border px-6 py-4">
-          <label className="mb-1 block text-xs font-ui-medium text-muted-foreground">{t("transferForm.generalNotesLabel")}</label>
+          <label className="mb-1 block text-xs font-medium text-muted-foreground">{t("transferForm.generalNotesLabel")}</label>
           <textarea
             value={form.notes}
             onChange={(e) => setForm({ ...form, notes: e.target.value })}

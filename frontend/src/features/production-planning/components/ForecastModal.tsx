@@ -96,7 +96,7 @@ export function ForecastModal({ isOpen, onClose, onApply, isSubmitting, defaultT
                   checked={overwrite} 
                   onCheckedChange={(checked) => setOverwrite(checked === true)} 
                 />
-                <Label htmlFor="overwrite" className="text-sm font-ui-normal">
+                <Label htmlFor="overwrite" className="text-sm font-normal">
                   {t("overwrite")}
                 </Label>
               </div>
@@ -114,9 +114,9 @@ export function ForecastModal({ isOpen, onClose, onApply, isSubmitting, defaultT
                 <table className="w-full text-sm">
                   <thead className="bg-muted">
                     <tr>
-                      <th className="px-3 py-2 text-left font-ui-semibold text-muted-foreground">{t("columns.product")}</th>
-                      <th className="px-3 py-2 text-right font-ui-semibold text-muted-foreground">{t("columns.historicalAvg")}</th>
-                      <th className="px-3 py-2 text-right font-ui-semibold text-blue-600 dark:text-blue-400">{t("columns.target")}</th>
+                      <th className="px-3 py-2 text-left font-semibold text-muted-foreground">{t("columns.product")}</th>
+                      <th className="px-3 py-2 text-right font-semibold text-muted-foreground">{t("columns.historicalAvg")}</th>
+                      <th className="px-3 py-2 text-right font-semibold text-blue-600 dark:text-blue-400">{t("columns.target")}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
@@ -125,9 +125,9 @@ export function ForecastModal({ isOpen, onClose, onApply, isSubmitting, defaultT
                     ) : (
                       previewData.map(item => (
                         <tr key={item.product_id} className="hover:bg-muted/20">
-                          <td className="px-3 py-2 font-ui-medium">{item.product_name}</td>
+                          <td className="px-3 py-2 font-medium">{item.product_name}</td>
                           <td className="px-3 py-2 text-right text-muted-foreground">{item.historical_avg.toFixed(2)}</td>
-                          <td className="px-3 py-2 text-right font-ui-bold text-blue-600">{item.target_quantity}</td>
+                          <td className="px-3 py-2 text-right font-bold text-blue-600">{item.target_quantity}</td>
                         </tr>
                       ))
                     )}

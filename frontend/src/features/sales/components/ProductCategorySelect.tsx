@@ -56,7 +56,7 @@ export function ProductCategorySelect({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         className={cn(
-          "flex h-9 w-full items-center justify-between rounded-md border border-border bg-white px-3 py-2 text-sm shadow-sm transition-all hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:border-slate-700 dark:bg-slate-900 dark:hover:bg-slate-800",
+          "flex h-9 w-full items-center justify-between rounded-md border border-border px-3 py-2 text-sm shadow-sm transition-all hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 border-border bg-card dark:hover:bg-slate-800",
           !selectedProduct && "text-muted-foreground",
           triggerClassName
         )}
@@ -69,11 +69,11 @@ export function ProductCategorySelect({
         </div>
         <ChevronDown size={14} className="shrink-0 text-muted-foreground" />
       </PopoverTrigger>
-      <PopoverContent className="w-[300px] p-0 shadow-md dark:bg-slate-900 dark:border-slate-700" align="start">
-        <div className="flex items-center border-b border-slate-100 p-2 dark:border-slate-800">
+      <PopoverContent className="w-[300px] p-0 shadow-md bg-card border-border" align="start">
+        <div className="flex items-center border-b border-slate-100 p-2 border-border">
           <Search className="mr-2 h-4 w-4 shrink-0 text-muted-foreground" />
           <input
-            className="flex h-8 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground dark:text-slate-100"
+            className="flex h-8 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground text-foreground"
             placeholder={t("productSelect.searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -87,7 +87,7 @@ export function ProductCategorySelect({
             }}
             className={cn(
               "flex w-full items-center justify-between rounded-md px-2 py-2 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
-              !value && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-ui-semibold"
+              !value && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold"
             )}
           >
             {t("productSelect.allProducts")}
@@ -96,7 +96,7 @@ export function ProductCategorySelect({
           
           {groupedProducts.map((cat) => (
             <div key={cat.id} className="mt-2">
-              <div className="px-2 py-1 text-2xs font-ui-bold uppercase tracking-wider text-muted-foreground dark:text-muted-foreground">
+              <div className="px-2 py-1 text-2xs font-bold uppercase tracking-wider text-muted-foreground dark:text-muted-foreground">
                 {cat.name}
               </div>
               {cat.items.map((product) => (
@@ -108,7 +108,7 @@ export function ProductCategorySelect({
                   }}
                   className={cn(
                     "flex w-full items-center justify-between rounded-md pl-6 pr-3 py-2 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
-                    value === product.id && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-ui-semibold"
+                    value === product.id && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold"
                   )}
                 >
                   {product.name}

@@ -94,7 +94,7 @@ export function PosTerminalSwitchDialog({
                   key={term.id}
                   type="button"
                   onClick={() => onPickTerminal(term)}
-                  className={`flex items-start justify-between gap-3 rounded-xl border px-4 py-3 text-left text-sm font-ui-semibold transition-colors ${
+                  className={`flex items-start justify-between gap-3 rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
                     isCurrent
                       ? "border-blue-500 bg-blue-50/80 text-slate-900 dark:border-blue-600 dark:bg-blue-950/40 dark:text-slate-100"
                       : "border-border bg-background text-foreground hover:border-blue-400 hover:bg-muted/60"
@@ -104,12 +104,12 @@ export function PosTerminalSwitchDialog({
                     <span className="block">
                       {term.name}
                       {isCurrent ? (
-                        <span className="ml-2 text-xs font-ui-normal text-blue-600 dark:text-blue-400">
+                        <span className="ml-2 text-xs font-normal text-blue-600 dark:text-blue-400">
                           {t("current")}
                         </span>
                       ) : null}
                     </span>
-                    <span className="block font-mono text-xs font-ui-normal text-muted-foreground">
+                    <span className="block font-mono text-xs font-normal text-muted-foreground">
                       {term.code}
                     </span>
                   </span>

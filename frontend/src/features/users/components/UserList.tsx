@@ -27,7 +27,7 @@ type SortField = "username" | "email" | "date_joined" | "last_login"
 type SortDir = "asc" | "desc"
 
 function SortIcon({ field, sortField, sortDir }: { field: SortField; sortField: SortField; sortDir: SortDir }) {
-  if (sortField !== field) return <ArrowUpDown size={12} className="text-slate-300 dark:text-slate-600" />
+  if (sortField !== field) return <ArrowUpDown size={12} className="text-muted-foreground" />
   return sortDir === "asc" ? <ArrowUp size={12} /> : <ArrowDown size={12} />
 }
 
@@ -110,17 +110,17 @@ export function UserList() {
     else { setSortField(field); setSortDir("asc") }
   }
 
-  const sel = "border border-border rounded-md px-2.5 py-1.5 text-sm bg-white dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+  const sel = "border border-border rounded-md px-2.5 py-1.5 text-sm bg-card border-input text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/20"
 
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground">{t('title')}</h2>
+          <h2 className="text-lg font-semibold text-foreground">{t('title')}</h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">{t('description', { count: totalCount })}</p>
         </div>
         <button onClick={() => { setEditingUser(null); setShowUserForm(true) }}
-          className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-blue-700 transition-all">
+          className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
           <Plus size={15} />{t('addNew')}
         </button>
       </div>
@@ -129,7 +129,7 @@ export function UserList() {
         <div className="relative flex-1 min-w-[200px] max-w-sm">
           <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input type="text" placeholder={t('searchPlaceholder')} value={searchTerm} onChange={e => setSearchTerm(e.target.value)}
-            className="w-full pl-8 pr-4 py-1.5 bg-white border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100" />
+            className="w-full pl-8 pr-4 py-1.5 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-input text-foreground" />
         </div>
         <div className="flex items-center gap-2">
           <Filter size={14} className="text-muted-foreground dark:text-muted-foreground" />
@@ -145,7 +145,7 @@ export function UserList() {
         </select>
       </div>
 
-      <div className="bg-white rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700">
+      <div className="rounded-lg border border-border bg-card border-border">
         {usersQuery.isLoading ? (
           <div className="flex items-center justify-center py-16"><Loader2 className="h-8 w-8 animate-spin text-blue-600" /></div>
         ) : users.length === 0 ? (
@@ -163,19 +163,19 @@ export function UserList() {
             header={
               <thead className={virtualTableStickyHeadClass}>
                 <tr>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
                     <button onClick={() => toggleSort("username")} className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">{t('table.user')} <SortIcon field="username" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
                     <button onClick={() => toggleSort("email")} className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">{t('table.email')} <SortIcon field="email" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.branch')}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.roles')}</th>
-                  <th className="text-center px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.status')}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.branch')}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.roles')}</th>
+                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.status')}</th>
+                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
                     <button onClick={() => toggleSort("last_login")} className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">{t('table.lastLogin')} <SortIcon field="last_login" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
-                  <th className="text-right px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.actions')}</th>
+                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.actions')}</th>
                 </tr>
               </thead>
             }
@@ -190,18 +190,18 @@ export function UserList() {
               <>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-ui-semibold text-slate-600 dark:bg-slate-700 dark:text-slate-300">
+                    <div className="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-600 bg-accent text-muted-foreground">
                       {u.username.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                      <span className="font-ui-medium text-foreground dark:text-slate-200">{u.username}</span>
+                      <span className="font-medium text-foreground text-foreground">{u.username}</span>
                       {u.is_superuser && <Badge variant="outline" className="ml-1 text-2xs border-amber-300 text-amber-600 dark:border-amber-700 dark:text-amber-400">SU</Badge>}
                       {(u.first_name || u.last_name) && <p className="text-xs text-muted-foreground dark:text-muted-foreground">{u.first_name} {u.last_name}</p>}
                     </div>
                   </div>
                 </td>
-                <td className="px-4 py-3 text-muted-foreground dark:text-slate-400">{u.email}</td>
-                <td className="px-4 py-3 text-muted-foreground dark:text-slate-400">{u.branch_name || "-"}</td>
+                <td className="px-4 py-3 text-muted-foreground text-muted-foreground">{u.email}</td>
+                <td className="px-4 py-3 text-muted-foreground text-muted-foreground">{u.branch_name || "-"}</td>
                 <td className="px-4 py-3">
                   <div className="flex flex-wrap gap-1">
                     {u.role_names.length > 0 ? u.role_names.map(role => <Badge key={role} variant="secondary" className="text-2xs">{role}</Badge>) : <span className="text-muted-foreground text-xs dark:text-muted-foreground">-</span>}
@@ -210,7 +210,7 @@ export function UserList() {
                 <td className="px-4 py-3 text-center">
                   <Badge variant={u.is_active ? "default" : "secondary"}>{u.is_active ? tAdmin('common.active') : tAdmin('common.passive')}</Badge>
                 </td>
-                <td className="px-4 py-3 text-xs text-muted-foreground dark:text-slate-400">{u.last_login ? formatDate(u.last_login) : "-"}</td>
+                <td className="px-4 py-3 text-xs text-muted-foreground text-muted-foreground">{u.last_login ? formatDate(u.last_login) : "-"}</td>
                 <td className="px-4 py-3 text-right">
                   <div className="flex items-center justify-end gap-1">
                     <button onClick={() => setViewUserId(u.id)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-slate-700 dark:hover:bg-slate-800" title={tAdmin('common.edit')}><Eye size={14} /></button>
@@ -228,13 +228,13 @@ export function UserList() {
       {viewUserId && <UserDetailModal userId={viewUserId} onClose={() => setViewUserId(null)} />}
 
       <AlertDialog open={!!deleteTarget} onOpenChange={(open) => { if (!open) setDeleteTarget(null) }}>
-        <AlertDialogContent className="dark:bg-slate-900">
+        <AlertDialogContent className="bg-card">
           <AlertDialogHeader>
             <AlertDialogTitle>{t('modals.deleteTitle')}</AlertDialogTitle>
             <AlertDialogDescription>{t('modals.deleteDesc', { name: deleteTarget?.username || "" })}</AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={isDeleting} className="dark:bg-slate-800 dark:text-slate-200">{tAdmin('common.cancel')}</AlertDialogCancel>
+            <AlertDialogCancel disabled={isDeleting} className="bg-muted text-foreground">{tAdmin('common.cancel')}</AlertDialogCancel>
             <AlertDialogAction onClick={handleDelete} disabled={isDeleting} className="bg-rose-600 hover:bg-rose-700 text-white">{isDeleting ? t('messages.deleting') : tAdmin('common.delete')}</AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

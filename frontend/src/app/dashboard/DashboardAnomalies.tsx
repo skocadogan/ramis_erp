@@ -47,7 +47,7 @@ export function DashboardAnomalies({ anomalies, onSelectAnomaly }: DashboardAnom
         >
           <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600 dark:text-amber-400" />
           <div className="flex-1">
-            <h4 className="text-sm font-ui-bold">{anno.title}</h4>
+            <h4 className="text-sm font-bold">{anno.title}</h4>
             <p className="text-xs opacity-90">{anno.description}</p>
           </div>
 

@@ -40,7 +40,7 @@ export function KdsPrepDrawer({
     >
       <ListChecks size={28} className="shrink-0" />
       {!collapsed && (
-        <span className="max-w-[10rem] truncate text-xs font-ui-semibold sm:text-sm">{tPrep('drawer.sidebarLabel')}</span>
+        <span className="max-w-[10rem] truncate text-xs font-semibold sm:text-sm">{tPrep('drawer.sidebarLabel')}</span>
       )}
     </button>
   );
@@ -51,7 +51,7 @@ export function KdsPrepDrawer({
         <TooltipProvider delay={0}>
           <Tooltip>
             <TooltipTrigger render={buttonContent} />
-            <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-ui-semibold text-xs">
+            <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-semibold text-xs">
               {tPrep('drawer.sidebarLabel')}
             </TooltipContent>
           </Tooltip>
@@ -74,7 +74,7 @@ export function KdsPrepDrawer({
             <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted px-4 py-3">
               <div className="flex items-center gap-2">
                 <ListChecks size={18} className="text-primary" />
-                <h3 className="font-ui-bold text-sm text-foreground">{tPrep('drawer.title')}</h3>
+                <h3 className="font-bold text-sm text-foreground">{tPrep('drawer.title')}</h3>
               </div>
               <button
                 type="button"

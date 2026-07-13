@@ -374,7 +374,7 @@ function AdminPageInner() {
 
   return (
     <AppShell lowStockCount={data.stats.lowStock}>
-      <div className="p-6 lg:p-8 h-full overflow-auto dark:bg-slate-950">
+      <div className="p-6 lg:p-8 h-full overflow-auto bg-card">
         {activeTab === "overview" && (
           <OverviewTab
             stats={data.stats}

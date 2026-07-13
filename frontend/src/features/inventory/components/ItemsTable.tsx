@@ -67,7 +67,7 @@ function StockStatusBadge({
 
   if (isUnlimited) {
     return (
-      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-ui-medium text-slate-600 dark:bg-slate-800 dark:text-muted-foreground">
+      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-medium text-slate-600 bg-muted dark:text-muted-foreground">
         {t("itemsTable.notTracked")}
       </span>
     )
@@ -76,7 +76,7 @@ function StockStatusBadge({
   // Özel durum: Fiziksel stok var ama rezerve edildiği için kullanılamıyor (Available <= 0)
   if (physicalQuantity > 0 && currentQuantity <= 0) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500 px-2 py-0.5 text-2xs font-ui-bold text-white">
+      <span className="inline-flex items-center gap-1 rounded-full bg-amber-500 px-2 py-0.5 text-2xs font-bold text-white">
         <RotateCcw size={10} className="animate-spin-slow" /> {t("itemsTable.reservedDepleted")}
       </span>
     )
@@ -84,34 +84,34 @@ function StockStatusBadge({
 
   if (currentQuantity < 0) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-rose-500 px-2 py-0.5 text-2xs font-ui-bold text-white">
+      <span className="inline-flex items-center gap-1 rounded-full bg-rose-500 px-2 py-0.5 text-2xs font-bold text-white">
         <AlertTriangle size={10} /> {t("itemsTable.negative")}
       </span>
     )
   }
   if (currentQuantity === 0) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-red-600 px-2 py-0.5 text-2xs font-ui-bold text-white">
+      <span className="inline-flex items-center gap-1 rounded-full bg-red-600 px-2 py-0.5 text-2xs font-bold text-white">
         <AlertTriangle size={10} /> {t("itemsTable.depleted")}
       </span>
     )
   }
   if (currentQuantity < minimumQuantity) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-2xs font-ui-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
+      <span className="inline-flex items-center gap-1 rounded-full bg-amber-100 px-2 py-0.5 text-2xs font-semibold text-amber-700 dark:bg-amber-900/30 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
         <AlertTriangle size={10} /> {t("itemsTable.lowStock")}
       </span>
     )
   }
   if (currentQuantity === minimumQuantity) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-yellow-50 px-2 py-0.5 text-2xs font-ui-semibold text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800">
+      <span className="inline-flex items-center gap-1 rounded-full bg-yellow-50 px-2 py-0.5 text-2xs font-semibold text-yellow-700 dark:bg-yellow-900/30 dark:text-yellow-400 border border-yellow-200 dark:border-yellow-800">
         <AlertTriangle size={10} /> {t("itemsTable.atThreshold")}
       </span>
     )
   }
   return (
-    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-2xs font-ui-medium text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900">
+    <span className="inline-flex items-center rounded-full bg-emerald-50 px-2 py-0.5 text-2xs font-medium text-emerald-600 dark:bg-emerald-900/30 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900">
       {t("itemsTable.adequate")}
     </span>
   )
@@ -143,7 +143,7 @@ const ItemRowCells = ({
         <button
           type="button"
           onClick={() => openStockItemDetail(item)}
-          className="text-left font-ui-medium text-foreground underline-offset-2 hover:text-emerald-600 hover:underline"
+          className="text-left font-medium text-foreground underline-offset-2 hover:text-emerald-600 hover:underline"
         >
           {item.name}
         </button>
@@ -157,12 +157,12 @@ const ItemRowCells = ({
       <td className="px-4 py-2 font-mono text-xs text-muted-foreground">{item.sku}</td>
       <td className="px-4 py-2 text-muted-foreground">{item.unit}</td>
       <td className="px-4 py-2 text-right">
-        <span className="text-muted-foreground font-ui-medium">
+        <span className="text-muted-foreground font-medium">
           {isUnlimited ? "—" : (item.physical_quantity || 0).toFixed(2)}
         </span>
       </td>
       <td className="px-4 py-2 text-right">
-        <span className="text-amber-600 dark:text-amber-500 font-ui-semibold">
+        <span className="text-amber-600 dark:text-amber-500 font-semibold">
           {isUnlimited ? "—" : ((item.reserved_quantity || 0) > 0 ? `-${(item.reserved_quantity || 0).toFixed(2)}` : "0.00")}
         </span>
       </td>
@@ -175,10 +175,10 @@ const ItemRowCells = ({
             onClick={() => openStockItemDetail(item)}
             className="group flex items-center justify-end gap-1.5 ml-auto"
           >
-            <span className={`font-ui-bold ${item.current_quantity <= 0 ? "text-rose-600" : "text-blue-600"} transition-colors`}>
+            <span className={`font-bold ${item.current_quantity <= 0 ? "text-rose-600" : "text-blue-600"} transition-colors`}>
               {item.current_quantity.toFixed(2)}
             </span>
-            <span className="text-2xs text-muted-foreground font-ui-medium">{item.unit}</span>
+            <span className="text-2xs text-muted-foreground font-medium">{item.unit}</span>
             <ExternalLink size={10} className="text-slate-300 group-hover:text-blue-400 transition-colors" />
           </button>
         )}
@@ -278,17 +278,17 @@ export const ItemsTable = memo(({
         <table className={`w-full text-sm ${inventoryTableRowClass}`}>
           <thead className={inventoryTableHeadClass}>
             <tr>
-              <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colProduct")}</th>
-              <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colCategory")}</th>
-              <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colSku")}</th>
-              <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colUnit")}</th>
-              <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colPhysical")}</th>
-              <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colReserved")}</th>
-              <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colAvailable")}</th>
-              <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colMinShort")}</th>
-              <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colLastIn")}</th>
-              <th className="text-center px-4 py-2 font-ui-medium">{t("itemsTable.colStatus")}</th>
-              <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colActions")}</th>
+              <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colProduct")}</th>
+              <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colCategory")}</th>
+              <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colSku")}</th>
+              <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colUnit")}</th>
+              <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colPhysical")}</th>
+              <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colReserved")}</th>
+              <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colAvailable")}</th>
+              <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colMinShort")}</th>
+              <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colLastIn")}</th>
+              <th className="text-center px-4 py-2 font-medium">{t("itemsTable.colStatus")}</th>
+              <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colActions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -312,17 +312,17 @@ export const ItemsTable = memo(({
       header={
         <thead className={inventoryTableHeadClass}>
           <tr>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colProduct")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colCategory")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colSku")}</th>
-            <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colUnit")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colPhysical")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colReserved")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colAvailable")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colMinShort")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colLastIn")}</th>
-            <th className="text-center px-4 py-2 font-ui-medium">{t("itemsTable.colStatus")}</th>
-            <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colActions")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colProduct")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colCategory")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colSku")}</th>
+            <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colUnit")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colPhysical")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colReserved")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colAvailable")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colMinShort")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colLastIn")}</th>
+            <th className="text-center px-4 py-2 font-medium">{t("itemsTable.colStatus")}</th>
+            <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colActions")}</th>
           </tr>
         </thead>
       }
@@ -341,17 +341,17 @@ export const ItemsTable = memo(({
           <table className={`w-full text-sm ${inventoryTableRowClass}`}>
             <thead className={inventoryTableHeadClass}>
               <tr>
-                <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colProduct")}</th>
-                <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colCategory")}</th>
-                <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colSku")}</th>
-                <th className="text-left px-4 py-2 font-ui-medium">{t("itemsTable.colUnit")}</th>
-                <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colPhysical")}</th>
-                <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colReserved")}</th>
-                <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colAvailable")}</th>
-                <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colMinShort")}</th>
-                <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colLastIn")}</th>
-                <th className="text-center px-4 py-2 font-ui-medium">{t("itemsTable.colStatus")}</th>
-                <th className="text-right px-4 py-2 font-ui-medium">{t("itemsTable.colActions")}</th>
+                <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colProduct")}</th>
+                <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colCategory")}</th>
+                <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colSku")}</th>
+                <th className="text-left px-4 py-2 font-medium">{t("itemsTable.colUnit")}</th>
+                <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colPhysical")}</th>
+                <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colReserved")}</th>
+                <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colAvailable")}</th>
+                <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colMinShort")}</th>
+                <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colLastIn")}</th>
+                <th className="text-center px-4 py-2 font-medium">{t("itemsTable.colStatus")}</th>
+                <th className="text-right px-4 py-2 font-medium">{t("itemsTable.colActions")}</th>
               </tr>
             </thead>
             <tbody>

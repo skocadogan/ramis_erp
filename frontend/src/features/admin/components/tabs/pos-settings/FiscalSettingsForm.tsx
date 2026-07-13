@@ -117,7 +117,7 @@ export function FiscalSettingsPanel({
     <div className="space-y-3">
       {fiscalType === "MOCK" && (
         <div className={panelClass}>
-          <h4 className="text-xs font-ui-bold text-foreground">Sanal Entegrasyon Parametreleri</h4>
+          <h4 className="text-xs font-bold text-foreground">Sanal Entegrasyon Parametreleri</h4>
           <div>
             <Label className="text-2xs">Simüle Edilen Gecikme (Saniye)</Label>
             <Input
@@ -140,7 +140,7 @@ export function FiscalSettingsPanel({
 
       {(fiscalType === "BEKO_GMP3" || fiscalType === "HUGIN_GMP3") && (
         <div className={panelClass}>
-          <h4 className="text-xs font-ui-bold text-foreground">Yazar Kasa (ÖKC) Parametreleri</h4>
+          <h4 className="text-xs font-bold text-foreground">Yazar Kasa (ÖKC) Parametreleri</h4>
           <div>
             <Label className="text-2xs">Bağlantı Türü</Label>
             <select
@@ -242,29 +242,29 @@ export function FiscalSettingsPanel({
                   placeholder="Varsayılan: API URL kullanılır"
                   className="mt-1 h-8 text-xs"
                 />
-                <p className="text-[10px] text-muted-foreground mt-0.5">
+                <p className="text-2xs text-muted-foreground mt-0.5">
                   Kimlik doğrulama farklı bir URL&apos;den yapılıyorsa buraya girin.
                 </p>
               </div>
               <div className="mt-2 rounded-md border border-blue-200 bg-blue-50/50 dark:border-blue-800 dark:bg-blue-950/30 p-2.5">
-                <p className="text-[10px] font-semibold text-blue-700 dark:text-blue-300 mb-1">
+                <p className="text-2xs font-semibold text-blue-700 dark:text-blue-300 mb-1">
                   ℹ️ Webhook Yapılandırması
                 </p>
-                <p className="text-[10px] text-blue-600 dark:text-blue-400 leading-relaxed">
+                <p className="text-2xs text-blue-600 dark:text-blue-400 leading-relaxed">
                   Token X-Connect Cloud, ödeme sonuçlarını webhook ile bildirir.
                   Aşağıdaki URL&apos;yi Token &quot;Set Client Settings&quot; API&apos;si üzerinden tanımlayın.
                 </p>
                 {fiscalWebhookUrl ? (
                   <div className="mt-2">
-                    <Label className="text-[10px] text-blue-700 dark:text-blue-300">Webhook Endpoint URL</Label>
+                    <Label className="text-2xs text-blue-700 dark:text-blue-300">Webhook Endpoint URL</Label>
                     <Input
                       readOnly
                       value={fiscalWebhookUrl}
-                      className="mt-1 h-8 bg-background text-[10px] font-mono"
+                      className="mt-1 h-8 bg-background text-2xs font-mono"
                     />
                   </div>
                 ) : (
-                  <p className="text-[10px] text-blue-600/80 dark:text-blue-400/80 mt-2 leading-relaxed">
+                  <p className="text-2xs text-blue-600/80 dark:text-blue-400/80 mt-2 leading-relaxed">
                     URL, terminal kaydedildikten ve sunucuda <code className="font-mono">FISCAL_WEBHOOK_BASE_URL</code> tanımlandıktan sonra görünür.
                   </p>
                 )}
@@ -311,7 +311,7 @@ export function FiscalSettingsPanel({
 
       {fiscalType === "EARSIV_UYUMSOFT" && (
         <div className={panelClass}>
-          <h4 className="text-xs font-ui-bold text-foreground">e-Arşiv Özel Entegratör Parametreleri</h4>
+          <h4 className="text-xs font-bold text-foreground">e-Arşiv Özel Entegratör Parametreleri</h4>
           <div>
             <Label className="text-2xs">Entegratör Portal Kullanıcı Adı</Label>
             <Input

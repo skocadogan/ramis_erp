@@ -57,7 +57,7 @@ export default function ProductSelect({
       >
         {selectedProduct ? (
           <div className="flex w-full items-center justify-between pr-1">
-            <span className="truncate font-ui-medium">{selectedProduct.name}</span>
+            <span className="truncate font-medium">{selectedProduct.name}</span>
             <span className="ml-2 shrink-0 text-2xs text-muted-foreground">{selectedProduct.category_name}</span>
           </div>
         ) : (
@@ -99,7 +99,7 @@ export default function ProductSelect({
                 )}
               >
                 <div className="flex min-w-0 flex-col pr-2">
-                  <span className="truncate font-ui-semibold text-foreground transition-colors group-hover:text-primary">
+                  <span className="truncate font-semibold text-foreground transition-colors group-hover:text-primary">
                     {product.name}
                   </span>
                   <span className="text-2xs italic text-muted-foreground">

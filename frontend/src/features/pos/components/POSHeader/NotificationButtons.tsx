@@ -53,7 +53,7 @@ const NotificationButtons = React.memo(function NotificationButtons({
         >
           <Radio size={20} />
           {waiterCallBadgeCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[11px] font-ui-bold text-white shadow-lg ring-2 ring-background">
+            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-sub font-bold text-white shadow-lg ring-2 ring-background">
               {waiterPulse && (
                 <span className="absolute inset-0 rounded-full bg-rose-500 animate-ping" />
               )}
@@ -76,7 +76,7 @@ const NotificationButtons = React.memo(function NotificationButtons({
         >
           <Bell size={20} />
           {kitchenBadgeCount > 0 && (
-            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-[11px] font-ui-bold text-white shadow-lg ring-2 ring-background">
+            <span className="absolute -top-1.5 -right-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-rose-500 text-sub font-bold text-white shadow-lg ring-2 ring-background">
               {kitchenPulse && (
                 <span className="absolute inset-0 rounded-full bg-rose-500 animate-ping" />
               )}

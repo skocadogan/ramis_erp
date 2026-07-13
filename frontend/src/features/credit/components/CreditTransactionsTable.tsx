@@ -37,7 +37,7 @@ const CreditTransactionRow = memo(function CreditTransactionRow({
       data-index={index}
       ref={measureElement}
       onClick={clickable ? () => onRowClick?.(tx) : undefined}
-      className={`border-t border-border dark:border-slate-700 ${clickable ? "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/60" : ""}`}
+      className={`border-t border-border border-border ${clickable ? "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/60" : ""}`}
     >
       <td className="px-3 py-2 whitespace-nowrap">{formatDate(tx.created_at)}</td>
       <td className="px-3 py-2">{tx.transaction_type_display}</td>
@@ -88,10 +88,10 @@ export const CreditTransactionsTable = memo(function CreditTransactionsTable({
   return (
     <div
       ref={containerRef}
-      className="max-h-64 overflow-y-auto rounded-lg border border-border dark:border-slate-700"
+      className="max-h-64 overflow-y-auto rounded-lg border border-border border-border"
     >
       <table className="w-full text-xs">
-        <thead className="sticky top-0 z-10 bg-slate-50 dark:bg-slate-800">
+        <thead className="sticky top-0 z-10 bg-muted">
           <tr>
             <th className="px-3 py-2 text-left">{t("detail.txDate")}</th>
             <th className="px-3 py-2 text-left">{t("detail.txType")}</th>
@@ -127,7 +127,7 @@ export const CreditTransactionsTable = memo(function CreditTransactionsTable({
         </tbody>
       </table>
       {infiniteControls?.isFetchingNextPage && (
-        <div className="flex items-center justify-center gap-2 border-t border-border py-2 text-xs text-muted-foreground dark:border-slate-700">
+        <div className="flex items-center justify-center gap-2 border-t border-border py-2 text-xs text-muted-foreground border-border">
           <Loader2 className="h-3.5 w-3.5 animate-spin" />
           {t("page.loadingMore")}
         </div>

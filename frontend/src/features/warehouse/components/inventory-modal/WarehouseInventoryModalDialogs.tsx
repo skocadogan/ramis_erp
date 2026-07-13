@@ -100,7 +100,7 @@ export function WarehouseInventoryModalDialogs({
             <DialogDescription>
               {editQtyRow ? (
                 <>
-                  <span className="font-ui-medium text-foreground">{editQtyRow.stock_item_name}</span>
+                  <span className="font-medium text-foreground">{editQtyRow.stock_item_name}</span>
                   {" — "}
                   {warehouseName}
                 </>
@@ -151,7 +151,7 @@ export function WarehouseInventoryModalDialogs({
             <DialogDescription>
               {editMinRow ? (
                 <>
-                  <span className="font-ui-medium text-foreground">{editMinRow.stock_item_name}</span>
+                  <span className="font-medium text-foreground">{editMinRow.stock_item_name}</span>
                   {" — "}
                   {warehouseName}. {t("editMin.descriptionSuffix")}
                 </>

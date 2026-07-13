@@ -115,8 +115,8 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
     }
   };
 
-  const infoLabelClass = "text-xs text-muted-foreground mb-0.5 font-ui-semibold block";
-  const infoValClass = "text-sm text-foreground font-ui-medium break-words block";
+  const infoLabelClass = "text-xs text-muted-foreground mb-0.5 font-semibold block";
+  const infoValClass = "text-sm text-foreground font-medium break-words block";
 
   return (
     <>
@@ -141,14 +141,14 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
           {/* Left Side: Customer Info Card */}
           <div className="w-full shrink-0 space-y-6 overflow-y-auto border-b border-border bg-muted/20 p-6 lg:w-80 lg:border-b-0 lg:border-e">
             <div className="flex flex-col items-center border-b border-border pb-4 text-center">
-              <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-2xl font-ui-bold text-primary">
+              <div className="mb-3 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10 text-2xl font-bold text-primary">
                 {customer.customer_type === "CORPORATE" ? (
                   <Building size={28} />
                 ) : (
                   <User size={28} />
                 )}
               </div>
-              <h4 className="text-base font-ui-bold text-foreground leading-tight">{customer.name}</h4>
+              <h4 className="text-base font-bold text-foreground leading-tight">{customer.name}</h4>
               <span className="text-xs text-muted-foreground mt-1">
                 Kayıt Tarihi: {formatDate(customer.created_at, { dateStyle: "medium" })}
               </span>
@@ -227,7 +227,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
                           href={customer.web_address}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-primary hover:underline font-ui-medium break-all block"
+                          className="text-primary hover:underline font-medium break-all block"
                         >
                           {customer.web_address}
                         </a>
@@ -252,7 +252,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
           {/* Right Side: Sales History */}
           <div className="flex min-h-[min(420px,50vh)] flex-1 flex-col overflow-hidden p-6 lg:min-h-0">
             <div className="mb-4 flex flex-wrap items-center justify-between gap-4">
-              <h4 className="text-sm font-ui-bold uppercase tracking-wider text-foreground">
+              <h4 className="text-sm font-bold uppercase tracking-wider text-foreground">
                 {t("sales.title")} ({totalCount})
               </h4>
               <div className="flex gap-2">
@@ -284,26 +284,26 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
             {/* Totals Summary Widgets */}
             <div className="mb-4 grid grid-cols-3 gap-4">
               <div className="rounded-xl border border-border bg-background p-3">
-                <span className="block text-2xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="block text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {t("sales.totalGross")}
                 </span>
-                <span className="mt-1 block text-sm font-ui-bold text-foreground">
+                <span className="mt-1 block text-sm font-bold text-foreground">
                   {formatCurrency(totals.gross_total)}
                 </span>
               </div>
               <div className="rounded-xl border border-border bg-background p-3">
-                <span className="block text-2xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                <span className="block text-2xs font-semibold uppercase tracking-wider text-muted-foreground">
                   {t("sales.totalDiscount")}
                 </span>
-                <span className="mt-1 block text-sm font-ui-bold text-rose-600">
+                <span className="mt-1 block text-sm font-bold text-rose-600">
                   {formatCurrency(totals.discount_total)}
                 </span>
               </div>
               <div className="rounded-xl border border-primary/20 bg-primary/5 p-3">
-                <span className="block text-2xs font-ui-semibold uppercase tracking-wider text-primary">
+                <span className="block text-2xs font-semibold uppercase tracking-wider text-primary">
                   {t("sales.totalNet")}
                 </span>
-                <span className="mt-1 block text-sm font-ui-bold text-primary">
+                <span className="mt-1 block text-sm font-bold text-primary">
                   {formatCurrency(totals.net_total)}
                 </span>
               </div>
@@ -356,7 +356,7 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
                     <>
                       <div className="grid grid-cols-[120px_1fr] gap-2">
                         <span className="text-muted-foreground">Sipariş No:</span>
-                        <span className="font-mono font-ui-semibold text-foreground">{o.order_number || o.id}</span>
+                        <span className="font-mono font-semibold text-foreground">{o.order_number || o.id}</span>
                       </div>
                       <div className="grid grid-cols-[120px_1fr] gap-2">
                         <span className="text-muted-foreground">Masa / Alan:</span>
@@ -366,16 +366,16 @@ export function CustomerDetailModal({ customer, onClose }: CustomerDetailModalPr
                         <span className="text-muted-foreground">Ödeme Yöntemi:</span>
                         <span className="text-foreground">{o.payment_method_display || o.payment_method || "—"}</span>
                       </div>
-                      <div className="grid grid-cols-[120px_1fr] gap-2 text-base font-ui-semibold">
+                      <div className="grid grid-cols-[120px_1fr] gap-2 text-base font-semibold">
                         <span className="text-muted-foreground">Net Tutar:</span>
                         <span className="text-primary">{formatCurrency(o.net_total ?? o.total_price ?? 0)}</span>
                       </div>
                       <div className="border-t border-border pt-3">
-                        <h3 className="mb-2 text-sm font-ui-semibold">Sipariş Edilen Ürünler</h3>
+                        <h3 className="mb-2 text-sm font-semibold">Sipariş Edilen Ürünler</h3>
                         {(o.items || []).map((item, idx) => (
                           <div key={idx} className="flex justify-between border-b border-border/30 py-1 text-sm">
                             <span>{item.quantity}x {item.product_name}</span>
-                            <span className="tabular-nums font-ui-semibold">{formatCurrency(item.total_price)}</span>
+                            <span className="tabular-nums font-semibold">{formatCurrency(item.total_price)}</span>
                           </div>
                         ))}
                       </div>

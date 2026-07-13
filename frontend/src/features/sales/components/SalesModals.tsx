@@ -79,7 +79,7 @@ export function EditSaleModal({
                   type="button"
                   onClick={() => setEditForm((prev) => ({ ...prev, payment_method: opt.value }))}
                   className={cn(
-                    "flex flex-col items-center gap-1.5 rounded-lg border p-3 text-xs font-ui-medium transition-colors",
+                    "flex flex-col items-center gap-1.5 rounded-lg border p-3 text-xs font-medium transition-colors",
                     editForm.payment_method === opt.value
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-border bg-background text-muted-foreground hover:bg-muted",

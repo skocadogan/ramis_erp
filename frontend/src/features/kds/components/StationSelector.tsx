@@ -50,7 +50,7 @@ export function StationSelector({
           <div className="h-20 w-20 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-sm shadow-primary/30">
             <ChefHat size={40} className="text-primary-foreground" />
           </div>
-          <h1 className="text-3xl font-ui-bold text-foreground mb-3">{t('selector.title')}</h1>
+          <h1 className="text-3xl font-bold text-foreground mb-3">{t('selector.title')}</h1>
           <p className="text-muted-foreground">{t('selector.description')}</p>
         </div>
 
@@ -58,7 +58,7 @@ export function StationSelector({
           <div className="mb-8 flex items-center gap-3 bg-muted/40 border border-border p-4 rounded-2xl">
             <Building2 size={24} className="text-primary" />
             <div className="flex-1">
-              <label className="block text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1 ml-1">{t('selector.changeBranch')}</label>
+              <label className="block text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1 ml-1">{t('selector.changeBranch')}</label>
               <Select
                 value={selectedBranchId || "none"}
                 onValueChange={(val) => {
@@ -69,7 +69,7 @@ export function StationSelector({
                   }
                 }}
               >
-                <SelectTrigger className="w-full bg-muted border-none text-foreground font-ui-bold h-14 rounded-2xl focus:ring-2 focus:ring-primary/50 px-6 text-lg">
+                <SelectTrigger className="w-full bg-muted border-none text-foreground font-bold h-14 rounded-2xl focus:ring-2 focus:ring-primary/50 px-6 text-lg">
                   <div className="flex items-center gap-2">
                     <span className="truncate">
                       {selectedBranchId
@@ -88,7 +88,7 @@ export function StationSelector({
                       value="none"
                       className="py-5 px-6 focus:bg-primary focus:text-primary-foreground transition-colors border-b border-border last:border-0"
                     >
-                      <span className="font-ui-bold opacity-40 italic text-base uppercase tracking-widest">
+                      <span className="font-bold opacity-40 italic text-base uppercase tracking-widest">
                         {t('selector.allBranches')}
                       </span>
                     </SelectItem>
@@ -100,7 +100,7 @@ export function StationSelector({
                         value={b.id}
                         className="py-5 px-6 focus:bg-primary focus:text-primary-foreground transition-colors border-b border-border last:border-0"
                       >
-                        <span className="font-ui-bold text-base uppercase tracking-wider">
+                        <span className="font-bold text-base uppercase tracking-wider">
                           {b.name}
                         </span>
                       </SelectItem>
@@ -112,7 +112,7 @@ export function StationSelector({
                         value={b.id}
                         className="py-5 px-6 focus:bg-primary focus:text-primary-foreground transition-colors border-b border-border last:border-0"
                       >
-                        <span className="font-ui-bold text-base uppercase tracking-wider">
+                        <span className="font-bold text-base uppercase tracking-wider">
                           {b.name}
                         </span>
                       </SelectItem>
@@ -127,9 +127,9 @@ export function StationSelector({
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           {stations.length === 0 ? (
             <div className="col-span-2 py-10 text-center border-2 border-dashed border-border rounded-2xl">
-              <LayoutGrid size={32} className="mx-auto text-muted mb-2" />
+              <LayoutGrid size={32} className="mx-auto text-muted-foreground mb-2" />
               <p className="text-muted-foreground">{t('selector.noStations')}</p>
-              <Link href="/panel?tab=stations" className="text-primary text-sm font-ui-bold mt-2 inline-block hover:underline">
+              <Link href="/panel?tab=stations" className="text-primary text-sm font-bold mt-2 inline-block hover:underline">
                 {t('selector.addFromAdmin')}
               </Link>
             </div>
@@ -145,11 +145,11 @@ export function StationSelector({
                   <ChefHat size={24} />
                 </div>
                 <div className="flex-1">
-                  <div className="font-ui-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider">{s.name}</div>
+                  <div className="font-bold text-foreground group-hover:text-primary transition-colors uppercase tracking-wider">{s.name}</div>
                   <div className="flex items-center gap-2 mt-0.5">
-                    <div className="text-2xs text-muted-foreground font-ui-bold uppercase tracking-tighter">{s.branch_name}</div>
+                    <div className="text-2xs text-muted-foreground font-bold uppercase tracking-tighter">{s.branch_name}</div>
                     <div className="h-1 w-1 rounded-full bg-border" />
-                    <div className={`text-2xs font-ui-bold uppercase tracking-widest ${s.pending_orders_count > 0 ? 'text-amber-500' : 'text-muted-foreground'}`}>
+                    <div className={`text-2xs font-bold uppercase tracking-widest ${s.pending_orders_count > 0 ? 'text-amber-500' : 'text-muted-foreground'}`}>
                       {t('selector.pendingCount', { count: s.pending_orders_count })}
                     </div>
                   </div>
@@ -163,13 +163,13 @@ export function StationSelector({
         <div className="mt-10 pt-8 border-t border-border flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8">
           <Link
             href="/panel?tab=overview"
-            className="inline-flex items-center gap-2 text-sm font-ui-bold text-primary hover:opacity-80 transition-opacity"
+            className="inline-flex items-center gap-2 text-sm font-bold text-primary hover:opacity-80 transition-opacity"
           >
             <Home size={18} />
             {t('header.overview')}
           </Link>
           {canAccessPos && (
-            <Link href="/pos" className="text-sm font-ui-bold text-muted-foreground hover:text-foreground transition-colors">
+            <Link href="/pos" className="text-sm font-bold text-muted-foreground hover:text-foreground transition-colors">
               {t('selector.backToPos')}
             </Link>
           )}

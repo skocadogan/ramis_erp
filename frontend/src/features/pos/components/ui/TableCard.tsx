@@ -189,10 +189,10 @@ const TableCard = memo(function TableCard({
 
       {/* Top section: Title and Capacity */}
       <div className="flex flex-col items-start w-full min-w-0 pr-3">
-        <span className="text-lg font-ui-bold text-foreground truncate w-full text-left leading-tight">
+        <span className="text-lg font-bold text-foreground truncate w-full text-left leading-tight">
           {displayName}
         </span>
-        <div className="flex items-center gap-1.5 mt-0.5 text-[10px] font-ui-semibold text-muted-foreground">
+        <div className="flex items-center gap-1.5 mt-0.5 text-2xs font-semibold text-muted-foreground">
           <Users size={10} className="shrink-0" />
           <span>
             {table.virtual_kind === "new_slot" ? t("newTakeawayHint") : t("capacityText", { count: table.capacity })}
@@ -203,7 +203,7 @@ const TableCard = memo(function TableCard({
       {/* Middle section: Assigned Waiter or Status Badges */}
       <div className="flex flex-wrap w-full gap-1 items-center my-0.5">
         {table.assigned_waiters && table.assigned_waiters.length > 0 && (
-          <div className="flex items-center gap-1 px-2 py-0.5 text-[10px] font-ui-medium text-foreground bg-muted border border-border/30 rounded-lg w-fit max-w-[70%] min-w-0">
+          <div className="flex items-center gap-1 px-2 py-0.5 text-2xs font-medium text-foreground bg-muted border border-border/30 rounded-lg w-fit max-w-[70%] min-w-0">
             <User size={10} className="shrink-0 text-muted-foreground" />
             <span className="truncate" title={table.assigned_waiters.join(", ")}>
               {table.assigned_waiters.join(", ")}
@@ -212,21 +212,21 @@ const TableCard = memo(function TableCard({
         )}
 
         {hasOrphanOrder && (
-          <span className={`w-fit text-[9px] font-ui-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 ${currentStyle.badge}`}>
+          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 ${currentStyle.badge}`}>
             <AlertTriangle size={10} aria-hidden="true" />
             {t("orphanOrderHint")}
           </span>
         )}
 
         {table.status === "CLEANING" && (
-          <span className={`w-fit text-[9px] font-ui-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
+          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
             <Brush size={10} aria-hidden="true" />
             {cleaningSeconds != null ? formatCleaningCountdown(cleaningSeconds) : t("cleaning")}
           </span>
         )}
 
         {table.status === "OCCUPIED" && elapsedMinutes !== null && (
-          <span className={`w-fit text-[9px] font-ui-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${isKitchen ? "bg-muted text-amber-600" : "bg-muted text-rose-600"}`}>
+          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${isKitchen ? "bg-muted text-amber-600" : "bg-muted text-rose-600"}`}>
             <UtensilsCrossed size={10} className="shrink-0" aria-hidden="true" />
             <Clock size={10} className="shrink-0" />
             {t("occupiedMinutes", { minutes: elapsedMinutes })}
@@ -234,7 +234,7 @@ const TableCard = memo(function TableCard({
         )}
 
         {isKitchen && (
-          <span className={`w-fit text-[9px] font-ui-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
+          <span className={`w-fit text-3xs font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-md shrink-0 flex items-center gap-1 transition-colors duration-300 ${currentStyle.badge}`}>
             <ChefHat size={10} aria-hidden="true" />
             {t("waiting")}
           </span>
@@ -247,7 +247,7 @@ const TableCard = memo(function TableCard({
           <button
             onClick={handleOrphanOrderOpen}
             disabled={openingOrphan}
-            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:bg-orange-800 disabled:opacity-70 text-white text-xs font-ui-bold transition-all shadow-sm active:scale-98 cursor-pointer"
+            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-orange-600 hover:bg-orange-700 active:bg-orange-800 disabled:opacity-70 text-white text-xs font-bold transition-all shadow-sm active:scale-98 cursor-pointer"
             type="button"
           >
             <ReceiptText size={14} /> {openingOrphan ? t("orphanOrderOpening") : t("orphanOrder")}
@@ -255,7 +255,7 @@ const TableCard = memo(function TableCard({
         ) : table.status === "OCCUPIED" && table.active_order ? (
           <button
             onClick={e => { e.stopPropagation(); onOpenOrderModal(table); }}
-            className={`flex h-10 w-full items-center justify-center gap-1.5 rounded-xl text-white text-xs font-ui-bold transition-all shadow-sm active:scale-98 cursor-pointer ${receiptBtnClass}`}
+            className={`flex h-10 w-full items-center justify-center gap-1.5 rounded-xl text-white text-xs font-bold transition-all shadow-sm active:scale-98 cursor-pointer ${receiptBtnClass}`}
             type="button"
           >
             <ReceiptText size={14} /> {t("viewOrder")}
@@ -263,7 +263,7 @@ const TableCard = memo(function TableCard({
         ) : cleaningEnabled && table.status === "FREE" && onStartCleaning ? (
           <button
             onClick={e => { e.stopPropagation(); onStartCleaning(table); }}
-            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white text-xs font-ui-bold transition-all shadow-sm active:scale-98 cursor-pointer"
+            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-sky-600 hover:bg-sky-700 active:bg-sky-800 text-white text-xs font-bold transition-all shadow-sm active:scale-98 cursor-pointer"
             type="button"
           >
             <Sparkles size={12} /> {t("startCleaning")}
@@ -271,15 +271,15 @@ const TableCard = memo(function TableCard({
         ) : canFinishCleaningEarly ? (
           <button
             onClick={e => { e.stopPropagation(); onFinishCleaning?.(table); }}
-            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-ui-bold transition-all shadow-sm active:scale-98 cursor-pointer"
+            className="flex h-10 w-full items-center justify-center gap-1.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 active:bg-emerald-800 text-white text-xs font-bold transition-all shadow-sm active:scale-98 cursor-pointer"
             type="button"
           >
             <CheckCircle2 size={12} /> {t("finishCleaning")}
           </button>
         ) : (
-          <div className="w-full border-t border-border/50 pt-1.5 flex justify-between items-center text-[10px] text-muted-foreground">
-            <span className="font-ui-medium">{t("statusLabel")}</span>
-            <span className={`font-ui-bold flex items-center gap-0.5 transition-colors duration-300 ${currentStyle.statusLabel}`}>
+          <div className="w-full border-t border-border/50 pt-1.5 flex justify-between items-center text-2xs text-muted-foreground">
+            <span className="font-medium">{t("statusLabel")}</span>
+            <span className={`font-bold flex items-center gap-0.5 transition-colors duration-300 ${currentStyle.statusLabel}`}>
               {table.status === "FREE" ? (
                 <><Check size={10} aria-hidden="true" />{t("status.empty")}</>
               ) : table.status === "RESERVED" ? (

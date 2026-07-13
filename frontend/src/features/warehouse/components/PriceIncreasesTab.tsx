@@ -57,7 +57,7 @@ export function PriceIncreasesTab({ branchId }: { branchId?: string }) {
       <div className="flex shrink-0 flex-wrap items-center gap-3">
         <div className="flex items-center gap-2 text-foreground">
           <TrendingUp size={18} className="text-orange-500" />
-          <span className="text-sm font-ui-semibold">{t("title")}</span>
+          <span className="text-sm font-semibold">{t("title")}</span>
         </div>
         <div className="ml-auto flex flex-wrap items-center gap-2">
           <select
@@ -91,12 +91,12 @@ export function PriceIncreasesTab({ branchId }: { branchId?: string }) {
 
       <div className="grid shrink-0 grid-cols-2 gap-3 sm:grid-cols-3">
         <div className="rounded-xl border border-border bg-card/50 p-4">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("summaryCount")}</p>
-          <p className="mt-1 text-2xl font-ui-bold">{summary?.item_count ?? 0}</p>
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("summaryCount")}</p>
+          <p className="mt-1 text-2xl font-bold">{summary?.item_count ?? 0}</p>
         </div>
         <div className="rounded-xl border border-border bg-card/50 p-4">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("summaryAvg")}</p>
-          <p className="mt-1 text-2xl font-ui-bold">
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("summaryAvg")}</p>
+          <p className="mt-1 text-2xl font-bold">
             {canViewAmounts && summary?.average_change_pct
               ? `%${summary.average_change_pct}`
               : canViewAmounts
@@ -105,8 +105,8 @@ export function PriceIncreasesTab({ branchId }: { branchId?: string }) {
           </p>
         </div>
         <div className="rounded-xl border border-border bg-card/50 p-4 col-span-2 sm:col-span-1">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("summaryWindow")}</p>
-          <p className="mt-1 text-sm font-ui-semibold">{t("windowLabel", { days: lookbackDays })}</p>
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("summaryWindow")}</p>
+          <p className="mt-1 text-sm font-semibold">{t("windowLabel", { days: lookbackDays })}</p>
         </div>
       </div>
 
@@ -143,7 +143,7 @@ export function PriceIncreasesTab({ branchId }: { branchId?: string }) {
               className="cursor-pointer px-4 py-3"
               onClick={() => openCostHistory(row)}
             >
-              <div className="font-ui-medium">{row.name}</div>
+              <div className="font-medium">{row.name}</div>
               <div className="text-xs text-muted-foreground">{row.sku}</div>
             </td>
             <td
@@ -159,7 +159,7 @@ export function PriceIncreasesTab({ branchId }: { branchId?: string }) {
               {formatAmount(row.previous_price, canViewAmounts)}
             </td>
             <td
-              className="cursor-pointer px-4 py-3 text-right tabular-nums font-ui-semibold"
+              className="cursor-pointer px-4 py-3 text-right tabular-nums font-semibold"
               onClick={() => openCostHistory(row)}
             >
               {formatAmount(row.current_price, canViewAmounts)}

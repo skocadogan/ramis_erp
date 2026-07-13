@@ -175,18 +175,18 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
           }
         }
       `}</style>
-      <div className="flex h-screen w-full bg-[#f8fafc] overflow-hidden font-sans relative">
+      <div className="flex h-screen w-full bg-card overflow-hidden font-sans relative">
       {/* Left Side: Order List */}
-      <div className={`flex-[3] flex flex-col h-full border-r border-border bg-white shadow-xl z-10 transition-all duration-700 ${isPayment ? 'grayscale-[0.2]' : ''}`}>
-        <header className="sticky top-0 flex items-center justify-between border-b border-slate-100 bg-white p-4">
+      <div className={`flex-[3] flex flex-col h-full border-r border-border shadow-xl z-10 transition-all duration-700 ${isPayment ? 'grayscale-[0.2]' : ''}`}>
+        <header className="sticky top-0 flex items-center justify-between border-b border-slate-100 p-4">
           <div>
-            <h1 className="text-xl font-ui-bold text-slate-800 tracking-tight">{t("orderDetails")}</h1>
+            <h1 className="text-xl font-bold text-slate-800 tracking-tight">{t("orderDetails")}</h1>
             {table ? (
-               <p className="text-muted-foreground font-ui-medium mt-0.5">
+               <p className="text-muted-foreground font-medium mt-0.5">
                 {table.name} <span className="mx-1 text-slate-300">•</span> {t("tableNo", { number: table.number })}
               </p>
             ) : (
-              <p className="text-muted-foreground font-ui-medium mt-0.5">{t("checkCart")}</p>
+              <p className="text-muted-foreground font-medium mt-0.5">{t("checkCart")}</p>
             )}
           </div>
           <div className="bg-blue-50 p-2 rounded-xl">
@@ -200,7 +200,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
               <div className="w-24 h-24 rounded-full bg-slate-50 flex items-center justify-center border-2 border-dashed border-border">
                 <Utensils className="h-10 w-10" />
               </div>
-              <p className="text-xl font-ui-medium">{t("emptyCart")}</p>
+              <p className="text-xl font-medium">{t("emptyCart")}</p>
             </div>
           ) : (
             <div className="space-y-2">
@@ -228,15 +228,15 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         className={`h-9 w-9 shrink-0 rounded-md border flex items-center justify-center shadow-sm ${
                           lineCancelled
                             ? "border-rose-200 bg-white/90 text-rose-600 dark:border-rose-800 dark:bg-rose-950/40"
-                            : "bg-white border-border text-blue-600"
+                            : "border-border text-blue-600"
                         }`}
                       >
-                        <span className="text-base font-ui-bold">{item.quantity}x</span>
+                        <span className="text-base font-bold">{item.quantity}x</span>
                       </div>
                       <div className="min-w-0">
                         <div className="flex items-start gap-1.5 min-w-0">
                           <h3
-                            className={`text-base font-ui-bold break-words min-w-0 ${
+                            className={`text-base font-bold break-words min-w-0 ${
                               lineCancelled
                                 ? "text-slate-500 line-through decoration-rose-400 decoration-2"
                                 : "text-slate-800"
@@ -256,7 +256,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         </div>
                         {caloriesLabel && (
                           <p
-                            className={`mt-0.5 text-sm font-ui-semibold tabular-nums ${
+                            className={`mt-0.5 text-sm font-semibold tabular-nums ${
                               lineCancelled
                                 ? "text-slate-400 line-through"
                                 : "text-amber-700"
@@ -267,7 +267,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         )}
                         {item.selectedUnit && (
                           <p
-                            className={`text-xs font-ui-semibold uppercase tracking-wider mt-0 ${
+                            className={`text-xs font-semibold uppercase tracking-wider mt-0 ${
                               lineCancelled
                                 ? "text-rose-600/80 line-through"
                                 : "text-muted-foreground"
@@ -278,7 +278,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         )}
                         {(item.selectedModifiers ?? []).length > 0 && (
                           <p
-                            className={`text-xs font-ui-medium mt-0 ${
+                            className={`text-xs font-medium mt-0 ${
                               lineCancelled
                                 ? "text-rose-600/80 line-through"
                                 : "text-emerald-700 dark:text-emerald-400"
@@ -288,7 +288,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                           </p>
                         )}
                         {lineCancelled && (
-                          <p className="mt-1 text-xs font-ui-semibold text-rose-700 dark:text-rose-400">
+                          <p className="mt-1 text-xs font-semibold text-rose-700 dark:text-rose-400">
                             {t("itemCancelledHint")}
                           </p>
                         )}
@@ -296,7 +296,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                     </div>
                     <div className="text-right shrink-0 pl-2">
                       <p
-                        className={`text-lg font-ui-bold ${
+                        className={`text-lg font-bold ${
                           lineCancelled
                             ? "text-slate-400 line-through decoration-rose-300"
                             : "text-slate-900"
@@ -305,7 +305,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         {formatCurrency(lineTotal)}
                       </p>
                       <p
-                        className={`text-xs font-ui-medium ${
+                        className={`text-xs font-medium ${
                           lineCancelled ? "text-slate-400 line-through" : "text-muted-foreground"
                         }`}
                       >
@@ -314,7 +314,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         })}
                       </p>
                       {lineCancelled && (
-                        <span className="mt-2 inline-flex rounded-full bg-rose-600 px-2.5 py-0.5 text-[11px] font-ui-bold uppercase tracking-wide text-white">
+                        <span className="mt-2 inline-flex rounded-full bg-rose-600 px-2.5 py-0.5 text-sub font-bold uppercase tracking-wide text-white">
                           {t("itemCancelled")}
                         </span>
                       )}
@@ -328,14 +328,14 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
       </div>
 
       {/* Right Side: Total & Info */}
-      <div className="flex-[2] flex flex-col h-full bg-[#0f172a] text-white p-12 justify-center relative overflow-hidden transition-all duration-700">
+      <div className="flex-[2] flex flex-col h-full bg-card text-white p-12 justify-center relative overflow-hidden transition-all duration-700">
         {/* Abstract Background Decoration */}
         <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/25" />
         <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-indigo-600/20" />
 
         <div className="relative z-10 mb-auto">
           <div className="bg-blue-600 w-16 h-1 rounded-full mb-8"></div>
-          <h2 className="text-5xl font-ui-bold mb-6 leading-tight">
+          <h2 className="text-5xl font-bold mb-6 leading-tight">
             {isPayment ? (
               <>
                 {t("paymentPhase")}
@@ -356,19 +356,19 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
           <div className="mt-12 space-y-6">
             <div className={`flex items-center gap-4 p-4 rounded-2xl border transition-all duration-500 ${isPayment ? 'text-blue-400 bg-blue-400/10 border-blue-400/30' : 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20'}`}>
               {isPayment ? <Sparkles className="h-6 w-6" /> : <CheckCircle2 className="h-6 w-6" />}
-              <span className="font-ui-bold text-lg">{isPayment ? t("closingAccount") : t("securePayment")}</span>
+              <span className="font-bold text-lg">{isPayment ? t("closingAccount") : t("securePayment")}</span>
             </div>
 
             {isPayment && (
               <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                <p className="text-xs font-ui-bold text-muted-foreground uppercase tracking-[0.2em]">{tPay("method")}</p>
+                <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em]">{tPay("method")}</p>
                 <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
                   <div className="bg-white/10 p-3 rounded-xl">
                     <PaymentMethodIcon className={`h-6 w-6 ${paymentIconClass}`} />
                   </div>
                   <div>
-                    <p className="text-xl font-ui-bold tracking-tight">{paymentMethodLabel}</p>
-                    <p className="text-muted-foreground text-xs font-ui-medium uppercase tracking-wider">{t("selectedMethod")}</p>
+                    <p className="text-xl font-bold tracking-tight">{paymentMethodLabel}</p>
+                    <p className="text-muted-foreground text-xs font-medium uppercase tracking-wider">{t("selectedMethod")}</p>
                   </div>
                 </div>
               </div>
@@ -379,27 +379,27 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
         <div className="relative z-10 space-y-6 mt-8">
           {displayDiscount > 0 && (
             <div className="space-y-3 bg-white/5 rounded-3xl p-6 border border-white/5">
-              <div className="flex justify-between items-center text-muted-foreground font-ui-bold uppercase tracking-widest text-xs">
+              <div className="flex justify-between items-center text-muted-foreground font-bold uppercase tracking-widest text-xs">
                 <span>{t("subtotal")}</span>
                 <span className="text-slate-300">{formatCurrency(displaySubtotal)}</span>
               </div>
-              <div className="flex justify-between items-center text-emerald-400 font-ui-bold uppercase tracking-widest text-xs">
+              <div className="flex justify-between items-center text-emerald-400 font-bold uppercase tracking-widest text-xs">
                 <span>{t("discount")}</span>
                 <span>-{formatCurrency(displayDiscount)}</span>
               </div>
             </div>
           )}
 
-          <div className="flex items-center justify-between text-muted-foreground font-ui-bold uppercase tracking-[0.2em] text-sm px-2">
+          <div className="flex items-center justify-between text-muted-foreground font-bold uppercase tracking-[0.2em] text-sm px-2">
             <span>{isPayment ? t("amountToPay") : t("totalAmount")}</span>
             <ChevronRight className="h-4 w-4" />
           </div>
 
-          <div className="relative flex flex-col items-center justify-center gap-2 rounded-[32px] border border-white/10 bg-slate-800/90 p-8 shadow-2xl">
-            <span className="text-6xl sm:text-7xl font-ui-bold tracking-tighter relative z-10 flex items-start">
+          <div className="relative flex flex-col items-center justify-center gap-2 rounded-5xl border border-white/10 bg-slate-800/90 p-8 shadow-2xl">
+            <span className="text-6xl sm:text-7xl font-bold tracking-tighter relative z-10 flex items-start">
               {formatCurrency(total)}
             </span>
-            <span className="text-white/40 font-ui-bold text-sm uppercase tracking-[0.3em] relative z-10">{isProcessing ? t("processing") : t("taxIncluded")}</span>
+            <span className="text-white/40 font-bold text-sm uppercase tracking-[0.3em] relative z-10">{isProcessing ? t("processing") : t("taxIncluded")}</span>
           </div>
 
           {isProcessing && (
@@ -427,12 +427,12 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
               </div>
             </div>
             <div className="space-y-4">
-              <h2 className="text-7xl font-ui-bold text-white tracking-tighter">
+              <h2 className="text-7xl font-bold text-white tracking-tighter">
                 {successSignal === "ORDER"
                   ? (settings?.order_success_title ?? t("orderSuccess"))
                   : (settings?.payment_success_title ?? t("paymentSuccess"))}
               </h2>
-              <p className="text-2xl font-ui-medium text-slate-300 leading-relaxed">
+              <p className="text-2xl font-medium text-slate-300 leading-relaxed">
                 {successSignal === "ORDER"
                   ? (settings?.order_success_subtitle ?? t("orderSuccessDesc"))
                   : (settings?.payment_success_subtitle ?? t("paymentSuccessDesc"))}

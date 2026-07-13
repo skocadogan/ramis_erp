@@ -141,7 +141,7 @@ export function KdsWasteModal({ open, stationId, warehouseName, onClose }: Props
                   type="button"
                   onClick={() => setMode(m)}
                   className={cn(
-                    "rounded-lg border px-2 py-2 text-xs font-ui-semibold transition-colors",
+                    "rounded-lg border px-2 py-2 text-xs font-semibold transition-colors",
                     mode === m
                       ? "border-primary bg-primary/10 text-primary"
                       : "border-border text-muted-foreground hover:bg-muted",
@@ -159,7 +159,7 @@ export function KdsWasteModal({ open, stationId, warehouseName, onClose }: Props
             ) : null}
 
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("waste.stockItem")}
               </label>
               <KdsWarehouseStockItemSelect
@@ -172,7 +172,7 @@ export function KdsWasteModal({ open, stationId, warehouseName, onClose }: Props
 
             {mode !== "WASTE" ? (
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("waste.reason")}
                 </label>
                 <select
@@ -192,7 +192,7 @@ export function KdsWasteModal({ open, stationId, warehouseName, onClose }: Props
 
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("waste.quantity")}
                 </label>
                 <input
@@ -209,7 +209,7 @@ export function KdsWasteModal({ open, stationId, warehouseName, onClose }: Props
                 />
               </div>
               <div>
-                <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("waste.unit")}
                 </label>
                 <input
@@ -221,7 +221,7 @@ export function KdsWasteModal({ open, stationId, warehouseName, onClose }: Props
             </div>
 
             <div>
-              <label className="mb-1.5 block text-xs font-ui-bold uppercase tracking-wide text-muted-foreground">
+              <label className="mb-1.5 block text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 {t("waste.notes")}
               </label>
               <textarea

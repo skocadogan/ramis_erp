@@ -68,7 +68,7 @@ export function WarehousesTab({ branchId }: { branchId?: string }) {
         </div>
         <button
           onClick={() => { setEditItem(null); setShowForm(true) }}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-ui-medium hover:bg-blue-700 transition-colors shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm"
         >
           <Plus size={16} />
           <span>{t("warehousesTab.newWarehouse")}</span>
@@ -76,18 +76,18 @@ export function WarehousesTab({ branchId }: { branchId?: string }) {
       </div>
 
       {/* Table */}
-      <div className="rounded-xl border border-border/80 dark:border-slate-800 overflow-hidden bg-card/50">
+      <div className="rounded-xl border border-border/80 border-border overflow-hidden bg-card/50">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-50 dark:bg-slate-800/50">
-                <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.colCode")}</th>
-                <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.name")}</th>
-                <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.type")}</th>
-                <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.branch")}</th>
-                <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.colManager")}</th>
-                <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.default")}</th>
-                <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{t("warehousesTab.actions")}</th>
+              <tr className="bg-muted/50">
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.colCode")}</th>
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.name")}</th>
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.type")}</th>
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.branch")}</th>
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.colManager")}</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.default")}</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t("warehousesTab.actions")}</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-border">
@@ -99,14 +99,14 @@ export function WarehousesTab({ branchId }: { branchId?: string }) {
                 filtered.map((w) => (
                   <tr key={w.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
                     <td className="px-4 py-3 font-mono text-xs text-blue-600 dark:text-blue-400">{w.code}</td>
-                    <td className="px-4 py-3 font-ui-medium text-slate-900 dark:text-slate-200">
+                    <td className="px-4 py-3 font-medium text-slate-900 text-foreground">
                       <div className="flex items-center gap-2">
                         <MapPin size={14} className="text-muted-foreground shrink-0" />
                         {w.name}
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="inline-flex px-2 py-0.5 rounded-md text-sub font-ui-medium bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300">
+                      <span className="inline-flex px-2 py-0.5 rounded-md text-sub font-medium bg-slate-100 text-slate-700 bg-muted text-muted-foreground">
                         {t(`warehouseType.${w.warehouse_type}` as never)}
                       </span>
                     </td>
@@ -114,7 +114,7 @@ export function WarehousesTab({ branchId }: { branchId?: string }) {
                       {w.branch_names?.length > 0 ? (
                         <div className="flex flex-wrap gap-1">
                           {w.branch_names.map((name) => (
-                            <span key={name} className="inline-flex px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 text-2xs font-ui-medium border border-blue-100 dark:border-blue-800">
+                            <span key={name} className="inline-flex px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300 text-2xs font-medium border border-blue-100 dark:border-blue-800">
                               {name}
                             </span>
                           ))}

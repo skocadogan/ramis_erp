@@ -280,12 +280,12 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-6 py-4 font-ui-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colReportNo")}</th>
-              <th className="text-left px-6 py-4 font-ui-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colStation")}</th>
-              <th className="text-left px-6 py-4 font-ui-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colStatus")}</th>
-              <th className="text-left px-6 py-4 font-ui-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colDate")}</th>
-              <th className="text-center px-6 py-4 font-ui-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colLines")}</th>
-              <th className="text-right px-6 py-4 font-ui-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colActions")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colReportNo")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colStation")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colStatus")}</th>
+              <th className="text-left px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colDate")}</th>
+              <th className="text-center px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colLines")}</th>
+              <th className="text-right px-6 py-4 font-bold text-muted-foreground uppercase tracking-wider text-2xs">{t("deficiencyReports.colActions")}</th>
             </tr>
           </thead>
         }
@@ -293,12 +293,12 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
           isLoading ? (
             <div className="text-center py-20">
               <Loader2 className="h-8 w-8 animate-spin text-amber-500 mx-auto mb-2" />
-              <span className="text-muted-foreground font-ui-medium">{t("deficiencyReports.loading")}</span>
+              <span className="text-muted-foreground font-medium">{t("deficiencyReports.loading")}</span>
             </div>
           ) : (
             <div className="text-center py-20">
               <AlertCircle size={40} className="text-slate-200 mx-auto mb-2" />
-              <span className="text-muted-foreground font-ui-medium">{t("deficiencyReports.empty")}</span>
+              <span className="text-muted-foreground font-medium">{t("deficiencyReports.empty")}</span>
             </div>
           )
         }
@@ -314,19 +314,19 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
           const showOtherActions = shouldShowDeficiencyTableActionsExceptDetail(r, rowActionOpts)
           return (
             <>
-              <td className="px-6 py-4 font-mono text-xs font-ui-bold text-amber-600 dark:text-amber-400">{r.report_number}</td>
+              <td className="px-6 py-4 font-mono text-xs font-bold text-amber-600 dark:text-amber-400">{r.report_number}</td>
               <td className="px-6 py-4">
                 <div className="flex flex-col">
                   <span className="text-foreground">{r.kitchen_station_name}</span>
-                  <span className="text-2xs text-muted-foreground font-ui-medium">{r.branch_name}</span>
+                  <span className="text-2xs text-muted-foreground font-medium">{r.branch_name}</span>
                 </div>
               </td>
               <td className="px-6 py-4"><StatusBadge domain="deficiency" status={r.status} /></td>
-              <td className="px-6 py-4 text-muted-foreground text-xs font-ui-medium">
+              <td className="px-6 py-4 text-muted-foreground text-xs font-medium">
                 {new Date(r.created_at).toLocaleDateString("tr-TR")}
               </td>
               <td className="px-6 py-4 text-center">
-                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-muted text-2xs font-ui-bold text-slate-600 dark:text-slate-300">
+                <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-muted text-2xs font-bold text-muted-foreground">
                   {getDeficiencyReportLineCount(r)}
                 </span>
               </td>
@@ -431,14 +431,14 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
           <form onSubmit={handleCreatePO}>
             <DialogBody className="space-y-4">
               <div>
-                <label className="block text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1.5">{t("deficiencyReports.labelSupplier")}</label>
+                <label className="block text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">{t("deficiencyReports.labelSupplier")}</label>
                 <select name="supplier_id" required className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-sm outline-none focus:ring-2 focus:ring-amber-500/20">
                    <option value="">{t("purchaseOrders.selectPlaceholder")}</option>
                    {suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
                 </select>
               </div>
               <div>
-                <label className="block text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1.5">{t("deficiencyReports.labelTargetWarehouse")}</label>
+                <label className="block text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">{t("deficiencyReports.labelTargetWarehouse")}</label>
                 <select name="warehouse_id" required className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-sm outline-none focus:ring-2 focus:ring-amber-500/20">
                    <option value="">{t("purchaseOrders.selectPlaceholder")}</option>
                    {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
@@ -466,13 +466,13 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
           <form onSubmit={handleCreateTransfer}>
             <DialogBody className="space-y-4">
               <div>
-                <label className="block text-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1.5">{t("deficiencyReports.labelSourceWarehouse")}</label>
+                <label className="block text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1.5">{t("deficiencyReports.labelSourceWarehouse")}</label>
                 <select name="source_warehouse_id" required className="w-full px-4 py-2.5 rounded-xl border border-border bg-background text-sm outline-none focus:ring-2 focus:ring-indigo-500/20">
                    <option value="">{t("purchaseOrders.selectPlaceholder")}</option>
                    {warehouses.map(w => <option key={w.id} value={w.id}>{w.name}</option>)}
                 </select>
               </div>
-              <div className="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-xl border border-blue-100 dark:border-blue-900/20 text-2xs text-blue-600 font-ui-medium">
+              <div className="bg-blue-50 dark:bg-blue-900/10 p-3 rounded-xl border border-blue-100 dark:border-blue-900/20 text-2xs text-blue-600 font-medium">
                  {t("deficiencyReports.transferAutoTargetHint")}
               </div>
             </DialogBody>

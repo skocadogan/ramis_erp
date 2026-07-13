@@ -143,7 +143,7 @@ const POSHeader = React.memo(function POSHeader({
   const terminalBlock = currentTerminal ? (
     <div className="flex items-center gap-2 rounded-full border border-primary/20 bg-primary/10 px-3 py-1.5">
       <div className="h-2 w-2 rounded-full bg-primary" />
-      <span className="text-xs font-ui-bold text-primary uppercase tracking-tight">
+      <span className="text-xs font-bold text-primary uppercase tracking-tight">
         {currentTerminal.name}
       </span>
     </div>
@@ -184,7 +184,7 @@ const POSHeader = React.memo(function POSHeader({
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground shadow-sm">
                   <Utensils size={18} />
                 </div>
-                <h1 className="hidden truncate text-base font-ui-bold tracking-tight text-foreground sm:text-lg md:block lg:text-xl">
+                <h1 className="hidden truncate text-base font-bold tracking-tight text-foreground sm:text-lg md:block lg:text-xl">
                   {t("waiter")}
                 </h1>
               </Link>
@@ -211,7 +211,7 @@ const POSHeader = React.memo(function POSHeader({
                       )} />
                       <span className="flex-1">{t("healthStatus")}</span>
                       <span className={cn(
-                        "text-xs font-ui-semibold",
+                        "text-xs font-semibold",
                         backendStatus === "down" && "text-red-500",
                         backendStatus === "checking" && "text-muted-foreground",
                         backendStatus === "ok" && "text-emerald-600"
@@ -324,7 +324,7 @@ const POSHeader = React.memo(function POSHeader({
                   title={t("logout")}
                 >
                   <LogOut size={16} />
-                  <span className="hidden lg:inline text-sm font-ui-medium">{t("logout")}</span>
+                  <span className="hidden lg:inline text-sm font-medium">{t("logout")}</span>
                 </button>
               </div>
             </div>
@@ -339,7 +339,7 @@ const POSHeader = React.memo(function POSHeader({
                 <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                   <Utensils size={18} />
                 </div>
-                <h1 className="truncate text-lg font-ui-bold tracking-tight text-foreground sm:text-xl">
+                <h1 className="truncate text-lg font-bold tracking-tight text-foreground sm:text-xl">
                   {t("pos")}
                 </h1>
               </Link>
@@ -353,7 +353,7 @@ const POSHeader = React.memo(function POSHeader({
                   <nav className="relative z-10 hidden shrink-0 items-center gap-2 lg:flex xl:pl-2">
                       <Link
                       href="/panel"
-                      className="flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-ui-medium text-muted-foreground hover:bg-muted hover:text-primary fullhd:px-3"
+                      className="flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-primary fullhd:px-3"
                       title={t("home")}
                     >
                       <Home size={18} className="shrink-0 text-muted-foreground/60 fullhd:hidden" aria-hidden />
@@ -362,7 +362,7 @@ const POSHeader = React.memo(function POSHeader({
                     </Link>
                     <Link
                       href="/kds"
-                      className="flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-ui-medium text-muted-foreground hover:bg-muted hover:text-primary fullhd:px-3"
+                      className="flex items-center gap-1.5 rounded-md px-2 py-1.5 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-primary fullhd:px-3"
                       title={t("kitchen")}
                     >
                       <ChefHat size={18} className="shrink-0 text-muted-foreground/60 fullhd:hidden" aria-hidden />
@@ -379,7 +379,7 @@ const POSHeader = React.memo(function POSHeader({
                 <button
                   type="button"
                   onClick={() => setIsTerminalSwitchOpen(true)}
-                  className="flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/10 px-2.5 py-2 text-sm font-ui-semibold text-primary shadow-sm transition-colors hover:bg-primary/20"
+                  className="flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/10 px-2.5 py-2 text-sm font-semibold text-primary shadow-sm transition-colors hover:bg-primary/20"
                   title={currentTerminal ? t("switchTerminalTitle") : t("switchTerminal")}
                 >
                   <ArrowRightLeft size={16} className="text-primary" />
@@ -416,7 +416,7 @@ const POSHeader = React.memo(function POSHeader({
                     )} />
                     <span className="flex-1">{t("healthStatus")}</span>
                     <span className={cn(
-                      "text-xs font-ui-semibold",
+                      "text-xs font-semibold",
                       backendStatus === "down" && "text-red-500",
                       backendStatus === "checking" && "text-muted-foreground",
                       backendStatus === "ok" && "text-emerald-600"
@@ -527,10 +527,10 @@ const POSHeader = React.memo(function POSHeader({
                 className="flex items-center gap-2 rounded-full border border-border bg-muted px-2 py-1.5 fullhd:gap-3 fullhd:px-4"
                 title={user?.username || t("staff")}
               >
-                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-xs font-ui-bold text-primary">
+                <div className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/15 text-xs font-bold text-primary">
                   {user?.username ? user.username.charAt(0).toUpperCase() : "P"}
                 </div>
-                <span className="hidden max-w-[10rem] truncate text-sm font-ui-semibold text-foreground fullhd:inline">{user?.username || t("staff")}</span>
+                <span className="hidden max-w-[10rem] truncate text-sm font-semibold text-foreground fullhd:inline">{user?.username || t("staff")}</span>
               </div>
 
               <button
@@ -543,7 +543,7 @@ const POSHeader = React.memo(function POSHeader({
                   logout();
                   router.push("/");
                 }}
-                className="flex items-center gap-2 rounded-lg border border-border bg-card px-2 py-2 text-sm font-ui-medium text-muted-foreground shadow-sm transition-colors hover:border-destructive/30 hover:bg-destructive/10 hover:text-destructive fullhd:px-4"
+                className="flex items-center gap-2 rounded-lg border border-border bg-card px-2 py-2 text-sm font-medium text-muted-foreground shadow-sm transition-colors hover:border-destructive/30 hover:bg-destructive/10 hover:text-destructive fullhd:px-4"
                 title={t("logout")}
               >
                 <LogOut size={16} />

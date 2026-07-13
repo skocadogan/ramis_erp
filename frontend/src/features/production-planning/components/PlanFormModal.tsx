@@ -154,7 +154,7 @@ export function PlanFormModal({ isOpen, onClose, onSave, isSubmitting, initialDa
             <div className="flex min-h-0 flex-col md:col-span-8">
               <div className="flex shrink-0 items-center justify-between gap-4 border-b border-border px-6 py-4">
                 <div className="min-w-0">
-                  <h3 className="text-sm font-ui-bold truncate">{t("menuProducts")}</h3>
+                  <h3 className="text-sm font-bold truncate">{t("menuProducts")}</h3>
                   <p className="text-2xs text-muted-foreground truncate">{t("menuProductsHint")}</p>
                 </div>
                 <div className="relative w-48 shrink-0">
@@ -176,8 +176,8 @@ export function PlanFormModal({ isOpen, onClose, onSave, isSubmitting, initialDa
                     <table className="w-full text-xs">
                       <thead className="sticky top-0 z-20 border-b border-border bg-background text-muted-foreground">
                         <tr>
-                          <th className="px-3 py-2 text-left font-ui-bold">{t("colProduct")}</th>
-                          <th className="px-3 py-2 text-right font-ui-bold w-40">{t("colTarget")}</th>
+                          <th className="px-3 py-2 text-left font-bold">{t("colProduct")}</th>
+                          <th className="px-3 py-2 text-right font-bold w-40">{t("colTarget")}</th>
                         </tr>
                       </thead>
                       <tbody className="divide-y divide-border">
@@ -194,7 +194,7 @@ export function PlanFormModal({ isOpen, onClose, onSave, isSubmitting, initialDa
 
                             return (
                               <tr key={line.product} className="transition-colors hover:bg-muted/20">
-                                <td className="px-3 py-2 font-ui-medium">{pName}</td>
+                                <td className="px-3 py-2 font-medium">{pName}</td>
                                 <td className="px-3 py-2">
                                   <Input
                                     type="number"

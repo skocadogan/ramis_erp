@@ -55,17 +55,17 @@ export function CombinedProductCompositionDialog({
                             <table className="min-w-full text-sm">
                                 <thead className="bg-muted/40 text-xs uppercase tracking-wide text-muted-foreground">
                                     <tr>
-                                        <th className="px-4 py-3 text-left font-ui-bold">{t("cols.product")}</th>
-                                        <th className="px-4 py-3 text-right font-ui-bold">{t("cols.quantity")}</th>
-                                        <th className="px-4 py-3 text-left font-ui-bold">{t("cols.salesUnit")}</th>
-                                        <th className="px-4 py-3 text-right font-ui-bold">{t("cols.multiplier")}</th>
-                                        <th className="px-4 py-3 text-right font-ui-bold">{t("cols.effectiveQty")}</th>
+                                        <th className="px-4 py-3 text-left font-bold">{t("cols.product")}</th>
+                                        <th className="px-4 py-3 text-right font-bold">{t("cols.quantity")}</th>
+                                        <th className="px-4 py-3 text-left font-bold">{t("cols.salesUnit")}</th>
+                                        <th className="px-4 py-3 text-right font-bold">{t("cols.multiplier")}</th>
+                                        <th className="px-4 py-3 text-right font-bold">{t("cols.effectiveQty")}</th>
                                     </tr>
                                 </thead>
                                 <tbody className="divide-y divide-border">
                                     {components.map((component, index) => (
                                         <tr key={`${component.product_id}-${component.product_unit_id ?? "std"}-${index}`}>
-                                            <td className="px-4 py-3 font-ui-medium text-foreground">
+                                            <td className="px-4 py-3 font-medium text-foreground">
                                                 {component.product_name}
                                             </td>
                                             <td className="px-4 py-3 text-right text-foreground">

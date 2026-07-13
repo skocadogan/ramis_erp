@@ -157,7 +157,7 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
           {isLoading ? (
             <div className="flex flex-col items-center justify-center py-20 gap-4">
               <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
-              <p className="text-muted-foreground font-ui-medium">{t("loading")}</p>
+              <p className="text-muted-foreground font-medium">{t("loading")}</p>
             </div>
           ) : !activePlan ? (
             <div className="flex flex-col items-center justify-center py-20 text-center gap-4">
@@ -165,7 +165,7 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
                 <AlertCircle className="h-12 w-12 text-muted-foreground" />
               </div>
               <div>
-                <h3 className="text-lg font-ui-semibold text-foreground">{t("noPlanTitle")}</h3>
+                <h3 className="text-lg font-semibold text-foreground">{t("noPlanTitle")}</h3>
                 <p className="text-muted-foreground max-w-xs mx-auto mt-2">
                   {t("noPlanBody")}
                 </p>
@@ -177,27 +177,27 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
                 {/* Küçük Stat Kartları */}
                 <div className="grid grid-cols-3 gap-3 flex-1">
                   <div className="bg-background p-3 rounded-xl border border-border flex flex-col justify-center">
-                    <div className="flex items-center gap-1.5 text-muted-foreground text-[10px] font-ui-bold mb-0.5">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-2xs font-bold mb-0.5">
                       <Package className="h-3 w-3 text-blue-500" />
                       {t("statProduct")}
                     </div>
-                    <div className="text-xl font-ui-bold text-foreground">{statusData.length}</div>
+                    <div className="text-xl font-bold text-foreground">{statusData.length}</div>
                   </div>
                   <div className="bg-background p-3 rounded-xl border border-border flex flex-col justify-center">
-                    <div className="flex items-center gap-1.5 text-muted-foreground text-[10px] font-ui-bold mb-0.5">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-2xs font-bold mb-0.5">
                       <TrendingUp className="h-3 w-3 text-emerald-500" />
                       {t("statCritical")}
                     </div>
-                    <div className="text-xl font-ui-bold text-amber-600 dark:text-amber-400">
+                    <div className="text-xl font-bold text-amber-600 dark:text-amber-400">
                       {statusData.filter((d: ProductionStatusItem) => d.status === 'warning').length}
                     </div>
                   </div>
                   <div className="bg-background p-3 rounded-xl border border-border flex flex-col justify-center">
-                    <div className="flex items-center gap-1.5 text-muted-foreground text-[10px] font-ui-bold mb-0.5">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-2xs font-bold mb-0.5">
                       <AlertCircle className="h-3 w-3 text-rose-500" />
                       {t("stat86")}
                     </div>
-                    <div className="text-xl font-ui-bold text-rose-600 dark:text-rose-400">
+                    <div className="text-xl font-bold text-rose-600 dark:text-rose-400">
                       {statusData.filter((d: ProductionStatusItem) => d.status === 'critical').length}
                     </div>
                   </div>
@@ -206,7 +206,7 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
                 {/* Filtre Alanı */}
                 <div className="flex gap-3 bg-background p-3 rounded-xl border border-border lg:w-[500px]">
                   <div className="w-[140px]">
-                    <div className="flex items-center gap-1.5 text-muted-foreground text-[10px] font-ui-bold mb-1.5">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-2xs font-bold mb-1.5">
                       <Calendar className="h-3 w-3" /> {t("filterDate")}
                     </div>
                     <Input
@@ -217,7 +217,7 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
                     />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-1.5 text-muted-foreground text-[10px] font-ui-bold mb-1.5">
+                    <div className="flex items-center gap-1.5 text-muted-foreground text-2xs font-bold mb-1.5">
                       <Filter className="h-3 w-3" /> {t("filterCategory")}
                     </div>
                     <Select value={selectedCategory} onValueChange={(val) => setSelectedCategory(val || "ALL")}>
@@ -242,38 +242,38 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
                   <table className="w-full text-sm">
                     <thead className="sticky top-0 z-10 bg-muted">
                       <tr className="border-b border-border text-xs text-muted-foreground">
-                        <th className="text-left px-6 py-4 font-ui-bold">{t("table.product")}</th>
-                        <th className="text-right px-4 py-4 font-ui-bold">{t("table.target")}</th>
-                        <th className="text-right px-4 py-4 font-ui-bold">{t("table.sold")}</th>
-                        <th className="text-right px-4 py-4 font-ui-bold">{t("table.remaining")}</th>
-                        <th className="text-right px-6 py-4 font-ui-bold">{t("table.status")}</th>
+                        <th className="text-left px-6 py-4 font-bold">{t("table.product")}</th>
+                        <th className="text-right px-4 py-4 font-bold">{t("table.target")}</th>
+                        <th className="text-right px-4 py-4 font-bold">{t("table.sold")}</th>
+                        <th className="text-right px-4 py-4 font-bold">{t("table.remaining")}</th>
+                        <th className="text-right px-6 py-4 font-bold">{t("table.status")}</th>
                       </tr>
                     </thead>
                     <tbody className="divide-y divide-border">
                       {statusData.map((item: ProductionStatusItem) => (
                         <tr key={item.id} className="group transition-colors hover:bg-muted/20">
                           <td className="px-6 py-4">
-                            <div className="font-ui-bold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                            <div className="font-bold text-foreground group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                               {item.product_name}
                             </div>
                             <div className="flex items-center gap-2 text-2xs text-muted-foreground dark:text-muted-foreground mt-0.5">
-                              <span className="bg-muted px-1.5 py-0.5 rounded text-blue-600 dark:text-blue-400 font-ui-medium">
+                              <span className="bg-muted px-1.5 py-0.5 rounded text-blue-600 dark:text-blue-400 font-medium">
                                 {labelCategory(item.category_name || "Genel")}
                               </span>
                               <span>•</span>
                               <span>{t("station")} {item.station_name || '-'}</span>
                             </div>
                           </td>
-                          <td className="px-4 py-4 text-right font-ui-semibold text-foreground">
+                          <td className="px-4 py-4 text-right font-semibold text-foreground">
                             {formatNumber(item.target, 0)}
                           </td>
                           <td className="px-4 py-4 text-right">
-                            <span className={item.sold > 0 ? "text-blue-600 dark:text-blue-400 font-ui-bold" : "text-muted-foreground font-ui-medium"}>
+                            <span className={item.sold > 0 ? "text-blue-600 dark:text-blue-400 font-bold" : "text-muted-foreground font-medium"}>
                               {formatNumber(item.sold, 0)}
                             </span>
                           </td>
                           <td className="px-4 py-4 text-right">
-                            <span className={`font-ui-bold ${item.remaining === 0 ? "text-rose-600 dark:text-rose-400" :
+                            <span className={`font-bold ${item.remaining === 0 ? "text-rose-600 dark:text-rose-400" :
                               item.remaining !== null && item.remaining <= 5 ? "text-amber-600 dark:text-amber-400" :
                                 "text-emerald-600 dark:text-emerald-400"
                               }`}>
@@ -291,12 +291,12 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
                                     style={{ width: `${Math.min(100, item.soldPercent)}%` }}
                                   />
                                 </div>
-                                <span className="text-sub font-ui-bold w-8 text-right text-muted-foreground">
+                                <span className="text-sub font-bold w-8 text-right text-muted-foreground">
                                   %{Math.round(item.soldPercent)}
                                 </span>
                               </div>
                             ) : (
-                              <div className="text-right text-2xs font-ui-medium text-muted-foreground italic">
+                              <div className="text-right text-2xs font-medium text-muted-foreground italic">
                                 {t("noLimit")}
                               </div>
                             )}
@@ -312,7 +312,7 @@ export function ProductionStatusModal({ isOpen, onClose, branchId }: ProductionS
         </DialogBody>
 
         <DialogFooter className="justify-center sm:justify-center">
-          <Button onClick={onClose} variant="outline" className="min-w-[120px] font-ui-medium">
+          <Button onClick={onClose} variant="outline" className="min-w-[120px] font-medium">
             {t("close")}
           </Button>
         </DialogFooter>

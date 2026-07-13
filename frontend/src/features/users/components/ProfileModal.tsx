@@ -13,8 +13,8 @@ import { useAuthStore } from "@/store/useAuthStore"
 import { useTranslations } from "next-intl"
 import { queryKeys } from "@/lib/queryKeys"
 
-const input = "w-full mt-1 px-3 py-2 bg-slate-50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
-const label = "text-sm font-ui-medium text-foreground"
+const input = "w-full mt-1 px-3 py-2 bg-slate-50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground"
+const label = "text-sm font-medium text-foreground"
 
 interface ProfileModalProps {
   onClose: () => void
@@ -75,7 +75,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
   return (
     <>
       <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50 p-4" onClick={onClose}>
-        <div className="bg-white rounded-lg border border-border w-full max-w-lg shadow-lg max-h-[90vh] overflow-y-auto dark:bg-slate-900 dark:border-slate-700" onClick={e => e.stopPropagation()}>
+        <div className="rounded-lg border border-border w-full max-w-lg shadow-lg max-h-[90vh] overflow-y-auto bg-card border-border" onClick={e => e.stopPropagation()}>
           {isLoading ? (
             <div className="flex items-center justify-center py-16">
               <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
@@ -84,18 +84,18 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
             <div className="p-6 text-center text-red-500 dark:text-red-400">{tSelf("loadErrorBanner")}</div>
           ) : (
             <>
-              <div className="relative bg-slate-50 px-6 py-6 text-center rounded-t-lg border-b border-border dark:bg-slate-800 dark:border-slate-700">
+              <div className="relative bg-slate-50 px-6 py-6 text-center rounded-t-lg border-b border-border bg-muted border-border">
                 <button onClick={onClose}
                   className="absolute top-3 right-3 p-1.5 rounded-md text-muted-foreground hover:text-slate-600 hover:bg-slate-200 transition-all dark:hover:bg-slate-700 dark:hover:text-slate-200">
                   <X size={16} />
                 </button>
-                <div className="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center text-2xl font-ui-semibold text-blue-700 mx-auto dark:bg-blue-900 dark:text-blue-300">
+                <div className="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center text-2xl font-semibold text-blue-700 mx-auto dark:bg-blue-900 dark:text-blue-300">
                   {profile.username.charAt(0).toUpperCase()}
                 </div>
-                <h2 className="text-base font-ui-semibold text-slate-900 mt-2 dark:text-slate-100">{profile.username}</h2>
+                <h2 className="text-base font-semibold text-slate-900 mt-2 text-foreground">{profile.username}</h2>
                 <div className="flex items-center justify-center gap-1.5 mt-2 flex-wrap">
                   {profile.role_names.map(r => (
-                    <Badge key={r} variant="outline" className="text-xs border-slate-300 text-slate-600 dark:border-slate-600 dark:text-muted-foreground">{r}</Badge>
+                    <Badge key={r} variant="outline" className="text-xs border-slate-300 text-slate-600 border-input dark:text-muted-foreground">{r}</Badge>
                   ))}
                   {profile.is_superuser && (
                     <Badge className="bg-amber-50 text-amber-700 border-amber-200 text-xs dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800">{tSelf("superuserBadge")}</Badge>
@@ -125,11 +125,11 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                     </div>
                     <div className="flex gap-2 pt-2">
                       <button onClick={handleSave} disabled={isSaving}
-                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-ui-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-50">
+                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md disabled:opacity-50">
                         <Save size={14} />{isSaving ? tSelf("saving") : tSelf("save")}
                       </button>
                       <button onClick={() => { setIsEditing(false); setForm({ email: profile.email, first_name: profile.first_name, last_name: profile.last_name }) }}
-                        className="px-4 py-1.5 text-sm font-ui-medium text-slate-600 hover:bg-slate-100 rounded-md dark:text-slate-300 dark:hover:bg-slate-800">
+                        className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-md text-muted-foreground dark:hover:bg-slate-800">
                         {tSelf("cancel")}
                       </button>
                     </div>
@@ -144,13 +144,13 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                       <InfoRow icon={Clock} label={t("detail.dateJoined")} value={formatDate(profile.date_joined, { dateStyle: "short" })} />
                       <InfoRow icon={Clock} label={t("table.lastLogin")} value={profile.last_login ? formatDate(profile.last_login) : tSelf("detailDash")} />
                     </div>
-                    <div className="flex gap-2 pt-4 border-t border-slate-100 dark:border-slate-700">
+                    <div className="flex gap-2 pt-4 border-t border-slate-100 border-border">
                       <button onClick={() => setIsEditing(true)}
-                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-ui-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md">
+                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md">
                         <User size={14} />{tSelf("edit")}
                       </button>
                       <button onClick={() => setShowChangePassword(true)}
-                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-ui-medium text-slate-600 hover:bg-slate-100 rounded-md dark:text-slate-300 dark:hover:bg-slate-800">
+                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-md text-muted-foreground dark:hover:bg-slate-800">
                         <KeyRound size={14} />{t("changePassword")}
                       </button>
                     </div>
@@ -173,7 +173,7 @@ function InfoRow({ icon: Icon, label, value }: { icon: React.ElementType; label:
       <Icon size={15} className="text-muted-foreground mt-0.5 shrink-0 dark:text-muted-foreground" />
       <div>
         <div className="text-xs text-muted-foreground dark:text-muted-foreground">{label}</div>
-        <div className="text-sm font-ui-medium text-foreground">{value}</div>
+        <div className="text-sm font-medium text-foreground">{value}</div>
       </div>
     </div>
   )

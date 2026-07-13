@@ -37,7 +37,7 @@ interface SalesTabProps {
 const PAYMENT_BADGE: Record<string, string> = {
     CASH: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-200/20',
     CARD: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-200/20',
-    OTHER: 'bg-slate-100 text-slate-600 border-border dark:bg-slate-800 dark:text-muted-foreground dark:border-slate-700',
+    OTHER: 'bg-slate-100 text-slate-600 border-border bg-muted dark:text-muted-foreground border-border',
 };
 
 const PAYMENT_ICONS: Record<string, React.ElementType> = {
@@ -107,23 +107,23 @@ export function SalesTab({
             {/* Header and Summary */}
             <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 shrink-0">
                 <div>
-                    <h2 className="text-2xl font-ui-bold text-foreground">{t('sales.title')}</h2>
+                    <h2 className="text-2xl font-bold text-foreground">{t('sales.title')}</h2>
                     <p className="text-sm text-muted-foreground mt-1">{t('sales.description')}</p>
                 </div>
-                <div className="flex flex-col items-stretch sm:items-end gap-1 rounded-lg bg-muted px-3 py-2 text-sm text-foreground dark:bg-slate-800">
-                    <div className="flex items-center gap-1.5 font-ui-semibold text-slate-600 dark:text-slate-300">
+                <div className="flex flex-col items-stretch sm:items-end gap-1 rounded-lg bg-muted px-3 py-2 text-sm text-foreground bg-muted">
+                    <div className="flex items-center gap-1.5 font-semibold text-slate-600 text-muted-foreground">
                         <TrendingUp size={14} />
                         <span>{t('sales.summary.selected')}</span>
                     </div>
-                    <div className="text-sm font-ui-semibold tabular-nums text-foreground">
+                    <div className="text-sm font-semibold tabular-nums text-foreground">
                         {t('sales.summary.gross')} {formatAmount(totals.gross_total, canViewAmounts)}
                     </div>
                     {totals.discount_total > 0.005 && (
-                        <div className="text-sm font-ui-semibold text-amber-700 dark:text-amber-400 tabular-nums">
+                        <div className="text-sm font-semibold text-amber-700 dark:text-amber-400 tabular-nums">
                             {canViewAmounts ? `${t('sales.summary.discount')} −${formatCurrency(totals.discount_total)}` : AMOUNT_DISPLAY_MASK}
                         </div>
                     )}
-                    <div className="text-sm font-ui-bold text-foreground tabular-nums border-t border-border dark:border-slate-600 pt-1">
+                    <div className="text-sm font-bold text-foreground tabular-nums border-t border-border border-input pt-1">
                         {t('sales.summary.net')} {formatAmount(totals.net_total, canViewAmounts)}
                     </div>
                 </div>
@@ -135,21 +135,21 @@ export function SalesTab({
                 <TableSelect
                     value={tableId}
                     onChange={setTableId}
-                    className="w-full sm:w-[200px] h-10 bg-card border-border text-sm dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
+                    className="w-full sm:w-[200px] h-10 bg-card border-border text-sm bg-card border-border text-foreground"
                 />
 
                 {/* Cashier Select */}
                 <CashierSelect
                     value={cashierId}
                     onChange={setCashierId}
-                    className="w-full sm:w-[220px] h-10 bg-card border-border text-sm dark:bg-slate-900 dark:border-slate-700 dark:text-slate-100"
+                    className="w-full sm:w-[220px] h-10 bg-card border-border text-sm bg-card border-border text-foreground"
                 />
 
                 {/* Payment type filter */}
                 <select
                     value={paymentFilter}
                     onChange={e => setPaymentFilter(e.target.value)}
-                    className="bg-card border border-border rounded-lg px-3 py-2 text-sm text-slate-800 dark:text-slate-100 focus:outline-none dark:bg-slate-900 dark:border-slate-700 h-10"
+                    className="bg-card border border-border rounded-lg px-3 py-2 text-sm text-slate-800 text-foreground focus:outline-none bg-card border-border h-10"
                 >
                     <option value="ALL">{t('sales.filters.allPayments')}</option>
                     <option value="CASH">{t('sales.filters.cash')}</option>
@@ -158,13 +158,13 @@ export function SalesTab({
                 </select>
 
                 {/* Date range */}
-                <div className="flex items-center gap-2 bg-card border border-border rounded-lg px-3 py-2 h-10 dark:bg-slate-900 dark:border-slate-700">
-                    <span className="text-2xs font-ui-semibold text-muted-foreground uppercase">{t('sales.filters.date')}</span>
+                <div className="flex items-center gap-2 bg-card border border-border rounded-lg px-3 py-2 h-10 bg-card border-border">
+                    <span className="text-2xs font-semibold text-muted-foreground uppercase">{t('sales.filters.date')}</span>
                     <input type="date" value={startDate} onChange={e => setStartDate(e.target.value)}
-                        className="bg-transparent border-none p-0 text-sm text-slate-800 dark:text-slate-100 focus:outline-none w-32" />
-                    <span className="text-slate-300 dark:text-slate-600">–</span>
+                        className="bg-transparent border-none p-0 text-sm text-slate-800 text-foreground focus:outline-none w-32" />
+                    <span className="text-muted-foreground">–</span>
                     <input type="date" value={endDate} onChange={e => setEndDate(e.target.value)}
-                        className="bg-transparent border-none p-0 text-sm text-slate-800 dark:text-slate-100 focus:outline-none w-32" />
+                        className="bg-transparent border-none p-0 text-sm text-slate-800 text-foreground focus:outline-none w-32" />
                 </div>
 
                 {/* Reset */}
@@ -189,21 +189,21 @@ export function SalesTab({
             {/* Table Container */}
             <div 
                 ref={parentRef}
-                className="bg-card rounded-2xl border border-border shadow-sm flex-1 overflow-auto scrollbar-thin dark:bg-slate-900 dark:border-slate-700"
+                className="bg-card rounded-2xl border border-border shadow-sm flex-1 overflow-auto scrollbar-thin bg-card border-border"
             >
                 <table className="w-full text-sm border-collapse table-fixed min-w-[1344px]">
-                    <thead className="bg-slate-50 dark:bg-slate-800 border-b border-border dark:border-slate-700 sticky top-0 z-10 shadow-sm">
+                    <thead className="bg-muted border-b border-border border-border sticky top-0 z-10 shadow-sm">
                         <tr>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-16">{t('sales.table.index')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.table')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-40">{t('sales.table.cashier')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.method')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.gross')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.discount')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.total')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.branch')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-48">{t('sales.table.notes')}</th>
-                            <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground text-xs uppercase tracking-wider w-40">{t('sales.table.date')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-16">{t('sales.table.index')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.table')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-40">{t('sales.table.cashier')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.method')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.gross')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.discount')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.total')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-32">{t('sales.table.branch')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-48">{t('sales.table.notes')}</th>
+                            <th className="text-left px-4 py-3 font-semibold text-muted-foreground text-xs uppercase tracking-wider w-40">{t('sales.table.date')}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -231,30 +231,30 @@ export function SalesTab({
                                         key={virtualRow.key}
                                         data-index={virtualRow.index}
                                         ref={rowVirtualizer.measureElement}
-                                        className="border-b border-slate-100 dark:border-slate-700/60 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors cursor-default"
+                                        className="border-b border-slate-100 border-border/60 hover:bg-slate-50/50 dark:hover:bg-slate-800/50 transition-colors cursor-default"
                                     >
                                         <td className="px-4 py-3 text-xs text-muted-foreground tabular-nums">{virtualRow.index + 1}</td>
-                                        <td className="px-4 py-3 font-ui-semibold text-foreground truncate">{sale.table_name ?? '—'}</td>
+                                        <td className="px-4 py-3 font-semibold text-foreground truncate">{sale.table_name ?? '—'}</td>
                                         <td className="px-4 py-3 text-muted-foreground truncate">{sale.created_by_name ?? '—'}</td>
                                         <td className="px-4 py-3">
-                                            <span className={`inline-flex items-center gap-1 text-[10px] font-ui-semibold px-2 py-0.5 rounded-full border whitespace-nowrap ${PAYMENT_BADGE[sale.payment_method] ?? PAYMENT_BADGE.OTHER}`}>
+                                            <span className={`inline-flex items-center gap-1 text-2xs font-semibold px-2 py-0.5 rounded-full border whitespace-nowrap ${PAYMENT_BADGE[sale.payment_method] ?? PAYMENT_BADGE.OTHER}`}>
                                                 <Icon size={10} />
                                                 {sale.payment_method_display}
                                             </span>
                                         </td>
-                                        <td className="px-4 py-3 text-sm font-ui-semibold tabular-nums text-foreground">
+                                        <td className="px-4 py-3 text-sm font-semibold tabular-nums text-foreground">
                                             {formatAmount(list, canViewAmounts)}
                                         </td>
-                                        <td className="px-4 py-3 text-sm font-ui-semibold tabular-nums">
+                                        <td className="px-4 py-3 text-sm font-semibold tabular-nums">
                                             {disc > 0.005 ? (
                                                 <span className="text-amber-700 dark:text-amber-400">
                                                     {canViewAmounts ? `−${formatCurrency(disc)}` : AMOUNT_DISPLAY_MASK}
                                                 </span>
                                             ) : (
-                                                <span className="text-muted-foreground font-ui-normal">—</span>
+                                                <span className="text-muted-foreground font-normal">—</span>
                                             )}
                                         </td>
-                                        <td className="px-4 py-3 text-sm font-ui-bold tabular-nums text-foreground">
+                                        <td className="px-4 py-3 text-sm font-bold tabular-nums text-foreground">
                                             {formatAmount(net, canViewAmounts)}
                                         </td>
                                         <td className="px-4 py-3 text-muted-foreground text-xs truncate">{sale.branch_name}</td>
@@ -281,22 +281,22 @@ export function SalesTab({
                             </tr>
                         )}
                     </tbody>
-                    <tfoot className="bg-slate-50 dark:bg-slate-800 border-t border-border dark:border-slate-700 sticky bottom-0 z-10 shadow-[0_-1px_0_rgba(0,0,0,0.05)]">
+                    <tfoot className="bg-muted border-t border-border border-border sticky bottom-0 z-10 shadow-[0_-1px_0_rgba(0,0,0,0.05)]">
                         <tr className="divide-x-0">
-                            <td colSpan={4} className="px-4 py-2.5 text-sm font-ui-semibold text-muted-foreground">
+                            <td colSpan={4} className="px-4 py-2.5 text-sm font-semibold text-muted-foreground">
                                 {t('sales.table.count', { count: sales.length })} / {t('sales.table.count', { count: infiniteControls.totalCount })}
                             </td>
-                            <td className="px-4 py-2.5 text-sm font-ui-semibold tabular-nums text-foreground">
+                            <td className="px-4 py-2.5 text-sm font-semibold tabular-nums text-foreground">
                                 {formatAmount(totals.gross_total, canViewAmounts)}
                             </td>
-                            <td className="px-4 py-2.5 text-sm font-ui-semibold tabular-nums text-amber-700 dark:text-amber-400">
+                            <td className="px-4 py-2.5 text-sm font-semibold tabular-nums text-amber-700 dark:text-amber-400">
                                 {totals.discount_total > 0.005
                                     ? canViewAmounts
                                         ? `−${formatCurrency(totals.discount_total)}`
                                         : AMOUNT_DISPLAY_MASK
                                     : '—'}
                             </td>
-                            <td className="px-4 py-2.5 text-sm font-ui-bold tabular-nums text-foreground">
+                            <td className="px-4 py-2.5 text-sm font-bold tabular-nums text-foreground">
                                 {formatAmount(totals.net_total, canViewAmounts)}
                             </td>
                             <td colSpan={3} className="px-4 py-2.5" />

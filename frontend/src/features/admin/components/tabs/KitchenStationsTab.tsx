@@ -178,14 +178,14 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground">{t('stations.title')}</h2>
+          <h2 className="text-lg font-semibold text-foreground">{t('stations.title')}</h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">
             {t('stations.subtitle')}
           </p>
         </div>
         {canManage && (
           <button onClick={openCreate}
-            className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-indigo-700 transition-all">
+            className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-indigo-700 transition-all">
             <Plus size={15} /> {t('stations.addNew')}
           </button>
         )}
@@ -196,7 +196,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
         <select
           value={filterBranch}
           onChange={e => setFilterBranch(e.target.value)}
-          className="px-3 py-1.5 text-sm border border-border rounded-md bg-white dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
+          className="px-3 py-1.5 text-sm border border-border rounded-md bg-card border-input text-foreground focus:outline-none focus:ring-2 focus:ring-indigo-500/20">
           <option value="">{t('stations.allBranches')}</option>
           {branches.map(b => <option key={b.id} value={b.id}>{b.name}</option>)}
         </select>
@@ -210,17 +210,17 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
       )}
 
       {/* Table */}
-      <div className="bg-white rounded-lg border border-border overflow-hidden dark:bg-slate-900 dark:border-slate-700">
+      <div className="rounded-lg border border-border overflow-hidden bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border dark:bg-slate-800 dark:border-slate-700">
+          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
             <tr>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('tabs.stations')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.branch')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.warehouse')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.code')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.categories')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.status')}</th>
-              <th className="text-right px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.actions')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('tabs.stations')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.branch')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.warehouse')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.code')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.categories')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.status')}</th>
+              <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('common.actions')}</th>
             </tr>
           </thead>
           <tbody>
@@ -232,7 +232,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
                   <ChefHat size={32} className="mx-auto text-slate-300 mb-2" />
                   <p className="text-sm text-muted-foreground">{t('stations.empty.title')}</p>
                   {canManage && (
-                    <button onClick={openCreate} className="mt-3 text-xs font-ui-medium text-indigo-600 hover:underline">
+                    <button onClick={openCreate} className="mt-3 text-xs font-medium text-indigo-600 hover:underline">
                       {t('stations.empty.action')}
                     </button>
                   )}
@@ -240,11 +240,11 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
               </tr>
             ) : (
               filtered.map(s => (
-                <tr key={s.id} className="border-b border-slate-100 hover:bg-slate-50/50 dark:border-slate-700 dark:hover:bg-slate-800/50">
+                <tr key={s.id} className="border-b border-slate-100 hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2.5">
                       <div className="h-7 w-7 rounded-lg flex-shrink-0" style={{ backgroundColor: s.color }} />
-                      <span className="font-ui-medium text-foreground">{s.name}</span>
+                      <span className="font-medium text-foreground">{s.name}</span>
                     </div>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">{s.branch_name}</td>
@@ -254,11 +254,11 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-slate-600 dark:text-slate-300">{s.code}</code>
+                    <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-slate-600 text-muted-foreground">{s.code}</code>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{s.categories_count} {t('stations.categories').toLowerCase()}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-ui-semibold ${s.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-slate-100 text-muted-foreground dark:bg-slate-800"}`}>
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${s.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-slate-100 text-muted-foreground bg-muted"}`}>
                       {s.is_active ? t('common.active') : t('common.passive')}
                     </span>
                   </td>

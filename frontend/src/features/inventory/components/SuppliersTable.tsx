@@ -27,21 +27,21 @@ export function SuppliersTable({
     <div className="flex flex-col h-full min-h-0">
       {onNew && (
         <div className="flex justify-between items-center mb-4 px-1">
-          <h3 className="font-ui-bold text-foreground">{t("title")}</h3>
+          <h3 className="font-bold text-foreground">{t("title")}</h3>
           <Button size="sm" onClick={onNew} className="gap-2">
             <Plus className="h-4 w-4" /> {t("new")}
           </Button>
         </div>
       )}
-      <div className="flex-1 overflow-auto bg-white rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700">
+      <div className="flex-1 overflow-auto rounded-lg border border-border bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border dark:bg-slate-800 dark:border-slate-700">
+          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
             <tr>
-              <th className="text-left px-3 py-2 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colName")}</th>
-              <th className="text-left px-3 py-2 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colContact")}</th>
-              <th className="text-left px-3 py-2 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colTel")}</th>
-              <th className="text-left px-3 py-2 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colEmail")}</th>
-              <th className="text-right px-3 py-2 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colActions")}</th>
+              <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colName")}</th>
+              <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colContact")}</th>
+              <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colTel")}</th>
+              <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colEmail")}</th>
+              <th className="text-right px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colActions")}</th>
             </tr>
           </thead>
           <tbody>
@@ -50,7 +50,7 @@ export function SuppliersTable({
                 <td colSpan={5} className="text-center py-12">
                   <div className="flex flex-col items-center gap-2">
                     <div className="h-8 w-8 animate-spin rounded-full border-2 border-blue-600 border-t-transparent" />
-                    <span className="text-sm text-muted-foreground font-ui-medium">{t("loading")}</span>
+                    <span className="text-sm text-muted-foreground font-medium">{t("loading")}</span>
                   </div>
                 </td>
               </tr>
@@ -62,8 +62,8 @@ export function SuppliersTable({
               </tr>
             ) : (
               suppliers.map((sup) => (
-                <tr key={sup.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors dark:border-slate-700 dark:hover:bg-slate-800/50">
-                  <td className="px-3 py-2 font-ui-medium text-foreground">{sup.name}</td>
+                <tr key={sup.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors border-border dark:hover:bg-slate-800/50">
+                  <td className="px-3 py-2 font-medium text-foreground">{sup.name}</td>
                   <td className="px-3 py-2 text-muted-foreground">{sup.contact_person}</td>
                   <td className="px-3 py-2 text-slate-600 font-mono text-xs dark:text-muted-foreground">{sup.phone}</td>
                   <td className="px-3 py-2 text-muted-foreground">{sup.email}</td>

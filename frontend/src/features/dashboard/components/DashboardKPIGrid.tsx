@@ -67,16 +67,16 @@ export function DashboardKPIGrid({
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
         <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm">
           <div className="flex-1 p-4">
-            <p className="text-xs font-ui-medium uppercase text-muted-foreground">
+            <p className="text-xs font-medium uppercase text-muted-foreground">
               {t("kpi.revenue", { period: t(`presets.${dateRangePreset}`) })}
             </p>
-            <p className="mt-1 text-2xl font-ui-bold text-foreground">
+            <p className="mt-1 text-2xl font-bold text-foreground">
               <AnimatedValue value={formatAmount(revenue?.today ?? 0, canViewAmounts)} />
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               {t("kpi.yesterday")}{" "}
               {formatAmount(revenue?.yesterday ?? 0, canViewAmounts)}
-              <span className={`ml-1 font-ui-semibold ${(revenue?.change_pct ?? 0) >= 0 ? 'text-emerald-600' : 'text-destructive'}`}>
+              <span className={`ml-1 font-semibold ${(revenue?.change_pct ?? 0) >= 0 ? 'text-emerald-600' : 'text-destructive'}`}>
                 ({(revenue?.change_pct ?? 0) >= 0 ? '+' : ''}{revenue?.change_pct ?? 0}%)
               </span>
             </p>
@@ -87,13 +87,13 @@ export function DashboardKPIGrid({
         </div>
         <div className="flex flex-col overflow-hidden rounded-xl border border-border bg-card shadow-sm">
           <div className="flex-1 p-4">
-            <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("kpi.orderCount")}</p>
-            <p className="mt-1 text-2xl font-ui-bold text-foreground">
+            <p className="text-xs font-medium uppercase text-muted-foreground">{t("kpi.orderCount")}</p>
+            <p className="mt-1 text-2xl font-bold text-foreground">
               <AnimatedValue value={orderCount?.today ?? 0} />
             </p>
             <p className="mt-1 text-xs text-muted-foreground">
               {t("kpi.yesterday")} {orderCount?.yesterday ?? 0}
-              <span className={`ml-1 font-ui-semibold ${(orderCount?.change_pct ?? 0) >= 0 ? 'text-emerald-600' : 'text-destructive'}`}>
+              <span className={`ml-1 font-semibold ${(orderCount?.change_pct ?? 0) >= 0 ? 'text-emerald-600' : 'text-destructive'}`}>
                 ({(orderCount?.change_pct ?? 0) >= 0 ? '+' : ''}{orderCount?.change_pct ?? 0}%)
               </span>
             </p>
@@ -104,9 +104,9 @@ export function DashboardKPIGrid({
         </div>
 
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("kpi.monthlyTarget")}</p>
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("kpi.monthlyTarget")}</p>
           <div className="mt-1 flex items-baseline justify-between gap-2">
-            <p className="text-2xl font-ui-bold text-foreground">
+            <p className="text-2xl font-bold text-foreground">
               <AnimatedValue value={`%${targetStats?.percentage ?? 0}`} />
             </p>
             <p className="text-2xs text-muted-foreground">
@@ -124,15 +124,15 @@ export function DashboardKPIGrid({
         </div>
 
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("kpi.avgTicket")}</p>
-          <p className="mt-1 text-2xl font-ui-bold text-foreground">
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("kpi.avgTicket")}</p>
+          <p className="mt-1 text-2xl font-bold text-foreground">
             <AnimatedValue value={formatAmount(avgOrderValue ?? 0, canViewAmounts)} />
           </p>
         </div>
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("kpi.openShift")}</p>
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("kpi.openShift")}</p>
           {activeShift ? (
-            <p className="mt-1 text-sm font-ui-semibold text-emerald-700 dark:text-emerald-400">
+            <p className="mt-1 text-sm font-semibold text-emerald-700 dark:text-emerald-400">
               {t("kpi.openingCash", {
                 amount: canViewAmounts
                   ? formatCurrency(activeShift.opening_cash)
@@ -147,16 +147,16 @@ export function DashboardKPIGrid({
 
       <div className="mb-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("inventoryKpi.criticalStock")}</p>
-          <p className="mt-1 text-2xl font-ui-bold text-foreground">
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("inventoryKpi.criticalStock")}</p>
+          <p className="mt-1 text-2xl font-bold text-foreground">
             {inventoryLoading ? "—" : <AnimatedValue value={lowStockCount ?? 0} />}
           </p>
           <p className="mt-1 text-xs text-muted-foreground">{t("inventoryKpi.belowMinimum")}</p>
         </div>
 
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("inventoryKpi.stockValue")}</p>
-          <p className="mt-1 text-2xl font-ui-bold text-foreground">
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("inventoryKpi.stockValue")}</p>
+          <p className="mt-1 text-2xl font-bold text-foreground">
             {inventoryLoading
               ? "—"
               : <AnimatedValue value={formatAmount(stockValue ?? 0, canViewAmounts)} />}
@@ -164,8 +164,8 @@ export function DashboardKPIGrid({
         </div>
 
         <div className="rounded-xl border border-border bg-card p-4 shadow-sm">
-          <p className="text-xs font-ui-medium uppercase text-muted-foreground">{t("inventoryKpi.wasteRatio")}</p>
-          <p className="mt-1 text-2xl font-ui-bold text-foreground">
+          <p className="text-xs font-medium uppercase text-muted-foreground">{t("inventoryKpi.wasteRatio")}</p>
+          <p className="mt-1 text-2xl font-bold text-foreground">
             {inventoryLoading ? "—" : <AnimatedValue value={`${Math.round((wasteRatio ?? 0) * 100)}%`} />}
           </p>
         </div>

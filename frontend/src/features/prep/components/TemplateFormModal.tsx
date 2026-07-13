@@ -132,11 +132,11 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
     <Dialog open={open} onOpenChange={(val) => !val && onClose()}>
       <DialogContent size="md">
         <DialogHeader className="flex flex-row items-center justify-between">
-          <DialogTitle className="text-lg font-ui-bold uppercase tracking-tight">
+          <DialogTitle className="text-lg font-bold uppercase tracking-tight">
             {initialData ? t("templateModal.editTitle") : t("templateModal.createTitle")}
           </DialogTitle>
           <div className="flex items-center gap-2 pr-6">
-            <Label htmlFor="is_enabled" className="text-2xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.enabled")}</Label>
+            <Label htmlFor="is_enabled" className="text-2xs font-bold uppercase text-muted-foreground">{t("templateModal.enabled")}</Label>
             <Switch 
               id="is_enabled"
               checked={formData.is_enabled}
@@ -149,7 +149,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
           <div className="max-h-[60vh] space-y-4 overflow-y-auto">
             {showBranchSelect && (
               <div className="grid gap-2">
-                <Label htmlFor="branch" className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.branch")}</Label>
+                <Label htmlFor="branch" className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.branch")}</Label>
                 <select
                   id="branch"
                   required
@@ -166,7 +166,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
             )}
 
             <div className="grid gap-2">
-              <Label htmlFor="station" className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.station")}</Label>
+              <Label htmlFor="station" className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.station")}</Label>
               <select
                 id="station"
                 value={formData.station || ""}
@@ -182,7 +182,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
             </div>
 
             <div className="grid gap-2">
-              <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.assignedTo")}</Label>
+              <Label className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.assignedTo")}</Label>
               {/* Sistem kullanıcı seçimi */}
               <div className="flex items-center gap-2">
                 <User size={14} className="shrink-0 text-muted-foreground" />
@@ -215,7 +215,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
             </div>
 
             <div className="grid gap-2">
-              <Label htmlFor="title" className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.templateName")}</Label>
+              <Label htmlFor="title" className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.templateName")}</Label>
               <Input
                 id="title"
                 required
@@ -227,7 +227,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
 
             <div className="grid grid-cols-2 gap-4">
               <div className="grid gap-2">
-                <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.targetQty")}</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.targetQty")}</Label>
                 <Input
                   type="number"
                   required
@@ -238,7 +238,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
                 />
               </div>
               <div className="grid gap-2">
-                <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.unit")}</Label>
+                <Label className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.unit")}</Label>
                 <Input
                   placeholder={t("templateModal.unitPlaceholder")}
                   value={formData.unit || ""}
@@ -248,7 +248,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
             </div>
 
             <div className="grid gap-2">
-              <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.activationTime")}</Label>
+              <Label className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.activationTime")}</Label>
               <Input
                 type="time"
                 required
@@ -258,7 +258,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
             </div>
 
             <div className="space-y-3">
-              <Label className="text-xs font-ui-bold uppercase text-muted-foreground">{t("templateModal.validDays")}</Label>
+              <Label className="text-xs font-bold uppercase text-muted-foreground">{t("templateModal.validDays")}</Label>
               <div className="flex flex-wrap gap-2">
                 {DAY_IDS.map((day) => (
                   <div key={day.id} className="flex items-center gap-1 rounded-lg border border-border bg-background px-2 py-1.5">
@@ -267,7 +267,7 @@ export function TemplateFormModal({ open, onClose, onSave, isLoading, branchId, 
                       checked={formData[day.id as keyof PrepTemplate] as boolean}
                       onCheckedChange={(checked) => setFormData({ ...formData, [day.id]: !!checked })}
                     />
-                    <label htmlFor={day.id} className="text-2xs font-ui-bold uppercase cursor-pointer select-none">
+                    <label htmlFor={day.id} className="text-2xs font-bold uppercase cursor-pointer select-none">
                       {t(`templateModal.days.${day.dayKey}`)}
                     </label>
                   </div>

@@ -47,10 +47,10 @@ export function KdsRecallDrawer({
     >
       <header className="flex shrink-0 items-center justify-between border-b border-border bg-muted/40 px-4 py-3">
         <div>
-          <h2 className="text-sm font-ui-bold uppercase tracking-wide text-foreground">
+          <h2 className="text-sm font-bold uppercase tracking-wide text-foreground">
             {t("title")}
           </h2>
-          <p className="text-[11px] text-muted-foreground">
+          <p className="text-sub text-muted-foreground">
             {t("windowHint", { minutes: recallWindowMinutes })}
           </p>
         </div>
@@ -81,13 +81,13 @@ export function KdsRecallDrawer({
               >
                 <div className="mb-2 flex items-start justify-between gap-2">
                   <div>
-                    <p className="text-sm font-ui-bold text-foreground">{group.table_name}</p>
+                    <p className="text-sm font-bold text-foreground">{group.table_name}</p>
                     {group.order_number ? (
-                      <p className="text-[11px] text-muted-foreground">
+                      <p className="text-sub text-muted-foreground">
                         #{group.order_number}
                       </p>
                     ) : null}
-                    <p className="text-[10px] text-muted-foreground">
+                    <p className="text-2xs text-muted-foreground">
                       {t("sentAgo", { minutes: formatSentAgo(group.sent_at) })}
                     </p>
                   </div>
@@ -95,7 +95,7 @@ export function KdsRecallDrawer({
                     type="button"
                     disabled={busyId === group.order_id}
                     onClick={() => onCancelOrder(group.order_id, group.table_name)}
-                    className="flex items-center gap-1 rounded-lg border border-red-500/40 bg-red-500/10 px-2 py-1 text-[10px] font-ui-bold uppercase text-red-700 transition-colors hover:bg-red-500/20 disabled:opacity-50 dark:text-red-300"
+                    className="flex items-center gap-1 rounded-lg border border-red-500/40 bg-red-500/10 px-2 py-1 text-2xs font-bold uppercase text-red-700 transition-colors hover:bg-red-500/20 disabled:opacity-50 dark:text-red-300"
                   >
                     <Ban size={12} />
                     {t("cancelOrder")}
@@ -108,11 +108,11 @@ export function KdsRecallDrawer({
                       className="flex items-center justify-between gap-2 rounded-lg bg-muted/30 px-2 py-2"
                     >
                       <div className="min-w-0 flex-1">
-                        <p className="truncate text-[13px] font-ui-semibold text-foreground">
+                        <p className="truncate text-ui-sm font-semibold text-foreground">
                           {item.quantity}x {item.product_name}
                         </p>
                         {item.unit_name ? (
-                          <p className="text-[10px] uppercase text-muted-foreground">
+                          <p className="text-2xs uppercase text-muted-foreground">
                             {item.unit_name}
                           </p>
                         ) : null}
@@ -123,7 +123,7 @@ export function KdsRecallDrawer({
                           disabled={busyId === item.id}
                           onClick={() => onRecallItem(item.id)}
                           className={cn(
-                            "flex items-center gap-1 rounded-lg bg-amber-500 px-2.5 py-1.5 text-[10px] font-ui-black uppercase text-white shadow-sm transition-colors hover:bg-amber-600 disabled:opacity-50",
+                            "flex items-center gap-1 rounded-lg bg-amber-500 px-2.5 py-1.5 text-2xs font-black uppercase text-white shadow-sm transition-colors hover:bg-amber-600 disabled:opacity-50",
                           )}
                         >
                           {busyId === item.id ? (

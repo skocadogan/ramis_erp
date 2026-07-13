@@ -14,15 +14,15 @@ export function CustomerDisplayAllergenModal({ modal }: Props) {
 
   return (
     <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center bg-slate-950/90 p-8 fade-in duration-300">
-      <div className="w-full max-w-2xl overflow-hidden rounded-[32px] border border-amber-500/30 bg-[#0f172a] shadow-2xl animate-in zoom-in-95 duration-300">
+      <div className="w-full max-w-2xl overflow-hidden rounded-5xl border border-amber-500/30 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
         <div className="border-b border-amber-500/20 bg-amber-500/10 px-10 py-8">
           <div className="flex items-center gap-5">
             <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-amber-500 text-white shadow-lg ring-4 ring-amber-500/20">
               <ShieldAlert className="h-9 w-9" strokeWidth={2.25} />
             </div>
             <div>
-              <h2 className="text-3xl font-ui-bold text-white">{t("allergenModalTitle")}</h2>
-              <p className="mt-1 text-lg font-ui-medium text-amber-200/90">{modal.productName}</p>
+              <h2 className="text-3xl font-bold text-white">{t("allergenModalTitle")}</h2>
+              <p className="mt-1 text-lg font-medium text-amber-200/90">{modal.productName}</p>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export function CustomerDisplayAllergenModal({ modal }: Props) {
             {modal.allergens.map((allergen) => (
               <li
                 key={allergen.id}
-                className="rounded-2xl border border-amber-500/25 bg-amber-500/10 px-6 py-4 text-xl font-ui-semibold text-amber-50"
+                className="rounded-2xl border border-amber-500/25 bg-amber-500/10 px-6 py-4 text-xl font-semibold text-amber-50"
               >
                 {allergen.name}
               </li>

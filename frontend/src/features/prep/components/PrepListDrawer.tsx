@@ -168,7 +168,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
               <ChefHat size={20} className="text-primary" />
             </div>
             <div>
-              <h3 className="text-sm font-ui-bold text-foreground uppercase">{t('drawer.title')}</h3>
+              <h3 className="text-sm font-bold text-foreground uppercase">{t('drawer.title')}</h3>
               <p className="text-2xs text-muted-foreground uppercase">{t('drawer.activeTasks', { count: tasks.length })}</p>
             </div>
           </div>
@@ -218,7 +218,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
 
             {/* Atanan kişiler — çoklu (sistem kullanıcıları + free-text) */}
             <div className="space-y-2">
-              <div className="flex items-center gap-1 text-2xs font-ui-bold uppercase text-muted-foreground">
+              <div className="flex items-center gap-1 text-2xs font-bold uppercase text-muted-foreground">
                 <User size={12} />
                 {t("drawer.assignedTo")}
               </div>
@@ -234,7 +234,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                         type="button"
                         onClick={() => toggleStaff(u.id)}
                         className={cn(
-                          "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium transition-colors",
+                          "inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-2xs font-medium transition-colors",
                           isSelected
                             ? "bg-primary text-primary-foreground"
                             : "bg-muted text-muted-foreground hover:bg-muted/80"
@@ -271,7 +271,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                   {assigneeNames.map((name, idx) => (
                     <span
                       key={idx}
-                      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
+                      className="inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-2xs font-medium bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
                     >
                       {name}
                       <button
@@ -291,7 +291,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
             <button
               onClick={handleCreate}
               disabled={!newTitle.trim() || createMutation.isPending}
-              className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground py-2 rounded-lg transition-colors shadow-lg text-xs font-ui-bold"
+              className="w-full flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 disabled:opacity-50 text-primary-foreground py-2 rounded-lg transition-colors shadow-lg text-xs font-bold"
             >
               <Send size={14} />
               {t("drawer.addTask")}
@@ -307,7 +307,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                 key={f}
                 onClick={() => setFilter(f)}
                 className={cn(
-                  "px-2 py-1 rounded text-[9px] font-ui-bold",
+                  "px-2 py-1 rounded text-3xs font-bold",
                   filter === f
                     ? "bg-primary text-primary-foreground"
                     : "bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -345,26 +345,26 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                   <div className="flex flex-wrap items-center gap-2">
                     <span
                       className={cn(
-                        "inline-flex items-center rounded px-2 py-0.5 text-[9px] font-ui-bold uppercase tracking-wide",
+                        "inline-flex items-center rounded px-2 py-0.5 text-3xs font-bold uppercase tracking-wide",
                         statusStyle.className
                       )}
                     >
                       {statusStyle.label}
                     </span>
                     {task.priority > 1 && (
-                      <span className="bg-destructive/15 text-destructive text-[8px] font-ui-bold px-1.5 py-0.5 rounded border border-destructive/20 uppercase">
+                      <span className="bg-destructive/15 text-destructive text-4xs font-bold px-1.5 py-0.5 rounded border border-destructive/20 uppercase">
                         {t('drawer.urgent')}
                       </span>
                     )}
                   </div>
                   <h4 className={cn(
-                    "text-sm font-ui-bold leading-none",
+                    "text-sm font-bold leading-none",
                     task.status === 'COMPLETED' ? "text-muted-foreground line-through" : "text-foreground"
                   )}>
                     {task.title}
                   </h4>
                   {task.description && (
-                    <p className="text-sub text-muted-foreground leading-relaxed font-ui-medium">
+                    <p className="text-sub text-muted-foreground leading-relaxed font-medium">
                       {task.description}
                     </p>
                   )}
@@ -380,7 +380,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                           )
                         }
                         className={cn(
-                          "inline-flex items-center gap-1.5 rounded-lg border px-2 py-1 text-[10px] font-ui-bold transition-colors",
+                          "inline-flex items-center gap-1.5 rounded-lg border px-2 py-1 text-2xs font-bold transition-colors",
                           task.assigned_to_name
                             ? "border-indigo-500/30 bg-indigo-500/10 text-indigo-400 hover:bg-indigo-500/20"
                             : "border-border bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground"
@@ -420,14 +420,14 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                                 className={cn(
                                   "flex w-full items-center gap-2 px-3 py-2 text-xs transition-colors hover:bg-muted",
                                   task.assigned_to === u.id
-                                    ? "bg-indigo-500/10 text-indigo-300 font-ui-bold"
+                                    ? "bg-indigo-500/10 text-indigo-300 font-bold"
                                     : "text-foreground"
                                 )}
                                 onClick={() =>
                                   assignMutation.mutate({ taskId: task.id, userId: u.id })
                                 }
                               >
-                                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-[9px] font-bold uppercase text-indigo-300">
+                                <div className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-3xs font-bold uppercase text-indigo-300">
                                   {userDisplayName(u).charAt(0)}
                                 </div>
                                 {userDisplayName(u)}
@@ -440,7 +440,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                   )}
                   {/* Yönetim yetkisi yoksa sadece oku */}
                   {task.assigned_to_name && !canManage("prep.change_preptask") && (
-                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-2 py-1 text-[10px] font-ui-bold text-indigo-400">
+                    <span className="inline-flex items-center gap-1.5 rounded-lg border border-indigo-500/30 bg-indigo-500/10 px-2 py-1 text-2xs font-bold text-indigo-400">
                       <User size={11} />
                       {task.assigned_to_name}
                     </span>
@@ -463,7 +463,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                         />
                       </div>
                       <div className="flex items-center justify-between gap-2">
-                        <span className="text-base font-ui-bold text-primary tabular-nums">
+                        <span className="text-base font-bold text-primary tabular-nums">
                           {done} / {target}
                           <span className="text-2xs ml-1 text-muted-foreground uppercase">
                             {task.unit}
@@ -512,13 +512,13 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                     {task.status !== 'COMPLETED' ? (
                       <button
                         onClick={() => completeTask({ taskId: task.id })}
-                        className="flex items-center gap-1.5 px-3 py-1.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg text-2xs font-ui-bold"
+                        className="flex items-center gap-1.5 px-3 py-1.5 bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg text-2xs font-bold"
                       >
                         <CheckCircle2 size={14} />
                         {t('drawer.actions.finish')}
                       </button>
                     ) : (
-                      <div className="flex items-center gap-1.5 text-primary text-2xs font-ui-bold uppercase">
+                      <div className="flex items-center gap-1.5 text-primary text-2xs font-bold uppercase">
                         <CheckCircle2 size={14} />
                         {t('drawer.status.ready')}
                       </div>
@@ -527,7 +527,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                     {task.status === 'PENDING' && (
                       <button
                         onClick={() => updateStatus({ taskId: task.id, status: 'IN_PROGRESS' })}
-                        className="text-muted-foreground hover:text-primary text-2xs font-ui-bold"
+                        className="text-muted-foreground hover:text-primary text-2xs font-bold"
                       >
                         {t('drawer.actions.start')}
                       </button>
@@ -537,7 +537,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
                   {task.deadline && (
                     <div className="flex items-center gap-1 text-muted-foreground">
                       <Clock size={12} />
-                      <span className="text-[9px] uppercase tracking-tighter">
+                      <span className="text-3xs uppercase tracking-tighter">
                         {new Date(task.deadline).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                       </span>
                     </div>
@@ -551,7 +551,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
 
       {/* Footer Info */}
       <div className="p-3 bg-muted/50 border-t border-border text-center">
-        <p className="text-[9px] text-muted-foreground font-ui-bold uppercase flex items-center justify-center gap-1">
+        <p className="text-3xs text-muted-foreground font-bold uppercase flex items-center justify-center gap-1">
           <AlertCircle size={10} />
           {t('drawer.footerNote')}
         </p>

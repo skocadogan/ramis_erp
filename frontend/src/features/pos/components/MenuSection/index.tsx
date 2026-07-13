@@ -266,21 +266,21 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
       : tableHeadingTitle(activeTable.name, tMenu);
 
   return (
-    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
-      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 bg-slate-50/50 p-4 dark:border-slate-800 dark:bg-slate-800/30">
+    <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border shadow-sm border-border bg-card">
+      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 bg-slate-50/50 p-4 border-border bg-muted/30">
         <div className="flex items-center gap-3">
           <button
             onClick={handleBackToTables}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-white text-slate-600 shadow-sm transition-colors hover:bg-slate-100 hover:text-blue-600 active:scale-95 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-300 dark:hover:bg-slate-700 dark:hover:text-blue-400"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-slate-600 shadow-sm transition-colors hover:bg-slate-100 hover:text-blue-600 active:scale-95 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700 dark:hover:text-blue-400"
           >
             <ChevronLeft size={20} />
           </button>
           <div className="min-w-0 flex flex-col">
-            <h2 className="truncate text-lg font-ui-bold leading-tight text-foreground">
+            <h2 className="truncate text-lg font-bold leading-tight text-foreground">
               {menuHeaderTitle}
             </h2>
             <span
-              className="text-xs font-ui-bold tracking-wide"
+              className="text-xs font-bold tracking-wide"
               style={{ color: zones.find((z) => z.id === activeTable.zone)?.color || "#10b981" }}
             >
               {activeTable.zone_name}
@@ -301,15 +301,15 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
         <div className="flex min-h-0 flex-1 flex-col">
           {/* Subcategory bar — seçili parent'ın alt kategorileri */}
           {subCategories.length > 0 && selectedRootParent && (
-            <div className="no-scrollbar flex shrink-0 items-center gap-1.5 overflow-x-auto border-b border-slate-100 bg-slate-50/50 px-3 py-2 dark:border-slate-800 dark:bg-slate-800/20">
+            <div className="no-scrollbar flex shrink-0 items-center gap-1.5 overflow-x-auto border-b border-slate-100 bg-slate-50/50 px-3 py-2 border-border bg-muted/20">
               {/* "Tümü" sekmesi */}
               <button
                 type="button"
                 onClick={() => setSelectedCategory(selectedRootParent.id)}
                 className={cn(
-                  "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-ui-medium transition-colors",
+                  "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
                   selectedCategory === selectedRootParent.id
-                    ? "bg-white text-slate-900 shadow-sm dark:bg-slate-700 dark:text-slate-100"
+                    ? "text-slate-900 shadow-sm bg-accent text-foreground"
                     : "text-muted-foreground hover:bg-white/60 hover:text-slate-700 dark:hover:bg-slate-700/50 dark:hover:text-slate-300",
                 )}
               >
@@ -324,7 +324,7 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
                     type="button"
                     onClick={() => setSelectedCategory(sub.id)}
                     className={cn(
-                      "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-ui-medium transition-colors",
+                      "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
                       isActive
                         ? "text-white shadow-sm"
                         : "text-muted-foreground hover:bg-white/60 hover:text-slate-700 dark:hover:bg-slate-700/50 dark:hover:text-slate-300",

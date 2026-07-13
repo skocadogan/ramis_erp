@@ -40,7 +40,7 @@ export function OrderStatusBadge({ status, className, size = 'xs' }: OrderStatus
   return (
     <span
       className={cn(
-        'font-ui-medium rounded-full',
+        'font-medium rounded-full',
         size === 'xs' ? 'text-2xs px-1.5 py-0.5' : 'text-xs px-2 py-0.5',
         colorClass,
         className

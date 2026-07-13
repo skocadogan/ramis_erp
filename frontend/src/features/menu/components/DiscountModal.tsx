@@ -63,7 +63,7 @@ export default function DiscountModal({
               <select
                 value={discountBranchId || ""}
                 onChange={(e) => onBranchChange(e.target.value || null)}
-                className="border-none bg-transparent pr-8 text-xs font-ui-medium text-foreground focus:ring-0"
+                className="border-none bg-transparent pr-8 text-xs font-medium text-foreground focus:ring-0"
               >
                 <option value="">{t("discountModal.allBranches")}</option>
                 {branches.map(b => (
@@ -77,7 +77,7 @@ export default function DiscountModal({
         <DialogBody className="flex min-h-0 flex-1 overflow-hidden p-0">
           {/* Category sidebar */}
           <div className="w-48 shrink-0 border-r border-border p-4 overflow-y-auto">
-            <p className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("discountModal.categories")}</p>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("discountModal.categories")}</p>
             <div className="flex flex-col gap-0.5">
               <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
                 <Checkbox
@@ -101,7 +101,7 @@ export default function DiscountModal({
           {/* Product list */}
           <div className="flex-1 overflow-y-auto overflow-x-auto p-4">
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
+              <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
                 {t("discountModal.products", { count: discountFilteredProducts.length })}
               </p>
               <button onClick={onToggleAll} className="text-xs text-amber-600 hover:underline dark:text-amber-400">
@@ -111,7 +111,7 @@ export default function DiscountModal({
             </div>
             <div className="flex flex-col gap-1">
               {discountFilteredProducts.length === 0 ? (
-                <p className="text-sm text-muted-foreground py-12 text-center bg-slate-50/50 rounded-lg dark:bg-slate-800/30">{t("discountModal.noProducts")}</p>
+                <p className="text-sm text-muted-foreground py-12 text-center bg-slate-50/50 rounded-lg bg-muted/30">{t("discountModal.noProducts")}</p>
               ) : (
                 discountFilteredProducts.map(p => {
                   const isSelected = discountSelectedProducts.has(p.id)
@@ -127,17 +127,17 @@ export default function DiscountModal({
                         checked={isSelected}
                         onCheckedChange={() => onToggleProduct(p.id)}
                       />
-                      <span className="text-sm font-ui-medium text-foreground truncate flex items-center gap-1.5">
+                      <span className="text-sm font-medium text-foreground truncate flex items-center gap-1.5">
                         {p.name}
                         {p.is_featured && <Star size={12} className="text-amber-500 fill-amber-500 shrink-0" />}
                       </span>
-                      <span className="text-xs text-muted-foreground truncate text-center bg-slate-100 px-2 py-0.5 rounded-full dark:bg-slate-800 dark:text-muted-foreground">{p.category_name}</span>
+                      <span className="text-xs text-muted-foreground truncate text-center bg-slate-100 px-2 py-0.5 rounded-full bg-muted dark:text-muted-foreground">{p.category_name}</span>
                       <div className="flex flex-col items-end">
-                        <span className={`text-sm font-ui-semibold font-mono ${currentDiscount > 0 ? "line-through text-muted-foreground" : "text-foreground"}`}>
+                        <span className={`text-sm font-semibold font-mono ${currentDiscount > 0 ? "line-through text-muted-foreground" : "text-foreground"}`}>
                           {formatCurrency(p.base_price)}
                         </span>
                         {currentDiscount > 0 && p.discounted_price && (
-                          <span className="text-xs font-ui-bold text-amber-600 font-mono">
+                          <span className="text-xs font-bold text-amber-600 font-mono">
                             {formatCurrency(p.discounted_price)}
                             <span className="ml-1 text-2xs bg-amber-100 text-amber-700 px-1 py-0.5 rounded">%{currentDiscount}</span>
                           </span>
@@ -145,13 +145,13 @@ export default function DiscountModal({
                       </div>
                       <div className="flex justify-end min-w-[100px]">
                         {discountedPreview !== null && (
-                          <span className="text-sm font-ui-bold flex items-center gap-1 font-mono text-amber-600 dark:text-amber-400">
+                          <span className="text-sm font-bold flex items-center gap-1 font-mono text-amber-600 dark:text-amber-400">
                             <span>→</span>
                             {formatCurrency(discountedPreview)}
                           </span>
                         )}
                         {rate === 0 && isSelected && currentDiscount > 0 && (
-                          <span className="text-xs font-ui-medium text-rose-500">{t("discountModal.removeInline")}</span>
+                          <span className="text-xs font-medium text-rose-500">{t("discountModal.removeInline")}</span>
                         )}
                       </div>
                     </label>
@@ -164,7 +164,7 @@ export default function DiscountModal({
 
         <DialogFooter className="flex-row flex-wrap items-center gap-4 sm:justify-between">
           <div className="flex min-w-0 flex-1 flex-wrap items-center gap-2">
-            <label className="shrink-0 text-sm font-ui-medium text-foreground">{t("discountModal.rate")}</label>
+            <label className="shrink-0 text-sm font-medium text-foreground">{t("discountModal.rate")}</label>
             <NumberInput
               step="0.5"
               min="0"
@@ -176,7 +176,7 @@ export default function DiscountModal({
               containerClassName="w-44"
             />
             {discountRate !== "" && isValidRate && (
-              <span className={`text-sm font-ui-medium ${rate > 0 ? "text-amber-600" : "text-rose-500"}`}>
+              <span className={`text-sm font-medium ${rate > 0 ? "text-amber-600" : "text-rose-500"}`}>
                 {rate > 0
                   ? t("discountModal.summaryDiscount", { rate: discountRate, count: affectedCount })
                   : t("discountModal.summaryRemove", { count: affectedCount })}

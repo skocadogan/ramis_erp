@@ -71,7 +71,7 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
     <div className="flex min-h-0 flex-1 flex-col gap-4 overflow-hidden">
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-sm font-ui-semibold text-foreground">{t("waste.title")}</h2>
+          <h2 className="text-sm font-semibold text-foreground">{t("waste.title")}</h2>
           <p className="text-xs text-muted-foreground">{t("waste.subtitle")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -82,14 +82,14 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
               placeholder={t("waste.searchPlaceholder")}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="h-9 w-44 rounded-lg border border-border bg-card pl-9 pr-3 text-sm outline-none dark:border-slate-700 dark:bg-slate-900/50"
+              className="h-9 w-44 rounded-lg border border-border bg-card pl-9 pr-3 text-sm outline-none border-border bg-card/50"
             />
           </div>
           <div className="relative">
             <CalendarIcon className="absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
               type="date"
-              className="h-9 w-40 rounded-lg border border-border bg-card pl-9 pr-3 text-xs outline-none dark:border-slate-700 dark:bg-slate-900/50"
+              className="h-9 w-40 rounded-lg border border-border bg-card pl-9 pr-3 text-xs outline-none border-border bg-card/50"
               value={formattedDate}
               onChange={(e) => {
                 if (e.target.value) {
@@ -110,21 +110,21 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
       </div>
 
       <div className="grid shrink-0 grid-cols-1 gap-3 sm:grid-cols-2">
-        <div className="rounded-xl border border-border/80 bg-amber-50/80 p-4 dark:border-slate-800 dark:bg-amber-950/20">
-          <p className="text-sub font-ui-medium uppercase tracking-wider text-muted-foreground">
+        <div className="rounded-xl border border-border/80 bg-amber-50/80 p-4 border-border dark:bg-amber-950/20">
+          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">
             {t("waste.totalWaste")}
           </p>
-          <p className="mt-1 text-2xl font-ui-bold tabular-nums text-foreground">
+          <p className="mt-1 text-2xl font-bold tabular-nums text-foreground">
             {totalWaste.toFixed(2)}
           </p>
         </div>
-        <div className="rounded-xl border border-border/80 bg-rose-50/80 p-4 dark:border-slate-800 dark:bg-rose-950/20">
-          <p className="text-sub font-ui-medium uppercase tracking-wider text-muted-foreground">
+        <div className="rounded-xl border border-border/80 bg-rose-50/80 p-4 border-border dark:bg-rose-950/20">
+          <p className="text-sub font-medium uppercase tracking-wider text-muted-foreground">
             {t("waste.totalCostEstimate")}
           </p>
           <p
             className={cn(
-              "mt-1 text-2xl font-ui-bold tabular-nums",
+              "mt-1 text-2xl font-bold tabular-nums",
               totalAmount > 0 ? "text-rose-600 dark:text-rose-400" : "text-foreground",
             )}
           >
@@ -133,7 +133,7 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
         </div>
       </div>
 
-      <div className="flex min-h-0 min-w-0 flex-1 flex-col rounded-xl border border-border/80 bg-card/50 dark:border-slate-800">
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col rounded-xl border border-border/80 bg-card/50 border-border">
         {movementsQuery.isLoading ? (
           <div className="py-12 text-center text-muted-foreground">{t("waste.loading")}</div>
         ) : movements.length === 0 ? (
@@ -154,25 +154,25 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
             header={
               <thead className={virtualTableStickyHeadClass}>
                 <tr>
-                  <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-left font-semibold text-muted-foreground">
                     {t("waste.colDateTime")}
                   </th>
-                  <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-left font-semibold text-muted-foreground">
                     {t("waste.colProduct")}
                   </th>
-                  <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-left font-semibold text-muted-foreground">
                     {t("waste.colWarehouse")}
                   </th>
-                  <th className="px-4 py-3 text-right font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-right font-semibold text-muted-foreground">
                     {t("waste.colQuantity")}
                   </th>
-                  <th className="px-4 py-3 text-right font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-right font-semibold text-muted-foreground">
                     {t("waste.colUnitCost")}
                   </th>
-                  <th className="px-4 py-3 text-right font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-right font-semibold text-muted-foreground">
                     {t("waste.colTotal")}
                   </th>
-                  <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">
+                  <th className="px-4 py-3 text-left font-semibold text-muted-foreground">
                     {t("waste.colNotes")}
                   </th>
                 </tr>
@@ -196,15 +196,15 @@ export function WasteReportsTab({ branchId }: WasteReportsTabProps) {
                   <td className="whitespace-nowrap px-4 py-3 text-foreground">
                     {format(new Date(m.created_at), "HH:mm")}
                   </td>
-                  <td className="px-4 py-3 font-ui-medium text-foreground">{m.stock_item_name}</td>
+                  <td className="px-4 py-3 font-medium text-foreground">{m.stock_item_name}</td>
                   <td className="px-4 py-3 text-muted-foreground">{m.warehouse_name}</td>
-                  <td className="px-4 py-3 text-right font-ui-semibold tabular-nums text-rose-600 dark:text-rose-400">
+                  <td className="px-4 py-3 text-right font-semibold tabular-nums text-rose-600 dark:text-rose-400">
                     {formatQuantityWithUnit(qty, m.unit)}
                   </td>
                   <td className="px-4 py-3 text-right tabular-nums text-foreground">
                     {currency.format(price)}
                   </td>
-                  <td className="px-4 py-3 text-right font-ui-medium tabular-nums text-foreground">
+                  <td className="px-4 py-3 text-right font-medium tabular-nums text-foreground">
                     {currency.format(qty * price)}
                   </td>
                   <td

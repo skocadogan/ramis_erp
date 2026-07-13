@@ -16,7 +16,7 @@ export default function RootError({ error, reset }: RootErrorProps) {
       <div className="flex flex-col items-center gap-4 text-center">
         <AlertCircle className="h-12 w-12 text-destructive" aria-hidden />
         <div className="space-y-2">
-          <h1 className="text-xl font-ui-bold text-foreground">Bir hata oluştu</h1>
+          <h1 className="text-xl font-bold text-foreground">Bir hata oluştu</h1>
           <p className="text-ui-sm text-muted-foreground">
             Beklenmeyen bir sorun oluştu. Lütfen tekrar deneyin.
           </p>
@@ -35,7 +35,7 @@ export default function RootError({ error, reset }: RootErrorProps) {
         <Link
           href="/"
           className={cn(
-            "inline-flex items-center gap-2 rounded-md px-4 py-2 text-ui-sm font-ui-medium",
+            "inline-flex items-center gap-2 rounded-md px-4 py-2 text-ui-sm font-medium",
             "bg-primary text-primary-foreground shadow-xs",
             "transition-colors hover:bg-primary/90",
             "focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-ring",

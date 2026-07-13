@@ -136,7 +136,7 @@ export function ExpiryActionDialog({
           <DialogBody className="space-y-4">
             {needsTargetWarehouse ? (
               <div>
-                <label htmlFor="expiry-target-wh" className="mb-1.5 block text-sm font-ui-medium text-foreground">
+                <label htmlFor="expiry-target-wh" className="mb-1.5 block text-sm font-medium text-foreground">
                   {t("expiryActions.targetWarehouseLabel")}
                 </label>
                 <select
@@ -155,7 +155,7 @@ export function ExpiryActionDialog({
               </div>
             ) : null}
             <div>
-              <label htmlFor="expiry-action-notes" className="mb-1.5 block text-sm font-ui-medium text-foreground">
+              <label htmlFor="expiry-action-notes" className="mb-1.5 block text-sm font-medium text-foreground">
                 {t("expiryActions.notesLabel")}
               </label>
               <textarea

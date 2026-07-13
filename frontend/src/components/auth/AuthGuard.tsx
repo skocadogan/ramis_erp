@@ -39,7 +39,7 @@ export function AuthGuard({ children, module, requiredPermission, mode = "view" 
       <div className="flex h-screen w-full items-center justify-center bg-background">
         <div className="flex flex-col items-center gap-3">
           <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-          <span className="text-sm font-ui-medium text-muted-foreground">{t("checkingPermission")}</span>
+          <span className="text-sm font-medium text-muted-foreground">{t("checkingPermission")}</span>
         </div>
       </div>
     );

@@ -139,7 +139,7 @@ export function CategorySelectTree({
                   }}
                   className={cn(
                     "group flex cursor-pointer items-center gap-1 rounded-md px-2 py-2 transition-all hover:bg-muted",
-                    value === cat.id && "bg-primary/10 font-ui-semibold text-foreground"
+                    value === cat.id && "bg-primary/10 font-semibold text-foreground"
                   )}
                   style={{ paddingLeft: `${cat.depth * 1.5 + 0.75}rem` }}
                 >

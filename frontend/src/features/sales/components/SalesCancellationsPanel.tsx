@@ -106,17 +106,17 @@ export function SalesCancellationsPanel({
 
     return (
         <>
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white px-3 py-2.5 rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700 shrink-0">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-border bg-card border-border shrink-0">
                 <div className="flex flex-wrap items-center gap-3 flex-1">
                     <div className="flex items-center gap-2 text-muted-foreground shrink-0">
                         <Filter size={16} />
-                        <span className="font-size-ui font-weight-ui-medium">{t("productAnalytics.filterLabel")}</span>
+                        <span className="text-ui font-medium">{t("productAnalytics.filterLabel")}</span>
                     </div>
 
                     <TableSelect
                         value={cancellations.tableId}
                         onChange={cancellations.setTableId}
-                        className="w-full sm:w-[180px] h-9 bg-slate-50 border-border text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+                        className="w-full sm:w-[180px] h-9 bg-slate-50 border-border text-sm bg-muted border-input text-foreground"
                     />
 
                     <div className="w-full sm:w-64">
@@ -140,7 +140,7 @@ export function SalesCancellationsPanel({
                                 value={startDate}
                                 onChange={(e) => onStartDateChange(e.target.value)}
                                 max={endDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 h-9"
+                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                             <span className="text-muted-foreground text-sm">-</span>
                             <input
@@ -148,7 +148,7 @@ export function SalesCancellationsPanel({
                                 value={endDate}
                                 onChange={(e) => onEndDateChange(e.target.value)}
                                 min={startDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 h-9"
+                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                         </div>
                     )}
@@ -189,33 +189,33 @@ export function SalesCancellationsPanel({
                     </div>
                 </div>
 
-                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-slate-100 dark:border-slate-800">
+                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-slate-100 border-border">
                     <div className="flex flex-col items-end">
-                        <span className="font-size-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1">
+                        <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">
                             {t("cancellations.totalAmount")}
                         </span>
-                        <span className="text-base font-ui-bold text-rose-600 dark:text-rose-400 leading-none">
+                        <span className="text-base font-bold text-rose-600 dark:text-rose-400 leading-none">
                             {formatAmount(cancellations.totals.total_amount, canViewAmounts)}
                         </span>
                     </div>
                     <div className="flex flex-col items-end">
-                        <span className="font-size-2xs font-ui-bold text-muted-foreground uppercase tracking-widest mb-1">
+                        <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">
                             {t("cancellations.totalQuantity")}
                         </span>
-                        <span className="text-base font-ui-bold text-blue-600 dark:text-blue-400 leading-none">
+                        <span className="text-base font-bold text-blue-600 dark:text-blue-400 leading-none">
                             {formatNumber(cancellations.totals.item_count)}
                         </span>
                     </div>
                 </div>
             </div>
 
-            <div className="p-3 flex-1 min-h-0 bg-white rounded-lg border border-border overflow-hidden flex flex-col shadow-sm dark:bg-slate-900 dark:border-slate-700">
+            <div className="p-3 flex-1 min-h-0 rounded-lg border border-border overflow-hidden flex flex-col shadow-sm bg-card border-border">
                 <div className="flex-1 overflow-auto overflow-x-hidden relative">
                     {(cancellations.isLoading || cancellations.isFetching) && (
-                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 dark:bg-slate-900/80">
+                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/80 bg-card/80">
                             <div className="flex flex-col items-center gap-2">
                                 <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={24} />
-                                <span className="text-xs font-ui-medium text-muted-foreground">{t("list.loadingHint")}</span>
+                                <span className="text-xs font-medium text-muted-foreground">{t("list.loadingHint")}</span>
                             </div>
                         </div>
                     )}
@@ -226,8 +226,8 @@ export function SalesCancellationsPanel({
                     />
                 </div>
 
-                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between dark:bg-slate-900/50 dark:border-slate-800">
-                    <div className="text-xs text-muted-foreground font-ui-medium">
+                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between bg-card/50 border-border">
+                    <div className="text-xs text-muted-foreground font-medium">
                         {t("list.paginationTotal", { count: cancellations.totalCount })}
                     </div>
                 </div>

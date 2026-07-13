@@ -117,7 +117,7 @@ export function CreditAccountList({ branchId, canManage }: CreditAccountListProp
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder={t("page.searchPlaceholder")}
-          className="min-w-[200px] flex-1 rounded-lg border border-border bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900"
+          className="min-w-[200px] flex-1 rounded-lg border border-border px-3 py-2 text-sm border-border bg-card"
         />
         {canManage && (
           <button
@@ -126,7 +126,7 @@ export function CreditAccountList({ branchId, canManage }: CreditAccountListProp
               setEditAccount(null);
               setFormOpen(true);
             }}
-            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-ui-semibold text-white hover:bg-blue-700"
+            className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-semibold text-white hover:bg-blue-700"
           >
             <Wallet size={16} />
             {t("page.newAccount")}

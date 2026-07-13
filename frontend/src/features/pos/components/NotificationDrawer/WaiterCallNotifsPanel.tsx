@@ -39,14 +39,14 @@ export function WaiterCallNotifsPanel({
       <div className="flex items-center justify-between bg-amber-500 p-4 text-white dark:bg-amber-600">
         <div className="flex items-center gap-2">
           <Radio size={18} />
-          <h3 className="font-ui-bold tracking-tight">{t("tableCallsTitle")}</h3>
+          <h3 className="font-bold tracking-tight">{t("tableCallsTitle")}</h3>
         </div>
         <div className="flex items-center gap-2">
           {waiterCallNotifs.length > 0 && (
             <button
               type="button"
               onClick={markAllWaiterCallsSeen}
-              className="rounded bg-white/20 px-2 py-1 text-[11px] font-ui-bold transition-colors hover:bg-white/30"
+              className="rounded bg-white/20 px-2 py-1 text-sub font-bold transition-colors hover:bg-white/30"
             >
               {t("markAllSeen")}
             </button>
@@ -66,7 +66,7 @@ export function WaiterCallNotifsPanel({
         {waiterCallNotifs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-muted-foreground">
             <CheckSquare size={32} className="mb-2 opacity-20" />
-            <span className="text-sm font-ui-medium">{t("noTableCalls")}</span>
+            <span className="text-sm font-medium">{t("noTableCalls")}</span>
           </div>
         ) : (
           waiterCallNotifs.map((notif) => (
@@ -80,16 +80,16 @@ export function WaiterCallNotifsPanel({
                 className="flex min-w-0 flex-1 flex-col gap-0.5 text-left"
               >
                 {notif.source === "reservation_due" && (
-                  <span className="text-2xs font-ui-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">
+                  <span className="text-2xs font-bold uppercase tracking-wide text-blue-600 dark:text-blue-400">
                     {t("reservationDue")}
                   </span>
                 )}
                 {notif.source === "reservation_arrived" && (
-                  <span className="text-2xs font-ui-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">
+                  <span className="text-2xs font-bold uppercase tracking-wide text-emerald-600 dark:text-emerald-400">
                     {t("reservationArrived")}
                   </span>
                 )}
-                <p className="text-sm font-ui-semibold text-slate-800 dark:text-slate-100">
+                <p className="text-sm font-semibold text-foreground">
                   {notif.message}
                 </p>
                 <span className="text-2xs text-muted-foreground">
@@ -102,7 +102,7 @@ export function WaiterCallNotifsPanel({
               <button
                 type="button"
                 onClick={() => markWaiterCallSeen(notif.id)}
-                className="flex shrink-0 items-center gap-1.5 rounded-lg border border-amber-200 bg-amber-100 px-2.5 py-1.5 text-xs font-ui-bold text-amber-800 transition-colors hover:bg-amber-200 dark:border-amber-700 dark:bg-amber-900/50 dark:text-amber-200 dark:hover:bg-amber-900/70"
+                className="flex shrink-0 items-center gap-1.5 rounded-lg border border-amber-200 bg-amber-100 px-2.5 py-1.5 text-xs font-bold text-amber-800 transition-colors hover:bg-amber-200 dark:border-amber-700 dark:bg-amber-900/50 dark:text-amber-200 dark:hover:bg-amber-900/70"
                 title={t("markSeen")}
               >
                 <Eye size={14} />

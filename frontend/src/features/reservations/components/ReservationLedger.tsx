@@ -117,10 +117,10 @@ export function ReservationLedger({
   };
 
   return (
-    <div className="mb-8 flex flex-col overflow-hidden rounded-xl border border-border bg-white dark:border-slate-700 dark:bg-slate-900 shadow-sm">
-      <div className="flex flex-col gap-4 border-b border-border bg-slate-50 p-3 md:flex-row md:items-center justify-between dark:border-slate-800 dark:bg-slate-800/40 shrink-0">
+    <div className="mb-8 flex flex-col overflow-hidden rounded-xl border border-border border-border bg-card shadow-sm">
+      <div className="flex flex-col gap-4 border-b border-border bg-slate-50 p-3 md:flex-row md:items-center justify-between border-border bg-muted/40 shrink-0">
         <div>
-          <h2 className="text-sm font-ui-bold text-slate-800 dark:text-slate-100">{t("ledger.title")}</h2>
+          <h2 className="text-sm font-bold text-slate-800 text-foreground">{t("ledger.title")}</h2>
           <p className="text-xs text-muted-foreground">{t("ledger.description")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -128,13 +128,13 @@ export function ReservationLedger({
             type="date"
             value={day}
             onChange={(e) => setDay(e.target.value)}
-            className="rounded-lg border border-border px-2 py-1.5 text-sm dark:border-slate-600 dark:bg-slate-800"
+            className="rounded-lg border border-border px-2 py-1.5 text-sm border-border bg-muted"
           />
           {canManage && (
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-ui-bold text-white"
+              className="inline-flex items-center gap-1 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-bold text-white"
             >
               <Plus size={14} /> {t("ledger.new")}
             </button>
@@ -150,7 +150,7 @@ export function ReservationLedger({
         ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-slate-100 text-xs uppercase text-muted-foreground dark:border-slate-800">
+            <thead className="border-b border-slate-100 text-xs uppercase text-muted-foreground border-border">
               <tr>
                 <th className="py-2 pr-2">{t("ledger.columns.time")}</th>
                 <th className="py-2 pr-2">{t("ledger.columns.customer")}</th>
@@ -162,7 +162,7 @@ export function ReservationLedger({
             </thead>
             <tbody>
               {(list.data as ReservationDto[] | undefined)?.map((r) => (
-                <tr key={r.id} className="border-b border-slate-50 dark:border-slate-800/80">
+                <tr key={r.id} className="border-b border-slate-50 border-border/80">
                   <td className="py-2 pr-2 font-mono text-xs">{r.scheduled_time?.slice(0, 5)}</td>
                   <td className="py-2 pr-2">{r.customer_name}</td>
                   <td className="py-2 pr-2">{r.party_size}</td>
@@ -184,7 +184,7 @@ export function ReservationLedger({
                                 })
                                 .catch((e) => toastApiError(e, t("toast.actionFailed")))
                             }
-                            className="rounded border border-border p-1 text-slate-600 dark:border-slate-600"
+                            className="rounded border border-border p-1 text-slate-600 border-input"
                             title={t("ledger.confirmApproveTitle")}
                           >
                             <Check size={14} />
@@ -201,7 +201,7 @@ export function ReservationLedger({
                                 })
                                 .catch((e) => toastApiError(e, t("toast.actionFailed")))
                             }
-                            className="rounded border border-border p-1 text-emerald-600 dark:border-slate-600"
+                            className="rounded border border-border p-1 text-emerald-600 border-input"
                             title={t("ledger.confirmSeatTitle")}
                           >
                             <UserCircle size={14} />
@@ -218,7 +218,7 @@ export function ReservationLedger({
                                 })
                                 .catch((e) => toastApiError(e, t("toast.actionFailed")))
                             }
-                            className="rounded border border-border p-1 text-rose-600 dark:border-slate-600"
+                            className="rounded border border-border p-1 text-rose-600 border-input"
                             title={t("ledger.cancelActionTitle")}
                           >
                             <Ban size={14} />
@@ -227,7 +227,7 @@ export function ReservationLedger({
                         <button
                           type="button"
                           onClick={() => setDeleteTarget(r)}
-                          className="rounded border border-border p-1 text-slate-600 dark:border-slate-600"
+                          className="rounded border border-border p-1 text-slate-600 border-input"
                           title={t("ledger.deleteActionTitle")}
                         >
                           <Trash2 size={14} />

@@ -32,12 +32,12 @@ export function BulkStockEntryLinesTable({
   return (
     <div className="flex min-h-0 min-w-0 flex-1 flex-col gap-2 overflow-hidden lg:min-h-0">
       <div className="flex shrink-0 flex-wrap items-center justify-between gap-2">
-        <span className="text-xs font-ui-medium text-muted-foreground">{t("bulkStockEntry.linesTitle")}</span>
+        <span className="text-xs font-medium text-muted-foreground">{t("bulkStockEntry.linesTitle")}</span>
         <button
           type="button"
           disabled={status === "POSTED"}
           onClick={onAddLine}
-          className="inline-flex items-center gap-1 rounded-md border border-border bg-white px-2.5 py-1.5 text-xs font-ui-medium hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:hover:bg-slate-700 disabled:opacity-50"
+          className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-slate-50 border-border bg-muted dark:hover:bg-slate-700 disabled:opacity-50"
         >
           <Plus className="h-3.5 w-3.5" />
           {t("bulkStockEntry.addRow")}
@@ -46,7 +46,7 @@ export function BulkStockEntryLinesTable({
 
       <div className="min-h-0 flex-1 overflow-auto overscroll-contain rounded-lg border border-border [scrollbar-gutter:stable]">
         <table className="w-full min-w-[900px] table-fixed border-collapse text-left">
-          <thead className="sticky top-0 z-10 border-b border-border bg-slate-100 shadow-sm dark:border-slate-700 dark:bg-slate-800/95">
+          <thead className="sticky top-0 z-10 border-b border-border bg-slate-100 shadow-sm border-border bg-muted/95">
             <tr>
               <th className={`${thBase} w-8 text-center`}>{t("bulkStockEntry.tableColNum")}</th>
               <th className={`${thBase} w-[5.75rem]`}>{t("bulkStockEntry.tableColSource")}</th>

@@ -187,7 +187,7 @@ export function SurveyResponsesDialog({
             </div>
 
             <div className="grid min-h-[540px] gap-4 lg:grid-cols-[minmax(0,1.7fr)_minmax(320px,1fr)]">
-              <Card className="min-h-0 overflow-hidden border-border bg-white/95 dark:bg-slate-900/95">
+              <Card className="min-h-0 overflow-hidden border-border bg-white/95 bg-card/95">
                 {responsesQuery.isLoading ? (
                   <div className="flex h-[540px] items-center justify-center">
                     <Loader2 className="h-6 w-6 animate-spin text-blue-600" />
@@ -232,7 +232,7 @@ export function SurveyResponsesDialog({
                             onClick={() => setSelectedResponse(response)}
                           >
                             <div className="flex flex-col">
-                              <span className="font-ui-semibold text-foreground">
+                              <span className="font-semibold text-foreground">
                                 {new Date(response.created_at).toLocaleString()}
                               </span>
                               <span className="text-xs text-muted-foreground">
@@ -245,7 +245,7 @@ export function SurveyResponsesDialog({
                             onClick={() => setSelectedResponse(response)}
                           >
                             <div className="flex flex-col">
-                              <span className="font-ui-medium text-foreground">
+                              <span className="font-medium text-foreground">
                                 {response.branch_name}
                                 {response.table_name ? ` / ${response.table_name}` : ""}
                               </span>
@@ -283,7 +283,7 @@ export function SurveyResponsesDialog({
                 ) : (
                   <div className="flex h-[540px] flex-col">
                     <div className="border-b border-border px-4 py-3">
-                      <div className="text-sm font-ui-semibold text-foreground">
+                      <div className="text-sm font-semibold text-foreground">
                         {selectedResponse.customer_name || t("surveys.results.noCustomer")}
                       </div>
                       <div className="text-xs text-muted-foreground">
@@ -294,13 +294,13 @@ export function SurveyResponsesDialog({
 
                     <div className="flex-1 space-y-4 overflow-y-auto p-4">
                       <div className="space-y-2">
-                        <div className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                           {t("surveys.results.detailAnswers")}
                         </div>
                         <div className="space-y-2">
                           {selectedResponse.answers.map((answer) => (
-                            <div key={answer.id} className="rounded-lg border border-border bg-slate-50/70 p-3 dark:bg-slate-900/40">
-                              <div className="text-sm font-ui-medium text-foreground">{answer.question_text}</div>
+                            <div key={answer.id} className="rounded-lg border border-border bg-slate-50/70 p-3 bg-card/40">
+                              <div className="text-sm font-medium text-foreground">{answer.question_text}</div>
                               <div className="mt-1 text-sm text-muted-foreground">
                                 {String(answer.answer_value ?? "—")}
                               </div>
@@ -310,16 +310,16 @@ export function SurveyResponsesDialog({
                       </div>
 
                       <div className="space-y-2">
-                        <div className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                           {t("surveys.results.detailPreview")}
                         </div>
-                        <p className="rounded-lg border border-border bg-slate-50/70 p-3 text-sm text-muted-foreground dark:bg-slate-900/40">
+                        <p className="rounded-lg border border-border bg-slate-50/70 p-3 text-sm text-muted-foreground bg-card/40">
                           {selectedResponse.answers_preview || "—"}
                         </p>
                       </div>
 
                       <div className="space-y-2">
-                        <div className="text-xs font-ui-semibold uppercase tracking-wider text-muted-foreground">
+                        <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                           {t("surveys.results.detailAttention")}
                         </div>
                         <Select

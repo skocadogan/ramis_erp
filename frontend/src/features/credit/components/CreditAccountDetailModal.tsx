@@ -161,7 +161,7 @@ export function CreditAccountDetailModal({
             <div className="grid grid-cols-3 gap-3 rounded-lg bg-background p-4 text-sm">
               <div>
                 <p className="text-xs text-muted-foreground">{t("table.balance")}</p>
-                <p className="font-ui-bold tabular-nums">
+                <p className="font-bold tabular-nums">
                   {formatAmount(accountLive.balance, canViewAmounts)}
                 </p>
               </div>
@@ -204,7 +204,7 @@ export function CreditAccountDetailModal({
 
             {canManage && (
               <div className="space-y-3 rounded-lg border border-border p-3">
-                <p className="text-sm font-ui-semibold">{t("detail.topup")}</p>
+                <p className="text-sm font-semibold">{t("detail.topup")}</p>
                 <div className="flex flex-wrap gap-2">
                   <div className="grid min-w-[140px] flex-1 gap-1.5">
                     <Label htmlFor="topup-amount" className="sr-only">
@@ -240,7 +240,7 @@ export function CreditAccountDetailModal({
             )}
 
             <div>
-              <p className="mb-2 text-sm font-ui-semibold">{t("detail.transactions")}</p>
+              <p className="mb-2 text-sm font-semibold">{t("detail.transactions")}</p>
               {txLoading ? (
                 <Loader2 className="mx-auto h-5 w-5 animate-spin text-muted-foreground" />
               ) : transactions.length === 0 ? (
@@ -297,7 +297,7 @@ export function CreditAccountDetailModal({
                 ].map(({ label, value }) => (
                   <div key={label} className="flex justify-between border-b border-border pb-1">
                     <span className="text-muted-foreground">{label}</span>
-                    <span className="font-ui-medium">{value}</span>
+                    <span className="font-medium">{value}</span>
                   </div>
                 ))}
               </div>

@@ -478,7 +478,7 @@ export function NotificationDrawer({
             fabSizeClass,
             visibleWaiterCallCount > 0
               ? "motion-safe:animate-bounce-soft bg-amber-500 text-white shadow-amber-500/40 [animation-iteration-count:3] dark:bg-amber-600"
-              : "bg-slate-800 text-muted-foreground dark:bg-slate-700 dark:text-slate-300",
+              : "bg-slate-800 text-muted-foreground bg-accent text-muted-foreground",
             visibleWaiterCallCount > 0 && waiterCallReminderTick > 0
               ? "motion-safe:animate-bounce-soft [animation-iteration-count:3]"
               : null
@@ -492,7 +492,7 @@ export function NotificationDrawer({
             }
           />
           {visibleWaiterCallCount > 0 && (
-            <span className="absolute -top-1.5 -left-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500 text-sub font-ui-bold text-white shadow-lg ring-4 ring-slate-50 dark:ring-slate-900">
+            <span className="absolute -top-1.5 -left-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500 text-sub font-bold text-white shadow-lg ring-4 ring-slate-50 dark:ring-slate-900">
               {visibleWaiterCallCount}
             </span>
           )}
@@ -508,7 +508,7 @@ export function NotificationDrawer({
             fabSizeClass,
             kitchenBadgeCount > 0
               ? "motion-safe:animate-bounce-soft bg-emerald-600 text-white shadow-emerald-500/40 [animation-iteration-count:3]"
-              : "bg-slate-800 text-muted-foreground dark:bg-slate-700 dark:text-slate-300"
+              : "bg-slate-800 text-muted-foreground bg-accent text-muted-foreground"
           )}
           title={t("kitchenTitle")}
         >
@@ -521,7 +521,7 @@ export function NotificationDrawer({
             <Bell size={24} />
           )}
           {kitchenBadgeCount > 0 && (
-            <span className="absolute -top-1.5 -left-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500 text-sub font-ui-bold text-white shadow-lg ring-4 ring-slate-50 dark:ring-slate-900">
+            <span className="absolute -top-1.5 -left-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-rose-500 text-sub font-bold text-white shadow-lg ring-4 ring-slate-50 dark:ring-slate-900">
               {kitchenBadgeCount}
             </span>
           )}

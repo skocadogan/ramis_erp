@@ -25,7 +25,7 @@ function KdsHeaderClock() {
   );
 
   return (
-    <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/50 px-4 py-2 text-sm font-ui-bold tabular-nums text-foreground shadow-inner">
+    <div className="flex items-center gap-3 rounded-xl border border-border bg-muted/50 px-4 py-2 text-sm font-bold tabular-nums text-foreground shadow-inner">
       <ClockIcon size={16} className="text-primary" />
       <span>{label}</span>
     </div>
@@ -128,7 +128,7 @@ export function KDSHeader({
           <KdsHeaderClock />
           <div className="h-6 w-px bg-border" />
           <div className="flex flex-col gap-0.5">
-            <span className="text-[10px] font-ui-bold uppercase tracking-widest text-muted-foreground">
+            <span className="text-2xs font-bold uppercase tracking-widest text-muted-foreground">
               {t("header.currentStation")}
             </span>
             <div className="flex items-center gap-2">
@@ -140,7 +140,7 @@ export function KDSHeader({
                     if (found) onSelectStation(found);
                   }}
                 >
-                  <SelectTrigger className="h-auto p-0 border-none bg-transparent text-sm font-ui-bold text-foreground shadow-none hover:opacity-80 transition-opacity">
+                  <SelectTrigger className="h-auto p-0 border-none bg-transparent text-sm font-bold text-foreground shadow-none hover:opacity-80 transition-opacity">
                     <div className="flex items-center gap-2">
                       <span className="truncate">{activeStation.name}</span>
                       <div
@@ -161,11 +161,11 @@ export function KDSHeader({
                             className="h-2.5 w-2.5 rounded-full shrink-0"
                             style={{ backgroundColor: s.color }}
                           />
-                          <span className="font-ui-semibold text-sm">
+                          <span className="font-semibold text-sm">
                             {s.name}
                           </span>
                           {s.pending_orders_count > 0 && (
-                            <span className="ml-auto rounded-full bg-kds-warning/20 px-2 py-0.5 text-[10px] font-ui-bold text-kds-warning border border-kds-warning/20">
+                            <span className="ml-auto rounded-full bg-kds-warning/20 px-2 py-0.5 text-2xs font-bold text-kds-warning border border-kds-warning/20">
                               {s.pending_orders_count}
                             </span>
                           )}
@@ -176,7 +176,7 @@ export function KDSHeader({
                 </Select>
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="text-sm font-ui-bold text-foreground">
+                  <span className="text-sm font-bold text-foreground">
                     {activeStation.name}
                   </span>
                   <div

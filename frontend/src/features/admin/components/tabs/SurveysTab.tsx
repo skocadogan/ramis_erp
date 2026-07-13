@@ -297,7 +297,7 @@ function SurveyFormDialog({
           <div className="space-y-6">
             <div className="grid gap-4 md:grid-cols-2">
               <div className="space-y-2">
-                <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.title")}</label>
+                <label className="text-sm font-medium text-foreground">{t("surveys.form.title")}</label>
                 <Input
                   value={form.title}
                   onChange={(event) => setForm((current) => ({ ...current, title: event.target.value }))}
@@ -305,7 +305,7 @@ function SurveyFormDialog({
                 />
               </div>
               <div className="space-y-2">
-                <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.sortOrder")}</label>
+                <label className="text-sm font-medium text-foreground">{t("surveys.form.sortOrder")}</label>
                 <Input
                   type="number"
                   value={form.sort_order}
@@ -315,7 +315,7 @@ function SurveyFormDialog({
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.descriptionLabel")}</label>
+              <label className="text-sm font-medium text-foreground">{t("surveys.form.descriptionLabel")}</label>
               <Textarea
                 value={form.description}
                 onChange={(event) => setForm((current) => ({ ...current, description: event.target.value }))}
@@ -325,21 +325,21 @@ function SurveyFormDialog({
 
             <div className="grid gap-3 md:grid-cols-3">
               <label className="flex items-center justify-between rounded-lg border border-border p-3">
-                <span className="text-sm font-ui-medium">{t("surveys.form.flags.active")}</span>
+                <span className="text-sm font-medium">{t("surveys.form.flags.active")}</span>
                 <Switch
                   checked={form.is_active}
                   onCheckedChange={(checked) => setForm((current) => ({ ...current, is_active: checked }))}
                 />
               </label>
               <label className="flex items-center justify-between rounded-lg border border-border p-3">
-                <span className="text-sm font-ui-medium">{t("surveys.form.flags.customerDisplay")}</span>
+                <span className="text-sm font-medium">{t("surveys.form.flags.customerDisplay")}</span>
                 <Switch
                   checked={form.is_customer_display_active}
                   onCheckedChange={(checked) => setForm((current) => ({ ...current, is_customer_display_active: checked }))}
                 />
               </label>
               <label className="flex items-center justify-between rounded-lg border border-border p-3">
-                <span className="text-sm font-ui-medium">{t("surveys.form.flags.smartTable")}</span>
+                <span className="text-sm font-medium">{t("surveys.form.flags.smartTable")}</span>
                 <Switch
                   checked={form.is_smart_table_active}
                   onCheckedChange={(checked) => setForm((current) => ({ ...current, is_smart_table_active: checked }))}
@@ -348,7 +348,7 @@ function SurveyFormDialog({
             </div>
 
             <div className="space-y-3">
-              <div className="text-sm font-ui-semibold text-foreground">{t("surveys.form.branches")}</div>
+              <div className="text-sm font-semibold text-foreground">{t("surveys.form.branches")}</div>
               <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
                 {branches.map((branch) => (
                   <label key={branch.id} className="flex items-center gap-3 rounded-lg border border-border p-3">
@@ -364,7 +364,7 @@ function SurveyFormDialog({
 
             <div className="space-y-4">
               <div className="flex items-center justify-between">
-                <div className="text-sm font-ui-semibold text-foreground">{t("surveys.form.questions")}</div>
+                <div className="text-sm font-semibold text-foreground">{t("surveys.form.questions")}</div>
                 <Button type="button" variant="outline" onClick={addQuestion} className="gap-2">
                   <Plus className="h-4 w-4" />
                   {t("surveys.form.addQuestion")}
@@ -375,7 +375,7 @@ function SurveyFormDialog({
                 <Card key={getQuestionItemKey(question, questionIndex)} className="border-border">
                   <div className="space-y-4 p-4">
                     <div className="flex items-center justify-between">
-                      <div className="text-sm font-ui-semibold text-foreground">
+                      <div className="text-sm font-semibold text-foreground">
                         {t("surveys.form.questionNumber", { number: questionIndex + 1 })}
                       </div>
                       {form.questions.length > 1 ? (
@@ -387,7 +387,7 @@ function SurveyFormDialog({
 
                     <div className="grid gap-4 md:grid-cols-2">
                       <div className="space-y-2 md:col-span-2">
-                        <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.questionText")}</label>
+                        <label className="text-sm font-medium text-foreground">{t("surveys.form.questionText")}</label>
                         <Input
                           value={question.text}
                           onChange={(event) => updateQuestion(questionIndex, { text: event.target.value })}
@@ -396,7 +396,7 @@ function SurveyFormDialog({
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.answerType")}</label>
+                        <label className="text-sm font-medium text-foreground">{t("surveys.form.answerType")}</label>
                         <Select
                           value={question.answer_type}
                           onValueChange={(value) => handleQuestionTypeChange(questionIndex, value as SurveyQuestionType)}
@@ -415,7 +415,7 @@ function SurveyFormDialog({
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.role")}</label>
+                        <label className="text-sm font-medium text-foreground">{t("surveys.form.role")}</label>
                         <Select
                           value={question.question_role}
                           onValueChange={(value) => handleRoleChange(questionIndex, value as SurveyQuestionRole)}
@@ -434,7 +434,7 @@ function SurveyFormDialog({
                       </div>
 
                       <div className="space-y-2">
-                        <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.questionSortOrder")}</label>
+                        <label className="text-sm font-medium text-foreground">{t("surveys.form.questionSortOrder")}</label>
                         <Input
                           type="number"
                           value={question.sort_order}
@@ -443,7 +443,7 @@ function SurveyFormDialog({
                       </div>
 
                       <label className="flex items-center justify-between rounded-lg border border-border p-3">
-                        <span className="text-sm font-ui-medium">{t("surveys.form.required")}</span>
+                        <span className="text-sm font-medium">{t("surveys.form.required")}</span>
                         <Switch
                           checked={question.is_required}
                           onCheckedChange={(checked) => updateQuestion(questionIndex, { is_required: checked })}
@@ -453,7 +453,7 @@ function SurveyFormDialog({
                       {question.answer_type === "RATING" ? (
                         <>
                           <div className="space-y-2">
-                            <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.ratingMin")}</label>
+                            <label className="text-sm font-medium text-foreground">{t("surveys.form.ratingMin")}</label>
                             <Input
                               type="number"
                               value={question.rating_min_value}
@@ -461,7 +461,7 @@ function SurveyFormDialog({
                             />
                           </div>
                           <div className="space-y-2">
-                            <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.ratingMax")}</label>
+                            <label className="text-sm font-medium text-foreground">{t("surveys.form.ratingMax")}</label>
                             <Input
                               type="number"
                               value={question.rating_max_value}
@@ -473,7 +473,7 @@ function SurveyFormDialog({
 
                       {question.answer_type === "SHORT_TEXT" ? (
                         <div className="space-y-2 md:col-span-2">
-                          <label className="text-sm font-ui-medium text-foreground">{t("surveys.form.placeholder")}</label>
+                          <label className="text-sm font-medium text-foreground">{t("surveys.form.placeholder")}</label>
                           <Input
                             value={question.placeholder}
                             onChange={(event) => updateQuestion(questionIndex, { placeholder: event.target.value })}
@@ -486,7 +486,7 @@ function SurveyFormDialog({
                     {question.answer_type === "OPTION" ? (
                       <div className="space-y-3 rounded-lg border border-dashed border-border p-4">
                         <div className="flex items-center justify-between">
-                          <div className="text-sm font-ui-medium text-foreground">{t("surveys.form.options")}</div>
+                          <div className="text-sm font-medium text-foreground">{t("surveys.form.options")}</div>
                           <Button type="button" variant="ghost" size="sm" onClick={() => addOption(questionIndex)}>
                             <Plus className="mr-1 h-4 w-4" />
                             {t("surveys.form.addOption")}
@@ -621,7 +621,7 @@ export function SurveysTab() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-ui-bold text-slate-900 dark:text-white">
+          <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white">
             <ClipboardList className="h-5 w-5 text-blue-600" />
             {t("surveys.title")}
           </h2>
@@ -641,7 +641,7 @@ export function SurveysTab() {
         ) : null}
       </div>
 
-      <Card className="border-border bg-white/95 p-4 dark:bg-slate-900/95">
+      <Card className="border-border bg-white/95 p-4 bg-card/95">
         <div className="flex flex-col gap-3 md:flex-row">
           <Input
             value={searchTerm}
@@ -672,10 +672,10 @@ export function SurveysTab() {
         </div>
       </Card>
 
-      <Card className="overflow-hidden border-border bg-white/95 dark:bg-slate-900/95">
+      <Card className="overflow-hidden border-border bg-white/95 bg-card/95">
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 dark:bg-slate-800/60">
+            <thead className="bg-muted/60">
               <tr className="text-left text-xs uppercase tracking-wider text-muted-foreground">
                 <th className="px-4 py-3">{t("surveys.table.title")}</th>
                 <th className="px-4 py-3">{t("surveys.table.branches")}</th>
@@ -703,7 +703,7 @@ export function SurveysTab() {
                 filteredSurveys.map((survey) => (
                   <tr key={survey.id} className="border-t border-border align-top">
                     <td className="px-4 py-4">
-                      <div className="font-ui-semibold text-foreground">{survey.title}</div>
+                      <div className="font-semibold text-foreground">{survey.title}</div>
                       <div className="mt-1 line-clamp-2 text-xs text-muted-foreground">
                         {survey.description || "—"}
                       </div>

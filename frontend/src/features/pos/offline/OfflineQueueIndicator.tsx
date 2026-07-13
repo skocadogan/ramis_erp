@@ -60,10 +60,10 @@ export function OfflineQueueIndicator({
           type="button"
           onClick={() => setOpen(true)}
           className={cn(
-            "flex items-center gap-1.5 rounded-lg border px-2.5 py-2 text-sm font-ui-semibold shadow-sm transition-colors",
+            "flex items-center gap-1.5 rounded-lg border px-2.5 py-2 text-sm font-semibold shadow-sm transition-colors",
             hasProblem
               ? "border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-300"
-              : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200",
+              : "border-slate-200 text-slate-700 hover:bg-slate-50 border-input bg-card text-foreground",
             className
           )}
           title={title}
@@ -76,7 +76,7 @@ export function OfflineQueueIndicator({
             <CloudUpload size={16} className="shrink-0" />
           )}
           {actionCount > 0 ? (
-            <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-xs font-ui-bold text-white">
+            <span className="inline-flex h-5 min-w-5 items-center justify-center rounded-full bg-amber-500 px-1 text-xs font-bold text-white">
               {actionCount}
             </span>
           ) : null}

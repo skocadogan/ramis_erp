@@ -261,7 +261,7 @@ export function PosSettingsTab() {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground flex items-center gap-3">
+          <h2 className="text-lg font-semibold text-foreground flex items-center gap-3">
            {t('posSettings.title')}
           </h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">
@@ -272,7 +272,7 @@ export function PosSettingsTab() {
           <button
             onClick={handleApplyChanges}
             disabled={isApplying}
-            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg text-sm font-ui-semibold shadow-sm transition-colors cursor-pointer self-start md:self-auto"
+            className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white rounded-lg text-sm font-semibold shadow-sm transition-colors cursor-pointer self-start md:self-auto"
           >
             {isApplying ? (
               <>
@@ -296,7 +296,7 @@ export function PosSettingsTab() {
               id="pos-settings-branch"
               value={effectiveBranchId}
               onChange={e => setBranchOverride(e.target.value)}
-              className="rounded-lg border border-border bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+              className="rounded-lg border border-border px-3 py-2 text-sm border-border bg-card text-foreground"
             >
               {branchList.map(b => (
                 <option key={b.id} value={b.id}>{b.name}</option>
@@ -316,7 +316,7 @@ export function PosSettingsTab() {
               id="pos-display-scope"
               value={targetPosTerminalId ?? ""}
               onChange={e => setTargetPosTerminalId(e.target.value.trim() ? e.target.value : null)}
-              className="min-w-[220px] rounded-lg border border-border bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+              className="min-w-[220px] rounded-lg border border-border px-3 py-2 text-sm border-border bg-card text-foreground"
             >
               <option value="">{t('posSettings.branchDefaultScope')}</option>
               {terminals.map(tm => (

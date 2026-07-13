@@ -317,10 +317,10 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
   }
 
   return (
-    <Card className="p-0 gap-0 border-border bg-card dark:border-slate-700 overflow-hidden">
-      <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-4 bg-slate-50 p-4 border-b border-border dark:bg-slate-800/40 dark:border-slate-800 shrink-0">
+    <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden">
+      <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-4 bg-slate-50 p-4 border-b border-border bg-muted/40 border-border shrink-0">
         <div className="space-y-0.5">
-          <CardTitle className="text-sm font-ui-semibold flex items-center gap-2">
+          <CardTitle className="text-sm font-semibold flex items-center gap-2">
             {t('admin_settings.terminals.title')}
           </CardTitle>
           <CardDescription className="text-xs">
@@ -334,9 +334,9 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
         )}
       </CardHeader>
       <CardContent className="p-4">
-        <div className="rounded-xl border border-slate-100 dark:border-slate-800 overflow-x-auto">
+        <div className="rounded-xl border border-slate-100 border-border overflow-x-auto">
           <Table>
-            <TableHeader className="bg-slate-50/50 dark:bg-slate-900/50">
+            <TableHeader className="bg-slate-50/50 bg-card/50">
               <TableRow>
                 <TableHead>{t('admin_settings.terminals.tableCode')}</TableHead>
                 <TableHead>{t('admin_settings.terminals.tableName')}</TableHead>
@@ -362,7 +362,7 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
                 terminals.map(term => (
                   <TableRow key={term.id}>
                     <TableCell className="font-mono text-sm">{term.code}</TableCell>
-                    <TableCell className="font-ui-medium">{term.name}</TableCell>
+                    <TableCell className="font-medium">{term.name}</TableCell>
                     <TableCell className="text-center">{term.sort_order}</TableCell>
                     <TableCell className="text-center">
                       <Switch

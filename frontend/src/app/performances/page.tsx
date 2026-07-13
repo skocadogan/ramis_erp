@@ -62,7 +62,7 @@ function PerformancesPageContent() {
     };
 
     const tabClass = (tab: PerformanceTab) =>
-        `flex items-center gap-1.5 px-3 py-3 text-sm font-ui-medium border-b-2 transition-colors ${
+        `flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-colors ${
             activeTab === tab
                 ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
                 : 'border-transparent text-muted-foreground hover:text-foreground'
@@ -83,8 +83,8 @@ function PerformancesPageContent() {
 
     return (
         <AppShell>
-            <div className="flex h-full flex-col bg-slate-50 overflow-hidden dark:bg-slate-950">
-                <div className="flex items-center gap-1 border-b border-border bg-white px-4 dark:bg-slate-900 dark:border-slate-700">
+            <div className="flex h-full flex-col overflow-hidden">
+                <div className="flex items-center gap-1 border-b border-border px-4">
                     <button
                         type="button"
                         className={tabClass('waiterCalls')}

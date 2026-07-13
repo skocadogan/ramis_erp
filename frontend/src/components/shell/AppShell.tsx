@@ -48,7 +48,7 @@ function ShellLayout({ children, lowStockCount = 0, initialAuthState }: AppShell
             lowStockCount={lowStockCount}
           />
         </Suspense>
-        <main className="min-w-0 flex-1 overflow-auto">
+        <main className="min-w-0 flex-1 overflow-auto bg-card">
           <Suspense fallback={<PageLoadingState className="absolute inset-0 flex items-center justify-center" />}>
             {children}
           </Suspense>

@@ -34,7 +34,7 @@ function SaleGridHeader({ t }: { t: ReturnType<typeof useTranslations> }) {
     <div
       className={cn(
         SALE_GRID,
-        "border-b border-border bg-muted/50 px-1 text-xs font-ui-bold text-muted-foreground"
+        "border-b border-border bg-muted/50 px-1 text-xs font-bold text-muted-foreground"
       )}
     >
       <div className="px-2 py-2.5">{t("cashReport.orderNo")}</div>
@@ -65,7 +65,7 @@ function SaleGridRow({
         "border-b border-border/40 px-1 text-sm text-muted-foreground hover:bg-muted/40 hover:text-foreground"
       )}
     >
-      <div className="px-2 py-2 font-ui-semibold text-foreground whitespace-nowrap">
+      <div className="px-2 py-2 font-semibold text-foreground whitespace-nowrap">
         {formatOrderNumber(sale.order_number)}
       </div>
       <div className="px-2 py-2 whitespace-nowrap tabular-nums">
@@ -82,7 +82,7 @@ function SaleGridRow({
       <div className="px-2 py-2">
         <span
           className={cn(
-            "inline-block rounded px-1.5 py-0.5 text-3xs font-ui-semibold whitespace-nowrap",
+            "inline-block rounded px-1.5 py-0.5 text-3xs font-semibold whitespace-nowrap",
             sale.payment_method === "CASH" &&
               "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
             sale.payment_method === "CARD" &&
@@ -99,7 +99,7 @@ function SaleGridRow({
           ? formatAmount(sale.discount_amount, canViewAmounts)
           : "—"}
       </div>
-      <div className="px-2 py-2 text-right font-ui-bold font-mono text-foreground whitespace-nowrap tabular-nums">
+      <div className="px-2 py-2 text-right font-bold font-mono text-foreground whitespace-nowrap tabular-nums">
         {formatAmount(sale.total_amount, canViewAmounts)}
       </div>
     </div>
@@ -130,12 +130,12 @@ function TerminalSummaryBlock({
             <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
               <Laptop size={16} />
             </div>
-            <span className="text-sm font-ui-bold text-foreground">{terminal.terminal_name}</span>
+            <span className="text-sm font-bold text-foreground">{terminal.terminal_name}</span>
           </div>
           <p className="text-xs text-muted-foreground">
-            <span className="font-ui-semibold text-foreground">{terminal.sales_count}</span>{" "}
+            <span className="font-semibold text-foreground">{terminal.sales_count}</span>{" "}
             {t("cashReport.sales")} | {t("cashReport.total")}:{" "}
-            <span className="font-ui-bold font-mono text-primary">
+            <span className="font-bold font-mono text-primary">
               {formatAmount(terminal.total_amount, canViewAmounts)}
             </span>
           </p>
@@ -145,34 +145,34 @@ function TerminalSummaryBlock({
       <div className="border-b border-border bg-muted/20 px-3 py-2">
         <div className="grid grid-cols-2 gap-2 rounded-lg bg-muted/40 p-2 text-xs sm:grid-cols-4">
           <div className="text-center">
-            <p className="font-ui-semibold uppercase text-muted-foreground">
+            <p className="font-semibold uppercase text-muted-foreground">
               {t("cashReport.paymentCash")}
             </p>
-            <p className="mt-0.5 font-ui-bold font-mono">
+            <p className="mt-0.5 font-bold font-mono">
               {formatAmount(terminal.payments.CASH, canViewAmounts)}
             </p>
           </div>
           <div className="border-x border-border text-center">
-            <p className="font-ui-semibold uppercase text-muted-foreground">
+            <p className="font-semibold uppercase text-muted-foreground">
               {t("cashReport.paymentCard")}
             </p>
-            <p className="mt-0.5 font-ui-bold font-mono">
+            <p className="mt-0.5 font-bold font-mono">
               {formatAmount(terminal.payments.CARD, canViewAmounts)}
             </p>
           </div>
           <div className="border-r border-border text-center">
-            <p className="font-ui-semibold uppercase text-muted-foreground">
+            <p className="font-semibold uppercase text-muted-foreground">
               {t("cashReport.paymentOther")}
             </p>
-            <p className="mt-0.5 font-ui-bold font-mono">
+            <p className="mt-0.5 font-bold font-mono">
               {formatAmount(terminal.payments.OTHER, canViewAmounts)}
             </p>
           </div>
           <div className="text-center">
-            <p className="font-ui-semibold uppercase text-muted-foreground">
+            <p className="font-semibold uppercase text-muted-foreground">
               {t("cashReport.paymentCredit")}
             </p>
-            <p className="mt-0.5 font-ui-bold font-mono">
+            <p className="mt-0.5 font-bold font-mono">
               {formatAmount(terminal.payments.CREDIT ?? 0, canViewAmounts)}
             </p>
           </div>

@@ -78,7 +78,7 @@ export function LanguageSwitcher({
         aria-label={t('ariaLabel')}
         className={cn(
           'inline-flex h-8 items-center justify-center gap-2 rounded-md px-2.5',
-          'text-sm font-ui-medium text-muted-foreground transition-colors',
+          'text-sm font-medium text-muted-foreground transition-colors',
           'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring',
           'disabled:pointer-events-none disabled:opacity-50',
           variantClasses[variant]
@@ -101,7 +101,7 @@ export function LanguageSwitcher({
             onClick={() => handleSwitch(loc)}
             className={cn(
               'gap-2 cursor-pointer',
-              loc === currentLocale && 'bg-accent font-ui-semibold'
+              loc === currentLocale && 'bg-accent font-semibold'
             )}
             id={`language-option-${loc}`}
           >

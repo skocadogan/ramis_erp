@@ -103,7 +103,7 @@ export function StockCountingTab({ branchId }: { branchId?: string }) {
           <option value="APPROVED">{t("stockCounting.statusApproved")}</option>
         </select>
         <button onClick={() => setShowForm(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-600 text-white text-sm font-ui-medium hover:bg-rose-700 transition-colors shadow-sm ml-auto">
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-rose-600 text-white text-sm font-medium hover:bg-rose-700 transition-colors shadow-sm ml-auto">
           <Plus size={16} /><span>{t("stockCounting.newCounting")}</span>
         </button>
       </div>
@@ -120,13 +120,13 @@ export function StockCountingTab({ branchId }: { branchId?: string }) {
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colNumber")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colWarehouse")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colStatus")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colDate")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colCountedBy")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colApprovedBy")}</th>
-              <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{t("stockCounting.colActions")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colNumber")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colWarehouse")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colStatus")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colDate")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colCountedBy")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colApprovedBy")}</th>
+              <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t("stockCounting.colActions")}</th>
             </tr>
           </thead>
         }
@@ -147,7 +147,7 @@ export function StockCountingTab({ branchId }: { branchId?: string }) {
         renderRow={(c) => (
           <>
             <td className="px-4 py-3 font-mono text-xs text-rose-600 dark:text-rose-400">{c.counting_number}</td>
-            <td className="px-4 py-3 font-ui-medium text-slate-900 dark:text-slate-200">{c.warehouse_name ?? "—"}</td>
+            <td className="px-4 py-3 font-medium text-foreground">{c.warehouse_name ?? "—"}</td>
             <td className="px-4 py-3"><StatusBadge domain="counting" status={c.status} /></td>
             <td className="px-4 py-3 text-muted-foreground text-xs">{c.counting_date}</td>
             <td className="px-4 py-3 text-muted-foreground">{c.counted_by_name ?? "—"}</td>

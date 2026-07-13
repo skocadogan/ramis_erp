@@ -71,13 +71,13 @@ export function CancelConfirmationDialog({
                             ? t('confirmOrder', { name: confirmCancel.name ?? '' })
                             : t('confirmItem', { name: confirmCancel?.name ?? '' })}
                         <br /><br />
-                        <span className="font-ui-semibold text-foreground">{t('auditLogNotice')}</span>
+                        <span className="font-semibold text-foreground">{t('auditLogNotice')}</span>
                     </AlertDialogDescription>
                 </AlertDialogHeader>
 
                 <div className="grid gap-4 py-4">
                     <div className="space-y-2">
-                        <label className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">{t('reason')}</label>
+                        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('reason')}</label>
                         <Select onValueChange={(val) => setReasonCode(val || "")} value={reasonCode}>
                             <SelectTrigger className="w-full">
                                 <SelectValue placeholder={t('selectReason')}>
@@ -95,7 +95,7 @@ export function CancelConfirmationDialog({
                     </div>
                     
                     <div className="space-y-2">
-                        <label className="text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">{t('description')}</label>
+                        <label className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{t('description')}</label>
                         <Textarea 
                             placeholder={t('descriptionPlaceholder')} 
                             value={reasonText}

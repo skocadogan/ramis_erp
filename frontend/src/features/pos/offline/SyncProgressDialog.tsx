@@ -45,7 +45,7 @@ export function SyncProgressDialog() {
 
         <div className="space-y-2">
           <div
-            className="h-2 w-full overflow-hidden rounded-full bg-slate-200 dark:bg-slate-800"
+            className="h-2 w-full overflow-hidden rounded-full bg-slate-200 bg-muted"
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={100}
@@ -61,7 +61,7 @@ export function SyncProgressDialog() {
             <span className="truncate pr-2">
               {session.currentLabel ?? t("processing")}
             </span>
-            <span className="shrink-0 font-ui-semibold tabular-nums">
+            <span className="shrink-0 font-semibold tabular-nums">
               {session.completed}/{session.total}
             </span>
           </div>

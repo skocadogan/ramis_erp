@@ -114,7 +114,7 @@ const PRESET_BUTTON_THEME: Record<
     },
     custom: {
         active: 'bg-slate-700 border-slate-700 text-white shadow-md shadow-slate-700/30 dark:bg-slate-300 dark:border-slate-300 dark:text-slate-900',
-        idle: 'border-slate-300 text-slate-700 bg-white hover:bg-slate-50 hover:border-slate-400 dark:border-slate-600 dark:text-slate-300 dark:bg-slate-900 dark:hover:bg-slate-800 dark:hover:border-slate-500',
+        idle: 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 border-input text-muted-foreground bg-card dark:hover:bg-slate-800 dark:hover:border-slate-500',
         ring: 'focus-visible:ring-slate-500/40',
     },
 };
@@ -149,7 +149,7 @@ export function PeriodFilter({
     if (variant === 'list') {
         return (
             <div className={`flex flex-wrap items-center gap-2 ${className}`}>
-                <span className="flex items-center gap-1.5 text-muted-foreground font-size-ui font-weight-ui-medium shrink-0">
+                <span className="flex items-center gap-1.5 text-muted-foreground text-ui font-medium shrink-0">
                     <CalendarRange size={16} aria-hidden />
                     {resolvedI18n.periodLabel}
                 </span>
@@ -162,7 +162,7 @@ export function PeriodFilter({
                         if (!v) return;
                         onSelect(v, getRangeForPeriodPreset(v));
                     }}
-                    className="min-w-[10.5rem] rounded-md border border-border bg-slate-50 py-1.5 pr-8 pl-2.5 text-sm text-slate-800 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/25 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:border-blue-400 dark:focus:ring-blue-400/25"
+                    className="min-w-[10.5rem] rounded-md border border-border bg-slate-50 py-1.5 pr-8 pl-2.5 text-sm text-slate-800 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/25 disabled:cursor-not-allowed disabled:opacity-50 border-input bg-muted text-foreground dark:focus:border-blue-400 dark:focus:ring-blue-400/25"
                 >
                     <option value="">{resolvedI18n.selectPlaceholder}</option>
                     {presetRows.map(({ id, label }) => (
@@ -181,7 +181,7 @@ export function PeriodFilter({
             role="group"
             aria-label={resolvedI18n.groupAriaLabel}
         >
-            <span className="flex items-center gap-1 text-2xs font-ui-semibold uppercase tracking-wide text-muted-foreground dark:text-muted-foreground shrink-0 mr-0.5">
+            <span className="flex items-center gap-1 text-2xs font-semibold uppercase tracking-wide text-muted-foreground dark:text-muted-foreground shrink-0 mr-0.5">
                 <CalendarRange size={12} aria-hidden />
                 {resolvedI18n.periodLabel}
             </span>
@@ -194,7 +194,7 @@ export function PeriodFilter({
                         type="button"
                         disabled={disabled}
                         onClick={() => onSelect(id, getRangeForPeriodPreset(id))}
-                        className={`rounded-lg px-2.5 py-1.5 text-xs font-ui-semibold border shrink-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-900
+                        className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold border shrink-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-900
                             ${theme.ring}
                             ${isActive ? theme.active : theme.idle}
                             ${isActive ? 'ring-2 ring-offset-1 ring-slate-900/15 dark:ring-white/25' : ''}

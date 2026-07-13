@@ -310,12 +310,12 @@ export function RoleModal({
                                 !isExpanded && "-rotate-90"
                               )}
                             />
-                            <span className="text-ui-sm font-ui-medium text-foreground">
+                            <span className="text-ui-sm font-medium text-foreground">
                               {cat.name}
                             </span>
                             <span
                               className={cn(
-                                "rounded-full px-1.5 py-0.5 text-2xs font-ui-medium",
+                                "rounded-full px-1.5 py-0.5 text-2xs font-medium",
                                 noneSelected && "bg-muted text-muted-foreground",
                                 !noneSelected &&
                                   allSelected &&

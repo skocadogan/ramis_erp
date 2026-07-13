@@ -26,7 +26,7 @@ function CreditPageContent() {
         <div className="flex-1 space-y-6 overflow-auto p-6">
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div>
-              <h1 className="text-xl font-ui-bold text-foreground">{t('page.title')}</h1>
+              <h1 className="text-xl font-bold text-foreground">{t('page.title')}</h1>
               <p className="mt-0.5 text-sm text-muted-foreground">{t('page.subtitle')}</p>
               {branchName && (
                 <p className="mt-1 text-xs text-muted-foreground">{t('page.branchLabel', { name: branchName })}</p>
@@ -36,7 +36,7 @@ function CreditPageContent() {
               <select
                 value={effectiveBranchId ?? ''}
                 onChange={(e) => setBranchOverride(e.target.value)}
-                className="rounded-lg border border-border bg-white px-3 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900"
+                className="rounded-lg border border-border px-3 py-1.5 text-sm border-border bg-card"
                 aria-label={t('page.branchSelectAria')}
               >
                 {branchList.map((b) => (

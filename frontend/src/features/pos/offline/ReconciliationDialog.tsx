@@ -49,13 +49,13 @@ function QueueRow({
   const t = useTranslations("pos.offlineQueue");
 
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-border bg-white p-3 dark:border-slate-700 dark:bg-slate-900">
+    <div className="flex flex-col gap-2 rounded-lg border border-border p-3 border-border bg-card">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <p className="truncate text-sm font-ui-semibold text-foreground">{op.label}</p>
+          <p className="truncate text-sm font-semibold text-foreground">{op.label}</p>
           <p className="text-xs text-muted-foreground">{statusLabel(t, op.status)}</p>
         </div>
-        <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-[10px] font-ui-bold uppercase tracking-wide text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+        <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-bold uppercase tracking-wide text-slate-600 bg-muted text-muted-foreground">
           {op.type.replace("_", " ")}
         </span>
       </div>
@@ -141,7 +141,7 @@ export function ReconciliationDialog({
           <span>{t("summary.failed", { count: counts.failed })}</span>
           <span>{t("summary.conflict", { count: counts.conflict })}</span>
           {!canSync ? (
-            <span className="font-ui-semibold text-amber-700 dark:text-amber-400">
+            <span className="font-semibold text-amber-700 dark:text-amber-400">
               {t("summary.offline")}
             </span>
           ) : null}
@@ -149,7 +149,7 @@ export function ReconciliationDialog({
 
         <div
           ref={scrollRef}
-          className="min-h-[200px] flex-1 overflow-y-auto rounded-lg border border-border bg-slate-50/50 p-2 dark:border-slate-700 dark:bg-slate-900/40"
+          className="min-h-[200px] flex-1 overflow-y-auto rounded-lg border border-border bg-slate-50/50 p-2 border-border bg-card/40"
         >
           {operations.length === 0 ? (
             <p className="p-6 text-center text-sm text-muted-foreground">{t("dialog.empty")}</p>

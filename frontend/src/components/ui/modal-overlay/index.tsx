@@ -18,7 +18,7 @@ interface ModalOverlayProps {
  *
  * @example
  *   <ModalOverlay onClose={handleClose}>
- *     <div className="bg-white rounded-xl p-6">...</div>
+ *     <div className="rounded-xl p-6">...</div>
  *   </ModalOverlay>
  */
 export function ModalOverlay({

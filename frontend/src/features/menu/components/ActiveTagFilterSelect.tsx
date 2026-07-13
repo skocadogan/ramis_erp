@@ -87,7 +87,7 @@ export function ActiveTagFilterSelect({
   return (
     <>
       <div className={cn("flex items-center gap-1.5 shrink-0", className)}>
-        <span className="text-xs font-ui-medium text-muted-foreground whitespace-nowrap">
+        <span className="text-xs font-medium text-muted-foreground whitespace-nowrap">
           {t("tagFilter.activeMenuLabel")}
         </span>
         <button

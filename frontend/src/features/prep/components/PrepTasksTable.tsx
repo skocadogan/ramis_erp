@@ -82,18 +82,18 @@ export function PrepTasksTable({
       tableClassName="w-full text-sm"
       header={
         <thead className={virtualTableStickyHeadClass}>
-          <tr className="text-xs font-ui-bold text-slate-500">
-            <th className="px-4 py-2 text-left font-ui-bold">
+          <tr className="text-xs font-bold text-slate-500">
+            <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.tasks.nameStation")}
             </th>
-            <th className="px-4 py-2 text-left font-ui-bold w-[140px]">
+            <th className="px-4 py-2 text-left font-bold w-[140px]">
               {t("management.columns.tasks.status")}
             </th>
-            <th className="px-4 py-2 text-right font-ui-bold">
+            <th className="px-4 py-2 text-right font-bold">
               {t("management.columns.tasks.progress")}
             </th>
             {showActionsColumn && (
-              <th className="px-4 py-2 text-right font-ui-bold w-[120px]">
+              <th className="px-4 py-2 text-right font-bold w-[120px]">
                 {t("management.columns.tasks.actions")}
               </th>
             )}
@@ -108,7 +108,7 @@ export function PrepTasksTable({
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
             <ClipboardList size={48} className="opacity-10 mb-4" />
-            <p className="text-sm font-ui-medium">{emptyMessage}</p>
+            <p className="text-sm font-medium">{emptyMessage}</p>
           </div>
         )
       }
@@ -129,10 +129,10 @@ export function PrepTasksTable({
         return (
           <>
             <td className="px-4 py-3 align-middle">
-              <h4 className="text-sm font-ui-bold text-slate-800 dark:text-white leading-none">
+              <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
                 {task.title}
               </h4>
-              <p className="text-2xs font-ui-medium text-muted-foreground mt-1">
+              <p className="text-2xs font-medium text-muted-foreground mt-1">
                 {task.station_name || t("management.defaultStation")}
               </p>
             </td>
@@ -157,7 +157,7 @@ export function PrepTasksTable({
                         : "bg-blue-500",
                   )}
                 />
-                <span className="text-[11px] font-ui-bold">
+                <span className="text-sub font-bold">
                   {task.status === "COMPLETED"
                     ? t("management.taskStatus.completed")
                     : task.status === "IN_PROGRESS"
@@ -168,16 +168,16 @@ export function PrepTasksTable({
             </td>
             <td className="px-4 py-3 align-middle">
               <div className="flex flex-col gap-1.5 items-end w-full max-w-[220px] ml-auto">
-                <div className="h-1.5 w-full rounded-full bg-slate-200 dark:bg-slate-800 overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-slate-200 bg-muted overflow-hidden">
                   <div
                     className="h-full rounded-full bg-amber-500"
                     style={{ width: `${pct}%` }}
                   />
                 </div>
                 <div className="flex items-center justify-end gap-2 w-full">
-                  <span className="text-xs font-ui-bold text-foreground tabular-nums">
+                  <span className="text-xs font-bold text-foreground tabular-nums">
                     {formatNumber(done, 0)} / {formatNumber(target, 0)}
-                    <span className="text-2xs font-ui-bold text-muted-foreground ml-1">
+                    <span className="text-2xs font-bold text-muted-foreground ml-1">
                       {task.unit}
                     </span>
                   </span>
@@ -227,7 +227,7 @@ export function PrepTasksTable({
                     type="button"
                     size="sm"
                     variant="outline"
-                    className="h-8 gap-1.5 text-[11px] font-ui-bold border-blue-200 text-blue-600 hover:bg-blue-50 dark:border-blue-900/50 dark:text-blue-400"
+                    className="h-8 gap-1.5 text-sub font-bold border-blue-200 text-blue-600 hover:bg-blue-50 dark:border-blue-900/50 dark:text-blue-400"
                     onClick={() => onUpdateStatus({ taskId: task.id, status: "IN_PROGRESS" })}
                   >
                     <Play size={14} />

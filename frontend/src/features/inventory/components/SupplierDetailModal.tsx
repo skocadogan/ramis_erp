@@ -207,7 +207,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
       PARTIALLY_ACCEPTED: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
       REJECTED: "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300",
     }
-    return `inline-flex max-w-full rounded px-2 py-0.5 text-sub font-ui-medium ${colors[status] || "bg-slate-100 text-slate-800"}`
+    return `inline-flex max-w-full rounded px-2 py-0.5 text-sub font-medium ${colors[status] || "bg-slate-100 text-slate-800"}`
   }
 
   return (
@@ -231,7 +231,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
               <button
                 onClick={handleExportExcel}
                 disabled={isExportingExcel}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background hover:bg-muted text-ui-sm font-ui-medium transition-colors disabled:opacity-50"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-background hover:bg-muted text-ui-sm font-medium transition-colors disabled:opacity-50"
               >
                 <FileSpreadsheet size={14} />
                 {isExportingExcel ? toaster("exporting") : "Excel"}
@@ -247,10 +247,10 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
         </DialogHeader>
 
         <DialogBody className="flex min-h-0 flex-col overflow-hidden p-0">
-          <div className="flex shrink-0 items-center gap-1 border-b border-border px-5 py-2 dark:border-slate-800">
+          <div className="flex shrink-0 items-center gap-1 border-b border-border px-5 py-2 border-border">
             <button
               onClick={() => setActiveTab("rejected")}
-              className={`px-4 py-1.5 rounded-lg text-ui-sm font-ui-medium transition-colors ${
+              className={`px-4 py-1.5 rounded-lg text-ui-sm font-medium transition-colors ${
                 isRejectedTab
                   ? "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300"
                   : "text-muted-foreground hover:bg-muted"
@@ -260,7 +260,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
             </button>
             <button
               onClick={() => setActiveTab("receivings")}
-              className={`px-4 py-1.5 rounded-lg text-ui-sm font-ui-medium transition-colors ${
+              className={`px-4 py-1.5 rounded-lg text-ui-sm font-medium transition-colors ${
                 !isRejectedTab
                   ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
                   : "text-muted-foreground hover:bg-muted"
@@ -270,7 +270,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
             </button>
           </div>
 
-          <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-5 py-2.5 dark:border-slate-800">
+          <div className="flex shrink-0 flex-wrap items-center gap-2 border-b border-border px-5 py-2.5 border-border">
             <div className="relative flex-1 min-w-[160px] max-w-[300px]">
               <Search className="absolute left-2.5 top-1/2 -translate-y-1/2 size-3.5 text-muted-foreground" />
               <input
@@ -278,7 +278,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={t("searchPlaceholder")}
-                className="w-full rounded border border-border bg-white py-1.5 pl-8 pr-8 text-ui-sm outline-none dark:border-slate-600 dark:bg-slate-800"
+                className="w-full rounded border border-border py-1.5 pl-8 pr-8 text-ui-sm outline-none border-border bg-muted"
               />
               {search && (
                 <button
@@ -293,14 +293,14 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="rounded border border-border bg-white px-3 py-1.5 text-ui-sm dark:border-slate-600 dark:bg-slate-800 dark:[color-scheme:dark]"
+              className="rounded border border-border px-3 py-1.5 text-ui-sm border-border bg-muted dark:[color-scheme:dark]"
             />
             <span className="text-muted-foreground text-ui-sm">—</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="rounded border border-border bg-white px-3 py-1.5 text-ui-sm dark:border-slate-600 dark:bg-slate-800 dark:[color-scheme:dark]"
+              className="rounded border border-border px-3 py-1.5 text-ui-sm border-border bg-muted dark:[color-scheme:dark]"
             />
             {filterChanged && (
               <button
@@ -320,7 +320,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
             {isRejectedTab ? (
-              <div className={`sticky top-0 z-10 border-b border-border bg-white pb-2 text-ui-sm font-ui-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-muted-foreground ${rejectedRowGrid}`}>
+              <div className={`sticky top-0 z-10 border-b border-border pb-2 text-ui-sm font-semibold text-slate-600 border-border bg-card dark:text-muted-foreground ${rejectedRowGrid}`}>
                 <span className="min-w-0 text-left">{t("colReceivingNo")}</span>
                 <span className="min-w-0 text-left">{t("colProduct")}</span>
                 <span className="min-w-0 text-right tabular-nums">{t("colExpected")}</span>
@@ -329,7 +329,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                 <span className="min-w-0 text-left">{t("colUnit")}</span>
               </div>
             ) : (
-              <div className={`sticky top-0 z-10 border-b border-border bg-white pb-2 text-ui-sm font-ui-semibold text-slate-600 dark:border-slate-800 dark:bg-slate-900 dark:text-muted-foreground ${receivingRowGrid}`}>
+              <div className={`sticky top-0 z-10 border-b border-border pb-2 text-ui-sm font-semibold text-slate-600 border-border bg-card dark:text-muted-foreground ${receivingRowGrid}`}>
                 <span className="min-w-0 text-left">{t("colReceivingNo")}</span>
                 <span className="min-w-0 text-left">{t("colDate")}</span>
                 <span className="min-w-0 text-left">{t("colStatus")}</span>
@@ -369,7 +369,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                             key={vi.key}
                             data-index={vi.index}
                             ref={rowVirtualizer.measureElement}
-                            className="absolute left-0 top-0 w-full border-b border-slate-100 dark:border-slate-800"
+                            className="absolute left-0 top-0 w-full border-b border-slate-100 border-border"
                             style={{ transform: `translateY(${vi.start}px)` }}
                           >
                             <div className={`${rejectedRowGrid} text-foreground`}>
@@ -378,7 +378,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                                 <div className="text-sub text-muted-foreground">{formatDate(item.received_date as string)}</div>
                               </div>
                               <div className="min-w-0">
-                                <div className="truncate text-ui-sm font-ui-medium" title={item.stock_item_name as string}>
+                                <div className="truncate text-ui-sm font-medium" title={item.stock_item_name as string}>
                                   {item.stock_item_name as string}
                                 </div>
                                 <div className="font-mono text-sub text-muted-foreground">{item.stock_item_sku as string}</div>
@@ -386,10 +386,10 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                               <div className="min-w-0 text-right tabular-nums text-ui-sm text-muted-foreground">
                                 {formatQuantityWithUnit(item.expected_quantity as number, item.unit as string)}
                               </div>
-                              <div className="min-w-0 text-right tabular-nums text-ui-sm text-emerald-700 dark:text-emerald-400 font-ui-medium">
+                              <div className="min-w-0 text-right tabular-nums text-ui-sm text-emerald-700 dark:text-emerald-400 font-medium">
                                 {formatQuantityWithUnit(item.received_quantity as number, item.unit as string)}
                               </div>
-                              <div className="min-w-0 text-right tabular-nums text-ui-sm text-rose-700 dark:text-rose-400 font-ui-bold">
+                              <div className="min-w-0 text-right tabular-nums text-ui-sm text-rose-700 dark:text-rose-400 font-bold">
                                 {formatQuantityWithUnit(item.rejected_quantity as number, item.unit as string)}
                               </div>
                               <div className="min-w-0 text-ui-sm text-muted-foreground">{item.unit as string}</div>
@@ -404,7 +404,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                           key={vi.key}
                           data-index={vi.index}
                           ref={rowVirtualizer.measureElement}
-                          className="absolute left-0 top-0 w-full border-b border-slate-100 dark:border-slate-800"
+                          className="absolute left-0 top-0 w-full border-b border-slate-100 border-border"
                           style={{ transform: `translateY(${vi.start}px)` }}
                         >
                           <div className={`${receivingRowGrid} text-foreground`}>
@@ -423,13 +423,13 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                             <div className="min-w-0 truncate text-ui-sm text-muted-foreground" title={rec.warehouse_name as string}>
                               {rec.warehouse_name as string}
                             </div>
-                            <div className="min-w-0 text-right tabular-nums text-ui-sm font-ui-medium">
+                            <div className="min-w-0 text-right tabular-nums text-ui-sm font-medium">
                               {new Intl.NumberFormat("tr-TR", { style: "currency", currency: "TRY", maximumFractionDigits: 0 }).format(rec.total_amount as number)}
                             </div>
                             <div className="min-w-0 text-center tabular-nums text-ui-sm text-muted-foreground">
                               {rec.items_count as number}
                             </div>
-                            <div className={`min-w-0 text-center tabular-nums text-ui-sm font-ui-medium ${(rec.rejected_items_count as number) > 0 ? "text-rose-700 dark:text-rose-400" : "text-muted-foreground"}`}>
+                            <div className={`min-w-0 text-center tabular-nums text-ui-sm font-medium ${(rec.rejected_items_count as number) > 0 ? "text-rose-700 dark:text-rose-400" : "text-muted-foreground"}`}>
                               {rec.rejected_items_count as number}
                             </div>
                           </div>

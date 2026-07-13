@@ -63,7 +63,7 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
             <button
                 type="button"
                 onClick={() => { setShowDiscountPanel(!showDiscountPanel); setDiscountError(null); }}
-                className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-ui-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 transition-colors dark:bg-amber-900/20 dark:text-amber-400 dark:hover:bg-amber-900/30"
+                className="w-full flex items-center justify-between px-4 py-2.5 text-sm font-semibold text-amber-700 bg-amber-50 hover:bg-amber-100 transition-colors dark:bg-amber-900/20 dark:text-amber-400 dark:hover:bg-amber-900/30"
             >
                 <span className="flex items-center gap-1.5"><Tag size={14} />{t('applyDiscount')}</span>
                 {showDiscountPanel ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
@@ -76,8 +76,8 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
                                 key={type}
                                 type="button"
                                 onClick={() => setDiscountType(type)}
-                                className={`flex-1 py-1.5 rounded-lg text-xs font-ui-semibold border transition-all
-                                    ${discountType === type ? 'bg-amber-500 border-amber-500 text-white shadow-sm' : 'border-border text-slate-600 hover:border-amber-300 dark:border-slate-700 dark:text-slate-300'}`}
+                                className={`flex-1 py-1.5 rounded-lg text-xs font-semibold border transition-all
+                                    ${discountType === type ? 'bg-amber-500 border-amber-500 text-white shadow-sm' : 'border-border text-slate-600 hover:border-amber-300 border-border text-muted-foreground'}`}
                             >
                                 {type === 'ORDER' ? `🧾 ${t('discountOrder')}` : `🍽️ ${t('discountItem')}`}
                             </button>
@@ -88,7 +88,7 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
                         <select
                             value={discountOrderId}
                             onChange={e => setDiscountOrderId(e.target.value)}
-                            className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-border dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300"
+                            className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-border bg-muted border-input text-muted-foreground"
                         >
                             <option value="">— {t('selectOrder')} —</option>
                             {orders.map((o, i) => (
@@ -104,7 +104,7 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
                         <select
                             value={discountItemId}
                             onChange={e => setDiscountItemId(e.target.value)}
-                            className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-border dark:bg-slate-800 dark:border-slate-600 dark:text-slate-300"
+                            className="w-full px-2.5 py-1.5 text-xs rounded-lg border border-border bg-muted border-input text-muted-foreground"
                         >
                             <option value="">— {t('selectProduct')} —</option>
                             {(discountOrderId ? orders.find(o => o.id === discountOrderId) : orders[0])?.items
@@ -147,7 +147,7 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
                                 type="button"
                                 onClick={applyDiscount}
                                 disabled={isApplyingDiscount || !discountAmount}
-                                className="px-3 py-1.5 text-xs font-ui-semibold text-white bg-amber-500 hover:bg-amber-600 rounded-lg disabled:opacity-50 transition-colors"
+                                className="px-3 py-1.5 text-xs font-semibold text-white bg-amber-500 hover:bg-amber-600 rounded-lg disabled:opacity-50 transition-colors"
                             >
                                 {isApplyingDiscount ? <Loader2 size={12} className="animate-spin" /> : t('apply')}
                             </button>
@@ -170,15 +170,15 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
 
                     {orders.some(o => (o.discount_amount || 0) > 0) && (
                         <div className="text-xs text-amber-600 bg-amber-50 rounded-lg px-3 py-1.5 space-y-2 dark:bg-amber-900/20 dark:text-amber-400">
-                            <p className="font-ui-bold border-b border-amber-200 dark:border-amber-700/50 pb-1 mb-1">{t('appliedDiscounts')}</p>
+                            <p className="font-bold border-b border-amber-200 dark:border-amber-700/50 pb-1 mb-1">{t('appliedDiscounts')}</p>
                             {orders.filter(o => (o.discount_amount || 0) > 0).map(o => (
                                 <div key={o.id} className="flex justify-between items-center group">
                                     <div className="flex flex-col">
-                                        <span className="font-ui-medium text-2xs uppercase opacity-80">{o.discount_type === 'ORDER' ? t('discountOrder') : t('discountItem')}</span>
+                                        <span className="font-medium text-2xs uppercase opacity-80">{o.discount_type === 'ORDER' ? t('discountOrder') : t('discountItem')}</span>
                                         <span className="text-sub">{o.discount_by_name ? `${o.discount_by_name}` : t('manager')}</span>
                                     </div>
                                     <div className="flex items-center gap-2">
-                                        <span className="font-ui-bold">
+                                        <span className="font-bold">
                                             {canViewAmounts ? `-${formatCurrency(o.discount_amount ?? 0)}` : AMOUNT_DISPLAY_MASK}
                                         </span>
                                         <button

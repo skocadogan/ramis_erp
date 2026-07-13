@@ -274,7 +274,7 @@ export function WaiterSalesPerformancePanel({
                                     type="date"
                                     value={startDate}
                                     onChange={(e) => onStartDateChange(e.target.value)}
-                                    className="rounded-md border border-border bg-white px-2 py-1 dark:bg-slate-900"
+                                    className="rounded-md border border-border px-2 py-1 bg-card"
                                 />
                             </label>
                             <label className="flex items-center gap-1.5 text-muted-foreground">
@@ -283,7 +283,7 @@ export function WaiterSalesPerformancePanel({
                                     type="date"
                                     value={endDate}
                                     onChange={(e) => onEndDateChange(e.target.value)}
-                                    className="rounded-md border border-border bg-white px-2 py-1 dark:bg-slate-900"
+                                    className="rounded-md border border-border px-2 py-1 bg-card"
                                 />
                             </label>
                         </div>
@@ -323,12 +323,12 @@ export function WaiterSalesPerformancePanel({
                     ].map((item) => (
                         <div
                             key={item.label}
-                            className="rounded-xl border border-border bg-white px-4 py-3 dark:bg-slate-900"
+                            className="rounded-xl border border-border px-4 py-3 bg-card"
                         >
                             <div className="text-2xs uppercase tracking-wide text-muted-foreground">
                                 {item.label}
                             </div>
-                            <div className="text-lg font-ui-semibold tabular-nums">{item.value}</div>
+                            <div className="text-lg font-semibold tabular-nums">{item.value}</div>
                         </div>
                     ))}
                 </div>
@@ -336,8 +336,8 @@ export function WaiterSalesPerformancePanel({
 
             <div className="grid min-h-0 flex-1 grid-cols-1 gap-4 lg:grid-cols-2">
                 <div className="flex min-h-0 flex-col gap-4 overflow-hidden">
-                    <div className="rounded-xl border border-border bg-white dark:bg-slate-900 flex flex-col min-h-0 flex-1">
-                        <div className="border-b border-border px-4 py-2.5 text-sm font-ui-semibold">
+                    <div className="rounded-xl border border-border bg-card flex flex-col min-h-0 flex-1">
+                        <div className="border-b border-border px-4 py-2.5 text-sm font-semibold">
                             {t('waiterSales.staffTableTitle')}
                         </div>
                         <div className="overflow-auto flex-1">
@@ -417,8 +417,8 @@ export function WaiterSalesPerformancePanel({
                     </div>
 
                     {cancellationBreakdown.length > 0 && (
-                        <div className="rounded-xl border border-border bg-white dark:bg-slate-900">
-                            <div className="border-b border-border px-4 py-2.5 text-sm font-ui-semibold">
+                        <div className="rounded-xl border border-border bg-card">
+                            <div className="border-b border-border px-4 py-2.5 text-sm font-semibold">
                                 {t('waiterSales.cancelReasonsTitle')}
                             </div>
                             <div className="overflow-auto max-h-40">
@@ -441,8 +441,8 @@ export function WaiterSalesPerformancePanel({
                         </div>
                     )}
 
-                    <div className="rounded-xl border border-border bg-white dark:bg-slate-900 flex flex-col min-h-0 flex-[1.2]">
-                        <div className="border-b border-border px-4 py-2.5 text-sm font-ui-semibold flex items-center justify-between">
+                    <div className="rounded-xl border border-border bg-card flex flex-col min-h-0 flex-[1.2]">
+                        <div className="border-b border-border px-4 py-2.5 text-sm font-semibold flex items-center justify-between">
                             <span>{t('waiterSales.historyTitle')}</span>
                             {isFetching && !isLoading && (
                                 <Loader2 size={14} className="animate-spin text-muted-foreground" />
@@ -507,9 +507,9 @@ export function WaiterSalesPerformancePanel({
                 </div>
 
                 <div className="flex min-h-0 flex-col gap-4">
-                    <div className="rounded-xl border border-border bg-white dark:bg-slate-900 flex flex-col">
+                    <div className="rounded-xl border border-border bg-card flex flex-col">
                         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-2.5">
-                            <div className="text-sm font-ui-semibold flex items-center gap-2">
+                            <div className="text-sm font-semibold flex items-center gap-2">
                                 <BarChart3 size={16} />
                                 {t('waiterSales.chartStaffTitle')}
                             </div>
@@ -613,9 +613,9 @@ export function WaiterSalesPerformancePanel({
                         </div>
                     </div>
 
-                    <div className="rounded-xl border border-border bg-white dark:bg-slate-900 flex flex-col">
+                    <div className="rounded-xl border border-border bg-card flex flex-col">
                         <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border px-4 py-2.5">
-                            <div className="text-sm font-ui-semibold">
+                            <div className="text-sm font-semibold">
                                 {t('waiterSales.chartDailyTitle')}
                             </div>
                             <ChartLegendItem

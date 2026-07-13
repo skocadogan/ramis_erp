@@ -77,7 +77,7 @@ const BranchSelector = React.memo(function BranchSelector({
       ) : (
         <span
           className={cn(
-            "flex min-w-0 items-center gap-2 text-sm font-ui-medium text-muted-foreground",
+            "flex min-w-0 items-center gap-2 text-sm font-medium text-muted-foreground",
             variant === "pos" &&
               "max-w-[11rem] sm:max-w-[14rem] md:max-w-[18rem] lg:max-w-[20rem]"
           )}

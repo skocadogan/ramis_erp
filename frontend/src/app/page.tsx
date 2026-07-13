@@ -35,7 +35,7 @@ export default async function Home() {
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary text-primary-foreground shadow-sm">
               <ChefHat size={20} aria-hidden />
             </div>
-            <span className="text-2xl font-ui-bold tracking-tight text-foreground">
+            <span className="text-2xl font-bold tracking-tight text-foreground">
               Ramis
             </span>
           </Link>
@@ -46,7 +46,7 @@ export default async function Home() {
             <div className="hidden h-4 w-px bg-border sm:block" />
             <Link
               href="/login"
-              className="inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-ui-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 active:scale-[0.98]"
+              className="inline-flex h-9 items-center justify-center rounded-lg bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-sm transition-all hover:bg-primary/90 active:scale-[0.98]"
             >
               {t("submit")}
             </Link>
@@ -54,11 +54,11 @@ export default async function Home() {
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 bg-background">
         <section className="relative overflow-hidden pt-16 pb-6 sm:pt-24 sm:pb-20">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center lg:text-start">
-              <h1 className="mt-6 text-4xl font-ui-bold leading-[1.1] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
+              <h1 className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-foreground sm:text-6xl lg:text-7xl">
                 {tLand("heroBefore")}{" "}
                 <span className="text-primary">{tLand("heroHighlight")}</span>
                 {tLand("heroAfter") ? <><br className="hidden lg:block" /> {tLand("heroAfter")}</> : null}
@@ -83,7 +83,7 @@ export default async function Home() {
                     <Icon size={24} aria-hidden />
                   </div>
                   <div>
-                    <h3 className="text-lg font-ui-bold text-foreground">
+                    <h3 className="text-lg font-bold text-foreground">
                       {tLand(title)}
                     </h3>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
@@ -99,7 +99,7 @@ export default async function Home() {
         <section className="py-6 sm:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between">
-              <h2 className="text-xl font-ui-bold tracking-tight text-foreground sm:text-2xl">
+              <h2 className="text-xl font-bold tracking-tight text-foreground sm:text-2xl">
                 {tLand("modulesHeading")}
               </h2>
               <div className="h-px flex-1 border-t border-border mx-6 hidden sm:block" />
@@ -116,10 +116,10 @@ export default async function Home() {
                     <Icon size={20} aria-hidden />
                   </div>
                   <div>
-                    <p className="text-sm font-ui-bold text-foreground sm:text-base">
+                    <p className="text-sm font-bold text-foreground sm:text-base">
                       {tLand(label)}
                     </p>
-                    <p className="text-2xs font-ui-medium text-muted-foreground sm:text-xs">
+                    <p className="text-2xs font-medium text-muted-foreground sm:text-xs">
                       {tLand(sub)}
                     </p>
                   </div>
@@ -137,7 +137,7 @@ export default async function Home() {
               <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-primary text-primary-foreground">
                 <ChefHat size={14} />
               </div>
-              <span className="text-sm font-ui-bold tracking-tight">Ramis ERP</span>
+              <span className="text-sm font-bold tracking-tight">Ramis ERP</span>
             </div>
             <p className="text-xs text-muted-foreground sm:text-sub">
               © {new Date().getFullYear()} Ramis ERP. {tLand("heroBefore")} {tLand("heroHighlight")} {tLand("heroAfter")}.

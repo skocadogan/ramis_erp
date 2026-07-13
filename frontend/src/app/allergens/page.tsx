@@ -35,7 +35,7 @@ function AllergensPageContent() {
 
   return (
     <AppShell>
-      <div className="flex h-full flex-col overflow-hidden p-6 gap-4 dark:bg-slate-950">
+      <div className="flex h-full flex-col overflow-hidden p-6 gap-4 bg-card">
         
 
         {/* Table with search, filters, pagination, sort */}
@@ -101,7 +101,7 @@ function AllergensPageContent() {
 
         {toast && (
           <div
-            className={`fixed bottom-6 right-6 z-50 rounded-lg px-4 py-2 text-sm font-ui-medium text-white shadow-lg ${
+            className={`fixed bottom-6 right-6 z-50 rounded-lg px-4 py-2 text-sm font-medium text-white shadow-lg ${
               toast.type === "error" ? "bg-rose-600" : "bg-emerald-600"
             }`}
           >

@@ -203,7 +203,7 @@ export function PurchaseOrdersTab({
             <button
               type="button"
               onClick={() => setOverdueFilter(true)}
-              className="shrink-0 font-ui-medium underline underline-offset-2"
+              className="shrink-0 font-medium underline underline-offset-2"
             >
               {t("purchaseOrdersTab.showOverdueOnly")}
             </button>
@@ -214,7 +214,7 @@ export function PurchaseOrdersTab({
                 setOverdueFilter(false)
                 onClearOverdueFilter?.()
               }}
-              className="shrink-0 font-ui-medium underline underline-offset-2"
+              className="shrink-0 font-medium underline underline-offset-2"
             >
               {t("purchaseOrdersTab.clearOverdueFilter")}
             </button>
@@ -252,14 +252,14 @@ export function PurchaseOrdersTab({
             setEditingOrder(null)
             setShowForm(true)
           }}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-ui-medium hover:bg-blue-700 transition-colors shadow-sm ml-auto"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-600 text-white text-sm font-medium hover:bg-blue-700 transition-colors shadow-sm ml-auto"
         >
           <Plus size={16} />
           <span>{t("purchaseOrdersTab.newOrder")}</span>
         </button>
         <button
           onClick={() => setSuggestOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-600 text-white text-sm font-ui-medium hover:bg-amber-700 transition-colors shadow-sm"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-600 text-white text-sm font-medium hover:bg-amber-700 transition-colors shadow-sm"
         >
           <Sparkles size={16} />
           <span>{t("purchaseOrdersTab.smartSuggest")}</span>
@@ -279,13 +279,13 @@ export function PurchaseOrdersTab({
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colOrderNo")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colSupplier")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colWarehouse")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colStatus")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colDate")}</th>
-              <th className="text-right px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colAmount")}</th>
-              <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{t("purchaseOrdersTab.colActions")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colOrderNo")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colSupplier")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colWarehouse")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colStatus")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colDate")}</th>
+              <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colAmount")}</th>
+              <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t("purchaseOrdersTab.colActions")}</th>
             </tr>
           </thead>
         }
@@ -306,11 +306,11 @@ export function PurchaseOrdersTab({
         renderRow={(o) => (
           <>
             <td className="px-4 py-3 font-mono text-xs text-blue-600 dark:text-blue-400">{o.order_number}</td>
-            <td className="px-4 py-3 font-ui-medium text-slate-900 dark:text-slate-200">{o.supplier_name ?? "—"}</td>
+            <td className="px-4 py-3 font-medium text-foreground">{o.supplier_name ?? "—"}</td>
             <td className="px-4 py-3 text-muted-foreground">{o.warehouse_name ?? "—"}</td>
             <td className="px-4 py-3"><StatusBadge domain="po" status={o.status} /></td>
             <td className="px-4 py-3 text-muted-foreground text-xs">{o.order_date}</td>
-            <td className="px-4 py-3 text-right font-ui-semibold text-slate-900 dark:text-slate-200">
+            <td className="px-4 py-3 text-right font-semibold text-foreground">
               {formatAmount(o.total_amount, canViewAmounts)}
             </td>
             <td className="px-4 py-3">
@@ -478,10 +478,10 @@ export function PurchaseOrdersTab({
               </DialogHeader>
               <DialogBody className="space-y-4">
                 <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelOrderDate")}</span> <span className="ml-2 font-ui-medium">{selectedOrder.order_date}</span></div>
-                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelExpected")}</span> <span className="ml-2 font-ui-medium">{selectedOrder.expected_date ?? "—"}</span></div>
-                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelCreator")}</span> <span className="ml-2 font-ui-medium">{selectedOrder.created_by_name ?? "—"}</span></div>
-                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelApprover")}</span> <span className="ml-2 font-ui-medium">{selectedOrder.approved_by_name ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelOrderDate")}</span> <span className="ml-2 font-medium">{selectedOrder.order_date}</span></div>
+                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelExpected")}</span> <span className="ml-2 font-medium">{selectedOrder.expected_date ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelCreator")}</span> <span className="ml-2 font-medium">{selectedOrder.created_by_name ?? "—"}</span></div>
+                  <div><span className="text-muted-foreground">{t("purchaseOrdersTab.labelApprover")}</span> <span className="ml-2 font-medium">{selectedOrder.approved_by_name ?? "—"}</span></div>
                 </div>
                 {selectedOrder.notes && (
                   <div className="p-3 rounded-lg bg-muted/50 text-sm text-muted-foreground">
@@ -492,11 +492,11 @@ export function PurchaseOrdersTab({
                 <table className="w-full text-sm mt-4">
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="text-left py-2 text-muted-foreground font-ui-medium">{t("purchaseOrdersTab.lineColProduct")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{t("purchaseOrdersTab.lineColQty")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{t("purchaseOrdersTab.lineColUnitPrice")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{t("purchaseOrdersTab.lineColTotal")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{t("purchaseOrdersTab.lineColReceived")}</th>
+                      <th className="text-left py-2 text-muted-foreground font-medium">{t("purchaseOrdersTab.lineColProduct")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{t("purchaseOrdersTab.lineColQty")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{t("purchaseOrdersTab.lineColUnitPrice")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{t("purchaseOrdersTab.lineColTotal")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{t("purchaseOrdersTab.lineColReceived")}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">
@@ -507,7 +507,7 @@ export function PurchaseOrdersTab({
                         <td className="py-2 text-right">
                           {formatAmount(item.unit_price, canViewAmounts)}
                         </td>
-                        <td className="py-2 text-right font-ui-medium">
+                        <td className="py-2 text-right font-medium">
                           {formatAmount(item.line_total, canViewAmounts)}
                         </td>
                         <td className="py-2 text-right">{formatQuantityWithUnit(item.received_quantity, item.unit)}</td>
@@ -516,8 +516,8 @@ export function PurchaseOrdersTab({
                   </tbody>
                   <tfoot>
                     <tr className="border-t-2 border-border">
-                      <td colSpan={3} className="py-2 text-right font-ui-semibold">{t("purchaseOrdersTab.footerTotal")}</td>
-                      <td className="py-2 text-right font-ui-bold text-lg text-blue-600">
+                      <td colSpan={3} className="py-2 text-right font-semibold">{t("purchaseOrdersTab.footerTotal")}</td>
+                      <td className="py-2 text-right font-bold text-lg text-blue-600">
                         {formatAmount(selectedOrder.total_amount, canViewAmounts)}
                       </td>
                       <td></td>
@@ -638,7 +638,7 @@ export function PurchaseOrdersTab({
                     return (
                       <div key={sug.stock_item_id} className={`space-y-2 rounded-lg border p-3 ${sug.has_conflict ? "border-amber-200 bg-amber-50/50 dark:border-amber-800 dark:bg-amber-900/10" : "border-border bg-muted/40"}`}>
                         <div className="flex items-center justify-between gap-2">
-                          <span className="text-sm font-ui-medium text-foreground">{sug.stock_item_name}</span>
+                          <span className="text-sm font-medium text-foreground">{sug.stock_item_name}</span>
                           <span className="shrink-0 text-xs text-muted-foreground">
                             {t("purchaseOrdersTab.suggestOrderQtyHint", { needed: sug.needed, unit: sug.unit })}
                           </span>
@@ -650,7 +650,7 @@ export function PurchaseOrdersTab({
                                 key={sup.id}
                                 type="button"
                                 onClick={() => setPreferredSuppliers((prev) => ({ ...prev, [sug.stock_item_id]: sup.id }))}
-                                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-ui-medium transition-colors ${
+                                className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
                                   selected === sup.id
                                     ? "border-blue-600 bg-blue-600 text-white"
                                     : "border-border bg-background text-muted-foreground hover:border-blue-400"
@@ -717,7 +717,7 @@ export function PurchaseOrdersTab({
 
                 {suggestResult.skipped_items.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-sm font-ui-semibold text-amber-700 dark:text-amber-400">
+                    <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
                       {t("purchaseOrdersTab.suggestSkippedListTitle", { count: suggestResult.skipped_items.length })}
                     </p>
                     <div className="overflow-hidden rounded-lg border border-amber-200 bg-amber-50 dark:border-amber-800 dark:bg-amber-900/10">
@@ -725,15 +725,15 @@ export function PurchaseOrdersTab({
                         <table className="w-full text-xs">
                           <thead className="sticky top-0 z-10">
                             <tr className="border-b border-amber-200 bg-amber-100 dark:border-amber-800 dark:bg-amber-900/40">
-                              <th className="px-3 py-2 text-left font-ui-semibold text-amber-800 dark:text-amber-300">{t("purchaseOrdersTab.suggestSkippedColProduct")}</th>
-                              <th className="px-3 py-2 text-right font-ui-semibold text-amber-800 dark:text-amber-300">{t("purchaseOrdersTab.suggestSkippedColCurrent")}</th>
-                              <th className="px-3 py-2 text-right font-ui-semibold text-amber-800 dark:text-amber-300">{t("purchaseOrdersTab.suggestSkippedColMin")}</th>
+                              <th className="px-3 py-2 text-left font-semibold text-amber-800 dark:text-amber-300">{t("purchaseOrdersTab.suggestSkippedColProduct")}</th>
+                              <th className="px-3 py-2 text-right font-semibold text-amber-800 dark:text-amber-300">{t("purchaseOrdersTab.suggestSkippedColCurrent")}</th>
+                              <th className="px-3 py-2 text-right font-semibold text-amber-800 dark:text-amber-300">{t("purchaseOrdersTab.suggestSkippedColMin")}</th>
                             </tr>
                           </thead>
                           <tbody className="divide-y divide-amber-100 dark:divide-amber-900/40">
                             {suggestResult.skipped_items.map((item) => (
                               <tr key={item.id}>
-                                <td className="px-3 py-1.5 font-ui-medium text-foreground">{item.name}</td>
+                                <td className="px-3 py-1.5 font-medium text-foreground">{item.name}</td>
                                 <td className="px-3 py-1.5 text-right text-muted-foreground">{formatQuantityWithUnit(item.quantity, item.unit)}</td>
                                 <td className="px-3 py-1.5 text-right text-muted-foreground">{formatQuantityWithUnit(item.minimum_quantity, item.unit)}</td>
                               </tr>

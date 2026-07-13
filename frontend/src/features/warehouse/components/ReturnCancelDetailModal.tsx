@@ -35,7 +35,7 @@ type Props = {
 function DetailRow({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="grid grid-cols-[minmax(0,9rem)_1fr] gap-x-3 gap-y-1 border-b border-border/60 py-2.5 last:border-b-0">
-      <dt className="text-xs font-ui-medium text-muted-foreground">{label}</dt>
+      <dt className="text-xs font-medium text-muted-foreground">{label}</dt>
       <dd className="text-sm text-foreground break-words">{children}</dd>
     </div>
   )
@@ -73,7 +73,7 @@ export function ReturnCancelDetailModal({ open, row, canManage, onClose, onDelet
             <DetailRow label={t("colType")}>
               <span
                 className={cn(
-                  "inline-flex rounded-md px-2 py-0.5 text-xs font-ui-semibold",
+                  "inline-flex rounded-md px-2 py-0.5 text-xs font-semibold",
                   isReturn
                     ? "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300"
                     : "bg-amber-50 text-amber-800 dark:bg-amber-950/40 dark:text-amber-200",
@@ -85,7 +85,7 @@ export function ReturnCancelDetailModal({ open, row, canManage, onClose, onDelet
             <DetailRow label={t("colProduct")}>{row.stock_item_name || "—"}</DetailRow>
             <DetailRow label={t("colWarehouse")}>{row.warehouse_name || "—"}</DetailRow>
             <DetailRow label={t("colQuantity")}>
-              <span className="font-ui-semibold tabular-nums text-rose-600 dark:text-rose-400">
+              <span className="font-semibold tabular-nums text-rose-600 dark:text-rose-400">
                 {formatQuantityWithUnit(row.quantity, row.unit)}
               </span>
             </DetailRow>
@@ -93,7 +93,7 @@ export function ReturnCancelDetailModal({ open, row, canManage, onClose, onDelet
               <span className="tabular-nums">{currency.format(row.unit_price || 0)}</span>
             </DetailRow>
             <DetailRow label={t("colTotal")}>
-              <span className="font-ui-semibold tabular-nums">{currency.format(lineTotal)}</span>
+              <span className="font-semibold tabular-nums">{currency.format(lineTotal)}</span>
             </DetailRow>
             <DetailRow label={t("colReason")}>{reasonText}</DetailRow>
             {notesMeta.purchaseOrder ? (

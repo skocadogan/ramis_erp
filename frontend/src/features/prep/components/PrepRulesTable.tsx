@@ -54,7 +54,7 @@ export function PrepRulesTable({
     return (
       <div className="flex flex-col items-center justify-center py-20 text-muted-foreground flex-1">
         <Settings2 size={48} className="opacity-10 mb-4" />
-        <p className="text-sm font-ui-medium">{t("management.emptyRulesAndDiscovery")}</p>
+        <p className="text-sm font-medium">{t("management.emptyRulesAndDiscovery")}</p>
         <Button variant="link" size="sm" className="mt-2 text-purple-600" onClick={onCreateManual}>
           {t("management.createManualRule")}
         </Button>
@@ -65,8 +65,8 @@ export function PrepRulesTable({
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
       {rules.length > 0 && (
-        <div className="bg-slate-50/50 dark:bg-slate-800/50 p-2 border-b border-slate-100 dark:border-slate-800 shrink-0">
-          <h5 className="text-2xs font-ui-bold uppercase text-muted-foreground px-2">
+        <div className="bg-slate-50/50 bg-muted/50 p-2 border-b border-slate-100 border-border shrink-0">
+          <h5 className="text-2xs font-bold uppercase text-muted-foreground px-2">
             {t("management.rulesSectionTitle", { count: rules.length })}
           </h5>
         </div>
@@ -84,17 +84,17 @@ export function PrepRulesTable({
         header={
           rules.length > 0 ? (
             <thead className={virtualTableStickyHeadClass}>
-              <tr className="text-xs font-ui-bold text-slate-500">
-                <th className="px-4 py-2 text-left font-ui-bold">
+              <tr className="text-xs font-bold text-slate-500">
+                <th className="px-4 py-2 text-left font-bold">
                   {t("management.columns.rules.nameMatch")}
                 </th>
-                <th className="px-4 py-2 text-left font-ui-bold">
+                <th className="px-4 py-2 text-left font-bold">
                   {t("management.columns.rules.ratio")}
                 </th>
-                <th className="px-4 py-2 text-right font-ui-bold">
+                <th className="px-4 py-2 text-right font-bold">
                   {t("management.columns.rules.status")}
                 </th>
-                <th className="px-4 py-2 text-right font-ui-bold w-[80px]">
+                <th className="px-4 py-2 text-right font-bold w-[80px]">
                   {t("management.columns.rules.actions")}
                 </th>
               </tr>
@@ -118,16 +118,16 @@ export function PrepRulesTable({
         renderRow={(rule) => (
           <>
             <td className="px-4 py-3 align-middle">
-              <h4 className="text-sm font-ui-bold text-slate-800 dark:text-white leading-none">
+              <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
                 {rule.title}
               </h4>
-              <p className="text-2xs font-ui-medium text-muted-foreground uppercase tracking-tighter mt-1">
+              <p className="text-2xs font-medium text-muted-foreground uppercase tracking-tighter mt-1">
                 {rule.base_product_name} → {rule.target_item}
               </p>
             </td>
             <td className="px-4 py-3 align-middle">
-              <span className="text-xs font-ui-bold text-foreground">{rule.ratio}</span>
-              <span className="text-2xs font-ui-bold text-muted-foreground ml-1">{rule.unit}</span>
+              <span className="text-xs font-bold text-foreground">{rule.ratio}</span>
+              <span className="text-2xs font-bold text-muted-foreground ml-1">{rule.unit}</span>
             </td>
             <td className="px-4 py-3 text-right align-middle">
               <div
@@ -135,16 +135,16 @@ export function PrepRulesTable({
                   "px-2 py-0.5 rounded-full inline-flex items-center gap-1.5",
                   rule.is_active
                     ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400"
-                    : "bg-slate-50 text-muted-foreground dark:bg-slate-800/50 dark:text-muted-foreground",
+                    : "bg-slate-50 text-muted-foreground bg-muted/50 dark:text-muted-foreground",
                 )}
               >
                 <div
                   className={cn(
                     "w-1.5 h-1.5 rounded-full",
-                    rule.is_active ? "bg-emerald-500" : "bg-slate-300 dark:bg-slate-600",
+                    rule.is_active ? "bg-emerald-500" : "bg-slate-300 bg-accent",
                   )}
                 />
-                <span className="text-2xs font-ui-bold">
+                <span className="text-2xs font-bold">
                   {rule.is_active
                     ? t("management.ruleState.active")
                     : t("management.ruleState.inactive")}
@@ -176,7 +176,7 @@ export function PrepRulesTable({
         <div className="shrink-0 border-t border-purple-100 dark:border-purple-900/30 overflow-auto max-h-[40%]">
           <div className="bg-purple-50/50 dark:bg-purple-900/10 p-2 border-b border-purple-100 dark:border-purple-900/30 flex items-center gap-2 sticky top-0">
             <BrainCircuit size={14} className="text-purple-500" />
-            <h5 className="text-2xs font-ui-bold uppercase text-purple-700 dark:text-purple-400">
+            <h5 className="text-2xs font-bold uppercase text-purple-700 dark:text-purple-400">
               {t("management.systemSuggestedRules", { count: discoveryList.length })}
             </h5>
           </div>
@@ -188,10 +188,10 @@ export function PrepRulesTable({
                   className="hover:bg-purple-50/30 dark:hover:bg-purple-900/10 transition-colors"
                 >
                   <td className="px-4 py-3 align-middle w-[42%]">
-                    <h4 className="text-sm font-ui-bold text-slate-800 dark:text-white">
+                    <h4 className="text-sm font-bold text-slate-800 dark:text-white">
                       {t("management.prepForProduct", { product: disc.product_name })}
                     </h4>
-                    <p className="text-2xs font-ui-medium text-purple-500 uppercase tracking-tighter mt-1">
+                    <p className="text-2xs font-medium text-purple-500 uppercase tracking-tighter mt-1">
                       {t("management.soldIn30Days", { count: disc.total_sold_30d })}
                     </p>
                   </td>
@@ -202,7 +202,7 @@ export function PrepRulesTable({
                     <Button
                       size="sm"
                       variant="outline"
-                      className="h-7 text-[9px] font-ui-bold uppercase border-purple-200 dark:border-purple-900/50 text-purple-600 dark:text-purple-400"
+                      className="h-7 text-3xs font-bold uppercase border-purple-200 dark:border-purple-900/50 text-purple-600 dark:text-purple-400"
                       onClick={() => onDiscoveryAdd(disc)}
                     >
                       {t("management.addRule")}

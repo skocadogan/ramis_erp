@@ -85,8 +85,8 @@ export const SalesStats = memo(({ summary, isLoading }: SalesStatsProps) => {
 
     return (
         <div className="flex flex-col gap-3">
-            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border bg-white px-3 py-2.5 shadow-sm dark:border-slate-700 dark:bg-slate-900">
-                <span className="text-sm font-ui-medium text-foreground">{t("stats.expandAllLabel")}</span>
+            <div className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-border px-3 py-2.5 shadow-sm border-border bg-card">
+                <span className="text-sm font-medium text-foreground">{t("stats.expandAllLabel")}</span>
                 <button
                     type="button"
                     role="switch"
@@ -94,11 +94,11 @@ export const SalesStats = memo(({ summary, isLoading }: SalesStatsProps) => {
                     aria-label={allOpen ? t("stats.expandAllAriaCollapse") : t("stats.expandAllAriaExpand")}
                     onClick={() => setAllExpanded(!allOpen)}
                     className={`relative h-7 w-12 shrink-0 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
-                        allOpen ? "bg-blue-600 dark:bg-blue-500" : "bg-slate-300 dark:bg-slate-600"
+                        allOpen ? "bg-blue-600 dark:bg-blue-500" : "bg-slate-300 bg-accent"
                     }`}
                 >
                     <span
-                        className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full bg-white shadow transition-transform dark:bg-slate-100 ${
+                        className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full shadow transition-transform dark:bg-slate-100 ${
                             allOpen ? "translate-x-5" : "translate-x-0"
                         }`}
                     />

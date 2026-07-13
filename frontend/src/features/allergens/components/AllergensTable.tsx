@@ -60,13 +60,13 @@ export const AllergensTable = memo(function AllergensTable({
   const colSpan = canManage ? 5 : 4
 
   const sel =
-    "border border-border rounded-md px-2.5 py-1.5 text-sm bg-white dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
+    "border border-border rounded-md px-2.5 py-1.5 text-sm bg-card border-input text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/20"
 
   const headerBlock = (
     <>
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground">{t("page.title")}</h2>
+          <h2 className="text-lg font-semibold text-foreground">{t("page.title")}</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
             {totalCount > 0 ? t("page.paginationInfo", { total: totalCount, start: 1, end: allergens.length }) : t("page.subtitle")}
           </p>
@@ -74,7 +74,7 @@ export const AllergensTable = memo(function AllergensTable({
         {canManage && onNew && (
           <button
             onClick={onNew}
-            className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-blue-700 transition-all"
+            className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all"
           >
             <Plus size={15} />
             {t("page.addNew")}
@@ -90,7 +90,7 @@ export const AllergensTable = memo(function AllergensTable({
             placeholder={t("page.searchPh")}
             value={search}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full pl-8 pr-4 py-1.5 bg-white border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+            className="w-full pl-8 pr-4 py-1.5 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-input text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -111,7 +111,7 @@ export const AllergensTable = memo(function AllergensTable({
         {headerBlock}
         <div className="flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border py-16 px-4 text-muted-foreground">
           <ShieldAlert size={36} className="mb-3 opacity-30" />
-          <p className="text-sm font-ui-medium">{t("table.empty")}</p>
+          <p className="text-sm font-medium">{t("table.empty")}</p>
         </div>
       </div>
     )
@@ -139,7 +139,7 @@ export const AllergensTable = memo(function AllergensTable({
             header={
               <thead className="sticky top-0 z-10 border-b border-border bg-muted text-muted-foreground">
                 <tr>
-                  <th className="text-left px-4 py-2 font-ui-medium">
+                  <th className="text-left px-4 py-2 font-medium">
                     <button
                       onClick={() => onToggleSort("code")}
                       className="flex items-center gap-1 hover:text-foreground"
@@ -148,7 +148,7 @@ export const AllergensTable = memo(function AllergensTable({
                       <SortIcon field="code" currentField={sortField} currentDir={sortDir} />
                     </button>
                   </th>
-                  <th className="text-left px-4 py-2 font-ui-medium">
+                  <th className="text-left px-4 py-2 font-medium">
                     <button
                       onClick={() => onToggleSort("name")}
                       className="flex items-center gap-1 hover:text-foreground"
@@ -157,7 +157,7 @@ export const AllergensTable = memo(function AllergensTable({
                       <SortIcon field="name" currentField={sortField} currentDir={sortDir} />
                     </button>
                   </th>
-                  <th className="text-right px-4 py-2 font-ui-medium">
+                  <th className="text-right px-4 py-2 font-medium">
                     <button
                       onClick={() => onToggleSort("prevalence_pct")}
                       className="flex items-center gap-1 hover:text-foreground ml-auto"
@@ -166,7 +166,7 @@ export const AllergensTable = memo(function AllergensTable({
                       <SortIcon field="prevalence_pct" currentField={sortField} currentDir={sortDir} />
                     </button>
                   </th>
-                  <th className="text-right px-4 py-2 font-ui-medium">
+                  <th className="text-right px-4 py-2 font-medium">
                     <button
                       onClick={() => onToggleSort("risk_score")}
                       className="flex items-center gap-1 hover:text-foreground ml-auto"
@@ -176,7 +176,7 @@ export const AllergensTable = memo(function AllergensTable({
                     </button>
                   </th>
                   {canManage && (
-                    <th className="text-right px-4 py-2 font-ui-medium">
+                    <th className="text-right px-4 py-2 font-medium">
                       {t("table.colActions")}
                     </th>
                   )}
@@ -193,12 +193,12 @@ export const AllergensTable = memo(function AllergensTable({
             renderRow={(row) => (
               <>
                 <td className="px-4 py-2 font-mono text-xs text-muted-foreground">{row.code}</td>
-                <td className="px-4 py-2 text-sm font-ui-medium text-foreground">{row.name}</td>
+                <td className="px-4 py-2 text-sm font-medium text-foreground">{row.name}</td>
                 <td className="px-4 py-2 text-right tabular-nums text-sm text-muted-foreground">
                   {Number(row.prevalence_pct).toFixed(2)}%
                 </td>
                 <td className="px-4 py-2 text-right">
-                  <span className="inline-flex min-w-[1.75rem] justify-center rounded bg-amber-100 px-1.5 py-0.5 text-xs font-ui-bold text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+                  <span className="inline-flex min-w-[1.75rem] justify-center rounded bg-amber-100 px-1.5 py-0.5 text-xs font-bold text-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
                     {row.risk_score}
                   </span>
                 </td>

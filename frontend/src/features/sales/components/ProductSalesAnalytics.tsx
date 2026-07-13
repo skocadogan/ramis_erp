@@ -139,7 +139,7 @@ export function ProductSalesAnalytics({
         return (
             <div className="flex flex-col items-center justify-center py-24 gap-3">
                 <Loader2 className="animate-spin text-blue-600" size={32} />
-                <span className="text-sm font-ui-medium text-muted-foreground">{t('productAnalytics.loading')}</span>
+                <span className="text-sm font-medium text-muted-foreground">{t('productAnalytics.loading')}</span>
             </div>
         );
     }
@@ -160,11 +160,11 @@ export function ProductSalesAnalytics({
     return (
         <div className="flex-1 min-h-0 overflow-y-auto pr-1 -mr-1 flex flex-col gap-4">
             {/* Filter Bar */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-white px-3 py-2.5 rounded-lg border border-border dark:bg-slate-900 dark:border-slate-700 shrink-0">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 px-3 py-2.5 rounded-lg border border-border bg-card border-border shrink-0">
                 <div className="flex flex-wrap items-center gap-3 flex-1">
                     <div className="flex items-center gap-2 text-muted-foreground shrink-0">
                         <Filter size={16} />
-                        <span className="font-size-ui font-weight-ui-medium">{t('productAnalytics.filterLabel')}</span>
+                        <span className="text-ui font-medium">{t('productAnalytics.filterLabel')}</span>
                     </div>
 
                     <div className="w-full sm:w-64">
@@ -188,7 +188,7 @@ export function ProductSalesAnalytics({
                                 value={startDate}
                                 onChange={e => onStartDateChange(e.target.value)}
                                 max={endDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 h-9"
+                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                             <span className="text-muted-foreground text-sm">-</span>
                             <input
@@ -196,7 +196,7 @@ export function ProductSalesAnalytics({
                                 value={endDate}
                                 onChange={e => onEndDateChange(e.target.value)}
                                 min={startDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 h-9"
+                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                         </div>
                     )}
@@ -221,19 +221,19 @@ export function ProductSalesAnalytics({
             <div className="flex flex-col gap-6">
                 {/* Top Stats */}
                 <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-                    <div className="rounded-xl border border-border bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-700">
+                    <div className="rounded-xl border border-border p-4 shadow-sm bg-card border-border">
                         <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                             <Package size={16} />
-                            <span className="text-2xs font-ui-bold uppercase tracking-wider">{t('productAnalytics.statTotalProducts')}</span>
+                            <span className="text-2xs font-bold uppercase tracking-wider">{t('productAnalytics.statTotalProducts')}</span>
                         </div>
-                        <p className="text-2xl font-ui-bold text-foreground">{data?.products.length || 0}</p>
+                        <p className="text-2xl font-bold text-foreground">{data?.products.length || 0}</p>
                     </div>
-                    <div className="rounded-xl border border-border bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-700">
+                    <div className="rounded-xl border border-border p-4 shadow-sm bg-card border-border">
                         <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                             <TrendingUp size={16} className="text-blue-500" />
-                            <span className="text-2xs font-ui-bold uppercase tracking-wider">{t('productAnalytics.statTopSeller')}</span>
+                            <span className="text-2xs font-bold uppercase tracking-wider">{t('productAnalytics.statTopSeller')}</span>
                         </div>
-                        <p className="text-lg font-ui-bold text-foreground truncate">
+                        <p className="text-lg font-bold text-foreground truncate">
                             {data?.products[0]?.name || t('table.dash')}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -242,12 +242,12 @@ export function ProductSalesAnalytics({
                             })}
                         </p>
                     </div>
-                    <div className="rounded-xl border border-border bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-700">
+                    <div className="rounded-xl border border-border p-4 shadow-sm bg-card border-border">
                         <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                             <TrendingUp size={16} className="text-emerald-500" />
-                            <span className="text-2xs font-ui-bold uppercase tracking-wider">{t('productAnalytics.statTop2')}</span>
+                            <span className="text-2xs font-bold uppercase tracking-wider">{t('productAnalytics.statTop2')}</span>
                         </div>
-                        <p className="text-lg font-ui-bold text-foreground truncate">
+                        <p className="text-lg font-bold text-foreground truncate">
                             {data?.products[1]?.name || t('table.dash')}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -256,12 +256,12 @@ export function ProductSalesAnalytics({
                             })}
                         </p>
                     </div>
-                    <div className="rounded-xl border border-border bg-white p-4 shadow-sm dark:bg-slate-900 dark:border-slate-700">
+                    <div className="rounded-xl border border-border p-4 shadow-sm bg-card border-border">
                         <div className="flex items-center gap-2 mb-2 text-muted-foreground">
                             <TrendingUp size={16} className="text-amber-500" />
-                            <span className="text-2xs font-ui-bold uppercase tracking-wider">{t('productAnalytics.statTop3')}</span>
+                            <span className="text-2xs font-bold uppercase tracking-wider">{t('productAnalytics.statTop3')}</span>
                         </div>
-                        <p className="text-lg font-ui-bold text-foreground truncate">
+                        <p className="text-lg font-bold text-foreground truncate">
                             {data?.products[2]?.name || t('table.dash')}
                         </p>
                         <p className="text-xs text-muted-foreground">
@@ -273,11 +273,11 @@ export function ProductSalesAnalytics({
                 </div>
 
                 {/* Products Table */}
-                <div className="rounded-xl border border-border bg-white overflow-hidden shadow-sm dark:bg-slate-900 dark:border-slate-700">
-                    <div className="p-4 border-b border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div className="rounded-xl border border-border overflow-hidden shadow-sm bg-card border-border">
+                    <div className="p-4 border-b border-slate-100 border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
-                            <h3 className="font-ui-bold text-foreground">{t('productAnalytics.tableTitle')}</h3>
-                            <div className="flex items-center gap-1.5 border-l border-border pl-4 dark:border-slate-700">
+                            <h3 className="font-bold text-foreground">{t('productAnalytics.tableTitle')}</h3>
+                            <div className="flex items-center gap-1.5 border-l border-border pl-4 border-border">
                                 <Button
                                     variant="outline"
                                     size="sm"
@@ -304,7 +304,7 @@ export function ProductSalesAnalytics({
                                 placeholder={t('productAnalytics.searchPlaceholder')}
                                 value={searchTerm}
                                 onChange={e => setSearchTerm(e.target.value)}
-                                className="w-full bg-slate-50 border border-border rounded-lg py-1.5 pl-8 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 dark:bg-slate-800 dark:border-slate-700"
+                                className="w-full bg-slate-50 border border-border rounded-lg py-1.5 pl-8 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-border"
                             />
                         </div>
                     </div>
@@ -321,25 +321,25 @@ export function ProductSalesAnalytics({
                                 header={
                                     <thead className={virtualTableStickyHeadClass}>
                                         <tr>
-                                            <th className="text-left px-4 py-3 font-ui-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colProduct')}</th>
-                                            <th className="text-left px-4 py-3 font-ui-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colCategory')}</th>
-                                            <th className="text-right px-4 py-3 font-ui-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colQty')}</th>
-                                            <th className="text-right px-4 py-3 font-ui-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colRevenue')}</th>
+                                            <th className="text-left px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colProduct')}</th>
+                                            <th className="text-left px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colCategory')}</th>
+                                            <th className="text-right px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colQty')}</th>
+                                            <th className="text-right px-4 py-3 font-semibold uppercase tracking-wider text-2xs">{t('productAnalytics.colRevenue')}</th>
                                         </tr>
                                     </thead>
                                 }
                                 renderRow={(p) => (
                                     <>
-                                        <td className="px-4 py-3 font-ui-medium text-slate-900 dark:text-slate-200">{p.name}</td>
+                                        <td className="px-4 py-3 font-medium text-slate-900 text-foreground">{p.name}</td>
                                         <td className="px-4 py-3 text-muted-foreground">
-                                            <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-sub font-ui-medium text-slate-600 dark:bg-slate-800 dark:text-muted-foreground">
+                                            <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-sub font-medium text-slate-600 bg-muted dark:text-muted-foreground">
                                                 {p.category}
                                             </span>
                                         </td>
-                                        <td className="px-4 py-3 text-right font-ui-semibold text-blue-600 dark:text-blue-400">
+                                        <td className="px-4 py-3 text-right font-semibold text-blue-600 dark:text-blue-400">
                                             {formatNumber(p.quantity, { minimumFractionDigits: 0, maximumFractionDigits: 2 })}
                                         </td>
-                                        <td className="px-4 py-3 text-right font-ui-semibold text-emerald-600 dark:text-emerald-400">
+                                        <td className="px-4 py-3 text-right font-semibold text-emerald-600 dark:text-emerald-400">
                                             {formatAmount(p.revenue, canViewAmounts)}
                                         </td>
                                     </>
@@ -350,14 +350,14 @@ export function ProductSalesAnalytics({
                 </div>
 
                 {/* Trends Chart */}
-                <div className="rounded-xl border border-border bg-white p-5 shadow-sm dark:bg-slate-900 dark:border-slate-700">
+                <div className="rounded-xl border border-border p-5 shadow-sm bg-card border-border">
                     <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-ui-bold text-foreground flex items-center gap-2">
+                        <h3 className="font-bold text-foreground flex items-center gap-2">
                             <BarChart3 size={18} className="text-blue-600" />
                             {t('productAnalytics.chartTitle')}
                         </h3>
                         {selectedLegend.length > 0 && (
-                            <span className="font-size-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
+                            <span className="text-xs text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">
                                 {t('productAnalytics.legendIsolated', { count: selectedLegend.length })}
                             </span>
                         )}

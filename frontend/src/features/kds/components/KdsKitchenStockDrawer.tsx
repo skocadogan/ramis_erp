@@ -62,7 +62,7 @@ function StockRow({
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0 flex-1">
-          <p className="font-ui-semibold leading-tight text-foreground">{row.stock_item_name}</p>
+          <p className="font-semibold leading-tight text-foreground">{row.stock_item_name}</p>
           {row.stock_item_sku ? (
             <p className="mt-0.5 font-mono text-xs text-foreground">{row.stock_item_sku}</p>
           ) : null}
@@ -70,7 +70,7 @@ function StockRow({
             <span className="text-ui text-foreground">{t('inventory.remaining')} :</span>
             <span
               className={cn(
-                "tabular-nums text-ui font-ui-bold",
+                "tabular-nums text-ui font-bold",
                 row.is_low_stock ? "text-amber-600 dark:text-amber-400" : "text-primary"
               )}
             >
@@ -94,7 +94,7 @@ function StockRow({
                 },
               ]);
             }}
-            className="flex max-w-[9rem] shrink-0 flex-col items-center gap-0.5 rounded-lg border border-amber-200 dark:border-amber-500/40 bg-amber-100 dark:bg-amber-600/20 px-2 py-1.5 text-center text-[11px] font-ui-semibold leading-tight text-amber-900 dark:text-amber-100 hover:bg-amber-200 dark:hover:bg-amber-600/35 sm:max-w-none sm:flex-row sm:gap-1 shadow-sm transition-colors"
+            className="flex max-w-[9rem] shrink-0 flex-col items-center gap-0.5 rounded-lg border border-amber-200 dark:border-amber-500/40 bg-amber-100 dark:bg-amber-600/20 px-2 py-1.5 text-center text-sub font-semibold leading-tight text-amber-900 dark:text-amber-100 hover:bg-amber-200 dark:hover:bg-amber-600/35 sm:max-w-none sm:flex-row sm:gap-1 shadow-sm transition-colors"
           >
             <Plus size={14} className="shrink-0" />
             <span>{t('inventory.addToDeficiency')}</span>
@@ -166,7 +166,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
     >
       <Package size={28} className="shrink-0" />
       {!collapsed && (
-        <span className="max-w-[10rem] truncate text-xs font-ui-semibold sm:text-sm">{t('inventory.sidebarLabel')}</span>
+        <span className="max-w-[10rem] truncate text-xs font-semibold sm:text-sm">{t('inventory.sidebarLabel')}</span>
       )}
     </button>
   );
@@ -176,7 +176,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
       {collapsed ? (
         <Tooltip>
           <TooltipTrigger render={buttonContent} />
-          <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-ui-semibold text-xs">
+          <TooltipContent side="top" sideOffset={8} className="bg-popover text-popover-foreground border-border font-semibold text-xs">
             {t('inventory.sidebarLabel')}
           </TooltipContent>
         </Tooltip>
@@ -196,14 +196,14 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
           >
             <div className="flex shrink-0 items-center justify-between border-b border-border bg-muted px-4 py-3">
               <div className="min-w-0">
-                <h2 className="flex items-center gap-2 text-sm font-ui-bold text-foreground">
+                <h2 className="flex items-center gap-2 text-sm font-bold text-foreground">
                   <Package size={18} className="shrink-0 text-primary" />
                   <span className="truncate">{t('inventory.title')}</span>
                 </h2>
                 {data?.warehouse_name ? (
                   <p className="mt-0.5 truncate text-xs text-muted-foreground">{data.warehouse_name}</p>
                 ) : (
-                  <p className="mt-0.5 text-xs text-amber-600 dark:text-amber-400 font-ui-medium italic">{t('inventory.noWarehouse')}</p>
+                  <p className="mt-0.5 text-xs text-amber-600 dark:text-amber-400 font-medium italic">{t('inventory.noWarehouse')}</p>
                 )}
               </div>
               <div className="flex items-center gap-2">
@@ -224,7 +224,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
             {lowCount > 0 && (
               <div className="shrink-0 border-b border-amber-200 dark:border-amber-900/40 bg-amber-50 dark:bg-amber-950/40 px-4 py-2.5">
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-3">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-ui-semibold text-amber-700 dark:text-amber-300">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-amber-700 dark:text-amber-300">
                     <AlertTriangle size={14} className="shrink-0" aria-hidden />
                     {t('inventory.criticalCount', { count: lowCount })}
                   </span>
@@ -242,7 +242,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
                           }))
                         );
                       }}
-                      className="inline-flex w-full shrink-0 items-center justify-center gap-1.5 rounded-lg border border-amber-300 dark:border-amber-500/50 bg-amber-200 dark:bg-amber-600/25 px-3 py-2 text-xs font-ui-bold text-amber-900 dark:text-amber-50 transition-colors hover:bg-amber-300/80 dark:hover:bg-amber-600/40 sm:w-auto shadow-sm"
+                      className="inline-flex w-full shrink-0 items-center justify-center gap-1.5 rounded-lg border border-amber-300 dark:border-amber-500/50 bg-amber-200 dark:bg-amber-600/25 px-3 py-2 text-xs font-bold text-amber-900 dark:text-amber-50 transition-colors hover:bg-amber-300/80 dark:hover:bg-amber-600/40 sm:w-auto shadow-sm"
                       title={t('inventory.addAllCriticalTooltip')}
                     >
                       <ListPlus size={15} className="shrink-0" aria-hidden />
@@ -257,7 +257,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
               <div className="min-h-0 flex-1 overflow-y-auto p-3">
                 <div className="flex flex-col items-center justify-center py-16 text-center text-muted-foreground">
                   <Package size={40} className="mb-3 opacity-40" />
-                  <p className="text-sm font-ui-medium">{t('inventory.noWarehouseDesc')}</p>
+                  <p className="text-sm font-medium">{t('inventory.noWarehouseDesc')}</p>
                   <p className="mt-1 text-xs text-muted-foreground/60">{t('inventory.systemConfigNote')}</p>
                 </div>
               </div>
@@ -289,7 +289,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
                     />
                   </div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="inline-flex items-center gap-1 text-[11px] font-ui-bold text-muted-foreground">
+                    <span className="inline-flex items-center gap-1 text-sub font-bold text-muted-foreground">
                       <Filter size={12} />
                       {t('inventory.stock')}
                     </span>
@@ -298,7 +298,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
                         type="button"
                         onClick={() => setStockFilter("all")}
                         className={cn(
-                          "rounded-md px-2.5 py-1 text-xs font-ui-semibold transition-colors",
+                          "rounded-md px-2.5 py-1 text-xs font-semibold transition-colors",
                           stockFilter === "all"
                             ? "bg-muted text-foreground"
                             : "text-muted-foreground hover:text-foreground"
@@ -310,7 +310,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
                         type="button"
                         onClick={() => setStockFilter("critical")}
                         className={cn(
-                          "rounded-md px-2.5 py-1 text-xs font-ui-semibold transition-colors",
+                          "rounded-md px-2.5 py-1 text-xs font-semibold transition-colors",
                           stockFilter === "critical"
                             ? "bg-amber-100 dark:bg-amber-900/50 text-amber-900 dark:text-amber-100"
                             : "text-muted-foreground hover:text-foreground"
@@ -328,7 +328,7 @@ export function KdsKitchenStockDrawer({ stationId, onAddToDeficiency, collapsed 
                 <div ref={scrollRef} className="min-h-0 flex-1 overflow-y-auto p-3">
                   {filtered.length === 0 ? (
                     <div className="flex flex-col items-center justify-center py-12 text-center text-muted-foreground">
-                      <p className="text-sm font-ui-medium">{t('inventory.noMatch')}</p>
+                      <p className="text-sm font-medium">{t('inventory.noMatch')}</p>
                       <p className="mt-1 text-xs text-muted-foreground">{t('inventory.noMatchDesc')}</p>
                     </div>
                   ) : (

@@ -109,7 +109,7 @@ export function DeleteConfirmationModals({
             <AlertDialogDescription>
               {t("delete.categoryDesc", { name: categoryToDelete?.name ?? "" })}
               {categories.some((c) => c.parent === categoryToDelete?.id) && (
-                <span className="mt-2 block font-ui-medium text-rose-600">
+                <span className="mt-2 block font-medium text-rose-600">
                   {t("delete.categoryChildrenWarn")}
                 </span>
               )}
@@ -135,7 +135,7 @@ export function DeleteConfirmationModals({
                     name: stockItemToDelete?.name ?? "",
                     count: stockItemToDelete?.recipe_usage_count ?? 0,
                   })}
-                  <span className="mt-2 block font-ui-medium text-rose-600">
+                  <span className="mt-2 block font-medium text-rose-600">
                     {t("delete.stockItemRecipeWarn")}
                   </span>
                 </>

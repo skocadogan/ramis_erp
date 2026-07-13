@@ -151,7 +151,7 @@ export const ProductCard = memo(function ProductCard({
         >
           {showOrdered && (
             <span
-              className="absolute left-2 top-2 z-20 flex min-h-7 min-w-7 items-center justify-center rounded-lg bg-rose-600 px-1.5 text-xs font-ui-bold text-white shadow-md ring-2 ring-background"
+              className="absolute left-2 top-2 z-20 flex min-h-7 min-w-7 items-center justify-center rounded-lg bg-rose-600 px-1.5 text-xs font-bold text-white shadow-md ring-2 ring-background"
               title={t("orderedQty")}
             >
               {orderedQty}
@@ -161,7 +161,7 @@ export const ProductCard = memo(function ProductCard({
           {isSoldOut && (
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 motion-reduce:bg-black/55 supports-[backdrop-filter]:backdrop-blur-[1px] motion-reduce:backdrop-blur-none">
               <span
-                className={`text-white text-2xs font-ui-bold px-2 py-1 rounded shadow-lg uppercase tracking-tighter rotate-[-5deg] ${
+                className={`text-white text-2xs font-bold px-2 py-1 rounded shadow-lg uppercase tracking-tighter rotate-[-5deg] ${
                   stockTrackingMode === "INGREDIENT" ? "bg-amber-600" : "bg-red-600"
                 }`}
               >
@@ -172,7 +172,7 @@ export const ProductCard = memo(function ProductCard({
 
           {stockTrackingMode === "PRODUCT" && isLimited && !isSoldOut && (
             <div className="absolute right-2 top-2 z-20">
-              <span className="bg-amber-500 text-white text-2xs font-ui-bold px-1.5 py-1 rounded shadow-md flex items-center gap-1 border border-white/20">
+              <span className="bg-amber-500 text-white text-2xs font-bold px-1.5 py-1 rounded shadow-md flex items-center gap-1 border border-white/20">
                 <Plus size={10} strokeWidth={4} />
                 {product.remaining_portions?.toFixed(0) ?? "0"}
               </span>
@@ -194,23 +194,23 @@ export const ProductCard = memo(function ProductCard({
         <div className="z-10 w-full bg-card p-4">
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0 flex-1">
-              <h4 className="line-clamp-2 min-h-[2.5rem] text-left text-sm font-ui-bold leading-snug text-foreground sm:line-clamp-1 sm:min-h-0 sm:text-base">
+              <h4 className="line-clamp-2 min-h-[2.5rem] text-left text-sm font-bold leading-snug text-foreground sm:line-clamp-1 sm:min-h-0 sm:text-base">
                 {product.name}
               </h4>
               {caloriesLabel && (
-                <p className="mt-0.5 text-right  font-ui-semibold tabular-nums text-amber-700 dark:text-amber-400">
+                <p className="mt-0.5 text-right  font-semibold tabular-nums text-amber-700 dark:text-amber-400">
                   {caloriesLabel}
                 </p>
               )}
             </div>
             <div className="flex flex-col items-end gap-1 shrink-0">
               {product.is_combined && (
-                <span className="rounded-md bg-primary/10 px-1.5 py-0.5 text-[9px] font-ui-bold uppercase tracking-wide text-primary shadow-sm border border-primary/20">
+                <span className="rounded-md bg-primary/10 px-1.5 py-0.5 text-3xs font-bold uppercase tracking-wide text-primary shadow-sm border border-primary/20">
                   {t("combined")}
                 </span>
               )}
               {disabled && !isSoldOut && (
-                <span className="rounded-md bg-muted px-1.5 py-0.5 text-[9px] font-ui-bold uppercase tracking-wide text-muted-foreground">
+                <span className="rounded-md bg-muted px-1.5 py-0.5 text-3xs font-bold uppercase tracking-wide text-muted-foreground">
                   {t("closed")}
                 </span>
               )}
@@ -228,15 +228,15 @@ export const ProductCard = memo(function ProductCard({
                   <span className="font-mono text-xs line-through text-muted-foreground dark:text-muted-foreground">
                     {formatAmount(product.base_price, canViewAmounts)}
                   </span>
-                  <span className={`font-ui-bold text-sm ${disabled ? "text-muted-foreground" : "text-amber-600"}`}>
+                  <span className={`font-bold text-sm ${disabled ? "text-muted-foreground" : "text-amber-600"}`}>
                     {formatAmount(product.discounted_price ?? 0, canViewAmounts)}
                   </span>
-                  <span className="text-xs bg-amber-500/10 text-amber-700 dark:text-amber-400 px-1 py-0.5 rounded font-ui-semibold">
+                  <span className="text-xs bg-amber-500/10 text-amber-700 dark:text-amber-400 px-1 py-0.5 rounded font-semibold">
                     %{product.discount_rate?.toFixed(0) ?? "0"}
                   </span>
                 </>
               ) : (
-                <span className={`sm:text-lg font-ui-bold font-mono ${disabled ? "text-muted-foreground" : "text-primary"}`}>
+                <span className={`sm:text-lg font-bold font-mono ${disabled ? "text-muted-foreground" : "text-primary"}`}>
                   {formatAmount(product.base_price, canViewAmounts)}
                 </span>
               )}
@@ -265,7 +265,7 @@ export const ProductCard = memo(function ProductCard({
             className="mx-3 mb-3 flex h-10 w-[calc(100%-1.5rem)] items-center justify-center gap-2 rounded-xl border border-violet-300/80 bg-violet-50 text-violet-800 transition-colors hover:bg-violet-100 sm:h-11 dark:border-violet-800/60 dark:bg-violet-950/50 dark:text-violet-100 dark:hover:bg-violet-950/70"
           >
             <Sparkles size={16} strokeWidth={2.25} className="shrink-0 sm:size-[18px]" />
-            <span className="text-xs font-ui-bold uppercase tracking-wide sm:text-sm">{t("recommendedBadge")}</span>
+            <span className="text-xs font-bold uppercase tracking-wide sm:text-sm">{t("recommendedBadge")}</span>
           </button>
         )}
       </div>
@@ -294,7 +294,7 @@ export const ProductCard = memo(function ProductCard({
               {t("allergenDialogTitle")}
             </DialogTitle>
           </DialogHeader>
-          <p className="text-sm font-ui-semibold text-foreground mb-2">{product.name}</p>
+          <p className="text-sm font-semibold text-foreground mb-2">{product.name}</p>
           {(product.allergens?.length ?? 0) > 0 ? (
             <ul className="space-y-2">
               {product.allergens!.map((a) => (
@@ -302,8 +302,8 @@ export const ProductCard = memo(function ProductCard({
                   key={a.id}
                   className="flex items-center justify-between rounded-lg border border-amber-100 bg-amber-50/50 px-3 py-2 text-sm dark:border-amber-900/40 dark:bg-amber-950/20"
                 >
-                  <span className="font-ui-medium">{a.name}</span>
-                  <span className="text-xs font-ui-bold text-amber-700 dark:text-amber-300">
+                  <span className="font-medium">{a.name}</span>
+                  <span className="text-xs font-bold text-amber-700 dark:text-amber-300">
                     {t("allergenRisk", { score: a.risk_score })}
                   </span>
                 </li>

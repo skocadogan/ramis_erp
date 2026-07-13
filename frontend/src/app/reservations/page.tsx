@@ -112,7 +112,7 @@ function ReservationsPageContent() {
                     <div className="flex flex-wrap items-center justify-between gap-4">
                         <div>
                             <div className="flex items-center gap-2">
-                                <h1 className="text-xl font-ui-bold text-foreground">{t('page.title')}</h1>
+                                <h1 className="text-xl font-bold text-foreground">{t('page.title')}</h1>
                                 {canManageApiReservations && !noBranch && (
                                     <button
                                         type="button"
@@ -138,7 +138,7 @@ function ReservationsPageContent() {
                                 <select
                                     value={effectiveBranchId}
                                     onChange={e => setBranchOverride(e.target.value)}
-                                    className="rounded-lg border border-border bg-white px-3 py-1.5 text-sm dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100"
+                                    className="rounded-lg border border-border px-3 py-1.5 text-sm border-border bg-card text-foreground"
                                     aria-label={t('page.branchSelectAria')}
                                 >
                                     {branchList.map(b => (
@@ -152,7 +152,7 @@ function ReservationsPageContent() {
                                 type="button"
                                 onClick={() => void refetch()}
                                 disabled={isLoading || noBranch}
-                                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-slate-600 transition-colors hover:bg-slate-50 disabled:opacity-40 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-slate-800"
+                                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-slate-600 transition-colors hover:bg-slate-50 disabled:opacity-40 border-border text-muted-foreground dark:hover:bg-slate-800"
                             >
                                 <RefreshCw size={13} className={isLoading ? 'animate-spin' : ''} />
                                 {t('page.refresh')}
@@ -173,9 +173,9 @@ function ReservationsPageContent() {
                             <Loader2 className="h-10 w-10 animate-spin text-blue-600" />
                         </div>
                     ) : tables.length === 0 ? (
-                        <div className="rounded-xl border border-dashed border-border py-16 text-center dark:border-slate-700">
-                            <CalendarClock className="mx-auto mb-3 h-10 w-10 text-slate-300 dark:text-slate-600" />
-                            <p className="text-sm font-ui-medium text-slate-600 dark:text-slate-300">
+                        <div className="rounded-xl border border-dashed border-border py-16 text-center border-border">
+                            <CalendarClock className="mx-auto mb-3 h-10 w-10 text-muted-foreground" />
+                            <p className="text-sm font-medium text-slate-600 text-muted-foreground">
                                 {t('page.emptyTablesTitle')}
                             </p>
                             <p className="mt-1 text-xs text-muted-foreground">
@@ -197,10 +197,10 @@ function ReservationsPageContent() {
                                 >
                                     <div className="mb-3 flex items-start justify-between gap-2">
                                         <div className="min-w-0">
-                                            <p className="text-lg font-ui-bold text-foreground">{table.name}</p>
+                                            <p className="text-lg font-bold text-foreground">{table.name}</p>
                                             <p className="text-xs text-muted-foreground">{table.zone_name}</p>
                                         </div>
-                                        <span className="shrink-0 rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-2xs font-ui-semibold uppercase tracking-wide text-amber-800 dark:border-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
+                                        <span className="shrink-0 rounded-full border border-amber-300 bg-amber-100 px-2 py-0.5 text-2xs font-semibold uppercase tracking-wide text-amber-800 dark:border-amber-800 dark:bg-amber-900/40 dark:text-amber-200">
                                             {t('cards.badgeReserved')}
                                         </span>
                                     </div>
@@ -234,7 +234,7 @@ function ReservationsPageContent() {
                                                 type="button"
                                                 onClick={() => void handleOpenGuest(table)}
                                                 disabled={isPending}
-                                                className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-2 py-1.5 text-xs font-ui-medium text-white hover:bg-emerald-700 disabled:opacity-50 min-w-[120px]"
+                                                className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-emerald-600 px-2 py-1.5 text-xs font-medium text-white hover:bg-emerald-700 disabled:opacity-50 min-w-[120px]"
                                             >
                                                 <DoorOpen size={14} />
                                                 {t('actions.guestArrived')}
@@ -243,7 +243,7 @@ function ReservationsPageContent() {
                                                 type="button"
                                                 onClick={() => setEditTable(table)}
                                                 disabled={isPending}
-                                                className="flex items-center justify-center gap-1 rounded-lg border border-border bg-white px-2 py-1.5 text-xs font-ui-medium text-slate-700 hover:bg-slate-50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+                                                className="flex items-center justify-center gap-1 rounded-lg border border-border px-2 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
                                             >
                                                 <Pencil size={14} />
                                                 {t('actions.edit')}
@@ -252,7 +252,7 @@ function ReservationsPageContent() {
                                                 type="button"
                                                 onClick={() => setCancelTarget(table)}
                                                 disabled={isPending}
-                                                className="flex items-center justify-center gap-1 rounded-lg border border-rose-200 bg-white px-2 py-1.5 text-xs font-ui-medium text-rose-700 hover:bg-rose-50 dark:border-rose-900/50 dark:bg-slate-800 dark:text-rose-400 dark:hover:bg-rose-950/30"
+                                                className="flex items-center justify-center gap-1 rounded-lg border border-rose-200 px-2 py-1.5 text-xs font-medium text-rose-700 hover:bg-rose-50 dark:border-rose-900/50 bg-muted dark:text-rose-400 dark:hover:bg-rose-950/30"
                                             >
                                                 <XCircle size={14} />
                                                 {t('actions.cancel')}

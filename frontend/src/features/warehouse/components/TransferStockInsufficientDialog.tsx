@@ -58,11 +58,11 @@ export function TransferStockInsufficientDialog({
           {description ? <AlertDialogDescription>{description}</AlertDialogDescription> : null}
         </AlertDialogHeader>
         <div className="text-sm space-y-2">
-          <p className="font-ui-medium text-foreground">{t("intro")}</p>
+          <p className="font-medium text-foreground">{t("intro")}</p>
           <ul className="rounded-md border border-amber-200/80 dark:border-amber-900/50 bg-amber-50/50 dark:bg-amber-950/20 divide-y divide-amber-100 dark:divide-amber-900/40">
             {insufficientItems.map((row, idx) => (
               <li key={`${row.stock_item_id}-${idx}`} className="px-3 py-2.5">
-                <div className="font-ui-medium text-foreground">{row.stock_item_name}</div>
+                <div className="font-medium text-foreground">{row.stock_item_name}</div>
                 <div className="text-xs text-muted-foreground mt-0.5">
                   {t("requested")}: {formatQuantityWithUnit(row.requested_quantity, row.unit)}
                   {" · "}

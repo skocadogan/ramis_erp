@@ -342,7 +342,7 @@ function InventoryPageContent() {
     <AppShell>
       <div className="flex h-full flex-col bg-background overflow-hidden">
         {/* Üst bar: istatistik kartları + mobil nav + şube filtresi */}
-        <div className="flex shrink-0 flex-col border-b border-border bg-background dark:border-slate-700">
+        <div className="flex shrink-0 flex-col border-b border-border bg-background border-border">
           <div className="flex items-center gap-2 px-2 py-2 sm:px-4">
             <div className="hidden lg:flex min-w-0 flex-1 items-center gap-1.5 overflow-x-auto">
               {statsBar}
@@ -352,7 +352,7 @@ function InventoryPageContent() {
             </div>
             <div className="ms-auto flex shrink-0 items-center gap-2 sm:gap-3">
               {actionBar}
-              <div className="hidden sm:block text-2xs font-ui-bold text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">
+              <div className="hidden sm:block text-2xs font-bold text-muted-foreground dark:text-muted-foreground uppercase tracking-wider">
                 {t("page.filterLabel")}
               </div>
               <BranchSelect
@@ -372,7 +372,7 @@ function InventoryPageContent() {
           <InventoryModuleNavVertical {...navProps} />
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-background">
-            <Card className="flex min-h-0 flex-1 flex-col gap-0 overflow-hidden rounded-none border-0 py-0 shadow-none dark:bg-slate-900">
+            <Card className="flex min-h-0 flex-1 flex-col gap-0 overflow-hidden rounded-none border-0 py-0 shadow-none bg-card">
               <CardContent className="flex min-h-0 flex-1 flex-col overflow-hidden p-0">
                 <InventoryFilters
                   activeTab={inventory.activeTab}

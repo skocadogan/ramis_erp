@@ -134,13 +134,13 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
   };
 
   const selClass =
-    "border border-border rounded-lg px-3 py-1.5 text-sm bg-white dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-blue-500/20";
+    "border border-border rounded-lg px-3 py-1.5 text-sm bg-card border-border text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500/20";
 
   return (
     <div className="space-y-4">
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
-          <h2 className="text-xl font-ui-bold text-foreground">{t("title")}</h2>
+          <h2 className="text-xl font-bold text-foreground">{t("title")}</h2>
           <p className="text-sm text-muted-foreground mt-0.5">
             Toplam {totalCount} müşteri kaydı bulunuyor.
           </p>
@@ -148,14 +148,14 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 rounded-lg border border-border bg-white px-3.5 py-1.5 text-sm font-ui-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-750 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-border px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 border-border bg-muted text-foreground dark:hover:bg-slate-750 transition-colors"
           >
             <FileDown size={15} />
             {t("messages.exportExcel")}
           </button>
           <button
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 rounded-lg border border-border bg-white px-3.5 py-1.5 text-sm font-ui-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-750 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-border px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 border-border bg-muted text-foreground dark:hover:bg-slate-750 transition-colors"
           >
             <FileDown size={15} />
             {t("messages.exportPdf")}
@@ -163,7 +163,7 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
           {canManageCustomers && (
             <button
               onClick={onAdd}
-              className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-ui-medium text-white hover:bg-blue-700 transition-colors shadow-sm"
+              className="flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-colors shadow-sm"
             >
               <Plus size={15} />
               {t("addNew")}
@@ -180,7 +180,7 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
             placeholder="Müşteri adı, telefon veya e-posta ile ara..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-1.5 bg-white border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-700 dark:text-slate-100"
+            className="w-full pl-9 pr-4 py-1.5 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
           />
         </div>
         <div className="flex items-center gap-2">
@@ -197,7 +197,7 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
         </div>
       </div>
 
-      <div className="bg-white rounded-xl border border-border dark:bg-slate-900 dark:border-slate-800">
+      <div className="rounded-lg border border-border bg-card border-border">
         {customersQuery.isLoading ? (
           <div className="flex items-center justify-center py-20">
             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
@@ -213,26 +213,26 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
             hasMore={!!customersQuery.hasNextPage}
             isFetchingNextPage={customersQuery.isFetchingNextPage}
             className="max-h-[calc(100vh-16rem)]"
-            tableClassName="w-full text-sm"
+            tableClassName="w-full text-sm rounded-lg"
             header={
               <thead className={virtualTableStickyHeadClass}>
                 <tr>
-                  <th className="text-left px-5 py-3.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="text-left px-5 py-3.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("table.colName")}
                   </th>
-                  <th className="text-left px-5 py-3.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="text-left px-5 py-3.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("table.colType")}
                   </th>
-                  <th className="text-left px-5 py-3.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="text-left px-5 py-3.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("table.colPhone")}
                   </th>
-                  <th className="text-left px-5 py-3.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="text-left px-5 py-3.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("table.colEmail")}
                   </th>
-                  <th className="text-left px-5 py-3.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="text-left px-5 py-3.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("table.colTax")}
                   </th>
-                  <th className="text-right px-5 py-3.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+                  <th className="text-right px-5 py-3.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                     {t("table.colActions")}
                   </th>
                 </tr>
@@ -249,10 +249,10 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
               <>
                 <td className="px-5 py-3.5">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-slate-100 flex items-center justify-center text-sm font-ui-semibold text-slate-600 dark:bg-slate-800 dark:text-slate-300">
+                    <div className="h-9 w-9 rounded-full bg-slate-100 flex items-center justify-center text-sm font-semibold text-slate-600 bg-muted text-muted-foreground">
                       {c.name.charAt(0).toUpperCase()}
                     </div>
-                    <span className="font-ui-medium text-foreground">{c.name}</span>
+                    <span className="font-medium text-foreground">{c.name}</span>
                   </div>
                 </td>
                 <td className="px-5 py-3.5">

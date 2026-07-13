@@ -92,7 +92,7 @@ export const TableStatusBadge = memo(function TableStatusBadge({ status, posOccu
     const dotSize = size === 'md' ? 'w-2 h-2' : 'w-1.5 h-1.5';
 
     return (
-        <span className={`inline-flex items-center gap-1.5 font-ui-medium border rounded-full ${cfg.bgClass} ${cfg.textClass} ${cfg.borderClass} ${sizeClasses}`}>
+        <span className={`inline-flex items-center gap-1.5 font-medium border rounded-full ${cfg.bgClass} ${cfg.textClass} ${cfg.borderClass} ${sizeClasses}`}>
             {showDot && <span className={`rounded-full shrink-0 ${cfg.dotClass} ${dotSize}`} />}
             {label}
         </span>

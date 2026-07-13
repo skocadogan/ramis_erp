@@ -46,11 +46,11 @@ export function KdsWarehouseStockItemSelect({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         disabled={disabled || isLoading}
-        className="w-full mt-1 flex items-center justify-between px-3 py-2 bg-slate-50 border border-border rounded-md text-sm text-left focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100 text-slate-900 disabled:opacity-50"
+        className="w-full mt-1 flex items-center justify-between px-3 py-2 bg-slate-50 border border-border rounded-md text-sm text-left focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground text-slate-900 disabled:opacity-50"
       >
         {selectedLevel ? (
           <div className="flex justify-between w-full pr-2">
-            <span className="truncate font-ui-medium text-foreground">
+            <span className="truncate font-medium text-foreground">
               {selectedLevel.stock_item_name}
             </span>
             {selectedLevel.stock_item_sku ? (
@@ -65,10 +65,10 @@ export function KdsWarehouseStockItemSelect({
         <Search size={14} className="text-muted-foreground shrink-0" />
       </PopoverTrigger>
       <PopoverContent
-        className="p-0 w-[var(--radix-popover-trigger-width)] max-h-[300px] overflow-hidden flex flex-col bg-white border border-border dark:bg-slate-900 dark:border-slate-800 shadow-md"
+        className="p-0 w-[var(--radix-popover-trigger-width)] max-h-[300px] overflow-hidden flex flex-col border border-border bg-card border-border shadow-md"
         align="start"
       >
-        <div className="p-2 border-b border-slate-100 dark:border-slate-800 flex items-center gap-2">
+        <div className="p-2 border-b border-slate-100 border-border flex items-center gap-2">
           <Search size={14} className="text-muted-foreground" />
           <input
             autoFocus
@@ -99,7 +99,7 @@ export function KdsWarehouseStockItemSelect({
                 className="w-full flex items-center justify-between px-3 py-2.5 text-sm hover:bg-slate-50 transition-all text-left dark:hover:bg-slate-800"
               >
                 <div className="flex min-w-0 flex-col">
-                  <span className="font-ui-medium text-foreground">{level.stock_item_name}</span>
+                  <span className="font-medium text-foreground">{level.stock_item_name}</span>
                   <span className="text-2xs text-muted-foreground">
                     {t("waste.availableQty", {
                       qty: level.quantity,

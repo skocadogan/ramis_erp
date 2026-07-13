@@ -235,7 +235,7 @@ export function BranchDetailModal({ branch, onClose }: BranchDetailModalProps) {
                             <div className="mt-0.5 flex flex-wrap gap-1">
                               {u.role_names.length > 0 ? (
                                 u.role_names.map((r) => (
-                                  <Badge key={r} variant="secondary" className="text-[9px]">
+                                  <Badge key={r} variant="secondary" className="text-3xs">
                                     {r}
                                   </Badge>
                                 ))

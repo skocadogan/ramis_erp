@@ -135,7 +135,7 @@ export function CustomerModal({ customer, onClose, onSuccess }: CustomerModalPro
                     type="button"
                     onClick={() => setCustomerType(type)}
                     className={cn(
-                      "rounded-lg border py-2 text-sm font-ui-semibold transition-colors",
+                      "rounded-lg border py-2 text-sm font-semibold transition-colors",
                       customerType === type
                         ? "border-primary bg-primary/10 text-primary"
                         : "border-border bg-background text-muted-foreground hover:bg-muted",

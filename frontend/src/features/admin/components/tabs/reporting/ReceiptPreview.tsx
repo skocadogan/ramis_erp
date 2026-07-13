@@ -84,13 +84,13 @@ export function ReceiptPreview({ template }: Props) {
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-3 py-2
         border-b border-border bg-slate-50
-        dark:border-slate-700 dark:bg-slate-800/60">
+        border-border bg-muted/60">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Printer size={13} />
           <span>{t("reporting.editor.preview")}</span>
           <span className="px-1.5 py-0.5 rounded
             bg-slate-200 text-slate-600 font-mono text-2xs
-            dark:bg-slate-700 dark:text-slate-300">
+            bg-accent text-muted-foreground">
             {paperLabel} · {paperWidth}ch
           </span>
         </div>
@@ -122,7 +122,7 @@ export function ReceiptPreview({ template }: Props) {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 flex justify-center
-        bg-slate-100 dark:bg-slate-950">
+        bg-slate-100 bg-card">
         {template ? (
           <div
             className="relative"
@@ -145,7 +145,7 @@ export function ReceiptPreview({ template }: Props) {
                 return (
                   <div
                     key={i}
-                    className={`bg-white flex ${block.align === "center" ? "justify-center" : block.align === "right" ? "justify-end" : "justify-start"} px-3 pt-3`}
+                    className={`flex ${block.align === "center" ? "justify-center" : block.align === "right" ? "justify-end" : "justify-start"} px-3 pt-3`}
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
@@ -161,7 +161,7 @@ export function ReceiptPreview({ template }: Props) {
                 )
               }
               return (
-                <div key={i} className="bg-white px-3 pt-2 flex items-center gap-1.5 justify-center text-xs text-muted-foreground">
+                <div key={i} className="px-3 pt-2 flex items-center gap-1.5 justify-center text-xs text-muted-foreground">
                   <ImageIcon size={14} />
                   <span>{t("reporting.blockEditor.blockTypes.branchLogo")}</span>
                 </div>
@@ -169,7 +169,7 @@ export function ReceiptPreview({ template }: Props) {
             })}
 
             <pre
-              className="bg-white text-slate-900 px-3 py-3
+              className="text-slate-900 px-3 py-3
                 text-sub leading-[1.55] font-mono whitespace-pre overflow-x-hidden shadow-md"
               style={{ fontFamily: "'Courier New', Courier, monospace" }}
             >
@@ -190,7 +190,7 @@ export function ReceiptPreview({ template }: Props) {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-3 h-full
-            text-muted-foreground dark:text-slate-600">
+            text-muted-foreground">
             <Printer size={36} />
             <p className="text-sm">{t("reporting.receiptPreview.selectTemplate")}</p>
           </div>

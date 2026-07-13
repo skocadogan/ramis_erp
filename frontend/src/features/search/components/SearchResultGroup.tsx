@@ -63,7 +63,7 @@ export function SearchResultGroupSection({
     <div id={`search-group-${moduleKey}`} className="mb-3">
       <div className="flex items-center gap-2 px-3 py-1.5">
         <Icon size={13} className="text-muted-foreground dark:text-muted-foreground shrink-0" />
-        <span className="text-xs font-ui-semibold uppercase tracking-wide text-muted-foreground dark:text-muted-foreground">
+        <span className="text-xs font-semibold uppercase tracking-wide text-muted-foreground dark:text-muted-foreground">
           {groupLabel}
         </span>
         <span className="ml-auto text-xs text-muted-foreground dark:text-muted-foreground tabular-nums">

@@ -46,14 +46,14 @@ const CreditAccountRow = memo(function CreditAccountRow({
     <tr
       data-index={index}
       ref={measureElement}
-      className="border-t border-border hover:bg-slate-50/80 dark:border-slate-700 dark:hover:bg-slate-800/40"
+      className="border-t border-border hover:bg-slate-50/80 border-border dark:hover:bg-slate-800/40"
     >
-      <td className="px-4 py-3 font-ui-semibold">{account.full_name}</td>
+      <td className="px-4 py-3 font-semibold">{account.full_name}</td>
       <td className="px-4 py-3 text-muted-foreground">{account.user_username ?? "—"}</td>
       <td className="px-4 py-3 text-muted-foreground">
         {account.is_global ? "Global" : account.branch_name ?? "—"}
       </td>
-      <td className="px-4 py-3 text-right font-ui-bold tabular-nums">
+      <td className="px-4 py-3 text-right font-bold tabular-nums">
         {formatAmount(account.balance, canViewAmounts)}
       </td>
       <td className="px-4 py-3 text-xs text-muted-foreground">{account.credit_policy_display}</td>
@@ -133,10 +133,10 @@ export const CreditAccountsTable = memo(function CreditAccountsTable({
   return (
     <div
       ref={containerRef}
-      className="max-h-[min(70vh,640px)] overflow-auto rounded-xl border border-border bg-white dark:border-slate-700 dark:bg-slate-900"
+      className="max-h-[min(70vh,640px)] overflow-auto rounded-xl border border-border border-border bg-card"
     >
       <table className="w-full min-w-[720px] text-sm">
-        <thead className="sticky top-0 z-10 bg-slate-50 text-left text-xs font-ui-bold uppercase text-muted-foreground dark:bg-slate-800/95">
+        <thead className="sticky top-0 z-10 bg-slate-50 text-left text-xs font-bold uppercase text-muted-foreground bg-muted/95">
           <tr>
             <th className="px-4 py-3">{t("table.name")}</th>
             <th className="px-4 py-3">{t("table.user")}</th>
@@ -178,7 +178,7 @@ export const CreditAccountsTable = memo(function CreditAccountsTable({
         </tbody>
       </table>
       {infiniteControls?.isFetchingNextPage && (
-        <div className="flex items-center justify-center gap-2 border-t border-border py-3 text-xs text-muted-foreground dark:border-slate-700">
+        <div className="flex items-center justify-center gap-2 border-t border-border py-3 text-xs text-muted-foreground border-border">
           <Loader2 className="h-4 w-4 animate-spin" />
           {t("page.loadingMore")}
         </div>

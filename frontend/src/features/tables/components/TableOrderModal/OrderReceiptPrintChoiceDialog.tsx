@@ -57,7 +57,7 @@ export function OrderReceiptPrintChoiceDialog({
                             type="button"
                             disabled={isReprinting}
                             onClick={handleKitchen}
-                            className="h-14 min-h-14 w-full touch-manipulation justify-start gap-3 px-4 text-base font-ui-bold bg-violet-600 hover:bg-violet-700"
+                            className="h-14 min-h-14 w-full touch-manipulation justify-start gap-3 px-4 text-base font-bold bg-violet-600 hover:bg-violet-700"
                         >
                             {isReprinting ? (
                                 <Loader2 size={22} className="shrink-0 animate-spin" aria-hidden />
@@ -75,8 +75,8 @@ export function OrderReceiptPrintChoiceDialog({
                             onClick={handleOrder}
                             className={
                                 showKitchenOption
-                                    ? 'h-14 min-h-14 w-full touch-manipulation justify-start gap-3 border-violet-200 px-4 text-base font-ui-bold text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-300 dark:hover:bg-violet-900/20'
-                                    : 'h-14 min-h-14 w-full touch-manipulation justify-start gap-3 px-4 text-base font-ui-bold bg-violet-600 hover:bg-violet-700'
+                                    ? 'h-14 min-h-14 w-full touch-manipulation justify-start gap-3 border-violet-200 px-4 text-base font-bold text-violet-700 hover:bg-violet-50 dark:border-violet-800 dark:text-violet-300 dark:hover:bg-violet-900/20'
+                                    : 'h-14 min-h-14 w-full touch-manipulation justify-start gap-3 px-4 text-base font-bold bg-violet-600 hover:bg-violet-700'
                             }
                         >
                             {isReprinting && !showKitchenOption ? (

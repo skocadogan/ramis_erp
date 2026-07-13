@@ -128,7 +128,7 @@ export function MrpDetailModal({ isOpen, onClose, plan, activeStationId }: MrpDe
               <div className="flex items-center gap-2 rounded-lg border border-border bg-background px-3 py-1.5">
                 <Filter size={14} className="text-muted-foreground" />
                 <Select value={selectedStationId} onValueChange={setSelectedStationId} disabled={stations.length === 0}>
-                  <SelectTrigger className="h-8 border-none bg-transparent focus:ring-0 w-[180px] p-0 text-xs font-ui-medium">
+                  <SelectTrigger className="h-8 border-none bg-transparent focus:ring-0 w-[180px] p-0 text-xs font-medium">
                     <SelectValue placeholder={t("filterStations")}>
                       {selectedStationId === "all"
                         ? t("allStations")
@@ -178,18 +178,18 @@ export function MrpDetailModal({ isOpen, onClose, plan, activeStationId }: MrpDe
                 return mrpWarehouses.map((warehouseData, idx) => (
                   <div key={idx} className="border border-border rounded-lg overflow-hidden">
                     <div className="border-b border-border bg-muted px-4 py-3">
-                      <h3 className="font-ui-semibold text-foreground">{warehouseData.warehouse_name}</h3>
+                      <h3 className="font-semibold text-foreground">{warehouseData.warehouse_name}</h3>
                     </div>
                     <div className="overflow-x-auto">
                       <table className="w-full text-sm">
                         <thead className="bg-muted text-muted-foreground">
                           <tr>
-                            <th className="text-left px-4 py-2 font-ui-medium">{t("columns.stockItem")}</th>
-                            <th className="text-left px-4 py-2 font-ui-medium">{t("columns.station")}</th>
-                            <th className="text-right px-4 py-2 font-ui-medium">{t("columns.required")}</th>
-                            <th className="text-right px-4 py-2 font-ui-medium">{t("columns.onHand")}</th>
-                            <th className="text-right px-4 py-2 font-ui-medium">{t("columns.gap")}</th>
-                            <th className="text-center px-4 py-2 font-ui-medium">{t("columns.status")}</th>
+                            <th className="text-left px-4 py-2 font-medium">{t("columns.stockItem")}</th>
+                            <th className="text-left px-4 py-2 font-medium">{t("columns.station")}</th>
+                            <th className="text-right px-4 py-2 font-medium">{t("columns.required")}</th>
+                            <th className="text-right px-4 py-2 font-medium">{t("columns.onHand")}</th>
+                            <th className="text-right px-4 py-2 font-medium">{t("columns.gap")}</th>
+                            <th className="text-center px-4 py-2 font-medium">{t("columns.status")}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -203,7 +203,7 @@ export function MrpDetailModal({ isOpen, onClose, plan, activeStationId }: MrpDe
 
                             return (
                               <tr key={item.stock_item_id} className="border-t border-border transition-colors hover:bg-muted/20">
-                                <td className="px-4 py-2 font-ui-medium text-foreground">
+                                <td className="px-4 py-2 font-medium text-foreground">
                                   {item.stock_item_name}
                                 </td>
                                 <td className="px-4 py-2 text-xs text-muted-foreground">
@@ -221,9 +221,9 @@ export function MrpDetailModal({ isOpen, onClose, plan, activeStationId }: MrpDe
                                     </>
                                   )}
                                 </td>
-                                <td className={`px-4 py-2 text-right font-ui-semibold ${unlimited ? "text-muted-foreground font-ui-normal" : gapVal > 0 ? "text-red-600 dark:text-red-400" : "text-green-600 dark:text-green-400"}`}>
+                                <td className={`px-4 py-2 text-right font-semibold ${unlimited ? "text-muted-foreground font-normal" : gapVal > 0 ? "text-red-600 dark:text-red-400" : "text-green-600 dark:text-green-400"}`}>
                                   {unlimited ? (
-                                    <span className="italic text-xs font-ui-normal">—</span>
+                                    <span className="italic text-xs font-normal">—</span>
                                   ) : (
                                     <>
                                       {formatNumber(Math.abs(gapVal), 2)} {item.unit}
@@ -232,15 +232,15 @@ export function MrpDetailModal({ isOpen, onClose, plan, activeStationId }: MrpDe
                                 </td>
                                 <td className="px-4 py-2 text-center">
                                   {unlimited ? (
-                                    <span className="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-2xs font-ui-medium text-muted-foreground">
+                                    <span className="inline-flex items-center rounded-full bg-muted px-2 py-0.5 text-2xs font-medium text-muted-foreground">
                                       {t("notTracked")}
                                     </span>
                                   ) : gapVal > 0 ? (
-                                    <span className="inline-flex items-center gap-1 bg-red-50 text-red-700 px-2 py-0.5 rounded-full text-2xs font-ui-bold dark:bg-red-900/30 dark:text-red-400">
+                                    <span className="inline-flex items-center gap-1 bg-red-50 text-red-700 px-2 py-0.5 rounded-full text-2xs font-bold dark:bg-red-900/30 dark:text-red-400">
                                       <AlertTriangle size={12} /> {t("shortage")}
                                     </span>
                                   ) : (
-                                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-2xs font-ui-bold dark:bg-green-900/30 dark:text-green-400">
+                                    <span className="inline-flex items-center gap-1 bg-green-50 text-green-700 px-2 py-0.5 rounded-full text-2xs font-bold dark:bg-green-900/30 dark:text-green-400">
                                       <CheckCircle2 size={12} /> {t("sufficient")}
                                     </span>
                                   )}

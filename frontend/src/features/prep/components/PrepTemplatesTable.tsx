@@ -49,17 +49,17 @@ export function PrepTemplatesTable({
       tableClassName="w-full text-sm"
       header={
         <thead className={virtualTableStickyHeadClass}>
-          <tr className="text-xs font-ui-bold text-slate-500">
-            <th className="px-4 py-2 text-left font-ui-bold">
+          <tr className="text-xs font-bold text-slate-500">
+            <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.templates.nameSchedule")}
             </th>
-            <th className="px-4 py-2 text-left font-ui-bold w-[160px]">
+            <th className="px-4 py-2 text-left font-bold w-[160px]">
               {t("management.columns.templates.station")}
             </th>
-            <th className="px-4 py-2 text-right font-ui-bold">
+            <th className="px-4 py-2 text-right font-bold">
               {t("management.columns.templates.target")}
             </th>
-            <th className="px-4 py-2 text-right font-ui-bold w-[80px]">
+            <th className="px-4 py-2 text-right font-bold w-[80px]">
               {t("management.columns.templates.actions")}
             </th>
           </tr>
@@ -73,7 +73,7 @@ export function PrepTemplatesTable({
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-muted-foreground">
             <CalendarClock size={48} className="opacity-10 mb-4" />
-            <p className="text-sm font-ui-medium">{t("management.emptyTemplates")}</p>
+            <p className="text-sm font-medium">{t("management.emptyTemplates")}</p>
             <Button
               variant="link"
               size="sm"
@@ -95,23 +95,23 @@ export function PrepTemplatesTable({
       renderRow={(template) => (
         <>
           <td className="px-4 py-3 align-middle">
-            <h4 className="text-sm font-ui-bold text-slate-800 dark:text-white leading-none">
+            <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
               {template.title}
             </h4>
-            <p className="text-2xs font-ui-medium text-muted-foreground mt-1">
+            <p className="text-2xs font-medium text-muted-foreground mt-1">
               {t("management.dailyAtTime", { time: template.activation_time })}
             </p>
           </td>
           <td className="px-4 py-3 align-middle">
-            <span className="text-[11px] font-ui-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded-full">
+            <span className="text-sub font-semibold text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/30 px-2 py-0.5 rounded-full">
               {template.station_name || t("management.defaultStation")}
             </span>
           </td>
           <td className="px-4 py-3 text-right align-middle">
-            <span className="text-xs font-ui-bold text-foreground">
+            <span className="text-xs font-bold text-foreground">
               {formatNumber(template.target_quantity, 0)}
             </span>
-            <span className="text-2xs font-ui-bold text-muted-foreground ml-1">
+            <span className="text-2xs font-bold text-muted-foreground ml-1">
               {template.unit}
             </span>
             <div

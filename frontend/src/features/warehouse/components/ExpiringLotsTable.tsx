@@ -58,7 +58,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
       onClick={() => onSelectLot(lot)}
     >
       <td className="px-4 py-3">
-        <div className="font-ui-medium text-slate-900 dark:text-slate-200">{lot.stock_item_name}</div>
+        <div className="font-medium text-slate-900 text-foreground">{lot.stock_item_name}</div>
         <div className="text-xs text-muted-foreground">{lot.stock_item_sku}</div>
       </td>
       <td className="px-4 py-3 text-foreground">{lot.warehouse_name}</td>
@@ -76,19 +76,19 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
           </span>
         ) : null}
       </td>
-      <td className="px-4 py-3 text-right font-ui-semibold tabular-nums text-slate-900 dark:text-slate-200">
+      <td className="px-4 py-3 text-right font-semibold tabular-nums text-slate-900 text-foreground">
         {formatQuantity(lot.quantity)}
       </td>
       <td className="px-4 py-3 text-center">
         {lot.risk_score != null ? (
           <span
             className={cn(
-              "inline-flex min-w-[2rem] justify-center rounded-full px-2 py-0.5 text-xs font-ui-semibold tabular-nums",
+              "inline-flex min-w-[2rem] justify-center rounded-full px-2 py-0.5 text-xs font-semibold tabular-nums",
               lot.risk_score >= 80
                 ? "bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-200"
                 : lot.risk_score >= 50
                   ? "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200"
-                  : "bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300",
+                  : "bg-slate-100 text-slate-700 bg-muted text-muted-foreground",
             )}
           >
             {lot.risk_score}
@@ -102,7 +102,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
           <DropdownMenu>
             <DropdownMenuTrigger
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 text-muted-foreground dark:hover:bg-slate-800"
               aria-label={t("expiryActions.menuAria", { name: lot.stock_item_name })}
               onClick={(e) => e.stopPropagation()}
             >
@@ -192,18 +192,18 @@ export const ExpiringLotsTable = memo(function ExpiringLotsTable({
   return (
     <div
       ref={scrollRef}
-      className="flex min-h-0 min-w-0 flex-1 flex-col overflow-auto rounded-xl border border-border/80 bg-card/50 dark:border-slate-800"
+      className="flex min-h-0 min-w-0 flex-1 flex-col overflow-auto rounded-xl border border-border/80 bg-card/50 border-border"
     >
       <table className="w-full text-sm">
-        <thead className="sticky top-0 z-10 border-b border-border bg-slate-50 dark:bg-slate-800/50">
+        <thead className="sticky top-0 z-10 border-b border-border bg-muted/50">
           <tr>
-            <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">{t("expiringLots.colProduct")}</th>
-            <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">{t("expiringLots.colWarehouse")}</th>
-            <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">{t("expiringLots.colLot")}</th>
-            <th className="px-4 py-3 text-left font-ui-semibold text-muted-foreground">{t("expiringLots.colExpiry")}</th>
-            <th className="px-4 py-3 text-right font-ui-semibold text-muted-foreground">{t("expiringLots.colRemaining")}</th>
-            <th className="px-4 py-3 text-center font-ui-semibold text-muted-foreground">{t("expiringLots.colRisk")}</th>
-            <th className="px-3 py-3 text-right font-ui-semibold text-muted-foreground w-12" />
+            <th className="px-4 py-3 text-left font-semibold text-muted-foreground">{t("expiringLots.colProduct")}</th>
+            <th className="px-4 py-3 text-left font-semibold text-muted-foreground">{t("expiringLots.colWarehouse")}</th>
+            <th className="px-4 py-3 text-left font-semibold text-muted-foreground">{t("expiringLots.colLot")}</th>
+            <th className="px-4 py-3 text-left font-semibold text-muted-foreground">{t("expiringLots.colExpiry")}</th>
+            <th className="px-4 py-3 text-right font-semibold text-muted-foreground">{t("expiringLots.colRemaining")}</th>
+            <th className="px-4 py-3 text-center font-semibold text-muted-foreground">{t("expiringLots.colRisk")}</th>
+            <th className="px-3 py-3 text-right font-semibold text-muted-foreground w-12" />
           </tr>
         </thead>
         <tbody className="divide-y divide-border">

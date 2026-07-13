@@ -189,7 +189,7 @@ export function CustomerDisplaySurveyModal({
                     <Star key={starIndex} className="h-5 w-5 fill-current" />
                   ))
                 ) : (
-                  <span className="text-3xl font-ui-bold">{value}</span>
+                  <span className="text-3xl font-bold">{value}</span>
                 )}
               </div>
             </button>
@@ -206,7 +206,7 @@ export function CustomerDisplaySurveyModal({
         <button
           type="button"
           onClick={() => setAnswer(currentQuestion.id, { boolean_value: true })}
-          className={`rounded-2xl border px-6 py-8 text-2xl font-ui-bold transition-all ${
+          className={`rounded-2xl border px-6 py-8 text-2xl font-bold transition-all ${
             selected === true
               ? "border-emerald-400 bg-emerald-500 text-white"
               : "border-white/20 bg-white/10 text-white"
@@ -217,7 +217,7 @@ export function CustomerDisplaySurveyModal({
         <button
           type="button"
           onClick={() => setAnswer(currentQuestion.id, { boolean_value: false })}
-          className={`rounded-2xl border px-6 py-8 text-2xl font-ui-bold transition-all ${
+          className={`rounded-2xl border px-6 py-8 text-2xl font-bold transition-all ${
             selected === false
               ? "border-rose-400 bg-rose-500 text-white"
               : "border-white/20 bg-white/10 text-white"
@@ -274,20 +274,20 @@ export function CustomerDisplaySurveyModal({
   if (isCompleted) {
     return (
       <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/95 px-6 py-8">
-        <div className="w-full max-w-2xl overflow-hidden rounded-[32px] border border-emerald-500/30 bg-[#0f172a] shadow-2xl">
+        <div className="w-full max-w-2xl overflow-hidden rounded-5xl border border-emerald-500/30 bg-card shadow-2xl">
           <div className="border-b border-emerald-500/20 bg-emerald-500/10 px-10 py-8">
             <div className="flex items-center gap-5">
               <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg ring-4 ring-emerald-500/20">
                 <CheckCircle2 className="h-9 w-9" strokeWidth={2.25} />
               </div>
               <div>
-                <h2 className="text-3xl font-ui-bold text-white">{t("thankYouTitle")}</h2>
-                <p className="mt-1 text-lg font-ui-medium text-emerald-100">{t("thankYouSubtitle")}</p>
+                <h2 className="text-3xl font-bold text-white">{t("thankYouTitle")}</h2>
+                <p className="mt-1 text-lg font-medium text-emerald-100">{t("thankYouSubtitle")}</p>
               </div>
             </div>
           </div>
           <div className="space-y-4 px-10 py-10 text-center">
-            <p className="text-2xl font-ui-semibold text-white">{t("thankYouMessage")}</p>
+            <p className="text-2xl font-semibold text-white">{t("thankYouMessage")}</p>
             <p className="text-base text-slate-300">{t("thankYouClosing")}</p>
           </div>
         </div>
@@ -297,14 +297,14 @@ export function CustomerDisplaySurveyModal({
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/95 px-6 py-8">
-      <div className="flex h-full w-full max-w-5xl flex-col rounded-[32px] border border-white/10 bg-slate-900/95 shadow-2xl">
+      <div className="flex h-full w-full max-w-5xl flex-col rounded-5xl border border-white/10 bg-slate-900/95 shadow-2xl">
         <div className="border-b border-white/10 px-8 py-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-ui-bold uppercase tracking-[0.3em] text-blue-300">
+              <div className="text-xs font-bold uppercase tracking-[0.3em] text-blue-300">
                 {t("title")}
               </div>
-              <h2 className="mt-2 text-3xl font-ui-bold text-white">{prompt.survey.title}</h2>
+              <h2 className="mt-2 text-3xl font-bold text-white">{prompt.survey.title}</h2>
               {prompt.survey.description ? (
                 <p className="mt-2 max-w-3xl text-base text-slate-300">{prompt.survey.description}</p>
               ) : null}
@@ -321,12 +321,12 @@ export function CustomerDisplaySurveyModal({
 
         <div className="flex flex-1 flex-col justify-center px-8 py-8">
           <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center">
-            <div className="relative rounded-[28px] border border-white/10 bg-white/5 p-8">
+            <div className="relative rounded-4xl border border-white/10 bg-white/5 p-8">
               {isSubmitting || isClosing ? (
-                <div className="absolute inset-0 z-10 flex items-center justify-center rounded-[28px] bg-slate-950/70">
+                <div className="absolute inset-0 z-10 flex items-center justify-center rounded-4xl bg-slate-950/70">
                   <div className="flex flex-col items-center gap-3 text-center">
                     <Loader2 className="h-8 w-8 animate-spin text-blue-300" />
-                    <div className="text-lg font-ui-semibold text-white">
+                    <div className="text-lg font-semibold text-white">
                       {isClosing ? t("closing") : t("submitting")}
                     </div>
                     <div className="text-sm text-slate-300">
@@ -335,7 +335,7 @@ export function CustomerDisplaySurveyModal({
                   </div>
                 </div>
               ) : null}
-              <div className="mb-6 text-4xl font-ui-bold leading-tight text-white">
+              <div className="mb-6 text-4xl font-bold leading-tight text-white">
                 {currentQuestion.text}
               </div>
               <div className="min-h-[220px]">{renderQuestionBody()}</div>
@@ -348,7 +348,7 @@ export function CustomerDisplaySurveyModal({
             ) : null}
 
             {error ? (
-              <div className="mt-4 text-center text-base font-ui-medium text-rose-300">{error}</div>
+              <div className="mt-4 text-center text-base font-medium text-rose-300">{error}</div>
             ) : null}
 
             <div className="mt-8 flex items-center justify-between gap-4">
@@ -376,7 +376,7 @@ export function CustomerDisplaySurveyModal({
               {!isLast ? (
                 <Button
                   type="button"
-                  className="h-14 rounded-2xl bg-blue-600 px-8 text-lg font-ui-bold hover:bg-blue-700"
+                  className="h-14 rounded-2xl bg-blue-600 px-8 text-lg font-bold hover:bg-blue-700"
                   onClick={goNext}
                   disabled={isSubmitting || isClosing}
                 >
@@ -385,7 +385,7 @@ export function CustomerDisplaySurveyModal({
               ) : (
                 <Button
                   type="button"
-                  className="h-14 rounded-2xl bg-emerald-600 px-8 text-lg font-ui-bold hover:bg-emerald-700"
+                  className="h-14 rounded-2xl bg-emerald-600 px-8 text-lg font-bold hover:bg-emerald-700"
                   onClick={() => void submit()}
                   disabled={isSubmitting || isClosing}
                 >

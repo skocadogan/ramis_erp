@@ -212,7 +212,7 @@ export function StationDisplayScreen({
         </div>
       </header>
 
-      <main className="flex-1 overflow-y-auto p-8">
+      <main className="flex-1 overflow-y-auto p-8 bg-background">
         {tasks.length === 0 ? (
           <EmptyState stationColor={stationColor} />
         ) : (

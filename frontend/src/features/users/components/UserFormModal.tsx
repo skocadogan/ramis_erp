@@ -436,7 +436,7 @@ export function UserFormModal({ user, branches, roles, onClose, onSuccess }: Use
               <section>
                 <div className="mb-2.5 flex items-center justify-between">
                   <SectionTitle className="mb-0">{t("form.sectionRoles")}</SectionTitle>
-                  <span className="rounded-full bg-muted px-2 py-0.5 text-sub font-ui-medium text-muted-foreground">
+                  <span className="rounded-full bg-muted px-2 py-0.5 text-sub font-medium text-muted-foreground">
                     {t("form.rolesSelectedCount", { count: form.role_ids.length })}
                   </span>
                 </div>
@@ -462,7 +462,7 @@ export function UserFormModal({ user, branches, roles, onClose, onSuccess }: Use
                           className="mt-0.5"
                         />
                         <div className="min-w-0 flex-1">
-                          <span className="block text-sm font-ui-medium leading-tight text-foreground">
+                          <span className="block text-sm font-medium leading-tight text-foreground">
                             {role.name}
                           </span>
                           {role.description && (
@@ -508,7 +508,7 @@ function SectionTitle({
   return (
     <h4
       className={cn(
-        "mb-3 text-sub font-ui-semibold uppercase tracking-wider text-muted-foreground",
+        "mb-3 text-sub font-semibold uppercase tracking-wider text-muted-foreground",
         className
       )}
     >
@@ -525,7 +525,7 @@ function FieldLabel({
   required?: boolean
 }) {
   return (
-    <Label className="text-xs font-ui-medium text-muted-foreground">
+    <Label className="text-xs font-medium text-muted-foreground">
       {children}
       {required && <span className="text-destructive">*</span>}
     </Label>

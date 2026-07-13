@@ -142,7 +142,7 @@ export default function CustomerDisplayPage() {
     return (
       <div className="flex h-screen items-center justify-center bg-slate-900 text-white p-6 text-center">
         <div className="max-w-lg space-y-4">
-          <h2 className="text-2xl font-ui-bold">{t("unsafeTitle")}</h2>
+          <h2 className="text-2xl font-bold">{t("unsafeTitle")}</h2>
           <p className="text-muted-foreground">
             {t("unsafeDescription")}
           </p>
@@ -156,8 +156,8 @@ export default function CustomerDisplayPage() {
       <div className="flex h-screen items-center justify-center bg-slate-900 text-white">
         <div className="flex flex-col items-center gap-6">
           <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
-          <h2 className="text-2xl font-ui-bold tracking-tight">{t("connectingTitle")}</h2>
-          <p className="text-muted-foreground font-ui-medium">
+          <h2 className="text-2xl font-bold tracking-tight">{t("connectingTitle")}</h2>
+          <p className="text-muted-foreground font-medium">
             {t("terminalIdLabel")} <span className="text-blue-400">{terminalKey}</span>
           </p>
         </div>
@@ -172,7 +172,7 @@ export default function CustomerDisplayPage() {
           <div className="bg-red-500/10 p-6 rounded-full inline-block mb-4 border border-red-500/20">
             <MonitorOff className="h-16 w-16 text-red-500" />
           </div>
-          <h2 className="text-4xl font-ui-bold tracking-tight">{t("disconnectedTitle")}</h2>
+          <h2 className="text-4xl font-bold tracking-tight">{t("disconnectedTitle")}</h2>
           <p className="text-muted-foreground text-xl">
             {t("disconnectedDescription")}
           </p>
@@ -180,7 +180,7 @@ export default function CustomerDisplayPage() {
             <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
               <div className="h-full bg-red-500/70 w-full"></div>
             </div>
-            <p className="mt-4 text-sm text-muted-foreground font-ui-bold uppercase tracking-widest">
+            <p className="mt-4 text-sm text-muted-foreground font-bold uppercase tracking-widest">
               {t("reconnecting")}
             </p>
           </div>

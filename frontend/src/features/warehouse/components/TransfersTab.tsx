@@ -144,7 +144,7 @@ export function TransfersTab({ branchId }: { branchId?: string }) {
             toast.dismiss()
             setFormMode({ mode: "create" })
           }}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-ui-medium hover:bg-indigo-700 transition-colors shadow-sm ml-auto"
+          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm ml-auto"
         >
           <Plus size={16} /><span>{tw("transfers.newTransfer")}</span>
         </button>
@@ -162,13 +162,13 @@ export function TransfersTab({ branchId }: { branchId?: string }) {
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colTransferNo")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colSourceWarehouse")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colTargetWarehouse")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colStatus")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colDate")}</th>
-              <th className="text-left px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colRequestedBy")}</th>
-              <th className="text-center px-4 py-3 font-ui-semibold text-muted-foreground">{tw("transfers.colActions")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colTransferNo")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colSourceWarehouse")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colTargetWarehouse")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colStatus")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colDate")}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colRequestedBy")}</th>
+              <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{tw("transfers.colActions")}</th>
             </tr>
           </thead>
         }
@@ -189,8 +189,8 @@ export function TransfersTab({ branchId }: { branchId?: string }) {
         renderRow={(row) => (
           <>
             <td className="px-4 py-3 font-mono text-xs text-indigo-600 dark:text-indigo-400">{row.transfer_number}</td>
-            <td className="px-4 py-3 text-slate-900 dark:text-slate-200">{row.source_warehouse_name ?? "—"}</td>
-            <td className="px-4 py-3 text-slate-900 dark:text-slate-200">{row.target_warehouse_name ?? "—"}</td>
+            <td className="px-4 py-3 text-foreground">{row.source_warehouse_name ?? "—"}</td>
+            <td className="px-4 py-3 text-foreground">{row.target_warehouse_name ?? "—"}</td>
             <td className="px-4 py-3"><StatusBadge domain="transfer" status={row.status} /></td>
             <td className="px-4 py-3 text-muted-foreground text-xs">{row.transfer_date}</td>
             <td className="px-4 py-3 text-muted-foreground">{row.requested_by_name ?? "—"}</td>
@@ -336,22 +336,22 @@ export function TransfersTab({ branchId }: { branchId?: string }) {
                 <div className="mb-4 grid grid-cols-2 gap-3 text-sm">
                   <div>
                     <span className="text-muted-foreground">{tw("transfers.colDate")}</span>
-                    <span className="ml-2 font-ui-medium">
+                    <span className="ml-2 font-medium">
                       {new Date(selectedItem.transfer_date).toLocaleDateString("tr-TR")}
                     </span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">{tw("transfers.colRequestedBy")}</span>
-                    <span className="ml-2 font-ui-medium">{selectedItem.requested_by_name ?? "—"}</span>
+                    <span className="ml-2 font-medium">{selectedItem.requested_by_name ?? "—"}</span>
                   </div>
                 </div>
                 <table className="w-full text-sm">
                   <thead>
                     <tr className="border-b border-border">
-                      <th className="text-left py-2 text-muted-foreground font-ui-medium">{tw("transfers.colProduct")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("transfers.detailColQty")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("transfers.detailColUnit")}</th>
-                      <th className="text-right py-2 text-muted-foreground font-ui-medium">{tw("transfers.colReceived")}</th>
+                      <th className="text-left py-2 text-muted-foreground font-medium">{tw("transfers.colProduct")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("transfers.detailColQty")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("transfers.detailColUnit")}</th>
+                      <th className="text-right py-2 text-muted-foreground font-medium">{tw("transfers.colReceived")}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-border">

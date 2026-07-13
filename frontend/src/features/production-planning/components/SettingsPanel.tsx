@@ -76,7 +76,7 @@ export function SettingsPanel() {
     <div className="space-y-6 p-6">
       {/* HEADER SECTION */}
       <div>
-        <h2 className="text-lg font-ui-semibold text-foreground flex items-center gap-3">
+        <h2 className="text-lg font-semibold text-foreground flex items-center gap-3">
           <Settings2 className="text-blue-600" size={20} /> {t("title")}
         </h2>
         <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">
@@ -106,9 +106,9 @@ export function SettingsPanel() {
       ) : (
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {/* POS KISIT MODU KARTI */}
-          <Card className="p-0 gap-0 border-border bg-card dark:border-slate-700 overflow-hidden">
-            <CardHeader className="bg-slate-50 p-4 border-b border-border dark:bg-slate-800/40 dark:border-slate-800">
-              <CardTitle className="text-sm font-ui-semibold flex items-center gap-2">
+          <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden">
+            <CardHeader className="bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-blue-600 shrink-0" /> {t("posCardTitle")}
               </CardTitle>
               <CardDescription className="text-xs">{t("posCardDesc")}</CardDescription>
@@ -116,12 +116,12 @@ export function SettingsPanel() {
 
             <CardContent className="p-6 space-y-6">
               <div className="space-y-1.5">
-                <Label className="text-xs font-ui-semibold text-muted-foreground">{t("workMode")}</Label>
+                <Label className="text-xs font-semibold text-muted-foreground">{t("workMode")}</Label>
                 <Select
                   value={formData.pos_block_mode}
                   onValueChange={(val) => setFormData(prev => ({ ...prev, pos_block_mode: val as PosBlockMode }))}
                 >
-                  <SelectTrigger className="w-full h-10 bg-white dark:bg-slate-800 border-border shadow-sm">
+                  <SelectTrigger className="w-full h-10 bg-card border-border shadow-sm">
                     <SelectValue>
                       {formData.pos_block_mode === 'BLOCK' ? t("modeBlock") : 
                        formData.pos_block_mode === 'WARN' ? t("modeWarn") : 
@@ -136,7 +136,7 @@ export function SettingsPanel() {
                 </Select>
               </div>
 
-              <div className="space-y-3 bg-slate-50 dark:bg-slate-800/30 p-4 rounded-lg border border-slate-100 dark:border-slate-800">
+              <div className="space-y-3 bg-muted/30 p-4 rounded-lg border border-slate-100 border-border">
                 <div className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
                   <p className="text-sub text-muted-foreground leading-relaxed">
@@ -154,9 +154,9 @@ export function SettingsPanel() {
           </Card>
 
           {/* PLANLAMA ALGORİTMASI KARTI */}
-          <Card className="p-0 gap-0 border-border bg-card dark:border-slate-700 overflow-hidden flex flex-col">
-            <CardHeader className="bg-slate-50 p-4 border-b border-border dark:bg-slate-800/40 dark:border-slate-800">
-              <CardTitle className="text-sm font-ui-semibold flex items-center gap-2">
+          <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden flex flex-col">
+            <CardHeader className="bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <Zap className="h-4 w-4 text-amber-500 shrink-0" /> {t("algoCardTitle")}
               </CardTitle>
               <CardDescription className="text-xs">{t("algoCardDesc")}</CardDescription>
@@ -164,18 +164,18 @@ export function SettingsPanel() {
 
             <CardContent className="p-6 space-y-6 flex-1 flex flex-col">
               <div className="space-y-1.5">
-                <Label className="text-xs font-ui-semibold text-muted-foreground">{t("safetyFactor")}</Label>
+                <Label className="text-xs font-semibold text-muted-foreground">{t("safetyFactor")}</Label>
                 <div className="relative">
                   <Clock className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     type="number"
                     step="0.01"
                     min="1.0"
-                    className="h-9 pl-9 pr-8 bg-white dark:bg-slate-800 border-border"
+                    className="h-9 pl-9 pr-8 bg-card border-border"
                     value={formData.default_safety_factor || ""}
                     onChange={(e) => setFormData(prev => ({ ...prev, default_safety_factor: parseFloat(e.target.value) || 1.0 }))}
                   />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-ui-bold text-muted-foreground">x</span>
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs font-bold text-muted-foreground">x</span>
                 </div>
                 <p className="text-2xs text-muted-foreground italic">
                   {t("safetyHint")}
@@ -186,7 +186,7 @@ export function SettingsPanel() {
                 <Button
                   onClick={handleSave}
                   disabled={isPending}
-                  className="gap-2 bg-blue-600 hover:bg-blue-700 h-9 px-6 shadow-sm font-ui-semibold transition-all active:scale-[0.98]"
+                  className="gap-2 bg-blue-600 hover:bg-blue-700 h-9 px-6 shadow-sm font-semibold transition-all active:scale-[0.98]"
                 >
                   {isPending ? (
                     <Loader2 className="h-4 w-4 animate-spin" />

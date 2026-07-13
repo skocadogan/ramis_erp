@@ -331,13 +331,13 @@ const CartSidebar = memo(function CartSidebar({
     <>
       <div
         className={cn(
-          "flex h-full w-80 shrink-0 flex-col rounded-2xl border border-border bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-900 lg:w-96",
+          "flex h-full w-80 shrink-0 flex-col rounded-2xl border border-border p-5 shadow-sm border-border bg-card lg:w-96",
           className
         )}
       >
-        <div className="mb-4 flex shrink-0 items-center gap-2 border-b border-slate-100 pb-3 dark:border-slate-700">
+        <div className="mb-4 flex shrink-0 items-center gap-2 border-b border-slate-100 pb-3 border-border">
           <ReceiptText size={20} className="text-blue-600 dark:text-blue-400" />
-          <h2 className="text-lg font-ui-bold text-slate-800 dark:text-slate-100">
+          <h2 className="text-lg font-bold text-slate-800 text-foreground">
             {selectedTable ? tCart("titleWithTable", { name: selectedDisplayName }) : tCart("title")}
           </h2>
         </div>
@@ -345,8 +345,8 @@ const CartSidebar = memo(function CartSidebar({
         <div className="flex flex-1 flex-col overflow-y-auto min-h-0 mb-4 pr-1 scrollbar-thin">
           {selectedTable ? (
             cart.length === 0 ? (
-              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 bg-slate-50/50 p-6 dark:border-slate-700 dark:bg-slate-800/40">
-                <span className="text-center text-sm font-ui-medium leading-relaxed text-muted-foreground dark:text-muted-foreground">
+              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 bg-slate-50/50 p-6 border-border bg-muted/40">
+                <span className="text-center text-sm font-medium leading-relaxed text-muted-foreground dark:text-muted-foreground">
                   {tCart("empty")}
                 </span>
               </div>
@@ -354,8 +354,8 @@ const CartSidebar = memo(function CartSidebar({
               <CartItemRow cart={cart} onUpdateQuantity={handleUpdateQuantity} />
             )
           ) : (
-            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 bg-slate-50/50 p-6 dark:border-slate-700 dark:bg-slate-800/40">
-              <span className="text-center text-sm font-ui-medium text-muted-foreground dark:text-muted-foreground">{tCart("selectTable")}</span>
+            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 bg-slate-50/50 p-6 border-border bg-muted/40">
+              <span className="text-center text-sm font-medium text-muted-foreground dark:text-muted-foreground">{tCart("selectTable")}</span>
             </div>
           )}
         </div>
@@ -395,7 +395,7 @@ const CartSidebar = memo(function CartSidebar({
               {canForcePastCriticalStock ? tStock("criticalDesc") : tStock("warningDesc")}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <ul className="max-h-[min(70vh,640px)] space-y-3 overflow-y-auto rounded-lg border border-border bg-slate-50/80 p-3 text-xs text-slate-700 dark:border-slate-700 dark:bg-slate-900/50 dark:text-slate-300">
+          <ul className="max-h-[min(70vh,640px)] space-y-3 overflow-y-auto rounded-lg border border-border bg-slate-50/80 p-3 text-xs text-slate-700 border-border bg-card/50 text-muted-foreground">
             {stockBlockIssues.map((i, idx) => {
               const isInsufficient = i.code === "INSUFFICIENT_STOCK" || i.code === "SOLD_OUT" || i.code === "LIMITED_EXCEEDED";
               const physicalQty = parseStockQty(i.physical);
@@ -407,22 +407,22 @@ const CartSidebar = memo(function CartSidebar({
               return (
                 <li
                   key={`${i.stock_item_name}-${idx}`}
-                  className="border-b border-border/80 pb-3 last:border-b-0 last:pb-0 dark:border-slate-700/80"
+                  className="border-b border-border/80 pb-3 last:border-b-0 last:pb-0 border-border/80"
                 >
                   <div className="flex items-center gap-3">
                     <span className={`inline-block h-2 w-2 shrink-0 rounded-full ${isInsufficient ? "bg-rose-500" : "bg-amber-500"}`} />
                     <div className="flex min-w-0 flex-col">
-                      <span className="font-ui-bold text-foreground">{i.stock_item_name}</span>
+                      <span className="font-bold text-foreground">{i.stock_item_name}</span>
                       <span className="text-2xs text-muted-foreground">{i.warehouse_name} {i.station_name ? `· ${i.station_name}` : ""}</span>
                     </div>
                   </div>
 
-                  <div className="ml-5 mt-2 grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1.5 rounded-md bg-white p-3 dark:bg-slate-800/50">
+                  <div className="ml-5 mt-2 grid grid-cols-[minmax(0,1fr)_auto] gap-x-6 gap-y-1.5 rounded-md p-3 bg-muted/50">
                     <div className="text-2xs uppercase tracking-wider text-muted-foreground">{tStock("physical")}</div>
-                    <div className="text-right text-sub font-ui-medium tabular-nums text-foreground">{formatQuantityWithUnit(physicalQty, i.unit)}</div>
+                    <div className="text-right text-sub font-medium tabular-nums text-foreground">{formatQuantityWithUnit(physicalQty, i.unit)}</div>
 
                     <div className="text-2xs uppercase tracking-wider text-muted-foreground">{tStock("reserved")}</div>
-                    <div className="space-y-0.5 text-right text-sub font-ui-medium tabular-nums text-amber-600 dark:text-amber-400">
+                    <div className="space-y-0.5 text-right text-sub font-medium tabular-nums text-amber-600 dark:text-amber-400">
                       {reservedQty > 0 ? (
                         <div>-{formatQuantityWithUnit(reservedQty, i.unit)}</div>
                       ) : null}
@@ -434,13 +434,13 @@ const CartSidebar = memo(function CartSidebar({
                       ) : null}
                     </div>
 
-                    <div className="border-t border-slate-100 pt-1.5 text-2xs font-ui-bold uppercase tracking-wider text-muted-foreground dark:border-slate-700">{tStock("available")}</div>
-                    <div className={`border-t border-slate-100 pt-1.5 text-right text-sub font-ui-bold tabular-nums dark:border-slate-700 ${availableQty <= 0 ? "text-rose-600 dark:text-rose-400" : "text-blue-600 dark:text-blue-400"}`}>
+                    <div className="border-t border-slate-100 pt-1.5 text-2xs font-bold uppercase tracking-wider text-muted-foreground border-border">{tStock("available")}</div>
+                    <div className={`border-t border-slate-100 pt-1.5 text-right text-sub font-bold tabular-nums border-border ${availableQty <= 0 ? "text-rose-600 dark:text-rose-400" : "text-blue-600 dark:text-blue-400"}`}>
                       {formatQuantityWithUnit(availableQty, i.unit)}
                     </div>
                   </div>
 
-                  <div className="ml-5 mt-2 text-2xs font-ui-medium italic">
+                  <div className="ml-5 mt-2 text-2xs font-medium italic">
                     {isReservedIssue ? (
                       <span className="text-amber-700 dark:text-amber-400">{tStock("reservedDepleted")}</span>
                     ) : isInsufficient ? (
@@ -485,7 +485,7 @@ const CartSidebar = memo(function CartSidebar({
             <AlertDialogDescription className="text-center">
               {tAuth("desc")}
               <br /><br />
-              <span className="font-ui-bold text-foreground italic">
+              <span className="font-bold text-foreground italic">
                 {tAuth("requiredPermission")}
               </span>
             </AlertDialogDescription>
@@ -503,7 +503,7 @@ const CartSidebar = memo(function CartSidebar({
                 {tAuth("confirm")}
               </AlertDialogAction>
             ) : (
-              <div className="flex items-center justify-center rounded-lg bg-slate-100 p-2 text-sub text-muted-foreground dark:bg-slate-800">
+              <div className="flex items-center justify-center rounded-lg bg-slate-100 p-2 text-sub text-muted-foreground bg-muted">
                 {tAuth("noPermission")}
               </div>
             )}

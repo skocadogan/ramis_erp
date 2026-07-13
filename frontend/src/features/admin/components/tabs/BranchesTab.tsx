@@ -52,7 +52,7 @@ export function BranchesTab({
     <div className="space-y-4">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-ui-semibold text-foreground">
+          <h2 className="text-lg font-semibold text-foreground">
             {canManageBranches ? t('title') : t('titlePersonal')}
           </h2>
           <p className="text-sm text-muted-foreground mt-0.5 dark:text-muted-foreground">
@@ -63,7 +63,7 @@ export function BranchesTab({
         </div>
         {canManageBranches ? (
           <button onClick={onAdd}
-            className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-ui-medium text-white hover:bg-blue-700 transition-all">
+            className="flex items-center gap-1.5 rounded-md bg-blue-600 px-3.5 py-1.5 text-sm font-medium text-white hover:bg-blue-700 transition-all">
             <Plus size={15} /> {t('addNew')}
           </button>
         ) : null}
@@ -73,17 +73,17 @@ export function BranchesTab({
         <div className="relative flex-1 max-w-sm">
           <Search size={15} className="absolute left-2.5 top-1/2 -translate-y-1/2 text-muted-foreground" />
           <input type="text" placeholder={tAdmin('common.search')} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-8 pr-4 py-1.5 bg-white border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100" />
+            className="w-full pl-8 pr-4 py-1.5 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-input text-foreground" />
         </div>
 
         {canManageBranches ? (
-          <div className="flex items-center bg-slate-100 p-1 rounded-lg dark:bg-slate-800">
+          <div className="flex items-center bg-slate-100 p-1 rounded-lg bg-muted">
             <button
               type="button"
               onClick={() => setShowDeleted(false)}
               className={cn(
-                "px-3 py-1 text-xs font-ui-medium rounded-md transition-all",
-                !showDeleted ? "bg-white shadow-sm text-blue-600 dark:bg-slate-700 dark:text-blue-400" : "text-muted-foreground hover:text-slate-700"
+                "px-3 py-1 text-xs font-medium rounded-md transition-all",
+                !showDeleted ? "shadow-sm text-blue-600 bg-accent dark:text-blue-400" : "text-muted-foreground hover:text-slate-700"
               )}
             >
               {t('activeBranches', { count: branches.length })}
@@ -92,8 +92,8 @@ export function BranchesTab({
               type="button"
               onClick={() => setShowDeleted(true)}
               className={cn(
-                "px-3 py-1 text-xs font-ui-medium rounded-md transition-all flex items-center gap-1",
-                showDeleted ? "bg-white shadow-sm text-red-600 dark:bg-slate-700 dark:text-red-400" : "text-muted-foreground hover:text-slate-700"
+                "px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center gap-1",
+                showDeleted ? "shadow-sm text-red-600 bg-accent dark:text-red-400" : "text-muted-foreground hover:text-slate-700"
               )}
             >
               {t('deletedBranches', { count: deletedBranches.length })}
@@ -102,19 +102,19 @@ export function BranchesTab({
         ) : null}
       </div>
 
-      <div className="bg-white rounded-lg border border-border overflow-auto dark:bg-slate-900 dark:border-slate-700">
+      <div className="rounded-lg border border-border overflow-auto bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border dark:bg-slate-800 dark:border-slate-700">
+          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
             <tr>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('name')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('code')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('phone')}</th>
-              <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('address')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('name')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('code')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('phone')}</th>
+              <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('address')}</th>
               {canManageBranches ? (
-                <th className="text-left px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('users')}</th>
+                <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('users')}</th>
               ) : null}
               {canManageBranches ? (
-                <th className="text-right px-4 py-2.5 text-xs font-ui-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{tAdmin('common.actions')}</th>
+                <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{tAdmin('common.actions')}</th>
               ) : null}
             </tr>
           </thead>
@@ -133,8 +133,8 @@ export function BranchesTab({
               </tr>
             ) : (
             filtered.map(b => (
-              <tr key={b.id} className="border-b border-slate-100 hover:bg-slate-50/50 dark:border-slate-700 dark:hover:bg-slate-800/50">
-                <td className="px-4 py-3 font-ui-medium text-foreground">{b.name}</td>
+              <tr key={b.id} className="border-b border-slate-100 hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50">
+                <td className="px-4 py-3 font-medium text-foreground">{b.name}</td>
                 <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{b.code}</td>
                 <td className="px-4 py-3 text-muted-foreground">{b.phone || "-"}</td>
                 <td className="px-4 py-3 text-slate-600 text-xs dark:text-muted-foreground">{b.address || "-"}</td>
@@ -143,7 +143,7 @@ export function BranchesTab({
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-1.5">
                     <Users size={14} className="text-muted-foreground dark:text-muted-foreground" />
-                    <span className="font-ui-semibold text-foreground">{b.users_count || 0}</span>
+                    <span className="font-semibold text-foreground">{b.users_count || 0}</span>
                   </div>
                 </td>
                 <td className="px-4 py-3 text-right">

@@ -86,7 +86,7 @@ function Input({ value, onChange, mono = false, placeholder = "" }: {
       className={`flex-1 h-7 px-2 text-xs rounded
         bg-slate-100 border border-slate-300 text-slate-900
         focus:outline-none focus:border-indigo-500
-        dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200
+        bg-muted border-input text-foreground
         ${mono ? "font-mono" : ""}`}
     />
   )
@@ -103,7 +103,7 @@ function Select({ value, onChange, options }: {
       className="flex-1 h-7 px-2 text-xs rounded
         bg-slate-100 border border-slate-300 text-slate-900
         focus:outline-none focus:border-indigo-500
-        dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200"
+        bg-muted border-input text-foreground"
     >
       {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
@@ -196,7 +196,7 @@ function BranchInfoEditor({ block, onUpdate, t, branches }: {
       </FieldRow>
 
       <div className="border-t border-border pt-2 mt-2">
-        <span className="text-2xs font-ui-semibold text-muted-foreground uppercase tracking-wider">
+        <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-wider">
           {t("reporting.blockEditor.fields.visibleFields")}
         </span>
         <div className="space-y-0.5 mt-1 max-h-48 overflow-y-auto">
@@ -377,7 +377,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                 className="w-12 h-7 px-1 text-center rounded
                   bg-slate-100 border border-slate-300 text-slate-900
                   focus:outline-none focus:border-indigo-500
-                  dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200"
+                  bg-muted border-input text-foreground"
               />
               <Select value={col.align} onChange={v => {
                 const cols = [...(block.columns ?? [])]
@@ -400,12 +400,12 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   const cols = [...(block.columns ?? [])]
                   cols[i] = { ...cols[i], prefix: e.target.value }
                   up({ columns: cols })
-                }} placeholder={t("reporting.blockEditor.prefix")} className="h-7 px-1 text-2xs rounded bg-slate-100 border border-slate-300 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200" />
+                }} placeholder={t("reporting.blockEditor.prefix")} className="h-7 px-1 text-2xs rounded bg-slate-100 border border-slate-300 bg-muted border-input text-foreground" />
                 <input value={col.suffix ?? ""} onChange={e => {
                   const cols = [...(block.columns ?? [])]
                   cols[i] = { ...cols[i], suffix: e.target.value }
                   up({ columns: cols })
-                }} placeholder={t("reporting.blockEditor.suffix")} className="h-7 px-1 text-2xs rounded bg-slate-100 border border-slate-300 dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200" />
+                }} placeholder={t("reporting.blockEditor.suffix")} className="h-7 px-1 text-2xs rounded bg-slate-100 border border-slate-300 bg-muted border-input text-foreground" />
               </div>
 
               <div className="flex flex-col gap-0">
@@ -451,7 +451,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
         className="w-20 h-7 px-2 text-xs rounded
           bg-slate-100 border border-slate-300 text-slate-900
           focus:outline-none focus:border-indigo-500
-          dark:bg-slate-800 dark:border-slate-600 dark:text-slate-200"
+          bg-muted border-input text-foreground"
       />
     </FieldRow>
   )
@@ -504,7 +504,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
           step={8}
           value={block.width_px ?? 384}
           onChange={e => up({ width_px: Number(e.target.value) || 384 })}
-          className="w-20 px-2 py-1 text-xs border border-border rounded bg-slate-50 dark:bg-slate-800 dark:border-slate-700"
+          className="w-20 px-2 py-1 text-xs border border-border rounded bg-muted border-border"
         />
       </FieldRow>
       <FieldRow label={t("reporting.blockEditor.fields.hideIfEmpty")}>
@@ -644,18 +644,17 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
     <div className="flex flex-col h-full overflow-hidden">
       {/* Palet */}
       <div className="px-3 py-2 border-b
-        border-border bg-white
-        dark:border-slate-700 dark:bg-slate-800/60">
+        border-border border-border bg-muted/60">
         <p className="text-2xs uppercase tracking-wider mb-2
           text-muted-foreground dark:text-muted-foreground">{t("reporting.blockEditor.addBlockTitle")}</p>
         <div className="flex flex-wrap gap-1.5">
           {palette.map(p => (
             <button key={p.type} type="button" onClick={() => addBlock(p.default)}
-              className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-ui-medium
+              className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium
                 bg-slate-100 hover:bg-indigo-600 text-slate-600 hover:text-white
                 border border-slate-300 hover:border-indigo-500 transition-all
-                dark:bg-slate-700 dark:hover:bg-indigo-600 dark:text-slate-300
-                dark:border-slate-600 dark:hover:border-indigo-500">
+                bg-accent dark:hover:bg-indigo-600 text-muted-foreground
+                border-input dark:hover:border-indigo-500">
               {p.icon}{p.label}
             </button>
           ))}
@@ -676,7 +675,7 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
             {VARIABLES.map(v => (
               <code key={v} className="text-2xs px-1.5 py-0.5 rounded font-mono
                 bg-slate-100 text-emerald-700
-                dark:bg-slate-700 dark:text-emerald-400">
+                bg-accent dark:text-emerald-400">
                 {v}
               </code>
             ))}
@@ -700,10 +699,10 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
                     hover:bg-slate-100 dark:hover:bg-slate-800/50"
                   onClick={() => setExpanded(expanded === i ? null : i)}
                 >
-                  <span className="w-5 h-5 flex items-center justify-center rounded text-2xs font-ui-bold
+                  <span className="w-5 h-5 flex items-center justify-center rounded text-2xs font-bold
                     bg-slate-200 text-muted-foreground
-                    dark:bg-slate-700 dark:text-muted-foreground">{i + 1}</span>
-                  <span className="text-sub font-ui-semibold w-20 shrink-0
+                    bg-accent dark:text-muted-foreground">{i + 1}</span>
+                  <span className="text-sub font-semibold w-20 shrink-0
                     text-indigo-600 dark:text-indigo-400">
                     {typeLabel(block.type)}
                   </span>
@@ -732,7 +731,7 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
                       <Trash2 size={12} />
                     </button>
                   </div>
-                  <div className="text-muted-foreground dark:text-slate-600">
+                  <div className="text-muted-foreground">
                     {expanded === i ? <ChevronUp size={13} /> : <ChevronDown size={13} />}
                   </div>
                 </div>
@@ -740,7 +739,7 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
                 {expanded === i && (
                   <div className="px-4 pb-3 pt-1.5 border-t
                     bg-slate-50 border-border
-                    dark:bg-slate-800/40 dark:border-slate-700/50">
+                    bg-muted/40 border-border/50">
                     <BlockEditor block={block} onUpdate={b => updateBlock(i, b)} branches={branches} />
                   </div>
                 )}

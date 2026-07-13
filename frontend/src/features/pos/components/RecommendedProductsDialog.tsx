@@ -142,7 +142,7 @@ export function RecommendedProductsDialog({
                 const units = catalogProduct?.units ?? rec.units ?? [];
                 return (
                   <tr key={rec.id} className="border-b border-border/60">
-                    <td className="py-3 pr-2 font-ui-medium">{rec.name}</td>
+                    <td className="py-3 pr-2 font-medium">{rec.name}</td>
                     <td className="py-3 pr-2">
                       {hasUnits ? (
                         <select
@@ -180,7 +180,7 @@ export function RecommendedProductsDialog({
                         >
                           <Minus size={14} />
                         </Button>
-                        <span className="min-w-[1.5rem] text-center text-sm font-ui-bold tabular-nums">
+                        <span className="min-w-[1.5rem] text-center text-sm font-bold tabular-nums">
                           {qty}
                         </span>
                         <Button

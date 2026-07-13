@@ -63,12 +63,12 @@ export function BulkStockEntryLeftColumn({
   const label = bulkStockEntryLabelClass
 
   return (
-    <div className="flex min-h-0 min-w-0 shrink-0 flex-col gap-3 overflow-y-auto border-border pr-0 lg:w-[30%] lg:max-h-full lg:border-r lg:pr-4 dark:border-slate-700">
-      <div className="flex flex-col gap-1.5 rounded-lg border border-border bg-white px-3 py-2.5 dark:border-slate-700 dark:bg-slate-900/50">
-        <label className="text-xs font-ui-medium text-muted-foreground">{t("bulkStockEntry.draftsPickerLabel")}</label>
+    <div className="flex min-h-0 min-w-0 shrink-0 flex-col gap-3 overflow-y-auto border-border pr-0 lg:w-[30%] lg:max-h-full lg:border-r lg:pr-4 border-border">
+      <div className="flex flex-col gap-1.5 rounded-lg border border-border px-3 py-2.5 border-border bg-card/50">
+        <label className="text-xs font-medium text-muted-foreground">{t("bulkStockEntry.draftsPickerLabel")}</label>
         <div className="flex flex-wrap items-center gap-2">
           <select
-            className="min-w-0 flex-1 rounded-md border border-border bg-white px-2.5 py-1.5 text-sm dark:bg-slate-800 dark:border-slate-600 dark:text-slate-100"
+            className="min-w-0 flex-1 rounded-md border border-border px-2.5 py-1.5 text-sm bg-muted border-input text-foreground"
             disabled={draftListLoading || loadingDraft}
             value={draftId ?? ""}
             onChange={(e) => onDraftSelect(e.target.value)}
@@ -99,7 +99,7 @@ export function BulkStockEntryLeftColumn({
         )}
       </div>
 
-      <div className="flex flex-col gap-2 rounded-lg border border-border bg-slate-50/80 px-3 py-2 dark:border-slate-700 dark:bg-slate-800/30">
+      <div className="flex flex-col gap-2 rounded-lg border border-border bg-slate-50/80 px-3 py-2 border-border bg-muted/30">
         <label className="inline-flex cursor-pointer items-center gap-2 text-xs text-foreground">
           <input
             type="checkbox"
@@ -123,13 +123,13 @@ export function BulkStockEntryLeftColumn({
 
       {saveError && (
         <div className="shrink-0 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-800 dark:border-red-900/50 dark:bg-red-950/40 dark:text-red-200">
-          <span className="font-ui-medium">{t("bulkStockEntry.draftRecordLabel")}</span> {saveError}
+          <span className="font-medium">{t("bulkStockEntry.draftRecordLabel")}</span> {saveError}
         </div>
       )}
 
       {finalizeError && (
         <div className="shrink-0 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-950 dark:border-amber-800 dark:bg-amber-950/50 dark:text-amber-100">
-          <span className="font-ui-medium">{t("bulkStockEntry.finalizeLabel")}</span> {finalizeError}
+          <span className="font-medium">{t("bulkStockEntry.finalizeLabel")}</span> {finalizeError}
         </div>
       )}
 

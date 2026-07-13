@@ -129,7 +129,7 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
     <>
       <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border shadow-sm border-border bg-card">
       {/* STICKY HEADER AREA */}
-      <div className="z-20 flex shrink-0 flex-col border-b border-slate-50 px-3 pt-4 pb-2 border-border bg-card sm:px-6 sm:pt-2">
+      <div className="z-20 flex shrink-0 flex-col border-b px-3 pt-4 pb-2 border-border bg-card sm:px-6 sm:pt-2">
         <div className="mb-4 flex flex-col gap-3 sm:mb-2 lg:flex-row lg:items-start lg:justify-between lg:gap-4">
           <h2 className="shrink-0 text-xl font-bold tracking-tight sm:text-2xl text-foreground">
             {t("select")}
@@ -173,7 +173,7 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
                 className={`flex shrink-0 items-center rounded-xl border px-4 py-2.5 text-sm font-bold transition-colors
  ${isActive 
  ? "shadow-md" 
- : "border-border hover:border-slate-400 border-border bg-muted text-muted-foreground dark:hover:border-slate-500"}`}
+ : "border-border hover: border-border bg-muted text-muted-foreground dark:hover:"}`}
                 style={isActive ? {
                   backgroundColor: `${zColor}15`,
                   borderColor: zColor,

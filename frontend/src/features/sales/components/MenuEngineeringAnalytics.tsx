@@ -578,7 +578,7 @@ export function MenuEngineeringAnalytics({
 
           
             <div className="rounded-lg border border-border shadow-sm bg-card border-border">
-                <div className="border-b border-slate-100 px-4 py-3 border-border">
+                <div className="border-b px-4 py-3 border-border">
                     <div className="text-sm font-semibold text-foreground">
                         {analysisMode === "actual"
                             ? t("menuEngineering.actualTableTitle")
@@ -592,7 +592,7 @@ export function MenuEngineeringAnalytics({
                 </div>
 
                 {isFetching && (
-                    <div className="border-b border-slate-100 /60 px-4 py-2 text-xs text-muted-foreground border-border bg-card/50">
+                    <div className="border-b /60 px-4 py-2 text-xs text-muted-foreground border-border bg-card/50">
                         {t("list.loadingHint")}
                     </div>
                 )}
@@ -793,7 +793,7 @@ export function MenuEngineeringAnalytics({
                     <div className="mt-4 overflow-x-auto">
                         <table className="min-w-full">
                             <thead>
-                                <tr className="border-b border-slate-100 border-border">
+                                <tr className="border-b border-border">
                                     <th className="px-2 py-2 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.stockItem")}</th>
                                     <th className="px-2 py-2 text-left text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.breakdown")}</th>
                                     <th className="px-2 py-2 text-right text-xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceTable.qty")}</th>
@@ -802,7 +802,7 @@ export function MenuEngineeringAnalytics({
                             </thead>
                             <tbody>
                                 {(variance?.top_items ?? []).map((item) => (
-                                    <tr key={item.stock_item_id} className="border-b border-slate-100 last:border-0 border-border">
+                                    <tr key={item.stock_item_id} className="border-b last:border-0 border-border">
                                         <td className="px-2 py-2">
                                             <div className="font-semibold text-foreground">{item.name}</div>
                                             <div className="text-xs text-muted-foreground">{item.sku}</div>

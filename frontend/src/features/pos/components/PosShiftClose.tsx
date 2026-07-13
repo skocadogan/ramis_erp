@@ -322,7 +322,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
             {/* Sağ Taraftaki Klavye Konteyneri */}
             {activeKbdField && (
               <div className="w-full md:w-[380px] shrink-0 animate-in fade-in slide-in-from-right-4 duration-300">
-                <div className="rounded-xl border border-slate-100 /50 p-1 border-border bg-card/50">
+                <div className="rounded-xl border /50 p-1 border-border bg-card/50">
                   <div className="flex items-center justify-between px-3 py-2 border-b border-white border-border mb-2">
                     <span className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">
                       {activeKbdField === "notes" ? tShift("kbdAlpha") : tShift("kbdNumeric")}

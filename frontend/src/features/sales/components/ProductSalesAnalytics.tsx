@@ -274,7 +274,7 @@ export function ProductSalesAnalytics({
 
                 {/* Products Table */}
                 <div className="rounded-xl border border-border overflow-hidden shadow-sm bg-card border-border">
-                    <div className="p-4 border-b border-slate-100 border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <div className="p-4 border-b border-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                         <div className="flex items-center gap-4">
                             <h3 className="font-bold text-foreground">{t('productAnalytics.tableTitle')}</h3>
                             <div className="flex items-center gap-1.5 border-l border-border pl-4 border-border">

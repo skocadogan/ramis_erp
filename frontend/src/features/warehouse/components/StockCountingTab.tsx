@@ -115,7 +115,7 @@ export function StockCountingTab({ branchId }: { branchId?: string }) {
         fetchMore={() => void fetchNextPage()}
         hasMore={!!hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        className="max-h-[calc(100vh-14rem)] rounded-xl border border-border/80 dark:border-slate-800 bg-card/50"
+        className="max-h-[calc(100vh-14rem)] rounded-xl border border-border/80 bg-card/50"
         tableClassName="w-full text-sm"
         header={
           <thead className={virtualTableStickyHeadClass}>

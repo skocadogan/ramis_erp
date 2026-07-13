@@ -84,7 +84,7 @@ function Input({ value, onChange, mono = false, placeholder = "" }: {
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
       className={`flex-1 h-7 px-2 text-xs rounded
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground
  ${mono ? "font-mono" : ""}`}
@@ -101,7 +101,7 @@ function Select({ value, onChange, options }: {
       value={value}
       onChange={e => onChange(e.target.value)}
       className="flex-1 h-7 px-2 text-xs rounded
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground"
     >
@@ -375,7 +375,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   up({ columns: cols })
                 }}
                 className="w-12 h-7 px-1 text-center rounded
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground"
               />
@@ -400,12 +400,12 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   const cols = [...(block.columns ?? [])]
                   cols[i] = { ...cols[i], prefix: e.target.value }
                   up({ columns: cols })
-                }} placeholder={t("reporting.blockEditor.prefix")} className="h-7 px-1 text-2xs rounded border border-slate-300 bg-muted border-input text-foreground" />
+                }} placeholder={t("reporting.blockEditor.prefix")} className="h-7 px-1 text-2xs rounded border bg-muted border-input text-foreground" />
                 <input value={col.suffix ?? ""} onChange={e => {
                   const cols = [...(block.columns ?? [])]
                   cols[i] = { ...cols[i], suffix: e.target.value }
                   up({ columns: cols })
-                }} placeholder={t("reporting.blockEditor.suffix")} className="h-7 px-1 text-2xs rounded border border-slate-300 bg-muted border-input text-foreground" />
+                }} placeholder={t("reporting.blockEditor.suffix")} className="h-7 px-1 text-2xs rounded border bg-muted border-input text-foreground" />
               </div>
 
               <div className="flex flex-col gap-0">
@@ -449,7 +449,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
       <input type="number" value={block.lines ?? 1} min={1} max={10}
         onChange={e => up({ lines: parseInt(e.target.value) || 1 })}
         className="w-20 h-7 px-2 text-xs rounded
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground"
       />
@@ -652,7 +652,7 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
             <button key={p.type} type="button" onClick={() => addBlock(p.default)}
               className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium
  hover:bg-indigo-600 hover:text-white
- border border-slate-300 hover:border-indigo-500 transition-all
+ border hover:border-indigo-500 transition-all
  bg-accent dark:hover:bg-indigo-600 text-muted-foreground
  border-input dark:hover:border-indigo-500">
               {p.icon}{p.label}

@@ -335,7 +335,7 @@ const CartSidebar = memo(function CartSidebar({
           className
         )}
       >
-        <div className="mb-4 flex shrink-0 items-center gap-2 border-b border-slate-100 pb-3 border-border">
+        <div className="mb-4 flex shrink-0 items-center gap-2 border-b pb-3 border-border">
           <ReceiptText size={20} className="text-blue-600 dark:text-blue-400" />
           <h2 className="text-lg font-bold text-foreground">
             {selectedTable ? tCart("titleWithTable", { name: selectedDisplayName }) : tCart("title")}
@@ -345,7 +345,7 @@ const CartSidebar = memo(function CartSidebar({
         <div className="flex flex-1 flex-col overflow-y-auto min-h-0 mb-4 pr-1 scrollbar-thin">
           {selectedTable ? (
             cart.length === 0 ? (
-              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 /50 p-6 border-border bg-muted/40">
+              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed /50 p-6 border-border bg-muted/40">
                 <span className="text-center text-sm font-medium leading-relaxed text-muted-foreground dark:text-muted-foreground">
                   {tCart("empty")}
                 </span>
@@ -354,7 +354,7 @@ const CartSidebar = memo(function CartSidebar({
               <CartItemRow cart={cart} onUpdateQuantity={handleUpdateQuantity} />
             )
           ) : (
-            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 /50 p-6 border-border bg-muted/40">
+            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed /50 p-6 border-border bg-muted/40">
               <span className="text-center text-sm font-medium text-muted-foreground dark:text-muted-foreground">{tCart("selectTable")}</span>
             </div>
           )}
@@ -434,8 +434,8 @@ const CartSidebar = memo(function CartSidebar({
                       ) : null}
                     </div>
 
-                    <div className="border-t border-slate-100 pt-1.5 text-2xs font-bold uppercase tracking-wider text-muted-foreground border-border">{tStock("available")}</div>
-                    <div className={`border-t border-slate-100 pt-1.5 text-right text-sub font-bold tabular-nums border-border ${availableQty <= 0 ? "text-rose-600 dark:text-rose-400" : "text-blue-600 dark:text-blue-400"}`}>
+                    <div className="border-t pt-1.5 text-2xs font-bold uppercase tracking-wider text-muted-foreground border-border">{tStock("available")}</div>
+                    <div className={`border-t pt-1.5 text-right text-sub font-bold tabular-nums border-border ${availableQty <= 0 ? "text-rose-600 dark:text-rose-400" : "text-blue-600 dark:text-blue-400"}`}>
                       {formatQuantityWithUnit(availableQty, i.unit)}
                     </div>
                   </div>

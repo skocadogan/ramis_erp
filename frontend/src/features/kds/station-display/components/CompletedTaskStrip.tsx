@@ -37,7 +37,7 @@ export function CompletedTaskStrip({ tasks }: CompletedTaskStripProps) {
           <CompletedTaskChip key={task.id} task={task} />
         ))}
         {tasks.length > 10 && (
-          <span className="inline-flex items-center gap-1 rounded-lg border border-slate-700/30 /40 px-3 py-1.5 text-xs font-medium">
+          <span className="inline-flex items-center gap-1 rounded-lg border /30 /40 px-3 py-1.5 text-xs font-medium">
             +{tasks.length - 10} daha
           </span>
         )}
@@ -58,7 +58,7 @@ function CompletedTaskChip({ task }: { task: PrepTask }) {
       className={cn(
         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
         isCancelled
-          ? "border-slate-700/20 /30  opacity-60"
+          ? "/20 /30  opacity-60"
           : "border-emerald-900/30 bg-emerald-950/30 text-emerald-300/80"
       )}
     >

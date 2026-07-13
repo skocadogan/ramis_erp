@@ -103,7 +103,7 @@ export function BulkStockEntryLeftColumn({
         <label className="inline-flex cursor-pointer items-center gap-2 text-xs text-foreground">
           <input
             type="checkbox"
-            className="rounded border-slate-300"
+            className="rounded"
             checked={autoSaveEnabled}
             onChange={(e) => setAutoSaveEnabled(e.target.checked)}
             disabled={status === "POSTED"}

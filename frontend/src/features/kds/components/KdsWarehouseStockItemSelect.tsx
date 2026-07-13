@@ -68,7 +68,7 @@ export function KdsWarehouseStockItemSelect({
         className="p-0 w-[var(--radix-popover-trigger-width)] max-h-[300px] overflow-hidden flex flex-col border border-border bg-card border-border shadow-md"
         align="start"
       >
-        <div className="p-2 border-b border-slate-100 border-border flex items-center gap-2">
+        <div className="p-2 border-b border-border flex items-center gap-2">
           <Search size={14} className="text-muted-foreground" />
           <input
             autoFocus

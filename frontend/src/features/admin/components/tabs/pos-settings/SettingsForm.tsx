@@ -68,7 +68,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             <Switch checked={settings.show_clock} onCheckedChange={val => set({ show_clock: val })} />
           </div>
 
-          <div className="space-y-3 pt-2 border-t border-slate-100 border-border">
+          <div className="space-y-3 pt-2 border-t border-border">
             <div className="space-y-1.5">
               <Label className="text-xs font-semibold text-muted-foreground">{t('admin_settings.display.welcomeTitleLabel')}</Label>
               <Input value={settings.welcome_title} onChange={e => set({ welcome_title: e.target.value })} className="h-9" placeholder="RAMIS ERP" />
@@ -79,7 +79,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             </div>
           </div>
 
-          <div className="space-y-3 pt-4 border-t border-slate-100 border-border">
+          <div className="space-y-3 pt-4 border-t border-border">
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <Zap className="h-4 w-4 text-emerald-500" /> {t('admin_settings.display.successMessagesTitle')}
             </CardTitle>

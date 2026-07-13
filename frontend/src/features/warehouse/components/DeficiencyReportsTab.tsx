@@ -275,7 +275,7 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
         fetchMore={() => void fetchNextPage()}
         hasMore={!!hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        className="min-h-0 flex-1 rounded-2xl border border-border/80 dark:border-slate-800 bg-card/50 shadow-sm"
+        className="min-h-0 flex-1 rounded-2xl border border-border/80 bg-card/50 shadow-sm"
         tableClassName="w-full text-sm"
         header={
           <thead className={virtualTableStickyHeadClass}>

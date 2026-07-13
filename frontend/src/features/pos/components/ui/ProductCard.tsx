@@ -110,8 +110,8 @@ export const ProductCard = memo(function ProductCard({
         className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-card text-left shadow-sm transition-colors
  ${
  disabled
- ? "border-border opacity-55 grayscale-[0.35] dark:border-slate-700"
- : "border-border hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500"
+ ? "border-border opacity-55 grayscale-[0.35] "
+ : "border-border hover:border-blue-400 dark:hover:border-blue-500"
  }`}
       >
         {hasAllergens && (

@@ -384,7 +384,7 @@ export function AuditTab({
                   </div>
                 </div>
 
-                <div className="p-3 rounded-lg bg-muted/50 border border-slate-100 border-border">
+                <div className="p-3 rounded-lg bg-muted/50 border border-border">
                   <p className="text-sub text-muted-foreground mb-2 uppercase font-bold tracking-tight">{t('audit.details.context')}</p>
                   <div className="space-y-2 text-ui-sm">
                     <div className="flex justify-between">
@@ -412,7 +412,7 @@ export function AuditTab({
                 )}
 
                 {(selectedLog.before_json || selectedLog.after_json) && (
-                  <div className="space-y-2 pt-2 border-t border-slate-100 border-border">
+                  <div className="space-y-2 pt-2 border-t border-border">
                     <p className="text-sub text-muted-foreground uppercase font-bold flex items-center gap-1">
                       <FileJson className="h-3 w-3" /> {t('audit.details.dataChange')}
                     </p>

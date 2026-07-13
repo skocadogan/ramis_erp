@@ -299,7 +299,7 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
       )}
       <td className="px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="relative h-14 w-14 flex-shrink-0 rounded-md border border-slate-100 overflow-hidden flex items-center justify-center border-border bg-muted shadow-sm">
+          <div className="relative h-14 w-14 flex-shrink-0 rounded-md border overflow-hidden flex items-center justify-center border-border bg-muted shadow-sm">
             {product.image ? (
               <AppImage src={product.image} alt="" fill className="object-cover" sizes="56px" />
             ) : (

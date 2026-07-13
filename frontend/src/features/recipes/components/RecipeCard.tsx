@@ -74,7 +74,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
           <div className="mt-4 space-y-4 animate-in fade-in slide-in-from-top-2 duration-300">
             {/* Specs: Times & Servings */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="/50 bg-card/30 p-2.5 rounded-xl border border-slate-100/80 border-border/50">
+              <div className="/50 bg-card/30 p-2.5 rounded-xl border /80 border-border/50">
                 <div className="flex items-center gap-1.5 text-xs font-semibold mb-2">
                   <Clock size={14} className="text-blue-500" /> {t("times")}
                 </div>
@@ -90,7 +90,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
                 </div>
               </div>
 
-              <div className="/50 bg-card/30 p-2.5 rounded-xl border border-slate-100/80 border-border/50">
+              <div className="/50 bg-card/30 p-2.5 rounded-xl border /80 border-border/50">
                 <div className="flex items-center gap-1.5 text-xs font-semibold mb-2">
                   <Users size={14} className="text-amber-500" /> {t("portion")}
                 </div>
@@ -111,7 +111,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
 
             {/* Recipe Times (Per serving) */}
             {(recipe.prep_time_per_serving > 0 || recipe.cook_time_per_serving > 0) && (
-              <div className="flex items-center gap-3 px-1 border-y border-slate-50 py-2 border-border/50">
+              <div className="flex items-center gap-3 px-1 border-y py-2 border-border/50">
                 <span className="text-sub text-muted-foreground font-medium">{t("perServingShort")}</span>
                 <div className="flex gap-2">
                   {recipe.prep_time_per_serving > 0 && (
@@ -152,7 +152,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
 
       {/* Actions Footer */}
       {isCardExpanded && (
-        <div className="flex border-t border-slate-100 border-border divide-x divide-border shrink-0 animate-in fade-in duration-500">
+        <div className="flex border-t border-border divide-x divide-border shrink-0 animate-in fade-in duration-500">
           {onEdit && (
             <button
               onClick={onEdit}
@@ -175,7 +175,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
       )}
 
       {isCardExpanded && isIngredientsExpanded && recipe.ingredients && (
-        <div className="border-t border-slate-100 p-4 bg-muted border-border animate-in zoom-in-95 duration-200">
+        <div className="border-t p-4 bg-muted border-border animate-in zoom-in-95 duration-200">
           <table className="w-full text-xs">
             <thead>
               <tr className="text-left text-muted-foreground">
@@ -186,7 +186,7 @@ export function RecipeCard({ recipe, onEdit, onDelete }: RecipeCardProps) {
             </thead>
             <tbody>
               {recipe.ingredients.map(ing => (
-                <tr key={ing.id} className="border-t border-slate-100 border-border">
+                <tr key={ing.id} className="border-t border-border">
                   <td className="py-1.5 font-medium text-foreground">
                     {ing.ingredient_type === "sub_recipe"
                       ? `${ing.sub_recipe_name} (${t("subRecipeBadge")})`

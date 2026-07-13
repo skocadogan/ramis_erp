@@ -65,7 +65,7 @@ export function PrepRulesTable({
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
       {rules.length > 0 && (
-        <div className="/50 bg-muted/50 p-2 border-b border-slate-100 border-border shrink-0">
+        <div className="/50 bg-muted/50 p-2 border-b border-border shrink-0">
           <h5 className="text-2xs font-bold uppercase text-muted-foreground px-2">
             {t("management.rulesSectionTitle", { count: rules.length })}
           </h5>

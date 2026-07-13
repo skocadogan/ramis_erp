@@ -211,7 +211,7 @@ export function ExpiringLotsTab({ branchId }: { branchId?: string }) {
           isFetchingNextPage={isFetchingNextPage}
         />
 
-        <aside className="flex w-full shrink-0 flex-col rounded-xl border border-border/80 bg-card/50 dark:border-slate-800 lg:w-80 lg:min-h-0">
+        <aside className="flex w-full shrink-0 flex-col rounded-xl border border-border/80 bg-card/50 lg:w-80 lg:min-h-0">
           <div className="border-b border-border px-4 py-3">
             <h3 className="text-sm font-semibold text-foreground">{t("expiryActions.historyTitle")}</h3>
             <p className="text-xs text-muted-foreground">

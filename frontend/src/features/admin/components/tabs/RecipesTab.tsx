@@ -93,7 +93,7 @@ export function RecipesTab({ recipes, searchTerm, setSearchTerm, canManageRecipe
           </DialogHeader>
           {selectedRecipe && (
             <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4 p-4 rounded-lg border border-slate-100 bg-muted border-border">
+              <div className="grid grid-cols-2 gap-4 p-4 rounded-lg border bg-muted border-border">
                 <div>
                   <span className="text-sm text-muted-foreground block">{t('recipes.menuProduct')}</span>
                   <span className="font-semibold text-foreground">{selectedRecipe.product_name || t('recipes.independent')}</span>
@@ -119,7 +119,7 @@ export function RecipesTab({ recipes, searchTerm, setSearchTerm, canManageRecipe
                     </thead>
                     <tbody>
                       {selectedRecipe.ingredients?.map(ing => (
-                        <tr key={ing.id} className="border-b border-slate-100 last:border-0 hover:/50 border-border dark:hover:/50">
+                        <tr key={ing.id} className="border-b last:border-0 hover:/50 border-border dark:hover:/50">
                           <td className="px-4 py-2 text-foreground">{ing.stock_item_name}</td>
                           <td className="px-4 py-2 text-right dark:text-muted-foreground">
                             {formatNumber(ing.quantity, 2)} {ing.unit}

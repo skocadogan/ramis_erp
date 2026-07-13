@@ -46,7 +46,7 @@ export function CustomerSelectModal({ onClose, onSelect }: CustomerSelectModalPr
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 /60 backdrop-blur-xs">
       <div className="w-full max-w-lg rounded-xl shadow-xl overflow-hidden border border-border flex flex-col max-h-[80vh] bg-card border-border animate-in fade-in zoom-in-95 duration-155">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border dark:border-slate-850">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-border">
           <h3 className="text-sm font-bold text-foreground">Müşteri Seç</h3>
           <button
             onClick={onClose}
@@ -57,7 +57,7 @@ export function CustomerSelectModal({ onClose, onSelect }: CustomerSelectModalPr
         </div>
 
         {/* Search */}
-        <div className="p-4 border-b border-border dark:border-slate-850">
+        <div className="p-4 border-b border-border">
           <div className="relative">
             <Search size={15} className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
             <input

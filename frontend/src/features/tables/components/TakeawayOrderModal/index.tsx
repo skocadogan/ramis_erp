@@ -562,7 +562,7 @@ export function TakeawayOrderModal({
             <div className="w-full max-w-4xl rounded-2xl border border-border bg-card border-border flex flex-col max-h-[90vh] overflow-hidden">
                 
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-slate-100 border-border px-6 py-4 /50 bg-muted/20">
+                <div className="flex items-center justify-between border-b border-border px-6 py-4 /50 bg-muted/20">
                     <div className="flex items-center gap-3">
                         <div className="h-10 w-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center">
                             <ReceiptText className="text-emerald-600 dark:text-emerald-400" size={20} />
@@ -595,7 +595,7 @@ export function TakeawayOrderModal({
                         </div>
                     ) : (
                         <div className="space-y-4">
-                            <div className="overflow-hidden rounded-xl border border-slate-100 border-border">
+                            <div className="overflow-hidden rounded-xl border border-border">
                                 <table className="w-full border-collapse text-left">
                                     <thead>
                                         <tr className="bg-muted/50 text-sub font-bold uppercase tracking-widest text-muted-foreground">
@@ -739,7 +739,7 @@ export function TakeawayOrderModal({
                                                                         return parentItems.map(parent => (
                                                                             <React.Fragment key={parent.id}>
                                                                                 {/* Parent Item */}
-                                                                                <div className="flex items-center justify-between p-2 bg-card rounded-lg border border-slate-100 border-border">
+                                                                                <div className="flex items-center justify-between p-2 bg-card rounded-lg border border-border">
                                                                                     <div className="flex items-center gap-3 min-w-0">
                                                                                         <span className="w-6 h-6 shrink-0 rounded bg-muted flex items-center justify-center text-xs font-bold text-muted-foreground">
                                                                                             {parent.quantity}
@@ -807,7 +807,7 @@ export function TakeawayOrderModal({
 
                 {/* Footer */}
                 {!isLoading && orders.length > 0 && !orderId && (
-                    <div className="p-6 bg-muted/50 border-t border-slate-100 border-border">
+                    <div className="p-6 bg-muted/50 border-t border-border">
                         <OrderFooter 
                             orders={orders}
                             totalOrderDiscount={totalOrderDiscount}
@@ -861,7 +861,7 @@ export function TakeawayOrderModal({
                                     setSingleSplit(e.target.checked);
                                     if (!e.target.checked) setSingleSplitAmt(defaultSplitAmounts());
                                 }}
-                                className="rounded border-slate-300"
+                                className="rounded"
                             />
                             {t('splitPaymentLabel')}
                         </label>
@@ -890,7 +890,7 @@ export function TakeawayOrderModal({
                                 className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all gap-2 ${
  singlePaymentMethod === 'CASH' 
  ? 'bg-emerald-50 border-emerald-500 text-emerald-600' 
- : 'border-slate-100 text-muted-foreground hover:border-border'
+ : ' text-muted-foreground hover:border-border'
  }`}
                             >
                                 <Banknote size={24} />
@@ -901,7 +901,7 @@ export function TakeawayOrderModal({
                                 className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all gap-2 ${
  singlePaymentMethod === 'CARD' 
  ? 'bg-blue-50 border-blue-500 text-blue-600' 
- : 'border-slate-100 text-muted-foreground hover:border-border'
+ : ' text-muted-foreground hover:border-border'
  }`}
                             >
                                 <CreditCard size={24} />

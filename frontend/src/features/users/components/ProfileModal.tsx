@@ -95,7 +95,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                 <h2 className="text-base font-semibold mt-2 text-foreground">{profile.username}</h2>
                 <div className="flex items-center justify-center gap-1.5 mt-2 flex-wrap">
                   {profile.role_names.map(r => (
-                    <Badge key={r} variant="outline" className="text-xs border-slate-300 border-input dark:text-muted-foreground">{r}</Badge>
+                    <Badge key={r} variant="outline" className="text-xs border-input dark:text-muted-foreground">{r}</Badge>
                   ))}
                   {profile.is_superuser && (
                     <Badge className="bg-amber-50 text-amber-700 border-amber-200 text-xs dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800">{tSelf("superuserBadge")}</Badge>
@@ -144,7 +144,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                       <InfoRow icon={Clock} label={t("detail.dateJoined")} value={formatDate(profile.date_joined, { dateStyle: "short" })} />
                       <InfoRow icon={Clock} label={t("table.lastLogin")} value={profile.last_login ? formatDate(profile.last_login) : tSelf("detailDash")} />
                     </div>
-                    <div className="flex gap-2 pt-4 border-t border-slate-100 border-border">
+                    <div className="flex gap-2 pt-4 border-t border-border">
                       <button onClick={() => setIsEditing(true)}
                         className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded-md">
                         <User size={14} />{tSelf("edit")}

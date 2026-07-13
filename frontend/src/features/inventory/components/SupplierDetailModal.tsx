@@ -369,7 +369,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                             key={vi.key}
                             data-index={vi.index}
                             ref={rowVirtualizer.measureElement}
-                            className="absolute left-0 top-0 w-full border-b border-slate-100 border-border"
+                            className="absolute left-0 top-0 w-full border-b border-border"
                             style={{ transform: `translateY(${vi.start}px)` }}
                           >
                             <div className={`${rejectedRowGrid} text-foreground`}>
@@ -404,7 +404,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                           key={vi.key}
                           data-index={vi.index}
                           ref={rowVirtualizer.measureElement}
-                          className="absolute left-0 top-0 w-full border-b border-slate-100 border-border"
+                          className="absolute left-0 top-0 w-full border-b border-border"
                           style={{ transform: `translateY(${vi.start}px)` }}
                         >
                           <div className={`${receivingRowGrid} text-foreground`}>

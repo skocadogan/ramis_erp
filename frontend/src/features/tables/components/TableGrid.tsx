@@ -236,7 +236,7 @@ export function TableGrid({ tables, zones, isLoading, canManage, onEdit, onDelet
                         </thead>
                         <tbody>
                             {filteredTables.map(t => (
-                                <tr key={t.id} className="border-b border-slate-100 hover:/60 border-border/60 dark:hover:/40">
+                                <tr key={t.id} className="border-b hover:/60 border-border/60 dark:hover:/40">
                                     <td className="px-4 py-3 font-semibold text-foreground">{t.name}</td>
                                     <td className="px-4 py-3 text-muted-foreground">{t.zone_name}</td>
                                     <td className="px-4 py-3 text-muted-foreground">{t.min_capacity}–{t.capacity}</td>

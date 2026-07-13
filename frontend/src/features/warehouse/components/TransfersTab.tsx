@@ -157,7 +157,7 @@ export function TransfersTab({ branchId }: { branchId?: string }) {
         fetchMore={() => void fetchNextPage()}
         hasMore={!!hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        className="min-h-0 flex-1 rounded-xl border border-border/80 dark:border-slate-800 bg-card/50"
+        className="min-h-0 flex-1 rounded-xl border border-border/80 bg-card/50"
         tableClassName="w-full text-sm"
         header={
           <thead className={virtualTableStickyHeadClass}>

@@ -174,7 +174,7 @@ export function OverviewTab({ stats, stockItems, setActiveTab, userPermissions, 
               key={`${c.tab}-${c.module}-${c.label}`}
               type="button"
               onClick={() => setActiveTab(c.tab)}
-              className="flex flex-col items-start gap-3 rounded-lg border border-border p-4 hover:border-slate-300 transition-all text-left bg-card border-border dark:hover:border-slate-600"
+              className="flex flex-col items-start gap-3 rounded-lg border border-border p-4 hover: transition-all text-left bg-card border-border dark:hover:"
             >
               <div className={`rounded-md p-2 ${c.iconBg}`}>
                 <c.icon size={18} />

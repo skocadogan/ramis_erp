@@ -329,7 +329,7 @@ function PrepManagementContent() {
   return (
     <AppShell>
       <div className="flex h-full flex-col bg-card overflow-hidden">
-        <div className="flex items-center justify-between border-b border-slate-100 px-4 py-2 bg-card border-border shrink-0">
+        <div className="flex items-center justify-between border-b px-4 py-2 bg-card border-border shrink-0">
           <div className="flex items-center gap-3">
             <div>
               <h1 className="text-lg font-bold dark:text-white leading-tight">
@@ -416,7 +416,7 @@ function PrepManagementContent() {
                   "flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap",
                   activeTab === tab.value
                     ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                    : 'border-transparent text-muted-foreground hover: hover:border-slate-300 dark:text-muted-foreground dark:hover:'
+                    : 'border-transparent text-muted-foreground hover: hover: dark:text-muted-foreground dark:hover:'
                 )}
               >
                 <tab.icon size={16} />

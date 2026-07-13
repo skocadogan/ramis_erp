@@ -178,7 +178,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
       <div className="flex h-screen w-full bg-card overflow-hidden font-sans relative">
       {/* Left Side: Order List */}
       <div className={`flex-[3] flex flex-col h-full border-r border-border shadow-xl z-10 transition-all duration-700 ${isPayment ? 'grayscale-[0.2]' : ''}`}>
-        <header className="sticky top-0 flex items-center justify-between border-b border-slate-100 p-4">
+        <header className="sticky top-0 flex items-center justify-between border-b p-4">
           <div>
             <h1 className="text-xl font-bold tracking-tight">{t("orderDetails")}</h1>
             {table ? (
@@ -220,7 +220,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                     className={`flex items-center justify-between rounded-lg border p-3 transition-colors ${
  lineCancelled
  ? "border-rose-200/80 bg-rose-50/60 dark:border-rose-900/50 dark:bg-rose-950/25"
- : "border-slate-100 "
+ : " "
  }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">

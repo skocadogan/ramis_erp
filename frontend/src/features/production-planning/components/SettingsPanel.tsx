@@ -136,7 +136,7 @@ export function SettingsPanel() {
                 </Select>
               </div>
 
-              <div className="space-y-3 bg-muted/30 p-4 rounded-lg border border-slate-100 border-border">
+              <div className="space-y-3 bg-muted/30 p-4 rounded-lg border border-border">
                 <div className="flex items-start gap-3">
                   <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-1.5 shrink-0" />
                   <p className="text-sub text-muted-foreground leading-relaxed">

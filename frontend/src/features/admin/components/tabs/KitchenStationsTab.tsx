@@ -240,7 +240,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
               </tr>
             ) : (
               filtered.map(s => (
-                <tr key={s.id} className="border-b border-slate-100 hover:/50 border-border dark:hover:/50">
+                <tr key={s.id} className="border-b hover:/50 border-border dark:hover:/50">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2.5">
                       <div className="h-7 w-7 rounded-lg flex-shrink-0" style={{ backgroundColor: s.color }} />

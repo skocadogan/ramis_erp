@@ -114,7 +114,7 @@ export function PriceIncreasesTab({ branchId }: { branchId?: string }) {
         rows={rows}
         rowHeight={56}
         overscan={8}
-        className="min-h-0 flex-1 rounded-xl border border-border/80 bg-card/50 dark:border-slate-800"
+        className="min-h-0 flex-1 rounded-xl border border-border/80 bg-card/50"
         tableClassName="text-sm"
         header={
           <thead className={virtualTableStickyHeadClass}>

@@ -401,7 +401,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               <button
                 type="button"
                 onClick={() => persistTerminalSelection("", null)}
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 text-sm font-semibold shadow-sm transition-colors hover: border-border bg-card text-foreground dark:hover:"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border px-4 text-sm font-semibold shadow-sm transition-colors hover: border-border bg-card text-foreground dark:hover:"
               >
                 <MonitorSmartphone className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <span>{t("selectTerminal")}</span>
@@ -511,13 +511,13 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                     )}
                     <div className="space-y-1.5 text-sm">
                       {reservationConfirmTable?.reservation_scheduled_at && (
-                        <div className="flex justify-between border-b border-slate-100 py-1 border-border">
+                        <div className="flex justify-between border-b py-1 border-border">
                           <span className="text-muted-foreground">{tPosPage("reservation.scheduledTime")}</span>
                           <span className="font-semibold">{formatDate(reservationConfirmTable.reservation_scheduled_at)}</span>
                         </div>
                       )}
                       {reservationConfirmTable?.reservation_party_size && (
-                        <div className="flex justify-between border-b border-slate-100 py-1 border-border">
+                        <div className="flex justify-between border-b py-1 border-border">
                           <span className="text-muted-foreground">{tPosPage("reservation.partySize")}</span>
                           <span className="font-semibold">
                             {tPosPage("reservation.partySizeVal", { count: reservationConfirmTable.reservation_party_size })}
@@ -635,13 +635,13 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                   )}
                   <div className="space-y-1.5 text-sm">
                     {reservationConfirmTable?.reservation_scheduled_at && (
-                      <div className="flex justify-between border-b border-slate-100 py-1 border-border">
+                      <div className="flex justify-between border-b py-1 border-border">
                         <span className="text-muted-foreground">{t("reservation.scheduledAt")}</span>
                         <span className="font-semibold">{formatDate(reservationConfirmTable.reservation_scheduled_at)}</span>
                       </div>
                     )}
                     {reservationConfirmTable?.reservation_party_size && (
-                      <div className="flex justify-between border-b border-slate-100 py-1 border-border">
+                      <div className="flex justify-between border-b py-1 border-border">
                         <span className="text-muted-foreground">{t("reservation.partySize")}</span>
                         <span className="font-semibold">{reservationConfirmTable.reservation_party_size} {t("reservation.pax")}</span>
                       </div>

@@ -43,7 +43,7 @@ const CancellationRow = memo(({
             data-index={idx}
             ref={measureElement}
             onClick={() => onRowClick?.(row)}
-            className={`border-b border-slate-100 border-border/60 last:border-0 cursor-pointer transition-colors ${ROW_HOVER}`}
+            className={`border-b border-border/60 last:border-0 cursor-pointer transition-colors ${ROW_HOVER}`}
         >
             <td className="px-4 py-3 text-xs text-muted-foreground font-mono tabular-nums">{idx + 1}</td>
             <td className="px-4 py-3 text-xs text-muted-foreground">

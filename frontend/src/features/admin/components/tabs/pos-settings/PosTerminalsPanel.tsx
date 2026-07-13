@@ -334,7 +334,7 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
         )}
       </CardHeader>
       <CardContent className="p-4">
-        <div className="rounded-xl border border-slate-100 border-border overflow-x-auto">
+        <div className="rounded-xl border border-border overflow-x-auto">
           <Table>
             <TableHeader className="/50 bg-card/50">
               <TableRow>

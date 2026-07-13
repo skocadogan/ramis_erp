@@ -117,7 +117,7 @@ export default function BulkPriceModal({
                   const isSelected = bulkSelectedProducts.has(p.id);
 
                   return (
-                    <label key={p.id} className={`grid grid-cols-[auto_1fr_80px_80px] sm:grid-cols-[auto_1fr_90px_90px_90px] lg:grid-cols-[auto_1fr_120px_90px_90px] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-3 rounded-lg cursor-pointer border border-transparent transition-all hover: hover:border-slate-100 dark:hover:/50 dark:hover:border-slate-800
+                    <label key={p.id} className={`grid grid-cols-[auto_1fr_80px_80px] sm:grid-cols-[auto_1fr_90px_90px_90px] lg:grid-cols-[auto_1fr_120px_90px_90px] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-3 rounded-lg cursor-pointer border border-transparent transition-all hover: hover: dark:hover:/50 dark:hover:
  ${!isSelected ? "opacity-40 grayscale-[0.5]" : ""}`}>
                       <Checkbox
                         checked={isSelected}

@@ -348,7 +348,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
         </div>
 
         {queryLongEnough && hasAnyResults && (
-          <div className="flex items-center justify-between border-t border-slate-100 border-border px-4 py-2">
+          <div className="flex items-center justify-between border-t border-border px-4 py-2">
             <span className="text-xs text-muted-foreground dark:text-muted-foreground">
               {t("resultCount", { count: totalResultCount })}
             </span>

@@ -71,7 +71,7 @@ export function WarehouseInventoryLevelsPanel({
           <input
             ref={headerSelectRef}
             type="checkbox"
-            className="size-4 rounded border-slate-300 accent-indigo-600"
+            className="size-4 rounded accent-indigo-600"
             checked={allFilteredSelected}
             onChange={() => {
               if (allFilteredSelected) setSelected(new Set())
@@ -127,7 +127,7 @@ export function WarehouseInventoryLevelsPanel({
                       <div className="flex justify-center">
                         <input
                           type="checkbox"
-                          className="size-4 rounded border-slate-300 accent-indigo-600"
+                          className="size-4 rounded accent-indigo-600"
                           checked={selected.has(r.stock_item)}
                           disabled={!stockQtyPositive(r)}
                           onChange={() => toggleSelected(r.stock_item)}
@@ -169,7 +169,7 @@ export function WarehouseInventoryLevelsPanel({
                           <button
                             type="button"
                             title={t("transferQtyFillRowTitle")}
-                            className="shrink-0 rounded border border-border px-1 py-0.5 text-2xs font-medium text-indigo-700 hover:bg-indigo-50 disabled:opacity-40 dark:border-slate-600 dark:text-indigo-300 dark:hover:bg-indigo-950/50"
+                            className="shrink-0 rounded border border-border px-1 py-0.5 text-2xs font-medium text-indigo-700 hover:bg-indigo-50 disabled:opacity-40 dark:text-indigo-300 dark:hover:bg-indigo-950/50"
                             disabled={!stockQtyPositive(r)}
                             onClick={() =>
                               setTransferQtyByItem((prev) => ({

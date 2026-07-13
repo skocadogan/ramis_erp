@@ -143,13 +143,13 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
             header={
               <thead className={virtualTableStickyHeadClass}>
                 <tr className="border-b border-border text-muted-foreground border-border dark:text-muted-foreground">
-                  <th className="border-b border-slate-100 px-2 py-3 text-left font-semibold border-border">{t("colTxnDate")}</th>
-                  <th className="border-b border-slate-100 px-2 py-3 text-left font-semibold border-border">{t("colSupplier")}</th>
-                  <th className="border-b border-slate-100 px-2 py-3 text-left font-semibold border-border">{t("colDocRef")}</th>
-                  <th className="border-b border-slate-100 px-2 py-3 text-left font-semibold border-border">{t("colNotes")}</th>
-                  <th className="border-b border-slate-100 px-2 py-3 text-right font-semibold border-border">{t("colQty")}</th>
-                  <th className="border-b border-slate-100 px-2 py-3 text-right font-semibold border-border">{t("colUnitPrice")}</th>
-                  <th className="border-b border-slate-100 px-2 py-3 text-right font-semibold border-border">{t("colLineTotal")}</th>
+                  <th className="border-b px-2 py-3 text-left font-semibold border-border">{t("colTxnDate")}</th>
+                  <th className="border-b px-2 py-3 text-left font-semibold border-border">{t("colSupplier")}</th>
+                  <th className="border-b px-2 py-3 text-left font-semibold border-border">{t("colDocRef")}</th>
+                  <th className="border-b px-2 py-3 text-left font-semibold border-border">{t("colNotes")}</th>
+                  <th className="border-b px-2 py-3 text-right font-semibold border-border">{t("colQty")}</th>
+                  <th className="border-b px-2 py-3 text-right font-semibold border-border">{t("colUnitPrice")}</th>
+                  <th className="border-b px-2 py-3 text-right font-semibold border-border">{t("colLineTotal")}</th>
                 </tr>
               </thead>
             }

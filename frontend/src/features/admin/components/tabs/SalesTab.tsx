@@ -231,7 +231,7 @@ export function SalesTab({
                                         key={virtualRow.key}
                                         data-index={virtualRow.index}
                                         ref={rowVirtualizer.measureElement}
-                                        className="border-b border-slate-100 border-border/60 hover:/50 dark:hover:/50 transition-colors cursor-default"
+                                        className="border-b border-border/60 hover:/50 dark:hover:/50 transition-colors cursor-default"
                                     >
                                         <td className="px-4 py-3 text-xs text-muted-foreground tabular-nums">{virtualRow.index + 1}</td>
                                         <td className="px-4 py-3 font-semibold text-foreground truncate">{sale.table_name ?? '—'}</td>

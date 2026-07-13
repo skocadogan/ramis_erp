@@ -70,7 +70,7 @@ export function InventoryHeader({
             <Boxes className="mr-3 h-4 w-4 text-amber-500" />
             {t("header.bulkStockEntry")}
           </DropdownMenuItem>
-          <div className="my-1 border-t border-slate-100 dark:border-slate-800" />
+          <div className="my-1 border-t" />
           <DropdownMenuItem onClick={onBulkMinimumUpdate} className="py-2.5">
             <FileSpreadsheet className="mr-3 h-4 w-4 text-indigo-500" />
             {t("header.bulkMinUpdate")}

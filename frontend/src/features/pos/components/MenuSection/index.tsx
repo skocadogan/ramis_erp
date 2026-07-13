@@ -267,7 +267,7 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border shadow-sm border-border bg-card">
-      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 /50 p-4 border-border bg-muted/30">
+      <div className="flex shrink-0 items-center justify-between border-b /50 p-4 border-border bg-muted/30">
         <div className="flex items-center gap-3">
           <button
             onClick={handleBackToTables}
@@ -301,7 +301,7 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
         <div className="flex min-h-0 flex-1 flex-col">
           {/* Subcategory bar — seçili parent'ın alt kategorileri */}
           {subCategories.length > 0 && selectedRootParent && (
-            <div className="no-scrollbar flex shrink-0 items-center gap-1.5 overflow-x-auto border-b border-slate-100 /50 px-3 py-2 border-border bg-muted/20">
+            <div className="no-scrollbar flex shrink-0 items-center gap-1.5 overflow-x-auto border-b /50 px-3 py-2 border-border bg-muted/20">
               {/* "Tümü" sekmesi */}
               <button
                 type="button"

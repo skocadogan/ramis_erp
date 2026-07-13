@@ -26,7 +26,7 @@ export const TableTransferView: React.FC<TableTransferViewProps> = ({
     const tStatus = useTranslations('tables.status');
     return (
         <div className="flex flex-col h-full">
-            <div className="p-4 border-b border-slate-50 border-border space-y-3">
+            <div className="p-4 border-b border-border space-y-3">
                 <p className="text-xs text-muted-foreground leading-relaxed font-medium">
                     {t.rich('transferInstructions', {
                         name: tableName,

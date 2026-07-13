@@ -122,7 +122,7 @@ export function CategorySidebar({
 }: CategorySidebarProps) {
   return (
     <>
-      <div className="no-scrollbar hidden w-48 shrink-0 flex-col gap-1 overflow-y-auto border-r border-slate-100 /30 p-3 md:flex border-border bg-muted/20">
+      <div className="no-scrollbar hidden w-48 shrink-0 flex-col gap-1 overflow-y-auto border-r /30 p-3 md:flex border-border bg-muted/20">
         <h3 className="mb-1 px-3 py-2 text-2xs font-bold uppercase tracking-widest text-muted-foreground dark:text-muted-foreground">
           {tMenu("categories")}
         </h3>
@@ -155,7 +155,7 @@ export function CategorySidebar({
         })}
       </div>
 
-      <div className="no-scrollbar flex w-full shrink-0 gap-2 overflow-x-auto border-b border-slate-100 px-3 py-2.5 md:hidden border-border">
+      <div className="no-scrollbar flex w-full shrink-0 gap-2 overflow-x-auto border-b px-3 py-2.5 md:hidden border-border">
         {hasFeatured && (
           <CategoryMobilePill
             featured

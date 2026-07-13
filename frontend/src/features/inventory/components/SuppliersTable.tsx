@@ -62,7 +62,7 @@ export function SuppliersTable({
               </tr>
             ) : (
               suppliers.map((sup) => (
-                <tr key={sup.id} className="border-b border-slate-100 hover:/50 transition-colors border-border dark:hover:/50">
+                <tr key={sup.id} className="border-b hover:/50 transition-colors border-border dark:hover:/50">
                   <td className="px-3 py-2 font-medium text-foreground">{sup.name}</td>
                   <td className="px-3 py-2 text-muted-foreground">{sup.contact_person}</td>
                   <td className="px-3 py-2 font-mono text-xs dark:text-muted-foreground">{sup.phone}</td>

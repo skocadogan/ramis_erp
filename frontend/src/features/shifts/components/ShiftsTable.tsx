@@ -73,7 +73,7 @@ const ShiftRow = memo(function ShiftRow({
     <tr
       data-index={index}
       ref={measureElement}
-      className="border-b border-slate-100 transition-colors hover:/50 border-border dark:hover:/50"
+      className="border-b transition-colors hover:/50 border-border dark:hover:/50"
     >
       <td className="px-3 py-2">
         {shift.status === "OPEN" ? (

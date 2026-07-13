@@ -309,7 +309,7 @@ export function PrintersTab({ branches, canManage }: Props) {
               </tr>
             ) : (
               printers.map(p => (
-                <tr key={p.id} className="border-b border-slate-100 hover:/50 border-border dark:hover:/50">
+                <tr key={p.id} className="border-b hover:/50 border-border dark:hover:/50">
                   <td className="px-4 py-3 font-medium text-foreground">{p.name}</td>
                   <td className="px-4 py-3">
                     <span className={`text-2xs px-1.5 py-0.5 rounded font-bold uppercase ${p.usage_type === "KITCHEN" ? "bg-amber-100 text-amber-700" : "bg-blue-100 text-blue-700"}`}>

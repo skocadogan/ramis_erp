@@ -132,7 +132,7 @@ const OrderItemRow = memo(({
             </div>
 
             {visibleChildren.length > 0 ? (
-                <div className="mt-1.5 border-l-2 border-slate-200 pl-3 border-border sm:ml-8 sm:pl-3">
+                <div className="mt-1.5 border-l-2 pl-3 border-border sm:ml-8 sm:pl-3">
                     <p className="text-2xs font-semibold uppercase tracking-wide text-muted-foreground">
                         {t('combinedContents')}
                     </p>
@@ -221,7 +221,7 @@ const OrderItemsListImpl = ({
     return (
         <div className="flex min-h-0 flex-col">
             {showSearchBar && (
-                <div className="sticky top-0 z-10 border-b border-slate-100 px-2 py-2 border-border bg-card sm:px-3">
+                <div className="sticky top-0 z-10 border-b px-2 py-2 border-border bg-card sm:px-3">
                     <div className="relative">
                         <Search
                             className="pointer-events-none absolute left-2.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground dark:text-muted-foreground"
@@ -306,7 +306,7 @@ const OrderItemsListImpl = ({
                                 </div>
 
                                 {activePaymentOrderId === order.id && (
-                                    <div className="mb-3 mt-1.5 overflow-hidden rounded-xl border border-slate-100 /50 p-2.5 border-border bg-card/30 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    <div className="mb-3 mt-1.5 overflow-hidden rounded-xl border /50 p-2.5 border-border bg-card/30 animate-in fade-in slide-in-from-top-2 duration-200">
                                         <div className="flex flex-wrap items-center justify-between gap-2">
                                             <span className="text-2xs font-semibold text-muted-foreground sm:text-xs">
                                                 Ödeme Yöntemi Seçin:
@@ -374,7 +374,7 @@ const OrderItemsListImpl = ({
                                                     type="button"
                                                     onClick={() => setActivePaymentOrderId(null)}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
+                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
                                                 >
                                                     <X size={14} />
                                                 </button>

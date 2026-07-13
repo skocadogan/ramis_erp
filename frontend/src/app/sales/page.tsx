@@ -176,7 +176,7 @@ function SalesPageContent() {
                             className={`flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-colors
  ${sales.activeTab === key
  ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
- : 'border-transparent text-muted-foreground hover: hover:border-slate-300 dark:text-muted-foreground dark:hover:'
+ : 'border-transparent text-muted-foreground hover: hover: dark:text-muted-foreground dark:hover:'
  }`}
                         >
                             {label}
@@ -377,7 +377,7 @@ function SalesPageContent() {
                                 </div>
 
                                 {/* Summary Mini Stats */}
-                                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-slate-100 border-border">
+                                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-border">
                                     <div className="flex flex-col items-end">
                                         <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">{t('list.netTotal')}</span>
                                         <span className="text-base font-bold text-foreground leading-none">
@@ -429,7 +429,7 @@ function SalesPageContent() {
                                     />
                                 </div>
 
-                                <div className="p-3 border-t border-slate-100 /50 flex items-center justify-between bg-card/50 border-border">
+                                <div className="p-3 border-t /50 flex items-center justify-between bg-card/50 border-border">
                                     <div className="text-xs text-muted-foreground font-medium">
                                         {t('list.paginationTotal', { count: sales.totalCount })}
                                     </div>

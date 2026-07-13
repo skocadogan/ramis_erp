@@ -150,7 +150,7 @@ export function ReservationLedger({
         ) : (
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="border-b border-slate-100 text-xs uppercase text-muted-foreground border-border">
+            <thead className="border-b text-xs uppercase text-muted-foreground border-border">
               <tr>
                 <th className="py-2 pr-2">{t("ledger.columns.time")}</th>
                 <th className="py-2 pr-2">{t("ledger.columns.customer")}</th>
@@ -162,7 +162,7 @@ export function ReservationLedger({
             </thead>
             <tbody>
               {(list.data as ReservationDto[] | undefined)?.map((r) => (
-                <tr key={r.id} className="border-b border-slate-50 border-border/80">
+                <tr key={r.id} className="border-b border-border/80">
                   <td className="py-2 pr-2 font-mono text-xs">{r.scheduled_time?.slice(0, 5)}</td>
                   <td className="py-2 pr-2">{r.customer_name}</td>
                   <td className="py-2 pr-2">{r.party_size}</td>

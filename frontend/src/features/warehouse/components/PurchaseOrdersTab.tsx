@@ -274,7 +274,7 @@ export function PurchaseOrdersTab({
         fetchMore={() => void fetchNextPage()}
         hasMore={!!hasNextPage}
         isFetchingNextPage={isFetchingNextPage}
-        className="max-h-[calc(100vh-14rem)] rounded-xl border border-border/80 dark:border-slate-800 bg-card/50"
+        className="max-h-[calc(100vh-14rem)] rounded-xl border border-border/80 bg-card/50"
         tableClassName="w-full text-sm"
         header={
           <thead className={virtualTableStickyHeadClass}>
@@ -651,10 +651,10 @@ export function PurchaseOrdersTab({
                                 type="button"
                                 onClick={() => setPreferredSuppliers((prev) => ({ ...prev, [sug.stock_item_id]: sup.id }))}
                                 className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
-                                  selected === sup.id
-                                    ? "border-blue-600 bg-blue-600 text-white"
-                                    : "border-border bg-background text-muted-foreground hover:border-blue-400"
-                                }`}
+ selected === sup.id
+ ? "border-blue-600 bg-blue-600 text-white"
+ : "border-border bg-background text-muted-foreground hover:border-blue-400"
+ }`}
                               >
                                 {selected === sup.id && <CheckCircle size={11} className="shrink-0" />}
                                 {sup.name}

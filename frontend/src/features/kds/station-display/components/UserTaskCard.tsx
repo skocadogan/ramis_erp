@@ -50,7 +50,7 @@ export function UserTaskCard({
     <div
       className={cn(
         "flex flex-col gap-4 rounded-2xl border /80 p-5 transition-colors duration-300",
-        "border-slate-700/60 hover:border-slate-600/60"
+        "/60 hover:/60"
       )}
     >
       {/* ─── User Header ─── */}
@@ -140,7 +140,7 @@ function ActiveTaskItem({ task }: { task: PrepTask }) {
       : 0;
 
   return (
-    <div className="group rounded-xl border border-slate-700/40 /60 p-3.5 transition-all duration-200 hover:border-slate-600/50">
+    <div className="group rounded-xl border /40 /60 p-3.5 transition-all duration-200 hover:/50">
       {/* Row 1: Status dot + title + deadline + priority */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 flex-1 items-center gap-2.5">

@@ -308,7 +308,7 @@ export function ReportingTab({ canManage }: Props) {
         </div>
         {canManage && (
           <div className="flex items-center gap-2">
-            <label className="flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-1.5
+            <label className="flex items-center gap-1.5 rounded-md border px-3 py-1.5
  text-sm font-medium hover: cursor-pointer transition-all bg-muted border-input text-foreground dark:hover:">
               <Upload size={15} /> {t('reporting.import')}
               <input type="file" accept=".json" className="hidden" onChange={handleImport} />
@@ -371,7 +371,7 @@ export function ReportingTab({ canManage }: Props) {
             ) : (
               filtered.map(temp => (
                 <tr key={temp.id}
-                  className="border-b border-slate-100 hover:/50
+                  className="border-b hover:/50
  border-border dark:hover:/50">
                   <td className="px-4 py-3 font-medium text-foreground text-foreground">
                     {temp.name}
@@ -495,20 +495,20 @@ export function ReportingTab({ canManage }: Props) {
         <input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
           placeholder={t('reporting.editor.templateName')}
           className="h-8 px-2.5 text-sm rounded w-48
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground" />
         <input value={form.slug}
           onChange={e => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") }))}
           placeholder={t('reporting.editor.slug')}
           className="h-8 px-2.5 text-sm font-mono rounded w-36
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground"
           readOnly={!!editing} />
         <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value as ReceiptTemplateForm["category"] }))}
           className="h-8 px-2 text-sm rounded
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground">
           <option value="POS_RECEIPT">{t('reporting.categories.pos')}</option>
@@ -517,7 +517,7 @@ export function ReportingTab({ canManage }: Props) {
         </select>
         <select value={form.paper_width} onChange={e => setForm(f => ({ ...f, paper_width: parseInt(e.target.value) }))}
           className="h-8 px-2 text-sm rounded
- border border-slate-300 
+ border 
  focus:outline-none focus:border-indigo-500
  bg-muted border-input text-foreground">
           <option value={32}>{t("reporting.paperWidth58")}</option>

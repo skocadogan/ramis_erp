@@ -209,7 +209,7 @@ export function TableOrderModal(props: TableOrderModalProps) {
             <div className="relative flex max-h-[min(94dvh,900px)] min-h-0 w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-border bg-card lg:max-w-6xl">
                 {isPaying && (
                     <div className="absolute inset-0 z-50 flex flex-col items-center justify-center /60 backdrop-blur-sm transition-opacity duration-200">
-                        <div className="flex flex-col items-center rounded-xl p-6 shadow-xl bg-card border border-slate-100 border-border max-w-xs text-center">
+                        <div className="flex flex-col items-center rounded-xl p-6 shadow-xl bg-card border border-border max-w-xs text-center">
                             <Loader2 className="h-10 w-10 animate-spin text-blue-600 dark:text-blue-400 mb-3" />
                             <h3 className="text-sm font-bold text-foreground mb-1">
                                 Mali İşlem Yapılıyor

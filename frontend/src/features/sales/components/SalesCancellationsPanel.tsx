@@ -189,7 +189,7 @@ export function SalesCancellationsPanel({
                     </div>
                 </div>
 
-                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-slate-100 border-border">
+                <div className="hidden lg:flex items-center gap-8 px-6 py-2 border-l border-border">
                     <div className="flex flex-col items-end">
                         <span className="text-2xs font-bold text-muted-foreground uppercase tracking-widest mb-1">
                             {t("cancellations.totalAmount")}
@@ -226,7 +226,7 @@ export function SalesCancellationsPanel({
                     />
                 </div>
 
-                <div className="p-3 border-t border-slate-100 /50 flex items-center justify-between bg-card/50 border-border">
+                <div className="p-3 border-t /50 flex items-center justify-between bg-card/50 border-border">
                     <div className="text-xs text-muted-foreground font-medium">
                         {t("list.paginationTotal", { count: cancellations.totalCount })}
                     </div>

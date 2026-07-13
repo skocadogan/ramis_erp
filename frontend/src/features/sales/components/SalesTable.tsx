@@ -96,12 +96,12 @@ const SaleRow = memo(({
             data-index={idx}
             ref={measureElement}
             onClick={() => onRowClick(sale)}
-            className={`border-b border-slate-100 border-border/60 last:border-0 cursor-pointer transition-colors ${isSelected ? 'bg-rose-50/40 dark:bg-rose-900/10' : PAYMENT_ROW_COLOR[sale.payment_method] ?? PAYMENT_ROW_COLOR.OTHER}`}
+            className={`border-b border-border/60 last:border-0 cursor-pointer transition-colors ${isSelected ? 'bg-rose-50/40 dark:bg-rose-900/10' : PAYMENT_ROW_COLOR[sale.payment_method] ?? PAYMENT_ROW_COLOR.OTHER}`}
         >
             {isSelectable && (
                 <td className="px-4 py-3 w-8" onClick={e => e.stopPropagation()}>
                     <label className="flex items-center gap-2 px-2.5 py-1.5 rounded-md cursor-pointer transition text-left">
-                        <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${isSelected ? "bg-blue-600 border-blue-600" : "border-slate-300 border-border bg-muted"}`}>
+                        <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${isSelected ? "bg-blue-600 border-blue-600" : " border-border bg-muted"}`}>
                             {isSelected && <Check size={10} className="text-white" strokeWidth={3} />}
                         </span>
                         <input
@@ -265,7 +265,7 @@ export const SalesTable = memo(({
                         {isSelectable && (
                             <th className="px-4 py-2.5 w-8" onClick={e => e.stopPropagation()}>
                                 <label className="flex items-center gap-2 px-2.5 py-1.5 rounded-md cursor-pointer transition text-left">
-                                    <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${allSelected ? "bg-blue-600 border-blue-600" : "border-slate-300 border-border bg-muted"}`}>
+                                    <span className={`flex items-center justify-center w-4 h-4 rounded border shrink-0 transition ${allSelected ? "bg-blue-600 border-blue-600" : " border-border bg-muted"}`}>
                                         {allSelected && <Check size={10} className="text-white" strokeWidth={3} />}
                                     </span>
                                     <input

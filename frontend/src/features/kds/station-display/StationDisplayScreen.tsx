@@ -175,7 +175,7 @@ export function StationDisplayScreen({
   return (
     <div className="flex min-h-screen flex-col text-white">
       <header
-        className="flex shrink-0 items-center justify-between border-b border-slate-800 px-8 py-4"
+        className="flex shrink-0 items-center justify-between border-b px-8 py-4"
         style={{ borderTopWidth: 4, borderTopColor: stationColor }}
       >
         <div className="flex items-center gap-4">

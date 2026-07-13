@@ -166,7 +166,7 @@ export function VerticalStatusTimeline({ title, steps, className }: VerticalStat
     return (
       <div
         className={cn(
-          "rounded-xl border border-slate-800 /20 p-4",
+          "rounded-xl border  /20 p-4",
           className
         )}
       >

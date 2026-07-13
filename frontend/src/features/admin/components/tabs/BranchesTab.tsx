@@ -133,7 +133,7 @@ export function BranchesTab({
               </tr>
             ) : (
             filtered.map(b => (
-              <tr key={b.id} className="border-b border-slate-100 hover:/50 border-border dark:hover:/50">
+              <tr key={b.id} className="border-b hover:/50 border-border dark:hover:/50">
                 <td className="px-4 py-3 font-medium text-foreground">{b.name}</td>
                 <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{b.code}</td>
                 <td className="px-4 py-3 text-muted-foreground">{b.phone || "-"}</td>

@@ -172,7 +172,7 @@ function ProductionPlanningContent() {
                   className={`flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap
  ${activeTab === tab.value
  ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
- : 'border-transparent text-muted-foreground hover: hover:border-slate-300 dark:text-muted-foreground dark:hover:'
+ : 'border-transparent text-muted-foreground hover: hover: dark:text-muted-foreground dark:hover:'
  }`}
                 >
                   {tab.label}
@@ -257,7 +257,7 @@ function ProductionPlanningContent() {
             </TabsContent>
 
             <TabsContent value="availability" className="m-0 border-none outline-none flex flex-1 min-h-0 min-w-0 flex-col overflow-hidden bg-card shadow-sm ring-1 ring-slate-900/5 dark:ring-white/5 rounded-lg p-0">
-              <div className="shrink-0 p-4 border-b border-slate-100 border-border flex flex-wrap items-center gap-4 /50 bg-muted/20">
+              <div className="shrink-0 p-4 border-b border-border flex flex-wrap items-center gap-4 /50 bg-muted/20">
                 <div className="w-48">
                   <Label className="text-2xs uppercase tracking-wider text-muted-foreground mb-1 block">{t("page.filters.branch")}</Label>
                   <BranchSelect

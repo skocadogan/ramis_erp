@@ -137,7 +137,7 @@ export function ProductOptionsModal({
   return (
     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 p-4">
       <div className="bg-background max-h-[90vh] w-full max-w-lg overflow-hidden rounded-xl border border-border shadow-md">
-        <div className="flex items-center justify-between border-b border-slate-100 px-5 py-4 border-border">
+        <div className="flex items-center justify-between border-b px-5 py-4 border-border">
           <div className="flex items-center gap-3">
             <div className="rounded-xl bg-blue-100 p-2 dark:bg-blue-900/30">
               <SlidersHorizontal size={18} className="text-blue-600 dark:text-blue-400" />
@@ -172,7 +172,7 @@ export function ProductOptionsModal({
               <button
                 type="button"
                 onClick={() => goModifiers(null)}
-                className="flex items-center justify-between rounded-lg border-2 border-slate-100 p-4 hover:border-blue-500 border-border"
+                className="flex items-center justify-between rounded-lg border-2 p-4 hover:border-blue-500 border-border"
               >
                 <span className="font-bold">{tUnit("standard")}</span>
                 <span className="font-mono font-bold">
@@ -184,7 +184,7 @@ export function ProductOptionsModal({
                   key={unit.id || unit.name}
                   type="button"
                   onClick={() => goModifiers(unit)}
-                  className="flex items-center justify-between rounded-lg border-2 border-slate-100 p-4 hover:border-blue-500 border-border"
+                  className="flex items-center justify-between rounded-lg border-2 p-4 hover:border-blue-500 border-border"
                 >
                   <span className="font-bold">{unit.name}</span>
                   <span className="font-mono font-bold">
@@ -237,7 +237,7 @@ export function ProductOptionsModal({
         </div>
 
         {step === "modifiers" && (
-          <div className="flex items-center justify-between border-t border-slate-100 px-5 py-4 border-border">
+          <div className="flex items-center justify-between border-t px-5 py-4 border-border">
             <span className="text-sm font-bold text-blue-600">
               {canViewAmounts
                 ? t("lineTotal", { total: formatCurrency(baseUnitPrice + modifierTotal) })

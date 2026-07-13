@@ -203,7 +203,7 @@ export function PrinterStatusIndicator({
       >
         <div className="relative">
           <PrinterIcon size={18} />
-          <div className={cn("absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white dark:border-slate-900", colorClass)} />
+          <div className={cn("absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white ", colorClass)} />
         </div>
         <span
           className={cn(
@@ -233,7 +233,7 @@ export function PrinterStatusIndicator({
         <div className="relative">
           <PrinterIcon size={18} />
           <div className={cn(
-            "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white dark:border-slate-900",
+            "absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white ",
             !allOnline ? "bg-rose-500" : (anyPaperIssue ? "bg-amber-400" : "bg-green-500")
           )} />
         </div>
@@ -265,7 +265,7 @@ export function PrinterStatusIndicator({
                 <div className="flex min-w-0 flex-1 items-center gap-2">
                   <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted">
                     <PrinterIcon size={14} className="text-muted-foreground" />
-                    <div className={cn("absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white dark:border-slate-900", statusColor)} />
+                    <div className={cn("absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full border border-white ", statusColor)} />
                   </div>
                   <div className="flex min-w-0 flex-col">
                     <span className="truncate text-xs font-bold text-foreground">

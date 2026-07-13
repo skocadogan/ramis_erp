@@ -95,7 +95,7 @@ export function CategoryTreeView({
         </div>
       )}
       <div className="flex-1 flex flex-col overflow-hidden rounded-lg border border-border bg-card border-border">
-      <div className="p-3 border-b border-slate-100 flex gap-2 border-border">
+      <div className="p-3 border-b flex gap-2 border-border">
         <button onClick={() => toggleAll(true)} className="text-xs font-medium px-2.5 py-1.5 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50">
           {t("expandAll")}
         </button>
@@ -127,7 +127,7 @@ export function CategoryTreeView({
               <tr><td colSpan={3} className="text-center py-12 text-muted-foreground dark:text-muted-foreground">{t("empty")}</td></tr>
             ) : (
               getVisibleCategories(categories).map(cat => (
-                <tr key={cat.id} className="border-b border-slate-100 hover:/50 group transition-colors border-border dark:hover:/50">
+                <tr key={cat.id} className="border-b hover:/50 group transition-colors border-border dark:hover:/50">
                   <td className="px-3 py-2">
                     <div className="flex items-center gap-1" style={{ marginLeft: `${cat.depth * 2}rem` }}>
                       <div className="w-6 h-6 flex items-center justify-center">

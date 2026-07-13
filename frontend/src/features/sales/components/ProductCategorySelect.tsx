@@ -70,7 +70,7 @@ export function ProductCategorySelect({
         <ChevronDown size={14} className="shrink-0 text-muted-foreground" />
       </PopoverTrigger>
       <PopoverContent className="w-[300px] p-0 shadow-md bg-card border-border" align="start">
-        <div className="flex items-center border-b border-slate-100 p-2 border-border">
+        <div className="flex items-center border-b p-2 border-border">
           <Search className="mr-2 h-4 w-4 shrink-0 text-muted-foreground" />
           <input
             className="flex h-8 w-full bg-transparent text-sm outline-none placeholder:text-muted-foreground text-foreground"

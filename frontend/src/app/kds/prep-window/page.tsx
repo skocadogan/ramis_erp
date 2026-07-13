@@ -190,7 +190,7 @@ function PrepWindowSetup({
 
   return (
     <div className="flex min-h-screen items-center justify-center p-6 text-white">
-      <div className="w-full max-w-2xl rounded-3xl border border-slate-800 /80 p-10 shadow-2xl">
+      <div className="w-full max-w-2xl rounded-3xl border /80 p-10 shadow-2xl">
         <div className="mb-10 text-center">
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-indigo-600 shadow-lg shadow-indigo-900/40">
             <ChefHat size={40} />
@@ -213,7 +213,7 @@ function PrepWindowSetup({
           <select
             value={branchId}
             onChange={(e) => setBranchId(e.target.value)}
-            className="w-full rounded-2xl border border-slate-700 px-4 py-4 text-lg font-semibold text-white outline-none focus:border-indigo-500"
+            className="w-full rounded-2xl border px-4 py-4 text-lg font-semibold text-white outline-none focus:border-indigo-500"
           >
             <option value="">Şube seçin…</option>
             {branches.map((b) => (
@@ -244,7 +244,7 @@ function PrepWindowSetup({
                   type="button"
                   disabled={isSubmitting}
                   onClick={() => void handleSelectStation(station)}
-                  className="group flex items-center justify-between rounded-2xl border border-slate-700 px-5 py-4 text-left transition hover:border-indigo-500 hover: disabled:opacity-60"
+                  className="group flex items-center justify-between rounded-2xl border px-5 py-4 text-left transition hover:border-indigo-500 hover: disabled:opacity-60"
                 >
                   <div className="flex items-center gap-4">
                     <div
@@ -302,7 +302,7 @@ function PrepWindowDisplay({
         <button
           type="button"
           onClick={onChangeSetup}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 transition hover: hover:text-white"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border transition hover: hover:text-white"
           title="Şube / istasyon değiştir"
         >
           <Settings2 size={16} />

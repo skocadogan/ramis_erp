@@ -49,7 +49,7 @@ export function RecipeCategoryTreeView({
 
   return (
     <div className="flex flex-col h-full overflow-hidden">
-      <div className="p-4 border-b border-slate-100 border-border flex items-center justify-between">
+      <div className="p-4 border-b border-border flex items-center justify-between">
         <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
           <Layers size={14} className="text-blue-600" />
           {t("title")}

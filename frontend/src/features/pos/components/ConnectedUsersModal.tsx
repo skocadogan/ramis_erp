@@ -75,8 +75,8 @@ export function ConnectedUsersModal({ isOpen, onClose, terminalId }: ConnectedUs
 
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="max-w-md sm:max-w-lg p-0 overflow-hidden bg-white/95 bg-card/95 border border-slate-200/50 border-border/50 shadow-lg">
-        <DialogHeader className="p-4 sm:p-6 pb-4 border-b border-slate-100 border-border">
+      <DialogContent className="max-w-md sm:max-w-lg p-0 overflow-hidden bg-white/95 bg-card/95 border /50 border-border/50 shadow-lg">
+        <DialogHeader className="p-4 sm:p-6 pb-4 border-b border-border">
           <DialogTitle className="flex items-center gap-2 text-lg sm:text-xl font-bold">
             <Users className="text-blue-600 dark:text-blue-400" />
             {title}
@@ -98,7 +98,7 @@ export function ConnectedUsersModal({ isOpen, onClose, terminalId }: ConnectedUs
               {connections.map((conn) => (
                 <div
                   key={conn.channel_name}
-                  className="flex items-center justify-between p-3 rounded-xl border border-slate-100 border-border /50 bg-muted/50 hover:dark:hover: transition-colors"
+                  className="flex items-center justify-between p-3 rounded-xl border border-border /50 bg-muted/50 hover:dark:hover: transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-400">
@@ -134,11 +134,11 @@ export function ConnectedUsersModal({ isOpen, onClose, terminalId }: ConnectedUs
           )}
         </div>
 
-        <div className="p-4 sm:p-6 pt-4 border-t border-slate-100 border-border bg-muted/50 flex justify-end gap-3">
+        <div className="p-4 sm:p-6 pt-4 border-t border-border bg-muted/50 flex justify-end gap-3">
           <button
             onClick={fetchConnections}
             disabled={isLoading}
-            className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-slate-200 border-border rounded-lg hover: dark:hover: transition-colors disabled:opacity-50 flex items-center gap-2"
+            className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-border rounded-lg hover: dark:hover: transition-colors disabled:opacity-50 flex items-center gap-2"
           >
             {isLoading && <Loader2 className="h-3 w-3 animate-spin" />}
             {refreshBtn}

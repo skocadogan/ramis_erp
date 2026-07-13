@@ -97,7 +97,7 @@ const OrderFooterImpl = ({
     return (
         <div className="space-y-4">
             {showTotals && totalOrderDiscount > 0 && (
-                <div className="flex flex-col gap-1 border-b border-slate-50 border-border pb-2 mb-1">
+                <div className="flex flex-col gap-1 border-b border-border pb-2 mb-1">
                     <div className="flex items-center justify-between text-sm font-mono">
                         <span>{t('orderSubtotal')}</span>
                         <span className="font-medium font-mono sm:text-lg">
@@ -140,7 +140,7 @@ const OrderFooterImpl = ({
                                 type="checkbox"
                                 checked={useSplitPayment}
                                 onChange={(e) => onToggleSplit(e.target.checked)}
-                                className="rounded border-slate-300"
+                                className="rounded"
                             />
                             {t('splitPayment')}
                         </label>

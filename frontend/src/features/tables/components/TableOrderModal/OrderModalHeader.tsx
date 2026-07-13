@@ -55,7 +55,7 @@ export function OrderModalHeader({
     const showKitchenPrintOption = showActiveOrderPrintMenu && Boolean(onReprintKitchen);
 
     return (
-        <div className="flex shrink-0 items-center justify-between gap-2 border-b border-slate-100 px-3 py-2.5 border-border sm:px-5 sm:py-3.5">
+        <div className="flex shrink-0 items-center justify-between gap-2 border-b px-3 py-2.5 border-border sm:px-5 sm:py-3.5">
             <div className="flex min-w-0 flex-1 items-center gap-2 sm:gap-2.5">
                 {isTransferring ? (
                     <button 

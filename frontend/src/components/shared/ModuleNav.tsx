@@ -29,7 +29,7 @@ export const sidebarActiveBar =
   "absolute left-1.5 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-primary shadow-glow"
 
 export const horizontalTabInactive =
-  "border-transparent text-muted-foreground hover:border-slate-300 hover: dark:hover:border-slate-600 dark:hover:"
+  "border-transparent text-muted-foreground hover: hover: dark:hover: dark:hover:"
 
 export const horizontalTabActive =
   "border-primary bg-primary/10 font-semibold text-primary"

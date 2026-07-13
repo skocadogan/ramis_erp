@@ -113,8 +113,8 @@ const PRESET_BUTTON_THEME: Record<
         ring: 'focus-visible:ring-amber-500/40',
     },
     custom: {
-        active: ' border-slate-700 text-white shadow-md shadow-slate-700/30  dark:border-slate-300 ',
-        idle: 'border-slate-300  hover: hover:border-slate-400 border-input text-muted-foreground bg-card dark:hover: dark:hover:border-slate-500',
+        active: '  text-white shadow-md shadow-slate-700/30   ',
+        idle: '  hover: hover: border-input text-muted-foreground bg-card dark:hover: dark:hover:',
         ring: 'focus-visible:ring-slate-500/40',
     },
 };

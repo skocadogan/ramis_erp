@@ -67,7 +67,7 @@ function StockStatusBadge({
 
   if (isUnlimited) {
     return (
-      <span className="inline-flex items-center rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-medium text-slate-600 bg-muted dark:text-muted-foreground">
+      <span className="inline-flex items-center rounded-full px-2 py-0.5 text-2xs font-medium bg-muted dark:text-muted-foreground">
         {t("itemsTable.notTracked")}
       </span>
     )
@@ -179,7 +179,7 @@ const ItemRowCells = ({
               {item.current_quantity.toFixed(2)}
             </span>
             <span className="text-2xs text-muted-foreground font-medium">{item.unit}</span>
-            <ExternalLink size={10} className="text-slate-300 group-hover:text-blue-400 transition-colors" />
+            <ExternalLink size={10} className="group-hover:text-blue-400 transition-colors" />
           </button>
         )}
       </td>
@@ -214,7 +214,7 @@ const ItemRowCells = ({
             <Minus size={16} />
           </button>
           <DropdownMenu>
-            <DropdownMenuTrigger className="p-1.5 rounded-md text-muted-foreground hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center ml-auto">
+            <DropdownMenuTrigger className="p-1.5 rounded-md text-muted-foreground hover: hover: dark:hover: transition-colors flex items-center justify-center ml-auto">
               <MoreHorizontal size={18} />
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-48">

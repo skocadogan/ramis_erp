@@ -76,7 +76,7 @@ export default function BulkPriceModal({
           <div className="w-48 shrink-0 border-r border-border p-4 overflow-y-auto">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("bulkPrice.categories")}</p>
             <div className="flex flex-col gap-0.5">
-              <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+              <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover: dark:hover: cursor-pointer">
                 <Checkbox
                   checked={bulkSelectedCategories.size === 0}
                   onCheckedChange={() => onToggleCategory("__all__")}
@@ -84,7 +84,7 @@ export default function BulkPriceModal({
                 <span className="text-sm text-foreground">{t("bulkPrice.all")}</span>
               </label>
               {categories.map(cat => (
-                <label key={cat.id} className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+                <label key={cat.id} className="flex items-center gap-2 px-2 py-1.5 rounded-md hover: dark:hover: cursor-pointer">
                   <Checkbox
                     checked={bulkSelectedCategories.has(cat.id)}
                     onCheckedChange={() => onToggleCategory(cat.id)}
@@ -107,7 +107,7 @@ export default function BulkPriceModal({
             </div>
             <div className="flex flex-col gap-1">
               {bulkFilteredProducts.length === 0 ? (
-                <p className="text-sm text-muted-foreground py-12 text-center bg-slate-50/50 rounded-lg bg-muted/30">{t("bulkPrice.noProducts")}</p>
+                <p className="text-sm text-muted-foreground py-12 text-center /50 rounded-lg bg-muted/30">{t("bulkPrice.noProducts")}</p>
               ) : (
                 bulkFilteredProducts.map(p => {
                   const preview = !isNaN(rate) && rate !== 0
@@ -117,14 +117,14 @@ export default function BulkPriceModal({
                   const isSelected = bulkSelectedProducts.has(p.id);
 
                   return (
-                    <label key={p.id} className={`grid grid-cols-[auto_1fr_80px_80px] sm:grid-cols-[auto_1fr_90px_90px_90px] lg:grid-cols-[auto_1fr_120px_90px_90px] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-3 rounded-lg cursor-pointer border border-transparent transition-all hover:bg-slate-50 hover:border-slate-100 dark:hover:bg-slate-800/50 dark:hover:border-slate-800
-                      ${!isSelected ? "opacity-40 grayscale-[0.5]" : ""}`}>
+                    <label key={p.id} className={`grid grid-cols-[auto_1fr_80px_80px] sm:grid-cols-[auto_1fr_90px_90px_90px] lg:grid-cols-[auto_1fr_120px_90px_90px] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-3 rounded-lg cursor-pointer border border-transparent transition-all hover: hover:border-slate-100 dark:hover:/50 dark:hover:border-slate-800
+ ${!isSelected ? "opacity-40 grayscale-[0.5]" : ""}`}>
                       <Checkbox
                         checked={isSelected}
                         onCheckedChange={() => onToggleProduct(p.id)}
                       />
                       <span className="text-sm font-medium text-foreground truncate">{p.name}</span>
-                      <span className="text-xs text-muted-foreground truncate text-center bg-slate-100 px-2 py-0.5 rounded-full bg-muted dark:text-muted-foreground">{p.category_name}</span>
+                      <span className="text-xs text-muted-foreground truncate text-center px-2 py-0.5 rounded-full bg-muted dark:text-muted-foreground">{p.category_name}</span>
                       <span className="text-sm font-semibold text-foreground text-right font-mono">
                         {formatCurrency(p.base_price)}
                       </span>

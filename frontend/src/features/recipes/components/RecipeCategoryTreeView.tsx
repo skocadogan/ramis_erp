@@ -50,7 +50,7 @@ export function RecipeCategoryTreeView({
   return (
     <div className="flex flex-col h-full overflow-hidden">
       <div className="p-4 border-b border-slate-100 border-border flex items-center justify-between">
-        <h3 className="text-sm font-bold text-slate-800 text-foreground flex items-center gap-2">
+        <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
           <Layers size={14} className="text-blue-600" />
           {t("title")}
         </h3>
@@ -72,11 +72,11 @@ export function RecipeCategoryTreeView({
             "flex items-center gap-2 px-3 py-1.5 rounded-lg cursor-pointer transition-all mb-1",
             !selectedCategoryId
               ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-bold"
-              : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800/50"
+              : " hover: dark:text-muted-foreground dark:hover:/50"
           )}
         >
           <div className="w-4 h-4 flex items-center justify-center">
-            <div className={cn("w-1.5 h-1.5 rounded-full", !selectedCategoryId ? "bg-blue-600" : "bg-slate-300")} />
+            <div className={cn("w-1.5 h-1.5 rounded-full", !selectedCategoryId ? "bg-blue-600" : "")} />
           </div>
           <span className="text-xs font-medium">{t("allRecipes")}</span>
         </div>
@@ -92,7 +92,7 @@ export function RecipeCategoryTreeView({
                 "flex items-center gap-2 px-3 py-2 rounded-lg cursor-pointer transition-all group mb-0.5",
                 selectedCategoryId === cat.id
                   ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-bold shadow-sm border border-blue-100 dark:border-blue-800/50"
-                  : "text-slate-600 hover:bg-slate-50 dark:text-muted-foreground dark:hover:bg-slate-800/40"
+                  : " hover: dark:text-muted-foreground dark:hover:/40"
               )}
               style={{ marginLeft: `${cat.depth * 0.75}rem` }}
             >
@@ -121,7 +121,7 @@ export function RecipeCategoryTreeView({
                   "text-2xs px-1.5 py-0.5 rounded-full font-medium",
                   selectedCategoryId === cat.id
                     ? "bg-blue-600 text-white"
-                    : "bg-slate-100 text-muted-foreground bg-muted dark:text-muted-foreground"
+                    : " text-muted-foreground bg-muted dark:text-muted-foreground"
                 )}>
                   {cat.recipes_count}
                 </span>

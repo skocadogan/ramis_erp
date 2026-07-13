@@ -57,7 +57,7 @@ const ReturnCancelRow = memo(function ReturnCancelRow({
       ref={measureElement}
       onClick={() => onSelect?.(row)}
       className={cn(
-        "transition-colors hover:bg-slate-50/50 dark:hover:bg-slate-800/30",
+        "transition-colors hover:/50 dark:hover:/30",
         onSelect && "cursor-pointer",
       )}
     >

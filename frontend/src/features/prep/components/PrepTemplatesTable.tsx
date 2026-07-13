@@ -49,7 +49,7 @@ export function PrepTemplatesTable({
       tableClassName="w-full text-sm"
       header={
         <thead className={virtualTableStickyHeadClass}>
-          <tr className="text-xs font-bold text-slate-500">
+          <tr className="text-xs font-bold">
             <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.templates.nameSchedule")}
             </th>
@@ -95,7 +95,7 @@ export function PrepTemplatesTable({
       renderRow={(template) => (
         <>
           <td className="px-4 py-3 align-middle">
-            <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
+            <h4 className="text-sm font-bold dark:text-white leading-none">
               {template.title}
             </h4>
             <p className="text-2xs font-medium text-muted-foreground mt-1">
@@ -117,13 +117,13 @@ export function PrepTemplatesTable({
             <div
               className={cn(
                 "inline-block w-1.5 h-1.5 rounded-full ml-2",
-                template.is_enabled ? "bg-emerald-500" : "bg-slate-300",
+                template.is_enabled ? "bg-emerald-500" : "",
               )}
             />
           </td>
           <td className="px-4 py-3 text-right align-middle">
             <DropdownMenu>
-              <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover:bg-slate-100 transition-colors outline-none">
+              <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover: transition-colors outline-none">
                 <MoreVertical size={14} />
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">

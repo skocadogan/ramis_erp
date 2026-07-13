@@ -309,7 +309,7 @@ export default function KDSPage() {
     <AuthGuard module="kds">
       <Suspense
         fallback={
-          <div className="flex h-screen items-center justify-center bg-slate-900">
+          <div className="flex h-screen items-center justify-center">
             <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
           </div>
         }

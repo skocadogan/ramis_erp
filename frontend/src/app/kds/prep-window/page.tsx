@@ -182,21 +182,21 @@ function PrepWindowSetup({
 
   if (isLoadingBranches) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-950 text-white">
+      <div className="flex h-screen items-center justify-center text-white">
         <Loader2 className="h-10 w-10 animate-spin text-blue-500" />
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-slate-950 p-6 text-white">
-      <div className="w-full max-w-2xl rounded-3xl border border-slate-800 bg-slate-900/80 p-10 shadow-2xl">
+    <div className="flex min-h-screen items-center justify-center p-6 text-white">
+      <div className="w-full max-w-2xl rounded-3xl border border-slate-800 /80 p-10 shadow-2xl">
         <div className="mb-10 text-center">
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-2xl bg-indigo-600 shadow-lg shadow-indigo-900/40">
             <ChefHat size={40} />
           </div>
           <h1 className="text-3xl font-bold">İstasyon Hazırlık Ekranı</h1>
-          <p className="mt-2 text-slate-400">Şube ve mutfak istasyonu seçin</p>
+          <p className="mt-2">Şube ve mutfak istasyonu seçin</p>
         </div>
 
         {error && (
@@ -206,14 +206,14 @@ function PrepWindowSetup({
         )}
 
         <div className="mb-8">
-          <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-slate-500">
+          <label className="mb-2 flex items-center gap-2 text-xs font-bold uppercase tracking-widest">
             <Building2 size={16} />
             Şube
           </label>
           <select
             value={branchId}
             onChange={(e) => setBranchId(e.target.value)}
-            className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-4 text-lg font-semibold text-white outline-none focus:border-indigo-500"
+            className="w-full rounded-2xl border border-slate-700 px-4 py-4 text-lg font-semibold text-white outline-none focus:border-indigo-500"
           >
             <option value="">Şube seçin…</option>
             {branches.map((b) => (
@@ -225,7 +225,7 @@ function PrepWindowSetup({
         </div>
 
         <div>
-          <div className="mb-4 text-xs font-bold uppercase tracking-widest text-slate-500">
+          <div className="mb-4 text-xs font-bold uppercase tracking-widest">
             Mutfak İstasyonu
           </div>
           {isLoadingStations ? (
@@ -233,9 +233,9 @@ function PrepWindowSetup({
               <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
             </div>
           ) : !branchId ? (
-            <p className="py-8 text-center text-slate-500">Önce şube seçin.</p>
+            <p className="py-8 text-center">Önce şube seçin.</p>
           ) : stations.length === 0 ? (
-            <p className="py-8 text-center text-slate-500">Bu şubede istasyon bulunamadı.</p>
+            <p className="py-8 text-center">Bu şubede istasyon bulunamadı.</p>
           ) : (
             <div className="grid gap-3">
               {stations.map((station) => (
@@ -244,7 +244,7 @@ function PrepWindowSetup({
                   type="button"
                   disabled={isSubmitting}
                   onClick={() => void handleSelectStation(station)}
-                  className="group flex items-center justify-between rounded-2xl border border-slate-700 bg-slate-950 px-5 py-4 text-left transition hover:border-indigo-500 hover:bg-slate-900 disabled:opacity-60"
+                  className="group flex items-center justify-between rounded-2xl border border-slate-700 px-5 py-4 text-left transition hover:border-indigo-500 hover: disabled:opacity-60"
                 >
                   <div className="flex items-center gap-4">
                     <div
@@ -253,10 +253,10 @@ function PrepWindowSetup({
                     />
                     <div>
                       <div className="text-lg font-bold">{station.name}</div>
-                      <div className="text-sm text-slate-500">{station.branch_name}</div>
+                      <div className="text-sm">{station.branch_name}</div>
                     </div>
                   </div>
-                  <ChevronRight className="text-slate-500 transition group-hover:text-white" />
+                  <ChevronRight className="transition group-hover:text-white" />
                 </button>
               ))}
             </div>
@@ -302,7 +302,7 @@ function PrepWindowDisplay({
         <button
           type="button"
           onClick={onChangeSetup}
-          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 bg-slate-900 text-slate-300 transition hover:bg-slate-800 hover:text-white"
+          className="flex h-9 w-9 items-center justify-center rounded-lg border border-slate-700 transition hover: hover:text-white"
           title="Şube / istasyon değiştir"
         >
           <Settings2 size={16} />
@@ -375,7 +375,7 @@ export default function PrepWindowPage() {
 
   if (phase === "loading") {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-950 text-white">
+      <div className="flex h-screen items-center justify-center text-white">
         <Loader2 className="h-10 w-10 animate-spin text-blue-500" />
       </div>
     );

@@ -107,7 +107,7 @@ export function SettingsPanel() {
         <div className="grid grid-cols-1 xl:grid-cols-2 gap-8">
           {/* POS KISIT MODU KARTI */}
           <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden">
-            <CardHeader className="bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+            <CardHeader className="p-4 border-b border-border bg-muted/40 border-border">
               <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <ShieldCheck className="h-4 w-4 text-blue-600 shrink-0" /> {t("posCardTitle")}
               </CardTitle>
@@ -155,7 +155,7 @@ export function SettingsPanel() {
 
           {/* PLANLAMA ALGORİTMASI KARTI */}
           <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden flex flex-col">
-            <CardHeader className="bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+            <CardHeader className="p-4 border-b border-border bg-muted/40 border-border">
               <CardTitle className="text-sm font-semibold flex items-center gap-2">
                 <Zap className="h-4 w-4 text-amber-500 shrink-0" /> {t("algoCardTitle")}
               </CardTitle>

@@ -80,8 +80,8 @@ function rowBadgeClass(menuClass: MenuEngineeringClass | null): string {
     if (menuClass === "STAR") return "bg-emerald-100 text-emerald-700 dark:bg-emerald-950/30 dark:text-emerald-300";
     if (menuClass === "PLOWHORSE") return "bg-amber-100 text-amber-700 dark:bg-amber-950/30 dark:text-amber-300";
     if (menuClass === "PUZZLE") return "bg-blue-100 text-blue-700 dark:bg-blue-950/30 dark:text-blue-300";
-    if (menuClass === "DOG") return "bg-slate-100 text-slate-700 bg-muted text-muted-foreground";
-    return "bg-slate-100 text-slate-700 bg-muted text-muted-foreground";
+    if (menuClass === "DOG") return "  bg-muted text-muted-foreground";
+    return "  bg-muted text-muted-foreground";
 }
 
 function buildVarianceLine(item: StockVarianceItem): string {
@@ -127,7 +127,7 @@ function menuClassIconClass(menuClass: MenuEngineeringClass): string {
     if (menuClass === "STAR") return "text-emerald-500";
     if (menuClass === "PLOWHORSE") return "text-amber-500";
     if (menuClass === "PUZZLE") return "text-blue-500";
-    return "text-slate-500";
+    return "";
 }
 
 export function MenuEngineeringAnalytics({
@@ -285,7 +285,7 @@ export function MenuEngineeringAnalytics({
                     <select
                         value={selectedCategoryId}
                         onChange={(event) => setSelectedCategoryId(event.target.value)}
-                        className="h-9 rounded-md border border-border bg-slate-50 px-3 text-sm bg-muted border-input text-foreground"
+                        className="h-9 rounded-md border border-border px-3 text-sm bg-muted border-input text-foreground"
                     >
                         <option value="ALL">{t("menuEngineering.allCategories")}</option>
                         {categoryOptions.map((category) => (
@@ -298,7 +298,7 @@ export function MenuEngineeringAnalytics({
                     <select
                         value={selectedMenuClass}
                         onChange={(event) => setSelectedMenuClass(event.target.value)}
-                        className="h-9 rounded-md border border-border bg-slate-50 px-3 text-sm bg-muted border-input text-foreground"
+                        className="h-9 rounded-md border border-border px-3 text-sm bg-muted border-input text-foreground"
                     >
                         <option value="ALL">{t("menuEngineering.allClasses")}</option>
                         {MENU_CLASSES.map((menuClass) => (
@@ -322,7 +322,7 @@ export function MenuEngineeringAnalytics({
                                 value={startDate}
                                 onChange={(event) => onStartDateChange(event.target.value)}
                                 max={endDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                             <span className="text-muted-foreground text-sm">-</span>
                             <input
@@ -330,7 +330,7 @@ export function MenuEngineeringAnalytics({
                                 value={endDate}
                                 onChange={(event) => onEndDateChange(event.target.value)}
                                 min={startDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                         </div>
                     )}
@@ -340,7 +340,7 @@ export function MenuEngineeringAnalytics({
                         value={searchTerm}
                         onChange={(event) => setSearchTerm(event.target.value)}
                         placeholder={t("menuEngineering.searchPlaceholder")}
-                        className="h-9 w-full sm:w-56 rounded-md border border-border bg-slate-50 px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground"
+                        className="h-9 w-full sm:w-56 rounded-md border border-border px-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground"
                     />
 
                     {hasCustomFilters && (
@@ -401,10 +401,10 @@ export function MenuEngineeringAnalytics({
                             type="button"
                             onClick={() => setAnalysisMode("estimated")}
                             className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${
-                                analysisMode === "estimated"
-                                    ? "bg-blue-600 text-white"
-                                    : "text-blue-900 hover:bg-blue-100 dark:text-blue-100 dark:hover:bg-blue-900/40"
-                            }`}
+ analysisMode === "estimated"
+ ? "bg-blue-600 text-white"
+ : "text-blue-900 hover:bg-blue-100 dark:text-blue-100 dark:hover:bg-blue-900/40"
+ }`}
                         >
                             {t("menuEngineering.analysisModes.estimated")}
                         </button>
@@ -412,10 +412,10 @@ export function MenuEngineeringAnalytics({
                             type="button"
                             onClick={() => setAnalysisMode("actual")}
                             className={`rounded-md px-3 py-1.5 text-xs font-semibold transition-colors ${
-                                analysisMode === "actual"
-                                    ? "bg-blue-600 text-white"
-                                    : "text-blue-900 hover:bg-blue-100 dark:text-blue-100 dark:hover:bg-blue-900/40"
-                            }`}
+ analysisMode === "actual"
+ ? "bg-blue-600 text-white"
+ : "text-blue-900 hover:bg-blue-100 dark:text-blue-100 dark:hover:bg-blue-900/40"
+ }`}
                         >
                             {t("menuEngineering.analysisModes.actual")}
                         </button>
@@ -529,10 +529,10 @@ export function MenuEngineeringAnalytics({
                             type="button"
                             onClick={() => setSelectedMenuClass((current) => current === menuClass ? "ALL" : menuClass)}
                             className={`rounded-xl border px-4 py-3 text-left shadow-sm transition-colors ${
-                                selectedMenuClass === menuClass
-                                    ? "border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-950/30"
-                                    : "border-border bg-card border-border"
-                            }`}
+ selectedMenuClass === menuClass
+ ? "border-blue-300 bg-blue-50 dark:border-blue-700 dark:bg-blue-950/30"
+ : "border-border bg-card border-border"
+ }`}
                         >
                             <div className="flex items-center justify-between">
                                 <span className={`inline-flex rounded-full px-2 py-1 text-sm font-bold ${rowBadgeClass(menuClass)}`}>
@@ -592,7 +592,7 @@ export function MenuEngineeringAnalytics({
                 </div>
 
                 {isFetching && (
-                    <div className="border-b border-slate-100 bg-slate-50/60 px-4 py-2 text-xs text-muted-foreground border-border bg-card/50">
+                    <div className="border-b border-slate-100 /60 px-4 py-2 text-xs text-muted-foreground border-border bg-card/50">
                         {t("list.loadingHint")}
                     </div>
                 )}
@@ -758,33 +758,33 @@ export function MenuEngineeringAnalytics({
                     <div className="mt-1 text-xs text-muted-foreground">{t("menuEngineering.varianceSubtitle")}</div>
 
                     <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-5">
-                        <div className="rounded-lg border border-border bg-slate-50/70 px-3 py-2 border-border bg-muted/30">
+                        <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
                             <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.waste")}</div>
                             <div className="mt-1 text-base font-bold text-rose-600 dark:text-rose-400">
                                 {formatNumber(variance?.totals.waste_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
-                        <div className="rounded-lg border border-border bg-slate-50/70 px-3 py-2 border-border bg-muted/30">
+                        <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
                             <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.cancel")}</div>
                             <div className="mt-1 text-base font-bold text-amber-600 dark:text-amber-400">
                                 {formatNumber(variance?.totals.cancel_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
-                        <div className="rounded-lg border border-border bg-slate-50/70 px-3 py-2 border-border bg-muted/30">
+                        <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
                             <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.return")}</div>
                             <div className="mt-1 text-base font-bold text-blue-600 dark:text-blue-400">
                                 {formatNumber(variance?.totals.return_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
-                        <div className="rounded-lg border border-border bg-slate-50/70 px-3 py-2 border-border bg-muted/30">
+                        <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
                             <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.disposal")}</div>
                             <div className="mt-1 text-base font-bold text-purple-600 dark:text-purple-400">
                                 {formatNumber(variance?.totals.disposal_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
-                        <div className="rounded-lg border border-border bg-slate-50/70 px-3 py-2 border-border bg-muted/30">
+                        <div className="rounded-lg border border-border /70 px-3 py-2 border-border bg-muted/30">
                             <div className="text-2xs font-bold uppercase tracking-wider text-muted-foreground">{t("menuEngineering.varianceCards.adjustment")}</div>
-                            <div className="mt-1 text-base font-bold text-slate-700 text-foreground">
+                            <div className="mt-1 text-base font-bold text-foreground">
                                 {formatNumber(variance?.totals.adjustment_qty ?? 0, { maximumFractionDigits: 2 })}
                             </div>
                         </div>
@@ -834,7 +834,7 @@ export function MenuEngineeringAnalytics({
 
                     <div className="mt-4 space-y-3">
                         {(variance?.recent_movements ?? []).map((movement) => (
-                            <div key={movement.movement_id} className="rounded-lg border border-border bg-slate-50/70 px-3 py-3 border-border bg-muted/30">
+                            <div key={movement.movement_id} className="rounded-lg border border-border /70 px-3 py-3 border-border bg-muted/30">
                                 <div className="flex items-start justify-between gap-3">
                                     <div>
                                         <div className="font-semibold text-foreground">{movement.stock_item_name}</div>

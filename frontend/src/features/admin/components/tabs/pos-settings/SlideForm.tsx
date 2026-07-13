@@ -108,7 +108,7 @@ export function SlideForm({ slide, onSubmit, onCancel, isSaving }: SlideFormProp
         {type === "TEXT" && (
           <div className="space-y-2 col-span-2">
             <Label className="text-xs font-semibold text-muted-foreground">{t('admin_settings.slides.textPreviewTitle')}</Label>
-            <div className="h-24 w-full rounded-lg border border-border bg-slate-900 flex flex-col items-center justify-center p-4 text-center text-white overflow-hidden shadow-inner">
+            <div className="h-24 w-full rounded-lg border border-border flex flex-col items-center justify-center p-4 text-center text-white overflow-hidden shadow-inner">
               <p className="text-sm font-bold leading-tight line-clamp-1">{title || t('admin_settings.slides.textPreviewDefaultTitle')}</p>
               <p className="text-xs opacity-70 line-clamp-1">{subTitle || t('admin_settings.slides.textPreviewDefaultSubtitle')}</p>
             </div>

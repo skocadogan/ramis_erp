@@ -132,7 +132,7 @@ export default function CustomerDisplayPage() {
 
   if (!clientReady) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-900 text-white">
+      <div className="flex h-screen items-center justify-center text-white">
         <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
       </div>
     );
@@ -140,7 +140,7 @@ export default function CustomerDisplayPage() {
 
   if (!displayToken) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-900 text-white p-6 text-center">
+      <div className="flex h-screen items-center justify-center text-white p-6 text-center">
         <div className="max-w-lg space-y-4">
           <h2 className="text-2xl font-bold">{t("unsafeTitle")}</h2>
           <p className="text-muted-foreground">
@@ -153,7 +153,7 @@ export default function CustomerDisplayPage() {
 
   if (status === "connecting" && !data) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-900 text-white">
+      <div className="flex h-screen items-center justify-center text-white">
         <div className="flex flex-col items-center gap-6">
           <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
           <h2 className="text-2xl font-bold tracking-tight">{t("connectingTitle")}</h2>
@@ -167,7 +167,7 @@ export default function CustomerDisplayPage() {
 
   if (status === "disconnected" && !data) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-900 text-white p-6 text-center">
+      <div className="flex h-screen items-center justify-center text-white p-6 text-center">
         <div className="max-w-md space-y-6">
           <div className="bg-red-500/10 p-6 rounded-full inline-block mb-4 border border-red-500/20">
             <MonitorOff className="h-16 w-16 text-red-500" />
@@ -177,7 +177,7 @@ export default function CustomerDisplayPage() {
             {t("disconnectedDescription")}
           </p>
           <div className="pt-8">
-            <div className="h-1 w-full bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-1 w-full rounded-full overflow-hidden">
               <div className="h-full bg-red-500/70 w-full"></div>
             </div>
             <p className="mt-4 text-sm text-muted-foreground font-bold uppercase tracking-widest">

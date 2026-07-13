@@ -113,8 +113,8 @@ const PRESET_BUTTON_THEME: Record<
         ring: 'focus-visible:ring-amber-500/40',
     },
     custom: {
-        active: 'bg-slate-700 border-slate-700 text-white shadow-md shadow-slate-700/30 dark:bg-slate-300 dark:border-slate-300 dark:text-slate-900',
-        idle: 'border-slate-300 text-slate-700 hover:bg-slate-50 hover:border-slate-400 border-input text-muted-foreground bg-card dark:hover:bg-slate-800 dark:hover:border-slate-500',
+        active: ' border-slate-700 text-white shadow-md shadow-slate-700/30  dark:border-slate-300 ',
+        idle: 'border-slate-300  hover: hover:border-slate-400 border-input text-muted-foreground bg-card dark:hover: dark:hover:border-slate-500',
         ring: 'focus-visible:ring-slate-500/40',
     },
 };
@@ -162,7 +162,7 @@ export function PeriodFilter({
                         if (!v) return;
                         onSelect(v, getRangeForPeriodPreset(v));
                     }}
-                    className="min-w-[10.5rem] rounded-md border border-border bg-slate-50 py-1.5 pr-8 pl-2.5 text-sm text-slate-800 shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/25 disabled:cursor-not-allowed disabled:opacity-50 border-input bg-muted text-foreground dark:focus:border-blue-400 dark:focus:ring-blue-400/25"
+                    className="min-w-[10.5rem] rounded-md border border-border py-1.5 pr-8 pl-2.5 text-sm shadow-sm transition-colors focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/25 disabled:cursor-not-allowed disabled:opacity-50 border-input bg-muted text-foreground dark:focus:border-blue-400 dark:focus:ring-blue-400/25"
                 >
                     <option value="">{resolvedI18n.selectPlaceholder}</option>
                     {presetRows.map(({ id, label }) => (
@@ -195,10 +195,10 @@ export function PeriodFilter({
                         disabled={disabled}
                         onClick={() => onSelect(id, getRangeForPeriodPreset(id))}
                         className={`rounded-lg px-2.5 py-1.5 text-xs font-semibold border shrink-0 transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-50 dark:focus-visible:ring-offset-slate-900
-                            ${theme.ring}
-                            ${isActive ? theme.active : theme.idle}
-                            ${isActive ? 'ring-2 ring-offset-1 ring-slate-900/15 dark:ring-white/25' : ''}
-                            disabled:opacity-45 disabled:cursor-not-allowed disabled:shadow-none`}
+ ${theme.ring}
+ ${isActive ? theme.active : theme.idle}
+ ${isActive ? 'ring-2 ring-offset-1 ring-slate-900/15 dark:ring-white/25' : ''}
+ disabled:opacity-45 disabled:cursor-not-allowed disabled:shadow-none`}
                     >
                         {label}
                     </button>

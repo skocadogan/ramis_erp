@@ -63,7 +63,7 @@ export function OfflineQueueIndicator({
             "flex items-center gap-1.5 rounded-lg border px-2.5 py-2 text-sm font-semibold shadow-sm transition-colors",
             hasProblem
               ? "border-amber-200 bg-amber-50 text-amber-800 hover:bg-amber-100 dark:border-amber-900/40 dark:bg-amber-950/30 dark:text-amber-300"
-              : "border-slate-200 text-slate-700 hover:bg-slate-50 border-input bg-card text-foreground",
+              : "border-slate-200  hover: border-input bg-card text-foreground",
             className
           )}
           title={title}

@@ -174,10 +174,10 @@ function SalesPageContent() {
                             key={key}
                             onClick={() => sales.setActiveTab(key)}
                             className={`flex items-center gap-1.5 px-3 py-3 text-sm font-medium border-b-2 transition-colors
-                                ${sales.activeTab === key
-                                    ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                                    : 'border-transparent text-muted-foreground hover:text-slate-700 hover:border-slate-300 dark:text-muted-foreground dark:hover:text-slate-200'
-                                }`}
+ ${sales.activeTab === key
+ ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
+ : 'border-transparent text-muted-foreground hover: hover:border-slate-300 dark:text-muted-foreground dark:hover:'
+ }`}
                         >
                             {label}
                         </button>
@@ -268,21 +268,21 @@ function SalesPageContent() {
                                     <TableSelect
                                         value={sales.tableId}
                                         onChange={sales.setTableId}
-                                        className="w-full sm:w-[180px] h-9 bg-slate-50 border-border text-sm bg-muted border-input text-foreground"
+                                        className="w-full sm:w-[180px] h-9 border-border text-sm bg-muted border-input text-foreground"
                                     />
 
                                     {/* Cashier Select */}
                                     <CashierSelect
                                         value={sales.cashierId}
                                         onChange={sales.setCashierId}
-                                        className="w-full sm:w-[200px] h-9 bg-slate-50 border-border text-sm bg-muted border-input text-foreground"
+                                        className="w-full sm:w-[200px] h-9 border-border text-sm bg-muted border-input text-foreground"
                                     />
 
                                     {sales.activeTab === 'sales' && (
                                         <select
                                             value={sales.paymentFilter}
                                             onChange={e => sales.setPaymentFilter(e.target.value)}
-                                            className="bg-slate-50 border border-border rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground"
+                                            className="border border-border rounded-md px-2.5 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground"
                                         >
                                             <option value="ALL">{t('payment.all')}</option>
                                             <option value="CASH">{t('payment.cash')}</option>
@@ -300,11 +300,11 @@ function SalesPageContent() {
                                             <button
                                                 type="button"
                                                 onClick={() => sales.setDiscountOnly(!sales.discountOnly)}
-                                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${sales.discountOnly ? 'bg-amber-600' : 'bg-slate-200 bg-accent'
-                                                    }`}
+                                                className={`relative inline-flex h-5 w-9 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 ${sales.discountOnly ? 'bg-amber-600' : ' bg-accent'
+ }`}
                                             >
                                                 <span className={`pointer-events-none block h-4 w-4 rounded-full shadow-lg ring-0 transition-transform ${sales.discountOnly ? 'translate-x-4' : 'translate-x-0'
-                                                    }`} />
+ }`} />
                                             </button>
                                         </div>
                                     )}
@@ -327,7 +327,7 @@ function SalesPageContent() {
                                                 value={sales.startDate}
                                                 onChange={e => sales.setStartDate(e.target.value)}
                                                 max={sales.endDate}
-                                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                                             />
                                             <span className="text-muted-foreground text-sm">-</span>
                                             <input
@@ -335,7 +335,7 @@ function SalesPageContent() {
                                                 value={sales.endDate}
                                                 onChange={e => sales.setEndDate(e.target.value)}
                                                 min={sales.startDate}
-                                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                                             />
                                         </div>
                                     )}
@@ -411,7 +411,7 @@ function SalesPageContent() {
 
                                 <div className="flex-1 overflow-auto overflow-x-hidden relative">
                                     {(sales.isLoading || sales.isFetching) && (
-                                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 bg-card/60 dark:motion-reduce:bg-slate-900/75">
+                                        <div className="absolute inset-0 z-10 flex items-center justify-center bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 bg-card/60 dark:motion-reduce:/75">
                                             <div className="flex flex-col items-center gap-2">
                                                 <Loader2 className="animate-spin text-blue-600 dark:text-blue-400" size={24} />
                                                 <span className="text-xs font-medium text-muted-foreground">{t('list.loadingHint')}</span>
@@ -429,7 +429,7 @@ function SalesPageContent() {
                                     />
                                 </div>
 
-                                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between bg-card/50 border-border">
+                                <div className="p-3 border-t border-slate-100 /50 flex items-center justify-between bg-card/50 border-border">
                                     <div className="text-xs text-muted-foreground font-medium">
                                         {t('list.paginationTotal', { count: sales.totalCount })}
                                     </div>

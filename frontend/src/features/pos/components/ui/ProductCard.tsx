@@ -108,11 +108,11 @@ export const ProductCard = memo(function ProductCard({
     <>
       <div
         className={`group relative flex flex-col overflow-hidden rounded-2xl border bg-card text-left shadow-sm transition-colors
-          ${
-            disabled
-              ? "border-border opacity-55 grayscale-[0.35] dark:border-slate-700"
-              : "border-border hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500"
-          }`}
+ ${
+ disabled
+ ? "border-border opacity-55 grayscale-[0.35] dark:border-slate-700"
+ : "border-border hover:border-blue-400 dark:border-slate-700 dark:hover:border-blue-500"
+ }`}
       >
         {hasAllergens && (
           <button
@@ -134,8 +134,8 @@ export const ProductCard = memo(function ProductCard({
           onClick={handleAddClick}
           title={disabled ? t("disabledError") : undefined}
           className={`flex w-full flex-col text-left ${
-            disabled ? "cursor-not-allowed" : "cursor-pointer"
-          }`}
+ disabled ? "cursor-not-allowed" : "cursor-pointer"
+ }`}
         >
         <div
           className="relative flex h-24 w-full items-center justify-center bg-muted/30 sm:h-32"
@@ -162,8 +162,8 @@ export const ProductCard = memo(function ProductCard({
             <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 motion-reduce:bg-black/55 supports-[backdrop-filter]:backdrop-blur-[1px] motion-reduce:backdrop-blur-none">
               <span
                 className={`text-white text-2xs font-bold px-2 py-1 rounded shadow-lg uppercase tracking-tighter rotate-[-5deg] ${
-                  stockTrackingMode === "INGREDIENT" ? "bg-amber-600" : "bg-red-600"
-                }`}
+ stockTrackingMode === "INGREDIENT" ? "bg-amber-600" : "bg-red-600"
+ }`}
               >
                 {stockTrackingMode === "INGREDIENT" ? t("soldOutIngredient") : t("soldOut86")}
               </span>
@@ -188,7 +188,7 @@ export const ProductCard = memo(function ProductCard({
               sizes="(max-width: 768px) 50vw, 200px"
             />
           ) : (
-            <Utensils size={26} className="text-slate-300 transition-colors group-hover:text-blue-200 dark:text-slate-600" />
+            <Utensils size={26} className="transition-colors group-hover:text-blue-200" />
           )}
         </div>
         <div className="z-10 w-full bg-card p-4">
@@ -198,7 +198,7 @@ export const ProductCard = memo(function ProductCard({
                 {product.name}
               </h4>
               {caloriesLabel && (
-                <p className="mt-0.5 text-right  font-semibold tabular-nums text-amber-700 dark:text-amber-400">
+                <p className="mt-0.5 text-right font-semibold tabular-nums text-amber-700 dark:text-amber-400">
                   {caloriesLabel}
                 </p>
               )}
@@ -243,10 +243,10 @@ export const ProductCard = memo(function ProductCard({
             </div>
             {!disabled && (
               <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full transition-all duration-200 sm:h-10 sm:w-10 ${
-                isAdded
-                  ? "bg-green-500 text-white scale-110 sm:opacity-100"
-                  : "bg-blue-100 text-blue-700 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-950/60 dark:text-blue-300 dark:group-hover:bg-blue-600 dark:group-hover:text-white opacity-80 sm:opacity-80"
-              }`}>
+ isAdded
+ ? "bg-green-500 text-white scale-110 sm:opacity-100"
+ : "bg-blue-100 text-blue-700 group-hover:bg-blue-600 group-hover:text-white dark:bg-blue-950/60 dark:text-blue-300 dark:group-hover:bg-blue-600 dark:group-hover:text-white opacity-80 sm:opacity-80"
+ }`}>
                 {isAdded
                   ? <Check size={22} strokeWidth={2.75} className="sm:size-[20px]" aria-hidden />
                   : <Plus size={24} strokeWidth={2.75} className="sm:size-[22px]" aria-hidden />

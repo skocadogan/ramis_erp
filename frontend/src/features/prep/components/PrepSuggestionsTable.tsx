@@ -38,7 +38,7 @@ export function PrepSuggestionsTable({
       tableClassName="w-full text-sm"
       header={
         <thead className={virtualTableStickyHeadClass}>
-          <tr className="text-xs font-bold text-slate-500">
+          <tr className="text-xs font-bold">
             <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.suggestions.materialBase")}
             </th>
@@ -77,7 +77,7 @@ export function PrepSuggestionsTable({
       renderRow={(sug) => (
         <>
           <td className="px-4 py-3 align-middle">
-            <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
+            <h4 className="text-sm font-bold dark:text-white leading-none">
               {sug.target_item}
             </h4>
             <p className="text-2xs font-medium text-muted-foreground uppercase tracking-tighter mt-1">

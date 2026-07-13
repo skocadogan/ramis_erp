@@ -219,7 +219,7 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
         </div>
       ) : (
         <Card className="border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
-          <div className="border-b border-border bg-slate-50 px-4 py-3 border-border bg-muted/40">
+          <div className="border-b border-border px-4 py-3 border-border bg-muted/40">
             <h2 className="text-sm font-semibold text-foreground">
               {t("salesListCard.title") || "POS Satış Kayıtları"}
             </h2>
@@ -234,7 +234,7 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                   type="date"
                   value={salesDateFrom}
                   onChange={(e) => { setSalesDateFrom(e.target.value); }}
-                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[9.5rem] flex-col gap-1">
@@ -246,7 +246,7 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                   type="date"
                   value={salesDateTo}
                   onChange={(e) => { setSalesDateTo(e.target.value); }}
-                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[8rem] flex-col gap-1">
@@ -354,7 +354,7 @@ export function SalesRecordsTab({ branchId, canViewAmounts, terminalOptions }: P
                               transform: `translateY(${vi.start}px)`,
                             }}
                           >
-                            <div className="flex items-center border-b border-border/60 px-3 py-2 hover:bg-slate-50 border-border dark:hover:bg-slate-800/30">
+                            <div className="flex items-center border-b border-border/60 px-3 py-2 hover: border-border dark:hover:/30">
                               <div className="flex-1 grid grid-cols-6 gap-2 items-center min-w-0">
                                 <span className="truncate text-muted-foreground">
                                   {sale.created_at ? new Date(sale.created_at).toLocaleDateString("tr-TR") : "-"}

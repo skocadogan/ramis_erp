@@ -40,12 +40,12 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
       </div>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4" style={{ maxHeight: "calc(100vh - 220px)" }}>
         <div className="rounded-lg border border-border bg-card border-border flex flex-col min-h-0">
-          <div className="bg-slate-50 rounded-t-lg px-4 py-3 border-b border-border bg-muted/40 border-border shrink-0">
+          <div className="rounded-t-lg px-4 py-3 border-b border-border bg-muted/40 border-border shrink-0">
             <h3 className="text-ui-sm font-semibold text-foreground">{t('roles.rolesCount', { count: roles.length })}</h3>
           </div>
           <div className="divide-y divide-slate-100 dark:divide-slate-700 overflow-y-auto flex-1 min-h-0">
             {roles.map(role => (
-              <div key={role.id} className="px-4 py-3 flex items-center justify-between hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+              <div key={role.id} className="px-4 py-3 flex items-center justify-between hover:/50 dark:hover:/50">
                 <div>
                   <span className="text-ui font-medium text-foreground text-foreground">{role.name}</span>
                   {role.description && <p className="text-xs text-muted-foreground mt-0.5 dark:text-muted-foreground">{role.description}</p>}
@@ -55,7 +55,7 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
                       .filter(perm => role.permission_codes.includes(perm.code))
                       .slice(0, 5)
                       .map(perm => (
-                        <span key={perm.code} className="rounded-md bg-slate-50 border border-border px-1.5 py-0.5 text-xs text-slate-600 bg-muted border-border dark:text-muted-foreground">{perm.name}</span>
+                        <span key={perm.code} className="rounded-md border border-border px-1.5 py-0.5 text-xs bg-muted border-border dark:text-muted-foreground">{perm.name}</span>
                       ))}
                     {role.permission_codes.length > 5 && (
                       <span className="text-2xs font-medium text-muted-foreground dark:text-muted-foreground self-center ml-1">{t('roles.more', { count: role.permission_codes.length - 5 })}</span>
@@ -63,7 +63,7 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
                   </div>
                 </div>
                 <div className="flex items-center gap-1">
-                  <button onClick={() => onEditRole(role)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-blue-600 dark:hover:bg-slate-800" title={t('common.edit')}>
+                  <button onClick={() => onEditRole(role)} className="p-1.5 rounded-md hover: text-muted-foreground hover:text-blue-600 dark:hover:" title={t('common.edit')}>
                     <Edit size={14} />
                   </button>
                   <button onClick={() => onDeleteRole(role.id)} className="p-1.5 rounded-md hover:bg-red-50 text-muted-foreground hover:text-red-600 dark:hover:bg-red-900/30" title={t('common.delete')}>
@@ -76,19 +76,19 @@ export function RolesTab({ roles, permCategories, onAddRole, onEditRole, onDelet
         </div>
 
         <div className="rounded-lg border border-border bg-card border-border flex flex-col min-h-0">
-          <div className="bg-slate-50 rounded-t-lg px-4 py-3 border-b border-border bg-muted/40 border-border shrink-0">
+          <div className="rounded-t-lg px-4 py-3 border-b border-border bg-muted/40 border-border shrink-0">
             <h3 className="text-ui-sm font-semibold text-foreground">{t('roles.permCategories')}</h3>
           </div>
           <div className="divide-y divide-slate-100 overflow-y-auto flex-1 min-h-0 dark:divide-slate-700">
             {permCategories.map(cat => (
-              <div key={cat.id} className="px-4 py-3 hover:bg-slate-50/30 dark:hover:bg-slate-800/20 transition-colors">
+              <div key={cat.id} className="px-4 py-3 hover:/30 dark:hover:/20 transition-colors">
                 <div className="flex items-center gap-2 mb-2.5">
                   <span className="text-ui font-medium text-foreground text-foreground">{cat.name}</span>
-                  <span className="rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-medium text-muted-foreground bg-muted dark:text-muted-foreground">{cat.permissions.length}</span>
+                  <span className="rounded-full px-2 py-0.5 text-2xs font-medium text-muted-foreground bg-muted dark:text-muted-foreground">{cat.permissions.length}</span>
                 </div>
                 <div className="flex flex-wrap gap-1">
                   {cat.permissions.map(perm => (
-                    <span key={perm.id} className="rounded-md bg-slate-50 border border-border px-2 py-1 text-xs text-slate-600 bg-muted border-border dark:text-muted-foreground" title={perm.code}>
+                    <span key={perm.id} className="rounded-md border border-border px-2 py-1 text-xs bg-muted border-border dark:text-muted-foreground" title={perm.code}>
                       {perm.name}
                     </span>
                   ))}

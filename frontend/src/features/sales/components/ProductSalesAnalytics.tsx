@@ -188,7 +188,7 @@ export function ProductSalesAnalytics({
                                 value={startDate}
                                 onChange={e => onStartDateChange(e.target.value)}
                                 max={endDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                             <span className="text-muted-foreground text-sm">-</span>
                             <input
@@ -196,7 +196,7 @@ export function ProductSalesAnalytics({
                                 value={endDate}
                                 onChange={e => onEndDateChange(e.target.value)}
                                 min={startDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                         </div>
                     )}
@@ -304,7 +304,7 @@ export function ProductSalesAnalytics({
                                 placeholder={t('productAnalytics.searchPlaceholder')}
                                 value={searchTerm}
                                 onChange={e => setSearchTerm(e.target.value)}
-                                className="w-full bg-slate-50 border border-border rounded-lg py-1.5 pl-8 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-border"
+                                className="w-full border border-border rounded-lg py-1.5 pl-8 pr-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-border"
                             />
                         </div>
                     </div>
@@ -330,9 +330,9 @@ export function ProductSalesAnalytics({
                                 }
                                 renderRow={(p) => (
                                     <>
-                                        <td className="px-4 py-3 font-medium text-slate-900 text-foreground">{p.name}</td>
+                                        <td className="px-4 py-3 font-medium text-foreground">{p.name}</td>
                                         <td className="px-4 py-3 text-muted-foreground">
-                                            <span className="inline-flex items-center rounded-md bg-slate-100 px-2 py-0.5 text-sub font-medium text-slate-600 bg-muted dark:text-muted-foreground">
+                                            <span className="inline-flex items-center rounded-md px-2 py-0.5 text-sub font-medium bg-muted dark:text-muted-foreground">
                                                 {p.category}
                                             </span>
                                         </td>

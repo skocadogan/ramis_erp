@@ -100,14 +100,14 @@ export default function CategoryPanel({
     <div className={cn("flex w-72 shrink-0 flex-col gap-2 overflow-hidden", className)}>
       {/* Başlık & araçlar */}
       <div className="flex items-center justify-between shrink-0">
-        <h2 className="text-sm font-semibold text-slate-700 flex items-center gap-1.5 text-muted-foreground">
+        <h2 className="text-sm font-semibold flex items-center gap-1.5 text-muted-foreground">
           <Layers size={13} className="text-blue-600" />{t("categoryPanel.title")}
         </h2>
         <div className="flex items-center gap-1">
           <button onClick={expandAll} className="text-2xs font-medium px-2 py-1 rounded bg-blue-50 text-blue-600 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400" title={t("categoryPanel.expandAll")}>
             +
           </button>
-          <button onClick={collapseAll} className="text-2xs font-medium px-2 py-1 rounded bg-slate-100 text-slate-500 hover:bg-slate-200 bg-muted dark:text-muted-foreground" title={t("categoryPanel.collapseAll")}>
+          <button onClick={collapseAll} className="text-2xs font-medium px-2 py-1 rounded hover: bg-muted dark:text-muted-foreground" title={t("categoryPanel.collapseAll")}>
             -
           </button>
           {canManage && onAdd && (
@@ -125,9 +125,9 @@ export default function CategoryPanel({
           {/* "Tümü" butonu */}
           <button onClick={() => onSelect(null)}
             className={`w-full text-left px-2.5 py-1.5 rounded-md text-sm font-medium transition-colors mb-1
-              ${!selectedCategory
-                ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
-                : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800"}`}>
+ ${!selectedCategory
+ ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+ : " hover: dark:text-muted-foreground dark:hover:"}`}>
             {t("categoryPanel.allWithCount", { count: products.length })}
           </button>
 
@@ -175,17 +175,17 @@ function CategoryTreeItem({ cat, isSelected, canManage, onSelect, onEdit, onDele
   const tagLabel = formatTagsForBranch(cat.tags, tagBranchId ?? null)
 
   return (
-    <div className={`group rounded-md transition-colors ${isSelected ? "bg-blue-50 dark:bg-blue-900/30" : "hover:bg-slate-100 dark:hover:bg-slate-800"}`}>
+    <div className={`group rounded-md transition-colors ${isSelected ? "bg-blue-50 dark:bg-blue-900/30" : "hover: dark:hover:"}`}>
       <div className="flex items-center" style={{ paddingLeft: `${cat.depth * 1.25}rem` }}>
         {/* Genişlet/daralt ok */}
         <div className="w-5 h-5 flex items-center justify-center shrink-0">
           {cat.hasChildren ? (
             <button onClick={(e) => onToggle(cat.id, e)}
-              className="p-0.5 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-muted-foreground transition-colors">
+              className="p-0.5 rounded hover: dark:hover: text-muted-foreground transition-colors">
               {cat.hasChildren ? <ChevronDown size={13} /> : <ChevronRight size={13} />}
             </button>
           ) : (
-            <div className="w-0.5 h-0.5 rounded-full bg-slate-300 bg-accent ml-1" />
+            <div className="w-0.5 h-0.5 rounded-full bg-accent ml-1" />
           )}
         </div>
 

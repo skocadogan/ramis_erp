@@ -153,7 +153,7 @@ const TableCard = memo(function TableCard({
     OUT_OF_SERVICE: {
       shell: "border-border/50 bg-muted/50 opacity-60 grayscale border-t-slate-400 border-t-4 cursor-not-allowed",
       badge: "bg-muted text-muted-foreground",
-      dot: "bg-slate-400",
+      dot: "",
       statusLabel: "text-muted-foreground"
     }
   };

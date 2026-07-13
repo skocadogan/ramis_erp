@@ -478,7 +478,7 @@ export function NotificationDrawer({
             fabSizeClass,
             visibleWaiterCallCount > 0
               ? "motion-safe:animate-bounce-soft bg-amber-500 text-white shadow-amber-500/40 [animation-iteration-count:3] dark:bg-amber-600"
-              : "bg-slate-800 text-muted-foreground bg-accent text-muted-foreground",
+              : " text-muted-foreground bg-accent text-muted-foreground",
             visibleWaiterCallCount > 0 && waiterCallReminderTick > 0
               ? "motion-safe:animate-bounce-soft [animation-iteration-count:3]"
               : null
@@ -508,7 +508,7 @@ export function NotificationDrawer({
             fabSizeClass,
             kitchenBadgeCount > 0
               ? "motion-safe:animate-bounce-soft bg-emerald-600 text-white shadow-emerald-500/40 [animation-iteration-count:3]"
-              : "bg-slate-800 text-muted-foreground bg-accent text-muted-foreground"
+              : " text-muted-foreground bg-accent text-muted-foreground"
           )}
           title={t("kitchenTitle")}
         >

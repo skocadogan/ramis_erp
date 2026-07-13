@@ -562,13 +562,13 @@ export function TakeawayOrderModal({
             <div className="w-full max-w-4xl rounded-2xl border border-border bg-card border-border flex flex-col max-h-[90vh] overflow-hidden">
                 
                 {/* Header */}
-                <div className="flex items-center justify-between border-b border-slate-100 border-border px-6 py-4 bg-slate-50/50 bg-muted/20">
+                <div className="flex items-center justify-between border-b border-slate-100 border-border px-6 py-4 /50 bg-muted/20">
                     <div className="flex items-center gap-3">
                         <div className="h-10 w-10 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center">
                             <ReceiptText className="text-emerald-600 dark:text-emerald-400" size={20} />
                         </div>
                         <div>
-                            <h2 className="text-lg font-bold text-slate-800 text-foreground uppercase tracking-tight">{t('title')}</h2>
+                            <h2 className="text-lg font-bold text-foreground uppercase tracking-tight">{t('title')}</h2>
                             <p className="text-xs font-bold text-muted-foreground uppercase tracking-widest">{tableName}</p>
                         </div>
                     </div>
@@ -609,11 +609,11 @@ export function TakeawayOrderModal({
                                     <tbody className="divide-y divide-border">
                                         {orders.map((order) => (
                                             <React.Fragment key={order.id}>
-                                                <tr className={`group transition-colors ${expandedOrders[order.id] ? 'bg-emerald-50/30 dark:bg-emerald-500/5' : 'hover:bg-slate-50 dark:hover:bg-slate-800/30'}`}>
+                                                <tr className={`group transition-colors ${expandedOrders[order.id] ? 'bg-emerald-50/30 dark:bg-emerald-500/5' : 'hover: dark:hover:/30'}`}>
                                                     <td className="px-4 py-4 text-center">
                                                         <button 
                                                             onClick={() => toggleExpand(order.id)}
-                                                            className="p-1.5 rounded-lg hover:bg-slate-200 dark:hover:bg-slate-700 text-muted-foreground transition-all"
+                                                            className="p-1.5 rounded-lg hover: dark:hover: text-muted-foreground transition-all"
                                                         >
                                                             {expandedOrders[order.id] ? <ChevronDown size={18} /> : <ChevronRight size={18} />}
                                                         </button>
@@ -647,7 +647,7 @@ export function TakeawayOrderModal({
                                                     </td>
                                                     <td className="px-4 py-4 text-right">
                                                         <div className="flex flex-col items-end">
-                                                            <span className="text-base font-bold text-slate-800 text-foreground">
+                                                            <span className="text-base font-bold text-foreground">
                                                                 {canViewAmounts ? formatCurrency(order.total_amount) : AMOUNT_DISPLAY_MASK}
                                                             </span>
                                                             {(Number(order.discount_amount) || 0) > 0 && (
@@ -709,7 +709,7 @@ export function TakeawayOrderModal({
                                                 </tr>
                                                 {/* Expanded Items */}
                                                 {expandedOrders[order.id] && (
-                                                    <tr className="bg-slate-50/50 bg-muted/20">
+                                                    <tr className="/50 bg-muted/20">
                                                         <td colSpan={5} className="px-8 py-4 border-l-4 border-emerald-500/50">
                                                             <div className="space-y-3">
                                                                 {order.notes?.trim() && (
@@ -768,7 +768,7 @@ export function TakeawayOrderModal({
 
                                                                                 {/* Child Items */}
                                                                                 {order.items.filter(child => child.parent_item === parent.id).map(child => (
-                                                                                    <div key={child.id} className="flex items-center justify-between p-1.5 ml-8 bg-slate-50/50 bg-muted/10 rounded-lg border border-dashed border-border/50">
+                                                                                    <div key={child.id} className="flex items-center justify-between p-1.5 ml-8 /50 bg-muted/10 rounded-lg border border-dashed border-border/50">
                                                                                         <div className="flex items-center gap-2 min-w-0">
                                                                                             <CornerDownRight size={14} className="text-muted-foreground shrink-0" />
                                                                                             <span className="w-5 h-5 shrink-0 rounded bg-card flex items-center justify-center text-2xs font-bold text-muted-foreground">
@@ -846,14 +846,14 @@ export function TakeawayOrderModal({
                     <div className="py-4 space-y-4">
                         <div className="p-4 bg-muted/50 rounded-xl flex justify-between items-center">
                             <span className="text-sm font-bold text-muted-foreground uppercase tracking-tighter">{tOrder('grandTotal')}</span>
-                            <span className="text-2xl font-bold text-slate-900 dark:text-white">
+                            <span className="text-2xl font-bold dark:text-white">
                                 {canViewAmounts
                                     ? formatCurrency(paymentOrder?.total_amount ?? 0)
                                     : AMOUNT_DISPLAY_MASK}
                             </span>
                         </div>
 
-                        <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-slate-600">
+                        <label className="flex cursor-pointer items-center gap-2 text-xs font-medium">
                             <input
                                 type="checkbox"
                                 checked={singleSplit}
@@ -867,7 +867,7 @@ export function TakeawayOrderModal({
                         </label>
 
                         {singleSplit ? (
-                            <div className="space-y-2 rounded-xl border border-border bg-slate-50 p-3 border-border bg-muted/50">
+                            <div className="space-y-2 rounded-xl border border-border p-3 border-border bg-muted/50">
                                 {PAYMENT_METHODS.map(({ value }) => (
                                     <div key={value} className="flex items-center gap-2">
                                         <span className="w-14 text-sub font-semibold text-muted-foreground">{tPos(`payment.${value.toLowerCase() as 'cash' | 'card' | 'other'}`)}</span>
@@ -888,10 +888,10 @@ export function TakeawayOrderModal({
                             <button
                                 onClick={() => setSinglePaymentMethod('CASH')}
                                 className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all gap-2 ${
-                                    singlePaymentMethod === 'CASH' 
-                                    ? 'bg-emerald-50 border-emerald-500 text-emerald-600' 
-                                    : 'border-slate-100 text-muted-foreground hover:border-border'
-                                }`}
+ singlePaymentMethod === 'CASH' 
+ ? 'bg-emerald-50 border-emerald-500 text-emerald-600' 
+ : 'border-slate-100 text-muted-foreground hover:border-border'
+ }`}
                             >
                                 <Banknote size={24} />
                                 <span className="text-xs font-bold uppercase">{tPos('payment.cash')}</span>
@@ -899,10 +899,10 @@ export function TakeawayOrderModal({
                             <button
                                 onClick={() => setSinglePaymentMethod('CARD')}
                                 className={`flex flex-col items-center justify-center p-4 rounded-xl border-2 transition-all gap-2 ${
-                                    singlePaymentMethod === 'CARD' 
-                                    ? 'bg-blue-50 border-blue-500 text-blue-600' 
-                                    : 'border-slate-100 text-muted-foreground hover:border-border'
-                                }`}
+ singlePaymentMethod === 'CARD' 
+ ? 'bg-blue-50 border-blue-500 text-blue-600' 
+ : 'border-slate-100 text-muted-foreground hover:border-border'
+ }`}
                             >
                                 <CreditCard size={24} />
                                 <span className="text-xs font-bold uppercase">{tPos('payment.card')}</span>
@@ -916,7 +916,7 @@ export function TakeawayOrderModal({
                         <button
                             onClick={handleSinglePayment}
                             disabled={isPaying}
-                            className="w-full bg-emerald-600 hover:bg-emerald-700 disabled:bg-slate-300 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
+                            className="w-full bg-emerald-600 hover:bg-emerald-700 disabled: text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all"
                         >
                             {isPaying ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
                             {singleSplit ? t('payButtonSplit') : singlePaymentMethod === 'CASH' ? t('payButtonCash') : t('payButtonCard')}
@@ -945,7 +945,7 @@ export function TakeawayOrderModal({
                                 value={discountAmount}
                                 onChange={setDiscountAmount}
                                 placeholder="0.00"
-                                className="h-14 text-2xl font-bold text-slate-800 border-2 focus:border-amber-500 transition-all"
+                                className="h-14 text-2xl font-bold border-2 focus:border-amber-500 transition-all"
                                 autoFocus
                              />
                         </div>
@@ -959,7 +959,7 @@ export function TakeawayOrderModal({
                                         : AMOUNT_DISPLAY_MASK}
                                 </span>
                             </div>
-                            <div className="flex justify-between items-center text-xs font-bold mt-1 text-slate-800 text-foreground">
+                            <div className="flex justify-between items-center text-xs font-bold mt-1 text-foreground">
                                 <span className="uppercase">{t('newTotal')}</span>
                                 <span>
                                     {canViewAmounts
@@ -976,7 +976,7 @@ export function TakeawayOrderModal({
                         <button
                             onClick={applyOrderDiscount}
                             disabled={isApplyingDiscount || (parseFloat(discountAmount) || 0) <= 0}
-                            className="w-full bg-amber-600 hover:bg-amber-700 disabled:bg-slate-300 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all"
+                            className="w-full bg-amber-600 hover:bg-amber-700 disabled: text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all"
                         >
                             {isApplyingDiscount ? <Loader2 className="animate-spin" size={18} /> : <CheckCircle2 size={18} />}
                             {t('applyDiscountCta')}

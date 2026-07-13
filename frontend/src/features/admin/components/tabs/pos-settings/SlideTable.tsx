@@ -33,7 +33,7 @@ export function SlideTable({
   const t = useTranslations("pos")
   return (
     <Card className="p-0 gap-0 border-border shadow-sm bg-card border-border overflow-hidden">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 p-4 border-b border-border bg-muted/40 border-border">
         <div className="space-y-0.5">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
             {t('admin_settings.slides.title')}
@@ -85,14 +85,14 @@ export function SlideTable({
                 </TableRow>
               ) : (
                 slides.map((slide) => (
-                  <TableRow key={slide.id} className="hover:bg-slate-50/50 transition-colors">
+                  <TableRow key={slide.id} className="hover:/50 transition-colors">
                     <TableCell>
                       <Badge variant={slide.type === "IMAGE" ? "default" : "secondary"} className="text-2xs uppercase font-bold">
                         {slide.type === "IMAGE" ? t('admin_settings.slides.typeImageLabel') : t('admin_settings.slides.typeTextLabel')}
                       </Badge>
                     </TableCell>
                     <TableCell>
-                      <div className="relative h-8 w-8 rounded-md overflow-hidden border border-border bg-slate-100 flex items-center justify-center border-border bg-muted">
+                      <div className="relative h-8 w-8 rounded-md overflow-hidden border border-border flex items-center justify-center border-border bg-muted">
                         {slide.image ? (
                           <AppImage src={slide.image} alt="" fill className="object-cover" sizes="32px" />
                         ) : (

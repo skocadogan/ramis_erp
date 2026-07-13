@@ -43,7 +43,7 @@ export default function ModifierGroupsPanel({
     <div className="flex flex-1 min-h-0 gap-4 overflow-hidden">
       <div className="w-60 shrink-0 flex flex-col rounded-lg border border-border border-border bg-card overflow-hidden">
         <div className="flex items-center justify-between border-b border-border px-3 py-2 border-border">
-          <h2 className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 text-muted-foreground">
+          <h2 className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
             <ListTree size={14} className="text-blue-600" />
             {t("groupsTitle")}
           </h2>
@@ -68,10 +68,10 @@ export default function ModifierGroupsPanel({
                 <div
                   key={g.id}
                   className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-sm ${
-                    active
-                      ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
-                      : "text-slate-600 hover:bg-slate-100 text-muted-foreground dark:hover:bg-slate-800"
-                  }`}
+ active
+ ? "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-300"
+ : " hover: text-muted-foreground dark:hover:"
+ }`}
                 >
                   <button type="button" className="flex-1 text-left truncate" onClick={() => onSelectGroup(g.id)}>
                     {g.name}

@@ -56,7 +56,7 @@ export function ProductCategorySelect({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         className={cn(
-          "flex h-9 w-full items-center justify-between rounded-md border border-border px-3 py-2 text-sm shadow-sm transition-all hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-blue-500/20 border-border bg-card dark:hover:bg-slate-800",
+          "flex h-9 w-full items-center justify-between rounded-md border border-border px-3 py-2 text-sm shadow-sm transition-all hover: focus:outline-none focus:ring-2 focus:ring-blue-500/20 border-border bg-card dark:hover:",
           !selectedProduct && "text-muted-foreground",
           triggerClassName
         )}
@@ -86,7 +86,7 @@ export function ProductCategorySelect({
               setOpen(false);
             }}
             className={cn(
-              "flex w-full items-center justify-between rounded-md px-2 py-2 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
+              "flex w-full items-center justify-between rounded-md px-2 py-2 text-sm transition-colors hover: dark:hover:",
               !value && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold"
             )}
           >
@@ -107,7 +107,7 @@ export function ProductCategorySelect({
                     setOpen(false);
                   }}
                   className={cn(
-                    "flex w-full items-center justify-between rounded-md pl-6 pr-3 py-2 text-sm transition-colors hover:bg-slate-100 dark:hover:bg-slate-800",
+                    "flex w-full items-center justify-between rounded-md pl-6 pr-3 py-2 text-sm transition-colors hover: dark:hover:",
                     value === product.id && "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400 font-semibold"
                   )}
                 >

@@ -178,10 +178,10 @@ export function CustomerDisplaySurveyModal({
               type="button"
               onClick={() => setAnswer(currentQuestion.id, { rating_value: value })}
               className={`rounded-2xl border px-4 py-5 text-center transition-all ${
-                selected
-                  ? "border-blue-600 bg-blue-600 text-white shadow-lg shadow-blue-600/20"
-                  : "border-white/20 bg-white/10 text-white hover:border-blue-300 hover:bg-white/15"
-              }`}
+ selected
+ ? "border-blue-600 bg-blue-600 text-white shadow-lg shadow-blue-600/20"
+ : "border-white/20 bg-white/10 text-white hover:border-blue-300 hover:bg-white/15"
+ }`}
             >
               <div className="flex items-center justify-center gap-1">
                 {isFiveScale ? (
@@ -207,10 +207,10 @@ export function CustomerDisplaySurveyModal({
           type="button"
           onClick={() => setAnswer(currentQuestion.id, { boolean_value: true })}
           className={`rounded-2xl border px-6 py-8 text-2xl font-bold transition-all ${
-            selected === true
-              ? "border-emerald-400 bg-emerald-500 text-white"
-              : "border-white/20 bg-white/10 text-white"
-          }`}
+ selected === true
+ ? "border-emerald-400 bg-emerald-500 text-white"
+ : "border-white/20 bg-white/10 text-white"
+ }`}
         >
           {t("yes")}
         </button>
@@ -218,10 +218,10 @@ export function CustomerDisplaySurveyModal({
           type="button"
           onClick={() => setAnswer(currentQuestion.id, { boolean_value: false })}
           className={`rounded-2xl border px-6 py-8 text-2xl font-bold transition-all ${
-            selected === false
-              ? "border-rose-400 bg-rose-500 text-white"
-              : "border-white/20 bg-white/10 text-white"
-          }`}
+ selected === false
+ ? "border-rose-400 bg-rose-500 text-white"
+ : "border-white/20 bg-white/10 text-white"
+ }`}
         >
           {t("no")}
         </button>
@@ -240,10 +240,10 @@ export function CustomerDisplaySurveyModal({
               type="button"
               onClick={() => setAnswer(currentQuestion.id, { selected_option_id: option.id })}
               className={`flex w-full items-center justify-between rounded-2xl border px-5 py-5 text-left text-xl transition-all ${
-                selected
-                  ? "border-blue-400 bg-blue-600 text-white"
-                  : "border-white/20 bg-white/10 text-white"
-              }`}
+ selected
+ ? "border-blue-400 bg-blue-600 text-white"
+ : "border-white/20 bg-white/10 text-white"
+ }`}
             >
               <span>{option.label}</span>
             </button>
@@ -259,7 +259,7 @@ export function CustomerDisplaySurveyModal({
         value={currentAnswer?.text_value ?? ""}
         onChange={(event) => setAnswer(currentQuestion.id, { text_value: event.target.value })}
         placeholder={currentQuestion.placeholder || t("textPlaceholder")}
-        className="min-h-[160px] rounded-2xl border-white/20 bg-white/10 p-4 text-lg text-white placeholder:text-slate-400"
+        className="min-h-[160px] rounded-2xl border-white/20 bg-white/10 p-4 text-lg text-white placeholder:"
       />
     )
   }
@@ -273,7 +273,7 @@ export function CustomerDisplaySurveyModal({
 
   if (isCompleted) {
     return (
-      <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/95 px-6 py-8">
+      <div className="fixed inset-0 z-[110] flex items-center justify-center /95 px-6 py-8">
         <div className="w-full max-w-2xl overflow-hidden rounded-5xl border border-emerald-500/30 bg-card shadow-2xl">
           <div className="border-b border-emerald-500/20 bg-emerald-500/10 px-10 py-8">
             <div className="flex items-center gap-5">
@@ -288,7 +288,7 @@ export function CustomerDisplaySurveyModal({
           </div>
           <div className="space-y-4 px-10 py-10 text-center">
             <p className="text-2xl font-semibold text-white">{t("thankYouMessage")}</p>
-            <p className="text-base text-slate-300">{t("thankYouClosing")}</p>
+            <p className="text-base">{t("thankYouClosing")}</p>
           </div>
         </div>
       </div>
@@ -296,8 +296,8 @@ export function CustomerDisplaySurveyModal({
   }
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-slate-950/95 px-6 py-8">
-      <div className="flex h-full w-full max-w-5xl flex-col rounded-5xl border border-white/10 bg-slate-900/95 shadow-2xl">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center /95 px-6 py-8">
+      <div className="flex h-full w-full max-w-5xl flex-col rounded-5xl border border-white/10 /95 shadow-2xl">
         <div className="border-b border-white/10 px-8 py-6">
           <div className="flex items-center justify-between gap-4">
             <div>
@@ -306,10 +306,10 @@ export function CustomerDisplaySurveyModal({
               </div>
               <h2 className="mt-2 text-3xl font-bold text-white">{prompt.survey.title}</h2>
               {prompt.survey.description ? (
-                <p className="mt-2 max-w-3xl text-base text-slate-300">{prompt.survey.description}</p>
+                <p className="mt-2 max-w-3xl text-base">{prompt.survey.description}</p>
               ) : null}
             </div>
-            <div className="text-right text-sm text-slate-300">
+            <div className="text-right text-sm">
               <div>{t("progressLabel", { current: currentIndex + 1, total: questions.length })}</div>
               <div>{t("answeredLabel", { count: answeredCount, total: questions.length })}</div>
             </div>
@@ -323,13 +323,13 @@ export function CustomerDisplaySurveyModal({
           <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center">
             <div className="relative rounded-4xl border border-white/10 bg-white/5 p-8">
               {isSubmitting || isClosing ? (
-                <div className="absolute inset-0 z-10 flex items-center justify-center rounded-4xl bg-slate-950/70">
+                <div className="absolute inset-0 z-10 flex items-center justify-center rounded-4xl /70">
                   <div className="flex flex-col items-center gap-3 text-center">
                     <Loader2 className="h-8 w-8 animate-spin text-blue-300" />
                     <div className="text-lg font-semibold text-white">
                       {isClosing ? t("closing") : t("submitting")}
                     </div>
-                    <div className="text-sm text-slate-300">
+                    <div className="text-sm">
                       {isClosing ? t("closingDescription") : t("submittingDescription")}
                     </div>
                   </div>
@@ -342,7 +342,7 @@ export function CustomerDisplaySurveyModal({
             </div>
 
             {!error ? (
-              <div className="mt-4 text-center text-sm text-slate-300">
+              <div className="mt-4 text-center text-sm">
                 {isCurrentAnswered ? t("savedHint") : t("requiredHint")}
               </div>
             ) : null}

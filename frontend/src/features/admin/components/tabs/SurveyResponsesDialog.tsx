@@ -299,7 +299,7 @@ export function SurveyResponsesDialog({
                         </div>
                         <div className="space-y-2">
                           {selectedResponse.answers.map((answer) => (
-                            <div key={answer.id} className="rounded-lg border border-border bg-slate-50/70 p-3 bg-card/40">
+                            <div key={answer.id} className="rounded-lg border border-border /70 p-3 bg-card/40">
                               <div className="text-sm font-medium text-foreground">{answer.question_text}</div>
                               <div className="mt-1 text-sm text-muted-foreground">
                                 {String(answer.answer_value ?? "—")}
@@ -313,7 +313,7 @@ export function SurveyResponsesDialog({
                         <div className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                           {t("surveys.results.detailPreview")}
                         </div>
-                        <p className="rounded-lg border border-border bg-slate-50/70 p-3 text-sm text-muted-foreground bg-card/40">
+                        <p className="rounded-lg border border-border /70 p-3 text-sm text-muted-foreground bg-card/40">
                           {selectedResponse.answers_preview || "—"}
                         </p>
                       </div>

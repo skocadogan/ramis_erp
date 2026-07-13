@@ -79,7 +79,7 @@ export default function DiscountModal({
           <div className="w-48 shrink-0 border-r border-border p-4 overflow-y-auto">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2 dark:text-muted-foreground">{t("discountModal.categories")}</p>
             <div className="flex flex-col gap-0.5">
-              <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+              <label className="flex items-center gap-2 px-2 py-1.5 rounded-md hover: dark:hover: cursor-pointer">
                 <Checkbox
                   checked={discountSelectedCategories.size === 0}
                   onCheckedChange={() => onToggleCategory("__all__")}
@@ -87,7 +87,7 @@ export default function DiscountModal({
                 <span className="text-sm text-foreground">{t("discountModal.all")}</span>
               </label>
               {categories.map(cat => (
-                <label key={cat.id} className="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-slate-50 dark:hover:bg-slate-800 cursor-pointer">
+                <label key={cat.id} className="flex items-center gap-2 px-2 py-1.5 rounded-md hover: dark:hover: cursor-pointer">
                   <Checkbox
                     checked={discountSelectedCategories.has(cat.id)}
                     onCheckedChange={() => onToggleCategory(cat.id)}
@@ -111,7 +111,7 @@ export default function DiscountModal({
             </div>
             <div className="flex flex-col gap-1">
               {discountFilteredProducts.length === 0 ? (
-                <p className="text-sm text-muted-foreground py-12 text-center bg-slate-50/50 rounded-lg bg-muted/30">{t("discountModal.noProducts")}</p>
+                <p className="text-sm text-muted-foreground py-12 text-center /50 rounded-lg bg-muted/30">{t("discountModal.noProducts")}</p>
               ) : (
                 discountFilteredProducts.map(p => {
                   const isSelected = discountSelectedProducts.has(p.id)
@@ -121,8 +121,8 @@ export default function DiscountModal({
                   const currentDiscount = p.discount_rate || 0
 
                   return (
-                    <label key={p.id} className={`grid grid-cols-[auto_1fr_80px_80px] sm:grid-cols-[auto_1fr_90px_90px_90px] lg:grid-cols-[auto_1fr_120px_90px_100px] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-3 rounded-lg cursor-pointer border border-transparent transition-all hover:bg-amber-50 hover:border-amber-100 dark:hover:bg-slate-800/50 dark:hover:border-slate-800
-                      ${!isSelected ? "opacity-40 grayscale-[0.5]" : ""}`}>
+                    <label key={p.id} className={`grid grid-cols-[auto_1fr_80px_80px] sm:grid-cols-[auto_1fr_90px_90px_90px] lg:grid-cols-[auto_1fr_120px_90px_100px] gap-2 sm:gap-3 items-center px-3 sm:px-4 py-3 rounded-lg cursor-pointer border border-transparent transition-all hover:bg-amber-50 hover:border-amber-100 dark:hover:/50 dark:hover:border-slate-800
+ ${!isSelected ? "opacity-40 grayscale-[0.5]" : ""}`}>
                       <Checkbox
                         checked={isSelected}
                         onCheckedChange={() => onToggleProduct(p.id)}
@@ -131,7 +131,7 @@ export default function DiscountModal({
                         {p.name}
                         {p.is_featured && <Star size={12} className="text-amber-500 fill-amber-500 shrink-0" />}
                       </span>
-                      <span className="text-xs text-muted-foreground truncate text-center bg-slate-100 px-2 py-0.5 rounded-full bg-muted dark:text-muted-foreground">{p.category_name}</span>
+                      <span className="text-xs text-muted-foreground truncate text-center px-2 py-0.5 rounded-full bg-muted dark:text-muted-foreground">{p.category_name}</span>
                       <div className="flex flex-col items-end">
                         <span className={`text-sm font-semibold font-mono ${currentDiscount > 0 ? "line-through text-muted-foreground" : "text-foreground"}`}>
                           {formatCurrency(p.base_price)}

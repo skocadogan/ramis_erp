@@ -267,11 +267,11 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
 
   return (
     <div className="flex h-full flex-col overflow-hidden rounded-2xl border border-border shadow-sm border-border bg-card">
-      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 bg-slate-50/50 p-4 border-border bg-muted/30">
+      <div className="flex shrink-0 items-center justify-between border-b border-slate-100 /50 p-4 border-border bg-muted/30">
         <div className="flex items-center gap-3">
           <button
             onClick={handleBackToTables}
-            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border text-slate-600 shadow-sm transition-colors hover:bg-slate-100 hover:text-blue-600 active:scale-95 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700 dark:hover:text-blue-400"
+            className="flex h-10 w-10 items-center justify-center rounded-xl border border-border shadow-sm transition-colors hover: hover:text-blue-600 active:scale-95 border-border bg-muted text-muted-foreground dark:hover: dark:hover:text-blue-400"
           >
             <ChevronLeft size={20} />
           </button>
@@ -301,7 +301,7 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
         <div className="flex min-h-0 flex-1 flex-col">
           {/* Subcategory bar — seçili parent'ın alt kategorileri */}
           {subCategories.length > 0 && selectedRootParent && (
-            <div className="no-scrollbar flex shrink-0 items-center gap-1.5 overflow-x-auto border-b border-slate-100 bg-slate-50/50 px-3 py-2 border-border bg-muted/20">
+            <div className="no-scrollbar flex shrink-0 items-center gap-1.5 overflow-x-auto border-b border-slate-100 /50 px-3 py-2 border-border bg-muted/20">
               {/* "Tümü" sekmesi */}
               <button
                 type="button"
@@ -309,8 +309,8 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
                 className={cn(
                   "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
                   selectedCategory === selectedRootParent.id
-                    ? "text-slate-900 shadow-sm bg-accent text-foreground"
-                    : "text-muted-foreground hover:bg-white/60 hover:text-slate-700 dark:hover:bg-slate-700/50 dark:hover:text-slate-300",
+                    ? " shadow-sm bg-accent text-foreground"
+                    : "text-muted-foreground hover:bg-white/60 hover: dark:hover:/50 dark:hover:",
                 )}
               >
                 {tMenu("all")}
@@ -327,7 +327,7 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
                       "shrink-0 whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
                       isActive
                         ? "text-white shadow-sm"
-                        : "text-muted-foreground hover:bg-white/60 hover:text-slate-700 dark:hover:bg-slate-700/50 dark:hover:text-slate-300",
+                        : "text-muted-foreground hover:bg-white/60 hover: dark:hover:/50 dark:hover:",
                     )}
                     style={
                       isActive

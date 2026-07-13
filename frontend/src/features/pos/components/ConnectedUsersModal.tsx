@@ -89,7 +89,7 @@ export function ConnectedUsersModal({ isOpen, onClose, terminalId }: ConnectedUs
               <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
             </div>
           ) : connections.length === 0 ? (
-            <div className="flex flex-col items-center justify-center p-8 text-slate-500 text-muted-foreground">
+            <div className="flex flex-col items-center justify-center p-8 text-muted-foreground">
               <MonitorSmartphone className="h-12 w-12 mb-4 opacity-50" />
               <p className="text-sm font-medium">{noConnections}</p>
             </div>
@@ -98,17 +98,17 @@ export function ConnectedUsersModal({ isOpen, onClose, terminalId }: ConnectedUs
               {connections.map((conn) => (
                 <div
                   key={conn.channel_name}
-                  className="flex items-center justify-between p-3 rounded-xl border border-slate-100 border-border bg-slate-50/50 bg-muted/50 hover:dark:hover:bg-slate-800 transition-colors"
+                  className="flex items-center justify-between p-3 rounded-xl border border-slate-100 border-border /50 bg-muted/50 hover:dark:hover: transition-colors"
                 >
                   <div className="flex items-center gap-3">
                     <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-400">
                       {conn.platform === "mobile" ? <Smartphone size={20} /> : <Monitor size={20} />}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-slate-900 text-foreground">
+                      <p className="text-sm font-semibold text-foreground">
                         {conn.name || "İsimsiz Kullanıcı"}
                       </p>
-                      <p className="text-xs text-slate-500 text-muted-foreground">
+                      <p className="text-xs text-muted-foreground">
                         {conn.platform === "mobile" ? "Mobil Uygulama" : "Web Uygulaması"}
                       </p>
                     </div>
@@ -138,14 +138,14 @@ export function ConnectedUsersModal({ isOpen, onClose, terminalId }: ConnectedUs
           <button
             onClick={fetchConnections}
             disabled={isLoading}
-            className="px-4 py-2 text-sm font-medium text-slate-700 text-muted-foreground bg-card border border-slate-200 border-border rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors disabled:opacity-50 flex items-center gap-2"
+            className="px-4 py-2 text-sm font-medium text-muted-foreground bg-card border border-slate-200 border-border rounded-lg hover: dark:hover: transition-colors disabled:opacity-50 flex items-center gap-2"
           >
             {isLoading && <Loader2 className="h-3 w-3 animate-spin" />}
             {refreshBtn}
           </button>
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-white bg-slate-900 dark:bg-slate-100 dark:text-slate-900 rounded-lg hover:opacity-90 transition-opacity"
+            className="px-4 py-2 text-sm font-medium text-white rounded-lg hover:opacity-90 transition-opacity"
           >
             Kapat
           </button>

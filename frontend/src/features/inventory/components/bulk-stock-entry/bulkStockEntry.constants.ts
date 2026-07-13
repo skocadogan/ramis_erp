@@ -7,6 +7,6 @@ export const bulkStockEntryThClass =
   "px-1.5 py-2 text-left text-sub font-semibold uppercase tracking-wide text-muted-foreground"
 
 export const bulkStockEntryInputClass =
-  "w-full mt-1 px-2.5 py-1.5 bg-slate-50 border border-border rounded-md text-sm bg-muted border-input text-foreground"
+  "w-full mt-1 px-2.5 py-1.5  border border-border rounded-md text-sm bg-muted border-input text-foreground"
 
 export const bulkStockEntryLabelClass = "text-xs font-medium text-muted-foreground"

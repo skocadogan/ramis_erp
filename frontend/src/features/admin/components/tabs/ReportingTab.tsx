@@ -309,13 +309,13 @@ export function ReportingTab({ canManage }: Props) {
         {canManage && (
           <div className="flex items-center gap-2">
             <label className="flex items-center gap-1.5 rounded-md border border-slate-300 px-3 py-1.5
-              text-sm font-medium text-slate-700 hover:bg-slate-50 cursor-pointer transition-all bg-muted border-input text-foreground dark:hover:bg-slate-700">
+ text-sm font-medium hover: cursor-pointer transition-all bg-muted border-input text-foreground dark:hover:">
               <Upload size={15} /> {t('reporting.import')}
               <input type="file" accept=".json" className="hidden" onChange={handleImport} />
             </label>
             <button onClick={openCreate}
               className="flex items-center gap-1.5 rounded-md bg-indigo-600 px-3.5 py-1.5
-                text-sm font-medium text-white hover:bg-indigo-700 transition-all">
+ text-sm font-medium text-white hover:bg-indigo-700 transition-all">
               <Plus size={15} /> {t('reporting.addNew')}
             </button>
           </div>
@@ -325,7 +325,7 @@ export function ReportingTab({ canManage }: Props) {
       {/* Hata */}
       {error && (
         <div className="flex items-center gap-2 text-sm text-rose-600 bg-rose-50 border border-rose-200
-          rounded-md px-3 py-2 dark:bg-rose-950/30 dark:border-rose-800 dark:text-rose-400">
+ rounded-md px-3 py-2 dark:bg-rose-950/30 dark:border-rose-800 dark:text-rose-400">
           <AlertCircle size={14} /> {error}
         </div>
       )}
@@ -335,10 +335,10 @@ export function ReportingTab({ canManage }: Props) {
         {categories.map(c => (
           <button key={c.value} onClick={() => setCatFilter(c.value)}
             className={`px-3 py-1 rounded-full text-xs font-medium transition-all
-              ${catFilter === c.value
-                ? "bg-indigo-600 text-white"
-                : "bg-slate-100 text-slate-600 hover:bg-slate-200 bg-muted dark:text-muted-foreground dark:hover:bg-slate-700"
-              }`}>
+ ${catFilter === c.value
+ ? "bg-indigo-600 text-white"
+ : " hover: bg-muted dark:text-muted-foreground dark:hover:"
+ }`}>
             {c.label}
           </button>
         ))}
@@ -346,13 +346,13 @@ export function ReportingTab({ canManage }: Props) {
 
       {/* Tablo */}
       <div className="rounded-lg border border-border overflow-hidden
-        bg-card border-border">
+ bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               {[t('reporting.table.name'), t('reporting.table.category'), t('reporting.table.paper'), t('reporting.table.blocks'), t('reporting.table.default'), t('common.actions')].map(h => (
                 <th key={h} className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground
-                  uppercase tracking-wider dark:text-muted-foreground">
+ uppercase tracking-wider dark:text-muted-foreground">
                   {h}
                 </th>
               ))}
@@ -365,20 +365,20 @@ export function ReportingTab({ canManage }: Props) {
               </td></tr>
             ) : filtered.length === 0 ? (
               <tr><td colSpan={6} className="px-4 py-10 text-center">
-                <Layers size={32} className="mx-auto text-slate-300 mb-2" />
+                <Layers size={32} className="mx-auto mb-2" />
                 <p className="text-sm text-muted-foreground">{t('common.noMatch')}</p>
               </td></tr>
             ) : (
               filtered.map(temp => (
                 <tr key={temp.id}
-                  className="border-b border-slate-100 hover:bg-slate-50/50
-                  border-border dark:hover:bg-slate-800/50">
+                  className="border-b border-slate-100 hover:/50
+ border-border dark:hover:/50">
                   <td className="px-4 py-3 font-medium text-foreground text-foreground">
                     {temp.name}
                   </td>
                   <td className="px-4 py-3">
                     <span className={`inline-flex px-2 py-0.5 rounded border text-sub font-semibold
-                      ${CATEGORY_COLORS[temp.category] ?? "bg-slate-100 text-muted-foreground"}`}>
+ ${CATEGORY_COLORS[temp.category] ?? " text-muted-foreground"}`}>
                       {temp.category_display}
                     </span>
                   </td>
@@ -401,35 +401,35 @@ export function ReportingTab({ canManage }: Props) {
                       {canManage && (
                         <button onClick={() => handleSetDefault(temp)}
                           className={`p-1.5 rounded transition ${temp.is_default
-                            ? "bg-amber-100 text-amber-500 hover:bg-amber-200 dark:bg-amber-900/30"
-                            : "hover:bg-amber-50 text-muted-foreground hover:text-amber-500 dark:hover:bg-amber-900/20"
-                          }`} title={temp.is_default ? t('reporting.table.default') : t('reporting.table.default')}>
+ ? "bg-amber-100 text-amber-500 hover:bg-amber-200 dark:bg-amber-900/30"
+ : "hover:bg-amber-50 text-muted-foreground hover:text-amber-500 dark:hover:bg-amber-900/20"
+ }`} title={temp.is_default ? t('reporting.table.default') : t('reporting.table.default')}>
                           {temp.is_default ? <Star size={14} fill="currentColor" /> : <StarOff size={14} />}
                         </button>
                       )}
                       <button onClick={() => openEdit(temp)}
-                        className="p-1.5 rounded hover:bg-slate-100 text-muted-foreground hover:text-indigo-600
-                          transition dark:hover:bg-slate-800" title={t('common.edit')}>
+                        className="p-1.5 rounded hover: text-muted-foreground hover:text-indigo-600
+ transition dark:hover:" title={t('common.edit')}>
                         <Edit size={14} />
                       </button>
                       {canManage && (
                         <button onClick={() => handleClone(temp)}
-                          className="p-1.5 rounded hover:bg-slate-100 text-muted-foreground hover:text-indigo-600
-                            transition dark:hover:bg-slate-800" title={t('reporting.clone')}>
+                          className="p-1.5 rounded hover: text-muted-foreground hover:text-indigo-600
+ transition dark:hover:" title={t('reporting.clone')}>
                           <Copy size={14} />
                         </button>
                       )}
                       {canManage && (
                         <button onClick={() => handleExport(temp)}
-                          className="p-1.5 rounded hover:bg-slate-100 text-muted-foreground hover:text-blue-600
-                            transition dark:hover:bg-slate-800" title={t('reporting.export')}>
+                          className="p-1.5 rounded hover: text-muted-foreground hover:text-blue-600
+ transition dark:hover:" title={t('reporting.export')}>
                           <Download size={14} />
                         </button>
                       )}
                       {canManage && (
                         <button onClick={() => openDeleteConfirm(temp)}
                           className="p-1.5 rounded hover:bg-rose-50 text-muted-foreground hover:text-rose-600
-                            transition dark:hover:bg-rose-900/20" title={t('common.delete')}>
+ transition dark:hover:bg-rose-900/20" title={t('common.delete')}>
                           <Trash2 size={14} />
                         </button>
                       )}
@@ -481,12 +481,12 @@ export function ReportingTab({ canManage }: Props) {
     <div className="flex flex-col h-full gap-0 -mx-6 -mt-4">
       {/* Editör topbar */}
       <div className="flex items-center gap-3 px-6 py-3
-        border-b border-border
-        bg-card border-border">
+ border-b border-border
+ bg-card border-border">
         <button onClick={() => setMode("list")}
           className="flex items-center gap-1.5 text-sm
-            text-muted-foreground hover:text-slate-900
-            dark:text-muted-foreground dark:hover:text-slate-200 transition">
+ text-muted-foreground hover:
+ dark:text-muted-foreground dark:hover: transition">
           <ChevronLeft size={16} /> {t('reporting.editor.returnList')}
         </button>
         <span className="text-muted-foreground">|</span>
@@ -495,31 +495,31 @@ export function ReportingTab({ canManage }: Props) {
         <input value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
           placeholder={t('reporting.editor.templateName')}
           className="h-8 px-2.5 text-sm rounded w-48
-            bg-slate-100 border border-slate-300 text-slate-900
-            focus:outline-none focus:border-indigo-500
-            bg-muted border-input text-foreground" />
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground" />
         <input value={form.slug}
           onChange={e => setForm(f => ({ ...f, slug: e.target.value.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "") }))}
           placeholder={t('reporting.editor.slug')}
           className="h-8 px-2.5 text-sm font-mono rounded w-36
-            bg-slate-100 border border-slate-300 text-slate-900
-            focus:outline-none focus:border-indigo-500
-            bg-muted border-input text-foreground"
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground"
           readOnly={!!editing} />
         <select value={form.category} onChange={e => setForm(f => ({ ...f, category: e.target.value as ReceiptTemplateForm["category"] }))}
           className="h-8 px-2 text-sm rounded
-          bg-slate-100 border border-slate-300 text-slate-900
-          focus:outline-none focus:border-indigo-500
-          bg-muted border-input text-foreground">
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground">
           <option value="POS_RECEIPT">{t('reporting.categories.pos')}</option>
           <option value="KITCHEN_TICKET">{t('reporting.categories.kitchen')}</option>
           <option value="WAITER_TICKET">{t('reporting.categories.waiter')}</option>
         </select>
         <select value={form.paper_width} onChange={e => setForm(f => ({ ...f, paper_width: parseInt(e.target.value) }))}
           className="h-8 px-2 text-sm rounded
-          bg-slate-100 border border-slate-300 text-slate-900
-          focus:outline-none focus:border-indigo-500
-          bg-muted border-input text-foreground">
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground">
           <option value={32}>{t("reporting.paperWidth58")}</option>
           <option value={48}>{t("reporting.paperWidth80")}</option>
         </select>
@@ -534,7 +534,7 @@ export function ReportingTab({ canManage }: Props) {
 
         <button onClick={handleSave} disabled={isSaving}
           className="flex items-center gap-1.5 px-4 py-1.5 rounded-md bg-indigo-600 text-white
-          text-sm font-medium hover:bg-indigo-700 disabled:opacity-50 transition-all">
+ text-sm font-medium hover:bg-indigo-700 disabled:opacity-50 transition-all">
           {isSaving ? <Loader2 size={14} className="animate-spin" /> : <Save size={14} />}
           {editing ? t('common.update') : t('common.save')}
         </button>
@@ -544,12 +544,12 @@ export function ReportingTab({ canManage }: Props) {
       <div ref={containerRef} className="flex flex-1 overflow-hidden min-h-0" style={{ height: "calc(100vh - 220px)" }}>
         {/* Sol: Blok editörü */}
         <div className="flex-1 overflow-hidden flex flex-col
-          bg-slate-50 border-r border-border min-w-0
-          bg-card border-border">
+ border-r border-border min-w-0
+ bg-card border-border">
             <div className="px-3 py-2 border-b flex items-center justify-between
-              border-border border-border bg-muted/60">
+ border-border border-border bg-muted/60">
               <p className="text-xs font-semibold uppercase tracking-wider
-                text-muted-foreground">
+ text-muted-foreground">
                 {t('reporting.editor.blocksCount', { count: form.layout_json.length })}
               </p>
               <button onClick={() => setShowHelp(true)} 
@@ -570,15 +570,15 @@ export function ReportingTab({ canManage }: Props) {
         <div
           onMouseDown={handleMouseDown}
           className="w-1.5 cursor-col-resize bg-transparent hover:bg-indigo-400/40 active:bg-indigo-500/60
-            transition-colors shrink-0 relative group"
+ transition-colors shrink-0 relative group"
           title={t('reporting.editor.dragToResize')}
         >
           <div className="absolute inset-y-0 -left-1 -right-1" />
         </div>
 
         {/* Sağ: Termal önizleme */}
-        <div className="flex flex-col bg-slate-100
-          bg-card border-border transition-none shrink-0"
+        <div className="flex flex-col 
+ bg-card border-border transition-none shrink-0"
           style={{ width: `${previewWidth}px` }}>
           <div className="flex items-center justify-between px-3 py-1.5 border-b border-border bg-card/50">
             <span className="text-2xs font-semibold text-muted-foreground uppercase tracking-widest">{t('reporting.editor.preview')}</span>

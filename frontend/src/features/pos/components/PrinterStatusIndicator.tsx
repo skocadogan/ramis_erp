@@ -195,7 +195,7 @@ export function PrinterStatusIndicator({
         onClick={syncAllStatuses}
         disabled={syncStatusMutation.isPending}
         className={cn(
-          "flex h-10 items-center gap-2 rounded-lg border border-border text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 border-border bg-card dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:hover:text-blue-400",
+          "flex h-10 items-center gap-2 rounded-lg border border-border text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 border-border bg-card dark:hover:border-blue-700 dark:hover: dark:hover:text-blue-400",
           labelBreakpoint === "fullhd" ? "px-2 fullhd:px-3" : "px-3",
           className,
         )}
@@ -225,7 +225,7 @@ export function PrinterStatusIndicator({
     <DropdownMenu>
       <DropdownMenuTrigger
         className={cn(
-          "flex h-10 items-center gap-2 rounded-lg border border-border text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 border-border bg-card dark:hover:border-blue-700 dark:hover:bg-slate-800 dark:hover:text-blue-400",
+          "flex h-10 items-center gap-2 rounded-lg border border-border text-muted-foreground shadow-sm transition-all hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 border-border bg-card dark:hover:border-blue-700 dark:hover: dark:hover:text-blue-400",
           labelBreakpoint === "fullhd" ? "px-2 fullhd:px-3" : "px-3",
           className,
         )}
@@ -260,7 +260,7 @@ export function PrinterStatusIndicator({
             return (
               <DropdownMenuItem
                 key={printer.id}
-                className="flex items-center justify-between gap-3 rounded-md px-2 py-2 focus:bg-slate-100 dark:focus:bg-slate-800"
+                className="flex items-center justify-between gap-3 rounded-md px-2 py-2 focus: dark:focus:"
               >
                 <div className="flex min-w-0 flex-1 items-center gap-2">
                   <div className="relative flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-muted">

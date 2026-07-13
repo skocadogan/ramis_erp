@@ -164,7 +164,7 @@ function RecycleBinContent() {
             </h2>
             <button
               onClick={() => summaryQuery.refetch()}
-              className="p-1 rounded hover:bg-slate-100 text-muted-foreground dark:hover:bg-slate-800"
+              className="p-1 rounded hover: text-muted-foreground dark:hover:"
               title={t("sidebar.refreshTitle")}
               type="button"
             >
@@ -192,11 +192,11 @@ function RecycleBinContent() {
                     "w-full text-left flex items-center justify-between px-3 py-2 text-sm rounded-md transition-colors",
                     selectedModel?.app_label === s.app_label && selectedModel?.model_name === s.model_name
                       ? "bg-indigo-50 text-indigo-700 font-medium dark:bg-indigo-900/30 dark:text-indigo-400"
-                      : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800",
+                      : " hover: dark:text-muted-foreground dark:hover:",
                   )}
                 >
                   <span className="truncate">{s.verbose_name}</span>
-                  <span className="bg-slate-200 text-slate-600 bg-muted dark:text-muted-foreground text-2xs px-1.5 py-0.5 rounded-full font-bold">
+                  <span className="bg-muted dark:text-muted-foreground text-2xs px-1.5 py-0.5 rounded-full font-bold">
                     {s.count}
                   </span>
                 </button>

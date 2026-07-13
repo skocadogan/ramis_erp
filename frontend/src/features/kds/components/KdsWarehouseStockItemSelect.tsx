@@ -46,7 +46,7 @@ export function KdsWarehouseStockItemSelect({
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger
         disabled={disabled || isLoading}
-        className="w-full mt-1 flex items-center justify-between px-3 py-2 bg-slate-50 border border-border rounded-md text-sm text-left focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground text-slate-900 disabled:opacity-50"
+        className="w-full mt-1 flex items-center justify-between px-3 py-2 border border-border rounded-md text-sm text-left focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground disabled:opacity-50"
       >
         {selectedLevel ? (
           <div className="flex justify-between w-full pr-2">
@@ -96,7 +96,7 @@ export function KdsWarehouseStockItemSelect({
                   setOpen(false);
                   setSearch("");
                 }}
-                className="w-full flex items-center justify-between px-3 py-2.5 text-sm hover:bg-slate-50 transition-all text-left dark:hover:bg-slate-800"
+                className="w-full flex items-center justify-between px-3 py-2.5 text-sm hover: transition-all text-left dark:hover:"
               >
                 <div className="flex min-w-0 flex-col">
                   <span className="font-medium text-foreground">{level.stock_item_name}</span>

@@ -33,11 +33,11 @@ export function LiveDateClock() {
 
   return (
     <div className="flex flex-col items-end gap-0.5">
-      <span className="text-sm font-medium tracking-wide text-slate-400">
+      <span className="text-sm font-medium tracking-wide">
         {dateLabel}
       </span>
       <div className="flex items-center gap-2 tabular-nums text-3xl font-bold tracking-tight text-white">
-        <Clock size={24} className="text-slate-400" />
+        <Clock size={24} className="" />
         {timeLabel}
       </div>
     </div>

@@ -99,7 +99,7 @@ export function BulkStockEntryLeftColumn({
         )}
       </div>
 
-      <div className="flex flex-col gap-2 rounded-lg border border-border bg-slate-50/80 px-3 py-2 border-border bg-muted/30">
+      <div className="flex flex-col gap-2 rounded-lg border border-border /80 px-3 py-2 border-border bg-muted/30">
         <label className="inline-flex cursor-pointer items-center gap-2 text-xs text-foreground">
           <input
             type="checkbox"

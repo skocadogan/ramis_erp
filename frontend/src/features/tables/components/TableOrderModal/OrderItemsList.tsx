@@ -59,7 +59,7 @@ const OrderItemRow = memo(({
                             {displayQuantity}×
                         </span>
                         <div className="min-w-0 flex-1">
-                            <p className="text-sm font-medium leading-snug text-slate-800 text-foreground">
+                            <p className="text-sm font-medium leading-snug text-foreground">
                                 {item.product_name}
                                 {item.unit_name && (
                                     <span className="ml-1 text-sub font-semibold italic text-blue-600 dark:text-blue-400">
@@ -78,28 +78,28 @@ const OrderItemRow = memo(({
                                 </p>
                             )}
                             {item.notes?.trim() && (
-                                <p className="mt-0.5 flex items-start gap-1 text-xs text-slate-800 text-foreground">
+                                <p className="mt-0.5 flex items-start gap-1 text-xs text-foreground">
                                     <MessageSquare size={10} className="mt-0.5 shrink-0" />
                                     <span>{item.notes}</span>
                                 </p>
                             )}
                             <div className="mt-1 flex flex-wrap items-center gap-2">
                                 {showQuantityControls && (
-                                    <div className="flex items-center overflow-hidden rounded-lg border border-border bg-slate-100 border-border bg-muted">
+                                    <div className="flex items-center overflow-hidden rounded-lg border border-border border-border bg-muted">
                                         <button
                                             type="button"
                                             onClick={() => handleUpdateItemQuantity(item.id, displayQuantity - 1)}
                                             disabled={isUpdatingItem}
-                                            className="touch-manipulation p-1.5 text-slate-600 transition-colors hover:bg-slate-200 active:bg-slate-300 text-muted-foreground dark:hover:bg-slate-700 sm:p-2"
+                                            className="touch-manipulation p-1.5 transition-colors hover: active: text-muted-foreground dark:hover: sm:p-2"
                                         >
                                             <Minus size={16} aria-hidden />
                                         </button>
-                                        <div className="h-6 w-px bg-slate-200 bg-accent" />
+                                        <div className="h-6 w-px bg-accent" />
                                         <button
                                             type="button"
                                             onClick={() => handleUpdateItemQuantity(item.id, displayQuantity + 1)}
                                             disabled={isUpdatingItem}
-                                            className="touch-manipulation p-1.5 text-slate-600 transition-colors hover:bg-slate-200 active:bg-slate-300 text-muted-foreground dark:hover:bg-slate-700 sm:p-2"
+                                            className="touch-manipulation p-1.5 transition-colors hover: active: text-muted-foreground dark:hover: sm:p-2"
                                         >
                                             <Plus size={16} aria-hidden />
                                         </button>
@@ -120,11 +120,11 @@ const OrderItemRow = memo(({
                     </div>
                 </div>
                 <div className="flex shrink-0 flex-col items-end gap-0.5 text-right">
-                    <p className="text-sm font-semibold font-mono tabular-nums text-slate-800 text-foreground sm:text-base">
+                    <p className="text-sm font-semibold font-mono tabular-nums text-foreground sm:text-base">
                         {formatAmount(item.total_price, canViewAmounts)}
                     </p>
                     <span
-                        className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-3xs font-medium sm:text-2xs ${(STATUS_CONFIG[item.status] ?? { className: 'bg-slate-100 text-muted-foreground' }).className}`}
+                        className={`whitespace-nowrap rounded-full px-1.5 py-0.5 text-3xs font-medium sm:text-2xs ${(STATUS_CONFIG[item.status] ?? { className: ' text-muted-foreground' }).className}`}
                     >
                         {t(`status.${(STATUS_CONFIG[item.status] ?? { labelKey: item.status.toLowerCase() }).labelKey}`)}
                     </span>
@@ -142,7 +142,7 @@ const OrderItemRow = memo(({
                                 key={child.id}
                                 className="flex items-baseline justify-between gap-2 py-0.5 text-sub leading-snug"
                             >
-                                <span className="min-w-0 truncate text-slate-600 text-muted-foreground">
+                                <span className="min-w-0 truncate text-muted-foreground">
                                     <span className="font-bold tabular-nums">{child.quantity}×</span>{' '}
                                     {child.product_name}
                                 </span>
@@ -234,7 +234,7 @@ const OrderItemsListImpl = ({
                             placeholder={t('searchProducts')}
                             enterKeyHint="search"
                             autoComplete="off"
-                            className="w-full rounded-lg border border-border bg-slate-50 py-2 pl-8 pr-3 text-sm text-slate-900 placeholder:text-muted-foreground focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/30 border-input bg-muted text-foreground dark:placeholder:text-muted-foreground"
+                            className="w-full rounded-lg border border-border py-2 pl-8 pr-3 text-sm placeholder:text-muted-foreground focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500/30 border-input bg-muted text-foreground dark:placeholder:text-muted-foreground"
                         />
                     </div>
                     {filterLower ? (
@@ -253,15 +253,15 @@ const OrderItemsListImpl = ({
                         {orders.length > 1 && (
                             <>
                                 <div className="mb-2 flex flex-wrap items-center gap-2 sm:mb-3">
-                                    <span className="text-xs font-bold uppercase tracking-wider text-slate-700 text-muted-foreground sm:text-sm">
+                                    <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground sm:text-sm">
                                         {order.order_number || t('orderNum', { num: idx + 1 })}
                                     </span>
                                     <span
-                                        className={`rounded-full px-2 py-0.5 text-2xs font-semibold sm:text-xs tracking-wide ${(STATUS_CONFIG[order.status] ?? { className: 'bg-slate-100 text-muted-foreground' }).className}`}
+                                        className={`rounded-full px-2 py-0.5 text-2xs font-semibold sm:text-xs tracking-wide ${(STATUS_CONFIG[order.status] ?? { className: ' text-muted-foreground' }).className}`}
                                     >
                                         {t(`status.${(STATUS_CONFIG[order.status] ?? { labelKey: order.status.toLowerCase() }).labelKey}`)}
                                     </span>
-                                    <span className="ml-auto text-xs font-medium text-slate-500 text-muted-foreground sm:text-sm">
+                                    <span className="ml-auto text-xs font-medium text-muted-foreground sm:text-sm">
                                         {new Intl.DateTimeFormat(locale === 'tr' ? 'tr-TR' : 'en-US', {
                                             hour: '2-digit',
                                             minute: '2-digit',
@@ -279,10 +279,10 @@ const OrderItemsListImpl = ({
                                             }}
                                             disabled={isPaying || !!isCancelling}
                                             className={`rounded-md p-1.5 transition-all duration-200 ${
-                                                activePaymentOrderId === order.id
-                                                    ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 ring-1 ring-blue-500/20'
-                                                    : 'text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-950/20'
-                                            }`}
+ activePaymentOrderId === order.id
+ ? 'bg-blue-50 text-blue-600 dark:bg-blue-950/40 dark:text-blue-400 ring-1 ring-blue-500/20'
+ : 'text-emerald-600 hover:bg-emerald-50 hover:text-emerald-700 dark:text-emerald-400 dark:hover:bg-emerald-950/20'
+ }`}
                                             title="Siparişi Öde"
                                         >
                                             <Wallet size={16} className="transition-transform duration-200 active:scale-95" />
@@ -293,7 +293,7 @@ const OrderItemsListImpl = ({
                                             type="button"
                                             onClick={() => handleCancelOrder(order.id, idx)}
                                             disabled={isPaying || !!isCancelling}
-                                            className="rounded-md p-1.5 text-slate-400 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:text-slate-500 dark:hover:bg-rose-950/30"
+                                            className="rounded-md p-1.5 transition-colors hover:bg-rose-50 hover:text-rose-600 dark:hover:bg-rose-950/30"
                                             title={t('cancelOrder')}
                                         >
                                             {isCancelling === order.id ? (
@@ -306,9 +306,9 @@ const OrderItemsListImpl = ({
                                 </div>
 
                                 {activePaymentOrderId === order.id && (
-                                    <div className="mb-3 mt-1.5 overflow-hidden rounded-xl border border-slate-100 bg-slate-50/50 p-2.5 border-border bg-card/30 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    <div className="mb-3 mt-1.5 overflow-hidden rounded-xl border border-slate-100 /50 p-2.5 border-border bg-card/30 animate-in fade-in slide-in-from-top-2 duration-200">
                                         <div className="flex flex-wrap items-center justify-between gap-2">
-                                            <span className="text-2xs font-semibold text-slate-500 text-muted-foreground sm:text-xs">
+                                            <span className="text-2xs font-semibold text-muted-foreground sm:text-xs">
                                                 Ödeme Yöntemi Seçin:
                                             </span>
                                             <div className="flex items-center gap-1.5">
@@ -360,7 +360,7 @@ const OrderItemsListImpl = ({
                                                         setActivePaymentOrderId(null);
                                                     }}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg bg-slate-600 px-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover:bg-slate-700 active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:bg-slate-750 dark:hover:bg-slate-800"
+                                                    className="inline-flex h-8 items-center justify-center gap-1 rounded-lg px-3 text-xs font-bold text-white shadow-sm transition-all duration-200 hover: active:scale-95 disabled:pointer-events-none disabled:opacity-50 dark:hover:"
                                                 >
                                                     {isPaying && selectedMethod === 'OTHER' ? (
                                                         <Loader2 size={12} className="animate-spin" />
@@ -374,7 +374,7 @@ const OrderItemsListImpl = ({
                                                     type="button"
                                                     onClick={() => setActivePaymentOrderId(null)}
                                                     disabled={isPaying}
-                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 text-slate-500 transition-colors hover:bg-slate-100 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700"
+                                                    className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-slate-200 transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
                                                 >
                                                     <X size={14} />
                                                 </button>

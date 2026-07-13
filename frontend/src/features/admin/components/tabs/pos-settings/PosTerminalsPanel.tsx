@@ -318,7 +318,7 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
 
   return (
     <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden">
-      <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-4 bg-slate-50 p-4 border-b border-border bg-muted/40 border-border shrink-0">
+      <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-4 p-4 border-b border-border bg-muted/40 border-border shrink-0">
         <div className="space-y-0.5">
           <CardTitle className="text-sm font-semibold flex items-center gap-2">
             {t('admin_settings.terminals.title')}
@@ -336,7 +336,7 @@ export function PosTerminalsPanel({ branchId, branchList, setBranchOverride, can
       <CardContent className="p-4">
         <div className="rounded-xl border border-slate-100 border-border overflow-x-auto">
           <Table>
-            <TableHeader className="bg-slate-50/50 bg-card/50">
+            <TableHeader className="/50 bg-card/50">
               <TableRow>
                 <TableHead>{t('admin_settings.terminals.tableCode')}</TableHead>
                 <TableHead>{t('admin_settings.terminals.tableName')}</TableHead>

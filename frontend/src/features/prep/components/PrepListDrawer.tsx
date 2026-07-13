@@ -323,7 +323,7 @@ export function PrepListDrawer({ activeStationId, branchId }: Props) {
       {/* List Container */}
       <div className="flex-1 overflow-y-auto p-4 space-y-3">
         {filteredTasks.length === 0 ? (
-          <div className="flex flex-col items-center justify-center py-20 text-slate-600">
+          <div className="flex flex-col items-center justify-center py-20">
             <ListChecks size={40} className="opacity-20 mb-4" />
             <p className="text-xs uppercase tracking-widest italic">{t('drawer.emptyList')}</p>
           </div>

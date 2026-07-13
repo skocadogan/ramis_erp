@@ -621,7 +621,7 @@ export function SurveysTab() {
     <div className="space-y-6">
       <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-bold text-slate-900 dark:text-white">
+          <h2 className="flex items-center gap-2 text-lg font-bold dark:text-white">
             <ClipboardList className="h-5 w-5 text-blue-600" />
             {t("surveys.title")}
           </h2>
@@ -748,7 +748,7 @@ export function SurveysTab() {
                               setIsFormOpen(true)
                             }}
                           >
-                            <Pencil className="h-4 w-4 text-slate-600" />
+                            <Pencil className="h-4 w-4" />
                           </Button>
                         ) : null}
                         {canManageSurvey ? (

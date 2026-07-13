@@ -221,7 +221,7 @@ export function DeficiencyReportFormModal({
                 }}
                 required
                 disabled={!!initialStationId}
-                className="w-full px-3 py-2 rounded-lg border border-border bg-card text-foreground text-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all disabled:opacity-100 disabled:bg-slate-50 dark:disabled:bg-slate-900/50 disabled:text-muted-foreground"
+                className="w-full px-3 py-2 rounded-lg border border-border bg-card text-foreground text-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 outline-none transition-all disabled:opacity-100 disabled: dark:disabled:/50 disabled:text-muted-foreground"
               >
                 <option value="">{t("deficiencyForm.selectStation")}</option>
                 {stations.map((s) => (
@@ -253,7 +253,7 @@ export function DeficiencyReportFormModal({
               </div>
 
               {items.map((item, i) => (
-                <div key={i} className="group relative rounded-lg border border-border bg-slate-50 p-2 border-border bg-muted/50 sm:p-1.5">
+                <div key={i} className="group relative rounded-lg border border-border p-2 border-border bg-muted/50 sm:p-1.5">
                   <div className="grid grid-cols-12 gap-2 sm:gap-3 items-center">
                     <div className="col-span-12 sm:col-span-5">
                       <label className="sm:hidden block text-2xs font-bold text-muted-foreground uppercase mb-0.5">{t("deficiencyForm.colProduct")}</label>
@@ -277,7 +277,7 @@ export function DeficiencyReportFormModal({
                         placeholder={t("deficiencyForm.qtyPlaceholder")}
                         value={item.quantity}
                         onChange={(e) => updateItem(i, "quantity", e.target.value)}
-                        className="w-full rounded-md border border-border px-2 py-1.5 text-center text-xs text-slate-900 outline-none focus:ring-2 focus:ring-amber-500/20 border-border bg-muted text-foreground sm:text-sm"
+                        className="w-full rounded-md border border-border px-2 py-1.5 text-center text-xs outline-none focus:ring-2 focus:ring-amber-500/20 border-border bg-muted text-foreground sm:text-sm"
                       />
                     </div>
                     
@@ -298,7 +298,7 @@ export function DeficiencyReportFormModal({
                         value={item.notes}
                         onChange={(e) => updateItem(i, "notes", e.target.value)}
                         placeholder={t("deficiencyForm.rowNotePlaceholder")}
-                        className="w-full rounded-md border border-border px-2 py-1.5 text-xs text-slate-900 outline-none focus:ring-2 focus:ring-amber-500/20 border-border bg-muted text-foreground"
+                        className="w-full rounded-md border border-border px-2 py-1.5 text-xs outline-none focus:ring-2 focus:ring-amber-500/20 border-border bg-muted text-foreground"
                       />
                     </div>
 
@@ -330,7 +330,7 @@ export function DeficiencyReportFormModal({
               }}
               rows={2}
               placeholder={t("deficiencyForm.reportNotesPlaceholder")}
-              className="w-full resize-none rounded-lg border border-border px-3 py-2 text-sm text-slate-900 outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 border-border bg-muted text-foreground"
+              className="w-full resize-none rounded-lg border border-border px-3 py-2 text-sm outline-none focus:border-amber-500 focus:ring-2 focus:ring-amber-500/20 border-border bg-muted text-foreground"
             />
           </div>
         </form>

@@ -113,7 +113,7 @@ function InvoicesPageContent() {
         </div>
       ) : (
         <Card className="p-0 gap-0 border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
-          <div className="border-b border-border bg-slate-50 px-4 py-3 border-border bg-muted/40">
+          <div className="border-b border-border px-4 py-3 border-border bg-muted/40">
             <h2 className="text-sm font-semibold text-foreground">{t("page.listTitle")}</h2>
             <p className="mt-0.5 text-xs text-muted-foreground">
               {totalCount > 0
@@ -133,7 +133,7 @@ function InvoicesPageContent() {
                   type="date"
                   value={filterDateFrom}
                   onChange={(e) => setFilterDateFrom(e.target.value)}
-                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[9.5rem] flex-col gap-1">
@@ -148,7 +148,7 @@ function InvoicesPageContent() {
                   type="date"
                   value={filterDateTo}
                   onChange={(e) => setFilterDateTo(e.target.value)}
-                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                 />
               </div>
               <div className="flex min-w-[9rem] flex-col gap-1">
@@ -183,7 +183,7 @@ function InvoicesPageContent() {
                   onChange={(e) => setFilterSearchRaw(e.target.value)}
                   placeholder={t("page.searchPlaceholder")}
                   autoComplete="off"
-                  className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 placeholder:text-muted-foreground border-input bg-card text-foreground"
+                  className="rounded-lg border border-border px-2 py-1.5 text-sm placeholder:text-muted-foreground border-input bg-card text-foreground"
                 />
               </div>
               <button
@@ -194,7 +194,7 @@ function InvoicesPageContent() {
                   setFilterHasPdf("all");
                   setFilterSearchRaw("");
                 }}
-                className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm transition-colors hover:bg-slate-100 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700"
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
               >
                 {t("page.resetFilters")}
               </button>
@@ -263,12 +263,12 @@ function InvoicesPageContent() {
                           href={inv.pdf_url}
                           target="_blank"
                           rel="noreferrer"
-                          className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+                          className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
                         >
                           <Download size={14} /> {t("table.download")}
                         </a>
                       ) : (
-                        <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 bg-accent text-muted-foreground">
+                        <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-accent text-muted-foreground">
                           {t("table.noPdf")}
                         </span>
                       )}

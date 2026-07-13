@@ -163,19 +163,19 @@ export function StationDisplayScreen({
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-slate-950">
+      <div className="flex h-screen items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <Loader2 className="h-12 w-12 animate-spin text-blue-500" />
-          <p className="text-slate-400 font-medium">İstasyon yükleniyor…</p>
+          <p className="font-medium">İstasyon yükleniyor…</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-950 text-white">
+    <div className="flex min-h-screen flex-col text-white">
       <header
-        className="flex shrink-0 items-center justify-between border-b border-slate-800 bg-slate-950 px-8 py-4"
+        className="flex shrink-0 items-center justify-between border-b border-slate-800 px-8 py-4"
         style={{ borderTopWidth: 4, borderTopColor: stationColor }}
       >
         <div className="flex items-center gap-4">
@@ -186,7 +186,7 @@ export function StationDisplayScreen({
             <ChefHat size={24} />
           </div>
           <div>
-            <div className="text-xs font-bold uppercase tracking-widest text-slate-500">
+            <div className="text-xs font-bold uppercase tracking-widest">
               Mutfak İstasyon Ekranı
             </div>
             <div className="flex items-center gap-2 mt-0.5">
@@ -196,7 +196,7 @@ export function StationDisplayScreen({
               />
               <span className="text-xl font-bold text-white">{station?.name ?? "İstasyon"}</span>
               {station?.branch_name && (
-                <span className="ml-1 text-sm text-slate-500">— {station.branch_name}</span>
+                <span className="ml-1 text-sm">— {station.branch_name}</span>
               )}
             </div>
           </div>
@@ -207,7 +207,7 @@ export function StationDisplayScreen({
         <div className="flex items-center gap-4">
           {headerActions}
           <WsIndicator connected={wsConnected} />
-          <div className="h-8 w-px bg-slate-700" />
+          <div className="h-8 w-px" />
           <LiveDateClock />
         </div>
       </header>
@@ -220,11 +220,11 @@ export function StationDisplayScreen({
             {grouped.activeGroups.length > 0 && (
               <section>
                 <div className="mb-4 flex items-center gap-3">
-                  <div className="h-px flex-1 bg-slate-800" />
-                  <span className="text-xs font-bold uppercase tracking-widest text-slate-500">
+                  <div className="h-px flex-1" />
+                  <span className="text-xs font-bold uppercase tracking-widest">
                     Aktif ({grouped.stats.totalActive})
                   </span>
-                  <div className="h-px flex-1 bg-slate-800" />
+                  <div className="h-px flex-1" />
                 </div>
 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

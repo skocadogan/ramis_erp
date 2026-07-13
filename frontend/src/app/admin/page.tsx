@@ -18,7 +18,7 @@ function LegacyAdminRedirectInner() {
   }, [router, searchParams])
 
   return (
-    <div className="flex h-screen items-center justify-center bg-slate-50">
+    <div className="flex h-screen items-center justify-center">
       <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
     </div>
   )
@@ -28,7 +28,7 @@ export default function LegacyAdminRedirect() {
   return (
     <Suspense
       fallback={
-        <div className="flex h-screen items-center justify-center bg-slate-50">
+        <div className="flex h-screen items-center justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
         </div>
       }

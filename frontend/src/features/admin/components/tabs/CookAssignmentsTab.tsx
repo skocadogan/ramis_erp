@@ -126,7 +126,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
       </div>
 
       {(isLoading || (isAssignmentsLoading && userId)) && (
-        <div className="flex items-center gap-2 rounded-md border border-border bg-slate-50 px-3 py-2 text-sm text-slate-600 border-border bg-muted/80 text-muted-foreground">
+        <div className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm border-border bg-muted/80 text-muted-foreground">
           <Loader2 className="h-4 w-4 shrink-0 animate-spin text-blue-600 dark:text-blue-400" />
           {t('common.loading')}
         </div>
@@ -134,7 +134,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
 
       <div className="max-w-2xl">
         <section className="overflow-hidden rounded-lg border border-border border-border bg-card">
-          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
+          <div className="flex flex-col gap-2 border-b border-border px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
              
               {t('assignments.cook.stationsTitle')}
@@ -162,7 +162,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
                   "rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
                   stations.length === 0 || stationIds.length === 0
                     ? "cursor-not-allowed text-muted-foreground"
-                    : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800"
+                    : " hover: dark:text-muted-foreground dark:hover:"
                 )}
               >
                 {t('assignments.common.deselectAll')}
@@ -178,7 +178,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
               <ul className="grid grid-cols-1 gap-1 sm:grid-cols-2">
                 {stations.map((s) => (
                   <li key={s.id}>
-                    <Label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-slate-800/60">
+                    <Label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 hover: dark:hover:/60">
                       <Checkbox
                         checked={stationIds.includes(s.id)}
                         onCheckedChange={() => toggleStation(s.id)}
@@ -201,7 +201,7 @@ export function CookAssignmentsTab({ branches }: { branches: Branch[] }) {
               </ul>
             )}
           </div>
-          <div className="border-t border-border bg-slate-50/80 px-4 py-2 text-xs text-muted-foreground border-border bg-muted/50 dark:text-muted-foreground">
+          <div className="border-t border-border /80 px-4 py-2 text-xs text-muted-foreground border-border bg-muted/50 dark:text-muted-foreground">
             {t('assignments.cook.stationsSelected', { count: stationIds.length, total: stations.length })}
           </div>
         </section>

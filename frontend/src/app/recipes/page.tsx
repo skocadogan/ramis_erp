@@ -100,7 +100,7 @@ function RecipesPageContent() {
                   <TooltipProvider>
                     <Tooltip>
                       <TooltipTrigger>
-                        <Info size={16} className="text-slate-300 hover:text-blue-500 cursor-help transition-colors" />
+                        <Info size={16} className="hover:text-blue-500 cursor-help transition-colors" />
                       </TooltipTrigger>
                       <TooltipContent className="max-w-xs text-xs leading-relaxed">
                         {t("titleTooltip")}

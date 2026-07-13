@@ -97,16 +97,16 @@ export function WarehousesTab({ branchId }: { branchId?: string }) {
                 <tr><td colSpan={7} className="text-center py-12 text-muted-foreground">{t("warehousesTab.empty")}</td></tr>
               ) : (
                 filtered.map((w) => (
-                  <tr key={w.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                  <tr key={w.id} className="hover:/50 dark:hover:/30 transition-colors">
                     <td className="px-4 py-3 font-mono text-xs text-blue-600 dark:text-blue-400">{w.code}</td>
-                    <td className="px-4 py-3 font-medium text-slate-900 text-foreground">
+                    <td className="px-4 py-3 font-medium text-foreground">
                       <div className="flex items-center gap-2">
                         <MapPin size={14} className="text-muted-foreground shrink-0" />
                         {w.name}
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="inline-flex px-2 py-0.5 rounded-md text-sub font-medium bg-slate-100 text-slate-700 bg-muted text-muted-foreground">
+                      <span className="inline-flex px-2 py-0.5 rounded-md text-sub font-medium bg-muted text-muted-foreground">
                         {t(`warehouseType.${w.warehouse_type}` as never)}
                       </span>
                     </td>

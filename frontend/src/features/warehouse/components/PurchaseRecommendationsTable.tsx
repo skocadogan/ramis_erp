@@ -58,7 +58,7 @@ const RecommendationRow = memo(function RecommendationRow({
   return (
     <tr
       className={cn(
-        "border-b border-border hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors",
+        "border-b border-border hover:/50 dark:hover:/30 transition-colors",
         row.is_low_stock && "bg-amber-50/40 dark:bg-amber-950/10",
       )}
     >
@@ -73,7 +73,7 @@ const RecommendationRow = memo(function RecommendationRow({
         </td>
       ) : null}
       <td className="px-4 py-3">
-        <div className="font-medium text-slate-900 text-foreground">{row.stock_item_name}</div>
+        <div className="font-medium text-foreground">{row.stock_item_name}</div>
         <div className="text-xs text-muted-foreground">{row.stock_item_sku}</div>
         <div className="mt-1 flex flex-wrap items-center gap-1">
           <UrgencyBadge urgency={row.urgency} />
@@ -96,7 +96,7 @@ const RecommendationRow = memo(function RecommendationRow({
           ? t("purchaseRecommendationsTab.daysLeft", { days: row.estimated_days_until_stockout })
           : "—"}
       </td>
-      <td className="px-4 py-3 text-right font-semibold tabular-nums text-slate-900 text-foreground">
+      <td className="px-4 py-3 text-right font-semibold tabular-nums text-foreground">
         {formatQuantityWithUnit(row.recommended_quantity, row.unit)}
       </td>
       {canCommit ? (

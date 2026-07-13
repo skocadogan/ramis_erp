@@ -87,10 +87,10 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
   // Fallback if no slides
   if (slides.length === 0) {
     return (
-      <div className="h-screen w-full bg-slate-950 flex flex-col items-center justify-center relative overflow-hidden">
+      <div className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-indigo-600/10" />
         <div className="relative z-10 text-center space-y-6">
-          <div className="animate-in rounded-5xl border border-white/10 bg-slate-900/85 p-12 shadow-2xl zoom-in duration-1000">
+          <div className="animate-in rounded-5xl border border-white/10 /85 p-12 shadow-2xl zoom-in duration-1000">
             <h1 className="text-6xl font-bold text-white tracking-tighter">
               {settings?.welcome_title || t("welcomeDefault")}
             </h1>
@@ -119,7 +119,7 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
         </div>
       ) : (
-        <div className="absolute inset-0 z-0 bg-slate-950 flex items-center justify-center animate-in fade-in zoom-in-95 duration-1000">
+        <div className="absolute inset-0 z-0 flex items-center justify-center animate-in fade-in zoom-in-95 duration-1000">
           <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-slate-900 to-purple-900/40" />
           <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-blue-500" />
           
@@ -145,7 +145,7 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
             )}
 
             {currentSlide.description && (
-              <p className="text-2xl text-slate-300 max-w-3xl mx-auto leading-relaxed font-medium">
+              <p className="text-2xl max-w-3xl mx-auto leading-relaxed font-medium">
                 {currentSlide.description}
               </p>
             )}
@@ -173,7 +173,7 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
             )}
             
             {currentSlide.description && (
-              <p className="text-xl text-slate-300 max-w-2xl leading-relaxed">
+              <p className="text-xl max-w-2xl leading-relaxed">
                 {currentSlide.description}
               </p>
             )}

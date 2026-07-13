@@ -97,7 +97,7 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
                   placeholder={t("searchPh")}
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-56 rounded-md border border-border py-2 pl-8 pr-3 text-xs text-slate-900 outline-none focus:border-blue-500 border-input bg-muted text-foreground"
+                  className="w-56 rounded-md border border-border py-2 pl-8 pr-3 text-xs outline-none focus:border-blue-500 border-input bg-muted text-foreground"
                 />
               </div>
               <div className="flex items-center gap-2 rounded-md border border-border px-3 py-1.5 border-border bg-muted">
@@ -108,7 +108,7 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
                   onChange={(e) => setStartDate(e.target.value)}
                   className="w-28 border-none bg-transparent text-xs outline-none text-foreground dark:[color-scheme:dark]"
                 />
-                <span className="text-slate-300">-</span>
+                <span className="">-</span>
                 <input
                   type="date"
                   value={endDate}
@@ -161,11 +161,11 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
                 </div>
               ) : (
                 <div className="flex flex-col items-center justify-center gap-4 py-32 text-muted-foreground">
-                  <div className="rounded-full bg-slate-100 p-6 bg-muted">
+                  <div className="rounded-full p-6 bg-muted">
                     <History size={48} className="opacity-25" />
                   </div>
                   <div className="text-center">
-                    <p className="text-base font-semibold text-slate-600 text-muted-foreground">{t("emptyTitle")}</p>
+                    <p className="text-base font-semibold text-muted-foreground">{t("emptyTitle")}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{t("emptySub")}</p>
                   </div>
                 </div>
@@ -182,7 +182,7 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
               <>
                 <td className="px-2 py-3">
                   <div className="flex flex-col">
-                    <span className="font-semibold text-slate-900 text-foreground">
+                    <span className="font-semibold text-foreground">
                       {new Date(m.created_at).toLocaleDateString(locale)}
                     </span>
                     <span className="text-sub font-medium text-muted-foreground">
@@ -190,11 +190,11 @@ export function CostHistoryModal({ item, open, onOpenChange }: CostHistoryModalP
                     </span>
                   </div>
                 </td>
-                <td className="px-2 py-3 font-medium text-slate-600 text-muted-foreground">
+                <td className="px-2 py-3 font-medium text-muted-foreground">
                   {m.supplier_name || <span className="text-muted-foreground">-</span>}
                 </td>
                 <td className="px-2 py-3">
-                  <span className="rounded bg-slate-100 px-2 py-1 font-mono text-sub font-bold tracking-tight text-slate-600 bg-muted dark:text-muted-foreground">
+                  <span className="rounded px-2 py-1 font-mono text-sub font-bold tracking-tight bg-muted dark:text-muted-foreground">
                     {m.reference || t("refNone")}
                   </span>
                 </td>

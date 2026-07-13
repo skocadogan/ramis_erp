@@ -50,7 +50,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
   return (
     <tr
       className={cn(
-        "border-b border-border hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors cursor-pointer",
+        "border-b border-border hover:/50 dark:hover:/30 transition-colors cursor-pointer",
         selectedLotId === lot.id && "bg-blue-50/50 dark:bg-blue-950/20",
         isCritical && "bg-rose-50/40 dark:bg-rose-950/10",
         isWarning && "bg-amber-50/30 dark:bg-amber-950/10",
@@ -58,7 +58,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
       onClick={() => onSelectLot(lot)}
     >
       <td className="px-4 py-3">
-        <div className="font-medium text-slate-900 text-foreground">{lot.stock_item_name}</div>
+        <div className="font-medium text-foreground">{lot.stock_item_name}</div>
         <div className="text-xs text-muted-foreground">{lot.stock_item_sku}</div>
       </td>
       <td className="px-4 py-3 text-foreground">{lot.warehouse_name}</td>
@@ -76,7 +76,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
           </span>
         ) : null}
       </td>
-      <td className="px-4 py-3 text-right font-semibold tabular-nums text-slate-900 text-foreground">
+      <td className="px-4 py-3 text-right font-semibold tabular-nums text-foreground">
         {formatQuantity(lot.quantity)}
       </td>
       <td className="px-4 py-3 text-center">
@@ -88,7 +88,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
                 ? "bg-rose-100 text-rose-800 dark:bg-rose-950 dark:text-rose-200"
                 : lot.risk_score >= 50
                   ? "bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-200"
-                  : "bg-slate-100 text-slate-700 bg-muted text-muted-foreground",
+                  : "  bg-muted text-muted-foreground",
             )}
           >
             {lot.risk_score}
@@ -102,7 +102,7 @@ const ExpiringLotRow = memo(function ExpiringLotRow({
           <DropdownMenu>
             <DropdownMenuTrigger
               type="button"
-              className="inline-flex h-8 w-8 items-center justify-center rounded-md text-slate-600 hover:bg-slate-100 text-muted-foreground dark:hover:bg-slate-800"
+              className="inline-flex h-8 w-8 items-center justify-center rounded-md hover: text-muted-foreground dark:hover:"
               aria-label={t("expiryActions.menuAria", { name: lot.stock_item_name })}
               onClick={(e) => e.stopPropagation()}
             >

@@ -89,7 +89,7 @@ export function KdsRecipeDetailModal({ recipe, onClose }: KdsRecipeDetailModalPr
           </div>
 
           {/* Sağ Sütun: Hazırlanış */}
-          <div className="flex flex-col min-h-0 bg-slate-900/10">
+          <div className="flex flex-col min-h-0 /10">
             <div className="px-8 py-4 bg-muted/40 border-b border-border/50">
               <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-orange-500">
                 {t('recipeDetail.instructions')}

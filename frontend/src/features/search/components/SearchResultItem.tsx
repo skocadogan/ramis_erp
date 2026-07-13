@@ -42,12 +42,12 @@ export function SearchResultItemRow({
         "focus:outline-none",
         isSelected
           ? "bg-accent bg-accent"
-          : "hover:bg-slate-100 dark:hover:bg-slate-800",
+          : "hover: dark:hover:",
       ].join(" ")}
     >
       <div className="flex-1 min-w-0">
         <div className="flex items-center gap-2">
-          <p className="text-sm font-medium text-slate-800 text-foreground truncate">
+          <p className="text-sm font-medium text-foreground truncate">
             {item.title}
           </p>
           {badgeLabel && (

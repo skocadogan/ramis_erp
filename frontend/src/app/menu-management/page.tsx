@@ -589,40 +589,40 @@ function MenuManagementPageContent() {
           <button
             onClick={() => setActiveTab('regular')}
             className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-              activeTab === 'regular'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                : 'border-transparent text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-slate-200'
-            }`}
+ activeTab === 'regular'
+ ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
+ : 'border-transparent text-muted-foreground hover: dark:text-muted-foreground dark:hover:'
+ }`}
           >
             {t("page.tabs.regular")}
           </button>
           <button
             onClick={() => setActiveTab('combined')}
             className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-              activeTab === 'combined'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                : 'border-transparent text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-slate-200'
-            }`}
+ activeTab === 'combined'
+ ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
+ : 'border-transparent text-muted-foreground hover: dark:text-muted-foreground dark:hover:'
+ }`}
           >
             {t("page.tabs.combined")}
           </button>
           <button
             onClick={() => setActiveTab('modifiers')}
             className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-              activeTab === 'modifiers'
-                ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                : 'border-transparent text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-slate-200'
-            }`}
+ activeTab === 'modifiers'
+ ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
+ : 'border-transparent text-muted-foreground hover: dark:text-muted-foreground dark:hover:'
+ }`}
           >
             {t("page.tabs.modifiers")}
           </button>
           <button
             onClick={() => setActiveTab('menuTags')}
             className={`px-4 py-3 text-sm font-medium border-b-2 transition-colors ${
-              activeTab === 'menuTags'
-                ? 'border-violet-600 text-violet-600 dark:text-violet-400 dark:border-violet-400'
-                : 'border-transparent text-muted-foreground hover:text-slate-700 dark:text-muted-foreground dark:hover:text-slate-200'
-            }`}
+ activeTab === 'menuTags'
+ ? 'border-violet-600 text-violet-600 dark:text-violet-400 dark:border-violet-400'
+ : 'border-transparent text-muted-foreground hover: dark:text-muted-foreground dark:hover:'
+ }`}
           >
             {t("page.tabs.menuTags")}
           </button>

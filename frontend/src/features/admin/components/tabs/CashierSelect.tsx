@@ -83,7 +83,7 @@ export function CashierSelect({
                             placeholder={t('sales.filters.cashierPlaceholder')}
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-9 pr-3 py-1.5 text-xs bg-slate-50 border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
+                            className="w-full pl-9 pr-3 py-1.5 text-xs border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
                             onKeyDown={(e) => e.stopPropagation()}
                             onPointerDown={(e) => e.stopPropagation()}
                         />

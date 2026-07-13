@@ -227,7 +227,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
             placeholder={t("inputPlaceholder")}
-            className="flex-1 bg-transparent text-sm text-slate-800 text-foreground placeholder:text-muted-foreground dark:placeholder:text-muted-foreground outline-none"
+            className="flex-1 bg-transparent text-sm text-foreground placeholder:text-muted-foreground dark:placeholder:text-muted-foreground outline-none"
             aria-label={t("inputAriaLabel")}
             autoComplete="off"
             spellCheck={false}
@@ -239,7 +239,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
                 setQuery("")
                 setSelectedIndex(-1)
               }}
-              className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground hover:text-slate-600 dark:hover:text-slate-300 transition-colors"
+              className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground hover: dark:hover: transition-colors"
               aria-label={t("clearAriaLabel")}
             >
               <X size={14} />
@@ -292,7 +292,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
                         tabIndex={0}
                         onClick={() => setQuery(search)}
                         onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setQuery(search) } }}
-                        className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm text-slate-800 text-foreground transition-colors hover:bg-slate-100 dark:hover:bg-slate-800 group cursor-pointer"
+                        className="w-full flex items-center gap-3 rounded-md px-3 py-2 text-left text-sm text-foreground transition-colors hover: dark:hover: group cursor-pointer"
                       >
                         <Clock size={13} className="text-muted-foreground shrink-0" />
                         <span className="flex-1 truncate">{search}</span>
@@ -301,7 +301,7 @@ export function GlobalSearchDialog({ open, onOpenChange }: GlobalSearchDialogPro
                             e.stopPropagation()
                             removeRecentSearch(search)
                           }}
-                          className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground opacity-0 group-hover:opacity-100 hover:text-slate-600 dark:hover:text-slate-300 transition-all"
+                          className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground opacity-0 group-hover:opacity-100 hover: dark:hover: transition-all"
                           aria-label={t("removeRecentAriaLabel", { search })}
                         >
                           <X size={12} />

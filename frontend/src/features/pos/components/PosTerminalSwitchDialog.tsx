@@ -95,10 +95,10 @@ export function PosTerminalSwitchDialog({
                   type="button"
                   onClick={() => onPickTerminal(term)}
                   className={`flex items-start justify-between gap-3 rounded-xl border px-4 py-3 text-left text-sm font-semibold transition-colors ${
-                    isCurrent
-                      ? "border-blue-500 bg-blue-50/80 text-slate-900 dark:border-blue-600 dark:bg-blue-950/40 dark:text-slate-100"
-                      : "border-border bg-background text-foreground hover:border-blue-400 hover:bg-muted/60"
-                  }`}
+ isCurrent
+ ? "border-blue-500 bg-blue-50/80 dark:border-blue-600 dark:bg-blue-950/40 "
+ : "border-border bg-background text-foreground hover:border-blue-400 hover:bg-muted/60"
+ }`}
                 >
                   <span className="min-w-0">
                     <span className="block">

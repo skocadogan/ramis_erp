@@ -43,14 +43,14 @@ export function CustomerSelectModal({ onClose, onSelect }: CustomerSelectModalPr
   }, [debouncedSearch]);
 
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 /60 backdrop-blur-xs">
       <div className="w-full max-w-lg rounded-xl shadow-xl overflow-hidden border border-border flex flex-col max-h-[80vh] bg-card border-border animate-in fade-in zoom-in-95 duration-155">
         {/* Header */}
         <div className="flex items-center justify-between px-5 py-3.5 border-b border-border dark:border-slate-850">
           <h3 className="text-sm font-bold text-foreground">Müşteri Seç</h3>
           <button
             onClick={onClose}
-            className="p-1 rounded-lg text-muted-foreground hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="p-1 rounded-lg text-muted-foreground hover: dark:hover: transition-colors"
           >
             <X size={16} />
           </button>
@@ -65,7 +65,7 @@ export function CustomerSelectModal({ onClose, onSelect }: CustomerSelectModalPr
               placeholder="Müşteri adı, telefon veya e-posta ile ara..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-9 pr-4 py-1.5 bg-slate-50 border border-border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
+              className="w-full pl-9 pr-4 py-1.5 border border-border rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
             />
           </div>
         </div>
@@ -87,10 +87,10 @@ export function CustomerSelectModal({ onClose, onSelect }: CustomerSelectModalPr
                   key={c.id}
                   type="button"
                   onClick={() => onSelect(c)}
-                  className="w-full flex items-center justify-between p-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 text-left transition-colors"
+                  className="w-full flex items-center justify-between p-3 rounded-lg hover: dark:hover: text-left transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="h-8 w-8 rounded-full bg-slate-100 flex items-center justify-center text-xs font-bold text-slate-500 bg-muted text-muted-foreground">
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-bold bg-muted text-muted-foreground">
                       {c.customer_type === "CORPORATE" ? (
                         <Building size={14} />
                       ) : (

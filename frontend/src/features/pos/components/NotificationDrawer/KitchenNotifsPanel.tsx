@@ -76,7 +76,7 @@ export function KitchenNotifsPanel({
         </div>
       </div>
 
-      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto bg-slate-50/50 p-3 bg-muted/40">
+      <div className="min-h-0 flex-1 space-y-2 overflow-y-auto /50 p-3 bg-muted/40">
         {readyItems.length === 0 && guestArrivedNotifs.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-12 text-muted-foreground dark:text-muted-foreground">
             <CheckSquare size={32} className="mb-2 opacity-20" />
@@ -93,7 +93,7 @@ export function KitchenNotifsPanel({
                   <span className="text-sub font-bold text-blue-600 dark:text-blue-400">
                     {t("guestArrived")}
                   </span>
-                  <p className="text-sm font-semibold text-slate-800 text-foreground">
+                  <p className="text-sm font-semibold text-foreground">
                     {notif.message}
                   </p>
                   <span className="text-2xs text-muted-foreground dark:text-muted-foreground">

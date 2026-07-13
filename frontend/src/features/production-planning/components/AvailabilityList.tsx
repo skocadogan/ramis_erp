@@ -101,7 +101,7 @@ export function AvailabilityList({
                   ? "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
                   : item.mode === "LIMITED"
                     ? "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400"
-                    : "bg-slate-100 text-slate-700 bg-muted text-muted-foreground",
+                    : "  bg-muted text-muted-foreground",
               )}
             >
               {item.mode === "SOLD_OUT"

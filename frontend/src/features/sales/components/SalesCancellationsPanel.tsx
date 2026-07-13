@@ -116,7 +116,7 @@ export function SalesCancellationsPanel({
                     <TableSelect
                         value={cancellations.tableId}
                         onChange={cancellations.setTableId}
-                        className="w-full sm:w-[180px] h-9 bg-slate-50 border-border text-sm bg-muted border-input text-foreground"
+                        className="w-full sm:w-[180px] h-9 border-border text-sm bg-muted border-input text-foreground"
                     />
 
                     <div className="w-full sm:w-64">
@@ -140,7 +140,7 @@ export function SalesCancellationsPanel({
                                 value={startDate}
                                 onChange={(e) => onStartDateChange(e.target.value)}
                                 max={endDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                             <span className="text-muted-foreground text-sm">-</span>
                             <input
@@ -148,7 +148,7 @@ export function SalesCancellationsPanel({
                                 value={endDate}
                                 onChange={(e) => onEndDateChange(e.target.value)}
                                 min={startDate}
-                                className="bg-slate-50 border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
+                                className="border border-border rounded-md px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 bg-muted border-input text-foreground h-9"
                             />
                         </div>
                     )}
@@ -226,7 +226,7 @@ export function SalesCancellationsPanel({
                     />
                 </div>
 
-                <div className="p-3 border-t border-slate-100 bg-slate-50/50 flex items-center justify-between bg-card/50 border-border">
+                <div className="p-3 border-t border-slate-100 /50 flex items-center justify-between bg-card/50 border-border">
                     <div className="text-xs text-muted-foreground font-medium">
                         {t("list.paginationTotal", { count: cancellations.totalCount })}
                     </div>

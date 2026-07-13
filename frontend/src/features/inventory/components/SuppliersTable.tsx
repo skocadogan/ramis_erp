@@ -35,7 +35,7 @@ export function SuppliersTable({
       )}
       <div className="flex-1 overflow-auto rounded-lg border border-border bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colName")}</th>
               <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colContact")}</th>
@@ -62,10 +62,10 @@ export function SuppliersTable({
               </tr>
             ) : (
               suppliers.map((sup) => (
-                <tr key={sup.id} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors border-border dark:hover:bg-slate-800/50">
+                <tr key={sup.id} className="border-b border-slate-100 hover:/50 transition-colors border-border dark:hover:/50">
                   <td className="px-3 py-2 font-medium text-foreground">{sup.name}</td>
                   <td className="px-3 py-2 text-muted-foreground">{sup.contact_person}</td>
-                  <td className="px-3 py-2 text-slate-600 font-mono text-xs dark:text-muted-foreground">{sup.phone}</td>
+                  <td className="px-3 py-2 font-mono text-xs dark:text-muted-foreground">{sup.phone}</td>
                   <td className="px-3 py-2 text-muted-foreground">{sup.email}</td>
                   <td className="px-3 py-2 text-right">
                     <div className="flex justify-end gap-1">

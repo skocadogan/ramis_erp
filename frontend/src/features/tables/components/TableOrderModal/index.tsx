@@ -208,13 +208,13 @@ export function TableOrderModal(props: TableOrderModalProps) {
         <ModalOverlay onClose={handleCloseModal} zIndex="z-50" className="p-2 sm:p-4">
             <div className="relative flex max-h-[min(94dvh,900px)] min-h-0 w-full max-w-4xl flex-col overflow-hidden rounded-xl border border-border bg-card lg:max-w-6xl">
                 {isPaying && (
-                    <div className="absolute inset-0 z-50 flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-sm transition-opacity duration-200">
+                    <div className="absolute inset-0 z-50 flex flex-col items-center justify-center /60 backdrop-blur-sm transition-opacity duration-200">
                         <div className="flex flex-col items-center rounded-xl p-6 shadow-xl bg-card border border-slate-100 border-border max-w-xs text-center">
                             <Loader2 className="h-10 w-10 animate-spin text-blue-600 dark:text-blue-400 mb-3" />
                             <h3 className="text-sm font-bold text-foreground mb-1">
                                 Mali İşlem Yapılıyor
                             </h3>
-                            <p className="text-2xs text-slate-500 text-muted-foreground animate-pulse">
+                            <p className="text-2xs text-muted-foreground animate-pulse">
                                 Fiş düzenleniyor ve ödeme kaydediliyor. Lütfen bekleyin...
                             </p>
                         </div>
@@ -313,7 +313,7 @@ export function TableOrderModal(props: TableOrderModalProps) {
                             <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
                                 <div className="space-y-4 p-4 pb-0">
                                     {!isHistoricalSaleView && orders.length > 0 && (
-                                        <div className="rounded-xl border border-border bg-slate-50/50 p-3.5 bg-card/40 border-border">
+                                        <div className="rounded-xl border border-border /50 p-3.5 bg-card/40 border-border">
                                             <div className="flex items-center justify-between">
                                                 <div className="flex items-center gap-2.5">
                                                     <Users size={16} className="text-muted-foreground" />

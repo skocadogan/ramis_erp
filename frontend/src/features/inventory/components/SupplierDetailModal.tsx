@@ -207,7 +207,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
       PARTIALLY_ACCEPTED: "bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300",
       REJECTED: "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300",
     }
-    return `inline-flex max-w-full rounded px-2 py-0.5 text-sub font-medium ${colors[status] || "bg-slate-100 text-slate-800"}`
+    return `inline-flex max-w-full rounded px-2 py-0.5 text-sub font-medium ${colors[status] || " "}`
   }
 
   return (
@@ -251,20 +251,20 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
             <button
               onClick={() => setActiveTab("rejected")}
               className={`px-4 py-1.5 rounded-lg text-ui-sm font-medium transition-colors ${
-                isRejectedTab
-                  ? "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300"
-                  : "text-muted-foreground hover:bg-muted"
-              }`}
+ isRejectedTab
+ ? "bg-rose-100 text-rose-800 dark:bg-rose-900/30 dark:text-rose-300"
+ : "text-muted-foreground hover:bg-muted"
+ }`}
             >
               {t("tabRejected")}
             </button>
             <button
               onClick={() => setActiveTab("receivings")}
               className={`px-4 py-1.5 rounded-lg text-ui-sm font-medium transition-colors ${
-                !isRejectedTab
-                  ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
-                  : "text-muted-foreground hover:bg-muted"
-              }`}
+ !isRejectedTab
+ ? "bg-emerald-100 text-emerald-800 dark:bg-emerald-900/30 dark:text-emerald-300"
+ : "text-muted-foreground hover:bg-muted"
+ }`}
             >
               {t("tabReceivings")}
             </button>
@@ -320,7 +320,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
 
           <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
             {isRejectedTab ? (
-              <div className={`sticky top-0 z-10 border-b border-border pb-2 text-ui-sm font-semibold text-slate-600 border-border bg-card dark:text-muted-foreground ${rejectedRowGrid}`}>
+              <div className={`sticky top-0 z-10 border-b border-border pb-2 text-ui-sm font-semibold border-border bg-card dark:text-muted-foreground ${rejectedRowGrid}`}>
                 <span className="min-w-0 text-left">{t("colReceivingNo")}</span>
                 <span className="min-w-0 text-left">{t("colProduct")}</span>
                 <span className="min-w-0 text-right tabular-nums">{t("colExpected")}</span>
@@ -329,7 +329,7 @@ export function SupplierDetailModal({ supplier, open, onOpenChange, defaultTab }
                 <span className="min-w-0 text-left">{t("colUnit")}</span>
               </div>
             ) : (
-              <div className={`sticky top-0 z-10 border-b border-border pb-2 text-ui-sm font-semibold text-slate-600 border-border bg-card dark:text-muted-foreground ${receivingRowGrid}`}>
+              <div className={`sticky top-0 z-10 border-b border-border pb-2 text-ui-sm font-semibold border-border bg-card dark:text-muted-foreground ${receivingRowGrid}`}>
                 <span className="min-w-0 text-left">{t("colReceivingNo")}</span>
                 <span className="min-w-0 text-left">{t("colDate")}</span>
                 <span className="min-w-0 text-left">{t("colStatus")}</span>

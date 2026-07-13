@@ -34,7 +34,7 @@ export function BulkDraftTableRow({
   const disabled = status === "POSTED"
 
   return (
-    <tr className="border-b border-border hover:bg-slate-50/80 border-border bg-card/40 dark:hover:bg-slate-800/50">
+    <tr className="border-b border-border hover:/80 border-border bg-card/40 dark:hover:/50">
       <td className="px-1.5 py-1.5 align-top text-center text-xs text-muted-foreground tabular-nums">{idx + 1}</td>
       <td className="px-1.5 py-1.5 align-top">
         <select
@@ -170,7 +170,7 @@ export function BulkDraftTableRow({
           type="button"
           disabled={disabled || lineCount <= 1}
           onClick={onRemove}
-          className="inline-flex rounded p-1 text-muted-foreground hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30"
+          className="inline-flex rounded p-1 text-muted-foreground hover: dark:hover: disabled:opacity-30"
           aria-label={t("bulkStockEntry.rowRemoveAria")}
         >
           <Trash2 className="h-4 w-4" />

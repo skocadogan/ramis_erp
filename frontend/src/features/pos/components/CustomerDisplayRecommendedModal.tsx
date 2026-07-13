@@ -14,7 +14,7 @@ export function CustomerDisplayRecommendedModal({ modal }: Props) {
   const t = useTranslations("pos.display");
 
   return (
-    <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center bg-slate-950/90 p-8 fade-in duration-300">
+    <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center /90 p-8 fade-in duration-300">
       <div className="w-full max-w-3xl overflow-hidden rounded-5xl border border-violet-500/30 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
         <div className="border-b border-violet-500/20 bg-violet-500/10 px-10 py-8">
           <div className="flex items-center gap-5">
@@ -29,9 +29,9 @@ export function CustomerDisplayRecommendedModal({ modal }: Props) {
         </div>
 
         <div className="space-y-6 px-10 py-8">
-          <div className="space-y-3 text-lg leading-relaxed text-slate-200">
+          <div className="space-y-3 text-lg leading-relaxed">
             <p>{t("recommendedModalIntro")}</p>
-            <p className="text-base text-slate-400">{t("recommendedModalHint")}</p>
+            <p className="text-base">{t("recommendedModalHint")}</p>
           </div>
 
           <div className="overflow-hidden rounded-2xl border border-violet-500/20">

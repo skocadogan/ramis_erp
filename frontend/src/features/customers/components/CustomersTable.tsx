@@ -148,14 +148,14 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
         <div className="flex items-center gap-2">
           <button
             onClick={handleExportExcel}
-            className="flex items-center gap-1.5 rounded-lg border border-border px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 border-border bg-muted text-foreground dark:hover:bg-slate-750 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-border px-3.5 py-1.5 text-sm font-medium hover: border-border bg-muted text-foreground dark:hover: transition-colors"
           >
             <FileDown size={15} />
             {t("messages.exportExcel")}
           </button>
           <button
             onClick={handleExportPdf}
-            className="flex items-center gap-1.5 rounded-lg border border-border px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 border-border bg-muted text-foreground dark:hover:bg-slate-750 transition-colors"
+            className="flex items-center gap-1.5 rounded-lg border border-border px-3.5 py-1.5 text-sm font-medium hover: border-border bg-muted text-foreground dark:hover: transition-colors"
           >
             <FileDown size={15} />
             {t("messages.exportPdf")}
@@ -249,7 +249,7 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
               <>
                 <td className="px-5 py-3.5">
                   <div className="flex items-center gap-3">
-                    <div className="h-9 w-9 rounded-full bg-slate-100 flex items-center justify-center text-sm font-semibold text-slate-600 bg-muted text-muted-foreground">
+                    <div className="h-9 w-9 rounded-full flex items-center justify-center text-sm font-semibold bg-muted text-muted-foreground">
                       {c.name.charAt(0).toUpperCase()}
                     </div>
                     <span className="font-medium text-foreground">{c.name}</span>
@@ -271,7 +271,7 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
                   <div className="flex items-center justify-end gap-1.5">
                     <button
                       onClick={() => onView(c)}
-                      className="p-2 rounded-lg hover:bg-slate-100 text-muted-foreground hover:text-slate-700 dark:hover:bg-slate-800"
+                      className="p-2 rounded-lg hover: text-muted-foreground hover: dark:hover:"
                       title={t("detailTitle")}
                     >
                       <Eye size={15} />
@@ -280,7 +280,7 @@ export function CustomersTable({ onEdit, onView, onAdd, refreshTrigger }: Custom
                       <>
                         <button
                           onClick={() => onEdit(c)}
-                          className="p-2 rounded-lg hover:bg-slate-100 text-muted-foreground hover:text-blue-600 dark:hover:bg-slate-800"
+                          className="p-2 rounded-lg hover: text-muted-foreground hover:text-blue-600 dark:hover:"
                           title={t("edit")}
                         >
                           <Edit size={15} />

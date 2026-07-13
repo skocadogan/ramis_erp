@@ -76,7 +76,7 @@ export function TableActionsMenu({
         >
             <DropdownMenu>
                 <DropdownMenuTrigger
-                    className="p-1.5 rounded-md text-muted-foreground hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors flex items-center justify-center"
+                    className="p-1.5 rounded-md text-muted-foreground hover: hover: dark:hover: transition-colors flex items-center justify-center"
                     aria-label={t('viewDetails')}
                 >
                     <MoreHorizontal size={18} />

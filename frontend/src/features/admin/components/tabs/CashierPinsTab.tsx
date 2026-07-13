@@ -149,7 +149,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
       </div>
 
       {(isLoading || (isAssignmentLoading && userId)) && (
-        <div className="flex items-center gap-2 rounded-md border border-border bg-slate-50 px-3 py-2 text-sm text-slate-600 border-border bg-muted/80 text-muted-foreground">
+        <div className="flex items-center gap-2 rounded-md border border-border px-3 py-2 text-sm border-border bg-muted/80 text-muted-foreground">
           <Loader2 className="h-4 w-4 shrink-0 animate-spin text-blue-600 dark:text-blue-400" />
           {t("common.loading")}
         </div>
@@ -158,7 +158,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
       <div className="grid gap-4 lg:grid-cols-2">
         {/* POS Terminals Checkbox List */}
         <section className="overflow-hidden rounded-lg border border-border border-border bg-card">
-          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
+          <div className="flex flex-col gap-2 border-b border-border px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
              
               {t("assignments.cashierPin.posTitle")}
@@ -186,7 +186,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
                   "rounded-md px-2.5 py-1 text-xs font-medium transition-colors",
                   posTerminals.length === 0 || posIds.length === 0
                     ? "cursor-not-allowed text-muted-foreground"
-                    : "text-slate-600 hover:bg-slate-100 dark:text-muted-foreground dark:hover:bg-slate-800"
+                    : " hover: dark:text-muted-foreground dark:hover:"
                 )}
               >
                 {t("assignments.common.deselectAll")}
@@ -202,7 +202,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
               <ul className="space-y-1">
                 {posTerminals.map((p) => (
                   <li key={p.id}>
-                    <Label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 hover:bg-slate-50 dark:hover:bg-slate-800/60">
+                    <Label className="flex cursor-pointer items-center gap-3 rounded-md px-2 py-2 hover: dark:hover:/60">
                       <Checkbox
                         checked={posIds.includes(p.id)}
                         onCheckedChange={() => togglePos(p.id)}
@@ -216,14 +216,14 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
               </ul>
             )}
           </div>
-          <div className="border-t border-border bg-slate-50/80 px-4 py-2 text-xs text-muted-foreground border-border bg-muted/50 dark:text-muted-foreground">
+          <div className="border-t border-border /80 px-4 py-2 text-xs text-muted-foreground border-border bg-muted/50 dark:text-muted-foreground">
             {t("assignments.cashierPin.posSelected", { count: posIds.length, total: posTerminals.length })}
           </div>
         </section>
 
         {/* PIN Configuration Section */}
         <section className="overflow-hidden rounded-lg border border-border border-border bg-card">
-          <div className="flex flex-col gap-2 border-b border-border bg-slate-50 px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
+          <div className="flex flex-col gap-2 border-b border-border px-4 py-2.5 sm:flex-row sm:items-center sm:justify-between border-border bg-muted/80">
             <h3 className="flex items-center gap-2 text-sm font-semibold text-foreground">
              
               {t("assignments.cashierPin.pinTitle")}
@@ -262,7 +262,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
                   type="button"
                   disabled={!userId}
                   onClick={() => handleNumpadPress(num.toString())}
-                  className="flex h-12 items-center justify-center rounded-lg border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex h-12 items-center justify-center rounded-lg border border-border hover:bg-secondary dark:hover: font-semibold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {num}
                 </button>
@@ -279,7 +279,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
                 type="button"
                 disabled={!userId}
                 onClick={() => handleNumpadPress("0")}
-                className="flex h-12 items-center justify-center rounded-lg border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex h-12 items-center justify-center rounded-lg border border-border hover:bg-secondary dark:hover: font-semibold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 0
               </button>
@@ -287,7 +287,7 @@ export function CashierPinsTab({ branches }: { branches: Branch[] }) {
                 type="button"
                 disabled={!userId || !pin}
                 onClick={() => handleNumpadPress("back")}
-                className="flex h-12 items-center justify-center rounded-lg border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="flex h-12 items-center justify-center rounded-lg border border-border hover:bg-secondary dark:hover: font-semibold text-lg transition-all active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Delete size={18} className="text-muted-foreground" />
               </button>

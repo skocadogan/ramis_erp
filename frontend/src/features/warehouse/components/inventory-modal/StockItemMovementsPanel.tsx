@@ -42,7 +42,7 @@ export function StockItemMovementsPanel({
 
   if (isLoading) {
     return (
-      <div className="rounded-lg border border-border bg-slate-50/80 px-4 py-8 text-center text-sm text-muted-foreground border-border bg-muted/40">
+      <div className="rounded-lg border border-border /80 px-4 py-8 text-center text-sm text-muted-foreground border-border bg-muted/40">
         {t("movements.loading")}
       </div>
     )
@@ -57,7 +57,7 @@ export function StockItemMovementsPanel({
   }
 
   return (
-    <div className="space-y-3 rounded-lg border border-border bg-slate-50/50 p-4 border-border bg-muted/30">
+    <div className="space-y-3 rounded-lg border border-border /50 p-4 border-border bg-muted/30">
       <label className="flex cursor-pointer items-center gap-2 text-sm text-foreground">
         <input
           type="checkbox"
@@ -88,7 +88,7 @@ export function StockItemMovementsPanel({
               </tr>
             ) : (
               filtered.map((m) => (
-                <tr key={m.id} className="hover:bg-white/60 dark:hover:bg-slate-900/40">
+                <tr key={m.id} className="hover:bg-white/60 dark:hover:/40">
                   <td className="whitespace-nowrap px-2 py-2 text-muted-foreground">{formatDate(m.created_at)}</td>
                   <td className="px-2 py-2 text-foreground">{m.warehouse_name ?? "—"}</td>
                   <td className="px-2 py-2">

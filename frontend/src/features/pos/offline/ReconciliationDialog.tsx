@@ -55,7 +55,7 @@ function QueueRow({
           <p className="truncate text-sm font-semibold text-foreground">{op.label}</p>
           <p className="text-xs text-muted-foreground">{statusLabel(t, op.status)}</p>
         </div>
-        <span className="shrink-0 rounded-full bg-slate-100 px-2 py-0.5 text-2xs font-bold uppercase tracking-wide text-slate-600 bg-muted text-muted-foreground">
+        <span className="shrink-0 rounded-full px-2 py-0.5 text-2xs font-bold uppercase tracking-wide bg-muted text-muted-foreground">
           {op.type.replace("_", " ")}
         </span>
       </div>
@@ -149,7 +149,7 @@ export function ReconciliationDialog({
 
         <div
           ref={scrollRef}
-          className="min-h-[200px] flex-1 overflow-y-auto rounded-lg border border-border bg-slate-50/50 p-2 border-border bg-card/40"
+          className="min-h-[200px] flex-1 overflow-y-auto rounded-lg border border-border /50 p-2 border-border bg-card/40"
         >
           {operations.length === 0 ? (
             <p className="p-6 text-center text-sm text-muted-foreground">{t("dialog.empty")}</p>

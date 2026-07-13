@@ -65,7 +65,7 @@ export function PrepRulesTable({
   return (
     <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
       {rules.length > 0 && (
-        <div className="bg-slate-50/50 bg-muted/50 p-2 border-b border-slate-100 border-border shrink-0">
+        <div className="/50 bg-muted/50 p-2 border-b border-slate-100 border-border shrink-0">
           <h5 className="text-2xs font-bold uppercase text-muted-foreground px-2">
             {t("management.rulesSectionTitle", { count: rules.length })}
           </h5>
@@ -84,7 +84,7 @@ export function PrepRulesTable({
         header={
           rules.length > 0 ? (
             <thead className={virtualTableStickyHeadClass}>
-              <tr className="text-xs font-bold text-slate-500">
+              <tr className="text-xs font-bold">
                 <th className="px-4 py-2 text-left font-bold">
                   {t("management.columns.rules.nameMatch")}
                 </th>
@@ -118,7 +118,7 @@ export function PrepRulesTable({
         renderRow={(rule) => (
           <>
             <td className="px-4 py-3 align-middle">
-              <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
+              <h4 className="text-sm font-bold dark:text-white leading-none">
                 {rule.title}
               </h4>
               <p className="text-2xs font-medium text-muted-foreground uppercase tracking-tighter mt-1">
@@ -135,13 +135,13 @@ export function PrepRulesTable({
                   "px-2 py-0.5 rounded-full inline-flex items-center gap-1.5",
                   rule.is_active
                     ? "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400"
-                    : "bg-slate-50 text-muted-foreground bg-muted/50 dark:text-muted-foreground",
+                    : " text-muted-foreground bg-muted/50 dark:text-muted-foreground",
                 )}
               >
                 <div
                   className={cn(
                     "w-1.5 h-1.5 rounded-full",
-                    rule.is_active ? "bg-emerald-500" : "bg-slate-300 bg-accent",
+                    rule.is_active ? "bg-emerald-500" : " bg-accent",
                   )}
                 />
                 <span className="text-2xs font-bold">
@@ -153,7 +153,7 @@ export function PrepRulesTable({
             </td>
             <td className="px-4 py-3 text-right align-middle">
               <DropdownMenu>
-                <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover:bg-slate-100 transition-colors outline-none">
+                <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover: transition-colors outline-none">
                   <MoreVertical size={14} />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
@@ -188,7 +188,7 @@ export function PrepRulesTable({
                   className="hover:bg-purple-50/30 dark:hover:bg-purple-900/10 transition-colors"
                 >
                   <td className="px-4 py-3 align-middle w-[42%]">
-                    <h4 className="text-sm font-bold text-slate-800 dark:text-white">
+                    <h4 className="text-sm font-bold dark:text-white">
                       {t("management.prepForProduct", { product: disc.product_name })}
                     </h4>
                     <p className="text-2xs font-medium text-purple-500 uppercase tracking-tighter mt-1">

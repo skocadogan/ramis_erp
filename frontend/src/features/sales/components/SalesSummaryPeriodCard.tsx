@@ -46,7 +46,7 @@ const PAYMENT_ROW_STYLES: Record<string, string> = {
     CASH:
         'border-emerald-200 bg-emerald-50/90 dark:border-emerald-800/70 dark:bg-emerald-950/35',
     CARD: 'border-blue-200 bg-blue-50/90 dark:border-blue-800/70 dark:bg-blue-950/35',
-    OTHER: 'border-border bg-slate-100/90 border-border bg-muted/80',
+    OTHER: 'border-border /90 border-border bg-muted/80',
 };
 
 const PAYMENT_ACCENT: Record<string, string> = {
@@ -120,7 +120,7 @@ export const SalesSummaryPeriodCard = memo(({
             <button
                 type="button"
                 onClick={() => setExpanded(!expanded)}
-                className="flex w-full items-start justify-between gap-2 text-left rounded-lg -m-1 p-1 transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
+                className="flex w-full items-start justify-between gap-2 text-left rounded-lg -m-1 p-1 transition-colors hover:/80 dark:hover:/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/30"
                 aria-expanded={expanded}
             >
                 <div className="min-w-0 flex-1">
@@ -152,14 +152,14 @@ export const SalesSummaryPeriodCard = memo(({
                 <>
                     <dl className="mb-1 mt-1 space-y-1.5">
                         <div className="flex items-center justify-between gap-2 text-sm">
-                            <dt className="font-medium text-slate-600 text-muted-foreground">{t("summaryCard.tableGross")}</dt>
+                            <dt className="font-medium text-muted-foreground">{t("summaryCard.tableGross")}</dt>
                             <dd className="font-semibold tabular-nums text-foreground">
                                 {formatAmount(gross - num(data.takeaway?.total), canViewAmounts)}
                             </dd>
                         </div>
                         {data.takeaway && data.takeaway.count > 0 && (
                             <div className="flex items-center justify-between gap-2 text-sm">
-                                <dt className="font-medium text-slate-600 text-muted-foreground">{t("summaryCard.takeawayGross")}</dt>
+                                <dt className="font-medium text-muted-foreground">{t("summaryCard.takeawayGross")}</dt>
                                 <dd className="font-semibold tabular-nums text-foreground">
                                     {formatAmount(data.takeaway.total, canViewAmounts)}</dd>
                             </div>
@@ -174,7 +174,7 @@ export const SalesSummaryPeriodCard = memo(({
                         )}
                         <div className="flex items-center justify-between gap-2 border-t border-border pt-1 text-sm border-border">
                             <dt className="font-bold text-foreground">{t("summaryCard.netGain")}</dt>
-                            <dd className="font-bold tabular-nums text-slate-900 text-foreground leading-tight">
+                            <dd className="font-bold tabular-nums text-foreground leading-tight">
                                 {formatAmount(net, canViewAmounts)}
                             </dd>
                         </div>
@@ -277,8 +277,8 @@ export function SalesSummaryPeriodCardSkeleton({ className = '' }: SalesSummaryP
         <div
             className={`rounded-xl border border-border bg-muted/30 p-4 ${className}`}
         >
-            <div className="h-3 w-20 bg-slate-200 bg-accent rounded mb-3" />
-            <div className="h-7 w-28 bg-slate-200 bg-accent rounded mb-2" />
+            <div className="h-3 w-20 bg-accent rounded mb-3" />
+            <div className="h-7 w-28 bg-accent rounded mb-2" />
             <div className="h-3 w-24 bg-muted rounded mb-4" />
             <div className="space-y-2">
                 <div className="h-10 bg-muted rounded-lg" />

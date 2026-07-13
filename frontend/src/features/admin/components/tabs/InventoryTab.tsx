@@ -58,13 +58,13 @@ export function InventoryTab({
         {/* Table skeleton */}
         <div className="rounded-2xl border border-border shadow-sm overflow-hidden bg-card border-border">
           <table className="w-full text-sm">
-            <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+            <thead className="border-b border-border bg-muted border-border">
               <tr>
-                <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.item')}</th>
-                <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.sku')}</th>
-                <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.current')}</th>
-                <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.min')}</th>
-                <th className="text-center px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.status')}</th>
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.item')}</th>
+                <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.sku')}</th>
+                <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.current')}</th>
+                <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.min')}</th>
+                <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.status')}</th>
               </tr>
             </thead>
             <tbody>
@@ -106,7 +106,7 @@ export function InventoryTab({
             placeholder={t('inventory.searchPlaceholder')}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/10 bg-card border-border text-foreground dark:placeholder:text-slate-500"
+            className="w-full pl-9 pr-4 py-2 border border-border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-slate-900/10 bg-card border-border text-foreground dark:placeholder:"
           />
         </div>
 
@@ -150,25 +150,25 @@ export function InventoryTab({
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.item')}</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.sku')}</th>
-              <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.current')}</th>
-              <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.min')}</th>
-              <th className="text-center px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.status')}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.item')}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.sku')}</th>
+              <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.current')}</th>
+              <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.min')}</th>
+              <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.status')}</th>
             </tr>
           </thead>
         }
         renderRow={(item) => (
           <>
-            <td className="px-4 py-3 font-medium text-slate-800 text-foreground">{item.name}</td>
-            <td className="px-4 py-3 font-mono text-xs text-slate-600 text-muted-foreground">{item.sku}</td>
-            <td className="px-4 py-3 text-right font-semibold text-slate-800 text-foreground">
+            <td className="px-4 py-3 font-medium text-foreground">{item.name}</td>
+            <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{item.sku}</td>
+            <td className="px-4 py-3 text-right font-semibold text-foreground">
               {item.current_quantity.toFixed(2)}
-              <span className="text-xs font-normal text-slate-800 text-foreground ml-0.5">{item.unit}</span>
+              <span className="text-xs font-normal text-foreground ml-0.5">{item.unit}</span>
             </td>
-            <td className="px-4 py-3 text-right text-slate-800 text-foreground">
+            <td className="px-4 py-3 text-right text-foreground">
               {formatMinimumQuantityDisplay(item.minimum_quantity)}
-              <span className="text-xs font-normal text-slate-800 text-foreground ml-0.5">{item.unit}</span>
+              <span className="text-xs font-normal text-foreground ml-0.5">{item.unit}</span>
             </td>
             <td className="px-4 py-3 text-center">
               {item.is_low_stock ? (
@@ -188,11 +188,11 @@ export function InventoryTab({
             <table className="w-full text-sm">
               <thead className={virtualTableStickyHeadClass}>
                 <tr>
-                  <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.item')}</th>
-                  <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.sku')}</th>
-                  <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.current')}</th>
-                  <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.min')}</th>
-                  <th className="text-center px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('inventory.table.status')}</th>
+                  <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.item')}</th>
+                  <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.sku')}</th>
+                  <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.current')}</th>
+                  <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.min')}</th>
+                  <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t('inventory.table.status')}</th>
                 </tr>
               </thead>
               <tbody>

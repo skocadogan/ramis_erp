@@ -117,7 +117,7 @@ function ReservationsPageContent() {
                                     <button
                                         type="button"
                                         onClick={() => setAlertSettingsOpen(true)}
-                                        className="rounded-md p-1.5 text-muted-foreground hover:bg-slate-100 hover:text-slate-700 transition-colors dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                                        className="rounded-md p-1.5 text-muted-foreground hover: hover: transition-colors dark:hover: dark:hover:"
                                         title={t('alertSettings.title')}
                                     >
                                         <Settings size={16} />
@@ -152,7 +152,7 @@ function ReservationsPageContent() {
                                 type="button"
                                 onClick={() => void refetch()}
                                 disabled={isLoading || noBranch}
-                                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm text-slate-600 transition-colors hover:bg-slate-50 disabled:opacity-40 border-border text-muted-foreground dark:hover:bg-slate-800"
+                                className="flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-sm transition-colors hover: disabled:opacity-40 border-border text-muted-foreground dark:hover:"
                             >
                                 <RefreshCw size={13} className={isLoading ? 'animate-spin' : ''} />
                                 {t('page.refresh')}
@@ -175,7 +175,7 @@ function ReservationsPageContent() {
                     ) : tables.length === 0 ? (
                         <div className="rounded-xl border border-dashed border-border py-16 text-center border-border">
                             <CalendarClock className="mx-auto mb-3 h-10 w-10 text-muted-foreground" />
-                            <p className="text-sm font-medium text-slate-600 text-muted-foreground">
+                            <p className="text-sm font-medium text-muted-foreground">
                                 {t('page.emptyTablesTitle')}
                             </p>
                             <p className="mt-1 text-xs text-muted-foreground">
@@ -243,7 +243,7 @@ function ReservationsPageContent() {
                                                 type="button"
                                                 onClick={() => setEditTable(table)}
                                                 disabled={isPending}
-                                                className="flex items-center justify-center gap-1 rounded-lg border border-border px-2 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+                                                className="flex items-center justify-center gap-1 rounded-lg border border-border px-2 py-1.5 text-xs font-medium hover: border-input bg-muted text-foreground dark:hover:"
                                             >
                                                 <Pencil size={14} />
                                                 {t('actions.edit')}

@@ -30,14 +30,14 @@ interface SalesTableProps {
 const PAYMENT_ROW_COLOR: Record<string, string> = {
     CASH: 'hover:bg-emerald-50/60 dark:hover:bg-emerald-900/10',
     CARD: 'hover:bg-blue-50/60 dark:hover:bg-blue-900/10',
-    OTHER: 'hover:bg-slate-50/60 dark:hover:bg-slate-800/30',
+    OTHER: 'hover:/60 dark:hover:/30',
     CREDIT: 'hover:bg-violet-50/60 dark:hover:bg-violet-900/10',
 };
 
 const PAYMENT_BADGE: Record<string, string> = {
     CASH: 'bg-emerald-50 text-emerald-700 border-emerald-200 dark:bg-emerald-900/20 dark:text-emerald-400 dark:border-emerald-700/40',
     CARD: 'bg-blue-50 text-blue-700 border-blue-200 dark:bg-blue-900/20 dark:text-blue-400 dark:border-blue-700/40',
-    OTHER: 'bg-slate-100 text-slate-600 border-border bg-muted dark:text-muted-foreground border-border',
+    OTHER: '  border-border bg-muted dark:text-muted-foreground border-border',
     CREDIT: 'bg-violet-50 text-violet-700 border-violet-200 dark:bg-violet-900/20 dark:text-violet-400 dark:border-violet-700/40',
 };
 

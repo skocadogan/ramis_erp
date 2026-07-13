@@ -294,7 +294,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     if (showTerminalFlow && !posTerminalsLoading && activePosTerminals.length === 0) {
       return (
         <AuthGuard module={variant}>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
+          <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-card">
             <MonitorSmartphone className="mb-3 h-12 w-12 text-amber-500" />
             <p className="mb-2 max-w-md text-center text-sm font-medium text-foreground">
               {tPosPage("noTerminal")}
@@ -326,7 +326,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     if (showTerminalFlow && activePosTerminals.length > 0) {
       return (
         <AuthGuard module={variant}>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
+          <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-card">
             <MonitorSmartphone className="mb-4 h-14 w-14 text-blue-600" />
             <h2 className="mb-2 text-lg font-bold text-foreground">
               {tPosPage("selectTerminal")}
@@ -338,7 +338,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                   key={terminal.id}
                   type="button"
                   onClick={() => persistTerminalSelection(terminal.code, terminal.id)}
-                  className="flex items-start justify-between gap-3 rounded-xl border border-border px-4 py-3 text-left text-sm font-semibold text-slate-800 shadow-sm transition-colors hover:border-blue-400 hover:bg-blue-50/80 border-border bg-card text-foreground dark:hover:bg-slate-800"
+                  className="flex items-start justify-between gap-3 rounded-xl border border-border px-4 py-3 text-left text-sm font-semibold shadow-sm transition-colors hover:border-blue-400 hover:bg-blue-50/80 border-border bg-card text-foreground dark:hover:"
                 >
                   <span className="min-w-0">
                     <span className="block">{terminal.name}</span>
@@ -381,7 +381,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     if (variant === "pos") {
       return (
         <AuthGuard module={variant}>
-          <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
+          <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-card">
             <p className="mb-4 max-w-md text-center text-sm text-muted-foreground">
               {t("shiftRequired")}
             </p>
@@ -401,7 +401,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               <button
                 type="button"
                 onClick={() => persistTerminalSelection("", null)}
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 text-sm font-semibold text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-border bg-card text-foreground dark:hover:bg-slate-800"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-xl border border-slate-200 px-4 text-sm font-semibold shadow-sm transition-colors hover: border-border bg-card text-foreground dark:hover:"
               >
                 <MonitorSmartphone className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 <span>{t("selectTerminal")}</span>
@@ -416,7 +416,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     /* -- Waiter: No shift (shift closed screen) -- */
     return (
       <AuthGuard module={variant}>
-        <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 p-6 bg-card">
+        <div className="flex min-h-screen flex-col items-center justify-center p-6 bg-card">
           <AlertCircle className="mb-4 h-14 w-14 text-amber-500" />
           <h2 className="mb-2 text-xl font-bold tracking-tight text-foreground">
             {username ? `${username} — ${t("shift.closed")}` : t("shift.closed")}

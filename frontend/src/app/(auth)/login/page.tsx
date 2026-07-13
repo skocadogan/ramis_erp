@@ -450,7 +450,7 @@ export default function LoginPage() {
                       type="button"
                       disabled={isLoading}
                       onClick={() => handleNumpadPress(num.toString())}
-                      className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
+                      className="flex h-14 w-14 items-center justify-center rounded-full border border-border hover:bg-secondary dark:hover: font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
                     >
                       {num}
                     </button>
@@ -467,7 +467,7 @@ export default function LoginPage() {
                     type="button"
                     disabled={isLoading}
                     onClick={() => handleNumpadPress("0")}
-                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
+                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border hover:bg-secondary dark:hover: font-semibold text-xl transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
                   >
                     0
                   </button>
@@ -475,7 +475,7 @@ export default function LoginPage() {
                     type="button"
                     disabled={isLoading || !pin}
                     onClick={() => handleNumpadPress("back")}
-                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border bg-slate-50 hover:bg-secondary dark:hover:bg-slate-700 font-semibold text-lg transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
+                    className="flex h-14 w-14 items-center justify-center rounded-full border border-border hover:bg-secondary dark:hover: font-semibold text-lg transition-all active:scale-90 disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
                   >
                     <Delete size={18} className="text-muted-foreground" />
                   </button>

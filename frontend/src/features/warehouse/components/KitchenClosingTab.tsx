@@ -158,9 +158,9 @@ export function KitchenClosingTab({ branchId }: { branchId?: string }) {
                 </tr>
               ) : (
                 items.map((i) => (
-                  <tr key={i.stock_item_id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                  <tr key={i.stock_item_id} className="hover:/50 dark:hover:/30 transition-colors">
                     <td className="px-4 py-3">
-                      <div className="font-medium text-slate-900 text-foreground">{i.stock_item_name}</div>
+                      <div className="font-medium text-foreground">{i.stock_item_name}</div>
                       <div className="text-xs text-muted-foreground">{i.stock_item_sku}</div>
                     </td>
                     <td className="px-4 py-3 text-right text-foreground">
@@ -214,12 +214,12 @@ export function KitchenClosingTab({ branchId }: { branchId?: string }) {
                     </tr>
                   ) : historyData?.results && historyData.results.length > 0 ? (
                     historyData.results.map((m) => (
-                      <tr key={m.id} className="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors">
+                      <tr key={m.id} className="hover:/50 dark:hover:/30 transition-colors">
                         <td className="px-4 py-3 whitespace-nowrap">
                           {format(new Date(m.created_at), "dd.MM.yyyy HH:mm")}
                         </td>
                         <td className="px-4 py-3">
-                          <div className="font-medium text-slate-900 text-foreground">{m.stock_item_name}</div>
+                          <div className="font-medium text-foreground">{m.stock_item_name}</div>
                         </td>
                         <td className="px-4 py-3 text-right font-medium text-red-600">
                           {formatQuantityWithUnit(m.quantity, m.unit)}

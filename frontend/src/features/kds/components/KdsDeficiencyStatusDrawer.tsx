@@ -566,11 +566,11 @@ export function KdsDeficiencyStatusDrawer({
                 <span className="text-foreground">
                   {translateDeficiencyStatus(detailReport.status)}
                 </span>
-                <span className="mx-1.5 text-slate-700">·</span>
+                <span className="mx-1.5">·</span>
                 <span>{formatDate(detailReport.created_at)}</span>
                 {detailReport.target_warehouse_name ? (
                   <>
-                    <span className="mx-1.5 text-slate-700">·</span>
+                    <span className="mx-1.5">·</span>
                     <span>{detailReport.target_warehouse_name}</span>
                   </>
                 ) : null}

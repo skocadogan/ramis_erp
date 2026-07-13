@@ -108,10 +108,9 @@ export const InventoryStats = memo(
                 key={card.id}
                 onClick={card.clickable ? onLowStockClick : undefined}
                 className={`bg-card rounded-md border flex items-center transition-all shrink-0
-                ${compact ? "h-9 gap-1.5 px-2" : "px-3 py-2.5 rounded-lg gap-3"}
-                ${card.clickable ? "cursor-pointer hover:shadow-md active:scale-[0.98]" : ""}
-                ${card.active ? "border-red-200 dark:border-red-900/50 ring-1 ring-red-500/20" : "border-border"}
-              `}
+ ${compact ? "h-9 gap-1.5 px-2" : "px-3 py-2.5 rounded-lg gap-3"}
+ ${card.clickable ? "cursor-pointer hover:shadow-md active:scale-[0.98]" : ""}
+ ${card.active ? "border-red-200 dark:border-red-900/50 ring-1 ring-red-500/20" : "border-border"}`}
               >
                 <div
                   className={`${card.iconBg} rounded ${card.iconColor} shrink-0 ${compact ? "p-1" : "p-2 rounded-md"}`}
@@ -130,7 +129,7 @@ export const InventoryStats = memo(
                             e.stopPropagation()
                             setInfoKey(card.id === "value" ? "value" : "approx")
                           }}
-                          className="shrink-0 rounded p-0.5 text-muted-foreground transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                          className="shrink-0 rounded p-0.5 text-muted-foreground transition-colors hover: hover: dark:hover: dark:hover:"
                           aria-label={`${card.label} ${t("stats.infoAriaSuffix")}`}
                         >
                           <Info className="size-3" />
@@ -153,7 +152,7 @@ export const InventoryStats = memo(
                               e.stopPropagation()
                               setInfoKey(card.id === "value" ? "value" : "approx")
                             }}
-                            className="shrink-0 rounded p-0.5 text-muted-foreground transition-colors hover:bg-slate-100 hover:text-slate-600 dark:hover:bg-slate-800 dark:hover:text-slate-300"
+                            className="shrink-0 rounded p-0.5 text-muted-foreground transition-colors hover: hover: dark:hover: dark:hover:"
                             aria-label={`${card.label} ${t("stats.infoAriaSuffix")}`}
                           >
                             <Info className="size-3.5" />

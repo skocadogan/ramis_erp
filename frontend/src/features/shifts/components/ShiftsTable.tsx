@@ -73,7 +73,7 @@ const ShiftRow = memo(function ShiftRow({
     <tr
       data-index={index}
       ref={measureElement}
-      className="border-b border-slate-100 transition-colors hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50"
+      className="border-b border-slate-100 transition-colors hover:/50 border-border dark:hover:/50"
     >
       <td className="px-3 py-2">
         {shift.status === "OPEN" ? (
@@ -81,7 +81,7 @@ const ShiftRow = memo(function ShiftRow({
             {t("table.badgeOpen")}
           </span>
         ) : (
-          <span className="inline-flex items-center rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 bg-accent text-muted-foreground">
+          <span className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium bg-accent text-muted-foreground">
             {t("table.badgeClosed")}
           </span>
         )}
@@ -93,7 +93,7 @@ const ShiftRow = memo(function ShiftRow({
       <td className="px-3 py-2 text-foreground">
         {shift.closed_at ? formatDate(shift.closed_at) : t("page.dash")}
       </td>
-      <td className="px-3 py-2 text-right font-medium tabular-nums text-slate-800 text-foreground">
+      <td className="px-3 py-2 text-right font-medium tabular-nums text-foreground">
         {formatAmount(Number(shift.expected_cash ?? 0), canViewAmounts)}
       </td>
       <td className="px-3 py-2 text-right tabular-nums text-foreground">
@@ -117,14 +117,14 @@ const ShiftRow = memo(function ShiftRow({
           <button
             type="button"
             onClick={() => onLoadZ(shift.id)}
-            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
           >
             <FileBarChart size={14} /> {t("actions.zReport")}
           </button>
           <button
             type="button"
             onClick={() => onLoadCash(shift.id)}
-            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+            className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
           >
             <FileText size={14} className="text-indigo-600 dark:text-indigo-400" />{" "}
             {t("actions.cashReport")}
@@ -134,14 +134,14 @@ const ShiftRow = memo(function ShiftRow({
               <button
                 type="button"
                 onClick={() => onExpense(shift.id)}
-                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
               >
                 <PlusCircle size={14} /> {t("actions.expense")}
               </button>
               <button
                 type="button"
                 onClick={() => onCashMovement(shift.id)}
-                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+                className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
               >
                 <ArrowUpCircle size={14} className="text-emerald-500" /> {t("actions.cashMovement")}
               </button>
@@ -151,7 +151,7 @@ const ShiftRow = memo(function ShiftRow({
             <button
               type="button"
               onClick={() => onEdit(shift)}
-              className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium text-slate-700 shadow-sm transition-colors hover:bg-slate-50 border-input bg-muted text-foreground dark:hover:bg-slate-700"
+              className="inline-flex items-center gap-1 rounded-md border border-border px-2 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-input bg-muted text-foreground dark:hover:"
             >
               <Edit2 size={14} /> {t("actions.edit")}
             </button>
@@ -160,7 +160,7 @@ const ShiftRow = memo(function ShiftRow({
             <button
               type="button"
               onClick={() => onClose(shift)}
-              className="inline-flex items-center gap-1 rounded-md bg-slate-900 px-2 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-white"
+              className="inline-flex items-center gap-1 rounded-md px-2 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover: dark:hover:bg-white"
             >
               <Lock size={14} /> {t("actions.closeShift")}
             </button>
@@ -228,7 +228,7 @@ export const ShiftsTable = memo(function ShiftsTable({
   return (
     <div ref={containerRef} className="max-h-[min(70vh,720px)] overflow-auto bg-card">
       <table className="w-full text-sm">
-        <thead className="sticky top-0 z-10 border-b border-border bg-slate-50 border-border bg-muted">
+        <thead className="sticky top-0 z-10 border-b border-border border-border bg-muted">
           <tr>
             <th className="px-3 py-2 text-left text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               {t("table.status")}

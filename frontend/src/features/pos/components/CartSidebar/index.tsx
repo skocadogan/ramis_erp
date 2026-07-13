@@ -337,7 +337,7 @@ const CartSidebar = memo(function CartSidebar({
       >
         <div className="mb-4 flex shrink-0 items-center gap-2 border-b border-slate-100 pb-3 border-border">
           <ReceiptText size={20} className="text-blue-600 dark:text-blue-400" />
-          <h2 className="text-lg font-bold text-slate-800 text-foreground">
+          <h2 className="text-lg font-bold text-foreground">
             {selectedTable ? tCart("titleWithTable", { name: selectedDisplayName }) : tCart("title")}
           </h2>
         </div>
@@ -345,7 +345,7 @@ const CartSidebar = memo(function CartSidebar({
         <div className="flex flex-1 flex-col overflow-y-auto min-h-0 mb-4 pr-1 scrollbar-thin">
           {selectedTable ? (
             cart.length === 0 ? (
-              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 bg-slate-50/50 p-6 border-border bg-muted/40">
+              <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 /50 p-6 border-border bg-muted/40">
                 <span className="text-center text-sm font-medium leading-relaxed text-muted-foreground dark:text-muted-foreground">
                   {tCart("empty")}
                 </span>
@@ -354,7 +354,7 @@ const CartSidebar = memo(function CartSidebar({
               <CartItemRow cart={cart} onUpdateQuantity={handleUpdateQuantity} />
             )
           ) : (
-            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 bg-slate-50/50 p-6 border-border bg-muted/40">
+            <div className="flex flex-1 items-center justify-center rounded-xl border-2 border-dashed border-slate-100 /50 p-6 border-border bg-muted/40">
               <span className="text-center text-sm font-medium text-muted-foreground dark:text-muted-foreground">{tCart("selectTable")}</span>
             </div>
           )}
@@ -395,7 +395,7 @@ const CartSidebar = memo(function CartSidebar({
               {canForcePastCriticalStock ? tStock("criticalDesc") : tStock("warningDesc")}
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <ul className="max-h-[min(70vh,640px)] space-y-3 overflow-y-auto rounded-lg border border-border bg-slate-50/80 p-3 text-xs text-slate-700 border-border bg-card/50 text-muted-foreground">
+          <ul className="max-h-[min(70vh,640px)] space-y-3 overflow-y-auto rounded-lg border border-border /80 p-3 text-xs border-border bg-card/50 text-muted-foreground">
             {stockBlockIssues.map((i, idx) => {
               const isInsufficient = i.code === "INSUFFICIENT_STOCK" || i.code === "SOLD_OUT" || i.code === "LIMITED_EXCEEDED";
               const physicalQty = parseStockQty(i.physical);
@@ -503,7 +503,7 @@ const CartSidebar = memo(function CartSidebar({
                 {tAuth("confirm")}
               </AlertDialogAction>
             ) : (
-              <div className="flex items-center justify-center rounded-lg bg-slate-100 p-2 text-sub text-muted-foreground bg-muted">
+              <div className="flex items-center justify-center rounded-lg p-2 text-sub text-muted-foreground bg-muted">
                 {tAuth("noPermission")}
               </div>
             )}

@@ -81,7 +81,7 @@ export function TableCard({ table, canManage, onEdit, onDelete, onStatusChange, 
                     <div className="flex min-w-0 flex-1 items-center gap-2.5">
                         <TableShapeIcon shape={table.shape} size={table.size} cfg={cfg} />
                         <div className="min-w-0">
-                            <p className="text-base font-bold leading-tight text-slate-800 text-foreground truncate">{table.name}</p>
+                            <p className="text-base font-bold leading-tight text-foreground truncate">{table.name}</p>
                             <p className="truncate text-sub text-muted-foreground">{table.zone_name}</p>
                             {table.status === 'RESERVED' && table.reservation_info?.trim() && (
                                 <p className="mt-1 line-clamp-2 text-sub font-medium text-amber-800 dark:text-amber-200/90">
@@ -107,8 +107,8 @@ export function TableCard({ table, canManage, onEdit, onDelete, onStatusChange, 
                 </div>
 
                 {table.assigned_waiters && table.assigned_waiters.length > 0 && (
-                    <div className="flex items-center gap-1 text-2xs font-medium text-slate-500 text-muted-foreground bg-muted/40 rounded px-1.5 py-0.5 w-fit max-w-full">
-                        <User size={10} className="shrink-0 text-slate-400" />
+                    <div className="flex items-center gap-1 text-2xs font-medium text-muted-foreground bg-muted/40 rounded px-1.5 py-0.5 w-fit max-w-full">
+                        <User size={10} className="shrink-0" />
                         <span className="truncate" title={table.assigned_waiters.join(", ")}>
                             {table.assigned_waiters.join(", ")}
                         </span>

@@ -214,7 +214,7 @@ function TablesPageContent() {
                                     <button
                                         type="button"
                                         onClick={() => setSettingsOpen(true)}
-                                        className="rounded-md p-1.5 text-muted-foreground hover:bg-slate-100 hover:text-slate-700 transition-colors dark:hover:bg-slate-800 dark:hover:text-slate-200"
+                                        className="rounded-md p-1.5 text-muted-foreground hover: hover: transition-colors dark:hover: dark:hover:"
                                         title={t('settings.title')}
                                     >
                                         <Settings size={16} />
@@ -243,7 +243,7 @@ function TablesPageContent() {
                             <button
                                 onClick={() => void handleRefresh()}
                                 disabled={tablesLoading || zonesLoading || zonesSummaryLoading || noBranchContext}
-                                className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-slate-600 border border-border rounded-lg hover:bg-slate-50 disabled:opacity-40 transition-colors border-border text-muted-foreground dark:hover:bg-slate-800"
+                                className="flex items-center gap-1.5 px-3 py-1.5 text-sm border border-border rounded-lg hover: disabled:opacity-40 transition-colors border-border text-muted-foreground dark:hover:"
                             >
                                 <RefreshCw
                                     size={13}
@@ -255,7 +255,7 @@ function TablesPageContent() {
                                 <button
                                     type="button"
                                     onClick={() => setZoneManageOpen(true)}
-                                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-slate-700 border border-border rounded-lg hover:bg-slate-50 transition-colors bg-card border-input text-foreground dark:hover:bg-slate-800"
+                                    className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium border border-border rounded-lg hover: transition-colors bg-card border-input text-foreground dark:hover:"
                                 >
                                     <MapPinned size={15} />
                                     {tZones('title')}

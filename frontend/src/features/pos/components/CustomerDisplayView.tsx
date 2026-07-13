@@ -131,7 +131,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
     method === "CARD"
       ? "text-blue-400"
       : method === "OTHER"
-        ? "text-slate-300"
+        ? ""
         : method === "CREDIT"
           ? "text-violet-400"
           : "text-amber-400";
@@ -180,10 +180,10 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
       <div className={`flex-[3] flex flex-col h-full border-r border-border shadow-xl z-10 transition-all duration-700 ${isPayment ? 'grayscale-[0.2]' : ''}`}>
         <header className="sticky top-0 flex items-center justify-between border-b border-slate-100 p-4">
           <div>
-            <h1 className="text-xl font-bold text-slate-800 tracking-tight">{t("orderDetails")}</h1>
+            <h1 className="text-xl font-bold tracking-tight">{t("orderDetails")}</h1>
             {table ? (
                <p className="text-muted-foreground font-medium mt-0.5">
-                {table.name} <span className="mx-1 text-slate-300">•</span> {t("tableNo", { number: table.number })}
+                {table.name} <span className="mx-1">•</span> {t("tableNo", { number: table.number })}
               </p>
             ) : (
               <p className="text-muted-foreground font-medium mt-0.5">{t("checkCart")}</p>
@@ -196,8 +196,8 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
 
         <div className="flex-1 overflow-y-auto p-4 space-y-3">
           {cart.length === 0 ? (
-            <div className="h-full flex flex-col items-center justify-center text-slate-300 space-y-4">
-              <div className="w-24 h-24 rounded-full bg-slate-50 flex items-center justify-center border-2 border-dashed border-border">
+            <div className="h-full flex flex-col items-center justify-center space-y-4">
+              <div className="w-24 h-24 rounded-full flex items-center justify-center border-2 border-dashed border-border">
                 <Utensils className="h-10 w-10" />
               </div>
               <p className="text-xl font-medium">{t("emptyCart")}</p>
@@ -218,18 +218,18 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                   <div
                     key={item.cartId}
                     className={`flex items-center justify-between rounded-lg border p-3 transition-colors ${
-                      lineCancelled
-                        ? "border-rose-200/80 bg-rose-50/60 dark:border-rose-900/50 dark:bg-rose-950/25"
-                        : "border-slate-100 bg-slate-50"
-                    }`}
+ lineCancelled
+ ? "border-rose-200/80 bg-rose-50/60 dark:border-rose-900/50 dark:bg-rose-950/25"
+ : "border-slate-100 "
+ }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div
                         className={`h-9 w-9 shrink-0 rounded-md border flex items-center justify-center shadow-sm ${
-                          lineCancelled
-                            ? "border-rose-200 bg-white/90 text-rose-600 dark:border-rose-800 dark:bg-rose-950/40"
-                            : "border-border text-blue-600"
-                        }`}
+ lineCancelled
+ ? "border-rose-200 bg-white/90 text-rose-600 dark:border-rose-800 dark:bg-rose-950/40"
+ : "border-border text-blue-600"
+ }`}
                       >
                         <span className="text-base font-bold">{item.quantity}x</span>
                       </div>
@@ -237,10 +237,10 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         <div className="flex items-start gap-1.5 min-w-0">
                           <h3
                             className={`text-base font-bold break-words min-w-0 ${
-                              lineCancelled
-                                ? "text-slate-500 line-through decoration-rose-400 decoration-2"
-                                : "text-slate-800"
-                            }`}
+ lineCancelled
+ ? " line-through decoration-rose-400 decoration-2"
+ : ""
+ }`}
                           >
                             {item.product.name}
                           </h3>
@@ -257,10 +257,10 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         {caloriesLabel && (
                           <p
                             className={`mt-0.5 text-sm font-semibold tabular-nums ${
-                              lineCancelled
-                                ? "text-slate-400 line-through"
-                                : "text-amber-700"
-                            }`}
+ lineCancelled
+ ? " line-through"
+ : "text-amber-700"
+ }`}
                           >
                             {caloriesLabel}
                           </p>
@@ -268,10 +268,10 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         {item.selectedUnit && (
                           <p
                             className={`text-xs font-semibold uppercase tracking-wider mt-0 ${
-                              lineCancelled
-                                ? "text-rose-600/80 line-through"
-                                : "text-muted-foreground"
-                            }`}
+ lineCancelled
+ ? "text-rose-600/80 line-through"
+ : "text-muted-foreground"
+ }`}
                           >
                             {item.selectedUnit.name}
                           </p>
@@ -279,10 +279,10 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         {(item.selectedModifiers ?? []).length > 0 && (
                           <p
                             className={`text-xs font-medium mt-0 ${
-                              lineCancelled
-                                ? "text-rose-600/80 line-through"
-                                : "text-emerald-700 dark:text-emerald-400"
-                            }`}
+ lineCancelled
+ ? "text-rose-600/80 line-through"
+ : "text-emerald-700 dark:text-emerald-400"
+ }`}
                           >
                             * {modifiers.map(formatModifierLabel).join(", ")}
                           </p>
@@ -297,17 +297,17 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                     <div className="text-right shrink-0 pl-2">
                       <p
                         className={`text-lg font-bold ${
-                          lineCancelled
-                            ? "text-slate-400 line-through decoration-rose-300"
-                            : "text-slate-900"
-                        }`}
+ lineCancelled
+ ? " line-through decoration-rose-300"
+ : ""
+ }`}
                       >
                         {formatCurrency(lineTotal)}
                       </p>
                       <p
                         className={`text-xs font-medium ${
-                          lineCancelled ? "text-slate-400 line-through" : "text-muted-foreground"
-                        }`}
+ lineCancelled ? " line-through" : "text-muted-foreground"
+ }`}
                       >
                         {t("unitPrice", {
                           price: formatCurrency(effectiveUnitPrice),
@@ -381,7 +381,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
             <div className="space-y-3 bg-white/5 rounded-3xl p-6 border border-white/5">
               <div className="flex justify-between items-center text-muted-foreground font-bold uppercase tracking-widest text-xs">
                 <span>{t("subtotal")}</span>
-                <span className="text-slate-300">{formatCurrency(displaySubtotal)}</span>
+                <span className="">{formatCurrency(displaySubtotal)}</span>
               </div>
               <div className="flex justify-between items-center text-emerald-400 font-bold uppercase tracking-widest text-xs">
                 <span>{t("discount")}</span>
@@ -395,7 +395,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
             <ChevronRight className="h-4 w-4" />
           </div>
 
-          <div className="relative flex flex-col items-center justify-center gap-2 rounded-5xl border border-white/10 bg-slate-800/90 p-8 shadow-2xl">
+          <div className="relative flex flex-col items-center justify-center gap-2 rounded-5xl border border-white/10 /90 p-8 shadow-2xl">
             <span className="text-6xl sm:text-7xl font-bold tracking-tighter relative z-10 flex items-start">
               {formatCurrency(total)}
             </span>
@@ -418,7 +418,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
       )}
       {/* Success Overlay */}
       {successSignal && (
-        <div className="absolute inset-0 z-[100] flex animate-in items-center justify-center bg-slate-950/95 fade-in duration-500">
+        <div className="absolute inset-0 z-[100] flex animate-in items-center justify-center /95 fade-in duration-500">
           <div className="text-center space-y-8 max-w-2xl px-12 animate-in zoom-in-95 slide-in-from-bottom-10 duration-700">
             <div className="flex justify-center">
               <div className="h-40 w-40 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center relative">
@@ -432,7 +432,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                   ? (settings?.order_success_title ?? t("orderSuccess"))
                   : (settings?.payment_success_title ?? t("paymentSuccess"))}
               </h2>
-              <p className="text-2xl font-medium text-slate-300 leading-relaxed">
+              <p className="text-2xl font-medium leading-relaxed">
                 {successSignal === "ORDER"
                   ? (settings?.order_success_subtitle ?? t("orderSuccessDesc"))
                   : (settings?.payment_success_subtitle ?? t("paymentSuccessDesc"))}

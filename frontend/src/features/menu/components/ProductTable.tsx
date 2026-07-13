@@ -179,7 +179,7 @@ export default function ProductTable({
               <Tag size={15} />{t("productTable.discount")}
             </button>
             <button type="button" onClick={onBulkPrice}
-              className="flex items-center gap-1.5 rounded-md border border-border px-3.5 py-1.5 text-sm font-medium text-slate-700 hover:bg-slate-50 transition-all bg-muted border-input text-muted-foreground dark:hover:bg-slate-700">
+              className="flex items-center gap-1.5 rounded-md border border-border px-3.5 py-1.5 text-sm font-medium hover: transition-all bg-muted border-input text-muted-foreground dark:hover:">
               <TrendingUp size={15} />{t("productTable.bulkPrice")}
             </button>
             <button type="button" onClick={onAdd}
@@ -202,7 +202,7 @@ export default function ProductTable({
             strategy={verticalListSortingStrategy}
           >
             <table className="w-full text-sm">
-              <thead className="bg-slate-50 border-b border-border sticky top-0 bg-muted border-border z-10">
+              <thead className="border-b border-border sticky top-0 bg-muted border-border z-10">
                 <tr>
                   {canManage && <th className="w-8"></th>}
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("productTable.columns.product")}</th>
@@ -289,21 +289,21 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
   };
 
   return (
-    <tr ref={setNodeRef} style={style} className="group hover:bg-slate-50/50 dark:hover:bg-slate-800/50">
+    <tr ref={setNodeRef} style={style} className="group hover:/50 dark:hover:/50">
       {canManage && (
         <td className="pl-2 w-8">
-          <button {...attributes} {...listeners} className="p-1 text-slate-300 hover:text-muted-foreground cursor-grab active:cursor-grabbing">
+          <button {...attributes} {...listeners} className="p-1 hover:text-muted-foreground cursor-grab active:cursor-grabbing">
             <GripVertical size={14} />
           </button>
         </td>
       )}
       <td className="px-4 py-3">
         <div className="flex items-center gap-3">
-          <div className="relative h-14 w-14 flex-shrink-0 rounded-md border border-slate-100 overflow-hidden bg-slate-50 flex items-center justify-center border-border bg-muted shadow-sm">
+          <div className="relative h-14 w-14 flex-shrink-0 rounded-md border border-slate-100 overflow-hidden flex items-center justify-center border-border bg-muted shadow-sm">
             {product.image ? (
               <AppImage src={product.image} alt="" fill className="object-cover" sizes="56px" />
             ) : (
-              <Utensils size={20} className="text-slate-300" />
+              <Utensils size={20} className="" />
             )}
           </div>
           <div className="flex flex-col min-w-0">
@@ -357,7 +357,7 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
         </div>
       </td>
       <td className="px-4 py-3">
-        <span className="inline-flex items-center gap-1 rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-slate-600 bg-accent text-muted-foreground whitespace-nowrap">
+        <span className="inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-medium bg-accent text-muted-foreground whitespace-nowrap">
           <Tag size={10} />{product.category_name}
         </span>
       </td>
@@ -405,7 +405,7 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
               {t("productTable.menuActive")}
             </span>
           ) : (
-            <span className="inline-flex rounded-full bg-slate-100 px-2.5 py-1 text-xs font-medium text-muted-foreground bg-accent dark:text-muted-foreground">
+            <span className="inline-flex rounded-full px-2.5 py-1 text-xs font-medium text-muted-foreground bg-accent dark:text-muted-foreground">
               {t("productTable.menuInactive")}
             </span>
           )}

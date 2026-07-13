@@ -13,7 +13,7 @@ import { useAuthStore } from "@/store/useAuthStore"
 import { useTranslations } from "next-intl"
 import { queryKeys } from "@/lib/queryKeys"
 
-const input = "w-full mt-1 px-3 py-2 bg-slate-50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground"
+const input = "w-full mt-1 px-3 py-2  border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground"
 const label = "text-sm font-medium text-foreground"
 
 interface ProfileModalProps {
@@ -84,18 +84,18 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
             <div className="p-6 text-center text-red-500 dark:text-red-400">{tSelf("loadErrorBanner")}</div>
           ) : (
             <>
-              <div className="relative bg-slate-50 px-6 py-6 text-center rounded-t-lg border-b border-border bg-muted border-border">
+              <div className="relative px-6 py-6 text-center rounded-t-lg border-b border-border bg-muted border-border">
                 <button onClick={onClose}
-                  className="absolute top-3 right-3 p-1.5 rounded-md text-muted-foreground hover:text-slate-600 hover:bg-slate-200 transition-all dark:hover:bg-slate-700 dark:hover:text-slate-200">
+                  className="absolute top-3 right-3 p-1.5 rounded-md text-muted-foreground hover: hover: transition-all dark:hover: dark:hover:">
                   <X size={16} />
                 </button>
                 <div className="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center text-2xl font-semibold text-blue-700 mx-auto dark:bg-blue-900 dark:text-blue-300">
                   {profile.username.charAt(0).toUpperCase()}
                 </div>
-                <h2 className="text-base font-semibold text-slate-900 mt-2 text-foreground">{profile.username}</h2>
+                <h2 className="text-base font-semibold mt-2 text-foreground">{profile.username}</h2>
                 <div className="flex items-center justify-center gap-1.5 mt-2 flex-wrap">
                   {profile.role_names.map(r => (
-                    <Badge key={r} variant="outline" className="text-xs border-slate-300 text-slate-600 border-input dark:text-muted-foreground">{r}</Badge>
+                    <Badge key={r} variant="outline" className="text-xs border-slate-300 border-input dark:text-muted-foreground">{r}</Badge>
                   ))}
                   {profile.is_superuser && (
                     <Badge className="bg-amber-50 text-amber-700 border-amber-200 text-xs dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-800">{tSelf("superuserBadge")}</Badge>
@@ -129,7 +129,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                         <Save size={14} />{isSaving ? tSelf("saving") : tSelf("save")}
                       </button>
                       <button onClick={() => { setIsEditing(false); setForm({ email: profile.email, first_name: profile.first_name, last_name: profile.last_name }) }}
-                        className="px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-md text-muted-foreground dark:hover:bg-slate-800">
+                        className="px-4 py-1.5 text-sm font-medium hover: rounded-md text-muted-foreground dark:hover:">
                         {tSelf("cancel")}
                       </button>
                     </div>
@@ -150,7 +150,7 @@ export function ProfileModal({ onClose }: ProfileModalProps) {
                         <User size={14} />{tSelf("edit")}
                       </button>
                       <button onClick={() => setShowChangePassword(true)}
-                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium text-slate-600 hover:bg-slate-100 rounded-md text-muted-foreground dark:hover:bg-slate-800">
+                        className="flex items-center gap-1.5 px-4 py-1.5 text-sm font-medium hover: rounded-md text-muted-foreground dark:hover:">
                         <KeyRound size={14} />{t("changePassword")}
                       </button>
                     </div>

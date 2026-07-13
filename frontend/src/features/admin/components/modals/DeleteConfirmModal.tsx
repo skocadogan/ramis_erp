@@ -86,7 +86,7 @@ export function DeleteConfirmModal({
                 "flex-1 h-11 rounded-xl font-bold shadow-lg shadow-opacity-20 transition-all active:scale-[0.98]",
                 isHardDelete 
                   ? "bg-red-600 hover:bg-red-700 text-white shadow-red-500/20" 
-                  : "bg-slate-900 hover:bg-slate-800 text-white shadow-slate-900/20 dark:bg-blue-600 dark:hover:bg-blue-700"
+                  : " hover: text-white shadow-slate-900/20 dark:bg-blue-600 dark:hover:bg-blue-700"
               )}
             >
               {isLoading ? "İşlem yapılıyor..." : confirmText}

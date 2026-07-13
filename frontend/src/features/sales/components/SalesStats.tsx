@@ -94,13 +94,13 @@ export const SalesStats = memo(({ summary, isLoading }: SalesStatsProps) => {
                     aria-label={allOpen ? t("stats.expandAllAriaCollapse") : t("stats.expandAllAriaExpand")}
                     onClick={() => setAllExpanded(!allOpen)}
                     className={`relative h-7 w-12 shrink-0 rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500/40 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-slate-900 ${
-                        allOpen ? "bg-blue-600 dark:bg-blue-500" : "bg-slate-300 bg-accent"
-                    }`}
+ allOpen ? "bg-blue-600 dark:bg-blue-500" : " bg-accent"
+ }`}
                 >
                     <span
-                        className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full shadow transition-transform dark:bg-slate-100 ${
-                            allOpen ? "translate-x-5" : "translate-x-0"
-                        }`}
+                        className={`absolute top-0.5 left-0.5 h-6 w-6 rounded-full shadow transition-transform ${
+ allOpen ? "translate-x-5" : "translate-x-0"
+ }`}
                     />
                 </button>
             </div>

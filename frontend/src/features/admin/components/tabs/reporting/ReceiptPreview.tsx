@@ -83,14 +83,14 @@ export function ReceiptPreview({ template }: Props) {
   return (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between px-3 py-2
-        border-b border-border bg-slate-50
-        border-border bg-muted/60">
+ border-b border-border 
+ border-border bg-muted/60">
         <div className="flex items-center gap-2 text-xs text-muted-foreground">
           <Printer size={13} />
           <span>{t("reporting.editor.preview")}</span>
           <span className="px-1.5 py-0.5 rounded
-            bg-slate-200 text-slate-600 font-mono text-2xs
-            bg-accent text-muted-foreground">
+ font-mono text-2xs
+ bg-accent text-muted-foreground">
             {paperLabel} · {paperWidth}ch
           </span>
         </div>
@@ -98,14 +98,14 @@ export function ReceiptPreview({ template }: Props) {
           <button
             onClick={handleZoomOut}
             disabled={zoom <= MIN_ZOOM}
-            className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30 transition"
+            className="p-1 rounded hover: dark:hover: disabled:opacity-30 transition"
             title={t("reporting.editor.zoomOut")}
           >
             <ZoomOut size={13} />
           </button>
           <button
             onClick={handleZoomReset}
-            className="px-1.5 py-0.5 rounded hover:bg-slate-200 dark:hover:bg-slate-700 text-2xs font-mono transition min-w-[36px] text-center"
+            className="px-1.5 py-0.5 rounded hover: dark:hover: text-2xs font-mono transition min-w-[36px] text-center"
             title={t("reporting.editor.zoomReset")}
           >
             {Math.round(zoom * 100)}%
@@ -113,7 +113,7 @@ export function ReceiptPreview({ template }: Props) {
           <button
             onClick={handleZoomIn}
             disabled={zoom >= MAX_ZOOM}
-            className="p-1 rounded hover:bg-slate-200 dark:hover:bg-slate-700 disabled:opacity-30 transition"
+            className="p-1 rounded hover: dark:hover: disabled:opacity-30 transition"
             title={t("reporting.editor.zoomIn")}
           >
             <ZoomIn size={13} />
@@ -122,7 +122,7 @@ export function ReceiptPreview({ template }: Props) {
       </div>
 
       <div className="flex-1 overflow-y-auto p-4 flex justify-center
-        bg-slate-100 bg-card">
+ bg-card">
         {template ? (
           <div
             className="relative"
@@ -134,7 +134,7 @@ export function ReceiptPreview({ template }: Props) {
             }}
           >
             <div className="h-3 bg-gradient-to-b from-slate-400 to-slate-500
-              dark:from-slate-600 dark:to-slate-700 rounded-t-sm opacity-60" />
+ dark:from-slate-600 dark:to-slate-700 rounded-t-sm opacity-60" />
 
             {/* Logo önizlemesi */}
             {logoBlocks.map((block, i) => {
@@ -169,8 +169,8 @@ export function ReceiptPreview({ template }: Props) {
             })}
 
             <pre
-              className="text-slate-900 px-3 py-3
-                text-sub leading-[1.55] font-mono whitespace-pre overflow-x-hidden shadow-md"
+              className="px-3 py-3
+ text-sub leading-[1.55] font-mono whitespace-pre overflow-x-hidden shadow-md"
               style={{ fontFamily: "'Courier New', Courier, monospace" }}
             >
               {text}
@@ -190,7 +190,7 @@ export function ReceiptPreview({ template }: Props) {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center gap-3 h-full
-            text-muted-foreground">
+ text-muted-foreground">
             <Printer size={36} />
             <p className="text-sm">{t("reporting.receiptPreview.selectTemplate")}</p>
           </div>

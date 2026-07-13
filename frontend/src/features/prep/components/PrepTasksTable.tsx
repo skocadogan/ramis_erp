@@ -82,7 +82,7 @@ export function PrepTasksTable({
       tableClassName="w-full text-sm"
       header={
         <thead className={virtualTableStickyHeadClass}>
-          <tr className="text-xs font-bold text-slate-500">
+          <tr className="text-xs font-bold">
             <th className="px-4 py-2 text-left font-bold">
               {t("management.columns.tasks.nameStation")}
             </th>
@@ -129,7 +129,7 @@ export function PrepTasksTable({
         return (
           <>
             <td className="px-4 py-3 align-middle">
-              <h4 className="text-sm font-bold text-slate-800 dark:text-white leading-none">
+              <h4 className="text-sm font-bold dark:text-white leading-none">
                 {task.title}
               </h4>
               <p className="text-2xs font-medium text-muted-foreground mt-1">
@@ -168,7 +168,7 @@ export function PrepTasksTable({
             </td>
             <td className="px-4 py-3 align-middle">
               <div className="flex flex-col gap-1.5 items-end w-full max-w-[220px] ml-auto">
-                <div className="h-1.5 w-full rounded-full bg-slate-200 bg-muted overflow-hidden">
+                <div className="h-1.5 w-full rounded-full bg-muted overflow-hidden">
                   <div
                     className="h-full rounded-full bg-amber-500"
                     style={{ width: `${pct}%` }}
@@ -235,7 +235,7 @@ export function PrepTasksTable({
                   </Button>
                 ) : canAddTask || canManageTemplates ? (
                   <DropdownMenu>
-                    <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover:bg-slate-100 transition-colors outline-none">
+                    <DropdownMenuTrigger className="h-8 w-8 inline-flex items-center justify-center rounded-md text-muted-foreground hover: transition-colors outline-none">
                       <MoreVertical size={14} />
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end" className="w-48">

@@ -35,7 +35,7 @@ export function OrderStatusBadge({ status, className, size = 'xs' }: OrderStatus
   const label = (KNOWN_STATUSES as readonly string[]).includes(status)
     ? t(status as KnownStatus)
     : status
-  const colorClass = STATUS_CLASSES[status] ?? 'bg-slate-100 text-muted-foreground'
+  const colorClass = STATUS_CLASSES[status] ?? ' text-muted-foreground'
 
   return (
     <span

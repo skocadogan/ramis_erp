@@ -163,7 +163,7 @@ export function AuditTab({
     <div className="space-y-6 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+          <h2 className="text-lg font-bold dark:text-white flex items-center gap-2">
             <ShieldAlert className="h-5 w-5 text-blue-600" />
             {t('audit.title')}
           </h2>
@@ -292,7 +292,7 @@ export function AuditTab({
                 }
                 emptyState={
                   <div className="p-12 text-center">
-                    <ShieldAlert className="h-12 w-12 text-slate-200 mx-auto mb-3" />
+                    <ShieldAlert className="h-12 w-12 mx-auto mb-3" />
                     <p className="text-muted-foreground">{t('common.noMatch')}</p>
                   </div>
                 }
@@ -312,7 +312,7 @@ export function AuditTab({
                         onClick={() => setSelectedLog(log)}
                       >
                         <div className="flex flex-col">
-                          <span className="text-sub font-medium text-slate-900 text-foreground">
+                          <span className="text-sub font-medium text-foreground">
                             {format(new Date(log.created_at), "d MMM, HH:mm", { locale: dateLocale })}
                           </span>
                           <div className="flex items-center gap-1 text-sub text-muted-foreground">
@@ -357,8 +357,8 @@ export function AuditTab({
         <div className="space-y-6">
           {selectedLog ? (
             <Card className="border-border bg-card overflow-hidden sticky top-6 border-border">
-              <div className="p-4 border-b border-border bg-slate-50/50 bg-muted/50 flex items-center justify-between border-border">
-                <h3 className="font-semibold text-slate-900 dark:text-white flex items-center gap-2">
+              <div className="p-4 border-b border-border /50 bg-muted/50 flex items-center justify-between border-border">
+                <h3 className="font-semibold dark:text-white flex items-center gap-2">
                   <Activity className="h-4 w-4 text-blue-600" />
                   {t('audit.details.title')}
                 </h3>
@@ -423,7 +423,7 @@ export function AuditTab({
                           {JSON.stringify(selectedLog.before_json, null, 2)}
                         </pre>
                       </div>
-                      <ArrowRight className="h-4 w-4 text-slate-300 shrink-0" />
+                      <ArrowRight className="h-4 w-4 shrink-0" />
                       <div className="flex-1 p-2 rounded bg-emerald-50/50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/20">
                         <span className="block text-emerald-600 dark:text-emerald-400 font-bold mb-1">{t('audit.details.after')}</span>
                         <pre className="font-mono text-2xs overflow-auto max-h-[100px] text-muted-foreground">
@@ -436,13 +436,13 @@ export function AuditTab({
               </div>
             </Card>
           ) : (
-            <Card className="border-dashed border-border bg-slate-50/30 bg-card/30 border-border h-[400px] flex items-center justify-center text-center p-6">
+            <Card className="border-dashed border-border /30 bg-card/30 border-border h-[400px] flex items-center justify-center text-center p-6">
               <div className="space-y-3">
                 <div className="h-12 w-12 bg-card rounded-full flex items-center justify-center mx-auto shadow-sm">
-                  <Activity className="h-6 w-6 text-slate-300" />
+                  <Activity className="h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-medium text-slate-900 text-foreground">{t('audit.details.noSelection')}</h4>
+                  <h4 className="text-sm font-medium text-foreground">{t('audit.details.noSelection')}</h4>
                   <p className="text-xs text-muted-foreground max-w-[200px] mt-1">
                     {t('audit.details.selectionDesc')}
                   </p>

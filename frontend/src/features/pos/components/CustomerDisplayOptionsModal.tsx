@@ -40,7 +40,7 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
   const caloriesLabel = formatProductCalories(modal.calories, t);
 
   return (
-    <div className="fixed inset-0 z-[90] flex animate-in items-center justify-center bg-slate-950/85 p-8 fade-in duration-300">
+    <div className="fixed inset-0 z-[90] flex animate-in items-center justify-center /85 p-8 fade-in duration-300">
       <div className="relative w-full max-w-3xl overflow-hidden rounded-5xl border border-white/10 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
         <div className="border-b border-white/10 px-10 py-8">
           <div className="flex items-center gap-5">
@@ -154,7 +154,7 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                       <span
                         className={cn(
                           "text-xl font-medium transition-colors duration-300",
-                          selected ? "text-white" : "text-slate-200"
+                          selected ? "text-white" : ""
                         )}
                       >
                         {mod.name}
@@ -180,7 +180,7 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
         </div>
 
         <div className="border-t border-white/10 px-10 py-6">
-          <p className="text-center text-base font-medium text-slate-400">{t("optionsModalHint")}</p>
+          <p className="text-center text-base font-medium">{t("optionsModalHint")}</p>
         </div>
       </div>
     </div>

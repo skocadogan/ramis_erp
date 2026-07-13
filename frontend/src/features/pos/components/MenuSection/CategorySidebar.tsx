@@ -28,10 +28,10 @@ function CategorySidebarBtn({
         type="button"
         onClick={onClick}
         className={`mb-1 flex w-full items-center gap-2 rounded-lg border px-4 py-3.5 text-left text-sm font-bold transition-colors ${
-          isActive
-            ? "border-amber-500 bg-amber-500 text-white shadow-md"
-            : "border-transparent bg-card text-slate-600 hover:bg-muted/50 text-muted-foreground dark:hover:bg-muted"
-        }`}
+ isActive
+ ? "border-amber-500 bg-amber-500 text-white shadow-md"
+ : "border-transparent bg-card hover:bg-muted/50 text-muted-foreground dark:hover:bg-muted"
+ }`}
       >
         {children}
       </button>
@@ -42,10 +42,10 @@ function CategorySidebarBtn({
       type="button"
       onClick={onClick}
       className={`flex w-full items-center justify-between rounded-lg border px-4 py-3.5 text-left text-sm font-bold transition-colors ${
-        isActive
-          ? "shadow-md"
-          : "border-transparent bg-card text-slate-600 hover:bg-muted/50 bg-muted/40 text-muted-foreground dark:hover:bg-slate-800"
-      }`}
+ isActive
+ ? "shadow-md"
+ : "border-transparent bg-card hover:bg-muted/50 bg-muted/40 text-muted-foreground dark:hover:"
+ }`}
       style={
         isActive
           ? {
@@ -80,10 +80,10 @@ function CategoryMobilePill({
         type="button"
         onClick={onClick}
         className={`flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg border px-5 py-2.5 text-sm font-bold transition-colors ${
-          isActive
-            ? "border-amber-500 bg-amber-500 text-white shadow-sm"
-            : "border-border bg-card text-slate-600 text-muted-foreground"
-        }`}
+ isActive
+ ? "border-amber-500 bg-amber-500 text-white shadow-sm"
+ : "border-border bg-card text-muted-foreground"
+ }`}
       >
         {children}
       </button>
@@ -94,10 +94,10 @@ function CategoryMobilePill({
       type="button"
       onClick={onClick}
       className={`shrink-0 whitespace-nowrap rounded-lg border px-5 py-2.5 text-sm font-bold transition-colors ${
-        isActive
-          ? "text-white shadow-sm"
-          : "border-border bg-card text-slate-600 border-border bg-muted text-muted-foreground"
-      }`}
+ isActive
+ ? "text-white shadow-sm"
+ : "border-border bg-card border-border bg-muted text-muted-foreground"
+ }`}
       style={isActive ? { backgroundColor: accent, borderColor: accent } : undefined}
     >
       {children}
@@ -122,7 +122,7 @@ export function CategorySidebar({
 }: CategorySidebarProps) {
   return (
     <>
-      <div className="no-scrollbar hidden w-48 shrink-0 flex-col gap-1 overflow-y-auto border-r border-slate-100 bg-slate-50/30 p-3 md:flex border-border bg-muted/20">
+      <div className="no-scrollbar hidden w-48 shrink-0 flex-col gap-1 overflow-y-auto border-r border-slate-100 /30 p-3 md:flex border-border bg-muted/20">
         <h3 className="mb-1 px-3 py-2 text-2xs font-bold uppercase tracking-widest text-muted-foreground dark:text-muted-foreground">
           {tMenu("categories")}
         </h3>

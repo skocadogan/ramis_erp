@@ -52,7 +52,7 @@ export function ExpiryRiskWidget({
           "rounded p-1",
           hasRisk
             ? "bg-amber-100 text-amber-600 dark:bg-amber-900/40 dark:text-amber-400"
-            : "bg-slate-100 text-slate-500 bg-muted text-muted-foreground",
+            : "  bg-muted text-muted-foreground",
         )}
       >
         <Clock size={14} />
@@ -89,7 +89,7 @@ export function ExpiryRiskWidget({
                 })}
           </p>
         </div>
-        <div className={cn("rounded-lg bg-white/60 p-2 bg-card/40", hasRisk ? "text-amber-600" : "text-slate-500")}>
+        <div className={cn("rounded-lg bg-white/60 p-2 bg-card/40", hasRisk ? "text-amber-600" : "")}>
           <Clock size={22} />
         </div>
       </div>

@@ -160,7 +160,7 @@ export function ProductOptionsModal({
                 <ShieldAlert size={16} strokeWidth={2.25} />
               </button>
             )}
-            <button type="button" onClick={onClose} className="rounded-full p-2 text-muted-foreground hover:bg-slate-100 dark:hover:bg-slate-800">
+            <button type="button" onClick={onClose} className="rounded-full p-2 text-muted-foreground hover: dark:hover:">
               <X size={20} />
             </button>
           </div>
@@ -214,10 +214,10 @@ export function ProductOptionsModal({
                           type="button"
                           onClick={() => toggleModifier(group.id, mod, group.is_multiple)}
                           className={`rounded-lg border px-3 py-2 text-sm font-medium transition-colors ${
-                            active
-                              ? "border-blue-600 bg-blue-600 text-white"
-                              : "border-border bg-slate-50 text-slate-700 border-border bg-muted text-foreground"
-                          }`}
+ active
+ ? "border-blue-600 bg-blue-600 text-white"
+ : "border-border border-border bg-muted text-foreground"
+ }`}
                         >
                           {mod.name}
                           {mod.price_adjustment > 0 && canViewAmounts && (

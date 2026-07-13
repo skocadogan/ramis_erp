@@ -166,11 +166,11 @@ export function VerticalStatusTimeline({ title, steps, className }: VerticalStat
     return (
       <div
         className={cn(
-          "rounded-xl border border-slate-800 bg-slate-900/20 p-4",
+          "rounded-xl border border-slate-800 /20 p-4",
           className
         )}
       >
-        <h3 className="text-base font-bold uppercase tracking-wider text-slate-100">{title}</h3>
+        <h3 className="text-base font-bold uppercase tracking-wider">{title}</h3>
         <p className="mt-3 text-sm text-muted-foreground italic">{t("emptySteps")}</p>
       </div>
     );

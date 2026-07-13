@@ -25,11 +25,11 @@ export function CompletedTaskStrip({ tasks }: CompletedTaskStripProps) {
   return (
     <section>
       <div className="mb-4 flex items-center gap-3">
-        <div className="h-px flex-1 bg-slate-800" />
-        <span className="text-xs font-bold uppercase tracking-widest text-slate-600">
+        <div className="h-px flex-1" />
+        <span className="text-xs font-bold uppercase tracking-widest">
           Tamamlanan / İptal ({tasks.length})
         </span>
-        <div className="h-px flex-1 bg-slate-800" />
+        <div className="h-px flex-1" />
       </div>
 
       <div className="flex flex-wrap gap-2">
@@ -37,7 +37,7 @@ export function CompletedTaskStrip({ tasks }: CompletedTaskStripProps) {
           <CompletedTaskChip key={task.id} task={task} />
         ))}
         {tasks.length > 10 && (
-          <span className="inline-flex items-center gap-1 rounded-lg border border-slate-700/30 bg-slate-800/40 px-3 py-1.5 text-xs font-medium text-slate-500">
+          <span className="inline-flex items-center gap-1 rounded-lg border border-slate-700/30 /40 px-3 py-1.5 text-xs font-medium">
             +{tasks.length - 10} daha
           </span>
         )}
@@ -58,12 +58,12 @@ function CompletedTaskChip({ task }: { task: PrepTask }) {
       className={cn(
         "inline-flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors",
         isCancelled
-          ? "border-slate-700/20 bg-slate-800/30 text-slate-500 opacity-60"
+          ? "border-slate-700/20 /30  opacity-60"
           : "border-emerald-900/30 bg-emerald-950/30 text-emerald-300/80"
       )}
     >
       {isCancelled ? (
-        <Circle size={10} className="text-slate-500" />
+        <Circle size={10} className="" />
       ) : (
         <CheckCircle2 size={10} className="text-emerald-400" />
       )}
@@ -72,7 +72,7 @@ function CompletedTaskChip({ task }: { task: PrepTask }) {
         <span
           className={cn(
             "ml-1 tabular-nums",
-            deadline.isOverdue ? "text-red-400/60" : "text-slate-500"
+            deadline.isOverdue ? "text-red-400/60" : ""
           )}
         >
           <Timer size={9} className="inline-block mr-0.5" />

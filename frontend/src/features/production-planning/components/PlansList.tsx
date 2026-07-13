@@ -104,7 +104,7 @@ export function PlansList({
                   ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
                   : plan.status === "DRAFT"
                     ? "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400"
-                    : "bg-slate-100 text-slate-700 bg-muted text-muted-foreground",
+                    : "  bg-muted text-muted-foreground",
               )}
             >
               {plan.status === "APPROVED"
@@ -164,7 +164,7 @@ export function PlansList({
                 size="sm"
                 onClick={() => onCopy(plan)}
                 title={t("copyTitle")}
-                className="h-8 gap-1 text-slate-600 border-border hover:bg-slate-100 text-muted-foreground border-input dark:hover:bg-slate-800"
+                className="h-8 gap-1 border-border hover: text-muted-foreground border-input dark:hover:"
               >
                 <Copy className="h-3.5 w-3.5" />
                 <span className="hidden sm:inline">{t("copy")}</span>

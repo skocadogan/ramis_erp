@@ -87,7 +87,7 @@ export const SaleDetailView: React.FC<SaleDetailViewProps> = ({
                 </div>
                 <div className="flex items-center justify-between text-xs">
                     <span className="text-muted-foreground">{t('totalRegistered')}</span>
-                    <span className="font-bold text-slate-800 text-foreground">
+                    <span className="font-bold text-foreground">
                         {formatAmount(sale.total_amount, canViewAmounts)}
                     </span>
                 </div>

@@ -152,7 +152,7 @@ export function InventoryFilters({
                 size="sm"
                 onClick={onRefresh}
                 disabled={isLoading}
-                className="h-[34px] px-3 gap-2 border-border hover:bg-slate-100 border-border dark:hover:bg-slate-800"
+                className="h-[34px] px-3 gap-2 border-border hover: border-border dark:hover:"
                 title={t("filters.refreshTitle")}
               >
                 <RotateCw className={`h-3.5 w-3.5 ${isLoading ? 'animate-spin' : ''}`} />

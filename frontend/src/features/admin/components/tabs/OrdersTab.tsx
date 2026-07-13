@@ -82,7 +82,7 @@ function orderStatusBadgeClass(status: string): string {
     case "CANCELLED":
       return "bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300"
     default:
-      return "bg-slate-100 text-slate-600 bg-muted text-muted-foreground"
+      return "  bg-muted text-muted-foreground"
   }
 }
 
@@ -181,7 +181,7 @@ export function OrdersTab({
         {canOpenPos && (
         <Link
           href="/pos"
-          className="flex items-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 shadow-sm dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors"
+          className="flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white hover: shadow-sm dark:bg-blue-600 dark:hover:bg-blue-500 transition-colors"
         >
           <ShoppingBag size={16} />
           {t('orders.goToPage')}
@@ -214,10 +214,10 @@ export function OrdersTab({
         header={
           <thead className={virtualTableStickyHeadClass}>
             <tr>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.id')}</th>
-              <th className="text-left px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.date')}</th>
-              <th className="text-center px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.status')}</th>
-              <th className="text-right px-4 py-3 font-semibold text-slate-600 text-muted-foreground">{t('orders.fields.total')}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('orders.fields.id')}</th>
+              <th className="text-left px-4 py-3 font-semibold text-muted-foreground">{t('orders.fields.date')}</th>
+              <th className="text-center px-4 py-3 font-semibold text-muted-foreground">{t('orders.fields.status')}</th>
+              <th className="text-right px-4 py-3 font-semibold text-muted-foreground">{t('orders.fields.total')}</th>
             </tr>
           </thead>
         }
@@ -327,7 +327,7 @@ export function OrdersTab({
                     {detailOrder.items.map(item => (
                       <li
                         key={item.id}
-                        className="rounded-lg border border-border bg-slate-50/80 bg-muted/40 border-border px-3 py-2"
+                        className="rounded-lg border border-border /80 bg-muted/40 border-border px-3 py-2"
                       >
                         <div className="flex flex-wrap items-baseline justify-between gap-2">
                           <span className="font-medium text-foreground">
@@ -356,7 +356,7 @@ export function OrdersTab({
                           <p className="mt-1 text-xs text-amber-800 dark:text-amber-200/90">{t('orders.fields.itemNote')}: {item.notes}</p>
                         ) : null}
                         {item.modifiers && item.modifiers.length > 0 ? (
-                          <ul className="mt-1.5 text-sub text-slate-600 text-muted-foreground list-disc pl-4">
+                          <ul className="mt-1.5 text-sub text-muted-foreground list-disc pl-4">
                             {item.modifiers.map(m => (
                               <li key={m.id}>
                                 {m.modifier_name}
@@ -402,7 +402,7 @@ export function OrdersTab({
                     </Button>
                   </div>
                 )}
-                <Button variant="secondary" size="sm" onClick={() => setDetailOrder(null)} className="bg-muted text-foreground dark:hover:bg-slate-700">
+                <Button variant="secondary" size="sm" onClick={() => setDetailOrder(null)} className="bg-muted text-foreground dark:hover:">
                   {t('common.cancel')}
                 </Button>
               </div>

@@ -37,11 +37,11 @@ export function OrderActions({
         disabled={disabled}
         onClick={() => submitOrder()}
         className={`relative w-full rounded-xl py-4 font-bold transition-all duration-300
-        ${disabled
-            ? "cursor-not-allowed bg-slate-100 text-muted-foreground bg-muted dark:text-muted-foreground"
-            : isKitchenBusy
-              ? "bg-amber-600 text-white hover:bg-amber-700 shadow-lg shadow-amber-600/20 ring-2 ring-amber-500/30" 
-              : "bg-blue-600 text-white hover:bg-blue-700"}`}
+ ${disabled
+ ? "cursor-not-allowed text-muted-foreground bg-muted dark:text-muted-foreground"
+ : isKitchenBusy
+ ? "bg-amber-600 text-white hover:bg-amber-700 shadow-lg shadow-amber-600/20 ring-2 ring-amber-500/30" 
+ : "bg-blue-600 text-white hover:bg-blue-700"}`}
       >
         {isSubmitting ? (
           <div className="flex space-x-2 items-center justify-center">

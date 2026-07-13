@@ -37,7 +37,7 @@ const TABLE_STATUS_CONFIG: Record<TableStatus, TableCardStyleConfig> = {
         cardBorder: 'border-amber-200 dark:border-amber-800/60',
     },
     OUT_OF_SERVICE: {
-        dotClass: 'bg-slate-400',
+        dotClass: '',
         bgClass: 'bg-muted',
         textClass: 'text-muted-foreground',
         borderClass: 'border-border',

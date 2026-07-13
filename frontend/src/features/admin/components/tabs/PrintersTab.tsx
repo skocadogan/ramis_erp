@@ -285,7 +285,7 @@ export function PrintersTab({ branches, canManage }: Props) {
       {/* Table */}
       <div className="rounded-lg border border-border overflow-hidden bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.printer')}</th>
               <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('printers.usage')}</th>
@@ -303,13 +303,13 @@ export function PrintersTab({ branches, canManage }: Props) {
             ) : printers.length === 0 ? (
               <tr>
                 <td colSpan={8} className="px-4 py-10 text-center">
-                  <PrinterIcon size={32} className="mx-auto text-slate-300 mb-2" />
+                  <PrinterIcon size={32} className="mx-auto mb-2" />
                   <p className="text-sm text-muted-foreground">{t('printers.empty')}</p>
                 </td>
               </tr>
             ) : (
               printers.map(p => (
-                <tr key={p.id} className="border-b border-slate-100 hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50">
+                <tr key={p.id} className="border-b border-slate-100 hover:/50 border-border dark:hover:/50">
                   <td className="px-4 py-3 font-medium text-foreground">{p.name}</td>
                   <td className="px-4 py-3">
                     <span className={`text-2xs px-1.5 py-0.5 rounded font-bold uppercase ${p.usage_type === "KITCHEN" ? "bg-amber-100 text-amber-700" : "bg-blue-100 text-blue-700"}`}>
@@ -332,7 +332,7 @@ export function PrintersTab({ branches, canManage }: Props) {
                   </td>
                   <td className="px-4 py-3 text-muted-foreground text-xs">{p.printer_type_display}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${p.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-slate-100 text-muted-foreground bg-muted"}`}>
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${p.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : " text-muted-foreground bg-muted"}`}>
                       {p.is_active ? t('common.active') : t('common.passive')}
                     </span>
                   </td>
@@ -343,7 +343,7 @@ export function PrintersTab({ branches, canManage }: Props) {
                       </button>
                       {canManage && (
                         <>
-                          <button onClick={() => openEdit(p)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-indigo-600 transition dark:hover:bg-slate-800" title={t('common.edit')}>
+                          <button onClick={() => openEdit(p)} className="p-1.5 rounded-md hover: text-muted-foreground hover:text-indigo-600 transition dark:hover:" title={t('common.edit')}>
                             <Edit size={14} />
                           </button>
                           <button onClick={() => handleDelete(p)} className="p-1.5 rounded-md hover:bg-rose-50 text-muted-foreground hover:text-rose-600 transition dark:hover:bg-rose-900/20" title={t('common.delete')}>

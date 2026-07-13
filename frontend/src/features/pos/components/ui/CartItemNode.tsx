@@ -32,10 +32,10 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
   )) + modifierSum;
 
   return (
-    <div className="flex flex-col gap-2 rounded-xl border border-border bg-slate-50 p-3 border-border bg-muted/50">
+    <div className="flex flex-col gap-2 rounded-xl border border-border p-3 border-border bg-muted/50">
       <div className="flex items-start justify-between">
         <div className="flex w-3/4 flex-col">
-          <span className="text-lg font-bold text-slate-800 text-foreground">{product.name}</span>
+          <span className="text-lg font-bold text-foreground">{product.name}</span>
           {selectedUnit && (
             <span className="text-xs font-bold text-blue-600 uppercase tracking-tighter">
               {selectedUnit.name} 
@@ -52,7 +52,7 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
             </span>
           ))}
         </div>
-        <span className="font-medium text-slate-900 text-foreground text-lg font-mono">
+        <span className="font-medium text-foreground text-lg font-mono">
           {formatAmount((effectivePrice * quantity), canViewAmounts)}
         </span>
       </div>
@@ -97,7 +97,7 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
               </span>
             </>
           ) : (
-            <span className="text-xs text-slate-900  text-foreground font-mono">
+            <span className="text-xs text-foreground font-mono">
               {canViewAmounts ? t("pricePerPiece", { price: formatCurrency(product.base_price) }) : AMOUNT_DISPLAY_MASK}
             </span>
           )}
@@ -124,12 +124,12 @@ export const CartItemNode = memo(function CartItemNode({ item, onUpdateQuantity 
           <button
             type="button"
             onClick={() => onUpdateQuantity(item.cartId, -1)}
-            className="flex h-11 min-w-[2.75rem] touch-manipulation items-center justify-center bg-slate-50 text-slate-700 transition-colors hover:bg-rose-50 hover:text-rose-700 active:bg-rose-100 bg-muted/80 text-foreground dark:hover:bg-rose-950/40 dark:hover:text-rose-300 dark:active:bg-rose-950/60"
+            className="flex h-11 min-w-[2.75rem] touch-manipulation items-center justify-center transition-colors hover:bg-rose-50 hover:text-rose-700 active:bg-rose-100 bg-muted/80 text-foreground dark:hover:bg-rose-950/40 dark:hover:text-rose-300 dark:active:bg-rose-950/60"
             title={t("decreaseQty")}
           >
             <Minus size={22} strokeWidth={2.75} aria-hidden />
           </button>
-          <span className="flex min-w-[2.75rem] items-center justify-center border-x-2 border-border bg-slate-100/90 px-3 text-center text-base font-bold tabular-nums text-slate-900 border-input bg-muted text-foreground">
+          <span className="flex min-w-[2.75rem] items-center justify-center border-x-2 border-border /90 px-3 text-center text-base font-bold tabular-nums border-input bg-muted text-foreground">
             {quantity}
           </span>
           <button

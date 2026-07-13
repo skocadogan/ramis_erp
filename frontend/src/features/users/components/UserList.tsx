@@ -164,16 +164,16 @@ export function UserList() {
               <thead className={virtualTableStickyHeadClass}>
                 <tr>
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
-                    <button onClick={() => toggleSort("username")} className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">{t('table.user')} <SortIcon field="username" sortField={sortField} sortDir={sortDir} /></button>
+                    <button onClick={() => toggleSort("username")} className="flex items-center gap-1 hover: dark:hover:">{t('table.user')} <SortIcon field="username" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
-                    <button onClick={() => toggleSort("email")} className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">{t('table.email')} <SortIcon field="email" sortField={sortField} sortDir={sortDir} /></button>
+                    <button onClick={() => toggleSort("email")} className="flex items-center gap-1 hover: dark:hover:">{t('table.email')} <SortIcon field="email" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.branch')}</th>
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.roles')}</th>
                   <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.status')}</th>
                   <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">
-                    <button onClick={() => toggleSort("last_login")} className="flex items-center gap-1 hover:text-slate-700 dark:hover:text-slate-200">{t('table.lastLogin')} <SortIcon field="last_login" sortField={sortField} sortDir={sortDir} /></button>
+                    <button onClick={() => toggleSort("last_login")} className="flex items-center gap-1 hover: dark:hover:">{t('table.lastLogin')} <SortIcon field="last_login" sortField={sortField} sortDir={sortDir} /></button>
                   </th>
                   <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('table.actions')}</th>
                 </tr>
@@ -190,7 +190,7 @@ export function UserList() {
               <>
                 <td className="px-4 py-3">
                   <div className="flex items-center gap-2">
-                    <div className="h-8 w-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-semibold text-slate-600 bg-accent text-muted-foreground">
+                    <div className="h-8 w-8 rounded-full flex items-center justify-center text-xs font-semibold bg-accent text-muted-foreground">
                       {u.username.charAt(0).toUpperCase()}
                     </div>
                     <div>
@@ -213,8 +213,8 @@ export function UserList() {
                 <td className="px-4 py-3 text-xs text-muted-foreground text-muted-foreground">{u.last_login ? formatDate(u.last_login) : "-"}</td>
                 <td className="px-4 py-3 text-right">
                   <div className="flex items-center justify-end gap-1">
-                    <button onClick={() => setViewUserId(u.id)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-slate-700 dark:hover:bg-slate-800" title={tAdmin('common.edit')}><Eye size={14} /></button>
-                    <button onClick={() => { setEditingUser(u); setShowUserForm(true) }} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-blue-600 dark:hover:bg-slate-800" title={tAdmin('common.edit')}><Edit size={14} /></button>
+                    <button onClick={() => setViewUserId(u.id)} className="p-1.5 rounded-md hover: text-muted-foreground hover: dark:hover:" title={tAdmin('common.edit')}><Eye size={14} /></button>
+                    <button onClick={() => { setEditingUser(u); setShowUserForm(true) }} className="p-1.5 rounded-md hover: text-muted-foreground hover:text-blue-600 dark:hover:" title={tAdmin('common.edit')}><Edit size={14} /></button>
                     {!u.is_superuser && <button onClick={() => setDeleteTarget(u)} className="p-1.5 rounded-md hover:bg-red-50 text-muted-foreground hover:text-red-600 dark:hover:bg-red-900/30" title={tAdmin('common.delete')}><Trash2 size={14} /></button>}
                   </div>
                 </td>

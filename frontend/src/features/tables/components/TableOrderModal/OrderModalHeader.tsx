@@ -61,7 +61,7 @@ export function OrderModalHeader({
                     <button 
                         type="button"
                         onClick={() => setIsTransferring(false)}
-                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-all hover:bg-slate-100 dark:hover:bg-slate-800 touch-manipulation"
+                        className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-muted-foreground transition-all hover: dark:hover: touch-manipulation"
                     >
                         <Loader2 size={18} className="rotate-180" />
                     </button>
@@ -69,7 +69,7 @@ export function OrderModalHeader({
                     <ReceiptText size={20} className="shrink-0 text-blue-600" aria-hidden />
                 )}
                 <div className="min-w-0">
-                    <h2 className="truncate text-sm font-bold text-slate-800 sm:text-base text-foreground">
+                    <h2 className="truncate text-sm font-bold sm:text-base text-foreground">
                         {isTransferring ? t('selectTargetTable') : isHistoricalSaleView ? t('saleDetail') : t('orderDetail')}
                     </h2>
                     {isHistoricalSaleView && saleId && (
@@ -136,7 +136,7 @@ export function OrderModalHeader({
                 <button
                     type="button"
                     onClick={onClose}
-                    className="flex h-10 w-10 touch-manipulation items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-slate-100 dark:hover:bg-slate-800"
+                    className="flex h-10 w-10 touch-manipulation items-center justify-center rounded-lg text-muted-foreground transition-colors hover: dark:hover:"
                     aria-label={tForm('cancel')}
                 >
                     <X size={18} />

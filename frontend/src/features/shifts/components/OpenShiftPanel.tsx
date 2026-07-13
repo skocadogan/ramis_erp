@@ -70,7 +70,7 @@ export function OpenShiftPanel({
           autoComplete="off"
           value={opening}
           onChange={(e) => setOpening(normalizeDecimalCashInput(e.target.value))}
-          className="min-w-0 flex-1 rounded-xl border border-border px-3 py-2.5 text-slate-900 border-input bg-muted text-foreground"
+          className="min-w-0 flex-1 rounded-xl border border-border px-3 py-2.5 border-input bg-muted text-foreground"
         />
         {touchKeyboard && (
           <button
@@ -79,8 +79,8 @@ export function OpenShiftPanel({
             aria-expanded={showKeyboard}
             onClick={() => setShowKeyboard((v) => !v)}
             className={cn(
-              "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border bg-slate-50 text-slate-700 transition hover:bg-slate-100",
-              "border-input bg-muted text-foreground dark:hover:bg-slate-700/80",
+              "flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-border   transition hover:",
+              "border-input bg-muted text-foreground dark:hover:/80",
               showKeyboard && "border-blue-400 bg-blue-50 text-blue-800 dark:border-blue-600 dark:bg-blue-950/50 dark:text-blue-100",
             )}
           >

@@ -85,7 +85,7 @@ export function CategorySelectTree({
             aria-expanded={open}
             aria-controls={listId}
             className={cn(
-              "w-full flex items-center justify-between px-3 py-2 bg-slate-50 border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground",
+              "w-full flex items-center justify-between px-3 py-2  border border-border rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 transition-all bg-muted border-input text-foreground",
               className
             )}
           >
@@ -116,12 +116,12 @@ export function CategorySelectTree({
                 setOpen(false)
               }}
               className={cn(
-                "flex items-center gap-2 px-2 py-2 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group mb-1",
-                !value && "bg-slate-100 text-slate-900 border border-border bg-muted text-foreground"
+                "flex items-center gap-2 px-2 py-2 rounded-md cursor-pointer hover: dark:hover: transition-all group mb-1",
+                !value && "  border border-border bg-muted text-foreground"
               )}
             >
               <div className="w-5 h-5 flex items-center justify-center">
-                <div className="w-1.5 h-1.5 rounded-full bg-slate-400" />
+                <div className="w-1.5 h-1.5 rounded-full" />
               </div>
               <span className="text-sm italic text-muted-foreground">{t("categoryTree.rootCategory")}</span>
               {!value && <Check className="h-3.5 w-3.5 ml-auto text-blue-600" />}
@@ -138,7 +138,7 @@ export function CategorySelectTree({
                     setOpen(false)
                   }}
                   className={cn(
-                    "flex items-center gap-1 px-2 py-2 rounded-md cursor-pointer hover:bg-slate-100 dark:hover:bg-slate-800 transition-all group",
+                    "flex items-center gap-1 px-2 py-2 rounded-md cursor-pointer hover: dark:hover: transition-all group",
                     value === cat.id && "bg-blue-50 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400 font-semibold"
                   )}
                   style={{ paddingLeft: `${cat.depth * 1.5 + 0.75}rem` }}
@@ -148,7 +148,7 @@ export function CategorySelectTree({
                       {cat.hasChildren ? (
                         <button
                           onClick={(e) => toggleExpand(cat.id, e)}
-                          className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded-md text-muted-foreground transition-colors"
+                          className="p-1 hover: dark:hover: rounded-md text-muted-foreground transition-colors"
                         >
                           {expandedIds.has(cat.id) ? (
                             <ChevronDown className="h-3.5 w-3.5" />
@@ -157,7 +157,7 @@ export function CategorySelectTree({
                           )}
                         </button>
                       ) : (
-                        <div className="w-1.5 h-1.5 rounded-full bg-slate-200 ml-1 bg-accent" />
+                        <div className="w-1.5 h-1.5 rounded-full ml-1 bg-accent" />
                       )}
                     </div>
                     {cat.hasChildren ? (

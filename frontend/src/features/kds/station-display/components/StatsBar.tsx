@@ -31,7 +31,7 @@ export function StatsBar({ tasks }: { tasks: PrepTask[] }) {
           <span className={cn("text-2xl font-bold tabular-nums", item.color)}>
             {item.count}
           </span>
-          <span className="text-xs font-medium uppercase tracking-widest text-slate-500">
+          <span className="text-xs font-medium uppercase tracking-widest">
             {item.label}
           </span>
         </div>

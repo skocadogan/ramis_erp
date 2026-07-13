@@ -367,7 +367,7 @@ function ShiftsPageContent() {
                   </div>
                 ) : (
                   <Card className="border-border shadow-md border-border bg-card ring-1 ring-slate-900/5 dark:ring-white/5 py-0 gap-0">
-            <div className="border-b border-border bg-slate-50 px-4 py-3 border-border bg-muted/40">
+            <div className="border-b border-border px-4 py-3 border-border bg-muted/40">
               <h2 className="text-sm font-semibold text-foreground">
               {t("listCard.title")}
 
@@ -386,7 +386,7 @@ function ShiftsPageContent() {
                     type="date"
                     value={filterDateFrom}
                     onChange={(e) => setFilterDateFrom(e.target.value)}
-                    className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
+                    className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                   />
                 </div>
                 <div className="flex min-w-[9.5rem] flex-col gap-1">
@@ -401,7 +401,7 @@ function ShiftsPageContent() {
                     type="date"
                     value={filterDateTo}
                     onChange={(e) => setFilterDateTo(e.target.value)}
-                    className="rounded-lg border border-border px-2 py-1.5 text-sm text-slate-800 border-input bg-card text-foreground"
+                    className="rounded-lg border border-border px-2 py-1.5 text-sm border-input bg-card text-foreground"
                   />
                 </div>
                 <div className="flex min-w-[8rem] flex-col gap-1">
@@ -453,7 +453,7 @@ function ShiftsPageContent() {
                     setFilterStatus("all");
                     setFilterTerminalId("");
                   }}
-                  className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-slate-600 shadow-sm transition-colors hover:bg-slate-100 border-border bg-muted text-muted-foreground dark:hover:bg-slate-700"
+                  className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium shadow-sm transition-colors hover: border-border bg-muted text-muted-foreground dark:hover:"
                 >
                   {t("filters.reset")}
                 </button>

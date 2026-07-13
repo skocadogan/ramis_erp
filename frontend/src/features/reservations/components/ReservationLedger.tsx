@@ -118,9 +118,9 @@ export function ReservationLedger({
 
   return (
     <div className="mb-8 flex flex-col overflow-hidden rounded-xl border border-border border-border bg-card shadow-sm">
-      <div className="flex flex-col gap-4 border-b border-border bg-slate-50 p-3 md:flex-row md:items-center justify-between border-border bg-muted/40 shrink-0">
+      <div className="flex flex-col gap-4 border-b border-border p-3 md:flex-row md:items-center justify-between border-border bg-muted/40 shrink-0">
         <div>
-          <h2 className="text-sm font-bold text-slate-800 text-foreground">{t("ledger.title")}</h2>
+          <h2 className="text-sm font-bold text-foreground">{t("ledger.title")}</h2>
           <p className="text-xs text-muted-foreground">{t("ledger.description")}</p>
         </div>
         <div className="flex flex-wrap items-center gap-2">
@@ -184,7 +184,7 @@ export function ReservationLedger({
                                 })
                                 .catch((e) => toastApiError(e, t("toast.actionFailed")))
                             }
-                            className="rounded border border-border p-1 text-slate-600 border-input"
+                            className="rounded border border-border p-1 border-input"
                             title={t("ledger.confirmApproveTitle")}
                           >
                             <Check size={14} />
@@ -227,7 +227,7 @@ export function ReservationLedger({
                         <button
                           type="button"
                           onClick={() => setDeleteTarget(r)}
-                          className="rounded border border-border p-1 text-slate-600 border-input"
+                          className="rounded border border-border p-1 border-input"
                           title={t("ledger.deleteActionTitle")}
                         >
                           <Trash2 size={14} />

@@ -77,7 +77,7 @@ export const DiscountPanel: React.FC<DiscountPanelProps> = ({
                                 type="button"
                                 onClick={() => setDiscountType(type)}
                                 className={`flex-1 py-1.5 rounded-lg text-xs font-semibold border transition-all
-                                    ${discountType === type ? 'bg-amber-500 border-amber-500 text-white shadow-sm' : 'border-border text-slate-600 hover:border-amber-300 border-border text-muted-foreground'}`}
+ ${discountType === type ? 'bg-amber-500 border-amber-500 text-white shadow-sm' : 'border-border hover:border-amber-300 border-border text-muted-foreground'}`}
                             >
                                 {type === 'ORDER' ? `🧾 ${t('discountOrder')}` : `🍽️ ${t('discountItem')}`}
                             </button>

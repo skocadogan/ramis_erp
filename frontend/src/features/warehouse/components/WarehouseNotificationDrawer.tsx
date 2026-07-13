@@ -43,7 +43,7 @@ export function WarehouseNotificationDrawer() {
             "relative flex size-12 items-center justify-center rounded-lg border shadow-md",
             pendingCount > 0
               ? "border-amber-600 bg-amber-600 text-white"
-              : "border-slate-300 bg-slate-800 text-slate-300 border-input",
+              : "border-slate-300   border-input",
           )}
           aria-label={t("drawerTitle")}
         >

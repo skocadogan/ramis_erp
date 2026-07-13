@@ -98,7 +98,7 @@ const OrderFooterImpl = ({
         <div className="space-y-4">
             {showTotals && totalOrderDiscount > 0 && (
                 <div className="flex flex-col gap-1 border-b border-slate-50 border-border pb-2 mb-1">
-                    <div className="flex items-center justify-between text-sm  font-mono">
+                    <div className="flex items-center justify-between text-sm font-mono">
                         <span>{t('orderSubtotal')}</span>
                         <span className="font-medium font-mono sm:text-lg">
                             {formatAmount(subtotalBeforeOrderDiscount, canViewAmounts)}
@@ -117,10 +117,10 @@ const OrderFooterImpl = ({
             )}
             {showTotals && (
                 <div className="flex items-center justify-between gap-3">
-                    <span className="text-xl font-semibold text-slate-600 font-mono text-muted-foreground ">
+                    <span className="text-xl font-semibold font-mono text-muted-foreground">
                         {orders.length > 1 ? t('grandTotal') : t('total')}
                     </span>
-                    <span className="text-xl font-bold text-slate-900 text-foreground sm:text-4xl font-mono">
+                    <span className="text-xl font-bold text-foreground sm:text-4xl font-mono">
                         {formatAmount(grandTotal, canViewAmounts)}
                     </span>
                 </div>
@@ -135,7 +135,7 @@ const OrderFooterImpl = ({
             {showPayment && !readOnly && (
                 <>
                     {allowSplitPayment && onToggleSplit && (
-                        <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-slate-600 text-muted-foreground">
+                        <label className="flex cursor-pointer items-center gap-2 text-xs font-medium text-muted-foreground">
                             <input
                                 type="checkbox"
                                 checked={useSplitPayment}
@@ -147,7 +147,7 @@ const OrderFooterImpl = ({
                     )}
 
                     {useSplitPayment && splitAmounts && onSplitAmountChange ? (
-                        <div className="space-y-2.5 rounded-lg border border-border bg-slate-50/80 p-3.5 border-border bg-muted/40 sm:p-4">
+                        <div className="space-y-2.5 rounded-lg border border-border /80 p-3.5 border-border bg-muted/40 sm:p-4">
                             {PAYMENT_METHODS.map(({ value }) => (
                                 <div key={value} className="flex items-center gap-2">
                                     <span className="w-16 shrink-0 text-sub font-semibold text-muted-foreground">
@@ -180,10 +180,10 @@ const OrderFooterImpl = ({
                                         type="button"
                                         onClick={() => setPaymentMethod(value)}
                                         className={`flex min-h-11 flex-1 touch-manipulation items-center justify-center gap-2 rounded-lg border px-1 py-2.5 text-xs font-semibold transition-all sm:text-sm
-                                    ${paymentMethod === value && !isCreditSelected
-                                        ? 'border-blue-600 bg-blue-600 text-white'
-                                        : 'border-border text-slate-600 hover:border-blue-300 hover:text-blue-600 border-border text-muted-foreground'
-                                    }`}
+ ${paymentMethod === value && !isCreditSelected
+ ? 'border-blue-600 bg-blue-600 text-white'
+ : 'border-border hover:border-blue-300 hover:text-blue-600 border-border text-muted-foreground'
+ }`}
                                     >
                                         <Icon size={15} className="shrink-0" aria-hidden />
                                         {tPos(`payment.${value.toLowerCase()}`)}
@@ -195,10 +195,10 @@ const OrderFooterImpl = ({
                                     type="button"
                                     onClick={onCreditClick}
                                     className={`flex w-full min-h-11 touch-manipulation items-center justify-center gap-2 rounded-lg border px-3 py-2.5 text-xs font-semibold transition-all sm:text-sm
-                                    ${isCreditSelected
-                                        ? 'border-violet-600 bg-violet-600 text-white'
-                                        : 'border-border text-slate-600 hover:border-violet-300 hover:text-violet-600 border-border text-muted-foreground'
-                                    }`}
+ ${isCreditSelected
+ ? 'border-violet-600 bg-violet-600 text-white'
+ : 'border-border hover:border-violet-300 hover:text-violet-600 border-border text-muted-foreground'
+ }`}
                                 >
                                     {tCredit('pos.button')}
                                 </button>
@@ -236,10 +236,10 @@ const OrderFooterImpl = ({
                         onClick={() => void handlePayment()}
                         disabled={isPaying || isLoading}
                         className={`flex w-full touch-manipulation items-center justify-center gap-2 rounded-xl px-3 py-3.5 text-sm font-bold transition-all sm:text-base
-                            ${isPaying || isLoading
-                                ? 'cursor-not-allowed bg-slate-100 text-muted-foreground'
-                                : 'bg-emerald-600 text-white hover:bg-emerald-700 active:scale-[0.98]'
-                            }`}
+ ${isPaying || isLoading
+ ? 'cursor-not-allowed text-muted-foreground'
+ : 'bg-emerald-600 text-white hover:bg-emerald-700 active:scale-[0.98]'
+ }`}
                     >
                         {isPaying ? (
                             <>

@@ -28,7 +28,7 @@ export function UnitsTable({ units, onEdit, onDelete, onNew, isLoading }: UnitsT
       )}
       <div className="rounded-lg border border-border overflow-hidden bg-card border-border">
         <table className="w-full text-left border-collapse">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colName")}</th>
               <th className="px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colShort")}</th>
@@ -54,7 +54,7 @@ export function UnitsTable({ units, onEdit, onDelete, onNew, isLoading }: UnitsT
               </tr>
             ) : (
               units.map((unit) => (
-                <tr key={unit.id} className="hover:bg-slate-50/50 transition-colors group dark:hover:bg-slate-800/50">
+                <tr key={unit.id} className="hover:/50 transition-colors group dark:hover:/50">
                   <td className="px-3 py-2">
                     <span className="text-sm font-semibold text-foreground">{unit.name}</span>
                   </td>

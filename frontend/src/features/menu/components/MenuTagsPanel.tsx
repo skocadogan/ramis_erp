@@ -49,7 +49,7 @@ export default function MenuTagsPanel({
       <div className="w-72 shrink-0 flex flex-col rounded-lg border border-border border-border bg-card overflow-hidden">
         <div className="border-b border-border px-3 py-2 space-y-2 border-border">
           <div className="flex items-center justify-between">
-            <h2 className="flex items-center gap-1.5 text-sm font-semibold text-slate-700 text-muted-foreground">
+            <h2 className="flex items-center gap-1.5 text-sm font-semibold text-muted-foreground">
               <Tag size={14} className="text-violet-600" />
               {t("listTitle")}
             </h2>
@@ -96,10 +96,10 @@ export default function MenuTagsPanel({
                 <div
                   key={tag.id}
                   className={`flex items-center gap-1 rounded-md px-2 py-1.5 text-sm ${
-                    active
-                      ? "bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300"
-                      : "text-slate-600 hover:bg-slate-100 text-muted-foreground dark:hover:bg-slate-800"
-                  }`}
+ active
+ ? "bg-violet-50 text-violet-700 dark:bg-violet-900/30 dark:text-violet-300"
+ : " hover: text-muted-foreground dark:hover:"
+ }`}
                 >
                   <button type="button" className="flex flex-1 items-center gap-1.5 text-left truncate min-w-0" onClick={() => onSelectTag(tag.id)}>
                     <Hash size={12} className="shrink-0 text-violet-500" />
@@ -152,7 +152,7 @@ export default function MenuTagsPanel({
                     <button
                       type="button"
                       onClick={() => onEditTag(selected)}
-                      className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover:bg-slate-50 dark:hover:bg-slate-800"
+                      className="inline-flex items-center gap-1 rounded-md border border-border px-2.5 py-1.5 text-xs font-medium hover: dark:hover:"
                     >
                       <Pencil size={12} />
                       {t("edit")}

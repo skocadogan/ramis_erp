@@ -212,7 +212,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
       {/* Table */}
       <div className="rounded-lg border border-border overflow-hidden bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('tabs.stations')}</th>
               <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('stations.branch')}</th>
@@ -229,7 +229,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
             ) : filtered.length === 0 ? (
               <tr>
                 <td colSpan={7} className="px-4 py-10 text-center">
-                  <ChefHat size={32} className="mx-auto text-slate-300 mb-2" />
+                  <ChefHat size={32} className="mx-auto mb-2" />
                   <p className="text-sm text-muted-foreground">{t('stations.empty.title')}</p>
                   {canManage && (
                     <button onClick={openCreate} className="mt-3 text-xs font-medium text-indigo-600 hover:underline">
@@ -240,7 +240,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
               </tr>
             ) : (
               filtered.map(s => (
-                <tr key={s.id} className="border-b border-slate-100 hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50">
+                <tr key={s.id} className="border-b border-slate-100 hover:/50 border-border dark:hover:/50">
                   <td className="px-4 py-3">
                     <div className="flex items-center gap-2.5">
                       <div className="h-7 w-7 rounded-lg flex-shrink-0" style={{ backgroundColor: s.color }} />
@@ -254,11 +254,11 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
                     </span>
                   </td>
                   <td className="px-4 py-3">
-                    <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-slate-600 text-muted-foreground">{s.code}</code>
+                    <code className="text-xs bg-muted px-1.5 py-0.5 rounded font-mono text-muted-foreground">{s.code}</code>
                   </td>
                   <td className="px-4 py-3 text-muted-foreground">{s.categories_count} {t('stations.categories').toLowerCase()}</td>
                   <td className="px-4 py-3">
-                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${s.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : "bg-slate-100 text-muted-foreground bg-muted"}`}>
+                    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-semibold ${s.is_active ? "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400" : " text-muted-foreground bg-muted"}`}>
                       {s.is_active ? t('common.active') : t('common.passive')}
                     </span>
                   </td>
@@ -276,7 +276,7 @@ export function KitchenStationsTab({ branches, canManage }: Props) {
                       </a>
                       {canManage && (
                         <>
-                          <button onClick={() => openEdit(s)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-blue-600 transition dark:hover:bg-slate-800" title={t('common.edit')}>
+                          <button onClick={() => openEdit(s)} className="p-1.5 rounded-md hover: text-muted-foreground hover:text-blue-600 transition dark:hover:" title={t('common.edit')}>
                             <Edit size={14} />
                           </button>
                           <button onClick={() => handleDelete(s)} className="p-1.5 rounded-md hover:bg-rose-50 text-muted-foreground hover:text-rose-600 transition dark:hover:bg-rose-900/20" title={t('common.delete')}>

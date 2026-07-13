@@ -45,7 +45,7 @@ export function SyncProgressDialog() {
 
         <div className="space-y-2">
           <div
-            className="h-2 w-full overflow-hidden rounded-full bg-slate-200 bg-muted"
+            className="h-2 w-full overflow-hidden rounded-full bg-muted"
             role="progressbar"
             aria-valuemin={0}
             aria-valuemax={100}

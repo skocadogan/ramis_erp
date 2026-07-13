@@ -24,7 +24,7 @@ export function ReadyByTableGroup({ group, deliverItem, t }: ReadyByTableGroupPr
         {group.items.map((item) => (
           <li
             key={item.id}
-            className="group flex items-center justify-between gap-2 p-3 transition-colors hover:bg-slate-50/80 dark:hover:bg-slate-800/50"
+            className="group flex items-center justify-between gap-2 p-3 transition-colors hover:/80 dark:hover:/50"
           >
             <div className="flex min-w-0 max-w-[70%] flex-col gap-0.5">
               <div className="flex items-center gap-2">
@@ -32,7 +32,7 @@ export function ReadyByTableGroup({ group, deliverItem, t }: ReadyByTableGroupPr
                   {item.station_name}
                 </span>
               </div>
-              <span className="text-sm font-bold leading-tight text-slate-800 text-foreground">
+              <span className="text-sm font-bold leading-tight text-foreground">
                 {item.quantity}x {item.product_name}
                 {item.unit_name && (
                   <span className="ml-1.5 text-xs text-blue-600 dark:text-blue-400">

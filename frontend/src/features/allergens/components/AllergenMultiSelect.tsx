@@ -50,7 +50,7 @@ export function AllergenMultiSelect({ value, onChange, className }: AllergenMult
       ) : allergens.length === 0 ? (
         <p className="text-xs text-muted-foreground">{t("none")}</p>
       ) : (
-        <div className="flex flex-wrap gap-1.5 flex-1 overflow-y-auto rounded-md border border-border p-2 bg-slate-50/50 bg-muted/30">
+        <div className="flex flex-wrap gap-1.5 flex-1 overflow-y-auto rounded-md border border-border p-2 /50 bg-muted/30">
           {[...allergens].sort((a, b) => a.name.localeCompare(b.name)).map((a) => {
             const selected = value.includes(a.id)
             return (
@@ -59,10 +59,10 @@ export function AllergenMultiSelect({ value, onChange, className }: AllergenMult
                 type="button"
                 onClick={() => toggle(a.id)}
                 className={`rounded-md px-2 py-1 text-xs font-medium border transition-colors ${
-                  selected
-                    ? "bg-amber-100 border-amber-300 text-amber-900 dark:bg-amber-900/40 dark:border-amber-700 dark:text-amber-100"
-                    : "border-border text-muted-foreground hover:border-amber-200 bg-card border-border"
-                }`}
+ selected
+ ? "bg-amber-100 border-amber-300 text-amber-900 dark:bg-amber-900/40 dark:border-amber-700 dark:text-amber-100"
+ : "border-border text-muted-foreground hover:border-amber-200 bg-card border-border"
+ }`}
               >
                 {a.name}
                 <span className="ml-1 opacity-70">({a.risk_score})</span>

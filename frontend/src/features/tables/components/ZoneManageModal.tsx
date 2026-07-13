@@ -70,15 +70,15 @@ function SortableZoneItem({ zone, canManage, onEdit, onDelete }: SortableZoneIte
             ref={setNodeRef}
             style={style}
             className={`flex items-center justify-between gap-3 bg-background px-4 py-3
-                ${isDragging ? 'relative z-50 scale-[1.02] rounded-lg border-2 border-primary/40 shadow-xl' : 'border-b border-border'}
-                transition-all group hover:bg-background`}
+ ${isDragging ? 'relative z-50 scale-[1.02] rounded-lg border-2 border-primary/40 shadow-xl' : 'border-b border-border'}
+ transition-all group hover:bg-background`}
         >
             <div className="min-w-0 flex-1 flex items-center gap-3">
                 {canManage && (
                     <div
                         {...attributes}
                         {...listeners}
-                        className="cursor-grab active:cursor-grabbing p-1 -ml-1 text-slate-300 hover:text-muted-foreground transition-colors"
+                        className="cursor-grab active:cursor-grabbing p-1 -ml-1 hover:text-muted-foreground transition-colors"
                         title={t('dragToReorder')}
                     >
                         <GripVertical size={16} />

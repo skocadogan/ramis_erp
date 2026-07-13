@@ -29,7 +29,7 @@ export const sidebarActiveBar =
   "absolute left-1.5 top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full bg-primary shadow-glow"
 
 export const horizontalTabInactive =
-  "border-transparent text-muted-foreground hover:border-slate-300 hover:text-slate-700 dark:hover:border-slate-600 dark:hover:text-slate-200"
+  "border-transparent text-muted-foreground hover:border-slate-300 hover: dark:hover:border-slate-600 dark:hover:"
 
 export const horizontalTabActive =
   "border-primary bg-primary/10 font-semibold text-primary"
@@ -41,7 +41,7 @@ export const verticalNavItemActive =
   "bg-primary/10 font-semibold text-primary"
 
 export const verticalIconInactive =
-  "text-muted-foreground group-hover:text-slate-600 dark:group-hover:text-slate-300"
+  "text-muted-foreground group-hover: dark:group-hover:"
 
 export const externalLinkHorizontal =
   "relative flex shrink-0 items-center gap-2 border-b-2 border-transparent px-3 py-2 text-ui font-medium transition-colors sm:gap-3 " +

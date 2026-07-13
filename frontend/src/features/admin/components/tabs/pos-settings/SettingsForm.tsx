@@ -22,7 +22,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
 
   return (
     <Card className="p-0 gap-0 border-border bg-card border-border overflow-hidden">
-      <CardHeader className="bg-slate-50 p-4 border-b border-border bg-muted/40 border-border">
+      <CardHeader className="p-4 border-b border-border bg-muted/40 border-border">
         <CardTitle className="text-sm font-semibold flex items-center">
            {t('admin_settings.display.title')}
         </CardTitle>
@@ -60,7 +60,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             <p className="text-2xs text-muted-foreground">{t('admin_settings.display.transitionHint')}</p>
           </div>
 
-          <div className="flex items-center justify-between p-3 rounded-lg bg-slate-50 border border-border bg-muted/30 border-border">
+          <div className="flex items-center justify-between p-3 rounded-lg border border-border bg-muted/30 border-border">
             <div className="space-y-0.5">
               <Label className="text-sm font-semibold text-foreground">{t('admin_settings.display.showClock')}</Label>
               <p className="text-2xs text-muted-foreground">{t('admin_settings.display.showClockHint')}</p>
@@ -83,7 +83,7 @@ export function SettingsForm({ settings, isSaving, onSubmit, onChange }: Setting
             <CardTitle className="text-sm font-semibold flex items-center gap-2">
               <Zap className="h-4 w-4 text-emerald-500" /> {t('admin_settings.display.successMessagesTitle')}
             </CardTitle>
-            <div className="space-y-4 bg-slate-50/50 bg-card/30 p-4 rounded-lg border border-border">
+            <div className="space-y-4 /50 bg-card/30 p-4 rounded-lg border border-border">
               <div className="space-y-2">
                 <Label className="text-2xs font-bold uppercase text-blue-500">{t('admin_settings.display.orderSuccessTitleLabel')}</Label>
                 <Input value={settings.order_success_title} onChange={e => set({ order_success_title: e.target.value })} className="h-9 text-sm" placeholder={t('admin_settings.display.titleLabel')} />

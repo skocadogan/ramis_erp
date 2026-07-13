@@ -84,10 +84,10 @@ function Input({ value, onChange, mono = false, placeholder = "" }: {
       onChange={e => onChange(e.target.value)}
       placeholder={placeholder}
       className={`flex-1 h-7 px-2 text-xs rounded
-        bg-slate-100 border border-slate-300 text-slate-900
-        focus:outline-none focus:border-indigo-500
-        bg-muted border-input text-foreground
-        ${mono ? "font-mono" : ""}`}
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground
+ ${mono ? "font-mono" : ""}`}
     />
   )
 }
@@ -101,9 +101,9 @@ function Select({ value, onChange, options }: {
       value={value}
       onChange={e => onChange(e.target.value)}
       className="flex-1 h-7 px-2 text-xs rounded
-        bg-slate-100 border border-slate-300 text-slate-900
-        focus:outline-none focus:border-indigo-500
-        bg-muted border-input text-foreground"
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground"
     >
       {options.map(o => <option key={o.value} value={o.value}>{o.label}</option>)}
     </select>
@@ -115,7 +115,7 @@ function Checkbox({ checked, onChange, label }: {
 }) {
   return (
     <label className="flex items-center gap-1.5 text-xs cursor-pointer select-none
-      text-foreground">
+ text-foreground">
       <input type="checkbox" checked={checked} onChange={e => onChange(e.target.checked)}
         className="w-3.5 h-3.5 accent-indigo-500" />
       {label}
@@ -220,7 +220,7 @@ function BranchInfoEditor({ block, onUpdate, t, branches }: {
                       type="button"
                       disabled={idx <= 0}
                       onClick={() => moveField(f.key, -1)}
-                      className="p-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30"
+                      className="p-0.5 rounded hover: dark:hover: disabled:opacity-30"
                     >
                       <ChevronUp size={11} />
                     </button>
@@ -228,7 +228,7 @@ function BranchInfoEditor({ block, onUpdate, t, branches }: {
                       type="button"
                       disabled={idx >= selectedFields.length - 1}
                       onClick={() => moveField(f.key, 1)}
-                      className="p-0.5 rounded hover:bg-slate-100 dark:hover:bg-slate-800 disabled:opacity-30"
+                      className="p-0.5 rounded hover: dark:hover: disabled:opacity-30"
                     >
                       <ChevronDown size={11} />
                     </button>
@@ -375,9 +375,9 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   up({ columns: cols })
                 }}
                 className="w-12 h-7 px-1 text-center rounded
-                  bg-slate-100 border border-slate-300 text-slate-900
-                  focus:outline-none focus:border-indigo-500
-                  bg-muted border-input text-foreground"
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground"
               />
               <Select value={col.align} onChange={v => {
                 const cols = [...(block.columns ?? [])]
@@ -400,12 +400,12 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   const cols = [...(block.columns ?? [])]
                   cols[i] = { ...cols[i], prefix: e.target.value }
                   up({ columns: cols })
-                }} placeholder={t("reporting.blockEditor.prefix")} className="h-7 px-1 text-2xs rounded bg-slate-100 border border-slate-300 bg-muted border-input text-foreground" />
+                }} placeholder={t("reporting.blockEditor.prefix")} className="h-7 px-1 text-2xs rounded border border-slate-300 bg-muted border-input text-foreground" />
                 <input value={col.suffix ?? ""} onChange={e => {
                   const cols = [...(block.columns ?? [])]
                   cols[i] = { ...cols[i], suffix: e.target.value }
                   up({ columns: cols })
-                }} placeholder={t("reporting.blockEditor.suffix")} className="h-7 px-1 text-2xs rounded bg-slate-100 border border-slate-300 bg-muted border-input text-foreground" />
+                }} placeholder={t("reporting.blockEditor.suffix")} className="h-7 px-1 text-2xs rounded border border-slate-300 bg-muted border-input text-foreground" />
               </div>
 
               <div className="flex flex-col gap-0">
@@ -414,7 +414,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   const cols = [...(block.columns ?? [])];
                   [cols[i], cols[i - 1]] = [cols[i - 1], cols[i]]
                   up({ columns: cols })
-                }} disabled={i === 0} className="p-0.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded disabled:opacity-20">
+                }} disabled={i === 0} className="p-0.5 hover: dark:hover: rounded disabled:opacity-20">
                   <ChevronUp size={12} />
                 </button>
                 <button type="button" onClick={() => {
@@ -422,7 +422,7 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
                   const cols = [...(block.columns ?? [])];
                   [cols[i], cols[i + 1]] = [cols[i + 1], cols[i]]
                   up({ columns: cols })
-                }} disabled={i === (block.columns?.length ?? 0) - 1} className="p-0.5 hover:bg-slate-100 dark:hover:bg-slate-800 rounded disabled:opacity-20">
+                }} disabled={i === (block.columns?.length ?? 0) - 1} className="p-0.5 hover: dark:hover: rounded disabled:opacity-20">
                   <ChevronDown size={12} />
                 </button>
               </div>
@@ -449,9 +449,9 @@ function BlockEditor({ block, onUpdate, branches }: { block: ReceiptBlock; onUpd
       <input type="number" value={block.lines ?? 1} min={1} max={10}
         onChange={e => up({ lines: parseInt(e.target.value) || 1 })}
         className="w-20 h-7 px-2 text-xs rounded
-          bg-slate-100 border border-slate-300 text-slate-900
-          focus:outline-none focus:border-indigo-500
-          bg-muted border-input text-foreground"
+ border border-slate-300 
+ focus:outline-none focus:border-indigo-500
+ bg-muted border-input text-foreground"
       />
     </FieldRow>
   )
@@ -644,17 +644,17 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
     <div className="flex flex-col h-full overflow-hidden">
       {/* Palet */}
       <div className="px-3 py-2 border-b
-        border-border border-border bg-muted/60">
+ border-border border-border bg-muted/60">
         <p className="text-2xs uppercase tracking-wider mb-2
-          text-muted-foreground dark:text-muted-foreground">{t("reporting.blockEditor.addBlockTitle")}</p>
+ text-muted-foreground dark:text-muted-foreground">{t("reporting.blockEditor.addBlockTitle")}</p>
         <div className="flex flex-wrap gap-1.5">
           {palette.map(p => (
             <button key={p.type} type="button" onClick={() => addBlock(p.default)}
               className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium
-                bg-slate-100 hover:bg-indigo-600 text-slate-600 hover:text-white
-                border border-slate-300 hover:border-indigo-500 transition-all
-                bg-accent dark:hover:bg-indigo-600 text-muted-foreground
-                border-input dark:hover:border-indigo-500">
+ hover:bg-indigo-600 hover:text-white
+ border border-slate-300 hover:border-indigo-500 transition-all
+ bg-accent dark:hover:bg-indigo-600 text-muted-foreground
+ border-input dark:hover:border-indigo-500">
               {p.icon}{p.label}
             </button>
           ))}
@@ -665,8 +665,8 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
       <div className="px-3 py-1.5 border-b border-border">
         <button type="button" onClick={() => setShowVars(v => !v)}
           className="text-sub flex items-center gap-1
-            text-indigo-500 hover:text-indigo-600
-            dark:text-indigo-400 dark:hover:text-indigo-300">
+ text-indigo-500 hover:text-indigo-600
+ dark:text-indigo-400 dark:hover:text-indigo-300">
           {showVars ? <ChevronUp size={11} /> : <ChevronDown size={11} />}
           {t("reporting.blockEditor.variablesToggle")}
         </button>
@@ -674,8 +674,8 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
           <div className="mt-1.5 flex flex-wrap gap-1">
             {VARIABLES.map(v => (
               <code key={v} className="text-2xs px-1.5 py-0.5 rounded font-mono
-                bg-slate-100 text-emerald-700
-                bg-accent dark:text-emerald-400">
+ text-emerald-700
+ bg-accent dark:text-emerald-400">
                 {v}
               </code>
             ))}
@@ -686,7 +686,7 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
       {/* Blok listesi */}
       <div className="flex-1 overflow-y-auto">
         {blocks.length === 0 ? (
-          <div className="flex flex-col items-center justify-center gap-2 h-32 text-slate-600 text-sm">
+          <div className="flex flex-col items-center justify-center gap-2 h-32 text-sm">
             <List size={28} />
             <p>{t("reporting.blockEditor.emptyBlocks")}</p>
           </div>
@@ -696,38 +696,38 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
               <div key={i} className="group">
                 <div
                   className="flex items-center gap-2 px-3 py-2 cursor-pointer select-none
-                    hover:bg-slate-100 dark:hover:bg-slate-800/50"
+ hover: dark:hover:/50"
                   onClick={() => setExpanded(expanded === i ? null : i)}
                 >
                   <span className="w-5 h-5 flex items-center justify-center rounded text-2xs font-bold
-                    bg-slate-200 text-muted-foreground
-                    bg-accent dark:text-muted-foreground">{i + 1}</span>
+ text-muted-foreground
+ bg-accent dark:text-muted-foreground">{i + 1}</span>
                   <span className="text-sub font-semibold w-20 shrink-0
-                    text-indigo-600 dark:text-indigo-400">
+ text-indigo-600 dark:text-indigo-400">
                     {typeLabel(block.type)}
                   </span>
                   <span className="flex-1 text-sub truncate font-mono
-                    text-muted-foreground dark:text-muted-foreground">
+ text-muted-foreground dark:text-muted-foreground">
                     {blockSummary(block, t)}
                   </span>
                   <div className="flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button type="button" onClick={e => { e.stopPropagation(); moveBlock(i, -1) }}
                       disabled={i === 0}
-                      className="p-1 rounded text-muted-foreground hover:text-slate-700
-                        hover:bg-slate-200 dark:hover:bg-slate-700 dark:hover:text-slate-300
-                        disabled:opacity-30 disabled:cursor-not-allowed">
+                      className="p-1 rounded text-muted-foreground hover:
+ hover: dark:hover: dark:hover:
+ disabled:opacity-30 disabled:cursor-not-allowed">
                       <ChevronUp size={12} />
                     </button>
                     <button type="button" onClick={e => { e.stopPropagation(); moveBlock(i, 1) }}
                       disabled={i === blocks.length - 1}
-                      className="p-1 rounded text-muted-foreground hover:text-slate-700
-                        hover:bg-slate-200 dark:hover:bg-slate-700 dark:hover:text-slate-300
-                        disabled:opacity-30 disabled:cursor-not-allowed">
+                      className="p-1 rounded text-muted-foreground hover:
+ hover: dark:hover: dark:hover:
+ disabled:opacity-30 disabled:cursor-not-allowed">
                       <ChevronDown size={12} />
                     </button>
                     <button type="button" onClick={e => { e.stopPropagation(); removeBlock(i) }}
                       className="p-1 rounded text-muted-foreground hover:text-rose-600
-                        hover:bg-rose-50 dark:hover:bg-rose-900/40 dark:hover:text-rose-400">
+ hover:bg-rose-50 dark:hover:bg-rose-900/40 dark:hover:text-rose-400">
                       <Trash2 size={12} />
                     </button>
                   </div>
@@ -738,8 +738,8 @@ export function ReceiptBlockEditor({ blocks, onChange }: Props) {
 
                 {expanded === i && (
                   <div className="px-4 pb-3 pt-1.5 border-t
-                    bg-slate-50 border-border
-                    bg-muted/40 border-border/50">
+ border-border
+ bg-muted/40 border-border/50">
                     <BlockEditor block={block} onUpdate={b => updateBlock(i, b)} branches={branches} />
                   </div>
                 )}

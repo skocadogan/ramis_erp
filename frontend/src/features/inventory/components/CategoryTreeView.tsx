@@ -99,14 +99,14 @@ export function CategoryTreeView({
         <button onClick={() => toggleAll(true)} className="text-xs font-medium px-2.5 py-1.5 rounded-md bg-blue-50 text-blue-700 hover:bg-blue-100 transition-colors dark:bg-blue-900/30 dark:text-blue-400 dark:hover:bg-blue-900/50">
           {t("expandAll")}
         </button>
-        <button onClick={() => toggleAll(false)} className="text-xs font-medium px-2.5 py-1.5 rounded-md bg-slate-100 text-slate-600 hover:bg-slate-200 transition-colors bg-muted dark:text-muted-foreground dark:hover:bg-slate-700">
+        <button onClick={() => toggleAll(false)} className="text-xs font-medium px-2.5 py-1.5 rounded-md hover: transition-colors bg-muted dark:text-muted-foreground dark:hover:">
           {t("collapseAll")}
         </button>
       </div>
 
       <div className="flex-1 overflow-auto">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colName")}</th>
               <th className="text-left px-3 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t("colCodeCount")}</th>
@@ -127,12 +127,12 @@ export function CategoryTreeView({
               <tr><td colSpan={3} className="text-center py-12 text-muted-foreground dark:text-muted-foreground">{t("empty")}</td></tr>
             ) : (
               getVisibleCategories(categories).map(cat => (
-                <tr key={cat.id} className="border-b border-slate-100 hover:bg-slate-50/50 group transition-colors border-border dark:hover:bg-slate-800/50">
+                <tr key={cat.id} className="border-b border-slate-100 hover:/50 group transition-colors border-border dark:hover:/50">
                   <td className="px-3 py-2">
                     <div className="flex items-center gap-1" style={{ marginLeft: `${cat.depth * 2}rem` }}>
                       <div className="w-6 h-6 flex items-center justify-center">
                         {cat.hasChildren ? (
-                          <button onClick={(e) => toggleExpand(cat.id, e)} className="p-1 hover:bg-slate-200 dark:hover:bg-slate-700 rounded text-muted-foreground transition-colors">
+                          <button onClick={(e) => toggleExpand(cat.id, e)} className="p-1 hover: dark:hover: rounded text-muted-foreground transition-colors">
                             {expandedIds.has(cat.id) ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
                           </button>
                         ) : (
@@ -156,7 +156,7 @@ export function CategoryTreeView({
                   </td>
                   <td className="px-3 py-2">
                     <div className="flex items-center gap-2">
-                      <span className="px-2 py-0.5 rounded-md bg-slate-100 text-muted-foreground text-2xs font-mono border border-border uppercase bg-muted dark:text-muted-foreground border-input">
+                      <span className="px-2 py-0.5 rounded-md text-muted-foreground text-2xs font-mono border border-border uppercase bg-muted dark:text-muted-foreground border-input">
                         {cat.code}
                       </span>
                       <span className="text-sub font-medium text-muted-foreground dark:text-muted-foreground">

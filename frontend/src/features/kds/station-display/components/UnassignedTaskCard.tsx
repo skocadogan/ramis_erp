@@ -45,7 +45,7 @@ export function UnassignedTaskCard({
     <div
       className={cn(
         "flex flex-col gap-4 rounded-2xl border-2 p-5 transition-colors duration-300",
-        "border-dashed border-slate-600/50 bg-slate-900/60 hover:border-slate-500/50"
+        "border-dashed border-slate-600/50 /60 hover:border-slate-500/50"
       )}
     >
       {/* ─── Header ─── */}
@@ -67,13 +67,13 @@ export function UnassignedTaskCard({
           >
             👥 Herkes
           </h3>
-          <div className="flex items-center gap-2 text-xs text-slate-400">
+          <div className="flex items-center gap-2 text-xs">
             <span className="inline-flex items-center gap-1">
-              <span className="h-1.5 w-1.5 rounded-full bg-slate-500" />
+              <span className="h-1.5 w-1.5 rounded-full" />
               {tasks.length} görev
             </span>
             {totalTargetQty > 0 && (
-              <span className="text-slate-500">
+              <span className="">
                 Toplam: {totalCompletedQty}/{totalTargetQty}
               </span>
             )}
@@ -98,7 +98,7 @@ export function UnassignedTaskCard({
       </div>
 
       {/* ─── Divider ─── */}
-      <div className="h-px bg-slate-700/30" />
+      <div className="h-px /30" />
 
       {/* ─── Task List ─── */}
       <div className="flex flex-col gap-3">
@@ -120,7 +120,7 @@ function ActiveTaskItem({ task }: { task: PrepTask }) {
       : 0;
 
   return (
-    <div className="group rounded-xl border border-slate-700/40 bg-slate-900/60 p-3.5 transition-all duration-200 hover:border-slate-600/50">
+    <div className="group rounded-xl border border-slate-700/40 /60 p-3.5 transition-all duration-200 hover:border-slate-600/50">
       {/* Row 1: Status dot + title + deadline */}
       <div className="flex items-start justify-between gap-2">
         <div className="flex min-w-0 flex-1 items-center gap-2.5">
@@ -158,7 +158,7 @@ function ActiveTaskItem({ task }: { task: PrepTask }) {
                   ? "text-red-400"
                   : deadline.isUrgent
                     ? "text-amber-400"
-                    : "text-slate-400"
+                    : ""
               )}
             >
               <Timer size={12} />
@@ -172,10 +172,10 @@ function ActiveTaskItem({ task }: { task: PrepTask }) {
       {task.target_quantity > 0 && (
         <div className="mt-2.5 space-y-1.5">
           <div className="flex items-center justify-between text-xs">
-            <span className="font-medium text-slate-400">
+            <span className="font-medium">
               {task.completed_quantity}/{task.target_quantity}{" "}
               {task.unit && (
-                <span className="text-slate-500">{task.unit}</span>
+                <span className="">{task.unit}</span>
               )}
             </span>
             <span
@@ -197,7 +197,7 @@ function ActiveTaskItem({ task }: { task: PrepTask }) {
 
       {/* Compact description */}
       {task.description && (
-        <p className="mt-1.5 line-clamp-1 text-xs text-slate-500">
+        <p className="mt-1.5 line-clamp-1 text-xs">
           {task.description}
         </p>
       )}

@@ -46,7 +46,7 @@ const CreditAccountRow = memo(function CreditAccountRow({
     <tr
       data-index={index}
       ref={measureElement}
-      className="border-t border-border hover:bg-slate-50/80 border-border dark:hover:bg-slate-800/40"
+      className="border-t border-border hover:/80 border-border dark:hover:/40"
     >
       <td className="px-4 py-3 font-semibold">{account.full_name}</td>
       <td className="px-4 py-3 text-muted-foreground">{account.user_username ?? "—"}</td>
@@ -62,7 +62,7 @@ const CreditAccountRow = memo(function CreditAccountRow({
           <button
             type="button"
             onClick={() => onView(account)}
-            className="rounded-md p-2 text-muted-foreground hover:bg-slate-100 dark:hover:bg-slate-800"
+            className="rounded-md p-2 text-muted-foreground hover: dark:hover:"
             aria-label={viewLabel}
           >
             <Eye size={16} />
@@ -72,7 +72,7 @@ const CreditAccountRow = memo(function CreditAccountRow({
               <button
                 type="button"
                 onClick={() => onEdit(account)}
-                className="rounded-md p-2 text-muted-foreground hover:bg-slate-100 dark:hover:bg-slate-800"
+                className="rounded-md p-2 text-muted-foreground hover: dark:hover:"
               >
                 <Pencil size={16} />
               </button>
@@ -136,7 +136,7 @@ export const CreditAccountsTable = memo(function CreditAccountsTable({
       className="max-h-[min(70vh,640px)] overflow-auto rounded-xl border border-border border-border bg-card"
     >
       <table className="w-full min-w-[720px] text-sm">
-        <thead className="sticky top-0 z-10 bg-slate-50 text-left text-xs font-bold uppercase text-muted-foreground bg-muted/95">
+        <thead className="sticky top-0 z-10 text-left text-xs font-bold uppercase text-muted-foreground bg-muted/95">
           <tr>
             <th className="px-4 py-3">{t("table.name")}</th>
             <th className="px-4 py-3">{t("table.user")}</th>

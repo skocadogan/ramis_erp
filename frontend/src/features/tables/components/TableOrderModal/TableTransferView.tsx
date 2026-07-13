@@ -55,20 +55,20 @@ export const TableTransferView: React.FC<TableTransferViewProps> = ({
                                 onClick={() => handleTransferTable(tbl.id)}
                                 disabled={isTransferLoading}
                                 className={`flex flex-col items-center justify-center p-3 rounded-xl border text-center transition-all h-20
-                                    ${tbl.status === 'OCCUPIED' 
-                                        ? 'bg-amber-50 border-amber-200 dark:bg-amber-900/10 dark:border-amber-800 shadow-sm' 
-                                        : 'border-border hover:border-blue-400 hover:bg-blue-50 bg-muted border-border shadow-sm'
-                                    }`}
+ ${tbl.status === 'OCCUPIED' 
+ ? 'bg-amber-50 border-amber-200 dark:bg-amber-900/10 dark:border-amber-800 shadow-sm' 
+ : 'border-border hover:border-blue-400 hover:bg-blue-50 bg-muted border-border shadow-sm'
+ }`}
                             >
                                 <span className={`text-2xs font-bold uppercase tracking-tighter mb-1 ${tbl.status === 'OCCUPIED' ? 'text-amber-600' : 'text-muted-foreground'}`}>
                                     {tbl.status === 'OCCUPIED' ? t('occupiedMerge') : tStatus('free')}
                                 </span>
-                                <span className="text-sm font-bold text-slate-800 text-foreground">{tbl.name}</span>
+                                <span className="text-sm font-bold text-foreground">{tbl.name}</span>
                             </button>
                         ))}
                 </div>
                 {isTransferLoading && (
-                    <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 bg-card/60 dark:motion-reduce:bg-slate-900/75">
+                    <div className="absolute inset-0 z-10 flex items-center justify-center rounded-xl bg-white/60 backdrop-blur-[1px] motion-reduce:backdrop-blur-none motion-reduce:bg-white/75 bg-card/60 dark:motion-reduce:/75">
                         <div className="bg-card p-4 rounded-2xl shadow-lg border border-border flex items-center gap-3">
                             <Loader2 size={18} className="animate-spin text-blue-600" />
                             <span className="text-xs font-bold text-foreground">{t('transferring')}</span>

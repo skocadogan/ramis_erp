@@ -77,13 +77,13 @@ export function BranchesTab({
         </div>
 
         {canManageBranches ? (
-          <div className="flex items-center bg-slate-100 p-1 rounded-lg bg-muted">
+          <div className="flex items-center p-1 rounded-lg bg-muted">
             <button
               type="button"
               onClick={() => setShowDeleted(false)}
               className={cn(
                 "px-3 py-1 text-xs font-medium rounded-md transition-all",
-                !showDeleted ? "shadow-sm text-blue-600 bg-accent dark:text-blue-400" : "text-muted-foreground hover:text-slate-700"
+                !showDeleted ? "shadow-sm text-blue-600 bg-accent dark:text-blue-400" : "text-muted-foreground hover:"
               )}
             >
               {t('activeBranches', { count: branches.length })}
@@ -93,7 +93,7 @@ export function BranchesTab({
               onClick={() => setShowDeleted(true)}
               className={cn(
                 "px-3 py-1 text-xs font-medium rounded-md transition-all flex items-center gap-1",
-                showDeleted ? "shadow-sm text-red-600 bg-accent dark:text-red-400" : "text-muted-foreground hover:text-slate-700"
+                showDeleted ? "shadow-sm text-red-600 bg-accent dark:text-red-400" : "text-muted-foreground hover:"
               )}
             >
               {t('deletedBranches', { count: deletedBranches.length })}
@@ -104,7 +104,7 @@ export function BranchesTab({
 
       <div className="rounded-lg border border-border overflow-auto bg-card border-border">
         <table className="w-full text-sm">
-          <thead className="bg-slate-50 border-b border-border bg-muted border-border">
+          <thead className="border-b border-border bg-muted border-border">
             <tr>
               <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('name')}</th>
               <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground uppercase tracking-wider dark:text-muted-foreground">{t('code')}</th>
@@ -133,11 +133,11 @@ export function BranchesTab({
               </tr>
             ) : (
             filtered.map(b => (
-              <tr key={b.id} className="border-b border-slate-100 hover:bg-slate-50/50 border-border dark:hover:bg-slate-800/50">
+              <tr key={b.id} className="border-b border-slate-100 hover:/50 border-border dark:hover:/50">
                 <td className="px-4 py-3 font-medium text-foreground">{b.name}</td>
                 <td className="px-4 py-3 font-mono text-xs text-muted-foreground">{b.code}</td>
                 <td className="px-4 py-3 text-muted-foreground">{b.phone || "-"}</td>
-                <td className="px-4 py-3 text-slate-600 text-xs dark:text-muted-foreground">{b.address || "-"}</td>
+                <td className="px-4 py-3 text-xs dark:text-muted-foreground">{b.address || "-"}</td>
                 {canManageBranches ? (
                 <>
                 <td className="px-4 py-3">
@@ -150,7 +150,7 @@ export function BranchesTab({
                   <div className="flex items-center justify-end gap-1">
                     {!showDeleted ? (
                       <>
-                        <button type="button" onClick={() => setEditingBranch(b)} className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-blue-600 transition dark:hover:bg-slate-800" title={tAdmin('common.edit')}>
+                        <button type="button" onClick={() => setEditingBranch(b)} className="p-1.5 rounded-md hover: text-muted-foreground hover:text-blue-600 transition dark:hover:" title={tAdmin('common.edit')}>
                           <Edit size={14} />
                         </button>
                         {isAdmin && (
@@ -191,7 +191,7 @@ export function BranchesTab({
                     <button
                       type="button"
                       onClick={() => setSelectedBranch(b)}
-                      className="p-1.5 rounded-md hover:bg-slate-100 text-muted-foreground hover:text-blue-600 transition dark:hover:bg-slate-800"
+                      className="p-1.5 rounded-md hover: text-muted-foreground hover:text-blue-600 transition dark:hover:"
                       title={t('details')}
                     >
                       <Eye size={14} />

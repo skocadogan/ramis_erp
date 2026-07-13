@@ -332,7 +332,7 @@ function PrepManagementContent() {
         <div className="flex items-center justify-between border-b border-slate-100 px-4 py-2 bg-card border-border shrink-0">
           <div className="flex items-center gap-3">
             <div>
-              <h1 className="text-lg font-bold text-slate-900 dark:text-white leading-tight">
+              <h1 className="text-lg font-bold dark:text-white leading-tight">
                 {t("management.title")}
                 {activeTab === 'templates' && templatesTotalCount > 0 && <span className="ml-2 text-xs font-normal text-muted-foreground">({templatesTotalCount})</span>}
                 {activeTab === 'smart-rules' && rulesTotalCount > 0 && <span className="ml-2 text-xs font-normal text-muted-foreground">({rulesTotalCount})</span>}
@@ -416,7 +416,7 @@ function PrepManagementContent() {
                   "flex items-center gap-2 px-4 py-3 text-sm font-medium border-b-2 transition-colors whitespace-nowrap",
                   activeTab === tab.value
                     ? 'border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400'
-                    : 'border-transparent text-muted-foreground hover:text-slate-700 hover:border-slate-300 dark:text-muted-foreground dark:hover:text-slate-200'
+                    : 'border-transparent text-muted-foreground hover: hover:border-slate-300 dark:text-muted-foreground dark:hover:'
                 )}
               >
                 <tab.icon size={16} />
@@ -476,7 +476,7 @@ function PrepManagementContent() {
                     }
                     className={cn(
                       "bg-card/40 p-3 rounded-xl border shadow-sm flex items-center gap-3 text-left w-full",
-                      isTaskStatCard && "cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-slate-800/60",
+                      isTaskStatCard && "cursor-pointer transition-colors hover: dark:hover:/60",
                       isSelected
                         ? "border-blue-500 ring-2 ring-blue-500/20 dark:border-blue-400"
                         : "border-border",
@@ -493,7 +493,7 @@ function PrepManagementContent() {
                     </div>
                     <div>
                       <p className="text-sub font-semibold text-muted-foreground leading-none mb-1">{t(`management.stats.${stat.labelKey}`)}</p>
-                      <p className="text-base font-bold text-slate-900 dark:text-white leading-none">{stat.value}</p>
+                      <p className="text-base font-bold dark:text-white leading-none">{stat.value}</p>
                     </div>
                   </CardTag>
                 );
@@ -526,7 +526,7 @@ function PrepManagementContent() {
                         onClick={() => setSmartSubTab('suggestions')}
                         className={cn(
                           "px-4 py-1.5 text-xs font-semibold rounded-md transition-all",
-                          smartSubTab === 'suggestions' ? "bg-card text-purple-600 shadow-sm" : "text-muted-foreground hover:text-slate-700"
+                          smartSubTab === 'suggestions' ? "bg-card text-purple-600 shadow-sm" : "text-muted-foreground hover:"
                         )}
                       >
                         {t("management.smartSubTabs.suggestions")}
@@ -535,7 +535,7 @@ function PrepManagementContent() {
                         onClick={() => setSmartSubTab('rules')}
                         className={cn(
                           "px-4 py-1.5 text-xs font-semibold rounded-md transition-all",
-                          smartSubTab === 'rules' ? "bg-card text-purple-600 shadow-sm" : "text-muted-foreground hover:text-slate-700"
+                          smartSubTab === 'rules' ? "bg-card text-purple-600 shadow-sm" : "text-muted-foreground hover:"
                         )}
                       >
                         {t("management.smartSubTabs.ruleManagement")}
@@ -629,7 +629,7 @@ function PrepManagementContent() {
 
                   {activeTab === 'settings' && (
                     <div className="p-6 space-y-6 bg-card">
-                      <h3 className="text-sm font-bold text-slate-900 dark:text-white">{t("management.moduleSettings")}</h3>
+                      <h3 className="text-sm font-bold dark:text-white">{t("management.moduleSettings")}</h3>
                       <div className="space-y-4">
                         <div className="flex items-center justify-between gap-4 p-4 bg-muted/50 rounded-xl border border-transparent border-border">
                           <div className="min-w-0 flex-1">
@@ -678,7 +678,7 @@ function PrepManagementContent() {
             </div>
 
             <div className="shrink-0 mt-4 p-4 bg-card border border-border rounded-xl shadow-sm">
-              <h4 className="text-xs font-bold text-slate-500 mb-3 flex items-center gap-2">
+              <h4 className="text-xs font-bold mb-3 flex items-center gap-2">
                 <Sparkles size={14} className="text-blue-500" />
                 {t("management.tipsTitle")}
               </h4>

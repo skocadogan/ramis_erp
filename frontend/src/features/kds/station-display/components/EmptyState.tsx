@@ -9,10 +9,10 @@ export function EmptyState({ stationColor }: { stationColor: string }) {
       >
         <ChefHat size={40} />
       </div>
-      <p className="text-2xl font-bold text-slate-400">
+      <p className="text-2xl font-bold">
         Hazırlık görevi yok
       </p>
-      <p className="mt-2 text-slate-600">
+      <p className="mt-2">
         Bu istasyon için aktif görev bulunmuyor.
       </p>
     </div>

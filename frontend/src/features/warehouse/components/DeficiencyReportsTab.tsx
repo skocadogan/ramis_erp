@@ -297,7 +297,7 @@ export function DeficiencyReportsTab({ branchId }: { branchId?: string }) {
             </div>
           ) : (
             <div className="text-center py-20">
-              <AlertCircle size={40} className="text-slate-200 mx-auto mb-2" />
+              <AlertCircle size={40} className="mx-auto mb-2" />
               <span className="text-muted-foreground font-medium">{t("deficiencyReports.empty")}</span>
             </div>
           )

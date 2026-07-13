@@ -37,7 +37,7 @@ const CreditTransactionRow = memo(function CreditTransactionRow({
       data-index={index}
       ref={measureElement}
       onClick={clickable ? () => onRowClick?.(tx) : undefined}
-      className={`border-t border-border border-border ${clickable ? "cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/60" : ""}`}
+      className={`border-t border-border border-border ${clickable ? "cursor-pointer hover: dark:hover:/60" : ""}`}
     >
       <td className="px-3 py-2 whitespace-nowrap">{formatDate(tx.created_at)}</td>
       <td className="px-3 py-2">{tx.transaction_type_display}</td>

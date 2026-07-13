@@ -506,7 +506,8 @@
       "order_item": {
         "cancelled": "Order Item Cancelled",
         "discount_applied": "Item Discount Applied",
-        "recalled": "KDS Item Recalled"
+        "recalled": "KDS Item Recalled",
+        "quantity_increased_kitchen_resend": "Item Quantity Increased — Kitchen Resend"
       },
       "sale": {
         "created": "Sale Created"
@@ -545,7 +546,8 @@
           "approved": "Deficiency Report Approved",
           "cancelled": "Deficiency Report Cancelled",
           "ordered": "Deficiency Report Ordered",
-          "item_actions_executed": "Deficiency Item Actions Executed"
+          "item_actions_executed": "Deficiency Item Actions Executed",
+          "repair_skipped": "Deficiency Repair Skipped"
         }
       },
       "inventory": {
@@ -575,7 +577,8 @@
       "production_planning": {
         "availability": {
           "auto_purged": "Expired 86 Record Auto-Deleted",
-          "purge_expired_completed": "Expired 86 Batch Purge Completed"
+          "purge_expired_completed": "Expired 86 Batch Purge Completed",
+          "purge_expired_skipped": "Expired 86 Batch Purge Skipped"
         }
       }
     },

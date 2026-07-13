@@ -506,7 +506,8 @@
       "order_item": {
         "cancelled": "Ürün İptali",
         "discount_applied": "Ürün İndirimi",
-        "recalled": "KDS Geri Çağır"
+        "recalled": "KDS Geri Çağır",
+        "quantity_increased_kitchen_resend": "Ürün Adedi Artırıldı — Mutfakına Yeniden Gönderim"
       },
       "sale": {
         "created": "Satış Oluşturma"
@@ -545,7 +546,8 @@
           "approved": "Eksik Listesi Onayı",
           "cancelled": "Eksik Listesi İptali",
           "ordered": "Eksik Listesinden Sipariş",
-          "item_actions_executed": "Eksik Kalem İşlemleri Uygulandı"
+          "item_actions_executed": "Eksik Kalem İşlemleri Uygulandı",
+          "repair_skipped": "Eksik Listesi Tamir Atlandı"
         }
       },
       "inventory": {
@@ -575,7 +577,8 @@
       "production_planning": {
         "availability": {
           "auto_purged": "Geçmiş 86 Kaydı Otomatik Silindi",
-          "purge_expired_completed": "Geçmiş 86 Toplu Temizlik Tamamlandı"
+          "purge_expired_completed": "Geçmiş 86 Toplu Temizlik Tamamlandı",
+          "purge_expired_skipped": "Geçmiş 86 Toplu Temizlik Atlandı"
         }
       }
     },

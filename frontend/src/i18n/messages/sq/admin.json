@@ -506,7 +506,8 @@
       "order_item": {
         "cancelled": "Artikulli i porosisë u anulua",
         "discount_applied": "Zbritja e artikullit u aplikua",
-        "recalled": "Artikulli KDS u tërhoq"
+        "recalled": "Artikulli KDS u tërhoq",
+        "quantity_increased_kitchen_resend": "Sasia e artikullit u rrit — ridërgim në kuzhinë"
       },
       "sale": {
         "created": "Shitja u krijua"
@@ -545,7 +546,8 @@
           "approved": "Raporti i mungesave u miratua",
           "cancelled": "Raporti i mungesave u anulua",
           "ordered": "Raporti i mungesave u porosit",
-          "item_actions_executed": "Veprimet e artikujve të raportit të mungesave u ekzekutuan"
+          "item_actions_executed": "Veprimet e artikujve të raportit të mungesave u ekzekutuan",
+          "repair_skipped": "Riparimi i raportit të mungesave u kapërceu"
         }
       },
       "inventory": {
@@ -575,7 +577,8 @@
       "production_planning": {
         "availability": {
           "auto_purged": "Regjistër 86 i skaduar fshirë automatikisht",
-          "purge_expired_completed": "Pastrimi në grup i 86 të skaduara u përfundua"
+          "purge_expired_completed": "Pastrimi në grup i 86 të skaduara u përfundua",
+          "purge_expired_skipped": "Pastrimi në grup i 86 të skaduara u kapërceu"
         }
       }
     },

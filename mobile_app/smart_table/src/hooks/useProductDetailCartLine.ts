@@ -118,9 +118,9 @@ export function useProductDetailCartLine(
     setDraftQuantity(currentLineQuantity);
   }, [product, unit, variant, modifiers, currentLineQuantity]);
 
-  const [prevCartLineProductId, setPrevCartLineProductId] = useState(
-    product?.id ?? null,
-  );
+  const [prevCartLineProductId, setPrevCartLineProductId] = useState<
+    string | null
+  >(null);
   if (prevCartLineProductId !== (product?.id ?? null)) {
     setPrevCartLineProductId(product?.id ?? null);
     if (!product?.id) {

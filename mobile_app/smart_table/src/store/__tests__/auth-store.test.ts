@@ -18,28 +18,51 @@ jest.mock("@/services/api-tokens", () => ({
 jest.mock("@/services/api", () => ({}));
 
 jest.mock("../table-store", () => {
-  type TableStoreMock = {
-    selectedTable: null;
-    init: jest.Mock;
-  };
-
-  type MockZustandHook = jest.Mock & {
-    getState: jest.Mock;
-    setState: jest.Mock;
-    subscribe: jest.Mock;
-  };
-
-  const mockState: TableStoreMock = {
+  const mockState = {
     selectedTable: null,
     init: jest.fn().mockResolvedValue(undefined),
   };
-  const hook = jest.fn((selector?: (s: TableStoreMock) => unknown) =>
+  const hook = jest.fn((selector?: (s: typeof mockState) => unknown) =>
     selector ? selector(mockState) : mockState,
-  ) as unknown as MockZustandHook;
-  hook.getState = jest.fn(() => mockState);
-  hook.setState = jest.fn();
-  hook.subscribe = jest.fn(() => () => {});
+  );
+  Object.assign(hook, {
+    getState: jest.fn(() => mockState),
+    setState: jest.fn(),
+    subscribe: jest.fn(() => () => {}),
+  });
   return { useTableStore: hook };
+});
+
+jest.mock("../cart-store", () => {
+  const mockState = {
+    clearCart: jest.fn(),
+    setTable: jest.fn(),
+  };
+  const hook = jest.fn((selector?: (s: typeof mockState) => unknown) =>
+    selector ? selector(mockState) : mockState,
+  );
+  Object.assign(hook, {
+    getState: jest.fn(() => mockState),
+    setState: jest.fn(),
+    subscribe: jest.fn(() => () => {}),
+  });
+  return { useCartStore: hook };
+});
+
+jest.mock("../order-store", () => {
+  const mockState = {
+    clearOrders: jest.fn(),
+    resolvedTableId: null,
+  };
+  const hook = jest.fn((selector?: (s: typeof mockState) => unknown) =>
+    selector ? selector(mockState) : mockState,
+  );
+  Object.assign(hook, {
+    getState: jest.fn(() => mockState),
+    setState: jest.fn(),
+    subscribe: jest.fn(() => () => {}),
+  });
+  return { useOrderStore: hook };
 });
 
 import * as SecureStore from "expo-secure-store";

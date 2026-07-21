@@ -246,7 +246,7 @@ const OrderItemRow = React.memo(
               {item.note}
             </Text>
           </View>
-        )}
+        ) : null}
 
         {/* Cancel Item Action */}
         {(itemDisplayStatus === "SENT_TO_KITCHEN" ||
@@ -783,7 +783,7 @@ export default function OrderDetailSheet({
                   />
                   {order.note ? (
                     <OrderDetailNote note={order.note} language={language} />
-                  )}
+                  ) : null}
                   <OrderDetailPaymentSummary
                     totalAmount={order.totalAmount}
                     language={language}

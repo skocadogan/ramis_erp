@@ -5,49 +5,31 @@
 import { useCartStore } from "../cart-store";
 import type { Product, ProductUnitInfo } from "@/types";
 
-const product: Product = {
+const product = {
   id: "p1",
   name: "Burger",
   nameEn: "Burger",
   description: "",
   descriptionEn: "",
+  ingredients: "",
+  ingredientsEn: "",
   categoryId: "c1",
   categoryName: "Food",
   imageUrl: "",
+  images: [],
   basePrice: 100,
-  salePrice: 100,
+  grossPrice: 100,
+  taxRate: 0,
   discountRate: 0,
-  hasDiscount: false,
-  isAvailable: true,
-  rating: 0,
-  ratingCount: 0,
-  calories: null,
-  allergens: [],
   units: [],
   variants: [],
-  modifierGroups: [
-    {
-      id: "g1",
-      name: "Extras",
-      nameEn: "Extras",
-      isRequired: false,
-      isMultiple: true,
-      minSelection: 0,
-      maxSelection: 3,
-      modifiers: [
-        {
-          id: "m1",
-          name: "Cheese",
-          nameEn: "Cheese",
-          price: 10,
-          isAvailable: true,
-        },
-      ],
-    },
-  ],
-  recommendedProductIds: [],
-  tags: [],
-};
+  modifierGroups: [],
+  allergens: [],
+  isAllergenic: false,
+  isCombined: false,
+  isActive: true,
+  showOnPos: true,
+} as Product;
 
 const unit: ProductUnitInfo = {
   id: "p1-standard",

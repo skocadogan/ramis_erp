@@ -45,19 +45,25 @@ def accessible_branch_id_strings(user: AbstractBaseUser) -> frozenset[str] | Non
 
         # 2. Garson atamaları (lazy-load ile döngüsel bağımlılık önlenir)
         WaiterBranchAssignment = apps.get_model("branches", "WaiterBranchAssignment")
-        wba = WaiterBranchAssignment.objects.filter(user=user).values_list("branch_id", flat=True)
+        wba = WaiterBranchAssignment.objects.filter(
+            user=user, is_active=True
+        ).values_list("branch_id", flat=True)
         for raw in wba:
             ids.add(str(raw))
 
         # 3. Aşçı atamaları
         CookStationAssignment = apps.get_model("branches", "CookStationAssignment")
-        csa = CookStationAssignment.objects.filter(user=user).values_list("branch_id", flat=True)
+        csa = CookStationAssignment.objects.filter(
+            user=user, is_active=True
+        ).values_list("branch_id", flat=True)
         for raw in csa:
             ids.add(str(raw))
 
         # 4. Müdür atamaları
         ManagerBranchAssignment = apps.get_model("branches", "ManagerBranchAssignment")
-        mba = ManagerBranchAssignment.objects.filter(user=user).values_list("branch_id", flat=True)
+        mba = ManagerBranchAssignment.objects.filter(
+            user=user, is_active=True
+        ).values_list("branch_id", flat=True)
         for raw in mba:
             ids.add(str(raw))
     except Exception:

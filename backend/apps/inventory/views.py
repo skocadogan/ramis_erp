@@ -872,7 +872,17 @@ class SupplierViewSet(viewsets.ModelViewSet):
         qs = GoodsReceiving.objects.filter(
             supplier_id=pk,
             is_active=True,
-        ).select_related("warehouse", "received_by").order_by("-received_date", "-id")
+        ).select_related("warehouse", "received_by").annotate(
+            items_count=Count("items", filter=Q(items__is_active=True)),
+            rejected_items_count=Count(
+                "items",
+                filter=Q(items__is_active=True, items__rejected_quantity__gt=0),
+            ),
+            accepted_items_count=Count(
+                "items",
+                filter=Q(items__is_active=True, items__received_quantity__gt=0),
+            ),
+        ).order_by("-received_date", "-id")
 
         if start_date:
             qs = qs.filter(received_date__gte=start_date)
@@ -898,9 +908,9 @@ class SupplierViewSet(viewsets.ModelViewSet):
                 "status_display": rec.get_status_display(),
                 "warehouse_name": rec.warehouse.name,
                 "total_amount": float(rec.total_amount),
-                "items_count": rec.items.filter(is_active=True).count(),
-                "rejected_items_count": rec.items.filter(is_active=True, rejected_quantity__gt=0).count(),
-                "accepted_items_count": rec.items.filter(is_active=True, received_quantity__gt=0).count(),
+                "items_count": rec.items_count,
+                "rejected_items_count": rec.rejected_items_count,
+                "accepted_items_count": rec.accepted_items_count,
                 "invoice_number": rec.invoice_number or "",
                 "waybill_number": rec.waybill_number or "",
                 "notes": rec.notes or "",
@@ -914,8 +924,8 @@ class SupplierViewSet(viewsets.ModelViewSet):
 class StockCategoryViewSet(viewsets.ModelViewSet):
     permission_classes = [RBACPermission]
     permission_description = 'Stok kategorisi yönetimi'
-    queryset = StockCategory.objects.select_related('parent').annotate(
-        items_count=Count('stock_items')
+    queryset = StockCategory.objects.filter(is_active=True).select_related('parent').annotate(
+        items_count=Count('stock_items', filter=Q(stock_items__is_active=True))
     ).order_by('name', 'id')
     serializer_class = StockCategorySerializer
     filter_backends = [filters.SearchFilter]
@@ -941,7 +951,7 @@ class StockCategoryViewSet(viewsets.ModelViewSet):
 class StockUnitViewSet(viewsets.ModelViewSet):
     serializer_class = StockUnitSerializer
     permission_classes = [RBACPermission]
-    queryset = StockUnit.objects.all()
+    queryset = StockUnit.objects.filter(is_active=True)
 
     def get_permissions(self):
         read_codes = ['inventory.view_stock_unit', 'inventory.manage_stock_unit']

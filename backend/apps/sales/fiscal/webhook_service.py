@@ -11,8 +11,10 @@ from apps.sales.models import FiscalBasketStatus, FiscalPendingBasket
 
 logger = logging.getLogger(__name__)
 
-WEBHOOK_WAIT_INTERVAL_SECONDS = 1.5
+WEBHOOK_WAIT_INTERVAL_SECONDS = 0.25
+WEBHOOK_WAIT_MAX_INTERVAL_SECONDS = 2.0
 WEBHOOK_WAIT_TIMEOUT_SECONDS = 120
+WEBHOOK_WAIT_REDIS_CHUNK_SECONDS = 5
 
 
 def build_fiscal_webhook_url(terminal_id) -> str | None:
@@ -23,7 +25,48 @@ def build_fiscal_webhook_url(terminal_id) -> str | None:
     return f"{base}/api/v1/sales/fiscal/webhook/{terminal_id}/"
 
 
+def _basket_wait_key(basket_id: str) -> str:
+    return f"fiscal:basket_wait:{basket_id}"
+
+
+def _redis_client():
+    """İsteğe bağlı Redis — yoksa None (locmem / import hatası)."""
+    url = (getattr(settings, "REDIS_CACHE_URL", None) or "").strip()
+    if not url:
+        return None
+    try:
+        import redis
+    except ImportError:
+        return None
+    try:
+        return redis.from_url(url)
+    except Exception:
+        logger.debug("fiscal wait redis bağlantısı kurulamadı", exc_info=True)
+        return None
+
+
+def notify_basket_waiters(basket_id: str) -> None:
+    """Webhook sonrası bekleyen thread'i uyandırır (Redis BLPOP)."""
+    client = _redis_client()
+    if client is None:
+        return
+    try:
+        key = _basket_wait_key(basket_id)
+        pipe = client.pipeline()
+        pipe.lpush(key, "1")
+        pipe.expire(key, int(WEBHOOK_WAIT_TIMEOUT_SECONDS) + 60)
+        pipe.execute()
+    except Exception:
+        logger.debug("fiscal wait notify başarısız: basket_id=%s", basket_id, exc_info=True)
+
+
 def register_pending_basket(sale, basket_id: str, terminal) -> FiscalPendingBasket:
+    client = _redis_client()
+    if client is not None:
+        try:
+            client.delete(_basket_wait_key(basket_id))
+        except Exception:
+            logger.debug("fiscal wait key temizlenemedi: basket_id=%s", basket_id, exc_info=True)
     return FiscalPendingBasket.objects.create(
         sale=sale,
         pos_terminal=terminal,
@@ -38,10 +81,22 @@ def wait_for_basket_completion(
     timeout: float = WEBHOOK_WAIT_TIMEOUT_SECONDS,
     interval: float = WEBHOOK_WAIT_INTERVAL_SECONDS,
 ) -> FiscalPendingBasket:
-    """Webhook veya DB güncellemesini bekler. Zaman aşımında TimeoutError fırlatır."""
+    """
+    Webhook veya DB güncellemesini bekler. Zaman aşımında TimeoutError fırlatır.
+
+    Redis varsa BLPOP ile bloklar (busy-spin yok); yoksa üstel backoff ile uyur.
+    """
     deadline = time.monotonic() + timeout
-    while time.monotonic() < deadline:
-        pending = FiscalPendingBasket.objects.filter(basket_id=basket_id).first()
+    sleep_interval = interval
+    client = _redis_client()
+    wait_key = _basket_wait_key(basket_id)
+
+    while True:
+        pending = (
+            FiscalPendingBasket.objects.filter(basket_id=basket_id)
+            .only("id", "status", "error_message", "result_payload", "basket_id")
+            .first()
+        )
         if pending is None:
             raise OrderValidationError("Mali sepet kaydı bulunamadı.")
 
@@ -58,9 +113,23 @@ def wait_for_basket_completion(
                 pending.error_message or "Yazar kasa mali işlemi başarısız oldu."
             )
 
-        time.sleep(interval)
+        remaining = deadline - time.monotonic()
+        if remaining <= 0:
+            raise TimeoutError(f"Webhook zaman aşımı ({timeout}s): basket_id={basket_id}")
 
-    raise TimeoutError(f"Webhook zaman aşımı ({timeout}s): basket_id={basket_id}")
+        if client is not None:
+            try:
+                chunk = max(1, min(int(remaining), WEBHOOK_WAIT_REDIS_CHUNK_SECONDS))
+                client.blpop(wait_key, timeout=chunk)
+                continue
+            except Exception:
+                logger.debug("fiscal wait blpop başarısız, sleep fallback", exc_info=True)
+
+        time.sleep(min(sleep_interval, remaining))
+        sleep_interval = min(
+            sleep_interval * 1.5,
+            WEBHOOK_WAIT_MAX_INTERVAL_SECONDS,
+        )
 
 
 def pending_basket_to_driver_result(pending: FiscalPendingBasket, terminal_id: str) -> dict:
@@ -165,6 +234,7 @@ def handle_token_webhook(terminal, payload: dict) -> bool:
             "updated_at",
         ]
     )
+    notify_basket_waiters(basket_id)
     logger.info(
         "Token webhook BASKET_COMPLETED işlendi: basket_id=%s status=%s",
         basket_id,

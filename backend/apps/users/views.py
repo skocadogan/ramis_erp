@@ -21,7 +21,13 @@ from .serializers import (
     ChangePasswordSerializer,
     PosScreenPreferencesPatchSerializer,
 )
-from .services import assign_pos_terminal_preference, set_jwt_auth_cookies
+from .services import (
+    assign_pos_terminal_preference,
+    set_jwt_auth_cookies,
+    assert_actor_may_set_branch,
+    assert_actor_may_assign_roles,
+    assert_actor_may_manage_target,
+)
 
 User = get_user_model()
 
@@ -173,10 +179,19 @@ class UserAdminViewSet(viewsets.ModelViewSet):
             return UserDetailSerializer
         return UserListSerializer
 
+    def destroy(self, request, *args, **kwargs):
+        user = self.get_object()
+        assert_actor_may_manage_target(request.user, user)
+        return super().destroy(request, *args, **kwargs)
+
     def create(self, request, *args, **kwargs):
         serializer = UserCreateSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
+
+        branch_id = data.get('branch_id')
+        assert_actor_may_set_branch(request.user, branch_id)
+        role_ids = assert_actor_may_assign_roles(request.user, data.get('role_ids') or [])
 
         user = User.objects.create_user(
             username=data['username'],
@@ -184,10 +199,10 @@ class UserAdminViewSet(viewsets.ModelViewSet):
             password=data['password'],
             first_name=data.get('first_name', ''),
             last_name=data.get('last_name', ''),
-            branch_id=data.get('branch_id'),
+            branch_id=branch_id,
         )
-        if data.get('role_ids'):
-            user.roles.set(data['role_ids'])
+        if role_ids:
+            user.roles.set(role_ids)
 
         return Response(
             UserDetailSerializer(user).data,
@@ -196,6 +211,7 @@ class UserAdminViewSet(viewsets.ModelViewSet):
 
     def update(self, request, *args, **kwargs):
         user = self.get_object()
+        assert_actor_may_manage_target(request.user, user)
         serializer = UserUpdateSerializer(data=request.data, instance=user)
         serializer.is_valid(raise_exception=True)
         data = serializer.validated_data
@@ -204,31 +220,34 @@ class UserAdminViewSet(viewsets.ModelViewSet):
             if field in data:
                 setattr(user, field, data[field])
         if 'branch_id' in data:
+            assert_actor_may_set_branch(request.user, data['branch_id'])
             user.branch_id = data['branch_id']
         user.save()
 
         if 'role_ids' in data:
-            user.roles.set(data['role_ids'])
+            role_ids = assert_actor_may_assign_roles(request.user, data['role_ids'] or [])
+            user.roles.set(role_ids)
 
         return Response(UserDetailSerializer(user).data)
 
     @action(detail=True, methods=['post'], permission_codes=['users.manage_user'])
     def set_roles(self, request, pk=None):
         user = self.get_object()
+        assert_actor_may_manage_target(request.user, user)
         role_ids = request.data.get('role_ids', [])
         if not isinstance(role_ids, list):
             return Response(
                 {'error': _('role_ids bir liste olmalıdır.')},
                 status=status.HTTP_400_BAD_REQUEST,
             )
-        from rbac.models import Role
-        valid_ids = list(Role.objects.filter(id__in=role_ids, is_active=True).values_list('id', flat=True))
+        valid_ids = assert_actor_may_assign_roles(request.user, role_ids)
         user.roles.set(valid_ids)
         return Response(UserDetailSerializer(user).data)
 
     @action(detail=True, methods=['post'], permission_codes=['users.manage_user'])
     def reset_password(self, request, pk=None):
         user = self.get_object()
+        assert_actor_may_manage_target(request.user, user)
         new_password = request.data.get('password')
         if not new_password:
             return Response(

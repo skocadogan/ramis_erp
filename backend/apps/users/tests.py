@@ -221,6 +221,80 @@ class TestUserAdminAPI:
         ids = {u['id'] for u in response.data['results']}
         assert str(pos_user.id) in ids
 
+    def test_manager_cannot_create_user_on_other_branch(self, api_client, db):
+        from rbac.models import Role, RolePermission, PermissionCategory
+        from apps.branches.models import Branch
+
+        cat = PermissionCategory.objects.create(code='users', name='Users')
+        manage = RolePermission.objects.create(
+            code='users.manage_user', name='Manage User', category=cat,
+        )
+        role = Role.objects.create(name='Branch Manager Scope')
+        role.permissions.add(manage)
+
+        branch_a = Branch.objects.create(name='Şube A', code='BA')
+        branch_b = Branch.objects.create(name='Şube B', code='BB')
+        manager = User.objects.create_user(
+            username='mgr_scope',
+            email='mgr_scope@test.com',
+            password='TestPass123!',
+            branch=branch_a,
+        )
+        manager.roles.add(role)
+
+        api_client.force_authenticate(user=manager)
+        response = api_client.post(
+            "/api/v1/admin/users/",
+            {
+                "username": "crossbranch",
+                "email": "cross@test.com",
+                "password": "StrongPass1!",
+                "branch_id": str(branch_b.id),
+            },
+        )
+        assert response.status_code == status.HTTP_403_FORBIDDEN
+        assert not User.objects.filter(username="crossbranch").exists()
+
+    def test_manager_cannot_assign_role_with_extra_permissions(self, api_client, db):
+        from rbac.models import Role, RolePermission, PermissionCategory
+        from apps.branches.models import Branch
+
+        cat = PermissionCategory.objects.create(code='users2', name='Users2')
+        manage = RolePermission.objects.create(
+            code='users.manage_user', name='Manage User', category=cat,
+        )
+        admin_perm = RolePermission.objects.create(
+            code='rbac.manage_role', name='Manage Role', category=cat,
+        )
+        manager_role = Role.objects.create(name='Limited Manager')
+        manager_role.permissions.add(manage)
+        admin_role = Role.objects.create(name='Full Admin Escalation')
+        admin_role.permissions.add(manage, admin_perm)
+
+        branch = Branch.objects.create(name='Esc Şube', code='ESC')
+        manager = User.objects.create_user(
+            username='mgr_esc',
+            email='mgr_esc@test.com',
+            password='TestPass123!',
+            branch=branch,
+        )
+        manager.roles.add(manager_role)
+
+        api_client.force_authenticate(user=manager)
+        response = api_client.post(
+            "/api/v1/admin/users/",
+            {
+                "username": "escalated",
+                "email": "escalated@test.com",
+                "password": "StrongPass1!",
+                "branch_id": str(branch.id),
+                "role_ids": [admin_role.id],
+            },
+            format="json",
+        )
+        assert response.status_code == status.HTTP_403_FORBIDDEN
+        assert not User.objects.filter(username="escalated").exists()
+
 
 @pytest.mark.django_db
 class TestMeAPI:

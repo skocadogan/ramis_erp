@@ -72,6 +72,24 @@ class TestAccessibleBranchIdStrings:
         result = accessible_branch_id_strings(user)
         assert len(result) == 0
 
+    def test_soft_delete_edilmis_atama_kapsama_girmez(self, db):
+        from apps.branches.models import WaiterBranchAssignment
+
+        branch = Branch.objects.create(name='WBA Şube', code='WBA')
+        user = User.objects.create_user(
+            username='waiter_soft', password='pw', email='waiter_soft@test.com'
+        )
+        assignment = WaiterBranchAssignment.objects.create(user=user, branch=branch)
+        assert str(branch.id) in accessible_branch_id_strings(user)
+
+        assignment.is_active = False
+        assignment.save(update_fields=['is_active', 'updated_at'])
+        if hasattr(user, '_accessible_branch_ids_cache'):
+            delattr(user, '_accessible_branch_ids_cache')
+
+        result = accessible_branch_id_strings(user)
+        assert str(branch.id) not in result
+
 
 # ------------------------------------------------------------------ #
 # user_may_access_branch                                              #

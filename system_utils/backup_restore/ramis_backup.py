@@ -501,6 +501,25 @@ def get_dir_size_mb(path) -> float:
     return total_size / (1024 * 1024)
 
 
+# Medya boyutu — her UI yenilemesinde full walk maliyetini azaltmak için kısa TTL önbellek
+_MEDIA_SIZE_CACHE: dict[str, float] = {"mb": 0.0, "ts": 0.0}
+_MEDIA_SIZE_TTL_SEC = 60.0
+
+
+def get_media_size_mb_cached() -> float:
+    now = datetime.datetime.now().timestamp()
+    if now - float(_MEDIA_SIZE_CACHE["ts"]) < _MEDIA_SIZE_TTL_SEC:
+        return float(_MEDIA_SIZE_CACHE["mb"])
+    size = get_dir_size_mb(MEDIA_DIR)
+    _MEDIA_SIZE_CACHE["mb"] = size
+    _MEDIA_SIZE_CACHE["ts"] = now
+    return size
+
+
+def invalidate_media_size_cache() -> None:
+    _MEDIA_SIZE_CACHE["ts"] = 0.0
+
+
 def parse_backup_filename(filename):
     """Yedek dosya adından tarih, tür ve biçimlendirilmiş bilgi çıkarır."""
     is_auto = "auto" in filename
@@ -918,7 +937,7 @@ class RamisBackupApp(Adw.Application):
         self.db_row.set_subtitle(f"{db_user}@{db_host}:{db_port}/{self.db_name}")
         
         # Media Size
-        media_size = get_dir_size_mb(MEDIA_DIR)
+        media_size = get_media_size_mb_cached()
         self.media_row.set_subtitle(f"{media_size:.2f} MB ({MEDIA_DIR})")
         
         # Backup Storage Stats
@@ -1035,6 +1054,7 @@ class RamisBackupApp(Adw.Application):
 
     def on_operation_complete(self, success, op_name):
         self.set_busy(False)
+        invalidate_media_size_cache()
         self.update_status_cards()
         self.refresh_list()
         

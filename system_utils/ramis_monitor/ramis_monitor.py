@@ -595,6 +595,8 @@ class ServiceRow(Adw.ActionRow):
 
 
 class LogView(Gtk.Box):
+    _MAX_LOG_CHARS = 400_000  # ~ birkaç bin satır; bellek şişmesini önler
+
     def __init__(self):
         super().__init__(orientation=Gtk.Orientation.VERTICAL)
         self.current_proc = None
@@ -678,6 +680,16 @@ class LogView(Gtk.Box):
     def append_text(self, text):
         end_iter = self.buffer.get_end_iter()
         self.buffer.insert(end_iter, text)
+
+        # Eski satırları budayarak bellek kullanımını sınırla
+        char_count = self.buffer.get_char_count()
+        if char_count > self._MAX_LOG_CHARS:
+            start = self.buffer.get_start_iter()
+            trim_at = self.buffer.get_iter_at_offset(char_count - self._MAX_LOG_CHARS)
+            # Satır başından kes
+            if not trim_at.starts_line():
+                trim_at.set_line_offset(0)
+            self.buffer.delete(start, trim_at)
 
         mark = self.buffer.get_insert()
         self.text_view.scroll_to_mark(mark, 0.0, True, 0.5, 1.0)

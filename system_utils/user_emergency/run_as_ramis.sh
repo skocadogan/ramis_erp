@@ -1,6 +1,10 @@
 #!/bin/bash
 # Ramis backend'de django_user_cli.py çalıştırır. pkexec ile root olarak
 # çağrıldığında ramis sistem kullanıcısına düşer.
+#
+# Kullanım:
+#   run_as_ramis.sh --payload-file /path/to/payload.json
+#   run_as_ramis.sh <base64-payload>   # geriye dönük uyumluluk (tercih edilmez)
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -26,17 +30,45 @@ for d in ".venv" "venv" "env"; do
   fi
 done
 
+OWNED_TMPFILES=()
+CLI_TMP_COPY=""
+cleanup() {
+  local f
+  for f in "${OWNED_TMPFILES[@]:-}"; do
+    [[ -n "$f" && -f "$f" ]] && rm -f "$f"
+  done
+  [[ -n "$CLI_TMP_COPY" && -f "$CLI_TMP_COPY" ]] && rm -f "$CLI_TMP_COPY"
+}
+trap cleanup EXIT
+
 if [[ $# -lt 1 ]]; then
-  echo '{"ok":false,"error":"missing_payload","message":"Base64 yük gerekli"}'
+  echo '{"ok":false,"error":"missing_payload","message":"Payload dosyası veya Base64 yük gerekli"}'
   exit 2
 fi
 
-TMPFILE=$(mktemp)
-trap 'rm -f "$TMPFILE"' EXIT
-if ! echo "$1" | base64 -d >"$TMPFILE" 2>/dev/null; then
-  echo '{"ok":false,"error":"bad_payload","message":"Base64 çözülemedi"}'
-  exit 2
+if [[ "$1" == "--payload-file" ]]; then
+  if [[ $# -lt 2 || -z "${2:-}" ]]; then
+    echo '{"ok":false,"error":"missing_payload","message":"--payload-file yolu gerekli"}'
+    exit 2
+  fi
+  TMPFILE="$2"
+  if [[ ! -f "$TMPFILE" ]]; then
+    echo '{"ok":false,"error":"bad_payload","message":"Payload dosyası bulunamadı"}'
+    exit 2
+  fi
+else
+  # Geriye dönük: base64 argv (parola process listesinde görünebilir — GUI artık dosya kullanır)
+  TMPFILE=$(mktemp)
+  OWNED_TMPFILES+=("$TMPFILE")
+  chmod 600 "$TMPFILE"
+  if ! echo "$1" | base64 -d >"$TMPFILE" 2>/dev/null; then
+    echo '{"ok":false,"error":"bad_payload","message":"Base64 çözülemedi"}'
+    exit 2
+  fi
 fi
+
+# Payload yalnızca bu süreç ve hedef kullanıcı tarafından okunabilsin
+chmod 600 "$TMPFILE" 2>/dev/null || true
 
 run_cli() {
   local py="$1"
@@ -47,17 +79,22 @@ run_cli() {
   dir_owner=$(stat -c '%U' "$BACKEND_DIR" 2>/dev/null || echo "$SYS_USER")
 
   if [[ $EUID -eq 0 ]]; then
-    # Eğer root olarak çalışıyorsak, dizin sahibine geçiş yapalım.
-    # Bu, /home/user gibi kısıtlı dizinlere erişimi sağlar ve dosya sahipliğini korur.
-    
     # Script dosyasının hedef kullanıcı tarafından okunabilir olduğundan emin olalım.
     if ! sudo -u "$dir_owner" test -r "$cli_script"; then
-      cp "$cli_script" /tmp/django_user_cli_tmp.py
-      chmod 644 /tmp/django_user_cli_tmp.py
-      cli_script="/tmp/django_user_cli_tmp.py"
+      CLI_TMP_COPY=$(mktemp /tmp/django_user_cli.XXXXXX.py)
+      cp "$cli_script" "$CLI_TMP_COPY"
+      chmod 600 "$CLI_TMP_COPY"
+      chown "$dir_owner":"$dir_owner" "$CLI_TMP_COPY"
+      cli_script="$CLI_TMP_COPY"
     fi
-    # TMPFILE için de yetki ver
-    chmod 644 "$TMPFILE"
+
+    # Çağıranın payload dosyasını chown etme — kopya üzerinden çalış (GUI unlink edebilsin)
+    local payload_for_user
+    payload_for_user=$(mktemp)
+    OWNED_TMPFILES+=("$payload_for_user")
+    cp "$TMPFILE" "$payload_for_user"
+    chown "$dir_owner":"$dir_owner" "$payload_for_user"
+    chmod 600 "$payload_for_user"
 
     # Sistem ayarlarını root olarak oku ve env ile aktar
     local env_args=()
@@ -75,32 +112,18 @@ run_cli() {
       done < /etc/ramis/backend.env
     fi
 
-    # Debug log
-    echo "--- ROOT EXECUTION ENV ---" > /tmp/ramis_user_admin_debug.log
-    for arg in "${env_args[@]}"; do
-      if [[ "$arg" == POSTGRES_PASSWORD=* ]]; then
-        echo "$arg" >> /tmp/ramis_user_admin_debug.log
-      fi
-    done
-    echo "dir_owner: $dir_owner" >> /tmp/ramis_user_admin_debug.log
-    echo "py: $py" >> /tmp/ramis_user_admin_debug.log
-
     sudo -u "$dir_owner" env DJANGO_SETTINGS_MODULE=config.settings PYTHONPATH="$BACKEND_DIR" "${env_args[@]}" \
-      bash -c "cd \"$BACKEND_DIR\" && exec \"$py\" \"$cli_script\" \"$TMPFILE\""
+      bash -c "cd \"$BACKEND_DIR\" && exec \"$py\" \"$cli_script\" \"$payload_for_user\""
   else
-    # Root değilsek doğrudan çalıştır (mevcut kullanıcı dizine erişebiliyorsa)
     export DJANGO_SETTINGS_MODULE=config.settings
     export PYTHONPATH="$BACKEND_DIR"
     cd "$BACKEND_DIR"
-    
-    # Debug log
-    echo "--- NON-ROOT EXECUTION ---" > /tmp/ramis_user_admin_debug.log
-    
+
     if [[ -f /etc/ramis/backend.env ]]; then
       set -a
+      # shellcheck disable=SC1091
       source /etc/ramis/backend.env
       set +a
-      echo "POSTGRES_PASSWORD: $POSTGRES_PASSWORD" >> /tmp/ramis_user_admin_debug.log
     fi
     exec "$py" "$cli_script" "$TMPFILE"
   fi

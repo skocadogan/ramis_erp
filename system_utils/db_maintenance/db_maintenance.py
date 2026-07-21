@@ -21,6 +21,15 @@ def _parse_env_value(raw: str) -> str:
     return val
 
 
+def _quote_pg_ident(name: str) -> str:
+    """PostgreSQL tanımlayıcısını güvenli biçimde tırnaklar."""
+    return '"' + name.replace('"', '""') + '"'
+
+
+def _is_safe_db_name(name: str) -> bool:
+    return bool(name) and name.replace("_", "").isalnum() and not name[0].isdigit()
+
+
 class MaintenanceActionRow(Adw.ActionRow):
     def __init__(self, title, subtitle, icon_name, action_callback):
         super().__init__(title=title, subtitle=subtitle)
@@ -57,6 +66,9 @@ class DBMaintenanceApp(Adw.Application):
                         self.db_config[key.strip()] = _parse_env_value(val)
                 
                 self.db_name = self.db_config.get("POSTGRES_DB", "ramis")
+                if not _is_safe_db_name(self.db_name):
+                    print(f"Geçersiz POSTGRES_DB değeri: {self.db_name!r}")
+                    return False
                 return True
         except Exception as e:
             print(f"Konfigürasyon okuma hatası: {e}")
@@ -213,9 +225,39 @@ class DBMaintenanceApp(Adw.Application):
         threading.Thread(target=self.run_psql_command, args=("VACUUM ANALYZE;", "VACUUM ANALYZE"), daemon=True).start()
 
     def run_reindex(self, row):
-        if self.is_processing: return
-        self.set_busy(True)
-        threading.Thread(target=self.run_psql_command, args=(f"REINDEX DATABASE {self.db_name};", "REINDEX"), daemon=True).start()
+        if self.is_processing:
+            return
+        if not _is_safe_db_name(self.db_name):
+            toast = Adw.Toast(title="Geçersiz veritabanı adı — REINDEX iptal")
+            self.toast_overlay.add_toast(toast)
+            return
+
+        dialog = Adw.MessageDialog(
+            transient_for=self.window,
+            heading="REINDEX DATABASE — uyarı",
+            body=(
+                f"'{self.db_name}' veritabanındaki tüm indeksler yenilenecek.\n\n"
+                "Bu işlem canlı trafikte uzun süreli kilitlere yol açabilir (POS/KDS etkilenebilir). "
+                "Mümkünse bakım penceresinde çalıştırın.\n\nDevam edilsin mi?"
+            ),
+        )
+        dialog.add_response("cancel", "Vazgeç")
+        dialog.add_response("ok", "Evet, REINDEX")
+        dialog.set_response_appearance("ok", Adw.ResponseAppearance.DESTRUCTIVE)
+
+        def on_response(_dialog, response):
+            if response != "ok":
+                return
+            self.set_busy(True)
+            sql = f"REINDEX DATABASE {_quote_pg_ident(self.db_name)};"
+            threading.Thread(
+                target=self.run_psql_command,
+                args=(sql, "REINDEX"),
+                daemon=True,
+            ).start()
+
+        dialog.connect("response", on_response)
+        dialog.present()
 
     def run_analyze(self, row):
         if self.is_processing: return

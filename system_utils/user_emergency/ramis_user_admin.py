@@ -1,7 +1,7 @@
-import base64
 import json
 import os
 import subprocess
+import tempfile
 import threading
 import gi
 
@@ -279,15 +279,21 @@ class RamisUserEmergencyApp(Adw.Application):
             self._main_content.set_sensitive(False)
 
         def worker():
-            b64 = base64.urlsafe_b64encode(json.dumps(payload, ensure_ascii=False).encode()).decode()
-            cmd = (
-                ["pkexec", self._helper, b64]
-                if self._use_pkexec()
-                else [self._helper, b64]
-            )
-            
+            # Parolayı argv/base64 ile taşımamak için güvenli temp dosya kullan
+            payload_path = None
             res = None
             try:
+                fd, payload_path = tempfile.mkstemp(prefix="ramis_ua_", suffix=".json")
+                with os.fdopen(fd, "w", encoding="utf-8") as handle:
+                    json.dump(payload, handle, ensure_ascii=False)
+                os.chmod(payload_path, 0o600)
+
+                cmd = (
+                    ["pkexec", self._helper, "--payload-file", payload_path]
+                    if self._use_pkexec()
+                    else [self._helper, "--payload-file", payload_path]
+                )
+
                 proc = subprocess.run(
                     cmd,
                     capture_output=True,
@@ -314,6 +320,12 @@ class RamisUserEmergencyApp(Adw.Application):
                 res = {"ok": False, "error": "timeout", "message": _("timeout_error")}
             except OSError as e:
                 res = {"ok": False, "error": "os", "message": str(e)}
+            finally:
+                if payload_path:
+                    try:
+                        os.unlink(payload_path)
+                    except OSError:
+                        pass
 
             # GLib.idle_add ile UI thread'ine dönüş yapıp callback tetikliyoruz
             GLib.idle_add(self._on_invoke_complete, res, callback)

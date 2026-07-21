@@ -6,6 +6,7 @@ from __future__ import annotations
 import base64
 import json
 import os
+import re
 import shlex
 import shutil
 import subprocess
@@ -18,6 +19,71 @@ FRONTEND_ENV = os.environ.get("RAMIS_FRONTEND_ENV", "/etc/ramis/frontend.env")
 RUNTIME_CONFIG = "/etc/ramis/runtime-config.json"
 INSTALL_DIR = os.environ.get("RAMIS_INSTALL_DIR", "/srv/ramis_erp")
 SYS_USER = os.environ.get("RAMIS_SYS_USER", "ramis")
+
+# Privileged restart — yalnızca Ramis / nginx birimleri
+_STATIC_ALLOWED_UNITS = frozenset(
+    {
+        "nginx.service",
+        "ramis-daphne.service",
+        "ramis-uvicorn.service",
+        "ramis-worker.service",
+        "ramis-worker-maintenance.service",
+        "ramis-worker-broadcast.service",
+        "ramis-worker-pdf.service",
+        "ramis-beat.service",
+        "ramis-frontend.service",
+    }
+)
+_DAPHNE_EXTRA_RE = re.compile(r"^ramis-daphne-\d{4}\.service$")
+_UVICORN_EXTRA_RE = re.compile(r"^ramis-uvicorn-\d{4}\.service$")
+_ENV_KEY_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*$")
+# source edilen env değerlerinde komut enjeksiyonu riski
+_UNSAFE_ENV_VALUE_RE = re.compile(r"[`$]|\$\(")
+
+
+def _is_allowed_unit(unit: str) -> bool:
+    if not unit or not isinstance(unit, str):
+        return False
+    if "/" in unit or ".." in unit or " " in unit:
+        return False
+    if unit in _STATIC_ALLOWED_UNITS:
+        return True
+    return bool(_DAPHNE_EXTRA_RE.match(unit) or _UVICORN_EXTRA_RE.match(unit))
+
+
+def _filter_units(units: list) -> tuple[list[str], str | None]:
+    allowed: list[str] = []
+    seen: set[str] = set()
+    for raw in units:
+        unit = str(raw).strip()
+        if not unit or unit in seen:
+            continue
+        if not _is_allowed_unit(unit):
+            return [], f"İzin verilmeyen systemd birimi: {unit}"
+        seen.add(unit)
+        allowed.append(unit)
+    return allowed, None
+
+
+def _validate_env_content(content: str, label: str) -> str | None:
+    if "\x00" in content:
+        return f"{label}: null byte içeremez"
+    for index, raw_line in enumerate(content.splitlines(), start=1):
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[7:].strip()
+        if "=" not in line:
+            return f"{label}: geçersiz satır {index}"
+        key, _, value = line.partition("=")
+        key = key.strip()
+        if not _ENV_KEY_RE.match(key):
+            return f"{label}: geçersiz anahtar ({key!r})"
+        # Çift tırnaklı değerlerde $() / backtick source sırasında genişler
+        if _UNSAFE_ENV_VALUE_RE.search(value):
+            return f"{label}: güvenli olmayan değer ({key})"
+    return None
 
 
 def _backend_python() -> str:
@@ -52,8 +118,8 @@ def _run_celery_beat_task(beat_key: str) -> tuple[bool, str]:
         return False, f"Geçersiz Beat anahtarı: {beat_key!r}"
 
     cmd = (
-        f"set -a && source {BACKEND_ENV} && set +a && "
-        f"cd {backend_dir} && {python} manage.py run_celery_beat_task {shlex.quote(beat_key)}"
+        f"set -a && source {shlex.quote(BACKEND_ENV)} && set +a && "
+        f"cd {shlex.quote(backend_dir)} && {shlex.quote(python)} manage.py run_celery_beat_task {shlex.quote(beat_key)}"
     )
     proc = subprocess.run(
         ["sudo", "-u", SYS_USER, "bash", "-c", cmd],
@@ -72,8 +138,8 @@ def _sync_celery_beat_schedule() -> tuple[bool, str]:
     if not os.path.isdir(backend_dir):
         return False, f"Backend dizini bulunamadı: {backend_dir}"
     cmd = (
-        f"set -a && source {BACKEND_ENV} && set +a && "
-        f"cd {backend_dir} && {python} manage.py sync_celery_beat_schedule"
+        f"set -a && source {shlex.quote(BACKEND_ENV)} && set +a && "
+        f"cd {shlex.quote(backend_dir)} && {shlex.quote(python)} manage.py sync_celery_beat_schedule"
     )
     proc = subprocess.run(
         ["sudo", "-u", SYS_USER, "bash", "-c", cmd],
@@ -145,26 +211,35 @@ def _sync_runtime_config() -> tuple[bool, str]:
 def _apply_restart_plan(units: list, special: list) -> dict:
     """systemctl yeniden başlatma ve isteğe bağlı senkron adımları."""
     messages: list[str] = []
+    allowed_units, unit_error = _filter_units(units or [])
+    if unit_error:
+        return {"ok": False, "message": unit_error}
 
-    if "runtime_sync" in special:
+    special_set = {str(item) for item in (special or [])}
+    allowed_special = {"runtime_sync", "beat_sync", "printing_worker_sync"}
+    unknown_special = special_set - allowed_special
+    if unknown_special:
+        return {"ok": False, "message": f"İzin verilmeyen özel işlem: {', '.join(sorted(unknown_special))}"}
+
+    if "runtime_sync" in special_set:
         ok, msg = _sync_runtime_config()
         if not ok:
             return {"ok": False, "message": msg}
         messages.append(msg)
 
-    if "beat_sync" in special:
+    if "beat_sync" in special_set:
         ok, msg = _sync_celery_beat_schedule()
         if not ok:
             return {"ok": False, "message": msg}
         messages.append(msg)
 
-    if "printing_worker_sync" in special:
+    if "printing_worker_sync" in special_set:
         ok, msg = _sync_celery_worker_units()
         if not ok:
             return {"ok": False, "message": msg}
         messages.append(msg)
 
-    for unit in units:
+    for unit in allowed_units:
         proc = subprocess.run(["systemctl", "restart", unit], capture_output=True, text=True)
         if proc.returncode != 0:
             return {
@@ -193,6 +268,16 @@ def handle(payload: dict) -> dict:
         frontend = payload.get("frontend")
         if backend is None or frontend is None:
             return {"ok": False, "error": "missing_content", "message": "backend/frontend içeriği gerekli"}
+        if not isinstance(backend, str) or not isinstance(frontend, str):
+            return {"ok": False, "error": "invalid_content", "message": "backend/frontend metin olmalıdır"}
+
+        backend_error = _validate_env_content(backend, "backend.env")
+        if backend_error:
+            return {"ok": False, "error": "validation", "message": backend_error}
+        frontend_error = _validate_env_content(frontend, "frontend.env")
+        if frontend_error:
+            return {"ok": False, "error": "validation", "message": frontend_error}
+
         _atomic_write(BACKEND_ENV, backend)
         _atomic_write(FRONTEND_ENV, frontend)
         messages = ["Ortam dosyaları kaydedildi"]

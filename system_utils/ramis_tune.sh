@@ -41,6 +41,11 @@ INFO="${BLUE}·${NC}"
 MODE="interactive"          # interactive | apply | dry-run | reset
 BACKUP_DIR="/var/backups/ramis/tune"
 TIMESTAMP="$(date '+%Y%m%d_%H%M%S')"
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# PostgreSQL scaling formülü (split ASGI uyumlu)
+# shellcheck source=/dev/null
+source "${SCRIPT_DIR}/postgresql_scaling.sh"
 
 # ── Komut satırı ──────────────────────────────────────────────────────
 for arg in "$@"; do
@@ -199,13 +204,31 @@ calculate_settings() {
         PG_MAINTENANCE_WORK_MEM="1GB"
     fi
 
-    # max_connections
+    # max_connections — split ASGI + Celery formülü (postgresql_scaling.sh)
+    # RAM tavanı ile OOM riskini sınırla
+    local scaling_conn
+    scaling_conn="$(ramis_postgres_recommended_max_connections)"
+    if [[ ! "$scaling_conn" =~ ^[0-9]+$ ]]; then
+        scaling_conn=50
+    fi
+    local ram_cap=50
     if (( MEM_TOTAL_MB <= 2048 )); then
-        PG_MAX_CONN=25
+        ram_cap=40
     elif (( MEM_TOTAL_MB <= 4096 )); then
-        PG_MAX_CONN=30
+        ram_cap=60
+    elif (( MEM_TOTAL_MB <= 8192 )); then
+        ram_cap=120
     else
-        PG_MAX_CONN=50
+        ram_cap=200
+    fi
+    if (( scaling_conn > ram_cap )); then
+        PG_MAX_CONN=$ram_cap
+    else
+        PG_MAX_CONN=$scaling_conn
+    fi
+    # En az 25
+    if (( PG_MAX_CONN < 25 )); then
+        PG_MAX_CONN=25
     fi
 
     # parallel workers (CPU çekirdeğine göre)
@@ -407,40 +430,19 @@ backup_current_configs() {
 # ══════════════════════════════════════════════════════════════════════
 
 write_backend_env() {
-    echo -e "${CYAN}  ─── /etc/ramis/backend.env Yazılıyor ───${NC}\n"
+    echo -e "${CYAN}  ─── /etc/ramis/backend.env Güncelleniyor (merge) ───${NC}\n"
 
-    local current_secret_key=""
-    local current_allowed_hosts=""
-    local current_db_name=""
-    local current_db_user=""
-    local current_db_pass=""
-    local current_redis_url=""
-    local current_csrf=""
-    local current_cors=""
+    local backend_env="/etc/ramis/backend.env"
+    mkdir -p /etc/ramis
 
     # Mevcut değerleri koru (varsa)
-    if [[ -f /etc/ramis/backend.env ]]; then
+    if [[ -f "$backend_env" ]]; then
         # shellcheck disable=SC1091
-        source /etc/ramis/backend.env 2>/dev/null || true
-        current_secret_key="${DJANGO_SECRET_KEY:-}"
-        current_allowed_hosts="${ALLOWED_HOSTS:-}"
-        current_db_name="${POSTGRES_DB:-}"
-        current_db_user="${POSTGRES_USER:-}"
-        current_db_pass="${POSTGRES_PASSWORD:-}"
-        current_redis_url="${REDIS_URL:-}"
-        current_csrf="${CSRF_TRUSTED_ORIGINS:-}"
-        current_cors="${CORS_EXTRA_ORIGINS:-}"
+        set -a
+        # shellcheck source=/dev/null
+        source "$backend_env" 2>/dev/null || true
+        set +a
     fi
-
-    # Varsayılan değerler (install.sh'dekiler)
-    local secret_key="${current_secret_key:-insecure-dev-key-change-me}"
-    local allowed_hosts="${current_allowed_hosts:-localhost,127.0.0.1}"
-    local db_name="${current_db_name:-ramis}"
-    local db_user="${current_db_user:-ramis}"
-    local db_pass="${current_db_pass:-ramis}"
-    local redis_url="${current_redis_url:-redis://127.0.0.1:6379/0}"
-    local csrf_origins="${current_csrf:-http://localhost}"
-    local cors_origins="${current_cors:-http://localhost}"
 
     # Celery result expires (RAM'e göre)
     if (( MEM_TOTAL_MB <= 4096 )); then
@@ -457,100 +459,69 @@ write_backend_env() {
         REDIS_SALES_GENERATIONS=3
     fi
 
-    cat > /etc/ramis/backend.env << ENVEOF
-# Ramis ERP — Üretim Ortam Dosyası (otomatik optimize edildi)
+    local conn_age
+    conn_age="$(ramis_postgres_recommended_conn_max_age)"
+
+    # Yalnızca performans anahtarlarını güncelle — UVICORN_INSTANCES vb. silinmez
+    declare -A TUNED_KEYS=(
+        [DAPHNE_INSTANCES]="${DAPHNE_INSTANCES}"
+        [CHANNEL_LAYER_CAPACITY]="${CHANNEL_LAYER_CAPACITY}"
+        [CHANNEL_LAYER_EXPIRY]="${CHANNEL_EXPIRY}"
+        [WS_AUTH_CACHE_SECONDS]="${WS_AUTH_CACHE}"
+        [WS_KDS_STATS_THROTTLE_SECONDS]="${WS_THROTTLE}"
+        [CELERY_PRINTING_WORKER_CONCURRENCY]="${CELERY_PRINTING_CONCURRENCY}"
+        [PRINT_JOB_REQUEUE_PENDING_SECONDS]="${PRINT_JOB_REQUEUE}"
+        [PRINT_JOB_STALE_PROCESSING_SECONDS]="${PRINT_JOB_STALE}"
+        [PRINT_JOB_MAINTENANCE_BATCH_SIZE]="${PRINT_JOB_BATCH}"
+        [RBAC_CACHE_TTL]="${RBAC_CACHE_TTL}"
+        [DASHBOARD_CACHE_TIMEOUT]="${DASHBOARD_CACHE_TIMEOUT}"
+        [KDS_ACTIVE_CACHE_TTL]="${KDS_ACTIVE_CACHE_TTL}"
+        [DISABLE_PDF_EXPORT]="${DISABLE_PDF_EXPORT}"
+        [REDIS_CELERY_RESULT_MAX_IDLE_SECONDS]="${REDIS_CELERY_IDLE}"
+        [CELERY_RESULT_EXPIRES_SECONDS]="${CELERY_RESULT_EXPIRES}"
+        [REDIS_ORDER_COUNTER_RETENTION_DAYS]="${REDIS_ORDER_RETENTION}"
+        [REDIS_RBAC_PERM_VERSIONS_TO_KEEP]="${REDIS_RBAC_VERSIONS}"
+        [REDIS_SALES_SUMMARY_GENERATIONS_TO_KEEP]="${REDIS_SALES_GENERATIONS}"
+        [POSTGRES_CONN_MAX_AGE]="${conn_age}"
+        [REDIS_MAINTENANCE_ENABLED]="true"
+    )
+
+    if [[ ! -f "$backend_env" ]]; then
+        # İlk kurulum — minimal iskelet (gizli anahtarlar varsayılan, kullanıcı değiştirmeli)
+        cat > "$backend_env" << ENVEOF
+# Ramis ERP — Üretim Ortam Dosyası (ramis_tune ile oluşturuldu)
 # Tarih: $(date '+%Y-%m-%d %H:%M:%S')
-# Donanım: ${CPU_MODEL} · ${MEM_TOTAL_MB}MB RAM · ${DISK_TYPE^^}
-# Seviye: ${HW_TIER^^}
-# Uyarı: Bu dosyayı repoya commit ETMEYİN.
-
-# --- Zorunlu ---
 DJANGO_DEBUG=false
-DJANGO_SECRET_KEY=${secret_key}
-ALLOWED_HOSTS=${allowed_hosts}
-
-# --- PostgreSQL ---
-POSTGRES_DB=${db_name}
-POSTGRES_USER=${db_user}
-POSTGRES_PASSWORD=${db_pass}
+DJANGO_SECRET_KEY=insecure-dev-key-change-me
+ALLOWED_HOSTS=localhost,127.0.0.1
+POSTGRES_DB=ramis
+POSTGRES_USER=ramis
+POSTGRES_PASSWORD=ramis
 POSTGRES_HOST=127.0.0.1
 POSTGRES_PORT=5432
-POSTGRES_CONN_MAX_AGE=0
-
-# --- Redis ---
-REDIS_URL=${redis_url}
-
-# --- WebSocket / Daphne ---
-DAPHNE_INSTANCES=${DAPHNE_INSTANCES}
-CHANNEL_LAYER_CAPACITY=${CHANNEL_LAYER_CAPACITY}
-CHANNEL_LAYER_EXPIRY=${CHANNEL_EXPIRY}
-WS_AUTH_CACHE_SECONDS=${WS_AUTH_CACHE}
-WS_KDS_STATS_THROTTLE_SECONDS=${WS_THROTTLE}
-
-# --- CSRF / CORS ---
-CSRF_TRUSTED_ORIGINS=${csrf_origins}
-CORS_EXTRA_ORIGINS=${cors_origins}
-
-# --- HTTPS / Güvenlik ---
-SECURE_SSL_REDIRECT=false
-
-# --- Smart Firing v2 ---
-ENABLE_SMART_FIRING_V2=true
-SMART_FIRING_QUEUE_DEPTH_THRESHOLD=8
-SMART_FIRING_BACKLOG_MINUTE_FACTOR=2
-SMART_FIRING_QUEUE_BUFFER_CAP=30
-SMART_FIRING_LEARNED_MIN_SAMPLES=5
-KDS_RECALL_WINDOW_MINUTES=15
-
-# --- Celery Beat (Europe/Istanbul) ---
-BEAT_CLEANUP_RESERVATIONS_HOUR=3
-BEAT_CLEANUP_RESERVATIONS_MINUTE=0
-BEAT_ROLLUP_PRODUCT_STATION_TIMING_HOUR=3
-BEAT_ROLLUP_PRODUCT_STATION_TIMING_MINUTE=15
-PRINTER_STATUS_SYNC_INTERVAL_MINUTES=5
-BEAT_SCAN_KITCHEN_LOW_STOCK_HOUR=4
-BEAT_SCAN_KITCHEN_LOW_STOCK_MINUTE=0
-BEAT_SCAN_OVERDUE_PO_HOUR=5
-BEAT_SCAN_OVERDUE_PO_MINUTE=0
-BEAT_SCAN_EXPIRING_LOTS_HOUR=4
-BEAT_SCAN_EXPIRING_LOTS_MINUTE=30
-BEAT_SWEEP_STALE_CLEANING_TABLES_INTERVAL_MINUTES=1
-BEAT_NOTIFY_DUE_RESERVATIONS_INTERVAL_MINUTES=1
-BEAT_REDIS_CLEANUP_HOUR=2
-BEAT_REDIS_CLEANUP_MINUTE=30
-
-# --- Redis Gece Bakımı ---
-REDIS_MAINTENANCE_ENABLED=true
-REDIS_CELERY_RESULT_MAX_IDLE_SECONDS=${REDIS_CELERY_IDLE}
-CELERY_RESULT_EXPIRES_SECONDS=${CELERY_RESULT_EXPIRES}
-REDIS_ORDER_COUNTER_RETENTION_DAYS=${REDIS_ORDER_RETENTION}
-REDIS_RBAC_PERM_VERSIONS_TO_KEEP=${REDIS_RBAC_VERSIONS}
-REDIS_SALES_SUMMARY_GENERATIONS_TO_KEEP=${REDIS_SALES_GENERATIONS}
-
-# --- Baskı / PrintJob Kuyruğu ---
-CELERY_PRINTING_WORKER_CONCURRENCY=${CELERY_PRINTING_CONCURRENCY}
-PRINT_JOB_REQUEUE_PENDING_SECONDS=${PRINT_JOB_REQUEUE}
-PRINT_JOB_STALE_PROCESSING_SECONDS=${PRINT_JOB_STALE}
-PRINT_JOB_MAINTENANCE_INTERVAL_SECONDS=30
-PRINT_JOB_MAINTENANCE_BATCH_SIZE=${PRINT_JOB_BATCH}
-
-# --- RBAC Cache ---
-RBAC_CACHE_TTL=${RBAC_CACHE_TTL}
-
-# --- Dashboard Cache ---
-DASHBOARD_CACHE_TIMEOUT=${DASHBOARD_CACHE_TIMEOUT}
-
-# --- KDS Aktif Sipariş Cache ---
-KDS_ACTIVE_CACHE_TTL=${KDS_ACTIVE_CACHE_TTL}
-
-# --- PDF Rapor (RAM kritikse kapatılır) ---
-DISABLE_PDF_EXPORT=${DISABLE_PDF_EXPORT}
+REDIS_URL=redis://127.0.0.1:6379/0
 ENVEOF
+    fi
 
-    chown ramis:ramis /etc/ramis/backend.env 2>/dev/null || true
-    chmod 600 /etc/ramis/backend.env
+    local key value
+    for key in "${!TUNED_KEYS[@]}"; do
+        value="${TUNED_KEYS[$key]}"
+        if grep -qE "^${key}=" "$backend_env" 2>/dev/null; then
+            sed -i "s|^${key}=.*|${key}=${value}|" "$backend_env"
+        else
+            echo "${key}=${value}" >> "$backend_env"
+        fi
+    done
 
-    echo -e "  ${CHECK} /etc/ramis/backend.env yazıldı (${HW_TIER^^} profili)"
+    # Tune notu (yorum satırı — yinelenmesin)
+    if ! grep -q "ramis_tune.sh" "$backend_env" 2>/dev/null; then
+        echo "# Performans anahtarları: ramis_tune.sh (${HW_TIER^^}, $(date '+%Y-%m-%d'))" >> "$backend_env"
+    fi
+
+    chown ramis:ramis "$backend_env" 2>/dev/null || true
+    chmod 600 "$backend_env"
+
+    echo -e "  ${CHECK} /etc/ramis/backend.env merge edildi (${HW_TIER^^} profili, max_conn önerisi=${PG_MAX_CONN})"
     echo ""
 }
 
@@ -559,33 +530,49 @@ ENVEOF
 # ══════════════════════════════════════════════════════════════════════
 
 write_frontend_env() {
-    echo -e "${CYAN}  ─── /etc/ramis/frontend.env Yazılıyor ───${NC}\n"
+    echo -e "${CYAN}  ─── /etc/ramis/frontend.env Güncelleniyor (merge) ───${NC}\n"
 
-    local current_api_url="http://localhost/api/v1"
-    local current_port="3000"
+    local frontend_env="/etc/ramis/frontend.env"
+    mkdir -p /etc/ramis
 
-    # Mevcut değerleri koru
-    if [[ -f /etc/ramis/frontend.env ]]; then
-        # shellcheck disable=SC1091
-        source /etc/ramis/frontend.env 2>/dev/null || true
-        current_api_url="${NEXT_PUBLIC_API_URL:-http://localhost/api/v1}"
-        current_port="${PORT:-3000}"
-    fi
-
-    cat > /etc/ramis/frontend.env << ENVEOF
-# Ramis ERP — Frontend Üretim Ortam Dosyası (otomatik optimize edildi)
-# Tarih: $(date '+%Y-%m-%d %H:%M:%S')
-
+    if [[ ! -f "$frontend_env" ]]; then
+        cat > "$frontend_env" << ENVEOF
+# Ramis ERP — Frontend Üretim Ortam Dosyası
 NODE_ENV=production
-PORT=${current_port}
-NEXT_PUBLIC_API_URL=${current_api_url}
+PORT=3000
+NEXT_PUBLIC_API_URL=http://localhost/api/v1
 NEXT_PUBLIC_POS_OFFLINE_QUEUE=true
 ENVEOF
+    fi
 
-    chown ramis:ramis /etc/ramis/frontend.env 2>/dev/null || true
-    chmod 600 /etc/ramis/frontend.env
+    # Yalnızca bilinen performans/üretim anahtarlarını güncelle — diğer NEXT_PUBLIC_* korunur
+    declare -A FE_TUNED=(
+        [NODE_ENV]="production"
+        [NEXT_PUBLIC_POS_OFFLINE_QUEUE]="true"
+    )
 
-    echo -e "  ${CHECK} /etc/ramis/frontend.env yazıldı"
+    local key value
+    for key in "${!FE_TUNED[@]}"; do
+        value="${FE_TUNED[$key]}"
+        if grep -qE "^${key}=" "$frontend_env" 2>/dev/null; then
+            sed -i "s|^${key}=.*|${key}=${value}|" "$frontend_env"
+        else
+            echo "${key}=${value}" >> "$frontend_env"
+        fi
+    done
+
+    # PORT / API URL yoksa ekle (varsa dokunma)
+    if ! grep -qE '^PORT=' "$frontend_env" 2>/dev/null; then
+        echo "PORT=3000" >> "$frontend_env"
+    fi
+    if ! grep -qE '^NEXT_PUBLIC_API_URL=' "$frontend_env" 2>/dev/null; then
+        echo "NEXT_PUBLIC_API_URL=http://localhost/api/v1" >> "$frontend_env"
+    fi
+
+    chown ramis:ramis "$frontend_env" 2>/dev/null || true
+    chmod 600 "$frontend_env"
+
+    echo -e "  ${CHECK} /etc/ramis/frontend.env merge edildi"
     echo ""
 }
 

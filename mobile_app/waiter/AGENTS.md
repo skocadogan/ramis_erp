@@ -4,8 +4,9 @@ Read the exact versioned docs at https://docs.expo.dev/versions/v55.0.0/ before 
 
 ## Yapılandırma Notları
 
-- `app.json` → `extra.apiUrl` değerindeki `YOUR_SERVER_IP` kısmını gerçek sunucu IP'siyle değiştirin.  
-  Örnek: `"apiUrl": "http://192.168.1.100/api/v1"`
+- `app.json` → `extra.apiUrl` değerindeki `YOUR_SERVER_IP` / `RAMISSERVER_IP` kısmını gerçek sunucu IP'siyle değiştirin.
+  - Tercihen HTTPS: `"apiUrl": "https://192.168.1.100/api/v1"`
+  - Yerel LAN HTTP gerekiyorsa `http://...` kullanılabilir; Android `usesCleartextTraffic` bu yüzden açıktır.
 - Statik IP'yi kaynak kontrolüne taşımayın; `.env` veya EAS Secrets kullanın.
 
 ## Önemli Mimari Kararlar

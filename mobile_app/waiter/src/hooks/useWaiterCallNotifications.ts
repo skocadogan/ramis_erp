@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { usePosStore } from "../store/usePosStore";
 import { getApiUrl } from "../api/client";
 import { buildWsUrl } from "../api/wsUrl";
+import { fetchWsTicket } from "../api/wsTicket";
 import { fetchPendingWaiterCalls } from "../api/waiterApi";
 import { playTableCallingSound } from "../utils/sound";
 import { useWaiterPosPushStore } from "../store/useWaiterPosPushStore";
@@ -117,14 +118,6 @@ export function useWaiterCallNotifications(enabled: boolean) {
     if (!enabled || !token || !branchId) return;
 
     let teardown = false;
-    const wsUrl = buildWsUrl(
-      getApiUrl(),
-      "/ws/waiter/calls/",
-      {
-        branch_id: branchId,
-      },
-      token
-    );
 
     const connect = () => {
       if (teardown) return;
@@ -133,8 +126,30 @@ export function useWaiterCallNotifications(enabled: boolean) {
         reconnectTimerRef.current = null;
       }
 
-      const socket = new WebSocket(wsUrl);
-      socketRef.current = socket;
+      void (async () => {
+        let wsUrl: string;
+        try {
+          const ticket = await fetchWsTicket();
+          wsUrl = buildWsUrl(
+            getApiUrl(),
+            "/ws/waiter/calls/",
+            {
+              branch_id: branchId,
+            },
+            ticket
+          );
+        } catch (err) {
+          console.warn("WS ticket failed, retrying:", err);
+          if (teardown) return;
+          const delay = Math.min(1000 * Math.pow(2, reconnectAttemptRef.current), 30_000);
+          reconnectAttemptRef.current += 1;
+          reconnectTimerRef.current = setTimeout(connect, delay);
+          return;
+        }
+        if (teardown) return;
+
+        const socket = new WebSocket(wsUrl);
+        socketRef.current = socket;
 
       socket.onmessage = (e) => {
         try {
@@ -198,6 +213,7 @@ export function useWaiterCallNotifications(enabled: boolean) {
       socket.onerror = () => {
         // WS error — onclose alınır, yeniden bağlanma reconnectTimer ile yönetilir
       };
+      })();
     };
 
     connect();

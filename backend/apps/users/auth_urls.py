@@ -1,5 +1,13 @@
 from django.urls import path
-from .views import MeView, ChangePasswordView, LogoutView, PosScreenPreferencesView, CheckPinUserView, PinTokenObtainView
+from .views import (
+    MeView,
+    ChangePasswordView,
+    LogoutView,
+    PosScreenPreferencesView,
+    CheckPinUserView,
+    PinTokenObtainView,
+    WsTicketView,
+)
 
 urlpatterns = [
     path('me/', MeView.as_view(), name='auth-me'),
@@ -12,5 +20,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view(), name='auth-logout'),
     path('check-pin/', CheckPinUserView.as_view(), name='auth-check-pin'),
     path('token/pin/', PinTokenObtainView.as_view(), name='auth-token-pin'),
+    path('ws-ticket/', WsTicketView.as_view(), name='auth-ws-ticket'),
 ]
-

@@ -1,5 +1,5 @@
 export interface WebSocketClient {
-  connect(url: string): void;
+  connect(urlOrFactory: string | (() => string | Promise<string>)): void;
   disconnect(): void;
   send(message: Record<string, unknown>): void;
   onMessage(handler: (data: unknown) => void): () => void;
@@ -14,7 +14,7 @@ export function createWebSocketClient(): WebSocketClient {
   let staleTimer: ReturnType<typeof setInterval> | null = null;
   let lastPongAt = Date.now();
   let teardown = false;
-  let currentUrl = "";
+  let urlFactory: (() => string | Promise<string>) | null = null;
   const messageHandlers = new Set<(data: unknown) => void>();
   const connectionHandlers = new Set<(connected: boolean) => void>();
 
@@ -56,53 +56,90 @@ export function createWebSocketClient(): WebSocketClient {
     }, 30_000);
   };
 
+  const closeSocketQuietly = () => {
+    if (!socket) return;
+    const prev = socket;
+    socket = null;
+    try {
+      prev.onclose = null;
+      prev.onerror = null;
+      prev.onmessage = null;
+      prev.onopen = null;
+      prev.close();
+    } catch {
+      /* ignore */
+    }
+  };
+
   const doConnect = () => {
-    if (teardown) return;
+    if (teardown || !urlFactory) return;
     if (reconnectTimer) {
       clearTimeout(reconnectTimer);
       reconnectTimer = null;
     }
 
-    socket = new WebSocket(currentUrl);
-
-    socket.onopen = () => {
-      reconnectAttempt = 0;
-      notifyConnection(true);
-      startHealthChecks();
-    };
-
-    socket.onmessage = (e) => {
+    void (async () => {
+      let url: string;
       try {
-        const message = JSON.parse(e.data);
-        if (message.type === "pong") {
-          lastPongAt = Date.now();
-          return;
-        }
-        notifyMessage(message);
+        url = await urlFactory!();
       } catch (err) {
-        console.error("WS Message parse error:", err, "| raw:", e.data?.slice?.(0, 200));
+        console.warn("WS URL factory failed, retrying:", err);
+        if (teardown) return;
+        const delay = Math.min(1000 * Math.pow(2, reconnectAttempt), 30_000);
+        reconnectAttempt += 1;
+        reconnectTimer = setTimeout(doConnect, delay);
+        return;
       }
-    };
 
-    socket.onclose = () => {
-      notifyConnection(false);
-      stopHealthChecks();
       if (teardown) return;
-      const delay = Math.min(1000 * Math.pow(2, reconnectAttempt), 30_000);
-      reconnectAttempt += 1;
-      reconnectTimer = setTimeout(doConnect, delay);
-    };
 
-    socket.onerror = () => {
-      // onclose handles reconnect
-    };
+      closeSocketQuietly();
+      const next = new WebSocket(url);
+      socket = next;
+
+      next.onopen = () => {
+        if (socket !== next) return;
+        reconnectAttempt = 0;
+        notifyConnection(true);
+        startHealthChecks();
+      };
+
+      next.onmessage = (e) => {
+        if (socket !== next) return;
+        try {
+          const message = JSON.parse(e.data);
+          if (message.type === "pong") {
+            lastPongAt = Date.now();
+            return;
+          }
+          notifyMessage(message);
+        } catch (err) {
+          console.error("WS Message parse error:", err, "| raw:", e.data?.slice?.(0, 200));
+        }
+      };
+
+      next.onclose = () => {
+        if (socket !== next && socket != null) return;
+        notifyConnection(false);
+        stopHealthChecks();
+        if (teardown) return;
+        const delay = Math.min(1000 * Math.pow(2, reconnectAttempt), 30_000);
+        reconnectAttempt += 1;
+        reconnectTimer = setTimeout(doConnect, delay);
+      };
+
+      next.onerror = () => {
+        // onclose handles reconnect
+      };
+    })();
   };
 
   return {
-    connect(url: string) {
+    connect(urlOrFactory: string | (() => string | Promise<string>)) {
       teardown = false;
       reconnectAttempt = 0;
-      currentUrl = url;
+      urlFactory =
+        typeof urlOrFactory === "function" ? urlOrFactory : () => urlOrFactory;
       doConnect();
     },
     disconnect() {
@@ -112,10 +149,7 @@ export function createWebSocketClient(): WebSocketClient {
         clearTimeout(reconnectTimer);
         reconnectTimer = null;
       }
-      if (socket) {
-        socket.close();
-        socket = null;
-      }
+      closeSocketQuietly();
     },
     send(message: Record<string, unknown>) {
       if (socket?.readyState === WebSocket.OPEN) {

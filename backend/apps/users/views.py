@@ -468,6 +468,26 @@ class LogoutView(APIView):
         return response
 
 
+class WsTicketView(APIView):
+    """
+    Kısa ömürlü WebSocket ticket üretir.
+    JWT'nin query string ile log/proxy'ye sızmasını önlemek için mobil istemciler bunu kullanır.
+    """
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        import os
+        import secrets
+
+        from django.core.cache import cache
+
+        ttl = int(os.environ.get("WS_TICKET_TTL_SECONDS", "120"))
+        ticket = secrets.token_urlsafe(32)
+        cache.set(f"ws_ticket:{ticket}", str(request.user.pk), timeout=ttl)
+        return Response({"ticket": ticket, "expires_in": ttl})
+
+
 class CheckPinUserView(APIView):
     """
     Kullanıcı adının Kasiyer rolüne sahip olup olmadığını ve atanmış bir PIN'i

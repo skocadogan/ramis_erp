@@ -1,24 +1,52 @@
+import { useEffect, useState } from "react";
 import NetInfo from "@react-native-community/netinfo";
 import { useBackendHealthStore } from "../../store/useBackendHealthStore";
 
+/** NetInfo aboneliği ile güncellenir — getCanSyncNow senkron kalır. */
+let _networkOk = true;
+
+export function getNetworkOkCached(): boolean {
+  return _networkOk;
+}
+
+export function setNetworkOkCached(ok: boolean): void {
+  _networkOk = ok;
+}
+
 export function getCanSyncNow(): boolean {
   const backendOk = useBackendHealthStore.getState().status === "ok";
-  return backendOk;
+  return backendOk && _networkOk;
 }
-
-async function getNetworkConnected(): Promise<boolean> {
-  const state = await NetInfo.fetch();
-  return Boolean(state.isConnected && state.isInternetReachable !== false);
-}
-
-void getNetworkConnected;
 
 export function useWaiterConnectivity() {
   const backendStatus = useBackendHealthStore((s) => s.status);
-  const offlineMode = backendStatus === "down";
-  const canSync = backendStatus === "ok";
+  const [networkOk, setNetworkOk] = useState(_networkOk);
 
-  return { backendStatus, offlineMode, canSync };
+  useEffect(() => {
+    let mounted = true;
+    const apply = (connected: boolean) => {
+      _networkOk = connected;
+      if (mounted) setNetworkOk(connected);
+    };
+
+    void NetInfo.fetch().then((state) => {
+      apply(Boolean(state.isConnected && state.isInternetReachable !== false));
+    });
+
+    const unsub = NetInfo.addEventListener((state) => {
+      apply(Boolean(state.isConnected && state.isInternetReachable !== false));
+    });
+
+    return () => {
+      mounted = false;
+      unsub();
+    };
+  }, []);
+
+  const offlineMode = backendStatus === "down" || !networkOk;
+  const canSync = backendStatus === "ok" && networkOk;
+
+  return { backendStatus, offlineMode, canSync, networkOk };
 }
 
 export function shouldQueueMutation(offlineMode: boolean, err: unknown): boolean {

@@ -152,6 +152,7 @@
     "cancelConfirmTitle": "Anulo artikullin",
     "cancelConfirmDesc": "A je i sigurt që dëshiron ta anulosh këtë artikull?",
     "cancelConfirmBtn": "Po, anuloje",
+    "branchMismatch": "Kjo tavolinë nuk i përket degës së zgjedhur.",
     "transferError": "Transferimi i tavolinës dështoi.",
     "listTablesError": "Nuk u mundësua listimi i tavolinave.",
     "qtyUpdateError": "Nuk u mundësua përditësimi i sasisë.",

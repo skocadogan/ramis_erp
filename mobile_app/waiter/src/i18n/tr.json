@@ -152,6 +152,7 @@
     "cancelConfirmTitle": "Ürün İptali",
     "cancelConfirmDesc": "Bu ürünü iptal etmek istediğinize emin misiniz?",
     "cancelConfirmBtn": "Evet, İptal Et",
+    "branchMismatch": "Bu masa seçili şubeye ait değil.",
     "transferError": "Masa taşıma işlemi başarısız.",
     "listTablesError": "Masalar listelenemedi.",
     "qtyUpdateError": "Miktar güncellenemedi.",

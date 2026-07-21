@@ -160,6 +160,18 @@ export async function dbGetQueueCountsAggregated(): Promise<{
   }
 }
 
+/** Logout / hesap değişiminde kuyruğu tamamen temizler (çapraz kullanıcı sızıntısını önler). */
+export async function dbClearAllOperations(): Promise<void> {
+  try {
+    await runSerialized(async () => {
+      const db = await getDatabase();
+      await db.runAsync("DELETE FROM offline_queue");
+    });
+  } catch (err) {
+    console.warn("[OfflineDB] dbClearAllOperations error:", err);
+  }
+}
+
 // ─── Helper ──────────────────────────────────────────────────────────────────
 
 function rowToOperation(row: {

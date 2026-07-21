@@ -44,26 +44,44 @@ def _try_decode_base64_token(raw: str) -> str:
     return raw
 
 
-def _tokens_from_scope(scope: dict) -> tuple[str | None, str | None]:
+def _tokens_from_scope(scope: dict) -> tuple[str | None, str | None, str | None]:
     """
-    (cookie_token, query_token) — ikisi de ham string veya None.
-    
+    (cookie_token, query_token, ticket) — ham string veya None.
+
     Query string'den gelen token base64 encode edilmiş olabilir.
     Decode edip JWT doğrulamasına hazır hale getirir.
+    Kısa ömürlü `ticket` tercih edilir (JWT query sızıntısını azaltır).
     """
     query_raw = scope.get("query_string", b"").decode("utf-8")
     qs = parse_qs(query_raw)
     query_vals = qs.get("token")
     query_tok = query_vals[0] if query_vals else None
-    
+
     # Base64 encode edilmiş token'ı decode et
     if query_tok:
         query_tok = _try_decode_base64_token(query_tok)
 
+    ticket_vals = qs.get("ticket")
+    ticket = ticket_vals[0] if ticket_vals else None
+
     cookies = scope.get("cookies") or {}
     cookie_tok = cookies.get("access_token")
 
-    return cookie_tok, query_tok
+    return cookie_tok, query_tok, ticket
+
+
+def _user_from_ws_ticket(ticket: str) -> AbstractBaseUser | None:
+    if not ticket:
+        return None
+    User = get_user_model()
+    user_id = cache.get(f"ws_ticket:{ticket}")
+    if user_id is None:
+        return None
+    try:
+        return User.objects.get(pk=user_id, is_active=True)
+    except User.DoesNotExist:
+        cache.delete(f"ws_ticket:{ticket}")
+        return None
 
 
 def _cache_key_for_token(raw: str) -> str:
@@ -73,12 +91,16 @@ def _cache_key_for_token(raw: str) -> str:
 
 def get_user_for_websocket(scope: dict) -> AbstractBaseUser | None:
     """
-    İstemci önce ?token= ile sonra HttpOnly cookie ile gönderebilir.
+    Öncelik: kısa ömürlü ticket → cookie → query JWT.
     Doğrulama sonucu kısa süre önbellekte tutulur (yoğun reconnect yükünü azaltır).
-    Öncelik: cookie (genelde daha güncel), ardından query string.
     """
     User = get_user_model()
-    cookie_tok, query_tok = _tokens_from_scope(scope)
+    cookie_tok, query_tok, ticket = _tokens_from_scope(scope)
+
+    if ticket:
+        user = _user_from_ws_ticket(ticket)
+        if user is not None:
+            return user
 
     candidates: list[str] = []
     seen: set[str] = set()

@@ -12,3 +12,13 @@ export function effectiveBranchId(
     userBranchId != null && String(userBranchId).trim() !== "" ? String(userBranchId) : null;
   return a || u || null;
 }
+
+/** Masa kaydı beklenen şubeye ait mi? */
+export function tableMatchesBranch(
+  tableBranchId: string | null | undefined,
+  expectedBranchId: string | null | undefined
+): boolean {
+  if (!expectedBranchId || String(expectedBranchId).trim() === "") return true;
+  if (tableBranchId == null || String(tableBranchId).trim() === "") return true;
+  return String(tableBranchId) === String(expectedBranchId);
+}

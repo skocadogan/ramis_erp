@@ -87,6 +87,12 @@ export async function dbListOperations(): Promise<QueuedOperation[]> {
   return sqliteList();
 }
 
+export async function dbClearAllOperations(): Promise<void> {
+  await migrateFromAsyncStorage();
+  const { dbClearAllOperations: sqliteClear } = await import("./sqliteDb");
+  await sqliteClear();
+}
+
 async function dbListByStatuses(statuses: QueueSyncStatus[]): Promise<QueuedOperation[]> {
   await migrateFromAsyncStorage();
   const { dbListByStatuses: sqliteListByStatuses } = await import("./sqliteDb");

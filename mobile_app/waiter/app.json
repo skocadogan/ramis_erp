@@ -82,7 +82,7 @@
       "expo-sqlite"
     ],
     "extra": {
-      "apiUrl": "http://RAMISSERVER_IP/api/v1",
+      "apiUrl": "https://RAMISSERVER_IP/api/v1",
       "eas": {
         "projectId": "b8a93cb5-f433-45b8-b3f8-c575e2612fde"
       },

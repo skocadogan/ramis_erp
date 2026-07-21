@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useRef } from "react";
-import { useAuthStore } from "../store/useAuthStore";
-import { usePosStore } from "../store/usePosStore";
 import { getApiUrl } from "../api/client";
 import { buildWsUrl } from "../api/wsUrl";
+import { fetchWsTicket } from "../api/wsTicket";
 import { playKitchenReadySound, playTableCallingSound } from "../utils/sound";
 import { useWaiterPosPushStore, type TableWsPatchMap } from "../store/useWaiterPosPushStore";
 import { effectiveBranchId } from "../utils/branchScope";
@@ -10,6 +9,8 @@ import { queryClient } from "../api/queryClient";
 import { fetchReadyForWaiterCount, fetchPendingWaiterCalls } from "../api/waiterApi";
 import { createWebSocketClient } from "../api/wsClient";
 import type { Table } from "../types/models";
+import { useAuthStore } from "../store/useAuthStore";
+import { usePosStore } from "../store/usePosStore";
 
 const runAfterInteractionsFallback = (fn: () => void) => {
   if (typeof requestIdleCallback !== "undefined") {
@@ -353,6 +354,7 @@ export function useUnifiedSync(enabled: boolean) {
             String(message.message || "Bağlantınız yönetici tarafından sonlandırıldı.")
           );
         usePosStore.getState().persistTerminalSelection("", null);
+        void useAuthStore.getState().logout();
       }
     });
 
@@ -360,17 +362,19 @@ export function useUnifiedSync(enabled: boolean) {
       useWaiterPosPushStore.getState().setWsConnected(connected);
     });
 
-    const wsUrl = buildWsUrl(
-      getApiUrl(),
-      "/ws/pos/sync/",
-      {
-        branch_id: branchId,
-        terminal_id: posTerminalUuid,
-        platform: "mobile",
-      },
-      token
-    );
-    client.connect(wsUrl);
+    client.connect(async () => {
+      const ticket = await fetchWsTicket();
+      return buildWsUrl(
+        getApiUrl(),
+        "/ws/pos/sync/",
+        {
+          branch_id: branchId,
+          terminal_id: posTerminalUuid,
+          platform: "mobile",
+        },
+        ticket
+      );
+    });
 
     return () => {
       unsubMessage();
@@ -461,8 +465,10 @@ export function useUnifiedSync(enabled: boolean) {
       }
     });
 
-    const wsUrl = buildWsUrl(getApiUrl(), "/ws/waiter/calls/", { branch_id: branchId }, token);
-    client.connect(wsUrl);
+    client.connect(async () => {
+      const ticket = await fetchWsTicket();
+      return buildWsUrl(getApiUrl(), "/ws/waiter/calls/", { branch_id: branchId }, ticket);
+    });
 
     return () => {
       unsubMessage();

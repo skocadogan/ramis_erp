@@ -2,6 +2,7 @@ import apiClient from "../../api/client";
 import { OFFLINE_QUEUE_MAX_RETRIES } from "./config";
 import { dbDeleteOperation, dbPutOperation } from "./db";
 import { QueueConflictError, QueueNetworkError, QueueSyncError } from "./queueErrors";
+import { resolveNonNetworkQueueStatus } from "./queueStatus";
 import type {
   IdempotentOrderResponse,
   QueuedOperation,
@@ -120,8 +121,7 @@ export async function syncOneOperation(
     }
 
     const retryCount = op.retryCount + 1;
-    const finalStatus: QueueSyncStatus =
-      retryCount >= OFFLINE_QUEUE_MAX_RETRIES ? "failed" : "failed";
+    const finalStatus = resolveNonNetworkQueueStatus(retryCount, status);
 
     const syncErr = new QueueSyncError(String(message), op.id, err);
     const updated: QueuedOperation = {

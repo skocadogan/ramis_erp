@@ -6,6 +6,7 @@ import { useAuthStore } from "../store/useAuthStore";
 import { usePosStore } from "../store/usePosStore";
 import { getApiUrl } from "../api/client";
 import { buildWsUrl } from "../api/wsUrl";
+import { fetchWsTicket } from "../api/wsTicket";
 import { playKitchenReadySound } from "../utils/sound";
 import { useWaiterPosPushStore, type TableWsPatchMap } from "../store/useWaiterPosPushStore";
 import { effectiveBranchId } from "../utils/branchScope";
@@ -339,16 +340,6 @@ export function useTableSync(enabled: boolean) {
     let teardown = false;
 
     const terminalId = usePosStore.getState().posTerminalUuid;
-    const wsUrl = buildWsUrl(
-      getApiUrl(),
-      "/ws/pos/sync/",
-      {
-        branch_id: branchId,
-        terminal_id: terminalId,
-        platform: "mobile",
-      },
-      token
-    );
 
     const connect = () => {
       if (teardown) return;
@@ -357,7 +348,31 @@ export function useTableSync(enabled: boolean) {
         reconnectTimerRef.current = null;
       }
 
-      const socket = new WebSocket(wsUrl);
+      void (async () => {
+        let wsUrl: string;
+        try {
+          const ticket = await fetchWsTicket();
+          wsUrl = buildWsUrl(
+            getApiUrl(),
+            "/ws/pos/sync/",
+            {
+              branch_id: branchId,
+              terminal_id: terminalId,
+              platform: "mobile",
+            },
+            ticket
+          );
+        } catch (err) {
+          console.warn("WS ticket failed, retrying:", err);
+          if (teardown) return;
+          const delay = Math.min(1000 * Math.pow(2, reconnectAttemptRef.current), 30_000);
+          reconnectAttemptRef.current += 1;
+          reconnectTimerRef.current = setTimeout(connect, delay);
+          return;
+        }
+        if (teardown) return;
+
+        const socket = new WebSocket(wsUrl);
 
       socket.onopen = () => {
         reconnectAttemptRef.current = 0; // başarılı bağlantıda sayacı sıfırla
@@ -407,8 +422,8 @@ export function useTableSync(enabled: boolean) {
                 true,
                 message.message || "Bağlantınız yönetici tarafından sonlandırıldı."
               );
-            // Clearing terminal selection to prevent auto reconnect to the same terminal
             usePosStore.getState().persistTerminalSelection("", null);
+            void useAuthStore.getState().logout();
           }
         } catch (err) {
           // Parse hatası — ham mesajı da logla (D-8)
@@ -431,6 +446,7 @@ export function useTableSync(enabled: boolean) {
       };
 
       socketRef.current = socket;
+      })();
     };
 
     connect();

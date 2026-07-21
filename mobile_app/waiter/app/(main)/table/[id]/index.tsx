@@ -26,7 +26,7 @@ import { useTableDetailRefreshStore } from "../../../../src/store/useTableDetail
 import { useWaiterPosPushStore } from "../../../../src/store/useWaiterPosPushStore";
 import { useAuthStore } from "../../../../src/store/useAuthStore";
 import { usePosStore } from "../../../../src/store/usePosStore";
-import { effectiveBranchId } from "../../../../src/utils/branchScope";
+import { effectiveBranchId, tableMatchesBranch } from "../../../../src/utils/branchScope";
 
 // Alt bileşenlerin import edilmesi
 import { TransferTableModal } from "../../../../src/components/TransferTableModal";
@@ -197,6 +197,7 @@ export default function TableDetailScreen() {
   const isTakeawayZone = Boolean(table?.zone_is_takeaway);
   const pushSkipRef = useRef(false);
   const tableRefreshTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mutationInFlightRef = useRef<Set<string>>(new Set());
 
   // Dialog State
   const [dialogConfig, setDialogConfig] = useState<{
@@ -263,6 +264,19 @@ export default function TableDetailScreen() {
         ]);
         tableData = tableRes.data;
         ordersData = Array.isArray(ordersRes.data) ? ordersRes.data : ordersRes.data.results || [];
+
+        if (!tableMatchesBranch(tableData?.branch_id ?? tableData?.branch, branchId)) {
+          showDialog({
+            title: t("common.error"),
+            message: t("tableDetail.branchMismatch"),
+            type: "error",
+            onConfirm: () => {
+              hideDialog();
+              router.back();
+            },
+          });
+          return;
+        }
       }
 
       setTable(tableData);
@@ -281,7 +295,7 @@ export default function TableDetailScreen() {
       setIsBootstrapping(false);
       setIsRefreshing(false);
     }
-  }, [id, t, branchId]);
+  }, [id, t, branchId, showDialog, hideDialog, router]);
 
   fetchTableDetailRef.current = fetchTableDetail;
 
@@ -329,6 +343,10 @@ export default function TableDetailScreen() {
       cancelLabel: t("common.cancel"),
       onConfirm: () => {
         hideDialog();
+        const lockKey = `cancel:${itemId}`;
+        if (mutationInFlightRef.current.has(lockKey)) return;
+        mutationInFlightRef.current.add(lockKey);
+
         const previousOrders = [...orders];
 
         // İyimser güncelleme — kalemi listeden silmek yerine iptal durumuna çek
@@ -361,6 +379,9 @@ export default function TableDetailScreen() {
               type: "error",
               onConfirm: hideDialog,
             });
+          })
+          .finally(() => {
+            mutationInFlightRef.current.delete(lockKey);
           });
       },
       onCancel: hideDialog,
@@ -373,6 +394,10 @@ export default function TableDetailScreen() {
       handleCancelItem(itemId);
       return;
     }
+
+    const lockKey = `qty:${itemId}`;
+    if (mutationInFlightRef.current.has(lockKey)) return;
+    mutationInFlightRef.current.add(lockKey);
 
     const sourceOrder = orders.find((order) =>
       Array.isArray(order.items) && order.items.some((item: any) => item.id === itemId)
@@ -425,8 +450,11 @@ export default function TableDetailScreen() {
           type: "error",
           onConfirm: hideDialog,
         });
+      })
+      .finally(() => {
+        mutationInFlightRef.current.delete(lockKey);
       });
-  }, [orders, branchId, queryClient, t, showDialog, hideDialog, handleCancelItem]);
+  }, [orders, branchId, queryClient, t, showDialog, hideDialog, handleCancelItem, id]);
 
   const fetchAllTablesForTransfer = useCallback(async () => {
     if (!branchId) {

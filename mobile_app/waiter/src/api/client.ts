@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
+import { shouldRetryTransientRequest } from "./httpRetry";
 
 const DEFAULT_API_URL = Constants.expoConfig?.extra?.apiUrl || "http://localhost:8000/api/v1";
 
@@ -53,7 +54,6 @@ const apiClient = axios.create({
   },
 });
 
-const RETRYABLE_HTTP_STATUSES = new Set([502, 503, 504]);
 const MAX_TRANSIENT_RETRIES = 2;
 
 function sleep(ms: number): Promise<void> {
@@ -158,8 +158,14 @@ apiClient.interceptors.response.use(
 
     if (
       config &&
-      (RETRYABLE_HTTP_STATUSES.has(status ?? 0) ||
-        (!error.response && error.code !== "ECONNABORTED" && !reqUrl.includes("/health/")))
+      shouldRetryTransientRequest({
+        method: config.method,
+        status,
+        hasResponse: Boolean(error.response),
+        code: error.code,
+        url: reqUrl,
+        headers: config.headers as Record<string, unknown> | undefined,
+      })
     ) {
       const retryCount = (config._transientRetry as number | undefined) ?? 0;
       if (retryCount < MAX_TRANSIENT_RETRIES) {

@@ -152,6 +152,7 @@
     "cancelConfirmTitle": "Cancel Item",
     "cancelConfirmDesc": "Are you sure you want to cancel this item?",
     "cancelConfirmBtn": "Yes, Cancel It",
+    "branchMismatch": "This table does not belong to the selected branch.",
     "transferError": "Table transfer failed.",
     "listTablesError": "Could not list tables.",
     "qtyUpdateError": "Could not update quantity.",

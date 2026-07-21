@@ -24,7 +24,12 @@ export interface AuthState {
   init: () => Promise<void>;
 }
 
-const SECURE_KEYS_ON_LOGOUT = ["auth_token", "auth_user", "server_url", "delivered_count"] as const;
+const SECURE_KEYS_ON_LOGOUT = [
+  "auth_token",
+  "auth_user",
+  "server_url",
+  "delivered_count",
+] as const;
 
 async function safeSecureDelete(key: string): Promise<void> {
   try {
@@ -61,9 +66,10 @@ export const useAuthStore = create<AuthState>((set) => ({
       usePosStore.getState().resetSessionOnLogout();
       useWaiterPosPushStore.getState().resetForLogout();
 
-      const [clientModule, queryModule] = await Promise.allSettled([
+      const [clientModule, queryModule, offlineModule] = await Promise.allSettled([
         import("../api/client"),
         import("../api/queryClient"),
+        import("../features/offline/db"),
       ]);
 
       if (clientModule.status === "fulfilled") {
@@ -71,6 +77,9 @@ export const useAuthStore = create<AuthState>((set) => ({
       }
       if (queryModule.status === "fulfilled") {
         queryModule.value.queryClient.clear();
+      }
+      if (offlineModule.status === "fulfilled") {
+        await offlineModule.value.dbClearAllOperations();
       }
 
       await Promise.all(SECURE_KEYS_ON_LOGOUT.map(safeSecureDelete));

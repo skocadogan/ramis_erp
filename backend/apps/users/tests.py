@@ -297,6 +297,29 @@ class TestUserAdminAPI:
 
 
 @pytest.mark.django_db
+class TestWsTicketAPI:
+    def test_ws_ticket_requires_auth(self, api_client):
+        response = api_client.post("/api/v1/auth/ws-ticket/")
+        assert response.status_code == status.HTTP_401_UNAUTHORIZED
+
+    def test_ws_ticket_returns_ticket_and_resolves_user(self, api_client, regular_user):
+        from apps.users.ws_auth import get_user_for_websocket
+        from django.core.cache import cache
+
+        api_client.force_authenticate(user=regular_user)
+        response = api_client.post("/api/v1/auth/ws-ticket/")
+        assert response.status_code == status.HTTP_200_OK
+        ticket = response.data["ticket"]
+        assert ticket
+        assert cache.get(f"ws_ticket:{ticket}") == str(regular_user.pk)
+
+        scope = {"query_string": f"ticket={ticket}".encode("utf-8"), "cookies": {}}
+        user = get_user_for_websocket(scope)
+        assert user is not None
+        assert user.pk == regular_user.pk
+
+
+@pytest.mark.django_db
 class TestMeAPI:
     def test_get_profile(self, api_client, regular_user):
         api_client.force_authenticate(user=regular_user)

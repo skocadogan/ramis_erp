@@ -1,15 +1,13 @@
 /**
  * WebSocket URL oluşturma utility'si.
  *
- * Backend hem ham hem de base64 encode edilmiş ?token= değerini kabul eder.
- * Base64 encoding sadece log gizleme amaçlıdır; gerçek güvenlik değildir.
- * True security için backend'de kısa ömürlü WS token desteği önerilir.
+ * JWT query string'e konmaz. Kısa ömürlü `ticket` (POST /auth/ws-ticket/) kullanılır.
  */
 export function buildWsUrl(
   baseApiUrl: string,
   path: string,
   params: Record<string, string | number | boolean | null | undefined>,
-  token?: string
+  ticket?: string | null
 ): string {
   const wsBase = baseApiUrl
     .replace("http://", "ws://")
@@ -22,9 +20,8 @@ export function buildWsUrl(
     query.set(key, String(value));
   }
 
-  if (token) {
-    const encodedToken = typeof btoa !== "undefined" ? btoa(token) : token;
-    query.set("token", encodedToken);
+  if (ticket) {
+    query.set("ticket", ticket);
   }
 
   const queryString = query.toString();

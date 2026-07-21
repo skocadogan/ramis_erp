@@ -15,7 +15,11 @@ import { useRouter } from "expo-router";
 import { Image } from "expo-image";
 import { Lock, User, Eye, EyeOff, Globe, ChevronDown, Trash2, Server } from "lucide-react-native";
 import axios from "axios";
-import apiClient, { resetApiBaseURLToDefault, setApiBaseURL } from "../../src/api/client";
+import apiClient, {
+  resetApiBaseURLToDefault,
+  setApiBaseURL,
+  setCachedToken,
+} from "../../src/api/client";
 import * as SecureStore from "expo-secure-store";
 import { useAuthStore } from "../../src/store/useAuthStore";
 import { usePosStore, applyWaiterScreenPreferences } from "../../src/store/usePosStore";
@@ -27,15 +31,27 @@ const SAVED_SERVERS_KEY = "saved_servers";
 interface SavedServer {
   url: string;
   username: string;
-  /** Şifre SecureStore'da tutulur — güvenlik notu: cihaz şifrelemesi aktifken güvenlidir. */
-  password: string;
+}
+
+function sanitizeSavedServer(raw: unknown): SavedServer | null {
+  if (!raw || typeof raw !== "object") return null;
+  const o = raw as Record<string, unknown>;
+  const url = typeof o.url === "string" ? o.url.trim() : "";
+  const username = typeof o.username === "string" ? o.username.trim() : "";
+  if (!url) return null;
+  return { url, username };
 }
 
 async function loadSavedServers(): Promise<SavedServer[]> {
   try {
     const raw = await SecureStore.getItemAsync(SAVED_SERVERS_KEY);
     if (!raw) return [];
-    return JSON.parse(raw) as SavedServer[];
+    const parsed = JSON.parse(raw);
+    if (!Array.isArray(parsed)) return [];
+    const list = parsed.map(sanitizeSavedServer).filter(Boolean) as SavedServer[];
+    // Eski kayıtlardaki şifre alanlarını diske yazmadan temizle
+    await persistSavedServers(list);
+    return list;
   } catch {
     return [];
   }
@@ -45,16 +61,29 @@ async function persistSavedServers(list: SavedServer[]): Promise<void> {
   await SecureStore.setItemAsync(SAVED_SERVERS_KEY, JSON.stringify(list));
 }
 
-/** Başarılı giriş sonrası sunucuyu listeye ekler/günceller. */
-async function upsertSavedServer(url: string, username: string, password: string): Promise<void> {
+/** Başarılı giriş sonrası sunucuyu listeye ekler/günceller (şifre saklanmaz). */
+async function upsertSavedServer(url: string, username: string): Promise<void> {
   const list = await loadSavedServers();
   const idx = list.findIndex((s) => s.url === url);
   if (idx >= 0) {
-    list[idx] = { url, username, password };
+    list[idx] = { url, username };
   } else {
-    list.unshift({ url, username, password });
+    list.unshift({ url, username });
   }
   await persistSavedServers(list);
+}
+
+function logLoginFailure(err: unknown): void {
+  if (axios.isAxiosError(err)) {
+    console.error("Login error:", {
+      status: err.response?.status,
+      code: err.code,
+      url: err.config?.url,
+      detail: (err.response?.data as { detail?: string } | undefined)?.detail,
+    });
+    return;
+  }
+  console.error("Login error:", err instanceof Error ? err.message : "unknown");
 }
 
 // ---------------------------------------------------------------------------
@@ -85,7 +114,7 @@ export default function LoginScreen() {
   const handleSelectServer = useCallback((server: SavedServer) => {
     setServerUrl(server.url);
     setUsername(server.username);
-    setPassword(server.password);
+    setPassword("");
     setServerPickerOpen(false);
     setError(null);
   }, []);
@@ -112,19 +141,18 @@ export default function LoginScreen() {
 
     try {
       const formattedUrl = serverUrl.trim();
+      if (formattedUrl.startsWith("http://")) {
+        console.warn(
+          "Waiter login: HTTP API kullanılıyor. Mümkünse HTTPS tercih edin (LAN dışı MITM riski)."
+        );
+      }
       setApiBaseURL(formattedUrl);
 
       const response = await apiClient.post("/auth/token/", { username, password });
       const { access } = response.data;
 
-      if (rememberMe) {
-        await SecureStore.setItemAsync("server_url", formattedUrl);
-        await upsertSavedServer(formattedUrl, username, password);
-        setSavedServers(await loadSavedServers());
-      }
-
-      // Geçici token (persist: false) — /auth/me/ için gerekli
-      await login({ username } as any, access, false);
+      // Token bellek cache'inde; isAuthenticated henüz false — /auth/me tamamlanana kadar
+      setCachedToken(access);
 
       const meRes = await apiClient.get("/auth/me/");
       const u = meRes.data;
@@ -154,18 +182,33 @@ export default function LoginScreen() {
         /* sunucuda terminal tercihi yok */
       }
 
-      await login({
-        id: u.id,
-        username: u.username,
-        fullName: [u.first_name, u.last_name].map((s) => String(s || "").trim()).filter(Boolean).join(" ") || u.username,
-        role: u.role_names?.[0] || "staff",
-        branchId: resolvedBranchId,
-        branchName: u.branch_name ? String(u.branch_name) : undefined,
-      }, access, rememberMe);
+      if (rememberMe) {
+        await SecureStore.setItemAsync("server_url", formattedUrl);
+        await upsertSavedServer(formattedUrl, username);
+        setSavedServers(await loadSavedServers());
+      }
+
+      await login(
+        {
+          id: u.id,
+          username: u.username,
+          fullName:
+            [u.first_name, u.last_name]
+              .map((s) => String(s || "").trim())
+              .filter(Boolean)
+              .join(" ") || u.username,
+          role: u.role_names?.[0] || "staff",
+          branchId: resolvedBranchId,
+          branchName: u.branch_name ? String(u.branch_name) : undefined,
+        },
+        access,
+        rememberMe
+      );
 
       router.replace("/(main)");
     } catch (err) {
-      console.error("Login error:", err);
+      setCachedToken(null);
+      logLoginFailure(err);
       if (axios.isAxiosError(err)) {
         if (err.response) {
           setError((err.response.data as { detail?: string })?.detail || t("auth.generalError"));

@@ -598,7 +598,7 @@ _merge_backend_env_ws_defaults() {
     _env_ensure_default "$backend_env" "WS_KDS_STATS_THROTTLE_SECONDS" "2" && added=$((added + 1))
     _env_ensure_default "$backend_env" "WS_CONN_MAX_PER_MINUTE" "20" && added=$((added + 1))
     _env_ensure_default "$backend_env" "WS_MAX_PENDING_TIMERS" "1000" && added=$((added + 1))
-    _env_ensure_default "$backend_env" "WS_BYPASS_CELERY" "false" && added=$((added + 1))
+    _env_ensure_default "$backend_env" "WS_BYPASS_CELERY" "true" && added=$((added + 1))
     _env_ensure_default "$backend_env" "UVICORN_INSTANCES" "4" && added=$((added + 1))
     _env_ensure_default "$backend_env" "KDS_RECALL_WINDOW_MINUTES" "15" && added=$((added + 1))
 

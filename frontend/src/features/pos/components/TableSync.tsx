@@ -218,6 +218,8 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
       getUrl: () => getPosSyncWsUrl(branchId, terminalId, "web"),
       onOpen: () => {
         console.debug("[TableSync] WebSocket connected");
+        // Kopukluk sonrası kaçırılan table_update / order_status_changed telafisi.
+        scheduleKdsHttpFallback();
       },
       onMessage: (event) => {
         try {
@@ -279,7 +281,11 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
               tablesKey,
               { allowPrepend: true },
             );
-          } else if (shouldHttpFallbackPosTables(payload)) {
+          } else if (
+            payload.type === "order_status_changed" ||
+            shouldHttpFallbackPosTables(payload)
+          ) {
+            // table_update kaçırılırsa veya yalnızca status olayı gelirse HTTP yedek.
             scheduleKdsHttpFallback();
           } else if (payload.type === "force_disconnect") {
             toast.error(

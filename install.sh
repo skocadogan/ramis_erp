@@ -1309,7 +1309,7 @@ WS_CONN_MAX_PER_MINUTE=20
 # WS throttle eşzamanlı timer limiti
 WS_MAX_PENDING_TIMERS=1000
 # Celery kuyruğunu atlayıp WS yayınını doğrudan Redis'e gönder (düşük gecikme)
-WS_BYPASS_CELERY=false
+WS_BYPASS_CELERY=true
 
 # --- CSRF / CORS ---
 CSRF_TRUSTED_ORIGINS=${app_origin}

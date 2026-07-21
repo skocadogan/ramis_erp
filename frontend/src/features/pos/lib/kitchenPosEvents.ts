@@ -26,6 +26,7 @@ const TABLES_HTTP_FALLBACK_REASONS = new Set([
   "order_created",
   "order_completed",
   "order_cancelled",
+  "item_status",
 ]);
 
 export function extractKitchenEventData(
@@ -70,9 +71,9 @@ export function shouldHttpFallbackPosTables(
 ): boolean {
   const type = String(payload.type ?? "");
 
-  // Kalem durumu: `table_update` yeterli.
   if (type === "order_status_changed") {
-    return false;
+    const d = extractKitchenEventData(payload);
+    return Boolean(d.table_id);
   }
 
   if (

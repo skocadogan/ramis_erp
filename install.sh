@@ -1213,6 +1213,25 @@ rm -f "$RAMIS_SU_PWFILE"
     success "$(_L backend_done)"
 }
 
+_setup_backend_env() {
+    local backend_env="/etc/ramis/backend.env"
+
+    if [[ -f "$backend_env" ]]; then
+        local backup="${backend_env}.bak.$(date '+%Y%m%d-%H%M%S')"
+        cp -a "$backend_env" "$backup"
+        info "$(printf "$(_L be_env_backup_fmt)" "$backup")"
+        if confirm_yn "$(_L q_be_env_preserve)" "e"; then
+            success "$(_L be_env_preserved)"
+            log "backend.env korundu (yedek: ${backup})"
+            return 0
+        fi
+        warn "$(_L be_env_overwrite_warn)"
+    fi
+
+    _create_backend_env
+    success "$(_L be_env_ok)"
+}
+
 _create_backend_env() {
     local proto="http"
 
@@ -1536,6 +1555,7 @@ SVCEOF
     systemctl enable ramis-worker.service >> "$LOG_FILE" 2>&1
     systemctl enable ramis-worker-maintenance.service >> "$LOG_FILE" 2>&1
     systemctl enable ramis-worker-broadcast.service >> "$LOG_FILE" 2>&1
+    systemctl enable ramis-worker-pdf.service >> "$LOG_FILE" 2>&1
     systemctl enable ramis-beat.service >> "$LOG_FILE" 2>&1
     # Uvicorn HTTP API (1-8 instance)
     systemctl enable ramis-uvicorn.service >> "$LOG_FILE" 2>&1
@@ -1556,6 +1576,8 @@ SVCEOF
     systemctl start ramis-worker-maintenance.service >> "$LOG_FILE" 2>&1 || warn "ramis-worker-maintenance başlatılamadı"
     sleep 2
     systemctl start ramis-worker-broadcast.service >> "$LOG_FILE" 2>&1 || warn "ramis-worker-broadcast başlatılamadı"
+    sleep 2
+    systemctl start ramis-worker-pdf.service >> "$LOG_FILE" 2>&1 || warn "ramis-worker-pdf başlatılamadı"
     sleep 2
     systemctl start ramis-beat.service >> "$LOG_FILE" 2>&1 || warn "$(printf "$(_L svc_unit_start_fail)" "ramis-beat")"
     sleep 2
@@ -2367,6 +2389,13 @@ verify_installation() {
         all_ok=false
     fi
 
+    if service_active ramis-worker-pdf; then
+        success "$(printf '%-22s %s' 'ramis-worker-pdf' "$(_L st_pg_run)")"
+    else
+        fail "$(printf '%-22s %s' 'ramis-worker-pdf' "$(_L st_pg_down)")"
+        all_ok=false
+    fi
+
     # Celery Beat servisi
     if service_active ramis-beat; then
         success "$(printf '%-22s %s' "$(_L vrf_beat_lbl)" "$(_L st_pg_run)")"
@@ -2499,8 +2528,7 @@ main() {
     setup_user_and_dirs
     deploy_project_files
     info "$(_L be_env_wr)"
-    _create_backend_env
-    success "$(_L be_env_ok)"
+    _setup_backend_env
     setup_postgresql
     setup_backend
     if [[ "${BACKEND_ONLY}" != "true" ]]; then

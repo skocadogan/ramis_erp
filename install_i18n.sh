@@ -451,6 +451,14 @@ _L() {
         *:be_env_daphne_ok) echo "backend.env — DAPHNE_INSTANCES=%s (portlar %s)" ;;
         en:be_env_daphne_warn) echo "backend.env written but DAPHNE_INSTANCES could not be verified" ;;
         *:be_env_daphne_warn) echo "backend.env yazıldı ancak DAPHNE_INSTANCES doğrulanamadı" ;;
+        en:be_env_backup_fmt) echo "Existing backend.env backed up: %s" ;;
+        *:be_env_backup_fmt) echo "Mevcut backend.env yedeklendi: %s" ;;
+        en:q_be_env_preserve) echo "Keep existing /etc/ramis/backend.env? (wizard values will not overwrite production settings)" ;;
+        *:q_be_env_preserve) echo "Mevcut /etc/ramis/backend.env korunsun mu? (sihirbaz değerleri üretim ayarlarının üzerine yazılmaz)" ;;
+        en:be_env_preserved) echo "Existing backend.env kept unchanged" ;;
+        *:be_env_preserved) echo "Mevcut backend.env korundu (değiştirilmedi)" ;;
+        en:be_env_overwrite_warn) echo "backend.env will be recreated from wizard settings" ;;
+        *:be_env_overwrite_warn) echo "backend.env sihirbaz ayarlarıyla yeniden oluşturulacak" ;;
         en:migrate) echo "Applying database migrations…" ;;
         *:migrate) echo "Veritabanı ilk kurulumu çalıştırılıyor..." ;;
         en:migrate_ok) echo "Migrations applied" ;;

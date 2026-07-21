@@ -196,7 +196,7 @@ _write_celery_systemd_units() {
     fi
 }
 
-_write_daphne_systemd_units() {
+_write_daphne_systemd_units_only() {
     local daphne_bin="${INSTALL_DIR}/backend/.venv/bin/daphne"
     if [[ ! -x "$daphne_bin" ]]; then
         daphne_bin="${INSTALL_DIR}/backend/env/bin/daphne"
@@ -208,8 +208,12 @@ _write_daphne_systemd_units() {
     # shellcheck source=system_utils/daphne_units.sh
     source "${SCRIPT_DIR}/system_utils/daphne_units.sh"
     ramis_write_daphne_systemd_units "${INSTALL_DIR}" "${SYS_USER:-ramis}" "$daphne_bin" "127.0.0.1"
+    success "Daphne systemd birimleri güncellendi (DAPHNE_INSTANCES)"
+}
 
-    # ── Uvicorn systemd birimleri (Split mimari) ──
+_sync_split_asgi_stack() {
+    # shellcheck source=system_utils/daphne_units.sh
+    source "${SCRIPT_DIR}/system_utils/daphne_units.sh"
     # shellcheck source=system_utils/uvicorn_units.sh
     source "${SCRIPT_DIR}/system_utils/uvicorn_units.sh"
     ramis_write_uvicorn_systemd_units "${INSTALL_DIR}" "${SYS_USER:-ramis}" "127.0.0.1" || true
@@ -218,13 +222,11 @@ _write_daphne_systemd_units() {
     ramis_apply_split_upstream_to_nginx
     if nginx -t >> "$LOG_FILE" 2>&1; then
         systemctl reload nginx >> "$LOG_FILE" 2>&1 || true
-        # Nginx hazır → Uvicorn servislerini başlat
         info "Uvicorn HTTP servisleri başlatılıyor..."
         ramis_start_uvicorn_services || true
     else
         warn "Nginx syntax hatası — Split upstream güncellemesi sonrası reload atlandı"
         tail -n 5 "$LOG_FILE" >&2 || true
-        # Nginx hatalı olsa bile Uvicorn'u başlat (elle müdahale için)
         info "Uvicorn HTTP servisleri başlatılıyor (nginx reload atlandı)..."
         ramis_start_uvicorn_services || true
     fi
@@ -241,7 +243,11 @@ _write_daphne_systemd_units() {
         *) warn "PostgreSQL max_connections güncellenemedi — manuel kontrol gerekebilir" ;;
     esac
     ramis_sync_backend_env_conn_max_age "/etc/ramis/backend.env" "${SYS_USER:-ramis}" || true
-    success "Daphne systemd birimleri güncellendi (DAPHNE_INSTANCES)"
+}
+
+_write_daphne_systemd_units() {
+    _write_daphne_systemd_units_only || return 1
+    _sync_split_asgi_stack
 }
 
 service_active() {
@@ -835,8 +841,6 @@ run_change_ip() {
     chmod 600 "$backend_env"
     success "backend.env güncellendi"
 
-    _write_daphne_systemd_units || true
-
     info "Frontend ortam dosyası güncelleniyor..."
     _env_set "$frontend_env" "NEXT_PUBLIC_API_URL" "$api_url"
     _env_set "$frontend_env" "NEXT_PUBLIC_POS_OFFLINE_QUEUE" "true"
@@ -1182,7 +1186,6 @@ main() {
         fi
 
         info "ramis-daphne başlatılıyor..."
-        _write_daphne_systemd_units || true
         _start_ramis_daphne_services
         sleep 2
         if service_active ramis-daphne; then
@@ -1338,9 +1341,6 @@ main() {
 
         _write_celery_systemd_units || true
         _write_daphne_systemd_units || true
-        # shellcheck source=system_utils/uvicorn_units.sh
-        source "${SCRIPT_DIR}/system_utils/uvicorn_units.sh"
-        ramis_write_uvicorn_systemd_units "${INSTALL_DIR}" "${SYS_USER:-ramis}" "127.0.0.1" || true
     fi
 
     # ── Frontend build ──

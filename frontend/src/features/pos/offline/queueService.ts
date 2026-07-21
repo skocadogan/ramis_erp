@@ -48,8 +48,7 @@ export function unwrapOrderResponse(data: IdempotentOrderResponse): IdempotentOr
   return data;
 }
 
-export async function getQueueCounts(): Promise<QueueCounts> {
-  const ops = await dbListOperations();
+function countsFromOps(ops: QueuedOperation[]): QueueCounts {
   const counts: QueueCounts = { pending: 0, failed: 0, conflict: 0, syncing: 0, total: ops.length };
   for (const op of ops) {
     if (op.status === "pending") counts.pending += 1;
@@ -60,9 +59,23 @@ export async function getQueueCounts(): Promise<QueueCounts> {
   return counts;
 }
 
+export async function getQueueCounts(): Promise<QueueCounts> {
+  return countsFromOps(await dbListOperations());
+}
+
 export async function listActiveQueueOperations(): Promise<QueuedOperation[]> {
   const ops = await dbListOperations();
   return ops.filter((o) => o.status !== "synced");
+}
+
+/** Tek IDB taraması ile counts + aktif operasyonlar. */
+export async function getQueueSnapshot(): Promise<{
+  counts: QueueCounts;
+  operations: QueuedOperation[];
+}> {
+  const ops = await dbListOperations();
+  const operations = ops.filter((o) => o.status !== "synced");
+  return { counts: countsFromOps(ops), operations };
 }
 
 export async function hasPendingQueueOperations(): Promise<boolean> {

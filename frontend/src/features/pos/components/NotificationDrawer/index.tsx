@@ -19,6 +19,7 @@ import {
 } from "@/lib/ws";
 import { playNotificationSound } from "@/lib/notificationSounds";
 import { handleStaffNotificationPayload } from "@/features/pos/lib/staffNotificationPayload";
+import { shouldRefreshReadyList } from "@/features/pos/lib/kitchenPosEvents";
 import { useWaiterCallReminders } from "@/features/pos/hooks/useWaiterCallReminders";
 import { useWaiterCallNotifications } from "@/features/pos/hooks/useWaiterCallNotifications";
 import { dismissWaiterCalls } from "@/features/pos/services/waiterCallApi";
@@ -115,7 +116,7 @@ export function NotificationDrawer({
       setSelectedTable: s.setSelectedTable,
     }))
   );
-  const { data: tables = [] } = usePosTables(activeBranchId ?? undefined);
+  const { data: tables = [] } = usePosTables(activeBranchId ?? undefined, variant);
 
   const [internalKitchenOpen, internalSetKitchenOpen] = useState(false);
   const [internalWaiterCallOpen, internalSetWaiterCallOpen] = useState(false);
@@ -308,12 +309,8 @@ export function NotificationDrawer({
         ),
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data);
-          if (
-            payload.type === "order_status_changed" ||
-            payload.type === "kds_refresh" ||
-            payload.type === "orders_updated"
-          ) {
+          const payload = JSON.parse(event.data) as Record<string, unknown>;
+          if (shouldRefreshReadyList(payload)) {
             void wsToReadyRef.current();
           }
         } catch (e) {

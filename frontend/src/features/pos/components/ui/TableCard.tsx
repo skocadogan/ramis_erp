@@ -6,13 +6,14 @@ import {
   useAutoFinishCleaningOnExpire,
   useCleaningCountdown,
 } from "@/hooks/useCleaningCountdown";
-import { memo, useState, useEffect } from "react";
+import { memo, useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { queryKeys } from "@/lib/queryKeys";
 import api from "@/lib/api";
 import { isActiveOrderStatus } from "@/features/orders/constants/activeOrderStatuses";
 import { tablesApi } from "@/features/tables/services/tablesApi";
 import type { OrderDetail } from "@/features/tables/components/TableOrderModal/types";
+import { useSharedNow } from "@/hooks/useSharedNow";
 
 interface TableCardProps {
   table: Table;
@@ -32,6 +33,9 @@ const TableCard = memo(function TableCard({
   const t = useTranslations("pos.table");
   const queryClient = useQueryClient();
   const [openingOrphan, setOpeningOrphan] = useState(false);
+  const trackElapsed =
+    table.status === "OCCUPIED" && !!table.active_order?.created_at;
+  const nowMs = useSharedNow(trackElapsed ? 30_000 : 0);
 
   const hasOrphanOrder =
     table.status === "FREE" && !!table.active_order && !table.virtual_kind;
@@ -89,21 +93,15 @@ const TableCard = memo(function TableCard({
     }
   };
 
-  const [elapsedMinutes, setElapsedMinutes] = useState<number | null>(null);
-  useEffect(() => {
-    if (table.status !== "OCCUPIED" || !table.active_order?.created_at) {
-      setElapsedMinutes(null);
-      return;
-    }
-    const calc = () => {
-      const created = new Date(table.active_order!.created_at!);
-      const diffMs = Date.now() - created.getTime();
-      setElapsedMinutes(Math.max(0, Math.floor(diffMs / 60000)));
-    };
-    calc();
-    const interval = setInterval(calc, 30_000);
-    return () => clearInterval(interval);
-  }, [table.status, table.active_order]);
+  const elapsedMinutes =
+    table.status === "OCCUPIED" && table.active_order?.created_at
+      ? Math.max(
+          0,
+          Math.floor(
+            (nowMs - new Date(table.active_order.created_at).getTime()) / 60_000,
+          ),
+        )
+      : null;
 
   useAutoFinishCleaningOnExpire(
     cleaningEnabled && table.status === "CLEANING" && !!onFinishCleaning,

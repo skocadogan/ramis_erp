@@ -181,7 +181,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
 
   const isPosVariant = variant === "pos";
 
-  const { isLoading, fetchData } = usePosDataSync({
+  const { isLoading } = usePosDataSync({
     pathname,
     variant,
   });
@@ -213,10 +213,12 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     setCartSheetOpen(false);
   }, []);
 
+  /** Masalar WS/optimistic ile güncellenir — menü katalog refetch yapılmaz. */
+  const noopRefresh = useCallback(async () => {}, []);
+
   const handlePaymentComplete = useCallback(async () => {
-    await fetchData();
     setOrderModalTable(null);
-  }, [fetchData, setOrderModalTable]);
+  }, [setOrderModalTable]);
 
   const queryClient = useQueryClient();
   const handleNewOrderFromModal = useCallback(() => {
@@ -224,7 +226,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     // React Query cache'inden oku (Zustand'daki server verileri kaldırıldı)
     const bid = activeBranchId ?? undefined;
     const zones = queryClient.getQueryData<Zone[]>(queryKeys.posZones(bid));
-    const tablesList = queryClient.getQueryData<Table[]>(queryKeys.posTables(bid));
+    const tablesList = queryClient.getQueryData<Table[]>(queryKeys.posTables(bid, variant));
     const zone = zones?.find((z) => z.id === orderModalTable.zone);
     if (zone?.is_takeaway && orderModalTable.virtual_kind === "takeaway_order") {
       const placeholder = tablesList?.find(
@@ -235,7 +237,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
       setSelectedTable(orderModalTable);
     }
     setOrderModalTable(null);
-  }, [orderModalTable, activeBranchId, setSelectedTable, setOrderModalTable, queryClient]);
+  }, [orderModalTable, activeBranchId, setSelectedTable, setOrderModalTable, queryClient, variant]);
 
   const renderOrderModal = () => {
     if (!orderModalTable || !orderModalTable.active_order) return null;
@@ -243,7 +245,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     const sharedProps = {
       orderModalTable,
       onClose: handleCloseOrderModal,
-      onActiveOrdersChanged: fetchData,
+      onActiveOrdersChanged: noopRefresh,
       onPaymentComplete: handlePaymentComplete,
       onNewOrder: handleNewOrderFromModal,
     };
@@ -478,12 +480,12 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
             <BackendHealthBanner />
             <main className="flex flex-1 overflow-hidden p-2 gap-2 bg-background">
               <div className="flex flex-1 flex-col overflow-hidden">
-                {!selectedTable ? <TableGrid /> : <MenuSection />}
+                {!selectedTable ? <TableGrid layout="pos" /> : <MenuSection layout="pos" />}
               </div>
               {cart.length > 0 && (
                 <CartSidebar
                   onOrderSuccess={handleOrderSuccess}
-                  onRefreshData={fetchData}
+                  onRefreshData={noopRefresh}
                   shiftGateOk={!needsShiftGate || !!activeShift}
                 />
               )}
@@ -491,7 +493,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
 
             {renderOrderModal()}
 
-            <TableSync branchId={activeBranchId || undefined} />
+            <TableSync branchId={activeBranchId || undefined} variant="pos" />
 
             {/* CustomerDisplayView ve DisplayDimmer ileride buraya eklenecek (POS-only) */}
 
@@ -580,7 +582,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
             <div className="hidden min-h-0 shrink-0 lg:flex">
               <CartSidebar
                 onOrderSuccess={() => setIsOrderSuccess(true)}
-                onRefreshData={fetchData}
+                onRefreshData={noopRefresh}
                 shiftGateOk={!!activeShift}
               />
             </div>
@@ -611,7 +613,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                 <CartSidebar
                   className="h-full min-h-[50dvh] w-full max-w-none rounded-none border-0 shadow-none lg:min-h-0"
                   onOrderSuccess={handleOrderSuccessAndCloseSheet}
-                  onRefreshData={fetchData}
+                  onRefreshData={noopRefresh}
                   shiftGateOk={!!activeShift}
                 />
               </div>

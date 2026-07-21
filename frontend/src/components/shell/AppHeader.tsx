@@ -1,16 +1,23 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, lazy, Suspense } from "react"
 import { Menu, LogOut, Search } from "lucide-react"
 import { useRouter } from "next/navigation"
 import { useShallow } from "zustand/react/shallow"
 import { useTranslations, useLocale } from "next-intl"
 import { useAuthStore } from "@/store/useAuthStore"
-import { ProfileModal } from "@/features/users/components/ProfileModal"
 import { BackendHealthIndicator } from "@/components/shell/BackendHealthProvider"
 import { ThemeMenu } from "@/components/shell/ThemeMenu"
-import { GlobalSearchDialog } from "@/features/search/components/GlobalSearchDialog"
 import { LanguageSwitcher } from "@/components/shell/LanguageSwitcher"
+
+const ProfileModal = lazy(() =>
+  import("@/features/users/components/ProfileModal").then((m) => ({ default: m.ProfileModal })),
+)
+const GlobalSearchDialog = lazy(() =>
+  import("@/features/search/components/GlobalSearchDialog").then((m) => ({
+    default: m.GlobalSearchDialog,
+  })),
+)
 
 interface AppHeaderProps {
   onToggleSidebar: () => void
@@ -147,10 +154,17 @@ export function AppHeader({ onToggleSidebar }: AppHeaderProps) {
         </div>
       </header>
 
-      {showProfile && <ProfileModal onClose={() => setShowProfile(false)} />}
+      {showProfile && (
+        <Suspense fallback={null}>
+          <ProfileModal onClose={() => setShowProfile(false)} />
+        </Suspense>
+      )}
 
-      {/* Global Arama Dialog */}
-      <GlobalSearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+      {searchOpen && (
+        <Suspense fallback={null}>
+          <GlobalSearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+        </Suspense>
+      )}
     </>
   )
 }

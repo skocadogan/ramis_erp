@@ -33,8 +33,7 @@ const TableGrid = memo(function TableGrid({ layout = "pos" }: TableGridProps) {
   // branchId: önce POS store'daki aktif şube, yoksa kullanıcının birincil şubesi
   const bid = usePosStore((s) => s.activeBranchId) || userBranchId;
 
-  // tables ve zones React Query cache'inden okunur (enabled: false — API çağrısı yok)
-  const { data: tables = [] } = usePosTables(bid);
+  const { data: tables = [] } = usePosTables(bid, layout);
   const { data: zones = [] } = usePosZones({ branchId: bid });
 
   const { 

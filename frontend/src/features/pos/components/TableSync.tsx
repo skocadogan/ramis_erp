@@ -3,7 +3,7 @@
 import { useEffect, useRef } from "react";
 import { toast } from "sonner";
 import deepEqual from "fast-deep-equal";
-import { useQueryClient, type QueryClient } from "@tanstack/react-query";
+import { useQueryClient, type QueryClient, type QueryKey } from "@tanstack/react-query";
 import { useShallow } from "zustand/react/shallow";
 import { usePosStore } from "@/store/usePosStore";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -14,74 +14,123 @@ import { hasModuleAccess } from "@/lib/constants";
 import { getPosSyncWsUrl, posSyncHubKey, subscribeSharedWebSocket } from "@/lib/ws";
 import { queryKeys } from "@/lib/queryKeys";
 import { mergePosTablesWithTakeawayVirtual } from "@/features/pos/lib/mergePosTablesWithTakeawayVirtual";
+import { shouldHttpFallbackPosTables } from "@/features/pos/lib/kitchenPosEvents";
+
+/** Ucuz equality: id + status + aktif sipariş imzası. */
+function tableSyncSignature(t: Table): string {
+  const ao = t.active_order;
+  const aos = t.active_orders;
+  const orderSig = aos?.length
+    ? aos.map((o) => `${o.id}:${o.total_amount}`).join(",")
+    : ao
+      ? `${ao.id}:${ao.status ?? ""}:${ao.total_amount}:${ao.created_at ?? ""}`
+      : "";
+  return [
+    t.id,
+    t.status,
+    t.pos_occupied_flow ?? "",
+    t.cleaning_until ?? "",
+    String(t.order_count ?? 0),
+    orderSig,
+  ].join("|");
+}
 
 function sameTableLists(a: Table[], b: Table[]): boolean {
   if (a === b) return true;
   if (a.length !== b.length) return false;
-  const sortedA = [...a].sort((x, y) => x.id.localeCompare(y.id));
-  const sortedB = [...b].sort((x, y) => x.id.localeCompare(y.id));
-  for (let i = 0; i < sortedA.length; i++) {
-    if (!deepEqual(sortedA[i], sortedB[i])) return false;
+  const sigA = a.map(tableSyncSignature).sort();
+  const sigB = b.map(tableSyncSignature).sort();
+  for (let i = 0; i < sigA.length; i++) {
+    if (sigA[i] !== sigB[i]) return false;
   }
   return true;
 }
 
-/** POS dışı tüketiciler (tables modülü) için table cache'lerini tazeler.
- *  POS bileşenleri doğrudan setQueryData ile güncellenir — invalidate gerekmez. */
-function invalidateNonPosTableQueries(qc: QueryClient) {
-  void qc.invalidateQueries({ queryKey: queryKeys.tablesBase });
+const ZONES_SUMMARY_THROTTLE_MS = 2_000;
+let lastZonesSummaryInvalidateAt = 0;
+
+function throttleZonesSummaryInvalidate(qc: QueryClient) {
+  const now = Date.now();
+  if (now - lastZonesSummaryInvalidateAt < ZONES_SUMMARY_THROTTLE_MS) return;
+  lastZonesSummaryInvalidateAt = now;
   void qc.invalidateQueries({ queryKey: ["zones", "summary"] });
 }
 
-/** WS `table_update` yükünü React Query önbelleğine uygular. */
+/** POS dışı tüketiciler (tables modülü) için table cache'lerini tazeler. */
+function invalidateNonPosTableQueries(qc: QueryClient) {
+  void qc.invalidateQueries({ queryKey: queryKeys.tablesBase });
+  throttleZonesSummaryInvalidate(qc);
+}
+
+function patchTableList(
+  oldData: unknown,
+  action: string,
+  data: Table,
+  opts: { allowPrepend: boolean },
+): unknown {
+  if (!oldData) {
+    // Seed yarışı: boş cache'de en azından bu masayı tut (delete hariç).
+    if (action === "delete") return oldData;
+    return [data];
+  }
+
+  const isArray = Array.isArray(oldData);
+  const list = isArray ? oldData : (oldData as { results?: unknown }).results;
+
+  if (!Array.isArray(list)) return oldData;
+
+  const tableId = data.id;
+  let newList: Table[];
+  if (action === "delete") {
+    newList = list.filter((t: Table) => t.id !== tableId);
+  } else {
+    const existingIndex = list.findIndex((t: Table) => t.id === tableId);
+    if (existingIndex > -1) {
+      const before = list[existingIndex] as Table;
+      const merged = { ...before, ...data } as Table;
+      if (deepEqual(before, merged)) {
+        return oldData;
+      }
+      newList = [...list];
+      newList[existingIndex] = merged;
+    } else if (opts.allowPrepend) {
+      newList = [data, ...list];
+    } else {
+      return oldData;
+    }
+  }
+
+  return isArray ? newList : { ...(oldData as object), results: newList };
+}
+
+/** WS `table_update` — yalnızca bu variant key + tablesBase. */
 function applyPosStyleTableUpdate(
   payload: { action: string; data: Table },
   queryClient: QueryClient,
+  tablesKey: QueryKey,
+  opts: { allowPrepend: boolean },
 ) {
   const { action, data } = payload;
-  const tableId = data.id;
 
-  const updateFn = (oldData: unknown) => {
-    if (!oldData) return oldData;
+  queryClient.setQueriesData({ queryKey: queryKeys.tablesBase }, (old) => {
+    if (!old) return old;
+    return patchTableList(old, action, data, opts);
+  });
 
-    const isArray = Array.isArray(oldData);
-    const list = isArray ? oldData : (oldData as { results?: unknown }).results;
+  queryClient.setQueryData(tablesKey, (old) =>
+    patchTableList(old, action, data, opts),
+  );
 
-    if (!Array.isArray(list)) return oldData;
-
-    let newList: Table[];
-    if (action === "delete") {
-      newList = list.filter((t) => t.id !== tableId);
-    } else {
-      const existingIndex = list.findIndex((t) => t.id === tableId);
-      if (existingIndex > -1) {
-        const before = list[existingIndex];
-        const merged = { ...before, ...data } as Table;
-        if (deepEqual(before, merged)) {
-          return oldData;
-        }
-        newList = [...list];
-        newList[existingIndex] = merged;
-      } else {
-        newList = [data, ...list];
-      }
-    }
-
-    return isArray ? newList : { ...(oldData as object), results: newList };
-  };
-
-  queryClient.setQueriesData({ queryKey: queryKeys.tablesBase }, updateFn);
-  queryClient.setQueriesData({ queryKey: queryKeys.posTablesBase }, updateFn);
-
-  void queryClient.invalidateQueries({ queryKey: ["zones", "summary"] });
+  throttleZonesSummaryInvalidate(queryClient);
 }
 
-/** Yeni (listedde olmayan) garson masası: sunucu kapsamı için tam liste. Üst üste gelenler tek istekte. */
+/** Yeni (listedde olmayan) garson masası: sunucu kapsamı için tam liste. */
 const WAITER_FULL_RESYNC_DEBOUNCE_MS = 80;
+/** Yapısal masa listesi HTTP yedeği — mutfak fırtınasında birleştirilir. */
+const KDS_HTTP_FALLBACK_DEBOUNCE_MS = 1_000;
 
 interface TableSyncProps {
   branchId?: string;
-  /** Garson: yedek HTTP ve WS sonrası liste `scope=waiter` ile sınırlı kalır */
   variant?: "pos" | "waiter";
 }
 
@@ -89,9 +138,11 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
   const { user, token } = useAuthStore(
     useShallow((s) => ({ user: s.user, token: s.token })),
   );
+  const posTerminalUuid = usePosStore((s) => s.posTerminalUuid);
   const queryClient = useQueryClient();
   const queryClientRef = useRef(queryClient);
   const waiterWsResyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const kdsHttpFallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     queryClientRef.current = queryClient;
   }, [queryClient]);
@@ -104,6 +155,8 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
     }
 
     let cancelled = false;
+    const tablesKey = queryKeys.posTables(branchId, variant);
+    const terminalId = posTerminalUuid || undefined;
 
     const runHttpFallback = () => {
       if (cancelled) return;
@@ -112,14 +165,19 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
           const params =
             variant === "waiter" && branchId
               ? { branch_id: branchId, scope: "waiter" as const }
-              : {};
+              : branchId
+                ? { branch_id: branchId }
+                : {};
           const res = await api.get("/tables/", { params });
           const raw = res.data.results ?? res.data;
           let list = (Array.isArray(raw) ? raw : []) as Table[];
           if (branchId) {
             try {
               const vres = await api.get("/tables/takeaway_virtual/", {
-                params: { branch_id: branchId, ...(variant === "waiter" ? { scope: "waiter" } : {}) },
+                params: {
+                  branch_id: branchId,
+                  ...(variant === "waiter" ? { scope: "waiter" } : {}),
+                },
               });
               const virt = Array.isArray(vres.data) ? vres.data : [];
               const qc = queryClientRef.current;
@@ -130,11 +188,11 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
             }
           }
           const qc = queryClientRef.current;
-          const prev = qc.getQueryData<Table[]>(queryKeys.posTables(branchId));
+          const prev = qc.getQueryData<Table[]>(tablesKey);
           if (prev && sameTableLists(prev, list)) {
             return;
           }
-          qc.setQueryData(queryKeys.posTables(branchId), list);
+          qc.setQueryData(tablesKey, list);
           invalidateNonPosTableQueries(qc);
         } catch (e) {
           console.error("[TableSync] HTTP yedek masa listesi alınamadı", e);
@@ -142,30 +200,43 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
       })();
     };
 
-    void runHttpFallback();
+    const scheduleKdsHttpFallback = () => {
+      if (kdsHttpFallbackTimerRef.current) {
+        clearTimeout(kdsHttpFallbackTimerRef.current);
+      }
+      kdsHttpFallbackTimerRef.current = setTimeout(() => {
+        kdsHttpFallbackTimerRef.current = null;
+        runHttpFallback();
+      }, KDS_HTTP_FALLBACK_DEBOUNCE_MS);
+    };
 
     const cleanupWs = subscribeSharedWebSocket(
-      posSyncHubKey(branchId, usePosStore.getState().posTerminalUuid || undefined, "web"),
+      posSyncHubKey(branchId, terminalId, "web"),
       {
       tag: "pos-table-sync",
       enabled: !!token,
-      getUrl: () => getPosSyncWsUrl(branchId, usePosStore.getState().posTerminalUuid || undefined, "web"),
+      getUrl: () => getPosSyncWsUrl(branchId, terminalId, "web"),
       onOpen: () => {
         console.debug("[TableSync] WebSocket connected");
       },
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data);
+          const payload = JSON.parse(event.data) as Record<string, unknown>;
           if (payload.type === "table_update") {
-            const { action, data } = payload as { action: string; data: Table };
+            const { action, data } = payload as unknown as { action: string; data: Table };
             const tableId = data.id as string;
             const qc = queryClientRef.current;
 
             if (variant === "waiter" && branchId) {
-              const cachedTables = qc.getQueryData<Table[]>(queryKeys.posTables(branchId));
+              const cachedTables = qc.getQueryData<Table[]>(tablesKey);
               const known = cachedTables?.some((t) => t.id === tableId) ?? false;
               if (action === "delete" || (action !== "delete" && known)) {
-                applyPosStyleTableUpdate({ action, data }, qc);
+                applyPosStyleTableUpdate(
+                  { action, data },
+                  qc,
+                  tablesKey,
+                  { allowPrepend: false },
+                );
                 return;
               }
               if (waiterWsResyncTimerRef.current) {
@@ -188,11 +259,11 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
                       const zones = qc.getQueryData<Zone[]>(queryKeys.posZones(branchId)) ?? [];
                       list = mergePosTablesWithTakeawayVirtual(list, virt as Table[], zones);
                     } catch { console.error("[TableSync] Sanal masa listesi alınamadı"); }
-                    const prev = qc.getQueryData<Table[]>(queryKeys.posTables(branchId));
+                    const prev = qc.getQueryData<Table[]>(tablesKey);
                     if (prev && sameTableLists(prev, list)) {
                       return;
                     }
-                    qc.setQueryData(queryKeys.posTables(branchId), list);
+                    qc.setQueryData(tablesKey, list);
                     invalidateNonPosTableQueries(qc);
                   } catch (e) {
                     console.error("[TableSync] Garson masa listesi yenilenemedi", e);
@@ -202,18 +273,19 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
               return;
             }
 
-            applyPosStyleTableUpdate({ action, data }, qc);
-          } else if (
-            payload.type === "orders_updated" ||
-            payload.type === "kds_refresh" ||
-            payload.type === "kds.refresh" ||
-            payload.type === "order_status_changed"
-          ) {
-            // Paket siparişleri veya KDS statüsü değiştiğinde sanal/fiziksel masaları anında yenile
-            runHttpFallback();
+            applyPosStyleTableUpdate(
+              { action, data },
+              qc,
+              tablesKey,
+              { allowPrepend: true },
+            );
+          } else if (shouldHttpFallbackPosTables(payload)) {
+            scheduleKdsHttpFallback();
           } else if (payload.type === "force_disconnect") {
-            toast.error(payload.message || "Bağlantınız yönetici tarafından sonlandırıldı.");
-            // The socket will be closed by the server. We might want to clear terminal choice to avoid reconnect loop.
+            toast.error(
+              (payload.message as string) ||
+                "Bağlantınız yönetici tarafından sonlandırıldı.",
+            );
             usePosStore.getState().persistTerminalSelection("", null);
           }
         } catch (error) {
@@ -229,9 +301,13 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
         clearTimeout(waiterWsResyncTimerRef.current);
         waiterWsResyncTimerRef.current = null;
       }
+      if (kdsHttpFallbackTimerRef.current) {
+        clearTimeout(kdsHttpFallbackTimerRef.current);
+        kdsHttpFallbackTimerRef.current = null;
+      }
       cleanupWs();
     };
-  }, [user?.permissions, user?.is_superuser, token, branchId, variant]);
+  }, [user?.permissions, user?.is_superuser, token, branchId, variant, posTerminalUuid]);
 
   return null;
 }

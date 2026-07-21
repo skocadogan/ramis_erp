@@ -224,20 +224,35 @@ export function runManagedWebSocket(options: ManagedWebSocketOptions): () => voi
     };
   };
 
+  /** Sekme/online: yalnızca kopuk veya şüpheli bağlantıda yeniden bağlan; sağlıklı OPEN'ı kesme. */
   const bumpReconnectOnLifecycle = () => {
     if (cancelled || !enabled) return;
     attempt = 0;
     clearReconnect();
-    if (ws) {
+
+    if (!ws || ws.readyState === WebSocket.CLOSED || ws.readyState === WebSocket.CLOSING) {
+      openSocket();
+      return;
+    }
+
+    if (ws.readyState === WebSocket.CONNECTING) {
+      return;
+    }
+
+    // OPEN: stale timer'ı yenile; zorunlu close+reconnect yok (focus storm önlenir).
+    bumpStaleWatch();
+    try {
+      if (heartbeatIntervalMs > 0) {
+        ws.send(JSON.stringify({ type: "ping" }));
+      }
+    } catch {
       forceImmediateReconnect = true;
       try {
-        ws.close(1000, "visibility-or-online");
+        ws.close(1000, "visibility-or-online-ping-failed");
       } catch {
         forceImmediateReconnect = false;
         openSocket();
       }
-    } else {
-      openSocket();
     }
   };
 

@@ -155,9 +155,13 @@ export function useTableMutation() {
         queryKey: queryKeys.tablesBase,
       });
 
-      // 3. Belirli branch'in POS tablo cache snapshot'ı
+      // 3. Belirli branch'in POS tablo cache snapshot'ı (rollback için ilk eşleşme)
       const storeBranchId = extractBranchId(prevPosQueries);
-      const prevStoreTables = queryClient.getQueryData<Table[]>(queryKeys.posTables(storeBranchId)) ?? [];
+      const prevStoreTables =
+        (prevPosQueries.find(([key]) => {
+          const k = key as unknown[];
+          return Array.isArray(k) && k[1] === storeBranchId;
+        })?.[1] as Table[] | undefined) ?? [];
 
       // 4. Yeni status
       const newStatus = getNewStatus(action);
@@ -165,7 +169,7 @@ export function useTableMutation() {
         return { prevPosQueries, prevTableQueries, prevStoreTables };
       }
 
-      // 5. Optimistic: Query cache – POS tabloları
+      // 5. Optimistic: Query cache – tüm pos-tables* (variant dahil)
       for (const [key] of prevPosQueries) {
         queryClient.setQueryData(key, (prev: unknown) =>
           optimisticUpdatePosTables(prev, tableId, newStatus),
@@ -178,12 +182,6 @@ export function useTableMutation() {
           optimisticUpdateTables(prev, tableId, newStatus),
         );
       }
-
-      // 7. Optimistic: Query cache (belirli branch)
-      queryClient.setQueryData(
-        queryKeys.posTables(storeBranchId),
-        optimisticUpdatePosTables(prevStoreTables, tableId, newStatus),
-      );
 
       return { prevPosQueries, prevTableQueries, prevStoreTables };
     },
@@ -199,14 +197,6 @@ export function useTableMutation() {
         for (const q of context.prevTableQueries) {
           queryClient.setQueryData(q[0] as import("@tanstack/react-query").QueryKey, q[1]);
         }
-      }
-      // Rollback: Query cache
-      if (context?.prevStoreTables && context.prevPosQueries) {
-        const rollbackBranchId = extractBranchId(context.prevPosQueries);
-        queryClient.setQueryData(
-          queryKeys.posTables(rollbackBranchId),
-          context.prevStoreTables,
-        );
       }
 
       toast.error(`tables.actions.${action}Error`);
@@ -260,9 +250,13 @@ export function useOptimisticOrderCreate() {
       queryKey: queryKeys.tablesBase,
     });
     const storeBranchId = extractBranchId(prevPosQueries);
-    const prevStoreTables = queryClient.getQueryData<Table[]>(queryKeys.posTables(storeBranchId)) ?? [];
+    const prevStoreTables =
+      (prevPosQueries.find(([key]) => {
+        const k = key as unknown[];
+        return Array.isArray(k) && k[1] === storeBranchId;
+      })?.[1] as Table[] | undefined) ?? [];
 
-    // Optimistic: POS query cache
+    // Optimistic: tüm pos-tables* (variant dahil)
     for (const [key] of prevPosQueries) {
       queryClient.setQueryData(key, (prev: unknown) =>
         optimisticUpdatePosTables(prev, tableId, "OCCUPIED"),
@@ -274,11 +268,6 @@ export function useOptimisticOrderCreate() {
         optimisticUpdateTables(prev, tableId, "OCCUPIED"),
       );
     }
-    // Optimistic: Query cache (belirli branch)
-    queryClient.setQueryData(
-      queryKeys.posTables(storeBranchId),
-      optimisticUpdatePosTables(prevStoreTables, tableId, "OCCUPIED"),
-    );
 
     return { prevPosQueries, prevTableQueries, prevStoreTables };
   };
@@ -292,11 +281,6 @@ export function useOptimisticOrderCreate() {
     for (const q of context.prevTableQueries) {
       queryClient.setQueryData(q[0] as import("@tanstack/react-query").QueryKey, q[1]);
     }
-    const rollbackBranchId = extractBranchId(context.prevPosQueries);
-    queryClient.setQueryData(
-      queryKeys.posTables(rollbackBranchId),
-      context.prevStoreTables,
-    );
   };
 
   /** Cache'i tazeler. POS cache'i zaten applyOptimistic/rollbackOptimistic ile güncellendi. */

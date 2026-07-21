@@ -289,6 +289,8 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
     zIndex: isDragging ? 10 : 'auto',
     opacity: isDragging ? 0.6 : 1,
     backgroundColor: isDragging ? 'rgba(241, 245, 249, 0.5)' : undefined,
+    contentVisibility: 'auto' as const,
+    containIntrinsicSize: '0 56px',
   };
 
   return (

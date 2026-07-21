@@ -59,16 +59,18 @@ const MenuSection = memo(function MenuSection({ layout = "pos" }: MenuSectionPro
   const bid = usePosStore((s) => s.activeBranchId);
   const stockTrackingMode = usePosStore((s) => s.stockTrackingMode);
   const selectedTableStore = usePosStore((s) => s.selectedTable);
+  const selectedTableId = selectedTableStore?.id;
 
   const { data: categories = [] } = usePosCategories({ branchId: bid });
   const { data: products = [] } = usePosProducts({ branchId: bid });
-  const { data: tables = [] } = usePosTables(bid ?? undefined);
+  // Yalnızca seçili masa — diğer masa WS güncellemeleri menü grid'ini yeniden çizmez
+  const { data: cachedActiveTable } = usePosTables(bid ?? undefined, layout, {
+    select: (tables) =>
+      selectedTableId ? (tables.find((t) => t.id === selectedTableId) ?? null) : null,
+  });
   const { data: zones = [] } = usePosZones({ branchId: bid ?? undefined });
 
-  const activeTable = useMemo(() => {
-    if (!selectedTableStore) return null;
-    return tables.find((t) => t.id === selectedTableStore.id) ?? selectedTableStore;
-  }, [tables, selectedTableStore]);
+  const activeTable = cachedActiveTable ?? selectedTableStore ?? null;
 
   const {
     setSelectedTable,

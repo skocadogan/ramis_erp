@@ -195,6 +195,7 @@ export function useKdsData(options?: UseKdsDataOptions) {
   /** Ardışık kds_active isteklerinde geç cevapların taze listeyi silmesini engeller. */
   const kdsFetchSeqRef = useRef(0);
   const wsRefreshDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const stationsStatsDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   /** WebSocket duplicate mesaj filtresi: son 50 benzersiz mesaj ID'sini tutar. */
   const processedWsMsgIdsRef = useRef<Set<string>>(new Set());
   const dedupCounterRef = useRef<number>(0);
@@ -483,9 +484,15 @@ export function useKdsData(options?: UseKdsDataOptions) {
         ),
       enabled: !!token,
       onOpen: () => {
-        /* Şube/WS eşzamanlılığı: bağlantı kurulunca HTTP ile aynı bağlamı yenile */
+        /* Reconnect: siparişleri yenile; istasyon listesi debounce (stats ile birleşir). */
         if (activeStationRef.current) void fetchOrdersRef.current();
-        void fetchStationsRef.current();
+        if (stationsStatsDebounceRef.current) {
+          clearTimeout(stationsStatsDebounceRef.current);
+        }
+        stationsStatsDebounceRef.current = setTimeout(() => {
+          stationsStatsDebounceRef.current = null;
+          void fetchStationsRef.current();
+        }, 1_000);
       },
       onMessage: (event) => {
         try {
@@ -552,8 +559,14 @@ export function useKdsData(options?: UseKdsDataOptions) {
             });
           }
           if (payload.type === "kds_stats_update") {
-            // İstasyon sayaçlarını güncellemek için listeyi hafifçe yenile.
-            void fetchStationsRef.current();
+            // Sayaç event'lerini birleştir — her event'te full stations refetch yok.
+            if (stationsStatsDebounceRef.current) {
+              clearTimeout(stationsStatsDebounceRef.current);
+            }
+            stationsStatsDebounceRef.current = setTimeout(() => {
+              stationsStatsDebounceRef.current = null;
+              void fetchStationsRef.current();
+            }, 1_000);
             return;
           }
           /* Hazırlık (eski kds_refresh): aynı mutfak WS taşınır */
@@ -844,6 +857,10 @@ export function useKdsData(options?: UseKdsDataOptions) {
       if (wsRefreshDebounceRef.current) {
         clearTimeout(wsRefreshDebounceRef.current);
         wsRefreshDebounceRef.current = null;
+      }
+      if (stationsStatsDebounceRef.current) {
+        clearTimeout(stationsStatsDebounceRef.current);
+        stationsStatsDebounceRef.current = null;
       }
       processedIds.clear();
       cleanupWs();

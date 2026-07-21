@@ -1,10 +1,12 @@
 "use client"
 
-import { useQuery } from "@tanstack/react-query"
+import { useQuery, type UseQueryOptions } from "@tanstack/react-query"
 import { queryKeys } from "@/lib/queryKeys"
 import api from "@/lib/api"
 import type { Table, Zone } from "@/types/pos"
 import { mergePosTablesWithTakeawayVirtual } from "@/features/pos/lib/mergePosTablesWithTakeawayVirtual"
+
+export type PosTablesVariant = "pos" | "waiter"
 
 /**
  * POS masa listesini React Query önbelleğinden okur.
@@ -14,13 +16,22 @@ import { mergePosTablesWithTakeawayVirtual } from "@/features/pos/lib/mergePosTa
  * `staleTime: Infinity` ile otomatik refetch tamamen kapalıdır;
  * bu sayede POS ekranında titreme olmaz.
  */
-export function usePosTables(branchId?: string) {
-  return useQuery<Table[]>({
-    queryKey: queryKeys.posTables(branchId),
+export function usePosTables<TData = Table[]>(
+  branchId?: string,
+  variant: PosTablesVariant = "pos",
+  options?: Pick<UseQueryOptions<Table[], Error, TData>, "select" | "enabled">,
+) {
+  const scopeParams =
+    variant === "waiter" && branchId
+      ? { branch_id: branchId, scope: "waiter" as const }
+      : { branch_id: branchId }
+
+  return useQuery<Table[], Error, TData>({
+    queryKey: queryKeys.posTables(branchId, variant),
     queryFn: async () => {
       const [tablesRes, virtRes, zonesRes] = await Promise.all([
-        api.get("/tables/", { params: { branch_id: branchId } }),
-        api.get("/tables/takeaway_virtual/", { params: { branch_id: branchId } }),
+        api.get("/tables/", { params: scopeParams }),
+        api.get("/tables/takeaway_virtual/", { params: scopeParams }),
         api.get("/zones/", { params: { branch_id: branchId } }),
       ])
 
@@ -36,6 +47,8 @@ export function usePosTables(branchId?: string) {
     refetchOnMount: false,
     refetchOnReconnect: false,
     refetchOnWindowFocus: false,
+    enabled: options?.enabled,
+    select: options?.select,
   })
 }
 

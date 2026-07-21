@@ -5,7 +5,7 @@ import { isPosOfflineQueueEnabled, OFFLINE_QUEUE_FLUSH_INTERVAL_MS } from "./con
 import { getCanSyncNow, usePosConnectivity } from "./connectivity";
 import {
   flushOfflineQueue,
-  getQueueCounts,
+  getQueueSnapshot,
   listActiveQueueOperations,
   reconcileWithServer,
   subscribeOfflineQueue,
@@ -44,7 +44,7 @@ export function useOfflineQueueState() {
       setOperations([]);
       return;
     }
-    const [c, ops] = await Promise.all([getQueueCounts(), listActiveQueueOperations()]);
+    const { counts: c, operations: ops } = await getQueueSnapshot();
     setCounts(c);
     setOperations(ops);
   }, [enabled]);

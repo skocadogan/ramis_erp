@@ -119,7 +119,7 @@ export function useTableOrderModal({
             return active;
         },
         enabled: !!tableId && !orderId,
-        staleTime: 0,
+        staleTime: 15_000,
     });
 
     const { data: historicalOrder, isLoading: isHistoricalLoading, error: historicalOrderError } = useQuery({

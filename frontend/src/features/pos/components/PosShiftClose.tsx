@@ -63,7 +63,7 @@ export function PosShiftClose({ labelBreakpoint = "sm" }: PosShiftCloseProps) {
       posTerminalUuid: s.posTerminalUuid,
     })),
   );
-  const { data: posTables = [] } = usePosTables(activeBranchId ?? undefined);
+  const { data: posTables = [] } = usePosTables(activeBranchId ?? undefined, "pos");
   const hasOpenChecks = posTables.some((t) => tableHasOpenAccount(t));
   const branchId = activeBranchId || userBranchId || "";
   const { canManage } = useModulePermissions();

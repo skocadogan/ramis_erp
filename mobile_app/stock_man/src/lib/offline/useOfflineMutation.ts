@@ -1,26 +1,7 @@
 // ============================================================
 // Stock Man — useOfflineMutation helpers (P5)
-//
-// Factory helpers for React Query `mutationFn` values that route
-// through `executeOrEnqueue`. Each call generates a fresh
-// idempotency key so double-taps don't duplicate server work.
-//
-// Usage in a hook:
-//
-//   mutationFn: createOfflineMutationFn<Entity, Payload>((payload) => ({
-//     endpoint: "/warehouse/foo/",
-//     method: "POST",
-//     payload,
-//     feature: "foo",
-//     description: "Create foo",
-//   })),
-//   onSuccess: (data) => {
-//     if (isOfflineQueued(data)) return;
-//     invalidate(data.id);
-//   },
 // ============================================================
 
-import { generateUuid } from "@/utils/uuid";
 import type { ExecuteOrEnqueueOptions } from "./executeOrEnqueue";
 import {
   isOfflineQueued,
@@ -39,18 +20,63 @@ export function showOfflineQueuedToast(
   toast.info(t("offline.queued"));
 }
 
-type OfflineMutationOpts = Omit<ExecuteOrEnqueueOptions, "idempotencyKey">;
+type OfflineMutationOpts = Omit<ExecuteOrEnqueueOptions, "idempotencyKey"> & {
+  /** Stable key — aynı işlem çift tıklamada aynı anahtarı kullanmalı. */
+  idempotencyKey?: string;
+};
+
+const inFlight = new Map<string, Promise<OfflineAwareMutationResult<unknown>>>();
+
+export function stableIdempotencyKey(opts: {
+  feature: string;
+  method: string;
+  endpoint: string;
+  payload: unknown;
+}): string {
+  let payloadPart = "";
+  try {
+    payloadPart = JSON.stringify(opts.payload ?? null) ?? "";
+  } catch {
+    payloadPart = String(opts.payload);
+  }
+  return `sm:${opts.feature}:${opts.method}:${opts.endpoint}:${payloadPart}`;
+}
 
 /**
  * Build a React Query `mutationFn` that accepts variables and
  * returns live data or an offline queued sentinel.
+ * Aynı idempotency key için in-flight dedupe uygular.
  */
 export function createOfflineMutationFn<T, V>(
   buildOpts: (variables: V) => OfflineMutationOpts
 ): (variables: V) => Promise<OfflineAwareMutationResult<T>> {
-  return async (variables: V) =>
-    unwrapOfflineMutation<T>({
-      ...buildOpts(variables),
-      idempotencyKey: generateUuid(),
-    });
+  return async (variables: V) => {
+    const built = buildOpts(variables);
+    const idempotencyKey =
+      built.idempotencyKey ??
+      stableIdempotencyKey({
+        feature: built.feature,
+        method: built.method,
+        endpoint: built.endpoint,
+        payload: built.payload,
+      });
+
+    const existing = inFlight.get(idempotencyKey);
+    if (existing) {
+      return existing as Promise<OfflineAwareMutationResult<T>>;
+    }
+
+    const promise = unwrapOfflineMutation<T>({
+      ...built,
+      idempotencyKey,
+    }).finally(() => {
+      inFlight.delete(idempotencyKey);
+    }) as Promise<OfflineAwareMutationResult<T>>;
+
+    inFlight.set(
+      idempotencyKey,
+      promise as Promise<OfflineAwareMutationResult<unknown>>
+    );
+    return promise;
+  };
 }

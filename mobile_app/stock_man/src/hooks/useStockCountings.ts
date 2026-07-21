@@ -65,7 +65,20 @@ export function useCreateStockCounting() {
 
 export function useStartStockCounting() {
   const invalidate = useInvalidateCountings();
-  return useMutation({ mutationFn: (id: UUID) => stockCountingService.start(id), onSuccess: (c) => invalidate(c.id) });
+  return useMutation({
+    mutationFn: createOfflineMutationFn<StockCounting, UUID>((id) => ({
+      endpoint: `/warehouse/stock-counting/${id}/start/`,
+      method: "POST",
+      payload: undefined,
+      feature: "stock-counting",
+      description: "Start stock counting",
+      idempotencyKey: `sm:stock-counting:start:${id}`,
+    })),
+    onSuccess: (c, id) => {
+      if (isOfflineQueued(c)) return;
+      invalidate(c.id ?? id);
+    },
+  });
 }
 
 export function useFinishStockCounting() {
@@ -77,6 +90,7 @@ export function useFinishStockCounting() {
       payload: undefined,
       feature: "stock-counting",
       description: "Finish stock counting",
+      idempotencyKey: `sm:stock-counting:finish:${id}`,
     })),
     onSuccess: (c, id) => {
       if (isOfflineQueued(c)) return;
@@ -87,7 +101,20 @@ export function useFinishStockCounting() {
 
 export function useApproveStockCounting() {
   const invalidate = useInvalidateCountings();
-  return useMutation({ mutationFn: (id: UUID) => stockCountingService.approve(id), onSuccess: (c) => invalidate(c.id) });
+  return useMutation({
+    mutationFn: createOfflineMutationFn<StockCounting, UUID>((id) => ({
+      endpoint: `/warehouse/stock-counting/${id}/approve/`,
+      method: "POST",
+      payload: undefined,
+      feature: "stock-counting",
+      description: "Approve stock counting",
+      idempotencyKey: `sm:stock-counting:approve:${id}`,
+    })),
+    onSuccess: (c, id) => {
+      if (isOfflineQueued(c)) return;
+      invalidate(c.id ?? id);
+    },
+  });
 }
 
 export function useUpdateCountingItems() {
@@ -102,6 +129,7 @@ export function useUpdateCountingItems() {
       payload: { items },
       feature: "stock-counting",
       description: "Update counting items",
+      idempotencyKey: `sm:stock-counting:update_items:${id}`,
     })),
     onSuccess: (c, { id }) => {
       if (isOfflineQueued(c)) return;

@@ -98,6 +98,7 @@ export function useCompleteGoodsReceiving() {
       payload: undefined,
       feature: "goods-receiving",
       description: "Complete goods receiving",
+      idempotencyKey: `sm:goods-receiving:complete:${id}`,
     })),
     onSuccess: (gr, id) => {
       if (isOfflineQueued(gr)) return;

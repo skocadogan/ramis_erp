@@ -36,15 +36,21 @@ import type {
 
 export function useInfinitePurchaseOrders(filters: PurchaseOrderFilters = {}) {
   const branchId = useBranchStore((s) => s.activeBranchId);
+  const activeWarehouseId = useBranchStore((s) => s.activeWarehouseId);
+  const scoped: PurchaseOrderFilters = {
+    ...filters,
+    warehouse_id: filters.warehouse_id ?? activeWarehouseId ?? undefined,
+  };
   return useInfiniteQuery({
-    queryKey: ["purchase-orders", "infinite", branchId, filters],
-    queryFn: ({ pageParam = 1 }) => purchaseOrderService.list({ ...filters, page: pageParam }),
+    queryKey: ["purchase-orders", "infinite", branchId, scoped],
+    queryFn: ({ pageParam = 1 }) => purchaseOrderService.list({ ...scoped, page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => {
       if (!lastPage || !lastPage.next) return undefined;
       const match = lastPage.next.match(/page=(\d+)/);
       return match ? parseInt(match[1], 10) : undefined;
     },
+    enabled: !!branchId,
     staleTime: 30_000,
   });
 }

@@ -28,6 +28,7 @@
 import { useMutation, useQuery, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { deficiencyReportService, type DeficiencyFilters } from "@/services/deficiencyReportService";
 import { useBranchStore } from "@/store/useBranchStore";
+import { createOfflineMutationFn, isOfflineQueued } from "@/lib/offline/useOfflineMutation";
 import type {
   DeficiencyReport,
   DeficiencyReportCreatePayload,
@@ -109,12 +110,38 @@ export function useCreateDeficiencyReport() {
 
 export function useApproveDeficiencyReport() {
   const invalidate = useInvalidateDeficiency();
-  return useMutation({ mutationFn: (id: UUID) => deficiencyReportService.approve(id), onSuccess: (dr) => invalidate(dr.id) });
+  return useMutation({
+    mutationFn: createOfflineMutationFn<DeficiencyReport, UUID>((id) => ({
+      endpoint: `/warehouse/deficiency-reports/${id}/approve/`,
+      method: "POST",
+      payload: undefined,
+      feature: "deficiency",
+      description: "Approve deficiency report",
+      idempotencyKey: `sm:deficiency:approve:${id}`,
+    })),
+    onSuccess: (dr, id) => {
+      if (isOfflineQueued(dr)) return;
+      invalidate(dr.id ?? id);
+    },
+  });
 }
 
 export function useCancelDeficiencyReport() {
   const invalidate = useInvalidateDeficiency();
-  return useMutation({ mutationFn: (id: UUID) => deficiencyReportService.cancel(id), onSuccess: (dr) => invalidate(dr.id) });
+  return useMutation({
+    mutationFn: createOfflineMutationFn<DeficiencyReport, UUID>((id) => ({
+      endpoint: `/warehouse/deficiency-reports/${id}/cancel/`,
+      method: "POST",
+      payload: undefined,
+      feature: "deficiency",
+      description: "Cancel deficiency report",
+      idempotencyKey: `sm:deficiency:cancel:${id}`,
+    })),
+    onSuccess: (dr, id) => {
+      if (isOfflineQueued(dr)) return;
+      invalidate(dr.id ?? id);
+    },
+  });
 }
 
 export function useCreatePOFromDeficiency() {

@@ -74,7 +74,7 @@
       ]
     ],
     "extra": {
-      "apiUrl": "http://192.168.0.11/api/v1",
+      "apiUrl": "https://RAMISSERVER_IP/api/v1",
       "eas": {
         "projectId": "92e45f2a-d824-4816-a86a-e21af4095c54"
       },

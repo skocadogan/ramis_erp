@@ -35,6 +35,8 @@ type BranchState = {
   setActiveBranch: (id: UUID | null) => Promise<void>;
   setActiveWarehouse: (id: UUID | null) => Promise<void>;
   hydrateFromStorage: () => Promise<void>;
+  /** Persist edilen şube, erişilebilir listede yoksa sıfırlar / ilk şubeye düşer. */
+  reconcileWithAvailableBranches: (branches: Branch[]) => Promise<void>;
   clear: () => Promise<void>;
 };
 
@@ -62,7 +64,7 @@ const safeDel = async (k: string) => {
   }
 };
 
-export const useBranchStore = create<BranchState>((set) => ({
+export const useBranchStore = create<BranchState>((set, get) => ({
   activeBranchId: null,
   activeWarehouseId: null,
   availableBranches: [],
@@ -120,6 +122,16 @@ export const useBranchStore = create<BranchState>((set) => ({
       safeGet(KEY_WAREHOUSE),
     ]);
     set({ activeBranchId: bid, activeWarehouseId: wid });
+  },
+
+  reconcileWithAvailableBranches: async (branches) => {
+    const allowed = new Set(branches.map((b) => b.id));
+    const active = get().activeBranchId;
+    if (active && allowed.has(active)) {
+      return;
+    }
+    const fallback = branches[0]?.id ?? null;
+    await get().setActiveBranch(fallback);
   },
 
   clear: async () => {

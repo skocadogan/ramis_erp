@@ -115,6 +115,11 @@ export default function LoginScreen() {
       setLocalError(t("auth.validationError"));
       return;
     }
+    if (url.startsWith("http://")) {
+      console.warn(
+        "[Login] HTTP API kullanılıyor. Mümkünse HTTPS tercih edin (LAN dışı MITM riski)."
+      );
+    }
     try {
       await login(url, username.trim(), password, rememberMe);
       router.replace("/(main)/(tabs)");
@@ -126,7 +131,7 @@ export default function LoginScreen() {
   const handleSelectServer = useCallback((server: SavedServer) => {
     setServerUrl(server.url);
     setUsername(server.username);
-    setPassword(server.password ?? "");
+    setPassword("");
     setServerPickerOpen(false);
     setLocalError(null);
   }, []);

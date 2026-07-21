@@ -23,6 +23,7 @@
 import { useMutation, useQuery, useInfiniteQuery, useQueryClient } from "@tanstack/react-query";
 import { transferService, type TransferFilters } from "@/services/transferService";
 import { createOfflineMutationFn, isOfflineQueued } from "@/lib/offline/useOfflineMutation";
+import { useBranchStore } from "@/store/useBranchStore";
 import type {
   WarehouseTransfer,
   WarehouseTransferCreatePayload,
@@ -32,15 +33,27 @@ import type {
 // ─── Queries ──────────────────────────────────────────────
 
 export function useInfiniteTransfers(filters: TransferFilters = {}) {
+  const branchId = useBranchStore((s) => s.activeBranchId);
+  const activeWarehouseId = useBranchStore((s) => s.activeWarehouseId);
+  const scoped: TransferFilters = {
+    ...filters,
+    // Şube kapsamı: filtre yoksa aktif depo üzerinden daralt
+    ...(filters.source_warehouse_id || filters.target_warehouse_id
+      ? {}
+      : activeWarehouseId
+        ? { source_warehouse_id: activeWarehouseId }
+        : {}),
+  };
   return useInfiniteQuery({
-    queryKey: ["transfers", "infinite", filters],
-    queryFn: ({ pageParam = 1 }) => transferService.list({ ...filters, page: pageParam }),
+    queryKey: ["transfers", "infinite", branchId, scoped],
+    queryFn: ({ pageParam = 1 }) => transferService.list({ ...scoped, page: pageParam }),
     initialPageParam: 1,
     getNextPageParam: (lastPage: any) => {
       if (!lastPage || !lastPage.next) return undefined;
       const match = lastPage.next.match(/page=(\d+)/);
       return match ? parseInt(match[1], 10) : undefined;
     },
+    enabled: !!branchId,
     staleTime: 30_000,
   });
 }
@@ -88,8 +101,18 @@ export function useCreateTransfer() {
 export function useApproveTransfer() {
   const invalidate = useInvalidateTransfers();
   return useMutation({
-    mutationFn: (id: UUID) => transferService.approve(id),
-    onSuccess: (t) => invalidate(t.id),
+    mutationFn: createOfflineMutationFn<WarehouseTransfer, UUID>((id) => ({
+      endpoint: `/warehouse/transfers/${id}/approve/`,
+      method: "POST",
+      payload: undefined,
+      feature: "transfer",
+      description: "Approve transfer",
+      idempotencyKey: `sm:transfer:approve:${id}`,
+    })),
+    onSuccess: (t, id) => {
+      if (isOfflineQueued(t)) return;
+      invalidate(t.id ?? id);
+    },
   });
 }
 
@@ -102,6 +125,7 @@ export function useCompleteTransfer() {
       payload: undefined,
       feature: "transfer",
       description: "Complete transfer",
+      idempotencyKey: `sm:transfer:complete:${id}`,
     })),
     onSuccess: (t, id) => {
       if (isOfflineQueued(t)) return;
@@ -113,8 +137,18 @@ export function useCompleteTransfer() {
 export function useCancelTransfer() {
   const invalidate = useInvalidateTransfers();
   return useMutation({
-    mutationFn: (id: UUID) => transferService.cancel(id),
-    onSuccess: (t) => invalidate(t.id),
+    mutationFn: createOfflineMutationFn<WarehouseTransfer, UUID>((id) => ({
+      endpoint: `/warehouse/transfers/${id}/cancel/`,
+      method: "POST",
+      payload: undefined,
+      feature: "transfer",
+      description: "Cancel transfer",
+      idempotencyKey: `sm:transfer:cancel:${id}`,
+    })),
+    onSuccess: (t, id) => {
+      if (isOfflineQueued(t)) return;
+      invalidate(t.id ?? id);
+    },
   });
 }
 

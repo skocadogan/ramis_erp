@@ -370,7 +370,7 @@ export function ProfileBranchTableModal({
                     renderItem={({ item }) => {
                       const isSelected = selectedTable?.id === item.id;
                       const isFree =
-                        item.status === "FREE" || item.status === "RESERVED";
+                        item.status === "FREE";
 
                       return (
                         <Pressable

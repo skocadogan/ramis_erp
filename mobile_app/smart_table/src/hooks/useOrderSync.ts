@@ -11,6 +11,7 @@ import { useTableStore } from "@/store/table-store";
 import { useOrderStore, type WsOrderStatusPayload } from "@/store/order-store";
 import { useMenuStore } from "@/store/menu-store";
 import { buildPosSyncWsUrl } from "@/services/wsUrl";
+import { fetchWsTicket } from "@/services/wsTicket";
 
 const WS_HEARTBEAT_MS = 30_000;
 const WS_STALE_TIMEOUT_MS = 95_000;
@@ -56,8 +57,9 @@ function payloadMatchesTable(
   payload: Record<string, unknown>,
   tableId: string | null,
 ): boolean {
+  if (!tableId) return false;
   const tid = payload.table_id ?? payload.tableId;
-  if (!tid || !tableId) return true;
+  if (!tid) return false;
   return String(tid) === String(tableId);
 }
 
@@ -225,7 +227,7 @@ export function useOrderSync() {
         tableData &&
         shouldClearOrdersOnTableUpdate(tableData, currentTableId)
       ) {
-        useOrderStore.getState().clearOrders();
+        useOrderStore.getState().clearOrders("payment");
       }
       return;
     }
@@ -254,7 +256,7 @@ export function useOrderSync() {
         PAYMENT_CLEAR_REASONS.has(reason) &&
         payloadMatchesTable(data ?? {}, currentTableId)
       ) {
-        useOrderStore.getState().clearOrders();
+        useOrderStore.getState().clearOrders("payment");
         return;
       }
       scheduleOrdersRefetchRef.current(data);
@@ -284,41 +286,57 @@ export function useOrderSync() {
         socketRef.current = null;
       }
 
-      const wsUrl = buildPosSyncWsUrl(serverUrl, branchId, token);
-      const socket = new WebSocket(wsUrl);
-      socketRef.current = socket;
-
-      socket.onopen = () => {
-        reconnectAttemptRef.current = 0;
-        wsConnectedRef.current = true;
-        useOrderStore.getState().setWsConnected(true);
-        startSocketHealthChecksRef.current();
-        runRefetchRef.current();
-      };
-
-      socket.onmessage = (event) => {
+      void (async () => {
+        let ticket: string;
         try {
-          const parsed = JSON.parse(String(event.data)) as WsMessage;
-          handleWsMessageRef.current(parsed);
+          ticket = await fetchWsTicket();
         } catch (err) {
-          console.warn("[useOrderSync] parse error:", err);
+          console.warn("[useOrderSync] WS ticket failed:", err);
+          if (teardown || isPausedRef.current) return;
+          const delay = calcReconnectDelay(reconnectAttemptRef.current);
+          reconnectAttemptRef.current += 1;
+          reconnectTimerRef.current = setTimeout(connect, delay);
+          return;
         }
-      };
 
-      socket.onclose = () => {
-        wsConnectedRef.current = false;
-        useOrderStore.getState().setWsConnected(false);
-        stopSocketHealthChecksRef.current();
-        clearRefetchSchedulersRef.current();
         if (teardown || isPausedRef.current) return;
-        const delay = calcReconnectDelay(reconnectAttemptRef.current);
-        reconnectAttemptRef.current += 1;
-        reconnectTimerRef.current = setTimeout(connect, delay);
-      };
 
-      socket.onerror = () => {
-        // onclose reconnect'i tetikler
-      };
+        const wsUrl = buildPosSyncWsUrl(serverUrl, branchId, ticket);
+        const socket = new WebSocket(wsUrl);
+        socketRef.current = socket;
+
+        socket.onopen = () => {
+          reconnectAttemptRef.current = 0;
+          wsConnectedRef.current = true;
+          useOrderStore.getState().setWsConnected(true);
+          startSocketHealthChecksRef.current();
+          runRefetchRef.current();
+        };
+
+        socket.onmessage = (event) => {
+          try {
+            const parsed = JSON.parse(String(event.data)) as WsMessage;
+            handleWsMessageRef.current(parsed);
+          } catch (err) {
+            console.warn("[useOrderSync] parse error:", err);
+          }
+        };
+
+        socket.onclose = () => {
+          wsConnectedRef.current = false;
+          useOrderStore.getState().setWsConnected(false);
+          stopSocketHealthChecksRef.current();
+          clearRefetchSchedulersRef.current();
+          if (teardown || isPausedRef.current) return;
+          const delay = calcReconnectDelay(reconnectAttemptRef.current);
+          reconnectAttemptRef.current += 1;
+          reconnectTimerRef.current = setTimeout(connect, delay);
+        };
+
+        socket.onerror = () => {
+          // onclose reconnect'i tetikler
+        };
+      })();
     };
 
     const handleAppStateChange = (nextAppState: string) => {

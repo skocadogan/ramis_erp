@@ -27,6 +27,7 @@ import {
 } from "lucide-react-native";
 import { useUIStore } from "@/store/ui-store";
 import { useCartStore } from "@/store/cart-store";
+import { useDialogStore } from "@/store/dialog-store";
 import { useProductDetailCartLine } from "@/hooks/useProductDetailCartLine";
 import { useProductDetailModifierToggle } from "@/hooks/useProductDetailModifierToggle";
 import { useProductDetail, useMenuNormalized as useMenu } from "@/services/useMenuNormalized";
@@ -131,7 +132,8 @@ export default function ProductDetailScreen() {
   const language = useUIStore((s) => s.language);
   const { isDark, colors } = useTheme();
   const layout = useProductDetailLayout();
-  const { enqueueCartToast, flushCartToast } = useDebouncedCartQuantityToast();
+  const { enqueueCartToast, flushCartToast, clearPendingCartToast } =
+    useDebouncedCartQuantityToast();
 
   const { product, isLoading, error, refresh } = useProductDetail(id ?? "");
   const { products: catalogProducts } = useMenu();
@@ -145,6 +147,7 @@ export default function ProductDetailScreen() {
     computeDisplayTotals,
     applyModifierToggle,
     buildCartModifiers,
+    getRequiredModifierError,
     resetModifiers,
     resolvedUnit,
     resolvedVariant,
@@ -181,39 +184,56 @@ export default function ProductDetailScreen() {
 
   // ── Handlers ──
   const handleGoBack = useCallback(() => {
+    clearPendingCartToast();
     router.back();
-  }, [router]);
+  }, [clearPendingCartToast, router]);
 
   const handleCommitAndGoBack = useCallback(() => {
-    commitDraft();
-    flushCartToast();
+    const requiredError = getRequiredModifierError();
+    if (requiredError) {
+      useDialogStore
+        .getState()
+        .alert(
+          language === "tr" ? "Eksik seçim" : "Required option",
+          language === "tr"
+            ? `"${requiredError}" grubundan seçim yapmalısınız.`
+            : `Please select an option from "${requiredError}".`,
+        );
+      return;
+    }
+    const result = commitDraft();
+    clearPendingCartToast();
+    if (result && result.quantityDelta !== 0 && resolvedUnit && product) {
+      enqueueCartToast({
+        productName: product.name,
+        productNameEn: product.nameEn,
+        unit: resolvedUnit,
+        quantityDelta: result.quantityDelta,
+        language,
+      });
+      flushCartToast();
+    }
     router.back();
-  }, [commitDraft, flushCartToast, router]);
+  }, [
+    clearPendingCartToast,
+    commitDraft,
+    enqueueCartToast,
+    flushCartToast,
+    getRequiredModifierError,
+    language,
+    product,
+    resolvedUnit,
+    router,
+  ]);
 
   const handleIncreaseWithToast = useCallback(() => {
     onIncrease();
-    if (!product || !resolvedUnit) return;
-    enqueueCartToast({
-      productName: product.name,
-      productNameEn: product.nameEn,
-      unit: resolvedUnit,
-      quantityDelta: 1,
-      language,
-    });
-  }, [enqueueCartToast, language, onIncrease, product, resolvedUnit]);
+  }, [onIncrease]);
 
   const handleDecreaseWithToast = useCallback(() => {
     if (quantity <= 0) return;
     onDecrease();
-    if (!product || !resolvedUnit) return;
-    enqueueCartToast({
-      productName: product.name,
-      productNameEn: product.nameEn,
-      unit: resolvedUnit,
-      quantityDelta: -1,
-      language,
-    });
-  }, [enqueueCartToast, language, onDecrease, product, quantity, resolvedUnit]);
+  }, [onDecrease, quantity]);
 
   // ── Loading state ──
   if (isLoading) {
@@ -479,7 +499,7 @@ export default function ProductDetailScreen() {
           product={product}
           catalogProducts={catalogProducts}
           language={language}
-          sourceProductQuantity={quantity}
+          sourceProductQuantity={sourceQuantity}
         />
       ) : null}
 
@@ -727,7 +747,7 @@ export default function ProductDetailScreen() {
                   language={language}
                   compact
                   scrollable
-                  sourceProductQuantity={quantity}
+                  sourceProductQuantity={sourceQuantity}
                 />
               </View>
             ) : (

@@ -295,14 +295,14 @@ export const ProductCard = React.memo(function ProductCard({
             >
               {product.rating.toFixed(1)}
             </Text>
-            {product.ratingCount && (
+            {product.ratingCount != null && product.ratingCount > 0 ? (
               <Text
                 className="text-[10px]"
                 style={{ color: colors.mutedForeground }}
               >
                 ({product.ratingCount})
               </Text>
-            )}
+            ) : null}
           </View>
         ) : null}
 

@@ -62,6 +62,27 @@ function buildLineMap(items: CartItem[]): Map<string, CartItem> {
   return map;
 }
 
+/** Backend sözleşmesi: unit_price modifiersız; modifier tutarı ayrı eklenir. */
+function lineUnitPrice(
+  product: Product,
+  unit: ProductUnitInfo,
+  variant: ProductVariant | undefined,
+): number {
+  return getUnitSalePrice(unit, product) + (variant?.priceAdjustment || 0);
+}
+
+function modifierSum(modifiers: CartItemModifier[]): number {
+  return modifiers.reduce((sum, m) => sum + m.price, 0);
+}
+
+function lineTotalPrice(
+  unitPrice: number,
+  modifiers: CartItemModifier[],
+  quantity: number,
+): number {
+  return (unitPrice + modifierSum(modifiers)) * quantity;
+}
+
 function buildCartLine(
   product: Product,
   unit: ProductUnitInfo,
@@ -71,11 +92,8 @@ function buildCartLine(
   note?: string,
   existingId?: string,
 ): CartItem {
-  const variantPrice = variant?.priceAdjustment || 0;
-  const modifierPrice = modifiers.reduce((sum, m) => sum + m.price, 0);
   const productSalePrice = getProductSalePrice(product);
-  const unitPrice =
-    getUnitSalePrice(unit, product) + variantPrice + modifierPrice;
+  const unitPrice = lineUnitPrice(product, unit, variant);
 
   return {
     id:
@@ -91,7 +109,7 @@ function buildCartLine(
     modifiers,
     productSalePrice,
     unitPrice,
-    totalPrice: unitPrice * quantity,
+    totalPrice: lineTotalPrice(unitPrice, modifiers, quantity),
     note,
   };
 }
@@ -124,7 +142,15 @@ export const useCartStore = create<CartState>((set, get) => ({
       set((state) => {
         const newItems = state.items.map((item) =>
           item.id === existing.id
-            ? { ...item, quantity: newQty, totalPrice: newQty * item.unitPrice }
+            ? {
+                ...item,
+                quantity: newQty,
+                totalPrice: lineTotalPrice(
+                  item.unitPrice,
+                  item.modifiers,
+                  newQty,
+                ),
+              }
             : item,
         );
         return {
@@ -176,7 +202,15 @@ export const useCartStore = create<CartState>((set, get) => ({
       set((state) => {
         const newItems = state.items.map((item) =>
           item.id === existing.id
-            ? { ...item, quantity, totalPrice: item.unitPrice * quantity }
+            ? {
+                ...item,
+                quantity,
+                totalPrice: lineTotalPrice(
+                  item.unitPrice,
+                  item.modifiers,
+                  quantity,
+                ),
+              }
             : item,
         );
         return {
@@ -218,7 +252,15 @@ export const useCartStore = create<CartState>((set, get) => ({
     set((state) => {
       const newItems = state.items.map((item) =>
         item.id === itemId
-          ? { ...item, quantity, totalPrice: item.unitPrice * quantity }
+          ? {
+              ...item,
+              quantity,
+              totalPrice: lineTotalPrice(
+                item.unitPrice,
+                item.modifiers,
+                quantity,
+              ),
+            }
           : item,
       );
       return {

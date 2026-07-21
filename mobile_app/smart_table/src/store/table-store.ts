@@ -165,6 +165,20 @@ export const useTableStore = create<TableState>((set, _get) => ({
       );
       await SecureStore.deleteItemAsync(STORAGE_KEYS.SELECTED_TABLE);
       set({ selectedBranch: branch, selectedTable: null });
+
+      try {
+        const { useCartStore } = await import("./cart-store");
+        useCartStore.getState().clearCart();
+      } catch (e) {
+        console.warn("[TableStore] failed to clear cart on branch change:", e);
+      }
+      try {
+        const { useOrderStore } = await import("./order-store");
+        useOrderStore.getState().clearOrders("other");
+        useOrderStore.setState({ resolvedTableId: null });
+      } catch (e) {
+        console.warn("[TableStore] failed to clear orders on branch change:", e);
+      }
     } catch (err) {
       console.warn("[TableStore] selectBranch error:", err);
     }
@@ -228,16 +242,21 @@ export const useTableStore = create<TableState>((set, _get) => ({
   // ── Select table ──
   selectTable: async (table: SelectedTable) => {
     try {
+      const previousTableId = get().selectedTable?.id;
       await SecureStore.setItemAsync(
         STORAGE_KEYS.SELECTED_TABLE,
         JSON.stringify(table),
       );
       set({ selectedTable: table });
 
-      // Synchronise with cart-store tableId
+      // Synchronise with cart-store tableId; masa değişince sepeti temizle
       try {
         const { useCartStore } = await import("./cart-store");
-        useCartStore.getState().setTable(table.id);
+        const cart = useCartStore.getState();
+        if (previousTableId && previousTableId !== table.id) {
+          cart.clearCart();
+        }
+        cart.setTable(table.id);
       } catch (e) {
         console.warn("[TableStore] failed to sync with cart-store:", e);
       }
@@ -245,6 +264,9 @@ export const useTableStore = create<TableState>((set, _get) => ({
       // Synchronise with order-store resolvedTableId
       try {
         const { useOrderStore } = await import("./order-store");
+        if (previousTableId && previousTableId !== table.id) {
+          useOrderStore.getState().clearOrders("other");
+        }
         useOrderStore.setState({ resolvedTableId: table.id });
       } catch (e) {
         console.warn("[TableStore] failed to sync with order-store:", e);

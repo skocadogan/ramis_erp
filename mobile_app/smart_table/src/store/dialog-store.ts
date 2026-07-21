@@ -7,6 +7,7 @@
 // ============================================================
 
 import { create } from "zustand";
+import { useUIStore } from "@/store/ui-store";
 
 export interface DialogAction {
   text: string;
@@ -41,6 +42,10 @@ export interface DialogState {
   hide: () => void;
 }
 
+function okLabel(): string {
+  return useUIStore.getState().language === "tr" ? "Tamam" : "OK";
+}
+
 export const useDialogStore = create<DialogState>((set) => ({
   visible: false,
   title: "",
@@ -54,7 +59,7 @@ export const useDialogStore = create<DialogState>((set) => ({
       message,
       actions: [
         {
-          text: "Tamam",
+          text: okLabel(),
           style: "default",
           onPress: () => set({ visible: false }),
         },

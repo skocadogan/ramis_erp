@@ -138,13 +138,14 @@ export function useProductDetailCartLine(
       return;
     }
     if (initializedProductIdRef.current !== product.id) {
+      if (!unit) return;
       const snapshotModifiers = cloneModifiers(modifiers);
       sourceSnapshotRef.current = {
         productId: product.id,
-        unit: unit!,
+        unit,
         variant,
         modifiers: snapshotModifiers,
-        key: lineKey(product.id, unit!.id, variant?.id, snapshotModifiers),
+        key: lineKey(product.id, unit.id, variant?.id, snapshotModifiers),
         quantity: currentLineQuantity,
       };
       initializedProductIdRef.current = product.id;

@@ -174,6 +174,7 @@ export default function MenuScreen() {
 
   const handlePlaceOrder = useCallback(async () => {
     if (items.length === 0) return;
+    if (useOrderStore.getState().isPlacingOrder) return;
     if (!selectedTableId) {
       useDialogStore
         .getState()
@@ -186,7 +187,8 @@ export default function MenuScreen() {
       return;
     }
     try {
-      await placeOrder(items, selectedTableId);
+      const note = useCartStore.getState().note;
+      await placeOrder(items, selectedTableId, note);
       clearCart();
       setCartVisible(false);
       useDialogStore
@@ -198,6 +200,12 @@ export default function MenuScreen() {
             : "Your order has been successfully sent to the kitchen.",
         );
     } catch (err: unknown) {
+      if (
+        err instanceof Error &&
+        err.name === "OrderAlreadyInFlightError"
+      ) {
+        return;
+      }
       const message =
         err instanceof Error
           ? err.message

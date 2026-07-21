@@ -7,21 +7,53 @@ import type { StateCreator } from "zustand";
 import type { CartItem, Order } from "@/types";
 import { useAuthStore } from "@/store/auth-store";
 import { useTableStore } from "@/store/table-store";
-import { submitOrder, resolveTableUuid } from "@/services/orderService";
+import {
+  submitOrder,
+  resolveTableUuid,
+  isValidTableUuid,
+} from "@/services/orderService";
 import {
   buildOrderCreateIdempotencyKey,
   randomUUID,
 } from "@/utils/idempotency";
 import type { OrderFetchSlice } from "./orderFetchSlice";
 
+export class OrderAlreadyInFlightError extends Error {
+  constructor() {
+    super("Sipariş zaten gönderiliyor");
+    this.name = "OrderAlreadyInFlightError";
+  }
+}
+
 export interface OrderPlacementSlice {
   isPlacingOrder: boolean;
+  /** Aynı sepet/masa için timeout sonrası yeniden denemede korunur */
+  pendingCreateOpId: string | null;
+  pendingCreateFingerprint: string | null;
 
   placeOrder: (
     items: CartItem[],
     tableId: string,
     note?: string,
   ) => Promise<Order>;
+}
+
+function buildPlaceOrderFingerprint(
+  items: CartItem[],
+  tableId: string,
+  note: string | undefined,
+): string {
+  const lines = items
+    .map(
+      (item) =>
+        `${item.productId}:${item.unit.id}:${item.variant?.id ?? ""}:${item.quantity}:${item.modifiers
+          .map((m) => m.modifierId)
+          .sort()
+          .join(",")}`,
+    )
+    .sort()
+    .join("|");
+  return `${tableId}::${note?.trim() ?? ""}::${lines}`;
 }
 
 async function resolveActiveTableUuid(
@@ -52,10 +84,12 @@ export const createOrderPlacementSlice: StateCreator<
   OrderPlacementSlice
 > = (set, get) => ({
   isPlacingOrder: false,
+  pendingCreateOpId: null,
+  pendingCreateFingerprint: null,
 
   placeOrder: async (items, tableId, note) => {
     if (get().isPlacingOrder) {
-      throw new Error("Sipariş zaten gönderiliyor");
+      throw new OrderAlreadyInFlightError();
     }
 
     set({ isPlacingOrder: true });
@@ -81,8 +115,24 @@ export const createOrderPlacementSlice: StateCreator<
       if (!resolvedId) {
         throw new Error("Masa seçilmedi");
       }
+      if (!isValidTableUuid(resolvedId)) {
+        throw new Error("Geçersiz masa kimliği (table_id UUID olmalı)");
+      }
 
-      const idempotencyKey = buildOrderCreateIdempotencyKey(randomUUID());
+      const fingerprint = buildPlaceOrderFingerprint(items, resolvedId, note);
+      let clientOpId = get().pendingCreateOpId;
+      if (
+        !clientOpId ||
+        get().pendingCreateFingerprint !== fingerprint
+      ) {
+        clientOpId = randomUUID();
+        set({
+          pendingCreateOpId: clientOpId,
+          pendingCreateFingerprint: fingerprint,
+        });
+      }
+
+      const idempotencyKey = buildOrderCreateIdempotencyKey(clientOpId);
       const apiOrder = await submitOrder(
         branchId,
         resolvedId,
@@ -94,6 +144,10 @@ export const createOrderPlacementSlice: StateCreator<
         throw new Error("Sipariş gönderilemedi");
       }
 
+      set({
+        pendingCreateOpId: null,
+        pendingCreateFingerprint: null,
+      });
       await get().fetchOrders(tName);
       return apiOrder;
     } finally {

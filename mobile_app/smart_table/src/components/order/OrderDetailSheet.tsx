@@ -219,7 +219,7 @@ const OrderItemRow = React.memo(
                   className="text-[12px]"
                   style={{ color: colors.accentForeground }}
                 >
-                  {language === "tr" ? mod.modifierName : mod.groupName}
+                  {mod.modifierName}
                   {mod.price > 0 && (
                     <Text style={{ color: colors.primary }}>
                       {" "}
@@ -233,7 +233,7 @@ const OrderItemRow = React.memo(
         )}
 
         {/* Item Note */}
-        {item.note && (
+        {item.note ? (
           <View
             className="flex-row items-start mt-2 pt-2 border-t"
             style={{ borderTopColor: colors.border }}
@@ -781,7 +781,7 @@ export default function OrderDetailSheet({
                     language={language}
                     onCancel={handleCancelItem}
                   />
-                  {order.note && (
+                  {order.note ? (
                     <OrderDetailNote note={order.note} language={language} />
                   )}
                   <OrderDetailPaymentSummary
@@ -826,9 +826,9 @@ export default function OrderDetailSheet({
                 />
               </View>
 
-              {order.note && (
+              {order.note ? (
                 <OrderDetailNote note={order.note} language={language} />
-              )}
+              ) : null}
 
               <View className="px-5">
                 <OrderDetailPaymentSummary

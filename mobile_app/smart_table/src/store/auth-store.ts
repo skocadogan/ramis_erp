@@ -29,8 +29,24 @@ export interface AuthUser {
 export interface SavedServer {
   url: string;
   username: string;
-  password: string;
+  /** @deprecated Şifre saklanmaz; geriye dönük JSON'dan strip edilir */
+  password?: string;
   label?: string;
+}
+
+function sanitizeSavedServers(raw: unknown): SavedServer[] {
+  if (!Array.isArray(raw)) return [];
+  return raw
+    .filter(
+      (entry): entry is Record<string, unknown> =>
+        !!entry && typeof entry === "object",
+    )
+    .map((entry) => ({
+      url: String(entry.url ?? ""),
+      username: String(entry.username ?? ""),
+      label: typeof entry.label === "string" ? entry.label : undefined,
+    }))
+    .filter((entry) => entry.url.length > 0);
 }
 
 interface AuthState {
@@ -92,7 +108,19 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       }
 
       const [serverUrl, token, refreshToken, userStr, savedStr] = result;
-      const savedServers: SavedServer[] = savedStr ? JSON.parse(savedStr) : [];
+      const parsedSaved = savedStr ? JSON.parse(savedStr) : [];
+      const savedServers = sanitizeSavedServers(parsedSaved);
+      // Eski kayıtlardan şifreleri diske yazmadan temizle
+      if (savedStr && JSON.stringify(savedServers) !== savedStr) {
+        try {
+          await SecureStore.setItemAsync(
+            STORAGE_KEYS.SAVED_SERVERS,
+            JSON.stringify(savedServers),
+          );
+        } catch {
+          /* non-critical */
+        }
+      }
 
       if (token && userStr && serverUrl) {
         const user: AuthUser = JSON.parse(userStr);
@@ -185,12 +213,31 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       user: null,
       isAuthenticated: false,
     });
+
+    try {
+      const { useCartStore } = await import("./cart-store");
+      useCartStore.getState().clearCart();
+    } catch (err) {
+      console.warn("[AuthStore] logout cart clear error:", err);
+    }
+    try {
+      const { useOrderStore } = await import("./order-store");
+      useOrderStore.getState().clearOrders("other");
+      useOrderStore.setState({ resolvedTableId: null });
+    } catch (err) {
+      console.warn("[AuthStore] logout order clear error:", err);
+    }
   },
 
   saveServer: async (server: SavedServer) => {
     const savedServers = get().savedServers;
-    const filtered = savedServers.filter((s) => s.url !== server.url);
-    const updated = [server, ...filtered].slice(0, 10);
+    const sanitized: SavedServer = {
+      url: server.url,
+      username: server.username,
+      label: server.label,
+    };
+    const filtered = savedServers.filter((s) => s.url !== sanitized.url);
+    const updated = [sanitized, ...filtered].slice(0, 10);
 
     await SecureStore.setItemAsync(
       STORAGE_KEYS.SAVED_SERVERS,
@@ -209,8 +256,13 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   },
 
   setServerUrl: async (url: string) => {
+    const previous = get().serverUrl;
     await SecureStore.setItemAsync(STORAGE_KEYS.SERVER_URL, url);
     set({ serverUrl: url });
+    // URL değişince eski JWT'yi kullanma — oturumu düşür
+    if (previous && previous !== url && get().isAuthenticated) {
+      await get().logout();
+    }
   },
 
   validateConnection: async () => {

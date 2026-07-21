@@ -56,37 +56,40 @@ function computeBackoff(attempt: number): number {
 
 // ─── Token Doğrulama (modül kapsamında in-flight dedup) ──────
 
-let validateInFlight: Promise<boolean> | null = null;
+let validateInFlight: Promise<"valid" | "invalid" | "unreachable"> | null =
+  null;
+
+type TokenCheckResult = "ok" | "unauthorized" | "network";
 
 /**
- * Saklı JWT'yi `/api/v1/auth/me/` üzerinden doğrular. Eşzamanlı
- * çağrılar aynı Promise'i paylaşır; sonuç false ise login'e dönmek
- * için çağıran kodun backoff stratejisi uygulaması beklenir.
- *
- * Access token geçersizse önce refresh token ile yenilemeyi dener,
- * başarılı olursa yeni token ile doğrulama yapar.
+ * Saklı JWT'yi `/api/v1/auth/me/` üzerinden doğrular.
+ * Ağ hatalarını auth başarısızlığından ayırır — geçici kopmada logout yok.
  */
-async function validateStoredToken(): Promise<boolean> {
+async function validateStoredToken(): Promise<
+  "valid" | "invalid" | "unreachable"
+> {
   if (validateInFlight) return validateInFlight;
 
   validateInFlight = (async () => {
     const { serverUrl, token } = useAuthStore.getState();
-    if (!serverUrl || !token) return false;
+    if (!serverUrl || !token) return "invalid";
 
-    // önce access token ile dene
-    const accessOk = await checkToken(serverUrl, token);
-    if (accessOk) return true;
+    const accessResult = await checkToken(serverUrl, token);
+    if (accessResult === "ok") return "valid";
+    if (accessResult === "network") return "unreachable";
 
-    // access geçersiz → refresh dene
+    // unauthorized → refresh dene
     const refreshed = await attemptTokenRefresh();
     if (refreshed) {
       const renewedToken = useAuthStore.getState().token;
       if (renewedToken) {
-        return checkToken(serverUrl, renewedToken);
+        const renewed = await checkToken(serverUrl, renewedToken);
+        if (renewed === "ok") return "valid";
+        if (renewed === "network") return "unreachable";
       }
     }
 
-    return false;
+    return "invalid";
   })().finally(() => {
     validateInFlight = null;
   });
@@ -94,7 +97,10 @@ async function validateStoredToken(): Promise<boolean> {
   return validateInFlight;
 }
 
-async function checkToken(serverUrl: string, token: string): Promise<boolean> {
+async function checkToken(
+  serverUrl: string,
+  token: string,
+): Promise<TokenCheckResult> {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), VALIDATE_TIMEOUT_MS);
   try {
@@ -105,9 +111,14 @@ async function checkToken(serverUrl: string, token: string): Promise<boolean> {
       },
       signal: controller.signal,
     });
-    return response.ok;
+    if (response.ok) return "ok";
+    if (response.status === 401 || response.status === 403) {
+      return "unauthorized";
+    }
+    // 5xx vb. — sunucu ayakta değil / geçici; logout etme
+    return "network";
   } catch {
-    return false;
+    return "network";
   } finally {
     clearTimeout(timeout);
   }
@@ -122,9 +133,10 @@ async function checkToken(serverUrl: string, token: string): Promise<boolean> {
  *
  *   Auto-login (auth yüklendikten SONRA):
  *     isAuthenticated && serverUrl && !isLoading
- *       ├─ validateStoredToken() === true  → store.recordSuccess()
- *       ├─ false, attempt < 5              → computeBackoff sonra tekrar
- *       └─ false, attempt >= 5             → logout() + router.replace('/(auth)/login')
+ *       ├─ validateStoredToken() === 'valid'       → store.recordSuccess()
+ *       ├─ 'unreachable'                           → backoff retry (logout YOK)
+ *       ├─ 'invalid', attempt < 5                  → computeBackoff sonra tekrar
+ *       └─ 'invalid', attempt >= 5                 → logout() + router.replace('/(auth)/login')
  *
  *   Periodic health check (auto-login başarıyla geçtikten sonra):
  *     status === 'ok'        → 30 sn aralıkla
@@ -159,16 +171,24 @@ function useConnectivityMonitor() {
 
     const attempt = async (attemptNumber: number) => {
       if (cancelled) return;
-      const valid = await validateStoredToken();
+      const result = await validateStoredToken();
       if (cancelled) return;
 
-      if (valid) {
+      if (result === "valid") {
         recordSuccess();
         return;
       }
 
+      // Ağ/sunucu hatası — oturumu düşürme; health modal'a bırak, yeniden dene
+      if (result === "unreachable") {
+        void checkHealth();
+        const delay = computeBackoff(Math.min(attemptNumber, 5));
+        retryTimer = setTimeout(() => void attempt(attemptNumber), delay);
+        return;
+      }
+
+      // Confirmed invalid token
       if (attemptNumber >= MAX_AUTO_LOGIN_ATTEMPTS) {
-        // Bütçe doldu — kullanıcıyı login'e yönlendir.
         try {
           await logout();
         } catch (err) {
@@ -194,7 +214,7 @@ function useConnectivityMonitor() {
       if (retryTimer) clearTimeout(retryTimer);
       isRunningRef.current = false;
     };
-  }, [isLoading, isAuthenticated, serverUrl, recordSuccess, logout, router]);
+  }, [isLoading, isAuthenticated, serverUrl, recordSuccess, logout, router, checkHealth]);
 
   // ── İlk health check (bir kez) ────────────────────────────
   // status değişimlerine bağlı değil; auth+UI mount olduktan sonra
@@ -301,9 +321,13 @@ function useDisconnectOverlay() {
    * health'i 'ok' işaretle, geçersizse çıkış yap.
    */
   const attemptReconnect = async () => {
-    const valid = await validateStoredToken();
-    if (valid) {
+    const result = await validateStoredToken();
+    if (result === "valid") {
       recordSuccess();
+      return;
+    }
+    if (result === "unreachable") {
+      void useBackendHealthStore.getState().checkHealth();
       return;
     }
     try {

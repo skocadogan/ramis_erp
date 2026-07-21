@@ -358,6 +358,10 @@ export const useSurveyStore = create<SurveyState>((set, get) => ({
   },
 
   submitCurrentSurvey: async (answers) => {
+    if (get().isSubmitting) {
+      return false;
+    }
+
     const prompt = get().currentPrompt;
     if (!prompt) {
       return false;
@@ -413,6 +417,12 @@ export const useSurveyStore = create<SurveyState>((set, get) => ({
   },
 
   resetSession: () => {
+    const prompt = get().currentPrompt;
+    if (prompt) {
+      void closeSmartTableSurveySession(prompt.session_id).catch((error) => {
+        console.warn("[SurveyStore] reset close error:", error);
+      });
+    }
     set({
       stage: "idle",
       triggerReason: null,

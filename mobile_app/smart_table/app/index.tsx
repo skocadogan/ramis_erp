@@ -100,8 +100,15 @@ export default function Index() {
     setNavigating(true);
 
     try {
-      // Auth store init zaten _layout'ta useEffect ile çağrıldı.
-      // Direkt state'i okuyup yönlendiriyoruz.
+      // Auth init bitene kadar bekle (max ~5s SecureStore timeout ile uyumlu)
+      const waitForAuthInit = async () => {
+        const started = Date.now();
+        while (useAuthStore.getState().isLoading && Date.now() - started < 6000) {
+          await new Promise((r) => setTimeout(r, 50));
+        }
+      };
+      await waitForAuthInit();
+
       const { isAuthenticated } = useAuthStore.getState();
 
       if (isAuthenticated) {
@@ -110,7 +117,6 @@ export default function Index() {
         router.replace("/(auth)/login" as never);
       }
     } catch {
-      // Hata olursa login'e gönder
       router.replace("/(auth)/login" as never);
     }
   }, [navigating, router]);

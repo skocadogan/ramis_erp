@@ -260,12 +260,30 @@ async function request<T>(
         continue;
       }
 
-      const json = await response.json();
+      const responseText = await response.text();
+      let json: unknown = null;
+      if (responseText) {
+        try {
+          json = JSON.parse(responseText);
+        } catch {
+          json = { detail: responseText };
+        }
+      }
 
       if (!response.ok) {
         const errorMsg =
-          json?.detail ||
-          json?.message ||
+          (json &&
+          typeof json === "object" &&
+          "detail" in json &&
+          (json as { detail?: unknown }).detail != null
+            ? String((json as { detail: unknown }).detail)
+            : null) ||
+          (json &&
+          typeof json === "object" &&
+          "message" in json &&
+          (json as { message?: unknown }).message != null
+            ? String((json as { message: unknown }).message)
+            : null) ||
           (typeof json === "string" ? json : `HTTP ${response.status}`);
         return { data: null, error: errorMsg, status: response.status };
       }

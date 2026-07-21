@@ -69,9 +69,44 @@ export function buildCartModifiersFromSelection(
   });
 }
 
+function getInitialUnitId(product: Product | null): string {
+  if (!product) return "";
+  return getDefaultProductUnit(product).id;
+}
+
+function getInitialVariantId(product: Product | null): string {
+  if (!product) return "";
+  const defaultVariant =
+    product.variants.find((v) => v.isDefault) ?? product.variants[0];
+  return defaultVariant?.id ?? "";
+}
+
+/** Zorunlu modifier gruplarının karşılanıp karşılanmadığını kontrol eder. */
+export function validateRequiredModifiers(
+  product: Product,
+  selection: Record<string, string[]>,
+): string | null {
+  for (const group of product.modifierGroups) {
+    if (!group.isRequired && group.minSelection <= 0) continue;
+    const selected = selection[group.id] ?? [];
+    const minNeeded = Math.max(
+      group.isRequired ? 1 : 0,
+      group.minSelection || 0,
+    );
+    if (selected.length < minNeeded) {
+      return group.name;
+    }
+  }
+  return null;
+}
+
 export function useProductDetailForm(product: Product | null) {
-  const [selectedUnitId, setSelectedUnitId] = useState("");
-  const [selectedVariantId, setSelectedVariantId] = useState("");
+  const [selectedUnitId, setSelectedUnitId] = useState(() =>
+    getInitialUnitId(product),
+  );
+  const [selectedVariantId, setSelectedVariantId] = useState(() =>
+    getInitialVariantId(product),
+  );
   const [selectedModifiers, setSelectedModifiers] = useState<
     Record<string, string[]>
   >({});
@@ -118,32 +153,6 @@ export function useProductDetailForm(product: Product | null) {
 
   const variantAdj = selectedVariant?.priceAdjustment ?? 0;
 
-  const computeDisplayTotals = useCallback(
-    (quantity: number) => {
-      if (!product || quantity <= 0) {
-        return { totalPrice: 0, listPrice: 0 };
-      }
-      const unit = resolveProductUnit(product, selectedUnitId);
-      const totalPrice = computeLineTotal({
-        unit,
-        product,
-        variantAdjustment: variantAdj,
-        modifierTotal: 0,
-        quantity,
-      });
-      const listPrice = computeLineTotal({
-        unit,
-        product,
-        variantAdjustment: variantAdj,
-        modifierTotal: 0,
-        quantity,
-        useListPrice: true,
-      });
-      return { totalPrice, listPrice };
-    },
-    [product, selectedUnitId, variantAdj],
-  );
-
   const computeTotals = useCallback(
     (quantity: number) => {
       if (!product || quantity <= 0) {
@@ -170,6 +179,9 @@ export function useProductDetailForm(product: Product | null) {
     [product, selectedUnitId, variantAdj, modifierSum],
   );
 
+  /** Gösterim fiyatı modifier'ları dahil eder (computeTotals ile aynı). */
+  const computeDisplayTotals = computeTotals;
+
   const handleModifierToggle = useCallback(
     (groupId: string, modifierId: string) => {
       setSelectedModifiers((prev) =>
@@ -181,21 +193,24 @@ export function useProductDetailForm(product: Product | null) {
 
   const applyModifierToggle = useCallback(
     (groupId: string, modifierId: string): Record<string, string[]> => {
-      const nextSelected = computeModifierToggle(
-        selectedModifiers,
-        groupId,
-        modifierId,
-        product,
-      );
-      setSelectedModifiers(nextSelected);
+      let nextSelected: Record<string, string[]> = {};
+      setSelectedModifiers((prev) => {
+        nextSelected = computeModifierToggle(prev, groupId, modifierId, product);
+        return nextSelected;
+      });
       return nextSelected;
     },
-    [product, selectedModifiers],
+    [product],
   );
 
   const buildCartModifiers = useCallback((): CartModifierSelection[] => {
     if (!product) return [];
     return buildCartModifiersFromSelection(product, selectedModifiers);
+  }, [product, selectedModifiers]);
+
+  const getRequiredModifierError = useCallback((): string | null => {
+    if (!product) return null;
+    return validateRequiredModifiers(product, selectedModifiers);
   }, [product, selectedModifiers]);
 
   const resetModifiers = useCallback(() => {
@@ -224,6 +239,7 @@ export function useProductDetailForm(product: Product | null) {
     handleModifierToggle,
     applyModifierToggle,
     buildCartModifiers,
+    getRequiredModifierError,
     resetModifiers,
     resolvedUnit,
     resolvedVariant,

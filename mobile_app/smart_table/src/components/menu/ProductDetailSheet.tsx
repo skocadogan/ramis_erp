@@ -48,6 +48,7 @@ import { RecommendedProductsSection } from "@/components/menu/product-detail/Rec
 import { productHasRecommendations } from "@/utils/recommendedProducts";
 import { useProductDetailCartLine } from "@/hooks/useProductDetailCartLine";
 import { useProductDetailModifierToggle } from "@/hooks/useProductDetailModifierToggle";
+import { useDialogStore } from "@/store/dialog-store";
 
 import type { Product, Language } from "@/types";
 import { useProductDetail } from "@/services/useMenuNormalized";
@@ -78,7 +79,8 @@ export function ProductDetailSheet({
   const { isDark, colors } = useTheme();
   const { height: screenHeight } = useWindowDimensions();
   const layout = useProductDetailLayout();
-  const { enqueueCartToast, flushCartToast } = useDebouncedCartQuantityToast();
+  const { enqueueCartToast, flushCartToast, clearPendingCartToast } =
+    useDebouncedCartQuantityToast();
   const { product: fetchedProduct } = useProductDetail(
     visible && product ? product.id : "",
   );
@@ -97,6 +99,7 @@ export function ProductDetailSheet({
     computeDisplayTotals,
     applyModifierToggle,
     buildCartModifiers,
+    getRequiredModifierError,
     resetModifiers,
     resolvedUnit,
     resolvedVariant,
@@ -188,50 +191,57 @@ export function ProductDetailSheet({
   }));
 
   const handleDonePress = useCallback(() => {
-    commitDraft();
-    flushCartToast();
+    const requiredError = getRequiredModifierError();
+    if (requiredError) {
+      useDialogStore
+        .getState()
+        .alert(
+          language === "tr" ? "Eksik seçim" : "Required option",
+          language === "tr"
+            ? `"${requiredError}" grubundan seçim yapmalısınız.`
+            : `Please select an option from "${requiredError}".`,
+        );
+      return;
+    }
+    const result = commitDraft();
+    clearPendingCartToast();
+    if (result && result.quantityDelta !== 0 && resolvedUnit) {
+      enqueueCartToast({
+        productName: activeProduct.name,
+        productNameEn: activeProduct.nameEn,
+        unit: resolvedUnit,
+        quantityDelta: result.quantityDelta,
+        language,
+      });
+      flushCartToast();
+    }
     onClose();
-  }, [commitDraft, flushCartToast, onClose]);
-
-  const handleIncreaseWithToast = useCallback(() => {
-    onIncrease();
-    if (!resolvedUnit) return;
-    enqueueCartToast({
-      productName: activeProduct.name,
-      productNameEn: activeProduct.nameEn,
-      unit: resolvedUnit,
-      quantityDelta: 1,
-      language,
-    });
   }, [
     activeProduct.name,
     activeProduct.nameEn,
+    clearPendingCartToast,
+    commitDraft,
     enqueueCartToast,
+    flushCartToast,
+    getRequiredModifierError,
     language,
-    onIncrease,
+    onClose,
     resolvedUnit,
   ]);
+
+  const handleDismissWithoutCommit = useCallback(() => {
+    clearPendingCartToast();
+    onClose();
+  }, [clearPendingCartToast, onClose]);
+
+  const handleIncreaseWithToast = useCallback(() => {
+    onIncrease();
+  }, [onIncrease]);
 
   const handleDecreaseWithToast = useCallback(() => {
     if (quantity <= 0) return;
     onDecrease();
-    if (!resolvedUnit) return;
-    enqueueCartToast({
-      productName: activeProduct.name,
-      productNameEn: activeProduct.nameEn,
-      unit: resolvedUnit,
-      quantityDelta: -1,
-      language,
-    });
-  }, [
-    activeProduct.name,
-    activeProduct.nameEn,
-    enqueueCartToast,
-    language,
-    onDecrease,
-    quantity,
-    resolvedUnit,
-  ]);
+  }, [onDecrease, quantity]);
 
   const displayName = useProductDisplayName(activeProduct, language);
 
@@ -313,10 +323,10 @@ export function ProductDetailSheet({
         language={language}
         compact={layout.useSplitLayout}
         scrollable={layout.useSplitLayout}
-        sourceProductQuantity={quantity}
+        sourceProductQuantity={sourceQuantity}
       />
     ),
-    [activeProduct, catalogProducts, language, layout.useSplitLayout, quantity],
+    [activeProduct, catalogProducts, language, layout.useSplitLayout, sourceQuantity],
   );
 
   const addToCartButton = useMemo(
@@ -440,7 +450,7 @@ export function ProductDetailSheet({
       visible={sheetVisible}
       transparent
       animationType="none"
-      onRequestClose={onClose}
+      onRequestClose={handleDismissWithoutCommit}
       statusBarTranslucent
     >
       <View className="flex-1 justify-end">
@@ -449,7 +459,7 @@ export function ProductDetailSheet({
           className="absolute inset-0"
         >
           <Pressable
-            onPress={onClose}
+            onPress={handleDismissWithoutCommit}
             className="flex-1"
             style={{ backgroundColor: "rgba(0,0,0,0.5)" }}
           />
@@ -513,7 +523,7 @@ export function ProductDetailSheet({
               </View>
             ) : null}
             <Pressable
-              onPress={onClose}
+              onPress={handleDismissWithoutCommit}
               className="w-10 h-10 rounded-full items-center justify-center"
               style={{ backgroundColor: colors.muted }}
               accessibilityRole="button"

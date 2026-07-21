@@ -128,7 +128,7 @@ function CompactTimeline({
 
   return (
     <View className="px-4 py-3">
-      {estimatedCompletionTime && !isCancelled && (
+      {estimatedCompletionTime && !isCancelled ? (
         <View className="items-center mb-3">
           <View
             className="px-4 py-2 rounded-full"
@@ -145,7 +145,7 @@ function CompactTimeline({
             </Text>
           </View>
         </View>
-      )}
+      ) : null}
 
       {isCancelled ? (
         <View className="items-center py-2">
@@ -271,7 +271,7 @@ function VerticalTimeline({
 
   return (
     <View className="px-4 py-4">
-      {estimatedCompletionTime && !isCancelled && (
+      {estimatedCompletionTime && !isCancelled ? (
         <View className="items-center mb-4">
           <View
             className="px-5 py-2 rounded-full"
@@ -288,7 +288,7 @@ function VerticalTimeline({
             </Text>
           </View>
         </View>
-      )}
+      ) : null}
 
       {isCancelled && (
         <View className="items-center mb-4">

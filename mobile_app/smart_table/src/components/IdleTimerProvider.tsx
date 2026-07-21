@@ -55,7 +55,7 @@ export default function IdleTimerProvider({
     };
   }, [idleTimeout, isIdleTimerActive, navigateToWelcome]);
 
-  // ── 2. Payment detection: activeOrders → empty → go to welcome ──
+  // ── 2. Payment detection: payment clear → welcome ──
   useEffect(() => {
     const unsub = useOrderStore.subscribe((state, prevState) => {
       const hadOrders = prevState.activeOrders.length > 0;
@@ -63,6 +63,7 @@ export default function IdleTimerProvider({
       if (
         hadOrders &&
         !hasOrdersNow &&
+        state.lastClearReason === "payment" &&
         useUIStore.getState().isIdleTimerActive
       ) {
         navigateToWelcome();

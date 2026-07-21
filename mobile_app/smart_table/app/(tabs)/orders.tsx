@@ -5,7 +5,7 @@
 // orders are cleared when POS payment completes (no order history).
 // ============================================================
 
-import { useState, useCallback, useEffect, useMemo } from "react";
+import { useState, useCallback, useEffect, useMemo, useRef } from "react";
 import {
   View,
   Text,
@@ -80,9 +80,12 @@ export default function OrdersScreen() {
     }, [fetchOrders]),
   );
 
-  // ── Open cart sheet automatically if we navigate here with items in the cart ──
+  // ── Open cart sheet only when cart goes from empty → non-empty ──
+  const prevCartCountRef = useRef(0);
   useEffect(() => {
-    if (items.length > 0) {
+    const prev = prevCartCountRef.current;
+    prevCartCountRef.current = items.length;
+    if (prev === 0 && items.length > 0) {
       setCartVisible(true);
     }
   }, [items.length]);
@@ -97,6 +100,7 @@ export default function OrdersScreen() {
   // ── Handle Placing Order ──
   const handlePlaceOrder = useCallback(async () => {
     if (items.length === 0) return;
+    if (useOrderStore.getState().isPlacingOrder) return;
     if (!selectedTableId) {
       useDialogStore
         .getState()
@@ -110,7 +114,8 @@ export default function OrdersScreen() {
     }
     try {
       setRefreshing(true);
-      await placeOrder(items, selectedTableId);
+      const note = useCartStore.getState().note;
+      await placeOrder(items, selectedTableId, note);
       clearCart();
       setCartVisible(false);
       useDialogStore
@@ -122,20 +127,27 @@ export default function OrdersScreen() {
             : "Your order has been successfully sent to the kitchen.",
         );
       router.replace("/(tabs)/menu");
-    } catch (err: any) {
+    } catch (err: unknown) {
+      if (
+        err instanceof Error &&
+        err.name === "OrderAlreadyInFlightError"
+      ) {
+        return;
+      }
       useDialogStore
         .getState()
         .alert(
           language === "tr" ? "Hata" : "Error",
-          err?.message ||
-            (language === "tr"
+          err instanceof Error
+            ? err.message
+            : language === "tr"
               ? "Sipariş gönderilemedi"
-              : "Failed to place order"),
+              : "Failed to place order",
         );
     } finally {
       setRefreshing(false);
     }
-  }, [items, placeOrder, clearCart, language, selectedTableId]);
+  }, [items, placeOrder, clearCart, language, selectedTableId, router]);
 
   // ── Order press opens inline detail sheet ──
   const handleOrderPress = useCallback((order: Order) => {

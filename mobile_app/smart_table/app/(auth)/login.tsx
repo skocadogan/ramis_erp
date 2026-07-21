@@ -61,7 +61,7 @@ export default function LoginScreen() {
   const [serverUrl, setServerUrl] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [rememberMe, setRememberMe] = useState(true);
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showSavedServers, setShowSavedServers] = useState(false);
@@ -140,12 +140,11 @@ export default function LoginScreen() {
         return;
       }
 
-      // Step 4: Save server if remember me
+      // Step 4: Save server URL + username only (never persist password)
       if (rememberMe) {
         await saveServer({
           url: formattedUrl,
           username: username.trim(),
-          password,
         });
       }
 
@@ -184,7 +183,7 @@ export default function LoginScreen() {
   const handleSelectSaved = useCallback((saved: SavedServer) => {
     setServerUrl(saved.url);
     setUsername(saved.username);
-    setPassword(saved.password);
+    setPassword("");
     setShowSavedServers(false);
     setError(null);
   }, []);

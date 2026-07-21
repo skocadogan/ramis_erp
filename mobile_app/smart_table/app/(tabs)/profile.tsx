@@ -38,6 +38,7 @@ import {
 } from "lucide-react-native";
 import { useUIStore } from "@/store/ui-store";
 import { useAuthStore } from "@/store/auth-store";
+import { useBackendHealthStore } from "@/store/useBackendHealthStore";
 import { useTableStore } from "@/store/table-store";
 import { useCartStore } from "@/store/cart-store";
 import { useDialogStore } from "@/store/dialog-store";
@@ -68,6 +69,7 @@ export default function ProfileScreen() {
   const fetchTables = useTableStore((s) => s.fetchTables);
   const fetchBranches = useTableStore((s) => s.fetchBranches);
   const setCartTable = useCartStore((s) => s.setTable);
+  const healthStatus = useBackendHealthStore((s) => s.status);
 
   const isDark = theme === "dark";
   const { colors } = useTheme();
@@ -176,8 +178,22 @@ export default function ProfileScreen() {
           true,
         );
       } else {
-        // Just update the server URL
+        const previousUrl = useAuthStore.getState().serverUrl;
         await setServerUrl(formattedUrl);
+        if (previousUrl && previousUrl !== formattedUrl) {
+          setShowServerSettings(false);
+          setEditPassword("");
+          useDialogStore
+            .getState()
+            .alert(
+              language === "tr" ? "Yeniden giriş" : "Re-login required",
+              language === "tr"
+                ? "Sunucu adresi değişti. Lütfen yeniden giriş yapın."
+                : "Server URL changed. Please sign in again.",
+            );
+          router.replace("/(auth)/login");
+          return;
+        }
       }
 
       setShowServerSettings(false);
@@ -275,6 +291,8 @@ export default function ProfileScreen() {
     serverConnection:
       language === "tr" ? "Sunucu Bağlantısı" : "Server Connection",
     connected: language === "tr" ? "Bağlı" : "Connected",
+    disconnected: language === "tr" ? "Bağlantı yok" : "Disconnected",
+    checking: language === "tr" ? "Kontrol ediliyor..." : "Checking...",
     serverUrl: language === "tr" ? "Sunucu Adresi" : "Server Address",
     loggedInAs: language === "tr" ? "Giriş Yapan" : "Logged in as",
     serverSettings: language === "tr" ? "Sunucu Ayarları" : "Server Settings",
@@ -406,11 +424,24 @@ export default function ProfileScreen() {
                 <View className="flex-row items-center gap-3">
                   <View
                     className="w-10 h-10 rounded-full items-center justify-center"
-                    style={{ backgroundColor: `${colors.success}1A` }}
+                    style={{
+                      backgroundColor:
+                        healthStatus === "ok"
+                          ? `${colors.success}1A`
+                          : healthStatus === "down"
+                            ? `${colors.destructive}1A`
+                            : `${colors.warning}1A`,
+                    }}
                   >
                     <Server
                       size={20}
-                      color={colors.success}
+                      color={
+                        healthStatus === "ok"
+                          ? colors.success
+                          : healthStatus === "down"
+                            ? colors.destructive
+                            : colors.warning
+                      }
                       strokeWidth={1.8}
                     />
                   </View>
@@ -422,12 +453,39 @@ export default function ProfileScreen() {
                       {t.serverConnection}
                     </Text>
                     <View className="flex-row items-center gap-1.5 mt-0.5">
-                      <Wifi size={12} color={colors.success} strokeWidth={2} />
+                      {healthStatus === "ok" ? (
+                        <Wifi
+                          size={12}
+                          color={colors.success}
+                          strokeWidth={2}
+                        />
+                      ) : (
+                        <WifiOff
+                          size={12}
+                          color={
+                            healthStatus === "down"
+                              ? colors.destructive
+                              : colors.warning
+                          }
+                          strokeWidth={2}
+                        />
+                      )}
                       <Text
                         className="text-xs font-medium"
-                        style={{ color: colors.success }}
+                        style={{
+                          color:
+                            healthStatus === "ok"
+                              ? colors.success
+                              : healthStatus === "down"
+                                ? colors.destructive
+                                : colors.warning,
+                        }}
                       >
-                        {t.connected}
+                        {healthStatus === "ok"
+                          ? t.connected
+                          : healthStatus === "down"
+                            ? t.disconnected
+                            : t.checking}
                       </Text>
                     </View>
                   </View>

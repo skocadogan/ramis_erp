@@ -22,6 +22,8 @@ export interface OrderFetchSlice {
   isLoading: boolean;
   error: string | null;
   resolvedTableId: string | null;
+  /** IdleTimer: yalnızca payment clear sonrası welcome'a dön */
+  lastClearReason: "payment" | "other" | null;
 
   fetchOrders: (
     tableName?: string,
@@ -29,7 +31,7 @@ export interface OrderFetchSlice {
   ) => Promise<void>;
   updateOrderStatus: (orderId: string, status: OrderStatus) => void;
   cancelOrder: (orderId: string) => void;
-  clearOrders: () => void;
+  clearOrders: (reason?: "payment" | "other") => void;
   cancelItem: (itemId: string) => Promise<void>;
   setResolvedTableId: (id: string | null) => void;
 }
@@ -63,6 +65,7 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
   isLoading: false,
   error: null,
   resolvedTableId: null,
+  lastClearReason: null,
 
   setResolvedTableId: (id) => set({ resolvedTableId: id }),
 
@@ -84,7 +87,11 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
       if (!auth.isAuthenticated || !branchId) {
         if (seq !== ordersFetchSeq) return;
         if (!background) {
-          set({ activeOrders: [], isLoading: false });
+          set({
+            activeOrders: [],
+            isLoading: false,
+            lastClearReason: "other",
+          });
         }
         return;
       }
@@ -105,6 +112,7 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
           activeOrders: [],
           error: "Masa seçilmedi veya masa bulunamadı",
           isLoading: false,
+          lastClearReason: "other",
         });
         return;
       }
@@ -112,9 +120,11 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
       const apiOrders = await fetchOrdersForTable(tableUuid);
       if (seq !== ordersFetchSeq) return;
 
+      const nextOrders = normalizeActiveOrders(apiOrders);
       set({
-        activeOrders: normalizeActiveOrders(apiOrders),
+        activeOrders: nextOrders,
         isLoading: false,
+        lastClearReason: nextOrders.length > 0 ? null : get().lastClearReason,
       });
     } catch (err: unknown) {
       if (seq !== ordersFetchSeq) return;
@@ -130,7 +140,11 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
 
   updateOrderStatus: (orderId, status) => {
     if (isTerminalOrderStatus(status)) {
-      set({ activeOrders: get().activeOrders.filter((o) => o.id !== orderId) });
+      const next = get().activeOrders.filter((o) => o.id !== orderId);
+      set({
+        activeOrders: next,
+        lastClearReason: next.length === 0 ? "payment" : get().lastClearReason,
+      });
       return;
     }
     set({
@@ -143,11 +157,15 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
   },
 
   cancelOrder: (orderId) => {
-    set({ activeOrders: get().activeOrders.filter((o) => o.id !== orderId) });
+    const next = get().activeOrders.filter((o) => o.id !== orderId);
+    set({
+      activeOrders: next,
+      lastClearReason: next.length === 0 ? "other" : get().lastClearReason,
+    });
   },
 
-  clearOrders: () => {
-    set({ activeOrders: [] });
+  clearOrders: (reason = "other") => {
+    set({ activeOrders: [], lastClearReason: reason });
   },
 
   cancelItem: async (itemId) => {

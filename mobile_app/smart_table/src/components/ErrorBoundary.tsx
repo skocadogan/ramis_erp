@@ -50,13 +50,18 @@ export class ErrorBoundary extends Component<Props, State> {
     this.props.onError?.(error, info);
   }
 
+  private retryKey = 0;
+
   private handleRetry = () => {
+    this.retryKey += 1;
     this.setState({ hasError: false, error: undefined });
   };
 
   render() {
     if (!this.state.hasError) {
-      return this.props.children;
+      return (
+        <React.Fragment key={this.retryKey}>{this.props.children}</React.Fragment>
+      );
     }
 
     const scheme = Appearance.getColorScheme();

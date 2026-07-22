@@ -44,6 +44,15 @@ describe("shouldHttpFallbackPosTables", () => {
     ).toBe(false);
   });
 
+  it("order_status_changed + table_id yok → paket, fallback var", () => {
+    expect(
+      shouldHttpFallbackPosTables({
+        type: "order_status_changed",
+        data: { order_id: "o1", item_status: "READY" },
+      }),
+    ).toBe(true);
+  });
+
   it("item_acknowledged → HTTP yedek (paket kartı KITCHEN→SETTLE)", () => {
     expect(
       shouldHttpFallbackPosTables({

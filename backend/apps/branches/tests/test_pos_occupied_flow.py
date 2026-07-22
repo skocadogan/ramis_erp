@@ -1,15 +1,27 @@
 """pos_occupied_flow — paket READY+görüldü → SETTLE."""
 
+from decimal import Decimal
+
 import pytest
 from django.utils import timezone
 
-from apps.branches.models import Zone
 from apps.branches.pos_occupied_flow import flow_for_order
-from apps.menu.models import Category, Product
 from apps.orders.models import Order, OrderItem, OrderStatus, OrderType
 
 
 pytest_plugins = ("apps.orders.tests.conftest",)
+
+
+def _make_item(order, product, *, status, acknowledged=False):
+    return OrderItem.objects.create(
+        order=order,
+        product=product,
+        quantity=1,
+        unit_price=Decimal("10.00"),
+        total_price=Decimal("10.00"),
+        status=status,
+        waiter_acknowledged_at=timezone.now() if acknowledged else None,
+    )
 
 
 @pytest.mark.django_db
@@ -23,13 +35,7 @@ class TestPosOccupiedFlowTakeaway:
             status=OrderStatus.READY,
             order_number="T1",
         )
-        OrderItem.objects.create(
-            order=order,
-            product=product,
-            quantity=1,
-            unit_price=10,
-            status=OrderStatus.READY,
-        )
+        _make_item(order, product, status=OrderStatus.READY)
         assert flow_for_order(order) == "KITCHEN"
 
     def test_ready_acked_is_settle(self, branch, takeaway_zone, product, pos_user):
@@ -41,14 +47,7 @@ class TestPosOccupiedFlowTakeaway:
             status=OrderStatus.READY,
             order_number="T2",
         )
-        OrderItem.objects.create(
-            order=order,
-            product=product,
-            quantity=1,
-            unit_price=10,
-            status=OrderStatus.READY,
-            waiter_acknowledged_at=timezone.now(),
-        )
+        _make_item(order, product, status=OrderStatus.READY, acknowledged=True)
         assert flow_for_order(order) == "SETTLE"
 
     def test_table_ready_acked_stays_kitchen(self, branch, table, product, pos_user):
@@ -60,12 +59,5 @@ class TestPosOccupiedFlowTakeaway:
             status=OrderStatus.READY,
             order_number="M1",
         )
-        OrderItem.objects.create(
-            order=order,
-            product=product,
-            quantity=1,
-            unit_price=10,
-            status=OrderStatus.READY,
-            waiter_acknowledged_at=timezone.now(),
-        )
+        _make_item(order, product, status=OrderStatus.READY, acknowledged=True)
         assert flow_for_order(order) == "KITCHEN"

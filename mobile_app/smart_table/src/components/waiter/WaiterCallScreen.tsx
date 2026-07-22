@@ -13,7 +13,7 @@ import {
   Platform,
   ActivityIndicator,
 } from "react-native";
-import { useFocusEffect } from "expo-router";
+import { useFocusEffect, useRouter } from "expo-router";
 import {
   Bell,
   Droplets,
@@ -92,6 +92,7 @@ export function WaiterCallScreen({
   onClose,
   onGoToProfile,
 }: WaiterCallScreenProps) {
+  const router = useRouter();
   const language = useUIStore((s) => s.language);
   const callWaiter = useOrderStore((s) => s.callWaiter);
   const isCallingWaiter = useOrderStore((s) => s.isCallingWaiter);
@@ -156,6 +157,8 @@ export function WaiterCallScreen({
         setShowSuccess(false);
         setFeedback(null);
         dismissTimerRef.current = null;
+        useDialogStore.getState().hide();
+        router.replace("/" as never);
       }, dismissMs);
       if (callType === "BILL" && result.shouldTrackCall) {
         surveyTimerRef.current = setTimeout(() => {
@@ -191,6 +194,7 @@ export function WaiterCallScreen({
     resetForm,
     language,
     requestConsentFlow,
+    router,
   ]);
 
   const iconBg = (hex: string) => `${hex}26`;

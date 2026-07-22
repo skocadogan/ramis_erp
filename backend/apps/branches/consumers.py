@@ -208,6 +208,20 @@ class PosSyncConsumer(AsyncWebsocketConsumer):
             'data': msg,
         }, cls=DjangoJSONEncoder))
 
+    async def waiter_call_dismissed_event(self, event):
+        """Smart table: çağrı görüldü — masa filtresi istemci tarafında."""
+        data = event.get("data", {})
+        await ws_safe_send(
+            self,
+            text_data=json.dumps(
+                {
+                    "type": "waiter_call_dismissed",
+                    "data": data,
+                },
+                cls=DjangoJSONEncoder,
+            ),
+        )
+
 
 class StaffNotificationConsumer(AsyncWebsocketConsumer):
     """

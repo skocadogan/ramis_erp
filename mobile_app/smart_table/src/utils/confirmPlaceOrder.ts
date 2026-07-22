@@ -34,7 +34,7 @@ export function requestPlaceOrderConfirmation(options: {
       },
       {
         text: isTr ? "Onaylıyorum" : "Confirm",
-        style: "default",
+        style: "success",
         onPress: options.onConfirm,
       },
     ],

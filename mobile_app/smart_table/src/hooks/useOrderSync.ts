@@ -11,6 +11,8 @@ import { useTableStore } from "@/store/table-store";
 import { useOrderStore, type WsOrderStatusPayload } from "@/store/order-store";
 import { markWsOrderMutation } from "@/store/order/wsHttpRaceGuard";
 import { useMenuStore } from "@/store/menu-store";
+import { useDialogStore } from "@/store/dialog-store";
+import { useUIStore } from "@/store/ui-store";
 import { buildPosSyncWsUrl } from "@/services/wsUrl";
 import { fetchWsTicket } from "@/services/wsTicket";
 import {
@@ -245,6 +247,53 @@ export function useOrderSync() {
 
     if (parsed.type === "menu_catalog_refresh") {
       useMenuStore.getState().signalRefresh();
+      return;
+    }
+
+    if (parsed.type === "waiter_call_dismissed") {
+      const dismissAll = Boolean(parsed.data.dismiss_all);
+      const callIds = Array.isArray(parsed.data.call_ids)
+        ? parsed.data.call_ids.map(String)
+        : [];
+      const tableIds = Array.isArray(parsed.data.table_ids)
+        ? parsed.data.table_ids.map(String)
+        : [];
+
+      const orderStore = useOrderStore.getState();
+      const pendingCalls = orderStore.waiterCalls.filter(
+        (call) => call.status === "PENDING",
+      );
+      if (pendingCalls.length === 0) return;
+
+      const relevantCalls = pendingCalls.filter((call) => {
+        if (callIds.includes(call.id)) return true;
+        if (
+          currentTableId &&
+          tableIds.includes(String(currentTableId)) &&
+          call.tableId === currentTableId
+        ) {
+          return true;
+        }
+        if (dismissAll) {
+          return !currentTableId || call.tableId === currentTableId;
+        }
+        return false;
+      });
+      if (relevantCalls.length === 0) return;
+
+      for (const call of relevantCalls) {
+        orderStore.dismissWaiterCall(call.id);
+      }
+
+      const language = useUIStore.getState().language;
+      useDialogStore
+        .getState()
+        .alert(
+          language === "tr" ? "Bilgi" : "Info",
+          language === "tr"
+            ? "Çağrınız görülmüştür az sonra masanızda olacağız."
+            : "Your call has been seen; we will be at your table shortly.",
+        );
       return;
     }
 

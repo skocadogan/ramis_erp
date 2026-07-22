@@ -52,6 +52,7 @@ export function Dialog() {
             {actions.map((action, index) => {
               const isCancel = action.style === "cancel";
               const isDestructive = action.style === "destructive";
+              const isSuccess = action.style === "success";
 
               let bgColor = colors.primary;
               let textColor = colors.primaryForeground;
@@ -61,6 +62,9 @@ export function Dialog() {
               } else if (isDestructive) {
                 bgColor = colors.destructive;
                 textColor = colors.destructiveForeground;
+              } else if (isSuccess) {
+                bgColor = colors.success;
+                textColor = colors.successForeground;
               }
 
               return (

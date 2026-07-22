@@ -201,7 +201,7 @@ export const createOrderWaiterSlice: StateCreator<
         c.id === callId
           ? {
               ...c,
-              status: "COMPLETED" as const,
+              status: "ACKNOWLEDGED" as const,
               acknowledgedAt: new Date().toISOString(),
             }
           : c,

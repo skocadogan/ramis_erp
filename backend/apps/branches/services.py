@@ -204,11 +204,13 @@ class NotificationService:
         call_ids: list[str] | None = None,
         dismiss_all: bool = False,
         assigned_waiter_ids: list[int] | None = None,
+        table_ids: list[str] | None = None,
     ) -> None:
-        """Görüldü işareti — ``/ws/waiter/calls/`` dinleyicilerinde listeden düşürülür.
+        """Görüldü işareti — waiter/calls + pos/sync (smart table) dinleyicilerine.
 
-        ``assigned_waiter_ids`` verilmişse sadece o garsonlar bildirimi alır;
-        ``None`` ise (dismiss_all veya rezervasyon bildirimi) herkese gider.
+        ``assigned_waiter_ids`` verilmişse waiter kanalında sadece o garsonlar
+        bildirimi alır; ``None`` ise (dismiss_all veya rezervasyon) herkese gider.
+        Smart table için ``table_ids`` ile masa filtresi taşınır.
         """
         channel_layer = get_channel_layer()
         if not channel_layer:
@@ -218,12 +220,37 @@ class NotificationService:
         if not branch_id:
             return
 
-        from apps.branches.signals import WAITER_CALLS_GLOBAL
+        from apps.branches.signals import POS_SYNC_GLOBAL, WAITER_CALLS_GLOBAL
+
+        resolved_call_ids = [str(x) for x in (call_ids or [])]
+        resolved_table_ids = [str(x) for x in (table_ids or []) if str(x).strip()]
+        if not resolved_table_ids and resolved_call_ids:
+            from uuid import UUID
+
+            from apps.performances.models import WaiterCallLog
+
+            valid_call_ids: list[str] = []
+            for raw_id in resolved_call_ids:
+                try:
+                    valid_call_ids.append(str(UUID(str(raw_id))))
+                except (TypeError, ValueError, AttributeError):
+                    continue
+            if valid_call_ids:
+                resolved_table_ids = [
+                    str(tid)
+                    for tid in WaiterCallLog.objects.filter(
+                        id__in=valid_call_ids,
+                        table_id__isnull=False,
+                    )
+                    .values_list("table_id", flat=True)
+                    .distinct()
+                ]
 
         payload = {
             "branch_id": branch_id,
             "dismiss_all": bool(dismiss_all),
-            "call_ids": [str(x) for x in (call_ids or [])],
+            "call_ids": resolved_call_ids,
+            "table_ids": resolved_table_ids,
         }
         if assigned_waiter_ids is not None:
             payload["assigned_waiter_ids"] = assigned_waiter_ids
@@ -232,8 +259,9 @@ class NotificationService:
             "data": payload,
         }
 
-        async def _send_both() -> None:
+        async def _send_groups() -> None:
             await channel_layer.group_send(f"waiter_calls_{branch_id}", event)
+            await channel_layer.group_send(f"pos_sync_{branch_id}", event)
             try:
                 await channel_layer.group_send(WAITER_CALLS_GLOBAL, event)
             except Exception:
@@ -242,9 +270,17 @@ class NotificationService:
                     branch_id,
                     exc_info=True,
                 )
+            try:
+                await channel_layer.group_send(POS_SYNC_GLOBAL, event)
+            except Exception:
+                logger.warning(
+                    "pos_sync_global dismiss yayını başarısız (branch_id=%s)",
+                    branch_id,
+                    exc_info=True,
+                )
 
         try:
-            async_to_sync(_send_both)()
+            async_to_sync(_send_groups)()
         except Exception:
             logger.warning(
                 "Garson çağrısı dismiss yayını başarısız (branch_id=%s)",

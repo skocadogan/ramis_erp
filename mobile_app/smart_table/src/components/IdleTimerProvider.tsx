@@ -10,6 +10,7 @@ import { View } from "react-native";
 import { router } from "expo-router";
 import { useUIStore } from "@/store/ui-store";
 import { useOrderStore } from "@/store/order-store";
+import { useDialogStore } from "@/store/dialog-store";
 
 interface IdleTimerProviderProps {
   children: ReactNode;
@@ -24,6 +25,7 @@ export default function IdleTimerProvider({
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   const navigateToWelcome = useCallback(() => {
+    useDialogStore.getState().hide();
     router.replace("/" as never);
   }, []);
 

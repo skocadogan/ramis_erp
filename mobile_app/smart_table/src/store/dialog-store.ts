@@ -12,7 +12,7 @@ import { useUIStore } from "@/store/ui-store";
 export interface DialogAction {
   text: string;
   onPress?: () => void;
-  style?: "default" | "cancel" | "destructive";
+  style?: "default" | "cancel" | "destructive" | "success";
 }
 
 export interface DialogState {

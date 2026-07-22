@@ -121,6 +121,11 @@ export default function Index() {
     }
   }, [navigating, router]);
 
+  const handleOpenOrders = useCallback(() => {
+    if (navigating) return;
+    router.replace("/(tabs)/orders" as never);
+  }, [navigating, router]);
+
   return (
     <View className="flex-1" style={{ backgroundColor: colors.background }}>
       {/* ── Full-screen gradient background ── */}
@@ -266,7 +271,12 @@ export default function Index() {
 
           {/* ── Active Orders Elegant Indicator ── */}
           {activeOrders.length > 0 && aggregatedStatus && (
-            <View
+            <Pressable
+              onPress={handleOpenOrders}
+              accessibilityRole="button"
+              accessibilityLabel={
+                language === "tr" ? "Siparişlerime git" : "Go to my orders"
+              }
               className="flex-row items-center gap-3 mt-5 px-4 py-3 rounded-2xl border"
               style={{
                 backgroundColor: colors.card,
@@ -277,6 +287,7 @@ export default function Index() {
                 shadowRadius: 8,
                 elevation: 3,
               }}
+              disabled={navigating}
             >
               <View className="w-10 h-10 rounded-full items-center justify-center">
                 <ClipboardList
@@ -314,7 +325,7 @@ export default function Index() {
                   backgroundColor: getCustomerStatusColor(aggregatedStatus),
                 }}
               />
-            </View>
+            </Pressable>
           )}
 
           {/* Divider */}

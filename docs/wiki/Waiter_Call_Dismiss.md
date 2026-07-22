@@ -105,16 +105,19 @@ Vardiya kapanışında (`ShiftService.close_shift`) şubedeki tüm `PENDING` ça
 
 ### Yayın Kanalları
 
-`NotificationService.broadcast_waiter_call_dismissed()` her zaman **iki** kanala yayınlar:
+`NotificationService.broadcast_waiter_call_dismissed()` her zaman şu kanallara yayınlar:
 
-1. `waiter_calls_{branch_id}` — şubeye özgü grup
-2. `WAITER_CALLS_GLOBAL` — süper kullanıcı / tüm şube bağlantısı
+1. `waiter_calls_{branch_id}` — şubeye özgü garson/POS çağrı listesi
+2. `WAITER_CALLS_GLOBAL` — süper kullanıcı aboneleri
+3. `pos_sync_{branch_id}` (+ `pos_sync_global`) — Smart Table masa cihazları (`waiter_call_dismissed` → görüldü dialogu)
+
+Payload alanları: `branch_id`, `dismiss_all`, `call_ids`, `table_ids` (çağrı loglarından), isteğe bağlı `assigned_waiter_ids`.
 
 ---
 
 ## WebSocket Mesaj Formatı
 
-`/ws/waiter/calls/` kanalından gelen mesaj:
+`/ws/waiter/calls/` ve `/ws/pos/sync/` kanallarından gelen mesaj:
 
 ```json
 {
@@ -122,7 +125,8 @@ Vardiya kapanışında (`ShiftService.close_shift`) şubedeki tüm `PENDING` ça
   "data": {
     "branch_id": "abc-123",
     "dismiss_all": false,
-    "call_ids": ["uuid-1", "uuid-2"]
+    "call_ids": ["uuid-1", "uuid-2"],
+    "table_ids": ["table-uuid"]
   }
 }
 ```

@@ -116,6 +116,7 @@ export function SalesCancellationsPanel({
                     <TableSelect
                         value={cancellations.tableId}
                         onChange={cancellations.setTableId}
+                        includeTakeawaySalesFilter
                         className="w-full sm:w-[180px] h-9 border-border text-sm bg-muted border-input text-foreground"
                     />
 

@@ -73,7 +73,12 @@ def get_cancellations_queryset(
             )
         )
     if table_id:
-        qs = qs.filter(order__table_id=table_id)
+        from apps.sales.selectors import TAKEAWAY_SALES_TABLE_FILTER
+
+        if str(table_id) == TAKEAWAY_SALES_TABLE_FILTER:
+            qs = qs.filter(order__order_type="TAKEAWAY")
+        else:
+            qs = qs.filter(order__table_id=table_id)
     if search:
         term = search.strip()
         if term:

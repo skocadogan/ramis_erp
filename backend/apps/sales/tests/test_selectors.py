@@ -74,3 +74,28 @@ class TestGetSalesQueryset:
     def test_gelecek_tarih_filtresi_bos_doner(self, sale):
         qs = get_sales_queryset(start_date='2099-01-01')
         assert sale not in qs
+
+    def test_takeaway_sentinel_filtresi(self, sale, branch):
+        from apps.orders.models import Order, OrderStatus, OrderType
+        from apps.sales.models import Sale, PaymentMethod
+        from apps.sales.selectors import TAKEAWAY_SALES_TABLE_FILTER
+        from core.decimal_constants import ZERO_MONEY
+
+        takeaway_order = Order.objects.create(
+            branch=branch,
+            status=OrderStatus.COMPLETED,
+            order_type=OrderType.TAKEAWAY,
+            total_amount=Decimal('80.00'),
+            discount_amount=ZERO_MONEY,
+        )
+        takeaway_sale = Sale.objects.create(
+            order=takeaway_order,
+            branch=branch,
+            payment_method=PaymentMethod.CASH,
+            total_amount=Decimal('80.00'),
+            discount_amount=ZERO_MONEY,
+        )
+
+        qs = get_sales_queryset(table_id=TAKEAWAY_SALES_TABLE_FILTER)
+        assert takeaway_sale in qs
+        assert sale not in qs

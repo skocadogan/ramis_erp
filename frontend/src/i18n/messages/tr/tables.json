@@ -5,7 +5,9 @@
     "placeholder": "Masa seçin…",
     "allTables": "Tüm Masalar",
     "searchPlaceholder": "Masa ara…",
-    "noResults": "Sonuç bulunamadı"
+    "noResults": "Sonuç bulunamadı",
+    "takeawayGroup": "Paket",
+    "takeawaySales": "Paket satışlar"
   },
   "summary": {
     "allZones": "Tüm Şubeler"

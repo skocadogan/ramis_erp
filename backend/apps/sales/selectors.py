@@ -2,6 +2,9 @@ from django.db.models import Sum, Count, F, DecimalField, ExpressionWrapper
 
 from .models import Sale
 
+# Frontend TableSelect sentinel — paket (TAKEAWAY) satışları filtrele.
+TAKEAWAY_SALES_TABLE_FILTER = "__takeaway__"
+
 
 def sale_gross_expression():
     """Brüt tutar hesaplama ifadesi (net + indirim)."""
@@ -61,7 +64,10 @@ def get_sales_queryset(
     if created_by_id:
         qs = qs.filter(created_by_id=created_by_id)
     if table_id:
-        qs = qs.filter(order__table_id=table_id)
+        if str(table_id) == TAKEAWAY_SALES_TABLE_FILTER:
+            qs = qs.filter(order__order_type="TAKEAWAY")
+        else:
+            qs = qs.filter(order__table_id=table_id)
     if start_date:
         qs = qs.filter(paid_at__date__gte=start_date)
     if end_date:

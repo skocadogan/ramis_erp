@@ -5,7 +5,9 @@
     "placeholder": "Изберете маса…",
     "allTables": "Всички маси",
     "searchPlaceholder": "Търсене на маса…",
-    "noResults": "Няма намерени резултати"
+    "noResults": "Няма намерени резултати",
+    "takeawayGroup": "Пакет",
+    "takeawaySales": "Пакетни продажби"
   },
   "summary": {
     "allZones": "Всички зони"

@@ -5,7 +5,9 @@
     "placeholder": "Select table…",
     "allTables": "All Tables",
     "searchPlaceholder": "Search table…",
-    "noResults": "No results found"
+    "noResults": "No results found",
+    "takeawayGroup": "Takeaway",
+    "takeawaySales": "Takeaway sales"
   },
   "summary": {
     "allZones": "All Zones"

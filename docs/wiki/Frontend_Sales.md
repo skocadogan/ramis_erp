@@ -18,6 +18,10 @@
 
 Sağ üst **şube seçimi** (`BranchSelect`) tüm sekmelerde ortak `useSales.branchId` state'ini kullanır.
 
+## Masa filtresi (`TableSelect`)
+
+Satışlar ve iptaller: `includeTakeawaySalesFilter` — şubede aktif `is_takeaway` bölgesi varsa **Paket satışlar** seçeneği (`table_id=__takeaway__` → backend `order_type=TAKEAWAY`). Rezervasyon masa seçiminde bu prop kapalıdır.
+
 ## Menü Mühendisliği
 - Bileşen: `features/sales/components/MenuEngineeringAnalytics.tsx`
 - Veri kaynağı: `/dashboard/menu-engineering/`

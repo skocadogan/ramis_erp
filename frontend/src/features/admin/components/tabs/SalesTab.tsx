@@ -135,6 +135,7 @@ export function SalesTab({
                 <TableSelect
                     value={tableId}
                     onChange={setTableId}
+                    includeTakeawaySalesFilter
                     className="w-full sm:w-[200px] h-10 bg-card border-border text-sm bg-card border-border text-foreground"
                 />
 

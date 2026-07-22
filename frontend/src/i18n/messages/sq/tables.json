@@ -5,7 +5,9 @@
     "placeholder": "Zgjidh tavolinën…",
     "allTables": "Të gjitha tavolinat",
     "searchPlaceholder": "Kërko tavolinë…",
-    "noResults": "Nuk u gjetën rezultate"
+    "noResults": "Nuk u gjetën rezultate",
+    "takeawayGroup": "Paket",
+    "takeawaySales": "Shitjet me paket"
   },
   "summary": {
     "allZones": "Të gjitha zonat"

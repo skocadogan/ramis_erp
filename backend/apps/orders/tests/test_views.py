@@ -42,6 +42,25 @@ class TestOrderCreateView:
         assert response.status_code == status.HTTP_201_CREATED
         assert Decimal(response.data['total_amount']) == Decimal('180.00')
 
+    def test_pos_tw_new_virtual_table_id_ile_paket_olusturur(
+        self, api_client, branch, takeaway_zone, product, pos_user
+    ):
+        """POS new_slot: table_id=tw-new__{zone} UUID değil; serializer + create kabul etmeli."""
+        api_client.force_authenticate(user=pos_user)
+        url = reverse('order-list')
+        payload = {
+            'branch_id': str(branch.id),
+            'table_id': f'tw-new__{takeaway_zone.id}',
+            'order_type': 'TAKEAWAY',
+            'items': [{'product_id': str(product.id), 'quantity': 1, 'unit_price': '90.00'}],
+        }
+        response = api_client.post(url, payload, format='json')
+        assert response.status_code == status.HTTP_201_CREATED, response.data
+        order = Order.objects.get(pk=response.data['id'])
+        assert order.order_type == 'TAKEAWAY'
+        assert order.table_id is None
+        assert order.takeaway_zone_id == takeaway_zone.id
+
     def test_garson_pos_view_pos_olmadan_siparis_olusturur(
         self, api_client, branch, zone, table, product, waiter_user_no_pos_view
     ):

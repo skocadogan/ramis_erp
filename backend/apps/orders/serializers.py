@@ -1,8 +1,12 @@
 from decimal import Decimal
+from uuid import UUID
 
 from django.conf import settings
 from django.utils import timezone
+from django.utils.translation import gettext as _
 from rest_framework import serializers
+
+from apps.branches.virtual_table_ids import is_virtual_table_id
 
 from .models import Order, OrderItem, OrderItemModifier, OrderStatus
 from .smart_firing import compute_firing_state, get_station_queue_metrics
@@ -242,12 +246,26 @@ class OrderMinimalSerializer(serializers.ModelSerializer):
 
 class OrderCreateSerializer(serializers.Serializer):
     branch_id = serializers.UUIDField()
-    table_id = serializers.UUIDField(required=False, allow_null=True)
+    # Fizik masa UUID veya paket sanal kimlik: tw-new__{zone_id} / tw-ord__{order_id}
+    table_id = serializers.CharField(required=False, allow_null=True, allow_blank=True)
     customer_id = serializers.UUIDField(required=False, allow_null=True)
     order_type = serializers.ChoiceField(choices=['TABLE', 'TAKEAWAY'], default='TABLE')
     notes = serializers.CharField(required=False, allow_blank=True)
     items = OrderItemCreateSerializer(many=True)
     stock_tracking_mode = serializers.ChoiceField(choices=['PRODUCT', 'INGREDIENT'], default='PRODUCT')
+
+    def validate_table_id(self, value):
+        if value is None or value == "":
+            return None
+        raw = str(value).strip()
+        if is_virtual_table_id(raw):
+            return raw
+        try:
+            return str(UUID(raw))
+        except ValueError as exc:
+            raise serializers.ValidationError(
+                _("Geçerli bir UUID veya sanal paket masası kimliği olmalı.")
+            ) from exc
 
 
 class PosStationStockCheckItemSerializer(serializers.Serializer):

@@ -42,7 +42,7 @@ Sanal masalar `GET /tables/takeaway_virtual/` ile yüklenir (`usePosTables` merg
 
 | `virtual_kind` | UI | Sipariş |
 |----------------|-----|---------|
-| `new_slot` | "Yeni paket" kartı | `table_id: tw-new__{zone}`, `order_type: TAKEAWAY` (backend zone’u çözer) |
+| `new_slot` | "Yeni paket" kartı | `table_id: tw-new__{zone}` (serializer CharField; UUID değil), `order_type: TAKEAWAY` → backend zone’u çözer |
 | `takeaway_order` | Dolu kart (sipariş no) | Mevcut sipariş modalı; sepete ekleme `takeawayOrderBlocked` |
 
 **Gerçek zamanlı senkron (önemli):** Paket siparişlerin fizik `table_id`’si yoktur → `table_update` WS gelmez. POS cache `staleTime: Infinity` olduğundan:

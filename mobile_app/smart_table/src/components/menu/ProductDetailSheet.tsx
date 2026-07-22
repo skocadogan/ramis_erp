@@ -203,30 +203,16 @@ export function ProductDetailSheet({
         );
       return;
     }
-    const result = commitDraft();
-    clearPendingCartToast();
-    if (result && result.quantityDelta !== 0 && resolvedUnit) {
-      enqueueCartToast({
-        productName: activeProduct.name,
-        productNameEn: activeProduct.nameEn,
-        unit: resolvedUnit,
-        quantityDelta: result.quantityDelta,
-        language,
-      });
-      flushCartToast();
-    }
+    commitDraft();
+    // Adet toast'ları +/- sırasında kuyruğa alındı; bekleyen varsa göster, tekrar ekleme.
+    flushCartToast();
     onClose();
   }, [
-    activeProduct.name,
-    activeProduct.nameEn,
-    clearPendingCartToast,
     commitDraft,
-    enqueueCartToast,
     flushCartToast,
     getRequiredModifierError,
     language,
     onClose,
-    resolvedUnit,
   ]);
 
   const handleDismissWithoutCommit = useCallback(() => {
@@ -235,13 +221,43 @@ export function ProductDetailSheet({
   }, [clearPendingCartToast, onClose]);
 
   const handleIncreaseWithToast = useCallback(() => {
+    if (!resolvedUnit) return;
     onIncrease();
-  }, [onIncrease]);
+    enqueueCartToast({
+      productName: activeProduct.name,
+      productNameEn: activeProduct.nameEn,
+      unit: resolvedUnit,
+      quantityDelta: 1,
+      language,
+    });
+  }, [
+    activeProduct.name,
+    activeProduct.nameEn,
+    enqueueCartToast,
+    language,
+    onIncrease,
+    resolvedUnit,
+  ]);
 
   const handleDecreaseWithToast = useCallback(() => {
-    if (quantity <= 0) return;
+    if (quantity <= 0 || !resolvedUnit) return;
     onDecrease();
-  }, [onDecrease, quantity]);
+    enqueueCartToast({
+      productName: activeProduct.name,
+      productNameEn: activeProduct.nameEn,
+      unit: resolvedUnit,
+      quantityDelta: -1,
+      language,
+    });
+  }, [
+    activeProduct.name,
+    activeProduct.nameEn,
+    enqueueCartToast,
+    language,
+    onDecrease,
+    quantity,
+    resolvedUnit,
+  ]);
 
   const displayName = useProductDisplayName(activeProduct, language);
 
@@ -323,10 +339,10 @@ export function ProductDetailSheet({
         language={language}
         compact={layout.useSplitLayout}
         scrollable={layout.useSplitLayout}
-        sourceProductQuantity={sourceQuantity}
+        sourceProductQuantity={quantity}
       />
     ),
-    [activeProduct, catalogProducts, language, layout.useSplitLayout, sourceQuantity],
+    [activeProduct, catalogProducts, language, layout.useSplitLayout, quantity],
   );
 
   const addToCartButton = useMemo(

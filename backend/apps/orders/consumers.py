@@ -18,6 +18,15 @@ from core.ws_envelope import wrap_legacy_event
 
 logger = logging.getLogger(__name__)
 
+# KDS/prep + POS/garson hazır-bildirim aboneleri (frontend NotificationDrawer ile hizalı).
+KITCHEN_NOTIFICATIONS_WS_PERMISSIONS = (
+    "orders.view_kds",
+    "prep.view_preptask",
+    "orders.view_order",
+    "orders.manage_order",
+    "waiter.access",
+)
+
 
 class KitchenNotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -44,7 +53,7 @@ class KitchenNotificationConsumer(AsyncWebsocketConsumer):
         if not await ws_allow_connection(self, user):
             return
         if not await self._user_has_any_permission(
-            ("orders.view_kds", "prep.view_preptask")
+            KITCHEN_NOTIFICATIONS_WS_PERMISSIONS
         ):
             await self.close()
             return

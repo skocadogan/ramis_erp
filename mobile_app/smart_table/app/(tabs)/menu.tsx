@@ -50,6 +50,7 @@ import React, { Suspense } from "react";
 const CartSheet = React.lazy(() => import("@/components/order/CartSheet"));
 import { useOrderStore } from "@/store/order-store";
 import { useDialogStore } from "@/store/dialog-store";
+import { requestPlaceOrderConfirmation } from "@/utils/confirmPlaceOrder";
 import { useSurveyStore } from "@/store/survey-store";
 import type { Product, Category } from "@/types";
 
@@ -172,7 +173,7 @@ export default function MenuScreen() {
     setCartVisible(false);
   }, []);
 
-  const handlePlaceOrder = useCallback(async () => {
+  const submitPlaceOrder = useCallback(async () => {
     if (items.length === 0) return;
     if (useOrderStore.getState().isPlacingOrder) return;
     if (!selectedTableId) {
@@ -217,6 +218,38 @@ export default function MenuScreen() {
         .alert(language === "tr" ? "Hata" : "Error", message);
     }
   }, [items, selectedTableId, placeOrder, clearCart, language]);
+
+  const handlePlaceOrder = useCallback(() => {
+    if (items.length === 0) return;
+    if (useOrderStore.getState().isPlacingOrder) return;
+    if (!selectedTableId) {
+      useDialogStore
+        .getState()
+        .alert(
+          language === "tr" ? "Hata" : "Error",
+          language === "tr"
+            ? "Sipariş vermek için masa seçmelisiniz."
+            : "Please select a table before ordering.",
+        );
+      return;
+    }
+    requestPlaceOrderConfirmation({
+      language,
+      onClearCart: () => {
+        clearCart();
+        setCartVisible(false);
+      },
+      onConfirm: () => {
+        void submitPlaceOrder();
+      },
+    });
+  }, [
+    items.length,
+    selectedTableId,
+    language,
+    clearCart,
+    submitPlaceOrder,
+  ]);
 
   const handleCartPress = useCallback(() => {
     if (cartCount === 0) return;

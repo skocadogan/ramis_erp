@@ -6,7 +6,10 @@ from django.test import TestCase
 
 from apps.branches.consumers import PosSyncConsumer, WaiterCallConsumer
 from apps.branches.models import Branch, Table, TableStatus, Zone
-from apps.orders.consumers import KitchenNotificationConsumer
+from apps.orders.consumers import (
+    KITCHEN_NOTIFICATIONS_WS_PERMISSIONS,
+    KitchenNotificationConsumer,
+)
 from rbac.models import PermissionCategory, Role, RolePermission
 
 User = get_user_model()
@@ -105,30 +108,33 @@ class WsConsumerRbacTests(TestCase):
         consumer.user = denied
         self.assertFalse(async_to_sync(consumer._user_has_any_permission)(perms))
 
-    def test_kitchen_consumer_accepts_kds_or_prep_permission(self):
+    def test_kitchen_consumer_accepts_kds_prep_pos_or_waiter_permission(self):
         consumer = KitchenNotificationConsumer()
+        perms = KITCHEN_NOTIFICATIONS_WS_PERMISSIONS
+
         consumer.user = self.kds_user
-        self.assertTrue(
-            async_to_sync(consumer._user_has_any_permission)(
-                ("orders.view_kds", "prep.view_preptask")
-            )
-        )
+        self.assertTrue(async_to_sync(consumer._user_has_any_permission)(perms))
 
         consumer.user = self.prep_user
-        self.assertTrue(
-            async_to_sync(consumer._user_has_any_permission)(
-                ("orders.view_kds", "prep.view_preptask")
-            )
-        )
+        self.assertTrue(async_to_sync(consumer._user_has_any_permission)(perms))
 
         consumer.user = self.pos_user
-        self.assertFalse(
-            async_to_sync(consumer._user_has_any_permission)(
-                ("orders.view_kds", "prep.view_preptask")
-            )
-        )
+        self.assertTrue(async_to_sync(consumer._user_has_any_permission)(perms))
 
-    def test_kitchen_consumer_requires_kds_permission(self):
+        consumer.user = self.waiter_user
+        self.assertTrue(async_to_sync(consumer._user_has_any_permission)(perms))
+
+        denied = User.objects.create_user(
+            username="wsrbackitchendenied",
+            password="pw",
+            email="wsrbackitchendenied@test.com",
+            branch=self.branch,
+        )
+        consumer.user = denied
+        self.assertFalse(async_to_sync(consumer._user_has_any_permission)(perms))
+
+    def test_kitchen_consumer_kds_permission_still_distinct(self):
+        """Kasiyer KDS ekranı iznine sahip olmayabilir; yalnızca bildirim WS yeterlidir."""
         consumer = KitchenNotificationConsumer()
         consumer.user = self.kds_user
         self.assertTrue(
@@ -138,6 +144,11 @@ class WsConsumerRbacTests(TestCase):
         consumer.user = self.pos_user
         self.assertFalse(
             async_to_sync(consumer._user_has_permission)("orders.view_kds")
+        )
+        self.assertTrue(
+            async_to_sync(consumer._user_has_any_permission)(
+                KITCHEN_NOTIFICATIONS_WS_PERMISSIONS
+            )
         )
 
     def test_waiter_call_consumer_requires_waiter_access(self):

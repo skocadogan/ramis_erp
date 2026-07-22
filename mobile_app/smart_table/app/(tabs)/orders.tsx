@@ -25,6 +25,7 @@ import {
 import { useUIStore } from "@/store/ui-store";
 import { useOrderStore } from "@/store/order-store";
 import { useDialogStore } from "@/store/dialog-store";
+import { requestPlaceOrderConfirmation } from "@/utils/confirmPlaceOrder";
 import { useTableStore } from "@/store/table-store";
 import { useCartStore } from "@/store/cart-store";
 import { useTheme } from "@/hooks/useTheme";
@@ -98,7 +99,7 @@ export default function OrdersScreen() {
   }, [fetchOrders]);
 
   // ── Handle Placing Order ──
-  const handlePlaceOrder = useCallback(async () => {
+  const submitPlaceOrder = useCallback(async () => {
     if (items.length === 0) return;
     if (useOrderStore.getState().isPlacingOrder) return;
     if (!selectedTableId) {
@@ -148,6 +149,38 @@ export default function OrdersScreen() {
       setRefreshing(false);
     }
   }, [items, placeOrder, clearCart, language, selectedTableId, router]);
+
+  const handlePlaceOrder = useCallback(() => {
+    if (items.length === 0) return;
+    if (useOrderStore.getState().isPlacingOrder) return;
+    if (!selectedTableId) {
+      useDialogStore
+        .getState()
+        .alert(
+          language === "tr" ? "Hata" : "Error",
+          language === "tr"
+            ? "Sipariş vermek için masa seçmelisiniz."
+            : "Please select a table before ordering.",
+        );
+      return;
+    }
+    requestPlaceOrderConfirmation({
+      language,
+      onClearCart: () => {
+        clearCart();
+        setCartVisible(false);
+      },
+      onConfirm: () => {
+        void submitPlaceOrder();
+      },
+    });
+  }, [
+    items.length,
+    selectedTableId,
+    language,
+    clearCart,
+    submitPlaceOrder,
+  ]);
 
   // ── Order press opens inline detail sheet ──
   const handleOrderPress = useCallback((order: Order) => {

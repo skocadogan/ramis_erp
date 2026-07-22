@@ -54,7 +54,7 @@ patchTask: async (taskId, data) =>
 ## WS Aboneliği (usePrepSocket)
 
 `usePrepSocket(branchId?)` hook'u `managedWebSocket` / `sharedWebSocketHub` üzerinden `kitchenNotificationsHubKey` kanalına bağlanır.  
-Backend JWT modunda bağlantı için `orders.view_kds` **veya** `prep.view_preptask` gerekir (Hazırlık Yönetimi yalnız prep izniyle de canlı güncellenir).  
+Backend JWT modunda bağlantı için `orders.view_kds` / `prep.view_preptask` **veya** POS/garson (`orders.view_order` / `orders.manage_order` / `waiter.access`) gerekir (Hazırlık Yönetimi yalnız prep izniyle, kasiyer KDS izni olmadan da canlı güncellenir).  
 Gelen `prep_updated` veya `kds_refresh[prep_update]` mesajları `mergePrepWsCache` aracılığıyla react-query önbelleğini günceller:
 
 | Query ailesi | WS davranışı |

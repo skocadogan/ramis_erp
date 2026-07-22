@@ -201,39 +201,48 @@ export default function ProductDetailScreen() {
         );
       return;
     }
-    const result = commitDraft();
-    clearPendingCartToast();
-    if (result && result.quantityDelta !== 0 && resolvedUnit && product) {
-      enqueueCartToast({
-        productName: product.name,
-        productNameEn: product.nameEn,
-        unit: resolvedUnit,
-        quantityDelta: result.quantityDelta,
-        language,
-      });
-      flushCartToast();
-    }
+    commitDraft();
+    // Adet toast'ları +/- sırasında kuyruğa alındı; bekleyen varsa göster, tekrar ekleme.
+    flushCartToast();
     router.back();
   }, [
-    clearPendingCartToast,
     commitDraft,
-    enqueueCartToast,
     flushCartToast,
     getRequiredModifierError,
     language,
-    product,
-    resolvedUnit,
     router,
   ]);
 
   const handleIncreaseWithToast = useCallback(() => {
+    if (!product || !resolvedUnit) return;
     onIncrease();
-  }, [onIncrease]);
+    enqueueCartToast({
+      productName: product.name,
+      productNameEn: product.nameEn,
+      unit: resolvedUnit,
+      quantityDelta: 1,
+      language,
+    });
+  }, [enqueueCartToast, language, onIncrease, product, resolvedUnit]);
 
   const handleDecreaseWithToast = useCallback(() => {
-    if (quantity <= 0) return;
+    if (quantity <= 0 || !product || !resolvedUnit) return;
     onDecrease();
-  }, [onDecrease, quantity]);
+    enqueueCartToast({
+      productName: product.name,
+      productNameEn: product.nameEn,
+      unit: resolvedUnit,
+      quantityDelta: -1,
+      language,
+    });
+  }, [
+    enqueueCartToast,
+    language,
+    onDecrease,
+    product,
+    quantity,
+    resolvedUnit,
+  ]);
 
   // ── Loading state ──
   if (isLoading) {
@@ -499,7 +508,7 @@ export default function ProductDetailScreen() {
           product={product}
           catalogProducts={catalogProducts}
           language={language}
-          sourceProductQuantity={sourceQuantity}
+          sourceProductQuantity={quantity}
         />
       ) : null}
 
@@ -747,7 +756,7 @@ export default function ProductDetailScreen() {
                   language={language}
                   compact
                   scrollable
-                  sourceProductQuantity={sourceQuantity}
+                  sourceProductQuantity={quantity}
                 />
               </View>
             ) : (

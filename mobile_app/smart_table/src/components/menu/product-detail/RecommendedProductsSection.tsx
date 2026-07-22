@@ -28,7 +28,7 @@ interface RecommendedProductsSectionProps {
   compact?: boolean;
   /** Tablo alanını kalan yüksekliğe uzatır ve satırları kaydırılabilir yapar */
   scrollable?: boolean;
-  /** Ana ürün adedi — 0 iken önerilen ekleme kapalı, sepetten önerilenler silinir */
+  /** Ana ürün adedi (taslak dahil) — 0 iken önerilen ekleme kapalı, sepetten önerilenler silinir */
   sourceProductQuantity?: number;
 }
 
@@ -170,10 +170,24 @@ export const RecommendedProductsSection = React.memo(
           closeUnitPicker();
           return;
         }
+        const previousUnitId =
+          unitOverrides[pickerProductId] ??
+          recommendationDefaultUnitId(catalogProduct);
+        if (unit.id !== previousUnitId) {
+          // Eski birimle sepette kalan önerilen satırları temizle
+          useCartStore
+            .getState()
+            .items.filter(
+              (item) =>
+                item.productId === pickerProductId &&
+                item.modifiers.length === 0,
+            )
+            .forEach((item) => removeItem(item.id));
+        }
         setUnitOverrides((prev) => ({ ...prev, [pickerProductId]: unit.id }));
         closeUnitPicker();
       },
-      [closeUnitPicker, pickerProductId],
+      [closeUnitPicker, pickerProductId, removeItem, unitOverrides],
     );
 
     const handleAdd = useCallback(

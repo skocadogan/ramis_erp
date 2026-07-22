@@ -7,7 +7,10 @@ from unittest.mock import AsyncMock, patch
 from django.test import SimpleTestCase
 
 from apps.branches.consumers import PosSyncConsumer, WaiterCallConsumer
-from apps.orders.consumers import KitchenNotificationConsumer
+from apps.orders.consumers import (
+    KITCHEN_NOTIFICATIONS_WS_PERMISSIONS,
+    KitchenNotificationConsumer,
+)
 
 
 class WsConsumerRbacTests(SimpleTestCase):
@@ -35,7 +38,7 @@ class WsConsumerRbacTests(SimpleTestCase):
             ("pos.view_pos", "waiter.access")
         )
 
-    def test_kitchen_denies_user_without_kds_or_prep_permission(self):
+    def test_kitchen_denies_user_without_kitchen_notification_permission(self):
         consumer = self._consumer(KitchenNotificationConsumer)
         consumer._user_has_any_permission = AsyncMock(return_value=False)
 
@@ -47,7 +50,7 @@ class WsConsumerRbacTests(SimpleTestCase):
 
         consumer.close.assert_awaited_once()
         consumer._user_has_any_permission.assert_awaited_once_with(
-            ("orders.view_kds", "prep.view_preptask")
+            KITCHEN_NOTIFICATIONS_WS_PERMISSIONS
         )
 
     def test_waiter_calls_denies_user_without_waiter_or_pos_permission(self):

@@ -48,7 +48,7 @@ export function Dialog() {
           ) : null}
 
           {/* Actions */}
-          <View className="flex-row gap-3">
+          <View className={actions.length > 2 ? "gap-3" : "flex-row gap-3"}>
             {actions.map((action, index) => {
               const isCancel = action.style === "cancel";
               const isDestructive = action.style === "destructive";
@@ -70,7 +70,9 @@ export function Dialog() {
                     hide();
                     action.onPress?.();
                   }}
-                  className="flex-1 h-11 rounded-2xl items-center justify-center"
+                  className={`h-11 rounded-2xl items-center justify-center ${
+                    actions.length > 2 ? "w-full" : "flex-1"
+                  }`}
                   style={{ backgroundColor: bgColor }}
                 >
                   <Text

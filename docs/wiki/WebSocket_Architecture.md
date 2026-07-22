@@ -23,7 +23,7 @@
 | `production_planning` | — | `/ws/production-status/{branch}/` | Üretim durumu |
 
 `KitchenNotificationConsumer` içinde iki abonelik modu vardır:
-- **JWT modu:** klasik kullanıcı oturumu (`token` query); izin: `orders.view_kds` **veya** `prep.view_preptask`
+- **JWT modu:** klasik kullanıcı oturumu (`token` query); izin: `orders.view_kds` **veya** `prep.view_preptask` **veya** POS/garson (`orders.view_order` / `orders.manage_order` / `waiter.access`) — kasiyer KDS izni olmadan da hazır bildirim WS’ine bağlanır
 - **Prep kiosk modu:** `prep_display_token` veya `pdt` query ile branch kapsamlı anonim abonelik ([[Prep_Display]])
 
 ## Şube Kapsamı

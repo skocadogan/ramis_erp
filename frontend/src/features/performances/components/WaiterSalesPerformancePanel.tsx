@@ -581,9 +581,10 @@ export function WaiterSalesPerformancePanel({
                                                 hide={staffHiddenSeries.includes('orders')}
                                             />
                                             <RechartsTooltip
-                                                formatter={(value: number, name: string) => {
+                                                formatter={(value, name) => {
+                                                    const numValue = typeof value === 'number' ? value : Number(value) || 0;
                                                     if (name === t('waiterSales.chartSalesLabel')) {
-                                                        return [formatCurrency(value), name];
+                                                        return [formatCurrency(numValue), name];
                                                     }
                                                     return [value, name];
                                                 }}
@@ -666,9 +667,10 @@ export function WaiterSalesPerformancePanel({
                                                 hide={dailyHiddenSeries.includes('sales')}
                                             />
                                             <RechartsTooltip
-                                                formatter={(value: number, name: string) => {
+                                                formatter={(value, name) => {
+                                                    const numValue = typeof value === 'number' ? value : Number(value) || 0;
                                                     if (name === t('waiterSales.chartSalesLabel')) {
-                                                        return [formatCurrency(value), name];
+                                                        return [formatCurrency(numValue), name];
                                                     }
                                                     return [value, t('waiterSales.chartOrdersLabel')];
                                                 }}

@@ -363,9 +363,10 @@ export function WaiterCallPerformancePanel({
                                     />
                                     <YAxis tick={{ fontSize: 11 }} allowDecimals={false} />
                                     <RechartsTooltip
-                                        formatter={(value: number, name: string) => {
+                                        formatter={(value, name) => {
+                                            const numValue = typeof value === 'number' ? value : Number(value) || 0;
                                             if (name === 'avg') {
-                                                return [`${value} ${t('waiterCalls.secondsShort')}`, t('waiterCalls.chartAvgLabel')];
+                                                return [`${numValue} ${t('waiterCalls.secondsShort')}`, t('waiterCalls.chartAvgLabel')];
                                             }
                                             return [value, name];
                                         }}

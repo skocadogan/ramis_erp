@@ -25,7 +25,7 @@ import {
     formatAmount,
 } from '@/lib/formatters';
 import { useCanViewAmounts } from '@/hooks/useCanViewAmounts';
-import type { Payload } from "recharts/types/component/DefaultLegendContent";
+import type { LegendPayload } from "recharts/types/component/DefaultLegendContent";
 import {
     LineChart,
     Line,
@@ -146,7 +146,7 @@ export function ProductSalesAnalytics({
 
     const top5Names = data?.products.slice(0, 5).map(p => p.name) || [];
 
-    const handleLegendClick = (o: Payload) => {
+    const handleLegendClick = (o: LegendPayload) => {
         const raw = o.dataKey;
         const dataKey = typeof raw === "string" || typeof raw === "number" ? String(raw) : "";
         if (!dataKey) return;

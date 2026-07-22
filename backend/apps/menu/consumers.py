@@ -3,13 +3,21 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 
-from core.ws_consumer import ws_handle_client_ping, ws_on_connect, ws_on_disconnect, ws_send_pong
+from core.ws_consumer import (
+    ws_allow_connection,
+    ws_handle_client_ping,
+    ws_on_connect,
+    ws_on_disconnect,
+    ws_send_pong,
+)
 
 
 class MenuCatalogConsumer(AsyncWebsocketConsumer):
     """Menü kategorisi/ürün listesi değişince POS tarafını tetikler."""
 
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         # --- WS Authentication ---
         user = await self._authenticate_ws()
         if user is None or not user.is_authenticated:
@@ -17,6 +25,8 @@ class MenuCatalogConsumer(AsyncWebsocketConsumer):
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
         self.group_name = "menu_catalog"
         await self.channel_layer.group_add(self.group_name, self.channel_name)
         ws_on_connect("menu_catalog")

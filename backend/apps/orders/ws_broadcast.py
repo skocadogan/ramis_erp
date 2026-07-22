@@ -9,7 +9,12 @@ from channels.layers import get_channel_layer
 
 from apps.branches.signals import POS_SYNC_GLOBAL
 from core.ws_deferred import schedule_kds_refresh
-from core.ws_metrics import increment_ws_broadcast, record_ws_broadcast_latency
+from core.ws_envelope import build_channel_event, table_ids_from_payload
+from core.ws_metrics import (
+    increment_ws_broadcast,
+    increment_ws_channel_layer_error,
+    record_ws_broadcast_latency,
+)
 from core.ws_throttle import throttle_coalesced
 
 logger = logging.getLogger(__name__)
@@ -30,26 +35,8 @@ __all__ = [
 KITCHEN_NOTIFICATIONS_GLOBAL = "kitchen_notifications"
 
 
-def _order_status_pending_msg_key(branch_id: str) -> str:
-    return f"ws:pending_msg:order_status_changed:{branch_id}"
-
-
-def _stash_order_status_message(branch_id: str, message: dict) -> None:
-    """Throttle penceresinde en son payload flush'ta kullanılsın."""
-    from django.core.cache import cache
-
-    cache.set(_order_status_pending_msg_key(branch_id), message, timeout=15)
-
-
-def _take_order_status_message(branch_id: str, fallback: dict) -> dict:
-    from django.core.cache import cache
-
-    key = _order_status_pending_msg_key(branch_id)
-    latest = cache.get(key)
-    if latest is not None:
-        cache.delete(key)
-        return latest
-    return fallback
+def _table_sync_group_name(table_id: str) -> str:
+    return f"table_sync_{table_id}"
 
 
 async def _async_send_to_groups(
@@ -59,6 +46,7 @@ async def _async_send_to_groups(
     *,
     include_kitchen: bool = True,
     include_pos_sync: bool = True,
+    table_ids: list[str] | None = None,
 ) -> None:
     """
     Tek bir async fonksiyonda mutfak ve/veya POS sync gruplarına yayın yapar.
@@ -81,11 +69,16 @@ async def _async_send_to_groups(
         tasks.append(
             channel_layer.group_send(POS_SYNC_GLOBAL, event)
         )
+    for table_id in table_ids or []:
+        tasks.append(
+            channel_layer.group_send(_table_sync_group_name(table_id), event)
+        )
 
     results = await asyncio.gather(*tasks, return_exceptions=True)
     et = str(event.get("type") or "unknown")
     for i, result in enumerate(results):
         if isinstance(result, Exception):
+            increment_ws_channel_layer_error()
             if include_kitchen and i < 2:
                 logger.exception("KDS WebSocket yayını başarısız (event=%s)", et)
             elif include_pos_sync:
@@ -144,13 +137,15 @@ def _broadcast_orders_updated_event(
     Tek olay tipi: ``orders_updated`` (istemci geri uyum için ``kds_refresh`` alias'ı consumer'da).
     Mutfak + POS sync kanallarına tek bir async fonksiyonda yayın yapar.
     """
-    event = {"type": "orders_updated", "message": message}
+    event = build_channel_event("orders_updated", str(branch_id), message)
+    table_ids = table_ids_from_payload(message)
 
     async def _send_all():
         await _async_send_to_groups(
             channel_layer, str(branch_id), event,
             include_kitchen=True,
             include_pos_sync=True,
+            table_ids=table_ids,
         )
 
     async_to_sync(_send_all)()
@@ -254,26 +249,10 @@ def broadcast_kds_stats(branch_id=None) -> None:
 
 
 def broadcast_kitchen_order_status_changed(branch_id, message: dict) -> None:
-    """``order_status_changed`` olayını doğrudan Redis'e yollar (Celery yok).
-
-    KDS→POS gecikmesi kritik; broadcast kuyruğu birikince dakikalarca gecikme
-    oluştuğu için bu olay tipi her zaman senkron yayınlanır. Yoğunluk koruması
-    ``throttle_coalesced`` ile devam eder.
-    """
+    """``order_status_changed`` deltasını kayıpsız olarak doğrudan Redis'e yollar."""
     if not branch_id:
         return
-    bid = str(branch_id)
-    _stash_order_status_message(bid, message)
-
-    def _run_latest() -> None:
-        latest = _take_order_status_message(bid, message)
-        _broadcast_kitchen_order_status_changed_now(bid, latest)
-
-    throttle_coalesced(
-        "order_status_changed",
-        bid,
-        run=_run_latest,
-    )
+    _broadcast_kitchen_order_status_changed_now(str(branch_id), message)
 
 
 def broadcast_kitchen_order_cancelled(branch_id, order) -> None:
@@ -314,7 +293,8 @@ def _broadcast_kitchen_order_status_changed_now(branch_id, message: dict) -> Non
     channel_layer = get_channel_layer()
     if channel_layer is None or not branch_id:
         return
-    event = {"type": "order_status_changed", "message": message}
+    event = build_channel_event("order_status_changed", str(branch_id), message)
+    table_ids = table_ids_from_payload(message)
     started = time.monotonic()
     try:
         async def _send_all():
@@ -322,6 +302,7 @@ def _broadcast_kitchen_order_status_changed_now(branch_id, message: dict) -> Non
                 channel_layer, str(branch_id), event,
                 include_kitchen=True,
                 include_pos_sync=True,
+                table_ids=table_ids,
             )
 
         async_to_sync(_send_all)()

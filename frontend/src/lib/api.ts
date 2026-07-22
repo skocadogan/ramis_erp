@@ -169,6 +169,8 @@ api.interceptors.response.use(
           useAuthStore.setState((s) => ({ ...s, token: newAccess }));
           // In-memory cache'i de güncelle ki retry'de expired token göndermesin
           cachedToken = newAccess;
+          const { reconnectAllSharedWebSockets } = await import("@/lib/ws");
+          reconnectAllSharedWebSockets();
         }
         processQueue(null);
         return api(originalRequest);

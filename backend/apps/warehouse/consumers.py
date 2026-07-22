@@ -3,9 +3,13 @@ from urllib.parse import parse_qs
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 
+from core.ws_consumer import ws_allow_connection
+
 
 class WarehouseNotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         # --- WS Authentication ---
         user = await self._authenticate_ws()
         if user is None or not user.is_authenticated:
@@ -13,6 +17,8 @@ class WarehouseNotificationConsumer(AsyncWebsocketConsumer):
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
         branch_id = (query.get("branch_id") or [None])[0]
         eff_id, mode = await self._resolve_ws_branch(self.user, branch_id)

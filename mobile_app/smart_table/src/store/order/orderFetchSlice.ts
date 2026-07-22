@@ -14,6 +14,10 @@ import {
 } from "@/services/orderService";
 import { isTerminalOrderStatus, normalizeActiveOrders } from "./orderUtils";
 import type { FetchOrdersOptions } from "./types";
+import {
+  captureWsRevision,
+  isWsRevisionCurrent,
+} from "./wsHttpRaceGuard";
 
 let ordersFetchSeq = 0;
 
@@ -72,6 +76,7 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
   fetchOrders: async (tableName, options) => {
     const background = options?.background ?? false;
     const seq = ++ordersFetchSeq;
+    const wsRevisionAtStart = captureWsRevision();
 
     if (!background) {
       set({ isLoading: true, error: null });
@@ -119,6 +124,7 @@ export const createOrderFetchSlice: StateCreator<OrderFetchSlice> = (
 
       const apiOrders = await fetchOrdersForTable(tableUuid);
       if (seq !== ordersFetchSeq) return;
+      if (!isWsRevisionCurrent(wsRevisionAtStart)) return;
 
       const nextOrders = normalizeActiveOrders(apiOrders);
       set({

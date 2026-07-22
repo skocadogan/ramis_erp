@@ -3,7 +3,13 @@
 import { useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
-import { getPosSyncWsUrl, posSyncHubKey, subscribeSharedWebSocket } from "@/lib/ws";
+import {
+  getPosSyncWsUrl,
+  posSyncHubKey,
+  resolveBranchIdForWs,
+  subscribeSharedWebSocket,
+  acceptWsEvent,
+} from "@/lib/ws";
 import { usePosStore } from "@/store/usePosStore";
 import { fetchActiveShift } from "../services/shiftsApi";
 import type { ShiftDto } from "../types";
@@ -44,6 +50,8 @@ export function useInvalidateActiveShift() {
 export function useSyncShiftsAcrossTabs(branchId?: string | null) {
   const queryClient = useQueryClient();
   const token = useAuthStore((s) => s.token);
+  const hasToken = !!token;
+  const terminalId = usePosStore((s) => s.posTerminalUuid) || undefined;
 
   useEffect(() => {
     // 1. Cross-tab sync via localStorage (same browser)
@@ -60,22 +68,21 @@ export function useSyncShiftsAcrossTabs(branchId?: string | null) {
     window.addEventListener("storage", handleStorage);
 
     // 2. Cross-machine sync via WebSockets (Django Channels)
-    if (!token) return () => window.removeEventListener("storage", handleStorage);
+    if (!hasToken) return () => window.removeEventListener("storage", handleStorage);
 
-    const terminalId = usePosStore.getState().posTerminalUuid || undefined;
-    const cleanupWs = subscribeSharedWebSocket(posSyncHubKey(branchId || undefined, terminalId, "web"), {
+    const wsBranchId = resolveBranchIdForWs(branchId);
+    const sequenceKey = `shift-sync:${wsBranchId ?? "global"}`;
+    const cleanupWs = subscribeSharedWebSocket(posSyncHubKey(wsBranchId, "web"), {
       tag: "shift-sync",
-      enabled: !!token,
-      getUrl: () => getPosSyncWsUrl(branchId || undefined, terminalId, "web"),
+      enabled: hasToken,
+      getUrl: () => getPosSyncWsUrl(wsBranchId, terminalId, "web"),
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data);
-          if (payload.type === "shift_event") {
-            // Broad invalidation on signal from server
-            void queryClient.invalidateQueries({ queryKey: ["active-shift"] });
-            void queryClient.invalidateQueries({ queryKey: ["shifts-list"] });
-            void queryClient.invalidateQueries({ queryKey: ["pos-terminals"] });
-          }
+          const parsed = acceptWsEvent(event.data, sequenceKey);
+          if (!parsed || parsed.type !== "shift_event") return;
+          void queryClient.invalidateQueries({ queryKey: ["active-shift"] });
+          void queryClient.invalidateQueries({ queryKey: ["shifts-list"] });
+          void queryClient.invalidateQueries({ queryKey: ["pos-terminals"] });
         } catch (error) {
           console.error("[ShiftSync] WS Parse error", error);
         }
@@ -86,5 +93,5 @@ export function useSyncShiftsAcrossTabs(branchId?: string | null) {
       window.removeEventListener("storage", handleStorage);
       cleanupWs();
     };
-  }, [queryClient, token, branchId]);
+  }, [queryClient, hasToken, branchId, terminalId]);
 }

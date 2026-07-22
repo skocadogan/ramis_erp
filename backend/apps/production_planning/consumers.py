@@ -3,6 +3,7 @@ import logging
 from channels.db import database_sync_to_async
 from channels.generic.websocket import AsyncWebsocketConsumer
 from core.ws_consumer import (
+    ws_allow_connection,
     ws_handle_client_ping,
     ws_on_connect,
     ws_on_disconnect,
@@ -14,12 +15,16 @@ logger = logging.getLogger(__name__)
 
 class ProductionStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         user = await self._authenticate_ws()
         if user is None or not user.is_authenticated:
             await self.close()
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
         self.branch_id = self.scope["url_route"]["kwargs"].get("branch_id")
         if not self.branch_id:
             await self.close()

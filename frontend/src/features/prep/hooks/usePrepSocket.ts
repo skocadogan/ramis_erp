@@ -1,6 +1,11 @@
 import { useEffect } from "react"
 import { useQueryClient } from "@tanstack/react-query"
-import { getKitchenNotificationsWsUrl, kitchenNotificationsHubKey, subscribeSharedWebSocket } from "@/lib/ws"
+import {
+  getKitchenNotificationsWsUrl,
+  kitchenNotificationsHubKey,
+  resolveBranchIdForWs,
+  subscribeSharedWebSocket,
+} from "@/lib/ws"
 import { useAuthStore } from "@/store/useAuthStore"
 import {
   applyPrepKitchenWsPayload,
@@ -17,15 +22,17 @@ function isPrepPayload(payload: PrepWsMessagePayload & { reason?: string; sub_ty
 export function usePrepSocket(branchId?: string) {
   const queryClient = useQueryClient()
   const token = useAuthStore((s) => s.token)
+  const hasToken = !!token
 
   useEffect(() => {
     const explicitBranch =
       typeof branchId === "string" ? branchId.trim() || undefined : undefined
+    const wsBranchId = resolveBranchIdForWs(explicitBranch)
 
-    const cleanup = subscribeSharedWebSocket(kitchenNotificationsHubKey(explicitBranch), {
+    const cleanup = subscribeSharedWebSocket(kitchenNotificationsHubKey(wsBranchId), {
       tag: "prep-kitchen",
-      getUrl: () => getKitchenNotificationsWsUrl(explicitBranch),
-      enabled: !!token,
+      getUrl: () => getKitchenNotificationsWsUrl(wsBranchId),
+      enabled: hasToken,
       onOpen: () => {
         void queryClient.invalidateQueries({ queryKey: ["prep-tasks"] })
         void queryClient.invalidateQueries({ queryKey: ["prep-tasks-infinite"] })
@@ -54,5 +61,5 @@ export function usePrepSocket(branchId?: string) {
     })
 
     return cleanup
-  }, [branchId, queryClient, token])
+  }, [branchId, queryClient, hasToken])
 }

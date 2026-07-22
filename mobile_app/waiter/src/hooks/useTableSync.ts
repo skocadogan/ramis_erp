@@ -408,10 +408,7 @@ export function useTableSync(enabled: boolean) {
             scheduleKdsInvalidate(orderId ? String(orderId) : null);
           }
 
-          if (
-            message.type === "menu_catalog_refresh" ||
-            message.type === "production_status_update"
-          ) {
+          if (message.type === "menu_catalog_refresh") {
             useWaiterPosPushStore.getState().refreshMenu();
           }
 

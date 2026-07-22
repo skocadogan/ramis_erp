@@ -9,6 +9,7 @@ from typing import Any
 from core.ws_metrics import track_ws_connection_closed, track_ws_connection_opened
 
 logger = logging.getLogger(__name__)
+WS_RATE_LIMIT_CLOSE_CODE = 4429
 
 try:
     from autobahn.exception import Disconnected as WsDisconnected
@@ -59,6 +60,26 @@ async def ws_handle_client_ping(text_data: str | None) -> bool:
 
 async def ws_send_pong(consumer: Any) -> None:
     await ws_safe_send(consumer, text_data=json.dumps({"type": "pong"}))
+
+
+async def ws_allow_connection(
+    consumer: Any,
+    user: Any | None = None,
+    *,
+    use_authenticated_user: bool = True,
+) -> bool:
+    """Atomik kullanıcı/IP bağlantı kotasını uygular; aşımda 4429 ile kapatır."""
+    from core.ws_throttle import check_ws_connection_throttle
+
+    if user is not None:
+        consumer.scope["user"] = user
+    throttle_scope = consumer.scope
+    if not use_authenticated_user:
+        throttle_scope = {**consumer.scope, "user": None}
+    if await check_ws_connection_throttle(throttle_scope):
+        return True
+    await consumer.close(code=WS_RATE_LIMIT_CLOSE_CODE)
+    return False
 
 
 def ws_on_connect(consumer_name: str) -> None:

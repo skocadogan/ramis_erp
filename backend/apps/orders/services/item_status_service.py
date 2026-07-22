@@ -4,15 +4,12 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from apps.branches.waiter_scope import enforce_waiter_order_item_scope
-from core.ws_deferred import schedule_kds_refresh
+from core.ws_deferred import schedule_kds_refresh, schedule_order_status_changed
 
 from ..combined_item_status import sync_combined_item_status_after_update
 from ..kds_item_scope import user_may_kds_line_item_by_assignment
 from ..models import OrderStatus
 from .item_service import ItemService
-from ..ws_broadcast import broadcast_kitchen_order_status_changed
-
-
 def apply_order_item_status(request, item, new_status, silent=False):
     """Durum güncellemesi. Hata halinde Response, başarıda None."""
     if new_status not in [s[0] for s in OrderStatus.choices]:
@@ -67,7 +64,7 @@ def apply_order_item_status(request, item, new_status, silent=False):
     }
 
     for synced in sync_combined_item_status_after_update(item):
-        broadcast_kitchen_order_status_changed(
+        schedule_order_status_changed(
             str(order.branch_id),
             {**_status_ws, "item_id": str(synced.id), "item_status": str(synced.status)},
         )
@@ -78,7 +75,7 @@ def apply_order_item_status(request, item, new_status, silent=False):
             order_id=str(order.id),
         )
 
-    broadcast_kitchen_order_status_changed(
+    schedule_order_status_changed(
         str(order.branch_id),
         {**_status_ws, "item_id": str(item.id)},
     )
@@ -95,5 +92,5 @@ def broadcast_order_item_touch(item, *, reason: str):
         'item_status': str(item.status),
         **({'table_id': str(order.table_id)} if order.table_id else {}),
     }
-    broadcast_kitchen_order_status_changed(str(order.branch_id), _status_ws)
+    schedule_order_status_changed(str(order.branch_id), _status_ws)
     schedule_kds_refresh(order.branch_id, reason, item_id=str(item.id), order_id=str(order.id))

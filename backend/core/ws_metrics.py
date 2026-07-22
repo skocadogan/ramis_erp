@@ -8,6 +8,8 @@ Process yeniden başlatıldığında sıfırlanır.
 from __future__ import annotations
 
 import logging
+import os
+import socket
 import threading
 from collections import defaultdict
 from typing import Any
@@ -19,8 +21,13 @@ _active_connections: dict[str, int] = defaultdict(int)
 _total_connections_opened: dict[str, int] = defaultdict(int)
 _last_broadcast_latency_ms: dict[str, float] = {}
 _max_broadcast_latency_ms: dict[str, float] = {}
+_throttle_coalesced: dict[str, int] = defaultdict(int)
+_rate_limit_rejected: int = 0
+_channel_layer_errors: int = 0
 
 logger = logging.getLogger(__name__)
+
+_INSTANCE_ID = f"{socket.gethostname()}:{os.getpid()}"
 
 
 def increment_ws_broadcast(event_type: str, branch_id: str | None = None) -> None:
@@ -60,13 +67,34 @@ def track_ws_connection_closed(consumer_name: str) -> None:
             _active_connections[consumer_name] = current - 1
 
 
+def increment_ws_throttle_coalesced(prefix: str) -> None:
+    with _lock:
+        _throttle_coalesced[prefix] += 1
+
+
+def increment_ws_rate_limit_rejected() -> None:
+    global _rate_limit_rejected
+    with _lock:
+        _rate_limit_rejected += 1
+
+
+def increment_ws_channel_layer_error() -> None:
+    global _channel_layer_errors
+    with _lock:
+        _channel_layer_errors += 1
+
+
 def get_ws_metrics_snapshot() -> dict[str, Any]:
     with _lock:
         return {
+            "instance_id": _INSTANCE_ID,
             "broadcast_by_event": dict(_broadcast_counts),
             "event_totals": dict(_event_by_type),
             "active_connections_by_consumer": dict(_active_connections),
             "total_connections_opened_by_consumer": dict(_total_connections_opened),
             "last_broadcast_latency_ms": dict(_last_broadcast_latency_ms),
             "max_broadcast_latency_ms": dict(_max_broadcast_latency_ms),
+            "throttle_coalesced_by_prefix": dict(_throttle_coalesced),
+            "rate_limit_rejected_total": _rate_limit_rejected,
+            "channel_layer_errors_total": _channel_layer_errors,
         }

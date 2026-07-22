@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
-import { getWaiterCallsWsUrl, resolveBranchIdForWs, runManagedWebSocket } from "@/lib/ws";
+import {
+  getWaiterCallsWsUrl,
+  resolveBranchIdForWs,
+  subscribeSharedWebSocket,
+  waiterCallsHubKey,
+  acceptWsEvent,
+} from "@/lib/ws";
 import { useAuthStore } from "@/store/useAuthStore";
 import { usePosStore } from "@/store/usePosStore";
 import { handleWaiterCallPayload } from "@/features/pos/lib/waiterCallPayload";
@@ -26,6 +32,7 @@ export function useWaiterCallNotifications(
   branchId?: string | null
 ) {
   const token = useAuthStore((s) => s.token);
+  const hasToken = !!token;
   const activeBranchId = usePosStore((s) => s.activeBranchId);
   const effectiveBranchId = branchId ?? activeBranchId ?? null;
   const knownCallIdsRef = useRef<Set<string>>(new Set());
@@ -64,7 +71,7 @@ export function useWaiterCallNotifications(
   );
 
   useEffect(() => {
-    if (!enabled || !token || !effectiveBranchId) return;
+    if (!enabled || !hasToken || !effectiveBranchId) return;
 
     knownCallIdsRef.current.clear();
     let cancelled = false;
@@ -83,21 +90,22 @@ export function useWaiterCallNotifications(
       cancelled = true;
       window.clearInterval(pollId);
     };
-  }, [enabled, token, effectiveBranchId, syncPendingCalls]);
+  }, [enabled, hasToken, effectiveBranchId, syncPendingCalls]);
 
   useEffect(() => {
-    if (!enabled || !token) return;
+    if (!enabled || !hasToken) return;
 
-    const cleanup = runManagedWebSocket({
+    const wsBranchId = resolveBranchIdForWs(effectiveBranchId);
+    const sequenceKey = `waiter-calls:${wsBranchId ?? "global"}`;
+    const cleanup = subscribeSharedWebSocket(waiterCallsHubKey(wsBranchId), {
       tag: "waiter-call-notifications",
       enabled: true,
-      getUrl: () =>
-        getWaiterCallsWsUrl(
-          resolveBranchIdForWs(effectiveBranchId)
-        ),
+      getUrl: () => getWaiterCallsWsUrl(wsBranchId),
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data);
+          const parsed = acceptWsEvent(event.data, sequenceKey);
+          if (!parsed) return;
+          const payload = { type: parsed.type, data: parsed.data };
           if (payload.type === "waiter_call") {
             handleWaiterCallPayload(payload);
           } else if (payload.type === "waiter_call_dismissed") {
@@ -110,5 +118,5 @@ export function useWaiterCallNotifications(
     });
 
     return () => cleanup();
-  }, [enabled, token, effectiveBranchId]);
+  }, [enabled, hasToken, effectiveBranchId]);
 }

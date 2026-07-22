@@ -12,6 +12,7 @@ import {
 } from "./orderUtils";
 import type { OrderFetchSlice } from "./orderFetchSlice";
 import type { WsOrderStatusPayload } from "./types";
+import { markWsOrderMutation } from "./wsHttpRaceGuard";
 
 export interface OrderWsSlice {
   wsConnected: boolean;
@@ -65,6 +66,7 @@ export const createOrderWsSlice: StateCreator<
     const now = new Date().toISOString();
 
     if (payload.event === "order_cancelled") {
+      markWsOrderMutation();
       set({ activeOrders: get().activeOrders.filter((o) => o.id !== orderId) });
       return;
     }
@@ -75,6 +77,7 @@ export const createOrderWsSlice: StateCreator<
 
     const itemStatus = rawStatus as OrderItemStatus;
 
+    markWsOrderMutation();
     set({
       activeOrders: get()
         .activeOrders.map((order) =>

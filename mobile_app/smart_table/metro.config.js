@@ -1,7 +1,12 @@
+const path = require("path");
 const { getDefaultConfig } = require("expo/metro-config");
 const { withNativeWind } = require("nativewind/metro");
 
-const config = getDefaultConfig(__dirname);
+const projectRoot = __dirname;
+const sharedRoot = path.resolve(projectRoot, "../shared");
+
+const config = getDefaultConfig(projectRoot);
+config.watchFolders = [sharedRoot];
 
 // Başlangıç performansı: dinamik require'ları gruplayarak yükler.
 config.transformer.inlineRequires = true;

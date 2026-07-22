@@ -3,7 +3,15 @@
 import { useEffect } from 'react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAuthStore } from '@/store/useAuthStore';
-import { getPosSyncWsUrl, getWaiterCallsWsUrl, runManagedWebSocket, resolveBranchIdForWs } from '@/lib/ws';
+import {
+    getPosSyncWsUrl,
+    getWaiterCallsWsUrl,
+    posSyncHubKey,
+    resolveBranchIdForWs,
+    subscribeSharedWebSocket,
+    waiterCallsHubKey,
+    acceptWsEvent,
+} from '@/lib/ws';
 import { shouldLivePollPerformances } from '../constants/livePoll';
 
 function invalidateWaiterCallQueries(qc: ReturnType<typeof useQueryClient>) {
@@ -28,24 +36,27 @@ export function usePerformancesLiveSync(options: {
     const { enabled, branchId, endDate } = options;
     const qc = useQueryClient();
     const token = useAuthStore((s) => s.token);
+    const hasToken = !!token;
 
     const live = enabled && shouldLivePollPerformances(endDate);
     const wsBranchId =
         branchId === 'ALL' ? resolveBranchIdForWs(undefined) : branchId;
 
     useEffect(() => {
-        if (!live || !token) return;
+        if (!live || !hasToken) return;
 
-        const cleanupCalls = runManagedWebSocket({
+        const callsSequenceKey = `perf-calls:${wsBranchId ?? 'global'}`;
+        const cleanupCalls = subscribeSharedWebSocket(waiterCallsHubKey(wsBranchId), {
             tag: 'performances-waiter-calls',
             enabled: true,
             getUrl: () => getWaiterCallsWsUrl(wsBranchId),
             onMessage: (event) => {
                 try {
-                    const payload = JSON.parse(event.data);
+                    const parsed = acceptWsEvent(event.data, callsSequenceKey);
+                    if (!parsed) return;
                     if (
-                        payload.type === 'waiter_call' ||
-                        payload.type === 'waiter_call_dismissed'
+                        parsed.type === 'waiter_call' ||
+                        parsed.type === 'waiter_call_dismissed'
                     ) {
                         invalidateWaiterCallQueries(qc);
                     }
@@ -55,17 +66,19 @@ export function usePerformancesLiveSync(options: {
             },
         });
 
-        const cleanupOrders = runManagedWebSocket({
+        const ordersSequenceKey = `perf-orders:${wsBranchId ?? 'global'}`;
+        const cleanupOrders = subscribeSharedWebSocket(posSyncHubKey(wsBranchId, 'web'), {
             tag: 'performances-pos-sync',
             enabled: true,
             getUrl: () => getPosSyncWsUrl(wsBranchId, undefined, 'web'),
             onMessage: (event) => {
                 try {
-                    const payload = JSON.parse(event.data);
+                    const parsed = acceptWsEvent(event.data, ordersSequenceKey);
+                    if (!parsed) return;
                     if (
-                        payload.type === 'orders_updated' ||
-                        payload.type === 'order_status_changed' ||
-                        payload.type === 'kds.refresh'
+                        parsed.type === 'orders_updated' ||
+                        parsed.type === 'order_status_changed' ||
+                        parsed.type === 'kds.refresh'
                     ) {
                         invalidateWaiterSalesQueries(qc);
                     }
@@ -79,5 +92,5 @@ export function usePerformancesLiveSync(options: {
             cleanupCalls();
             cleanupOrders();
         };
-    }, [live, token, wsBranchId, qc]);
+    }, [live, hasToken, wsBranchId, qc]);
 }

@@ -8,11 +8,13 @@ from django.utils import timezone
 
 from core.ws_consumer import (
     ws_handle_client_ping,
+    ws_allow_connection,
     ws_on_connect,
     ws_on_disconnect,
     ws_safe_send,
     ws_send_pong,
 )
+from core.ws_envelope import wrap_legacy_event
 
 class PosSyncConsumer(AsyncWebsocketConsumer):
     """
@@ -23,6 +25,8 @@ class PosSyncConsumer(AsyncWebsocketConsumer):
     """
 
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         # --- WS Authentication ---
         user = await self._authenticate_ws()
         if user is None or not user.is_authenticated:
@@ -30,6 +34,11 @@ class PosSyncConsumer(AsyncWebsocketConsumer):
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
+        if not await self._user_has_any_permission(("pos.view_pos", "waiter.access")):
+            await self.close()
+            return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
         branch_id = (query.get("branch_id") or [None])[0]
         eff_id, mode = await self._resolve_ws_branch(self.user, branch_id)
@@ -44,11 +53,20 @@ class PosSyncConsumer(AsyncWebsocketConsumer):
 
         terminal_id = (query.get("terminal_id") or [None])[0]
         platform = (query.get("platform") or ["web"])[0]
+        table_id = (query.get("table_id") or [None])[0]
         
         self.terminal_id = terminal_id
         self.platform = platform
+        self.table_group_name = None
 
         await self.channel_layer.group_add(self.group_name, self.channel_name)
+
+        if table_id:
+            if mode == "global" or not await self._verify_table_subscription(eff_id, table_id):
+                await self.close()
+                return
+            self.table_group_name = f"table_sync_{table_id}"
+            await self.channel_layer.group_add(self.table_group_name, self.channel_name)
         
         if self.terminal_id:
             await self._add_connection_to_cache()
@@ -99,9 +117,27 @@ class PosSyncConsumer(AsyncWebsocketConsumer):
 
         return resolve_websocket_branch_subscription(user, branch_id_raw)
 
+    @database_sync_to_async
+    def _user_has_any_permission(self, permissions: tuple[str, ...]) -> bool:
+        return any(self.user.has_permission(permission) for permission in permissions)
+
+    @database_sync_to_async
+    def _verify_table_subscription(self, branch_id, table_id):
+        from apps.branches.models import Table
+
+        return Table.objects.filter(
+            pk=table_id,
+            zone__branch_id=branch_id,
+            is_active=True,
+        ).exists()
+
     async def disconnect(self, close_code):
         if hasattr(self, "group_name"):
             await self.channel_layer.group_discard(self.group_name, self.channel_name)
+        if getattr(self, "table_group_name", None):
+            await self.channel_layer.group_discard(
+                self.table_group_name, self.channel_name
+            )
             
         if getattr(self, "terminal_id", None):
             await self._remove_connection_from_cache()
@@ -136,28 +172,25 @@ class PosSyncConsumer(AsyncWebsocketConsumer):
         }, cls=DjangoJSONEncoder))
 
     async def kds_refresh(self, event):
-        msg = event.get('message')
-        await ws_safe_send(self, text_data=json.dumps({
-            'type': 'kds.refresh',
-            'message': msg,
-            'data': msg,
-        }, cls=DjangoJSONEncoder))
+        wire = wrap_legacy_event(event)
+        if wire.get("type") == "orders_updated":
+            wire["type"] = "kds.refresh"
+        await ws_safe_send(
+            self,
+            text_data=json.dumps(wire, cls=DjangoJSONEncoder),
+        )
 
     async def order_status_changed(self, event):
-        msg = event.get('message')
-        await ws_safe_send(self, text_data=json.dumps({
-            'type': 'order_status_changed',
-            'message': msg,
-            'data': msg,
-        }, cls=DjangoJSONEncoder))
+        await ws_safe_send(
+            self,
+            text_data=json.dumps(wrap_legacy_event(event), cls=DjangoJSONEncoder),
+        )
 
     async def orders_updated(self, event):
-        msg = event.get('message')
-        await ws_safe_send(self, text_data=json.dumps({
-            'type': 'orders_updated',
-            'message': msg,
-            'data': msg,
-        }, cls=DjangoJSONEncoder))
+        await ws_safe_send(
+            self,
+            text_data=json.dumps(wrap_legacy_event(event), cls=DjangoJSONEncoder),
+        )
 
     async def menu_catalog_refresh(self, event):
         msg = event.get('message')
@@ -184,12 +217,16 @@ class StaffNotificationConsumer(AsyncWebsocketConsumer):
     """
 
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         user = await self._authenticate_ws()
         if user is None or not user.is_authenticated:
             await self.close()
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
         branch_id = (query.get("branch_id") or [None])[0]
         eff_id, mode = await self._resolve_ws_branch(self.user, branch_id)
@@ -251,12 +288,19 @@ class WaiterCallConsumer(AsyncWebsocketConsumer):
     """
 
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         user = await self._authenticate_ws()
         if user is None or not user.is_authenticated:
             await self.close()
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
+        if not await self._user_has_any_permission(("waiter.access", "pos.view_pos")):
+            await self.close()
+            return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
         branch_id = (query.get("branch_id") or [None])[0]
         eff_id, mode = await self._resolve_ws_branch(self.user, branch_id)
@@ -286,6 +330,10 @@ class WaiterCallConsumer(AsyncWebsocketConsumer):
         from core.branch_scope import resolve_websocket_branch_subscription
 
         return resolve_websocket_branch_subscription(user, branch_id_raw)
+
+    @database_sync_to_async
+    def _user_has_any_permission(self, permissions: tuple[str, ...]) -> bool:
+        return any(self.user.has_permission(permission) for permission in permissions)
 
     async def disconnect(self, close_code):
         if hasattr(self, "group_name"):

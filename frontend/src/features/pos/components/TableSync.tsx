@@ -11,7 +11,7 @@ import type { Table, Zone } from "@/types/pos";
 import api from "@/lib/api";
 import { hasModuleAccess } from "@/lib/constants";
 
-import { getPosSyncWsUrl, posSyncHubKey, subscribeSharedWebSocket } from "@/lib/ws";
+import { getPosSyncWsUrl, posSyncHubKey, subscribeSharedWebSocket, acceptWsEvent, setOnSequenceGap } from "@/lib/ws";
 import { queryKeys } from "@/lib/queryKeys";
 import { mergePosTablesWithTakeawayVirtual } from "@/features/pos/lib/mergePosTablesWithTakeawayVirtual";
 import { shouldHttpFallbackPosTables } from "@/features/pos/lib/kitchenPosEvents";
@@ -128,6 +128,7 @@ function applyPosStyleTableUpdate(
 const WAITER_FULL_RESYNC_DEBOUNCE_MS = 80;
 /** Yapısal masa listesi HTTP yedeği — mutfak fırtınasında birleştirilir. */
 const KDS_HTTP_FALLBACK_DEBOUNCE_MS = 1_000;
+const POS_SEQUENCE_GAP_REFETCH_MS = 3_000;
 
 interface TableSyncProps {
   branchId?: string;
@@ -138,11 +139,12 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
   const { user, token } = useAuthStore(
     useShallow((s) => ({ user: s.user, token: s.token })),
   );
-  const posTerminalUuid = usePosStore((s) => s.posTerminalUuid);
+  const hasToken = !!token;
   const queryClient = useQueryClient();
   const queryClientRef = useRef(queryClient);
   const waiterWsResyncTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const kdsHttpFallbackTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const sequenceGapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => {
     queryClientRef.current = queryClient;
   }, [queryClient]);
@@ -150,13 +152,12 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
   useEffect(() => {
     const perms = user?.permissions;
     const su = user?.is_superuser;
-    if (!hasModuleAccess(perms, su, "tables") || !token) {
+    if (!hasModuleAccess(perms, su, "tables") || !hasToken) {
       return;
     }
 
     let cancelled = false;
     const tablesKey = queryKeys.posTables(branchId, variant);
-    const terminalId = posTerminalUuid || undefined;
 
     const runHttpFallback = () => {
       if (cancelled) return;
@@ -210,12 +211,27 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
       }, KDS_HTTP_FALLBACK_DEBOUNCE_MS);
     };
 
+    const sequenceKey = `pos-sync:${branchId ?? "global"}:${variant}`;
+
+    setOnSequenceGap(() => {
+      if (sequenceGapTimerRef.current) {
+        clearTimeout(sequenceGapTimerRef.current);
+      }
+      sequenceGapTimerRef.current = setTimeout(() => {
+        sequenceGapTimerRef.current = null;
+        scheduleKdsHttpFallback();
+      }, POS_SEQUENCE_GAP_REFETCH_MS);
+    });
+
     const cleanupWs = subscribeSharedWebSocket(
-      posSyncHubKey(branchId, terminalId, "web"),
+      posSyncHubKey(branchId, "web"),
       {
       tag: "pos-table-sync",
-      enabled: !!token,
-      getUrl: () => getPosSyncWsUrl(branchId, terminalId, "web"),
+      enabled: hasToken,
+      getUrl: () => {
+        const terminalId = usePosStore.getState().posTerminalUuid || undefined;
+        return getPosSyncWsUrl(branchId, terminalId, "web");
+      },
       onOpen: () => {
         console.debug("[TableSync] WebSocket connected");
         // Kopukluk sonrası kaçırılan table_update / order_status_changed telafisi.
@@ -223,9 +239,12 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
       },
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data) as Record<string, unknown>;
-          if (payload.type === "table_update") {
-            const { action, data } = payload as unknown as { action: string; data: Table };
+          const parsed = acceptWsEvent(event.data, sequenceKey);
+          if (!parsed) return;
+
+          if (parsed.type === "table_update") {
+            const action = parsed.action ?? "upsert";
+            const data = parsed.data as unknown as Table;
             const tableId = data.id as string;
             const qc = queryClientRef.current;
 
@@ -282,14 +301,13 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
               { allowPrepend: true },
             );
           } else if (
-            payload.type === "order_status_changed" ||
-            shouldHttpFallbackPosTables(payload)
+            parsed.type === "order_status_changed" ||
+            shouldHttpFallbackPosTables({ type: parsed.type, data: parsed.data })
           ) {
-            // table_update kaçırılırsa veya yalnızca status olayı gelirse HTTP yedek.
             scheduleKdsHttpFallback();
-          } else if (payload.type === "force_disconnect") {
+          } else if (parsed.type === "force_disconnect") {
             toast.error(
-              (payload.message as string) ||
+              (parsed.data.message as string) ||
                 "Bağlantınız yönetici tarafından sonlandırıldı.",
             );
             usePosStore.getState().persistTerminalSelection("", null);
@@ -311,9 +329,13 @@ export function TableSync({ branchId, variant = "pos" }: TableSyncProps) {
         clearTimeout(kdsHttpFallbackTimerRef.current);
         kdsHttpFallbackTimerRef.current = null;
       }
+      if (sequenceGapTimerRef.current) {
+        clearTimeout(sequenceGapTimerRef.current);
+        sequenceGapTimerRef.current = null;
+      }
       cleanupWs();
     };
-  }, [user?.permissions, user?.is_superuser, token, branchId, variant, posTerminalUuid]);
+  }, [user?.permissions, user?.is_superuser, hasToken, branchId, variant]);
 
   return null;
 }

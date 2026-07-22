@@ -16,6 +16,7 @@ import os
 import threading
 from typing import Callable
 
+from asgiref.sync import sync_to_async
 from django.core.cache import cache
 
 logger = logging.getLogger(__name__)
@@ -122,21 +123,29 @@ def throttle_coalesced(
     if not bid:
         return
 
-    window = throttle_seconds if throttle_seconds is not None else _KDS_STATS_THROTTLE_SECONDS
+    window = max(
+        throttle_seconds if throttle_seconds is not None else _KDS_STATS_THROTTLE_SECONDS,
+        0.001,
+    )
     tkey = _throttle_key(prefix, bid)
     pkey = _pending_key(prefix, bid)
 
-    if cache.get(tkey):
+    lock_timeout = max(window, 0.001)
+    if not cache.add(tkey, 1, timeout=lock_timeout):
         cache.set(pkey, 1, timeout=max(int(window * 3), 5))
+        try:
+            from core.ws_metrics import increment_ws_throttle_coalesced
+
+            increment_ws_throttle_coalesced(prefix)
+        except Exception:
+            pass
+        _schedule_flush(prefix, bid, window, run)
         return
 
     try:
         run()
     except Exception:
         logger.exception("WS throttle run failed (prefix=%s branch_id=%s)", prefix, bid)
-        return
-
-    cache.set(tkey, 1, timeout=max(int(window), 1))
     _schedule_flush(prefix, bid, window, run)
 
 
@@ -161,22 +170,22 @@ def _schedule_flush(
         girmiş olabilir (callback identity kontrolü yapar).
         """
         try:
-            await asyncio.sleep(window)
-
             pkey = _pending_key(prefix, branch_id)
             tkey = _throttle_key(prefix, branch_id)
+            lock_timeout = max(window, 0.001)
 
-            if not cache.get(pkey):
-                return
-            cache.delete(pkey)
-            if cache.get(tkey):
-                return
+            while True:
+                await asyncio.sleep(window)
+                if not cache.get(pkey):
+                    return
+                if not cache.add(tkey, 1, timeout=lock_timeout):
+                    continue
 
-            # Sync callback'i thread pool'da çalıştır (scheduler'ı bloklama)
-            current_loop = asyncio.get_running_loop()
-            await current_loop.run_in_executor(None, lambda: _run_db_safe(run))
-
-            cache.set(tkey, 1, timeout=max(int(window), 1))
+                # Lock alındıktan önceki pending tüketilir. Bu sırada gelen yeni
+                # çağrı tekrar pending yazar ve sonraki trailing turunda çalışır.
+                cache.delete(pkey)
+                current_loop = asyncio.get_running_loop()
+                await current_loop.run_in_executor(None, lambda: _run_db_safe(run))
         except asyncio.CancelledError:
             pass
         except Exception:
@@ -186,24 +195,17 @@ def _schedule_flush(
             )
 
     async def _schedule() -> None:
-        # Önceki task varsa iptal et
-        existing = _pending_tasks.pop(timer_key, None)
+        existing = _pending_tasks.get(timer_key)
         if existing is not None and not existing.done():
-            existing.cancel()
+            return
 
-        # Timer limit aşımı kontrolü: en eski task'ı temizle
+        # Pending işi iptal etmek trailing-edge kaybına yol açar. Limit yalnızca
+        # operasyonel uyarıdır; mevcut ve yeni işler tamamlanmaya bırakılır.
         if len(_pending_tasks) >= _MAX_PENDING_TIMERS:
-            try:
-                oldest_key = next(iter(_pending_tasks))
-                oldest = _pending_tasks.pop(oldest_key)
-                if not oldest.done():
-                    oldest.cancel()
-                    logger.warning(
-                        "WS throttle limit aşıldı (%d). En eski task iptal edildi: %s",
-                        _MAX_PENDING_TIMERS, oldest_key,
-                    )
-            except (StopIteration, RuntimeError):
-                pass
+            logger.warning(
+                "WS throttle pending task uyarı eşiği aşıldı: %d",
+                _MAX_PENDING_TIMERS,
+            )
 
         # Yeni task oluştur
         task = asyncio.create_task(_flush())
@@ -253,24 +255,39 @@ async def check_ws_connection_throttle(
     Returns:
         True if allowed, False if rate limited.
     """
-    from django.core.cache import cache
-
     if max_connections is None:
         max_connections = _WS_CONN_MAX_PER_MINUTE
+    if max_connections <= 0:
+        return False
 
     client_key = _ws_client_key(scope)
     cache_key = f"ws:conn_rate:{hashlib.sha256(client_key.encode()).hexdigest()[:16]}"
 
+    def _increment() -> int:
+        if cache.add(cache_key, 1, timeout=window_seconds):
+            return 1
+        try:
+            return cache.incr(cache_key)
+        except ValueError:
+            # Anahtar `add` ile `incr` arasında sona erdiyse yeni pencere aç.
+            if cache.add(cache_key, 1, timeout=window_seconds):
+                return 1
+            return cache.incr(cache_key)
+
     try:
-        current = cache.get(cache_key, 0)
-        if current >= max_connections:
+        current = await sync_to_async(_increment, thread_sensitive=False)()
+        if current > max_connections:
             logger.warning(
                 "WS rate limit tetiklendi: key=%s current=%d max=%d",
                 cache_key, current, max_connections,
             )
+            try:
+                from core.ws_metrics import increment_ws_rate_limit_rejected
+
+                increment_ws_rate_limit_rejected()
+            except Exception:
+                pass
             return False
-        # Pipeline ile atomic increment
-        cache.set(cache_key, current + 1, timeout=window_seconds)
         return True
     except Exception:
         # Cache hatası durumunda bağlantıya izin ver (fail-open)

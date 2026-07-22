@@ -8,7 +8,18 @@ import { useAuthStore } from "@/store/useAuthStore";
 import api from "@/lib/api";
 import { toast } from "sonner";
 import { adminApi, type KitchenStation } from "@/features/admin/services/adminApi";
-import { getKitchenNotificationsWsUrl, kitchenNotificationsHubKey, subscribeSharedWebSocket } from "@/lib/ws";
+import {
+  getKitchenNotificationsWsUrl,
+  kitchenNotificationsHubKey,
+  resolveBranchIdForWs,
+  subscribeSharedWebSocket,
+} from "@/lib/ws";
+import {
+  dedupByEventId,
+  parseWsMessage,
+  setOnSequenceGap,
+  shouldApplySequence,
+} from "@/lib/ws/wsEventProtocol";
 import { applyPrepKitchenWsPayload } from "@/features/prep/utils/mergePrepWsCache";
 import type { PrepTask } from "@/features/prep/types";
 import { queryKeys } from "@/lib/queryKeys";
@@ -24,6 +35,7 @@ import { kdsTableMergeKey } from "../utils/kdsTableKey";
 import { playNotificationSound } from "@/lib/notificationSounds";
 
 const GRACE_GROUP_MS = 15_000;
+const KDS_SEQUENCE_GAP_REFETCH_MS = 3_000;
 
 /** POS/tables iptal ve ödeme sonrası KDS listesini gecikmesiz yenile. */
 const KDS_IMMEDIATE_REFRESH_REASONS = new Set([
@@ -135,6 +147,7 @@ export function useKdsData(options?: UseKdsDataOptions) {
   const { user, token } = useAuthStore(
     useShallow((s) => ({ user: s.user, token: s.token }))
   );
+  const hasToken = !!token;
   const router = useRouter();
   const searchParams = useSearchParams();
 
@@ -196,9 +209,7 @@ export function useKdsData(options?: UseKdsDataOptions) {
   const kdsFetchSeqRef = useRef(0);
   const wsRefreshDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const stationsStatsDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  /** WebSocket duplicate mesaj filtresi: son 50 benzersiz mesaj ID'sini tutar. */
-  const processedWsMsgIdsRef = useRef<Set<string>>(new Set());
-  const dedupCounterRef = useRef<number>(0);
+  const sequenceGapDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Yalnızca gerçek istasyon değişiminde listeyi sıfırla. `fetchStations` her WS'te yeni
   // KitchenStation nesnesi ile setActiveStation yapıyordu; [activeStation] referansı değişince
@@ -467,22 +478,34 @@ export function useKdsData(options?: UseKdsDataOptions) {
   }, [selectedBranchId, searchParams]);
 
   useEffect(() => {
-    if (!token) return;
+    if (!hasToken) return;
     
     // Initial fetch when activeStation is set
     if (activeStation) {
       void fetchOrdersRef.current();
     }
 
+    const wsBranchId = resolveBranchIdForWs(
+      selectedBranchId ?? activeStationRef.current?.branch ?? undefined
+    );
+    const sequenceAggregateKey = `kds:${wsBranchId ?? "global"}`;
+
+    setOnSequenceGap(() => {
+      if (sequenceGapDebounceRef.current) {
+        clearTimeout(sequenceGapDebounceRef.current);
+      }
+      sequenceGapDebounceRef.current = setTimeout(() => {
+        sequenceGapDebounceRef.current = null;
+        if (activeStationRef.current) void fetchOrdersRef.current();
+      }, KDS_SEQUENCE_GAP_REFETCH_MS);
+    });
+
     const cleanupWs = subscribeSharedWebSocket(
-      kitchenNotificationsHubKey(selectedBranchId ?? activeStationRef.current?.branch ?? undefined),
+      kitchenNotificationsHubKey(wsBranchId),
       {
       tag: "kds-kitchen",
-      getUrl: () =>
-        getKitchenNotificationsWsUrl(
-          selectedBranchId ?? activeStationRef.current?.branch ?? undefined
-        ),
-      enabled: !!token,
+      getUrl: () => getKitchenNotificationsWsUrl(wsBranchId),
+      enabled: hasToken,
       onOpen: () => {
         /* Reconnect: siparişleri yenile; istasyon listesi debounce (stats ile birleşir). */
         if (activeStationRef.current) void fetchOrdersRef.current();
@@ -496,42 +519,12 @@ export function useKdsData(options?: UseKdsDataOptions) {
       },
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data);
-          /* WebSocket duplicate mesaj koruması: aynı payload tekrar gelirse atla.
-           * MsgId: type + ayırt edici alanlar. Hiçbir ayırt edici alan yoksa
-           * monotonic artan sayaç kullan (kds_stats_update gibi eventsiz olaylar). */
-          const dedupParts: string[] = [payload.type];
-          const ddp = payload.data as Record<string, unknown> | undefined;
-          let hasUniqueField = false;
-          if (ddp) {
-            if (ddp.order_id) { dedupParts.push(String(ddp.order_id)); hasUniqueField = true; }
-            if (ddp.item_id) { dedupParts.push(String(ddp.item_id)); hasUniqueField = true; }
-            if (ddp.event) { dedupParts.push(String(ddp.event)); hasUniqueField = true; }
-            if (ddp.item_status) { dedupParts.push(String(ddp.item_status)); hasUniqueField = true; }
-            if (ddp.sub_type) { dedupParts.push(String(ddp.sub_type)); hasUniqueField = true; }
-            if (ddp.reason) { dedupParts.push(String(ddp.reason)); hasUniqueField = true; }
-            if (ddp.stock_item_name) { dedupParts.push(String(ddp.stock_item_name)); hasUniqueField = true; }
-            if (ddp.report_number) { dedupParts.push(String(ddp.report_number)); hasUniqueField = true; }
-            if (ddp.transfer_number) { dedupParts.push(String(ddp.transfer_number)); hasUniqueField = true; }
-            if (ddp.status) { dedupParts.push(String(ddp.status)); hasUniqueField = true; }
-            if (ddp.new_quantity != null) { dedupParts.push(String(ddp.new_quantity)); hasUniqueField = true; }
-            const task = ddp.task as Record<string, unknown> | undefined;
-            if (task?.id) { dedupParts.push(String(task.id)); hasUniqueField = true; }
-            if (ddp.removed_task_id) { dedupParts.push(String(ddp.removed_task_id)); hasUniqueField = true; }
-          }
-          if (!hasUniqueField) {
-            // Her olayı benzersiz yapmak için sayaç ekle
-            dedupParts.push(String(dedupCounterRef.current++));
-          }
-          const dedupMsgId = dedupParts.join(":");
-          if (processedWsMsgIdsRef.current.has(dedupMsgId)) {
-            return;
-          }
-          processedWsMsgIdsRef.current.add(dedupMsgId);
-          if (processedWsMsgIdsRef.current.size > 50) {
-            const first = processedWsMsgIdsRef.current.values().next().value;
-            if (first) processedWsMsgIdsRef.current.delete(first);
-          }
+          const parsed = parseWsMessage(event.data);
+          if (!parsed) return;
+          if (!dedupByEventId(parsed.eventId)) return;
+          if (!shouldApplySequence(sequenceAggregateKey, parsed.sequence)) return;
+
+          const payload = { type: parsed.type, data: parsed.data };
           /* Yeni olay tipi: sadece prep önbelleği (sipariş refetch yok) */
           if (payload.type === "prep_updated" && payload.data) {
             const m = payload.data as {
@@ -798,7 +791,11 @@ export function useKdsData(options?: UseKdsDataOptions) {
           }
 
           if (payload.type === "deficiency_status_changed") {
-            const data = payload.data;
+            const data = payload.data as {
+              station_id?: string;
+              status?: string;
+              report_number?: string | number;
+            };
             // Commit sonrası tutarlı liste için tam yenileme (sadece status merge yetersiz; transfers vb.)
             void qc.invalidateQueries({ queryKey: queryKeys.deficiencyReportsBase });
 
@@ -852,8 +849,8 @@ export function useKdsData(options?: UseKdsDataOptions) {
     }
     );
 
-    const processedIds = processedWsMsgIdsRef.current;
     return () => {
+      setOnSequenceGap(null);
       if (wsRefreshDebounceRef.current) {
         clearTimeout(wsRefreshDebounceRef.current);
         wsRefreshDebounceRef.current = null;
@@ -862,12 +859,15 @@ export function useKdsData(options?: UseKdsDataOptions) {
         clearTimeout(stationsStatsDebounceRef.current);
         stationsStatsDebounceRef.current = null;
       }
-      processedIds.clear();
+      if (sequenceGapDebounceRef.current) {
+        clearTimeout(sequenceGapDebounceRef.current);
+        sequenceGapDebounceRef.current = null;
+      }
       cleanupWs();
     };
     // tk: useTranslations her render'da yeni ref uretebilir → tkRef uzerinden okunuyor
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token, selectedBranchId, activeStation?.id, qc]);
+  }, [hasToken, selectedBranchId, activeStation?.id, qc]);
 
   function handleSelectStation(s: KitchenStation) {
     setActiveStation(s);

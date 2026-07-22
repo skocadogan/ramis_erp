@@ -9,6 +9,7 @@
     "analyze": "ANALYZE=true next build --webpack",
     "start": "node .next/standalone/server.js",
     "lint": "next lint",
+    "test:unit": "vitest run",
     "knip": "knip"
   },
   "dependencies": {
@@ -52,7 +53,8 @@
     "postcss": "^8.5.16",
     "shadcn": "^4.13.0",
     "tailwindcss": "^4.0.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
   },
   "overrides": {
     "postcss": "^8.5.16"

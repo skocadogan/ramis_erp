@@ -88,6 +88,7 @@ export function NotificationDrawer({
       token: s.token,
     }))
   );
+  const hasToken = !!token;
 
   const {
     activeBranchId,
@@ -260,7 +261,7 @@ export function NotificationDrawer({
   }, [user?.permissions, user?.is_superuser, variant]);
 
   useEffect(() => {
-    if (!token || (!showReadyNotifs && !showWaiterCallNotifs)) {
+    if (!hasToken || (!showReadyNotifs && !showWaiterCallNotifs)) {
       return;
     }
 
@@ -268,7 +269,7 @@ export function NotificationDrawer({
       staffNotificationsHubKey(resolveBranchIdForWs(branchIdProp ?? activeBranchId ?? null)),
       {
       tag: "pos-staff-notifications",
-      enabled: !!token,
+      enabled: hasToken,
       getUrl: () =>
         getStaffNotificationsWsUrl(
           resolveBranchIdForWs(branchIdProp ?? activeBranchId ?? null)
@@ -287,10 +288,10 @@ export function NotificationDrawer({
     );
 
     return () => cleanupStaffWs();
-  }, [token, showReadyNotifs, showWaiterCallNotifs, branchIdProp, activeBranchId]);
+  }, [hasToken, showReadyNotifs, showWaiterCallNotifs, branchIdProp, activeBranchId]);
 
   useEffect(() => {
-    if (!canPollReadyOrders(user?.permissions, user?.is_superuser, variant) || !token) {
+    if (!canPollReadyOrders(user?.permissions, user?.is_superuser, variant) || !hasToken) {
       return;
     }
 
@@ -302,7 +303,7 @@ export function NotificationDrawer({
       kitchenNotificationsHubKey(resolveBranchIdForWs(branchIdProp ?? activeBranchId ?? null)),
       {
       tag: "pos-notification-kitchen",
-      enabled: !!token,
+      enabled: hasToken,
       getUrl: () =>
         getKitchenNotificationsWsUrl(
           resolveBranchIdForWs(branchIdProp ?? activeBranchId ?? null)
@@ -327,7 +328,7 @@ export function NotificationDrawer({
       if (rateLimitRetryRef.current) clearTimeout(rateLimitRetryRef.current);
       cleanupWs();
     };
-  }, [user?.permissions, user?.is_superuser, token, variant, branchIdProp, activeBranchId]);
+  }, [user?.permissions, user?.is_superuser, hasToken, variant, branchIdProp, activeBranchId]);
 
   const deliverItem = async (itemId: string) => {
     setReadyItems((prev) => prev.filter((i) => i.id !== itemId));

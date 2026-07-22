@@ -7,18 +7,22 @@ from channels.generic.websocket import AsyncWebsocketConsumer
 from django.core.serializers.json import DjangoJSONEncoder
 
 from core.ws_consumer import (
+    ws_allow_connection,
     ws_handle_client_ping,
     ws_on_connect,
     ws_on_disconnect,
     ws_safe_send,
     ws_send_pong,
 )
+from core.ws_envelope import wrap_legacy_event
 
 logger = logging.getLogger(__name__)
 
 
 class KitchenNotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
         prep_display_token = (
             (query.get("prep_display_token") or query.get("pdt") or [None])[0]
@@ -37,6 +41,11 @@ class KitchenNotificationConsumer(AsyncWebsocketConsumer):
             return
 
         self.user = user
+        if not await ws_allow_connection(self, user):
+            return
+        if not await self._user_has_permission("orders.view_kds"):
+            await self.close()
+            return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
         branch_id = (query.get("branch_id") or [None])[0]
         eff_id, mode = await self._resolve_ws_branch(self.user, branch_id)
@@ -87,6 +96,10 @@ class KitchenNotificationConsumer(AsyncWebsocketConsumer):
 
         return resolve_websocket_branch_subscription(user, branch_id_raw)
 
+    @database_sync_to_async
+    def _user_has_permission(self, permission: str) -> bool:
+        return self.user.has_permission(permission)
+
     async def disconnect(self, close_code):
         if hasattr(self, "group_name"):
             await self.channel_layer.group_discard(
@@ -100,27 +113,24 @@ class KitchenNotificationConsumer(AsyncWebsocketConsumer):
             await ws_send_pong(self)
             return
     async def order_status_changed(self, event):
-        message = event['message']
-
-        # Gelen mesajı WebSocket üzerinden frontend'e gönder
-        await ws_safe_send(self, text_data=json.dumps(
-            {'type': 'order_status_changed', 'data': message},
-            cls=DjangoJSONEncoder,
-        ))
+        await ws_safe_send(
+            self,
+            text_data=json.dumps(wrap_legacy_event(event), cls=DjangoJSONEncoder),
+        )
 
     async def kds_refresh(self, event):
         """KDS / POS: kds_active listesini HTTP ile yenilemek için tetikleyici."""
-        await ws_safe_send(self, text_data=json.dumps(
-            {'type': 'kds_refresh', 'data': event.get('message', {})},
-            cls=DjangoJSONEncoder,
-        ))
+        wire = wrap_legacy_event(event)
+        if wire.get("type") == "orders_updated":
+            wire["type"] = "kds_refresh"
+        await ws_safe_send(self, text_data=json.dumps(wire, cls=DjangoJSONEncoder))
 
     async def orders_updated(self, event):
         """Sipariş listesi değişti; istemci selektif invalidasyon yapabilir (eski: kds_refresh)."""
-        await ws_safe_send(self, text_data=json.dumps(
-            {'type': 'orders_updated', 'data': event.get('message', {})},
-            cls=DjangoJSONEncoder,
-        ))
+        await ws_safe_send(
+            self,
+            text_data=json.dumps(wrap_legacy_event(event), cls=DjangoJSONEncoder),
+        )
 
     async def prep_updated(self, event):
         """Hazırlık görevleri; siparişi yenilemeden sadece prep önbelleğini güncellemek için."""
@@ -166,6 +176,8 @@ class PosDisplayConsumer(AsyncWebsocketConsumer):
     """
 
     async def connect(self):
+        if not await ws_allow_connection(self, use_authenticated_user=False):
+            return
         self.terminal_id = self.scope["url_route"]["kwargs"].get("terminal_id", "default")
         self.can_publish = False
 
@@ -184,6 +196,8 @@ class PosDisplayConsumer(AsyncWebsocketConsumer):
             await self.close()
             return
 
+        if user is not None and user.is_authenticated and not await ws_allow_connection(self, user):
+            return
         self.group_name = f"pos_display_{self.terminal_id}"
         logger.debug(
             "PosDisplayConsumer terminal_id=%s can_publish=%s",

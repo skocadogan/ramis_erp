@@ -9,15 +9,25 @@ import { AppState } from "react-native";
 import { useAuthStore } from "@/store/auth-store";
 import { useTableStore } from "@/store/table-store";
 import { useOrderStore, type WsOrderStatusPayload } from "@/store/order-store";
+import { markWsOrderMutation } from "@/store/order/wsHttpRaceGuard";
 import { useMenuStore } from "@/store/menu-store";
 import { buildPosSyncWsUrl } from "@/services/wsUrl";
 import { fetchWsTicket } from "@/services/wsTicket";
+import {
+  dedupByEventId,
+  parseWsMessage,
+  setOnSequenceGap,
+  shouldApplySequence,
+  type NormalizedWsMessage,
+} from "../../../shared/ws/wsEventProtocol";
+import { payloadTargetsAnotherTable } from "./orderSyncPolicy";
 
 const WS_HEARTBEAT_MS = 30_000;
 const WS_STALE_TIMEOUT_MS = 95_000;
 const ORDER_REFETCH_DEBOUNCE_MS = 600;
 const ORDER_REFETCH_MAX_WAIT_MS = 3_000;
 const HTTP_FALLBACK_MS = 45_000;
+const SEQUENCE_GAP_REFETCH_MS = 3_000;
 
 type WsMessage = {
   type?: string;
@@ -45,22 +55,13 @@ function shouldClearOrdersOnTableUpdate(
   return TABLE_CLEARED_STATUSES.has(status);
 }
 
-function extractWsData(
-  message: WsMessage,
-): Record<string, unknown> | undefined {
-  const raw = message.message ?? message.data;
-  if (!raw || typeof raw !== "object") return undefined;
-  return raw as Record<string, unknown>;
-}
-
-function payloadMatchesTable(
-  payload: Record<string, unknown>,
-  tableId: string | null,
+/** v2 zarfında table_id varsa filtrele; yoksa legacy güvenli fallback. */
+function parsedTargetsAnotherTable(
+  tableId: string | undefined,
+  currentTableId: string | null,
 ): boolean {
   if (!tableId) return false;
-  const tid = payload.table_id ?? payload.tableId;
-  if (!tid) return false;
-  return String(tid) === String(tableId);
+  return payloadTargetsAnotherTable({ table_id: tableId }, currentTableId);
 }
 
 function calcReconnectDelay(attempt: number): number {
@@ -176,12 +177,12 @@ export function useOrderSync() {
   });
 
   const scheduleOrdersRefetchRef = useRef(
-    (payload?: Record<string, unknown>) => {
+    (parsed?: NormalizedWsMessage) => {
       const currentTableId =
         useTableStore.getState().selectedTable?.id ||
         useOrderStore.getState().resolvedTableId;
 
-      if (payload && !payloadMatchesTable(payload, currentTableId)) {
+      if (parsed && parsedTargetsAnotherTable(parsed.tableId, currentTableId)) {
         return;
       }
 
@@ -213,55 +214,80 @@ export function useOrderSync() {
       return;
     }
 
-    const data = extractWsData(message);
+    const parsed = parseWsMessage(message);
+    if (!parsed) return;
+
+    const aggregateKey =
+      parsed.tableId ?? parsed.orderId ?? parsed.branchId ?? parsed.type;
+    if (!dedupByEventId(parsed.eventId)) return;
+    if (!shouldApplySequence(aggregateKey, parsed.sequence)) return;
+
     const currentTableId =
       useTableStore.getState().selectedTable?.id ||
       useOrderStore.getState().resolvedTableId;
 
-    if (message.type === "table_update") {
+    if (parsedTargetsAnotherTable(parsed.tableId, currentTableId)) {
+      return;
+    }
+
+    if (parsed.type === "table_update") {
       const tableData =
-        message.data && typeof message.data === "object"
-          ? (message.data as Record<string, unknown>)
-          : undefined;
+        Object.keys(parsed.data).length > 0 ? parsed.data : undefined;
       if (
         tableData &&
         shouldClearOrdersOnTableUpdate(tableData, currentTableId)
       ) {
+        markWsOrderMutation();
         useOrderStore.getState().clearOrders("payment");
       }
       return;
     }
 
-    if (message.type === "menu_catalog_refresh") {
+    if (parsed.type === "menu_catalog_refresh") {
       useMenuStore.getState().signalRefresh();
       return;
     }
 
-    if (message.type === "order_status_changed" && data) {
-      if (!payloadMatchesTable(data, currentTableId)) return;
+    if (parsed.type === "order_status_changed") {
       useOrderStore
         .getState()
-        .applyWsOrderStatusChange(toStatusPayload(data));
-      scheduleOrdersRefetchRef.current(data);
+        .applyWsOrderStatusChange(toStatusPayload(parsed.data));
+      scheduleOrdersRefetchRef.current(parsed);
       return;
     }
 
     if (
-      message.type === "orders_updated" ||
-      message.type === "kds_refresh" ||
-      message.type === "kds.refresh"
+      parsed.type === "orders_updated" ||
+      parsed.type === "kds_refresh" ||
+      parsed.type === "kds.refresh"
     ) {
-      const reason = typeof data?.reason === "string" ? data.reason : "";
+      const reason = typeof parsed.data.reason === "string" ? parsed.data.reason : "";
       if (
         PAYMENT_CLEAR_REASONS.has(reason) &&
-        payloadMatchesTable(data ?? {}, currentTableId)
+        !parsedTargetsAnotherTable(parsed.tableId, currentTableId)
       ) {
+        markWsOrderMutation();
         useOrderStore.getState().clearOrders("payment");
         return;
       }
-      scheduleOrdersRefetchRef.current(data);
+      scheduleOrdersRefetchRef.current(parsed);
     }
   });
+
+  useEffect(() => {
+    let gapTimer: ReturnType<typeof setTimeout> | null = null;
+    setOnSequenceGap(() => {
+      if (gapTimer) clearTimeout(gapTimer);
+      gapTimer = setTimeout(() => {
+        gapTimer = null;
+        runRefetchRef.current();
+      }, SEQUENCE_GAP_REFETCH_MS);
+    });
+    return () => {
+      setOnSequenceGap(null);
+      if (gapTimer) clearTimeout(gapTimer);
+    };
+  }, []);
 
   useEffect(() => {
     if (!enabled || !token || !serverUrl || !branchId) {
@@ -403,8 +429,12 @@ export function useOrderSync() {
     token,
     serverUrl,
     branchId,
-    tableId,
   ]);
+
+  useEffect(() => {
+    if (!enabled || !tableId) return;
+    runRefetchRef.current();
+  }, [enabled, tableId]);
 
   return null;
 }

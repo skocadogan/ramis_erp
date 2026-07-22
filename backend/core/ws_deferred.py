@@ -34,16 +34,50 @@ def schedule_table_broadcast(table_id, action: str = "upsert") -> None:
 
 
 def schedule_kds_refresh(branch_id, reason: str = "unknown", **extra: Any) -> None:
-    """Şube başına KDS/POS sync yenileme sinyalini commit sonrasına erteler."""
+    """Şube başına KDS/POS invalidasyon kapsamlarını kayıpsız birleştirir."""
     if not branch_id:
         return
     _ensure_state()
     bid = str(branch_id)
-    payload = _state.kds_refresh.get(bid) or {}
+    payload = _state.kds_refresh.get(bid) or {
+        "reasons": set(),
+        "order_ids": set(),
+        "table_ids": set(),
+        "item_ids": set(),
+        "extra": {},
+    }
+    payload["reasons"].add(str(reason))
     payload["reason"] = reason
-    payload.update(extra)
+
+    for singular in ("order_id", "table_id", "item_id"):
+        plural = f"{singular}s"
+        value = extra.pop(singular, None)
+        if value:
+            payload[plural].add(str(value))
+        values = extra.pop(plural, None)
+        if values:
+            if isinstance(values, (str, bytes)):
+                values = [values]
+            payload[plural].update(str(item) for item in values if item)
+
+    payload["extra"].update(extra)
     _state.kds_refresh[bid] = payload
     _register_commit_hook()
+
+
+def schedule_order_status_changed(branch_id, message: dict[str, Any]) -> None:
+    """Her durum deltasını yalnız başarılı transaction commit'inden sonra yayınlar."""
+    if not branch_id:
+        return
+    bid = str(branch_id)
+    payload = dict(message)
+
+    def _broadcast() -> None:
+        from apps.orders.ws_broadcast import broadcast_kitchen_order_status_changed
+
+        broadcast_kitchen_order_status_changed(bid, payload)
+
+    transaction.on_commit(_broadcast)
 
 
 def _flush_all() -> None:
@@ -70,9 +104,20 @@ def _flush_all() -> None:
         from apps.orders.ws_broadcast import broadcast_kds_refresh
 
         for branch_id, payload in kds.items():
-            reason = str(payload.pop("reason", "unknown"))
+            reason = str(payload.get("reason", "unknown"))
+            message = dict(payload.get("extra", {}))
+            reasons = sorted(payload.get("reasons", set()))
+            if reasons:
+                message["reasons"] = reasons
+            for plural in ("order_ids", "table_ids", "item_ids"):
+                values = sorted(payload.get(plural, set()))
+                if not values:
+                    continue
+                message[plural] = values
+                if len(values) == 1:
+                    message[plural[:-1]] = values[0]
             try:
-                broadcast_kds_refresh(branch_id, reason, **payload)
+                broadcast_kds_refresh(branch_id, reason, **message)
             except Exception:
                 logger.exception(
                     "Ertelenmiş KDS WS yayını başarısız (branch_id=%s)", branch_id

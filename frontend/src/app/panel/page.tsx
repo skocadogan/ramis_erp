@@ -66,6 +66,7 @@ function AdminPageInner() {
   const { user, token } = useAuthStore(
     useShallow((s) => ({ user: s.user, token: s.token })),
   )
+  const hasToken = !!token
   const router = useRouter()
   const searchParams = useSearchParams()
   const tabParam = (searchParams.get("tab") ?? "overview") as AdminTab
@@ -234,7 +235,7 @@ function AdminPageInner() {
 
     const cleanupWs = subscribeSharedWebSocket(kitchenNotificationsHubKey(kitchenWsBranchId), {
       tag: "admin-kitchen",
-      enabled: !!token,
+      enabled: hasToken,
       getUrl: () => getKitchenNotificationsWsUrl(kitchenWsBranchId),
       onOpen: () => {
         stopHttpPolling() // WS bağlandı → HTTP polling durdur
@@ -265,7 +266,7 @@ function AdminPageInner() {
       stopHttpPolling()
       cleanupWs()
     }
-  }, [syncOrders, token, kitchenWsBranchId])
+  }, [syncOrders, hasToken, kitchenWsBranchId])
 
   const handleCreateBranch = async () => {
     setIsSubmitting(true)

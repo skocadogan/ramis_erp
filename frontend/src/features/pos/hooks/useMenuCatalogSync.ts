@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { useAuthStore } from "@/store/useAuthStore";
-import { getMenuCatalogWsUrl, runManagedWebSocket } from "@/lib/ws";
+import { getMenuCatalogWsUrl, runManagedWebSocket, acceptWsEvent } from "@/lib/ws";
 
 /**
  * Menü API’sinde değişiklik olunca backend `menu_catalog_refresh` yayınlar;
@@ -39,14 +39,13 @@ export function useMenuCatalogSync(
       onClose: () => onSocketStateRef.current?.(false),
       onMessage: (event) => {
         try {
-          const payload = JSON.parse(event.data) as { type?: string };
-          if (payload.type === "menu_catalog_refresh") {
-            if (debounceTimer) window.clearTimeout(debounceTimer);
-            debounceTimer = window.setTimeout(() => {
-              debounceTimer = null;
-              void onRefreshRef.current();
-            }, REFRESH_DEBOUNCE_MS);
-          }
+          const parsed = acceptWsEvent(event.data, "menu-catalog");
+          if (!parsed || parsed.type !== "menu_catalog_refresh") return;
+          if (debounceTimer) window.clearTimeout(debounceTimer);
+          debounceTimer = window.setTimeout(() => {
+            debounceTimer = null;
+            void onRefreshRef.current();
+          }, REFRESH_DEBOUNCE_MS);
         } catch {
           /* geçersiz mesaj */
         }

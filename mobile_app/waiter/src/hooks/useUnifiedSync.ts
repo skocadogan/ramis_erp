@@ -1,4 +1,5 @@
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { AppState } from "react-native";
 import { getApiUrl } from "../api/client";
 import { buildWsUrl } from "../api/wsUrl";
 import { fetchWsTicket } from "../api/wsTicket";
@@ -11,6 +12,17 @@ import { createWebSocketClient } from "../api/wsClient";
 import type { Table } from "../types/models";
 import { useAuthStore } from "../store/useAuthStore";
 import { usePosStore } from "../store/usePosStore";
+import {
+  applyTableUpdate,
+  reconcilePendingCallIds,
+  type TableUpdateAction,
+} from "./unifiedSyncPolicy";
+import {
+  dedupByEventId,
+  parseWsMessage,
+  setOnSequenceGap,
+  shouldApplySequence,
+} from "../../../shared/ws/wsEventProtocol";
 
 const runAfterInteractionsFallback = (fn: () => void) => {
   if (typeof requestIdleCallback !== "undefined") {
@@ -25,6 +37,8 @@ const KDS_MAX_WAIT_MS = 3000;
 const READY_DEBOUNCE_MS = 500;
 const READY_MAX_WAIT_MS = 2800;
 const PENDING_POLL_MS = 60_000;
+const TABLE_FALLBACK_POLL_MS = 60_000;
+const SEQUENCE_GAP_RESYNC_MS = 3_000;
 
 export function useUnifiedSync(enabled: boolean) {
   const token = useAuthStore((s) => s.token);
@@ -33,6 +47,9 @@ export function useUnifiedSync(enabled: boolean) {
   const branchId = effectiveBranchId(userBranchId, activeBranchId);
   const posTerminalUuid = usePosStore((s) => s.posTerminalUuid);
   const playNotifSound = usePosStore((s) => s.playNotifSound);
+  const [isAppActive, setIsAppActive] = useState(
+    AppState.currentState !== "background" && AppState.currentState !== "inactive"
+  );
 
   const prevCountRef = useRef(0);
   const readyDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -49,6 +66,13 @@ export function useUnifiedSync(enabled: boolean) {
 
   const knownCallIdsRef = useRef<Set<string>>(new Set());
   const callsWsConnectedRef = useRef(false);
+
+  useEffect(() => {
+    const subscription = AppState.addEventListener("change", (nextState) => {
+      setIsAppActive(nextState !== "background" && nextState !== "inactive");
+    });
+    return () => subscription.remove();
+  }, []);
 
   const clearReadySchedulers = useCallback(() => {
     if (readyDebounceRef.current) {
@@ -99,6 +123,47 @@ export function useUnifiedSync(enabled: boolean) {
     })();
   }, []);
 
+  const syncPendingCalls = useCallback(
+    async (playSoundForNew: boolean) => {
+      if (!branchId) return;
+      const calls = await fetchPendingWaiterCalls(branchId);
+      if (!usePosStore.getState().showWaiterCallNotifs) return;
+
+      const store = useWaiterPosPushStore.getState();
+      const previousIds = knownCallIdsRef.current;
+      const { pendingIds, newIds, staleIds } = reconcilePendingCallIds(previousIds, calls);
+      let played = false;
+      for (const call of calls) {
+        const id = call.call_id != null ? String(call.call_id) : "";
+        if (!id) continue;
+        if (newIds.has(id)) {
+          store.addWaiterCall(call);
+          if (playSoundForNew && usePosStore.getState().playNotifSound && !played) {
+            void playTableCallingSound();
+            played = true;
+          }
+        }
+      }
+      if (staleIds.length > 0) {
+        store.applyWaiterCallDismissed({ callIds: staleIds });
+      }
+      knownCallIdsRef.current = pendingIds;
+    },
+    [branchId]
+  );
+
+  const resyncPosSnapshot = useCallback(() => {
+    if (!branchId) return;
+    void queryClient.invalidateQueries({ queryKey: ["tables", branchId] });
+    void queryClient.invalidateQueries({ queryKey: ["tables-takeaway-virtual", branchId] });
+    void queryClient.invalidateQueries({ queryKey: ["pos-tables-takeaway-virtual", branchId] });
+    void queryClient.invalidateQueries({ queryKey: ["table", "active-orders"] });
+    execReadyFetchCoalesced();
+    void syncPendingCalls(false).catch((err) => {
+      console.error("Pending waiter calls reconnect fetch error:", err);
+    });
+  }, [branchId, execReadyFetchCoalesced, syncPendingCalls]);
+
   const scheduleReadyFetchAfterWs = useCallback(() => {
     if (readyDebounceRef.current) {
       clearTimeout(readyDebounceRef.current);
@@ -140,14 +205,10 @@ export function useUnifiedSync(enabled: boolean) {
     if (branchId) {
       queryClient.setQueryData(["tables", branchId], (oldData: Table[]) => {
         if (!Array.isArray(oldData)) return oldData;
-        let changed = false;
-        const next = oldData.map((tbl) => {
-          const patch = batch[String(tbl.id)];
-          if (!patch) return tbl;
-          changed = true;
-          return { ...tbl, ...patch };
-        });
-        return changed ? next : oldData;
+        return Object.values(batch).reduce(
+          (tables, patch) => applyTableUpdate(tables, patch, "upsert"),
+          oldData
+        );
       });
     }
 
@@ -160,20 +221,36 @@ export function useUnifiedSync(enabled: boolean) {
   }, [branchId]);
 
   const queueTableUpdateFromWs = useCallback(
-    (data: Record<string, unknown>) => {
-      const rawId = data?.id;
+    (data: Record<string, unknown>, action?: TableUpdateAction) => {
+      const rawId = data?.id ?? data?.table_id;
       const id = rawId != null && String(rawId) !== "" ? String(rawId) : null;
 
       if (!id) {
         useWaiterPosPushStore.getState().touchTableListFromWs(data);
+        if (branchId) {
+          void queryClient.invalidateQueries({ queryKey: ["tables", branchId] });
+        }
         return;
       }
+
+      if (action === "delete") {
+        delete tablePatchBatchRef.current[id];
+        if (branchId) {
+          queryClient.setQueryData(["tables", branchId], (oldData: Table[]) => {
+            if (!Array.isArray(oldData)) return oldData;
+            return applyTableUpdate(oldData, data, action);
+          });
+        }
+        useWaiterPosPushStore.getState().touchTableListFromWs(data);
+        return;
+      }
+
       const prev = tablePatchBatchRef.current[id] ?? {};
       tablePatchBatchRef.current[id] = { ...prev, ...data };
       if (tableRafRef.current != null) return;
       tableRafRef.current = requestAnimationFrame(flushTablePatchBatch);
     },
-    [flushTablePatchBatch]
+    [branchId, flushTablePatchBatch]
   );
 
   const flushKdsInvalidate = useCallback(() => {
@@ -228,30 +305,21 @@ export function useUnifiedSync(enabled: boolean) {
     }
   }, []);
 
-  const syncPendingCalls = useCallback(
-    async (playSoundForNew: boolean) => {
-      if (!branchId) return;
-      const calls = await fetchPendingWaiterCalls(branchId);
-      if (!usePosStore.getState().showWaiterCallNotifs) return;
-
-      const store = useWaiterPosPushStore.getState();
-      let played = false;
-      for (const call of calls) {
-        const id = call.call_id != null ? String(call.call_id) : "";
-        if (!id) continue;
-        const isNew = !knownCallIdsRef.current.has(id);
-        knownCallIdsRef.current.add(id);
-        if (isNew) {
-          store.addWaiterCall(call);
-          if (playSoundForNew && usePosStore.getState().playNotifSound && !played) {
-            void playTableCallingSound();
-            played = true;
-          }
-        }
-      }
-    },
-    [branchId]
-  );
+  // --- Sequence gap → debounced snapshot resync ---
+  useEffect(() => {
+    let gapTimer: ReturnType<typeof setTimeout> | null = null;
+    setOnSequenceGap(() => {
+      if (gapTimer) clearTimeout(gapTimer);
+      gapTimer = setTimeout(() => {
+        gapTimer = null;
+        resyncPosSnapshot();
+      }, SEQUENCE_GAP_RESYNC_MS);
+    });
+    return () => {
+      setOnSequenceGap(null);
+      if (gapTimer) clearTimeout(gapTimer);
+    };
+  }, [resyncPosSnapshot]);
 
   // --- Ready refresh handler (other components can trigger refresh) ---
   useEffect(() => {
@@ -263,14 +331,25 @@ export function useUnifiedSync(enabled: boolean) {
 
   // --- Ready poll + initial fetch (90s fallback, only when POS WS is down) ---
   useEffect(() => {
-    if (!enabled || !token || !branchId || !posTerminalUuid) return;
+    if (!enabled || !isAppActive || !token || !branchId || !posTerminalUuid) return;
     void fetchReadyRef.current();
     const interval = setInterval(() => {
       if (useWaiterPosPushStore.getState().wsConnected) return;
       void fetchReadyRef.current();
     }, 90_000);
     return () => clearInterval(interval);
-  }, [enabled, token, branchId, posTerminalUuid, playNotifSound]);
+  }, [enabled, isAppActive, token, branchId, posTerminalUuid, playNotifSound]);
+
+  // --- Masa snapshot fallback (yalnız POS WS kapalıyken) ---
+  useEffect(() => {
+    if (!enabled || !isAppActive || !token || !branchId || !posTerminalUuid) return;
+    const interval = setInterval(() => {
+      if (useWaiterPosPushStore.getState().wsConnected) return;
+      void queryClient.invalidateQueries({ queryKey: ["tables", branchId] });
+      void queryClient.invalidateQueries({ queryKey: ["tables-takeaway-virtual", branchId] });
+    }, TABLE_FALLBACK_POLL_MS);
+    return () => clearInterval(interval);
+  }, [enabled, isAppActive, token, branchId, posTerminalUuid]);
 
   // --- Clear ready state when disabled or terminal missing ---
   useEffect(() => {
@@ -304,37 +383,47 @@ export function useUnifiedSync(enabled: boolean) {
 
   // --- POS Sync WebSocket (/ws/pos/sync/) ---
   useEffect(() => {
-    if (!enabled || !token || !branchId || !posTerminalUuid) return;
+    if (!enabled || !isAppActive || !token || !branchId || !posTerminalUuid) return;
 
     const client = createWebSocketClient();
 
     const unsubMessage = client.onMessage((msg) => {
-      const message = msg as Record<string, unknown>;
+      const parsed = parseWsMessage(msg);
+      if (!parsed) return;
 
-      if (message.type === "table_update" && message.data) {
-        queueTableUpdateFromWs(message.data as Record<string, unknown>);
+      const aggregateKey =
+        parsed.tableId ?? parsed.orderId ?? parsed.branchId ?? branchId ?? parsed.type;
+      if (!dedupByEventId(parsed.eventId)) return;
+      if (!shouldApplySequence(aggregateKey, parsed.sequence)) return;
+
+      const raw = msg as Record<string, unknown>;
+
+      if (parsed.type === "table_update" && Object.keys(parsed.data).length > 0) {
+        queueTableUpdateFromWs(
+          parsed.data,
+          typeof raw.action === "string" ? raw.action : undefined
+        );
         scheduleReadyFetchAfterWs();
       }
 
       if (
-        message.type === "kds_refresh" ||
-        message.type === "kds.refresh" ||
-        message.type === "order_status_changed" ||
-        message.type === "orders_updated"
+        parsed.type === "kds_refresh" ||
+        parsed.type === "kds.refresh" ||
+        parsed.type === "order_status_changed" ||
+        parsed.type === "orders_updated"
       ) {
-        const wsPayload = (message.message ?? message.data) as Record<string, unknown> | undefined;
-        bumpTableFromKdsPayload(wsPayload);
+        bumpTableFromKdsPayload(parsed.data);
         scheduleReadyFetchAfterWs();
-        const orderId = wsPayload?.order_id || wsPayload?.orderId || null;
+        const orderId = parsed.orderId ?? parsed.data.order_id ?? parsed.data.orderId ?? null;
         scheduleKdsInvalidate(orderId ? String(orderId) : null);
       }
 
-      if (message.type === "menu_catalog_refresh" || message.type === "production_status_update") {
+      if (parsed.type === "menu_catalog_refresh") {
         useWaiterPosPushStore.getState().refreshMenu();
       }
 
-      if (message.type === "shift_event") {
-        const payload = message.data as
+      if (parsed.type === "shift_event") {
+        const payload = parsed.data as
           | { branch_id?: string; status?: string; shift_id?: string }
           | undefined;
         if (payload?.branch_id === branchId) {
@@ -346,12 +435,12 @@ export function useUnifiedSync(enabled: boolean) {
         }
       }
 
-      if (message.type === "force_disconnect") {
+      if (parsed.type === "force_disconnect") {
         usePosStore
           .getState()
           .setDisconnectModal(
             true,
-            String(message.message || "Bağlantınız yönetici tarafından sonlandırıldı.")
+            String(raw.message || "Bağlantınız yönetici tarafından sonlandırıldı.")
           );
         usePosStore.getState().persistTerminalSelection("", null);
         void useAuthStore.getState().logout();
@@ -360,6 +449,9 @@ export function useUnifiedSync(enabled: boolean) {
 
     const unsubConnection = client.onConnectionChange((connected) => {
       useWaiterPosPushStore.getState().setWsConnected(connected);
+      if (connected) {
+        resyncPosSnapshot();
+      }
     });
 
     client.connect(async () => {
@@ -380,9 +472,11 @@ export function useUnifiedSync(enabled: boolean) {
       unsubMessage();
       unsubConnection();
       client.disconnect();
+      useWaiterPosPushStore.getState().setWsConnected(false);
     };
   }, [
     enabled,
+    isAppActive,
     token,
     branchId,
     posTerminalUuid,
@@ -390,11 +484,12 @@ export function useUnifiedSync(enabled: boolean) {
     bumpTableFromKdsPayload,
     scheduleReadyFetchAfterWs,
     scheduleKdsInvalidate,
+    resyncPosSnapshot,
   ]);
 
   // --- Waiter calls initial sync + 60s poll (fallback when waiter WS is down) ---
   useEffect(() => {
-    if (!enabled || !token || !branchId) return;
+    if (!enabled || !isAppActive || !token || !branchId) return;
 
     knownCallIdsRef.current.clear();
     let cancelled = false;
@@ -414,11 +509,11 @@ export function useUnifiedSync(enabled: boolean) {
       cancelled = true;
       clearInterval(pollId);
     };
-  }, [enabled, token, branchId, syncPendingCalls]);
+  }, [enabled, isAppActive, token, branchId, syncPendingCalls]);
 
   // --- Waiter Calls WebSocket (/ws/waiter/calls/) ---
   useEffect(() => {
-    if (!enabled || !token || !branchId) return;
+    if (!enabled || !isAppActive || !token || !branchId) return;
 
     const client = createWebSocketClient();
 
@@ -474,6 +569,7 @@ export function useUnifiedSync(enabled: boolean) {
       unsubMessage();
       unsubConnection();
       client.disconnect();
+      callsWsConnectedRef.current = false;
     };
-  }, [enabled, token, branchId, syncPendingCalls]);
+  }, [enabled, isAppActive, token, branchId, syncPendingCalls]);
 }

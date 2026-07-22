@@ -75,8 +75,7 @@ from .idempotency import (
 )
 from apps.sales.models import PaymentMethod
 from apps.shifts.selectors import get_active_shift
-from core.ws_deferred import schedule_kds_refresh
-from .ws_broadcast import broadcast_kitchen_order_status_changed
+from core.ws_deferred import schedule_kds_refresh, schedule_order_status_changed
 from .services.item_status_service import apply_order_item_status, broadcast_order_item_touch
 
 class OrderViewSet(viewsets.ModelViewSet):
@@ -793,7 +792,7 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         except OrderValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        broadcast_kitchen_order_status_changed(
+        schedule_order_status_changed(
             str(order.branch_id),
             {
                 'event': 'status_update',
@@ -820,7 +819,7 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         except OrderValidationError as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
-        broadcast_kitchen_order_status_changed(
+        schedule_order_status_changed(
             str(order.branch_id),
             {
                 'event': 'status_update',
@@ -856,11 +855,9 @@ class OrderItemViewSet(viewsets.ModelViewSet):
         schedule_kds_refresh(
             order.branch_id, "item_quantity_updated", item_id=str(item.id), order_id=str(order.id)
         )
-        from .ws_broadcast import broadcast_kitchen_order_status_changed
-
         if created_pending:
             kitchen_delta = sum(int(p.quantity) for p in created_pending)
-            broadcast_kitchen_order_status_changed(
+            schedule_order_status_changed(
                 str(order.branch_id),
                 {
                     'event': 'kitchen_delta_added',
@@ -872,7 +869,7 @@ class OrderItemViewSet(viewsets.ModelViewSet):
                 },
             )
         else:
-            broadcast_kitchen_order_status_changed(
+            schedule_order_status_changed(
                 str(order.branch_id),
                 {
                     'event': 'quantity_updated',

@@ -69,16 +69,22 @@
             "usesCleartextTraffic": true,
             "enableProguardInReleaseBuilds": true,
             "enableShrinkResourcesInReleaseBuilds": true,
-            "hermesFlags": ["-O", "-max-dedup-size=64"]
+            "hermesFlags": [
+              "-O",
+              "-max-dedup-size=64"
+            ]
           },
           "ios": {
-            "hermesFlags": ["-O", "-max-dedup-size=64"],
+            "hermesFlags": [
+              "-O",
+              "-max-dedup-size=64"
+            ],
             "deploymentTarget": "16.4"
           }
         }
-      ]
+      ],
+      "expo-status-bar"
     ],
-    
     "experiments": {
       "typedRoutes": true
     },
@@ -87,7 +93,7 @@
       "eas": {
         "projectId": "3ee94072-f6e7-4f19-8e99-c98b08bf8d31"
       },
-      "owner" :"skocadogan"
+      "owner": "skocadogan"
     }
   }
 }

@@ -81,7 +81,7 @@ def virtual_table_detail_payload(table_id: str) -> dict | None:
     if not ref:
         return None
 
-    from apps.orders.models import Order, OrderStatus, OrderType
+    from apps.orders.models import Order, OrderType
     from .models import TableStatus, Zone
     from .selectors import takeaway_virtual_tables_payload
 
@@ -144,16 +144,8 @@ def virtual_table_detail_payload(table_id: str) -> dict | None:
             "created_at": order.created_at,
             "status": order.status,
         }
-        pending_line = frozenset(
-            {OrderStatus.PENDING, OrderStatus.PREPARING, OrderStatus.READY}
-        )
-        flow = "SETTLE"
-        for item in order.items.all():
-            if item.parent_item_id:
-                continue
-            if item.status in pending_line:
-                flow = "KITCHEN"
-                break
+        from apps.branches.pos_occupied_flow import flow_for_order
+
         return {
             "id": table_id,
             "name": (order.order_number or str(order.id)[-8:]).strip(),
@@ -175,7 +167,7 @@ def virtual_table_detail_payload(table_id: str) -> dict | None:
             "is_active": True,
             "active_order": ao,
             "active_orders": [ao],
-            "pos_occupied_flow": flow,
+            "pos_occupied_flow": flow_for_order(order),
             "virtual_kind": "takeaway_order",
             "linked_order_id": str(order.id),
         }

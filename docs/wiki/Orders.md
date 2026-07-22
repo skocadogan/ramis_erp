@@ -110,7 +110,7 @@ Akıllı masa üzerinden gönderilen kalem iptal isteklerinde `cancel_source = "
 
 | Değer | Koşul (özet) | UI |
 |--------|----------------|-----|
-| `KITCHEN` | Dolu masada en az bir üst kalem `PENDING`, `PREPARING` veya `READY` | POS / [[Frontend_Tables]] — turuncu “bekleyen” |
-| `SETTLE` | İlgili üst kalemler teslim/iptal/tamam; hesap bekleniyor | Kırmızı (rose) |
+| `KITCHEN` | Dolu masada en az bir üst kalem `PENDING`, `PREPARING` veya (görülmemiş) `READY` | POS / [[Frontend_Tables]] — turuncu “bekleyen” |
+| `SETTLE` | İlgili üst kalemler teslim/iptal/tamam; **pakette** `READY` + `waiter_acknowledged_at` de SETTLE | Kırmızı (rose) |
 
 Ayrıntı ve serializer: [[Branches]]. POS görünümü: [[Frontend_POS]].

@@ -104,20 +104,7 @@ def takeaway_virtual_tables_payload(branch_id: str) -> list[dict]:
     out: list[dict] = []
     default_zone = zones[0] if zones else None
 
-    def flow_for_order(order: Order) -> str | None:
-        pending_line = frozenset(
-            {
-                OrderStatus.PENDING,
-                OrderStatus.PREPARING,
-                OrderStatus.READY,
-            }
-        )
-        for item in order.items.all():
-            if item.parent_item_id:
-                continue
-            if item.status in pending_line:
-                return 'KITCHEN'
-        return 'SETTLE'
+    from apps.branches.pos_occupied_flow import flow_for_order
 
     for z in zones:
         out.append(

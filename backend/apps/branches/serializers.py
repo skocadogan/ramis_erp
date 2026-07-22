@@ -87,10 +87,12 @@ def compute_pos_occupied_flow(table: Table) -> str | None:
     """
     POS masa kartı rengi: üst sipariş kalemlerinde (parent yok) mutfak/teslimat öncesi
     durum varsa KITCHEN (turuncu), tümü teslim/i̇ptal/tamam ise SETTLE (kırmızı).
+    Paket siparişlerde READY+görüldü SETTLE sayılır — bkz. ``pos_occupied_flow``.
     """
     if table.status != TableStatus.OCCUPIED:
         return None
-    from apps.orders.models import OrderStatus
+
+    from apps.branches.pos_occupied_flow import flow_for_orders
 
     orders = getattr(table, 'active_orders_prefetched', None)
     if orders is None:
@@ -102,30 +104,13 @@ def compute_pos_occupied_flow(table: Table) -> str | None:
     else:
         orders = list(orders)
 
-    if not orders:
-        return 'SETTLE'
-
-    pending_line = frozenset({
-        OrderStatus.PENDING,
-        OrderStatus.PREPARING,
-        OrderStatus.READY,
-    })
-    for order in orders:
-        top_level = _order_top_level_items(order)
-        for item in top_level:
-            if item.status in pending_line:
-                return 'KITCHEN'
-    return 'SETTLE'
+    return flow_for_orders(orders)
 
 
 def _order_top_level_items(order):
-    cache = getattr(order, "_prefetched_objects_cache", None) or {}
-    items = cache.get("items")
-    if items is not None:
-        return [i for i in items if i.parent_item_id is None]
-    from apps.orders.models import OrderItem
+    from apps.branches.pos_occupied_flow import top_level_items
 
-    return list(order.items.filter(parent_item__isnull=True))
+    return top_level_items(order)
 
 
 class KitchenStationSerializer(serializers.ModelSerializer):

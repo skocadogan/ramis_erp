@@ -30,6 +30,7 @@ const TABLES_HTTP_FALLBACK_REASONS = new Set([
   "order_completed",
   "order_cancelled",
   "item_status",
+  "item_acknowledged",
 ]);
 
 function reasonsInclude(

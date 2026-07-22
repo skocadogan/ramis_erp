@@ -2,6 +2,7 @@
 
 import { useEffect, useCallback, useState, useRef, useMemo } from "react";
 import { isAxiosError } from "axios";
+import { useQueryClient } from "@tanstack/react-query";
 import { usePosStore } from "@/store/usePosStore";
 import { usePosTables } from "@/features/pos/hooks/usePosTables";
 import { useAuthStore } from "@/store/useAuthStore";
@@ -30,6 +31,7 @@ import type { ReadyItem } from "@/types/pos";
 import { groupReadyNotificationItems } from "@/features/pos/lib/groupReadyNotificationItems";
 import { KitchenNotifsPanel, type GuestArrivedNotif } from "./KitchenNotifsPanel";
 import { WaiterCallNotifsPanel, type WaiterCallNotif } from "./WaiterCallNotifsPanel";
+import { queryKeys } from "@/lib/queryKeys";
 
 interface ReadyItemApiRow {
   id: string;
@@ -82,6 +84,7 @@ export function NotificationDrawer({
   onWaiterCallOpenChange?: (open: boolean) => void;
 } = {}) {
   const t = useTranslations("pos.notifications");
+  const queryClient = useQueryClient();
   const { user, token } = useAuthStore(
     useShallow((s) => ({
       user: s.user,
@@ -89,6 +92,16 @@ export function NotificationDrawer({
     }))
   );
   const hasToken = !!token;
+
+  const refreshPosTablesAfterKitchenAction = useCallback(() => {
+    const bid = branchIdProp ?? usePosStore.getState().activeBranchId ?? undefined;
+    void queryClient.invalidateQueries({ queryKey: queryKeys.posTablesBase });
+    if (bid) {
+      void queryClient.invalidateQueries({
+        queryKey: queryKeys.posTables(bid, variant),
+      });
+    }
+  }, [queryClient, branchIdProp, variant]);
 
   const {
     activeBranchId,
@@ -334,6 +347,7 @@ export function NotificationDrawer({
     setReadyItems((prev) => prev.filter((i) => i.id !== itemId));
     try {
       await api.post(`/orders/items/${itemId}/set_status/`, { status: "DELIVERED" });
+      refreshPosTablesAfterKitchenAction();
     } catch (e) {
       console.error("Teslimat hatası:", e);
     } finally {
@@ -358,6 +372,7 @@ export function NotificationDrawer({
 
     try {
       await api.post("/orders/items/bulk-acknowledge/", { ids });
+      refreshPosTablesAfterKitchenAction();
     } catch (e) {
       console.error("Toplu görüldü işareti hatası:", e);
       setReadyItems((prev) =>

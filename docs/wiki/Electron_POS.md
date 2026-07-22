@@ -10,7 +10,7 @@
 ## 🏗️ Mimari Yapı
 
 POS Electron uygulaması (`electron_apps/pos` altında yer alır) şu ana bileşenlerden oluşur:
-1. **Server Manager (`serverManager.ts`):** Next.js standalone sunucusunu dinamik boş bir port atayarak başlatır ve API adresini enjekte eder.
+1. **Server Manager (`serverManager.ts`):** Next.js standalone sunucusunu dinamik boş bir port atayarak başlatır ve API adresini enjekte eder. Packaged (AppImage) modda sunucu `userData/next-server` altına kopyalanır; yenileme anahtarı `appVersion:BUILD_ID` stamp’idir (yalnızca `package.json` sürümü değil — frontend rebuild’i de cache’i geçersiz kılar).
 2. **Main Process (`main.ts`):** Uygulama pencerelerini, auto-login doğrulamalarını ve çoklu ekran mantığını yönetir.
 3. **Login UI (`login.html`):** Kasiyerlerin PIN kodu veya standart şifreyle girebildiği sanal sayısal tuş takımlı (virtual keypad) native giriş arayüzüdür.
 4. **Preload Script (`preload.ts`):** ContextBridge ile web sayfası arasında IPC iletişimi kurar. Kasiyerin web sayfasında yaptığı terminal seçim değişikliklerini (`pos_prefs` ve `auth-storage`) localStorage üzerinden okuyup ana sürece (`pos:terminal-selected`) bildirir.

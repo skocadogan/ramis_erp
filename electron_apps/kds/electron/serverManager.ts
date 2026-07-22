@@ -42,6 +42,25 @@ function getNodeExecutable(): string {
   return app.isPackaged ? process.execPath : "node";
 }
 
+/** Next.js standalone `.next/BUILD_ID` — frontend rebuild ile değişir, package version aynı kalsa bile. */
+function readNextBuildId(serverDir: string): string | null {
+  try {
+    const buildIdPath = path.join(serverDir, ".next", "BUILD_ID");
+    if (!fs.existsSync(buildIdPath)) {
+      return null;
+    }
+    const id = fs.readFileSync(buildIdPath, "utf-8").trim();
+    return id || null;
+  } catch {
+    return null;
+  }
+}
+
+/** `appVersion:nextBuildId` — sürüm sabit kalsa bile yeni AppImage frontend'i userData'ya yenilenir. */
+function buildServerStamp(appVersion: string, buildId: string | null): string {
+  return `${appVersion}:${buildId ?? "missing"}`;
+}
+
 async function ensureServerCopied(
   sourceDir: string,
   targetDir: string,
@@ -49,14 +68,19 @@ async function ensureServerCopied(
 ): Promise<void> {
   const versionFile = path.join(targetDir, ".version");
   const serverScript = path.join(targetDir, "server.js");
+  const sourceBuildId = readNextBuildId(sourceDir);
+  const desiredStamp = buildServerStamp(currentVersion, sourceBuildId);
 
   let shouldCopy = false;
   if (!fs.existsSync(targetDir) || !fs.existsSync(versionFile) || !fs.existsSync(serverScript)) {
     shouldCopy = true;
   } else {
-    const installedVer = fs.readFileSync(versionFile, "utf-8").trim();
-    if (installedVer !== currentVersion) {
+    const installedStamp = fs.readFileSync(versionFile, "utf-8").trim();
+    if (installedStamp !== desiredStamp) {
       shouldCopy = true;
+      log(
+        `[Next.js Server] Cache güncellenecek (kurulu=${installedStamp}, beklenen=${desiredStamp}).`,
+      );
     }
   }
 
@@ -78,11 +102,11 @@ async function ensureServerCopied(
       await fsPromises.rename(prodModules, targetModules);
     }
 
-    await fsPromises.writeFile(path.join(stagingDir, ".version"), currentVersion, "utf-8");
+    await fsPromises.writeFile(path.join(stagingDir, ".version"), desiredStamp, "utf-8");
 
     await fsPromises.rm(targetDir, { recursive: true, force: true });
     await fsPromises.rename(stagingDir, targetDir);
-    log("[Next.js Server] Kopyalama tamamlandı.");
+    log(`[Next.js Server] Kopyalama tamamlandı (stamp=${desiredStamp}).`);
   } catch (err) {
     await fsPromises.rm(stagingDir, { recursive: true, force: true }).catch(() => {});
     error("[Next.js Server] Kopyalama hatası:", err);

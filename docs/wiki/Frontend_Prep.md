@@ -54,8 +54,15 @@ patchTask: async (taskId, data) =>
 ## WS Aboneliği (usePrepSocket)
 
 `usePrepSocket(branchId?)` hook'u `managedWebSocket` / `sharedWebSocketHub` üzerinden `kitchenNotificationsHubKey` kanalına bağlanır.  
-Gelen `prep_updated` veya `kds_refresh[prep_update]` mesajları `mergePrepWsCache` aracılığıyla react-query önbelleğini günceller.  
-Hem `prep-management` sayfası hem de `kds/page.tsx` bu hook'u kullanır — KDS Prep Drawer anlık güncellenir.
+Backend JWT modunda bağlantı için `orders.view_kds` **veya** `prep.view_preptask` gerekir (Hazırlık Yönetimi yalnız prep izniyle de canlı güncellenir).  
+Gelen `prep_updated` veya `kds_refresh[prep_update]` mesajları `mergePrepWsCache` aracılığıyla react-query önbelleğini günceller:
+
+| Query ailesi | WS davranışı |
+|--------------|--------------|
+| `prep-tasks` (KDS drawer) | Nokta atışı `setQueryData` merge |
+| `prep-tasks-infinite`, `prep-task-count` (prep-management) | Her incremental `prep_updated` sonrası `invalidateQueries` → HTTP refetch |
+
+Hem `prep-management` sayfası hem de `kds/page.tsx` bu hook'u kullanır — çapraz ekran senkronu aynı mutfak hub üzerinden çalışır.
 
 ---
 

@@ -20,7 +20,7 @@ from .selectors import (
     get_active_prep_templates,
 )
 from .services import PrepService
-from .ws_broadcast import broadcast_prep_update
+from core.ws_deferred import schedule_prep_update
 
 class PrepTaskViewSet(viewsets.ModelViewSet):
     queryset = PrepTask.objects.filter(is_active=True)
@@ -91,7 +91,7 @@ class PrepTaskViewSet(viewsets.ModelViewSet):
         # PrepTaskAssignment kayıtlarını oluştur
         self._create_assignments(task, assigned_user_ids, assignee_names)
 
-        broadcast_prep_update(task.branch_id, task.station_id, task=task)
+        schedule_prep_update(task.branch_id, task.station_id, task_pk=task.pk)
 
     def perform_update(self, serializer):
         assigned_user_ids = serializer.validated_data.pop('assigned_user_ids', None)
@@ -107,7 +107,7 @@ class PrepTaskViewSet(viewsets.ModelViewSet):
                 assignee_names or [],
             )
 
-        broadcast_prep_update(task.branch_id, task.station_id, task=task)
+        schedule_prep_update(task.branch_id, task.station_id, task_pk=task.pk)
 
     def _create_assignments(self, task, assigned_user_ids, assignee_names):
         """assigned_user_ids ve assignee_names listelerinden PrepTaskAssignment oluşturur."""
@@ -140,7 +140,7 @@ class PrepTaskViewSet(viewsets.ModelViewSet):
         station_id = instance.station_id
         task_id = instance.pk
         instance.delete()
-        broadcast_prep_update(branch_id, station_id, removed_task_id=task_id)
+        schedule_prep_update(branch_id, station_id, removed_task_id=task_id)
 
     @action(detail=False, methods=["post"], url_path="generate-from-templates")
     def generate_from_templates(self, request):

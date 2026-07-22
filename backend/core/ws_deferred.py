@@ -80,6 +80,47 @@ def schedule_order_status_changed(branch_id, message: dict[str, Any]) -> None:
     transaction.on_commit(_broadcast)
 
 
+def schedule_prep_update(
+    branch_id,
+    station_id=None,
+    *,
+    task_pk=None,
+    removed_task_id=None,
+    refresh_all=False,
+) -> None:
+    """Hazırlık WS yayınını yalnız başarılı transaction commit'inden sonra gönderir."""
+    if not branch_id:
+        return
+    bid = str(branch_id)
+    sid = str(station_id) if station_id else None
+    task_pk_str = str(task_pk) if task_pk else None
+    removed = str(removed_task_id) if removed_task_id else None
+    do_refresh_all = bool(refresh_all)
+
+    def _broadcast() -> None:
+        from apps.prep.models import PrepTask
+        from apps.prep.ws_broadcast import broadcast_prep_update
+
+        task = None
+        if task_pk_str and not do_refresh_all and not removed:
+            task = PrepTask.objects.filter(pk=task_pk_str, is_active=True).first()
+
+        try:
+            broadcast_prep_update(
+                bid,
+                sid,
+                task=task,
+                removed_task_id=removed,
+                refresh_all=do_refresh_all,
+            )
+        except Exception:
+            logger.exception(
+                "Ertelenmiş prep WS yayını başarısız (branch_id=%s)", bid
+            )
+
+    transaction.on_commit(_broadcast)
+
+
 def _flush_all() -> None:
     tables = dict(getattr(_state, "table_broadcasts", {}))
     kds = dict(getattr(_state, "kds_refresh", {}))

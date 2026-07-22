@@ -92,9 +92,9 @@ def execute_priority_consume(user, lot_id: str, **params) -> dict:
         updated_ids.append(str(task.id))
 
     if branch and updated_ids:
-        from apps.prep.ws_broadcast import broadcast_prep_update
+        from core.ws_deferred import schedule_prep_update
 
-        broadcast_prep_update(str(branch.id), None, refresh_all=True)
+        schedule_prep_update(str(branch.id), None, refresh_all=True)
 
     return {
         'fefo_boost': settings.EXPIRY_FEFO_BOOST_VALUE,

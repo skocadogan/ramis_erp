@@ -35,9 +35,9 @@ class WsConsumerRbacTests(SimpleTestCase):
             ("pos.view_pos", "waiter.access")
         )
 
-    def test_kitchen_denies_user_without_kds_permission(self):
+    def test_kitchen_denies_user_without_kds_or_prep_permission(self):
         consumer = self._consumer(KitchenNotificationConsumer)
-        consumer._user_has_permission = AsyncMock(return_value=False)
+        consumer._user_has_any_permission = AsyncMock(return_value=False)
 
         with patch(
             "apps.orders.consumers.ws_allow_connection",
@@ -46,7 +46,9 @@ class WsConsumerRbacTests(SimpleTestCase):
             asyncio.run(consumer.connect())
 
         consumer.close.assert_awaited_once()
-        consumer._user_has_permission.assert_awaited_once_with("orders.view_kds")
+        consumer._user_has_any_permission.assert_awaited_once_with(
+            ("orders.view_kds", "prep.view_preptask")
+        )
 
     def test_waiter_calls_denies_user_without_waiter_or_pos_permission(self):
         consumer = self._consumer(WaiterCallConsumer)

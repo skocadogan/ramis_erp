@@ -43,7 +43,9 @@ class KitchenNotificationConsumer(AsyncWebsocketConsumer):
         self.user = user
         if not await ws_allow_connection(self, user):
             return
-        if not await self._user_has_permission("orders.view_kds"):
+        if not await self._user_has_any_permission(
+            ("orders.view_kds", "prep.view_preptask")
+        ):
             await self.close()
             return
         query = parse_qs((self.scope.get("query_string") or b"").decode("utf-8"))
@@ -95,6 +97,10 @@ class KitchenNotificationConsumer(AsyncWebsocketConsumer):
         from core.branch_scope import resolve_websocket_branch_subscription
 
         return resolve_websocket_branch_subscription(user, branch_id_raw)
+
+    @database_sync_to_async
+    def _user_has_any_permission(self, permissions: tuple[str, ...]) -> bool:
+        return any(self.user.has_permission(permission) for permission in permissions)
 
     @database_sync_to_async
     def _user_has_permission(self, permission: str) -> bool:

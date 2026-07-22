@@ -24,7 +24,7 @@ def cancel_overdue_prep_tasks(deadline_minutes_past: int | None = None):
     Varsayılan: ``PREP_TASK_CANCEL_OVERDUE_MINUTES`` ortam değişkeni (yoksa 60).
     """
     from .models import PrepTask, PrepStatus
-    from .ws_broadcast import broadcast_prep_update
+    from core.ws_deferred import schedule_prep_update
 
     if deadline_minutes_past is None:
         deadline_minutes_past = getattr(
@@ -54,10 +54,10 @@ def cancel_overdue_prep_tasks(deadline_minutes_past: int | None = None):
 
             # WebSocket bildirimi — istemci önbelleğini güncelle
             try:
-                broadcast_prep_update(
+                schedule_prep_update(
                     branch_id=task.branch_id,
                     station_id=task.station_id,
-                    task=task,
+                    task_pk=task.pk,
                 )
             except Exception:
                 logger.exception(

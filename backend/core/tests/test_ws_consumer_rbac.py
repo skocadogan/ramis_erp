@@ -71,6 +71,21 @@ class WsConsumerRbacTests(TestCase):
         )
         cls.kds_user.roles.add(kds_role)
 
+        prep_cat = PermissionCategory.objects.get_or_create(
+            code="prep", defaults={"name": "Hazırlık"}
+        )[0]
+        prep_role = Role.objects.create(name="Prep Only")
+        prep_role.permissions.add(
+            _make_perm("prep.view_preptask", "Hazırlık Listesi", prep_cat)
+        )
+        cls.prep_user = User.objects.create_user(
+            username="wsrbacprep",
+            password="pw",
+            email="wsrbacprep@test.com",
+            branch=cls.branch,
+        )
+        cls.prep_user.roles.add(prep_role)
+
     def test_pos_sync_permission_helper(self):
         consumer = PosSyncConsumer()
         perms = ("pos.view_pos", "waiter.access")
@@ -89,6 +104,29 @@ class WsConsumerRbacTests(TestCase):
         )
         consumer.user = denied
         self.assertFalse(async_to_sync(consumer._user_has_any_permission)(perms))
+
+    def test_kitchen_consumer_accepts_kds_or_prep_permission(self):
+        consumer = KitchenNotificationConsumer()
+        consumer.user = self.kds_user
+        self.assertTrue(
+            async_to_sync(consumer._user_has_any_permission)(
+                ("orders.view_kds", "prep.view_preptask")
+            )
+        )
+
+        consumer.user = self.prep_user
+        self.assertTrue(
+            async_to_sync(consumer._user_has_any_permission)(
+                ("orders.view_kds", "prep.view_preptask")
+            )
+        )
+
+        consumer.user = self.pos_user
+        self.assertFalse(
+            async_to_sync(consumer._user_has_any_permission)(
+                ("orders.view_kds", "prep.view_preptask")
+            )
+        )
 
     def test_kitchen_consumer_requires_kds_permission(self):
         consumer = KitchenNotificationConsumer()

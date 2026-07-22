@@ -62,9 +62,9 @@ class PrepService:
         PrepService._deduct_stock_for_completed_task(task)
         
         # WebSocket bildirimi burada tetiklenebilir (ws_broadcast.py üzerinden)
-        from .ws_broadcast import broadcast_prep_update
+        from core.ws_deferred import schedule_prep_update
 
-        broadcast_prep_update(task.branch_id, task.station_id, task=task)
+        schedule_prep_update(task.branch_id, task.station_id, task_pk=task.pk)
 
         return task
 
@@ -82,9 +82,9 @@ class PrepService:
         if status == PrepStatus.COMPLETED:
             PrepService._deduct_stock_for_completed_task(task)
         
-        from .ws_broadcast import broadcast_prep_update
+        from core.ws_deferred import schedule_prep_update
 
-        broadcast_prep_update(task.branch_id, task.station_id, task=task)
+        schedule_prep_update(task.branch_id, task.station_id, task_pk=task.pk)
 
         return task
 
@@ -123,9 +123,9 @@ class PrepService:
             task.status = PrepStatus.IN_PROGRESS
         task.save()
 
-        from .ws_broadcast import broadcast_prep_update
+        from core.ws_deferred import schedule_prep_update
 
-        broadcast_prep_update(task.branch_id, task.station_id, task=task)
+        schedule_prep_update(task.branch_id, task.station_id, task_pk=task.pk)
         return task
 
     @staticmethod
@@ -224,10 +224,10 @@ class PrepService:
         if assignments_to_create:
             PrepTaskAssignment.objects.bulk_create(assignments_to_create)
 
-        from .ws_broadcast import broadcast_prep_update
+        from core.ws_deferred import schedule_prep_update
 
         for branch_id in affected_branches:
-            broadcast_prep_update(branch_id, refresh_all=True)
+            schedule_prep_update(branch_id, refresh_all=True)
 
         return len(tasks_to_create)
 

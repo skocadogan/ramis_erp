@@ -64,10 +64,14 @@ function shouldApplyTaskToQuery(
   return true;
 }
 
-function invalidatePrepTaskQueries(queryClient: QueryClient): void {
-  queryClient.invalidateQueries({ queryKey: ["prep-tasks"] });
+function invalidatePrepInfiniteAndCountQueries(queryClient: QueryClient): void {
   queryClient.invalidateQueries({ queryKey: ["prep-tasks-infinite"] });
   queryClient.invalidateQueries({ queryKey: ["prep-task-count"] });
+}
+
+function invalidatePrepTaskQueries(queryClient: QueryClient): void {
+  queryClient.invalidateQueries({ queryKey: ["prep-tasks"] });
+  invalidatePrepInfiniteAndCountQueries(queryClient);
 }
 
 /**
@@ -99,7 +103,9 @@ export function applyPrepKitchenWsPayload(
     // Backend bazen `serialize_prep_task_for_ws` ile null döner; kısmi merge yapılamaz — HTTP tazele.
     if (!payload.removed_task_id) {
       invalidatePrepTaskQueries(queryClient);
+      return;
     }
+    invalidatePrepInfiniteAndCountQueries(queryClient);
     return;
   }
 
@@ -135,5 +141,8 @@ export function applyPrepKitchenWsPayload(
 
   if (needRefetchBecauseEmptyCache) {
     invalidatePrepTaskQueries(queryClient);
+    return;
   }
+
+  invalidatePrepInfiniteAndCountQueries(queryClient);
 }

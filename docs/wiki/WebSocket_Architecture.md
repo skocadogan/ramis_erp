@@ -23,7 +23,7 @@
 | `production_planning` | — | `/ws/production-status/{branch}/` | Üretim durumu |
 
 `KitchenNotificationConsumer` içinde iki abonelik modu vardır:
-- **JWT modu:** klasik kullanıcı oturumu (`token` query)
+- **JWT modu:** klasik kullanıcı oturumu (`token` query); izin: `orders.view_kds` **veya** `prep.view_preptask`
 - **Prep kiosk modu:** `prep_display_token` veya `pdt` query ile branch kapsamlı anonim abonelik ([[Prep_Display]])
 
 ## Şube Kapsamı
@@ -40,6 +40,7 @@
 | Celery Bypass | `orders/ws_broadcast.py` | `WS_BYPASS_CELERY` ile Celery aradan çıkarılır, doğrudan Redis'e yayınlanır (<10ms gecikme) |
 | KDS stats throttle | `core/ws_throttle.py` | OrderItem signal flood azaltılır |
 | Prep yalnız `prep_updated` | `prep/ws_broadcast.py` | Çift mutfak yayını kaldırıldı |
+| Prep yayın `on_commit` | `core/ws_deferred.schedule_prep_update` | Transaction commit sonrası serialize + broadcast |
 | WS JWT cache | `users/ws_auth.py` | Reconnect başına DB sorgusu azalır |
 | Paylaşımlı hub (frontend) | `lib/ws/sharedWebSocketHub.ts` | POS'ta çift `/ws/pos/sync/` bağlantısı birleşir |
 | Ping/pong + stale close | `lib/ws/managedWebSocket.ts` | Kopuk bağlantı erken tespit |

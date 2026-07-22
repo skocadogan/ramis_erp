@@ -319,17 +319,12 @@ class ProductionPlanViewSet(viewsets.ModelViewSet):
                 })
 
             # WebSocket broadcast — KDS'yi güncelle
-            try:
-                from apps.prep.utils import broadcast_prep_update
-                broadcast_prep_update(
-                    branch_id=str(plan.branch_id),
-                    refresh_all=True,
-                )
-            except Exception:
-                logger.warning(
-                    "WS broadcast failed after prep task creation for plan %s",
-                    plan.id,
-                )
+            from core.ws_deferred import schedule_prep_update
+
+            schedule_prep_update(
+                branch_id=str(plan.branch_id),
+                refresh_all=True,
+            )
 
         return Response({
             "created": created_tasks,

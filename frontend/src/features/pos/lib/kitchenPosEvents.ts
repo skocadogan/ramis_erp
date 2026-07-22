@@ -1,6 +1,9 @@
 /**
  * Mutfak WS olaylarından POS ready-list / masa HTTP yedek kararları.
  * Backend: `broadcast_kds_refresh` → `orders_updated` (+ consumer’da kds_refresh alias).
+ *
+ * Paket (TAKEAWAY) siparişlerin fizik `table_id`’si yoktur; `table_update` gelmez.
+ * Sanal kartlar (`tw-ord__*`) yalnız `/tables/takeaway_virtual/` HTTP ile güncellenir.
  */
 
 const READY_LIST_ITEM_STATUSES = new Set(["READY", "DELIVERED", "SERVED"]);
@@ -17,8 +20,8 @@ const READY_LIST_ORDERS_UPDATED_REASONS = new Set([
 ]);
 
 /**
- * Tam `/tables/` HTTP — yapısal liste değişimi.
- * `item_status` vb. zaten `table_update` ile gelir; full refetch gerekmez.
+ * Tam `/tables/` (+ takeaway_virtual) HTTP — yapısal liste değişimi.
+ * Fizik masada `item_status` çoğu zaman `table_update` ile gelir; paket için gelmez.
  */
 const TABLES_HTTP_FALLBACK_REASONS = new Set([
   "complete_table",
@@ -28,6 +31,19 @@ const TABLES_HTTP_FALLBACK_REASONS = new Set([
   "order_cancelled",
   "item_status",
 ]);
+
+function reasonsInclude(
+  d: Record<string, unknown>,
+  allowed: Set<string>,
+): boolean {
+  const reason = String(d.reason ?? "");
+  if (allowed.has(reason)) return true;
+  const reasons = d.reasons;
+  if (Array.isArray(reasons)) {
+    return reasons.some((r) => allowed.has(String(r)));
+  }
+  return false;
+}
 
 export function extractKitchenEventData(
   payload: Record<string, unknown>,
@@ -58,17 +74,14 @@ export function shouldRefreshReadyList(payload: Record<string, unknown>): boolea
     type === "kds_refresh" ||
     type === "kds.refresh"
   ) {
-    const reason = String(d.reason ?? "");
-    if (READY_LIST_ORDERS_UPDATED_REASONS.has(reason)) return true;
+    if (reasonsInclude(d, READY_LIST_ORDERS_UPDATED_REASONS)) return true;
     // Görüldü / durum invalidasyonu — badge ve listeyi HTTP ile uzlaştır.
+    const reason = String(d.reason ?? "");
     if (reason === "item_acknowledged" || reason === "item_status") return true;
     const reasons = d.reasons;
     if (Array.isArray(reasons)) {
       return reasons.some(
-        (r) =>
-          READY_LIST_ORDERS_UPDATED_REASONS.has(String(r)) ||
-          r === "item_acknowledged" ||
-          r === "item_status"
+        (r) => r === "item_acknowledged" || r === "item_status",
       );
     }
   }
@@ -81,10 +94,11 @@ export function shouldHttpFallbackPosTables(
   payload: Record<string, unknown>,
 ): boolean {
   const type = String(payload.type ?? "");
+  const d = extractKitchenEventData(payload);
 
   if (type === "order_status_changed") {
-    const d = extractKitchenEventData(payload);
-    return Boolean(d.table_id);
+    // Fizik masa: table_update yeterli. Paket (table_id yok): sanal liste HTTP gerekir.
+    return !d.table_id;
   }
 
   if (
@@ -92,9 +106,7 @@ export function shouldHttpFallbackPosTables(
     type === "kds_refresh" ||
     type === "kds.refresh"
   ) {
-    const d = extractKitchenEventData(payload);
-    const reason = String(d.reason ?? "");
-    return TABLES_HTTP_FALLBACK_REASONS.has(reason);
+    return reasonsInclude(d, TABLES_HTTP_FALLBACK_REASONS);
   }
 
   return false;

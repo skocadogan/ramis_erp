@@ -44,6 +44,7 @@
 | WS JWT cache | `users/ws_auth.py` | Reconnect başına DB sorgusu azalır |
 | Paylaşımlı hub (frontend) | `lib/ws/sharedWebSocketHub.ts` | POS'ta çift `/ws/pos/sync/` bağlantısı birleşir |
 | Ping/pong + stale close | `lib/ws/managedWebSocket.ts` | Kopuk bağlantı erken tespit |
+| Paket sanal masa HTTP yedeği | `kitchenPosEvents.shouldHttpFallbackPosTables` | TAKEAWAY'de `table_update` yok; `order_created`/`complete_table`/table_id'siz status → `/tables/takeaway_virtual/` |
 | Çoklu Daphne | `system_utils/daphne_units.sh` | Nginx `least_conn` upstream `ramis_daphne` |
 | Split HTTP/WS | [[ASGI_Split_Deploy]] | REST Uvicorn (`ramis_uvicorn`), yalnız `/ws/` Daphne |
 

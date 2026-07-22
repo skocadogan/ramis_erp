@@ -38,18 +38,25 @@ Panele dönüş, üst bar `POSHeader` içindeki `/panel` bağlantısı ile aynı
 
 ## Paket (takeaway) grid
 
-Sanal masalar `GET /tables/takeaway_virtual/` ile yüklenir (`usePosDataSync` → `takeawayVirtualQuery`); fizik `GET /tables/` listesi ile birleştirilir.
+Sanal masalar `GET /tables/takeaway_virtual/` ile yüklenir (`usePosTables` merge); fizik `GET /tables/` listesi ile birleştirilir.
 
 | `virtual_kind` | UI | Sipariş |
 |----------------|-----|---------|
-| `new_slot` | "Yeni paket" kartı | `table_id: null`, `order_type: TAKEAWAY` |
+| `new_slot` | "Yeni paket" kartı | `table_id: tw-new__{zone}`, `order_type: TAKEAWAY` (backend zone’u çözer) |
 | `takeaway_order` | Dolu kart (sipariş no) | Mevcut sipariş modalı; sepete ekleme `takeawayOrderBlocked` |
+
+**Gerçek zamanlı senkron (önemli):** Paket siparişlerin fizik `table_id`’si yoktur → `table_update` WS gelmez. POS cache `staleTime: Infinity` olduğundan:
+
+1. Yerel aksiyon sonrası `PosWaiterShell.refreshPosTables` → `pos-tables` invalidate
+2. Diğer terminaller: `TableSync` + `shouldHttpFallbackPosTables` (`order_created` / `complete_table` / `table_id`siz `order_status_changed`) → `/tables/` + `takeaway_virtual` HTTP yedeği
+
+`kitchenPosEvents.ts` — paket için `order_status_changed` + `table_id` yokken HTTP yedek **zorunlu** (fizik masada `table_update` yeter).
 
 - RBAC: `takeaway.view_takeaway` — yetkisiz tıklamada izin modalı
 - `TableCard`: `OUT_OF_SERVICE` / `CLEANING` seçilemez; **RESERVED** sarı accent (POS + masa ekranı ile uyumlu)
 - Müşteri ekranı: `PosDisplaySync` takeaway sanal masa değişimlerini dinler
 
-Bkz. [[Branches#Paket (takeaway) sanal masalar]].
+Bkz. [[Branches#Paket (takeaway) sanal masalar]], [[WebSocket_Architecture]].
 
 ## Temel Akış
 1. Şube ve terminal seçimi

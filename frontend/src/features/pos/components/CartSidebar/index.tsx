@@ -173,12 +173,17 @@ const CartSidebar = memo(function CartSidebar({
         }
       }
 
-      // ── OPTIMISTIC UPDATE: Stock check geçti, masayı anında "occupied" yap ──
-      optimisticCtxRef.current = await optimisticOrder.applyOptimistic(selectedTable!.id);
-
+      // Fizik masa: anında OCCUPIED. Paket new_slot: tw-ord__ kartı API sonrası gelir —
+      // yanlışlıkla tw-new__'i OCCUPIED yapmak sanal listeyi bozar.
       const zone = zones.find(z => z.id === selectedTable.zone);
       const order_type = zone?.is_takeaway ? 'TAKEAWAY' : 'TABLE';
       const isNewTakeawayVirtual = selectedTable.virtual_kind === 'new_slot';
+      if (!isNewTakeawayVirtual) {
+        optimisticCtxRef.current = await optimisticOrder.applyOptimistic(selectedTable!.id);
+      } else {
+        optimisticCtxRef.current = null;
+      }
+
       const receiptTableName =
         zone?.is_takeaway && isNewTakeawayVirtual
           ? tCart("newTakeawaySlotTitle")
@@ -186,7 +191,8 @@ const CartSidebar = memo(function CartSidebar({
 
       const payload = {
         branch_id: branchId,
-        table_id: zone?.is_takeaway && isNewTakeawayVirtual ? null : selectedTable.id,
+        // tw-new__{zone} → backend takeaway_zone çözümler; null gönderme (çoklu paket bölgesi)
+        table_id: selectedTable.id,
         order_type,
         items: cart.map(item => ({
           product_id: item.product.id,

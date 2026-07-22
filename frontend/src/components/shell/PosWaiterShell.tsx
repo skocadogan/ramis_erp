@@ -213,14 +213,24 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     setCartSheetOpen(false);
   }, []);
 
-  /** Masalar WS/optimistic ile güncellenir — menü katalog refetch yapılmaz. */
-  const noopRefresh = useCallback(async () => {}, []);
+  const queryClient = useQueryClient();
+
+  /**
+   * Paket sanal masalar (`tw-ord__*`) `table_update` almaz; Infinity stale cache
+   * yalnız bu refetch / TableSync HTTP yedeği ile güncellenir.
+   */
+  const refreshPosTables = useCallback(async () => {
+    const bid = activeBranchId ?? undefined;
+    await queryClient.invalidateQueries({
+      queryKey: queryKeys.posTables(bid, variant),
+    });
+  }, [queryClient, activeBranchId, variant]);
 
   const handlePaymentComplete = useCallback(async () => {
     setOrderModalTable(null);
-  }, [setOrderModalTable]);
+    await refreshPosTables();
+  }, [setOrderModalTable, refreshPosTables]);
 
-  const queryClient = useQueryClient();
   const handleNewOrderFromModal = useCallback(() => {
     if (!orderModalTable) return;
     // React Query cache'inden oku (Zustand'daki server verileri kaldırıldı)
@@ -245,7 +255,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
     const sharedProps = {
       orderModalTable,
       onClose: handleCloseOrderModal,
-      onActiveOrdersChanged: noopRefresh,
+      onActiveOrdersChanged: refreshPosTables,
       onPaymentComplete: handlePaymentComplete,
       onNewOrder: handleNewOrderFromModal,
     };
@@ -485,7 +495,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               {cart.length > 0 && (
                 <CartSidebar
                   onOrderSuccess={handleOrderSuccess}
-                  onRefreshData={noopRefresh}
+                  onRefreshData={refreshPosTables}
                   shiftGateOk={!needsShiftGate || !!activeShift}
                 />
               )}
@@ -582,7 +592,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
             <div className="hidden min-h-0 shrink-0 lg:flex">
               <CartSidebar
                 onOrderSuccess={() => setIsOrderSuccess(true)}
-                onRefreshData={noopRefresh}
+                onRefreshData={refreshPosTables}
                 shiftGateOk={!!activeShift}
               />
             </div>
@@ -613,7 +623,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
                 <CartSidebar
                   className="h-full min-h-[50dvh] w-full max-w-none rounded-none border-0 shadow-none lg:min-h-0"
                   onOrderSuccess={handleOrderSuccessAndCloseSheet}
-                  onRefreshData={noopRefresh}
+                  onRefreshData={refreshPosTables}
                   shiftGateOk={!!activeShift}
                 />
               </div>

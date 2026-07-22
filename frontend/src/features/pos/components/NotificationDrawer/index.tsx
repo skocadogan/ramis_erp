@@ -64,7 +64,7 @@ function canPollReadyOrders(
 }
 
 const READY_LIST_MIN_INTERVAL_MS = 3_500;
-const WS_READY_DEBOUNCE_MS = 1_200;
+const WS_READY_DEBOUNCE_MS = 400;
 
 export function NotificationDrawer({
   variant = "pos",

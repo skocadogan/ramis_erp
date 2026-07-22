@@ -59,7 +59,18 @@ export function shouldRefreshReadyList(payload: Record<string, unknown>): boolea
     type === "kds.refresh"
   ) {
     const reason = String(d.reason ?? "");
-    return READY_LIST_ORDERS_UPDATED_REASONS.has(reason);
+    if (READY_LIST_ORDERS_UPDATED_REASONS.has(reason)) return true;
+    // Görüldü / durum invalidasyonu — badge ve listeyi HTTP ile uzlaştır.
+    if (reason === "item_acknowledged" || reason === "item_status") return true;
+    const reasons = d.reasons;
+    if (Array.isArray(reasons)) {
+      return reasons.some(
+        (r) =>
+          READY_LIST_ORDERS_UPDATED_REASONS.has(String(r)) ||
+          r === "item_acknowledged" ||
+          r === "item_status"
+      );
+    }
   }
 
   return false;

@@ -380,6 +380,7 @@ function OrderCardImpl({
 
   const visibleItems = group.items
     .filter((item) => {
+      if (item.status === "DELIVERED" || item.status === "COMPLETED") return false;
       if (item.status !== "CANCELLED") return true;
       return nowMs - item.updated_at_ts < 5000;
     })

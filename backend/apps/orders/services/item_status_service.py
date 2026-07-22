@@ -62,6 +62,10 @@ def apply_order_item_status(request, item, new_status, silent=False):
         "item_status": str(item.status),
         **({"table_id": str(order.table_id)} if order.table_id else {}),
     }
+    _refresh_scope = {
+        "order_id": str(order.id),
+        **({"table_id": str(order.table_id)} if order.table_id else {}),
+    }
 
     for synced in sync_combined_item_status_after_update(item):
         schedule_order_status_changed(
@@ -72,14 +76,19 @@ def apply_order_item_status(request, item, new_status, silent=False):
             order.branch_id,
             "item_status",
             item_id=str(synced.id),
-            order_id=str(order.id),
+            **_refresh_scope,
         )
 
     schedule_order_status_changed(
         str(order.branch_id),
         {**_status_ws, "item_id": str(item.id)},
     )
-    schedule_kds_refresh(order.branch_id, "item_status", item_id=str(item.id), order_id=str(order.id))
+    schedule_kds_refresh(
+        order.branch_id,
+        "item_status",
+        item_id=str(item.id),
+        **_refresh_scope,
+    )
     return None
 
 
@@ -93,4 +102,10 @@ def broadcast_order_item_touch(item, *, reason: str):
         **({'table_id': str(order.table_id)} if order.table_id else {}),
     }
     schedule_order_status_changed(str(order.branch_id), _status_ws)
-    schedule_kds_refresh(order.branch_id, reason, item_id=str(item.id), order_id=str(order.id))
+    schedule_kds_refresh(
+        order.branch_id,
+        reason,
+        item_id=str(item.id),
+        order_id=str(order.id),
+        **({'table_id': str(order.table_id)} if order.table_id else {}),
+    )

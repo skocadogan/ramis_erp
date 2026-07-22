@@ -105,8 +105,15 @@ function groupKdsOrders(orders: Order[]): GroupedOrder[] {
         return now - group.max_updated_at_ts < GRACE_GROUP_MS;
       }
       return group.items.some(
-        (item) =>
-          item.status !== "CANCELLED" || now - item.updated_at_ts < GRACE_GROUP_MS
+        (item) => {
+          if (item.status === "DELIVERED" || item.status === "COMPLETED") {
+            return false;
+          }
+          return (
+            item.status !== "CANCELLED" ||
+            now - item.updated_at_ts < GRACE_GROUP_MS
+          );
+        }
       );
     });
 
@@ -640,31 +647,48 @@ export function useKdsData(options?: UseKdsDataOptions) {
                 if (activeStationRef.current) void fetchOrdersRef.current();
               }, 2000);
             } else if (d.item_id && d.item_status) {
-              setOrders((prev) =>
-                prev.map((o) => {
-                  if (o.id !== d.order_id) return o;
-                  const newItems = o.items.map((it) =>
-                    it.id === d.item_id
-                      ? { ...it, status: d.item_status as OrderItem['status'], updated_at_ts: now }
-                      : it
-                  );
-                  if (newItems.some((it, i) => it !== o.items[i])) {
+              const leavesKds =
+                d.item_status === "DELIVERED" || d.item_status === "COMPLETED";
+              setOrders((prev) => {
+                const next = prev
+                  .map((o) => {
+                    if (d.order_id && o.id !== d.order_id) return o;
+                    if (!d.order_id && !o.items.some((it) => it.id === d.item_id)) {
+                      return o;
+                    }
+                    let changed = false;
+                    let newItems = o.items.map((it) => {
+                      if (it.id !== d.item_id) return it;
+                      changed = true;
+                      return {
+                        ...it,
+                        status: d.item_status as OrderItem["status"],
+                        updated_at_ts: now,
+                      };
+                    });
+                    if (leavesKds) {
+                      const before = newItems.length;
+                      newItems = newItems.filter(
+                        (it) =>
+                          it.status !== "DELIVERED" && it.status !== "COMPLETED"
+                      );
+                      if (newItems.length !== before) changed = true;
+                    }
+                    if (!changed) return o;
                     return { ...o, items: newItems, updated_at_ts: now };
-                  }
-                  return o;
-                })
-              );
-              if (RECALL_SYNC_ITEM_STATUSES.has(d.item_status)) {
+                  })
+                  .filter((o) => !(leavesKds && o.items.length === 0));
+                return next;
+              });
+              if (RECALL_SYNC_ITEM_STATUSES.has(d.item_status) || leavesKds) {
                 onOrdersSyncRef.current?.();
-                // Terminal durum (DELIVERED/READY): sipariş listeden kalkmış olabilir.
-                // Inline merge anlık UI günceller, 2sn sonra refetch sunucudaki son listeyi alır.
                 if (wsRefreshDebounceRef.current) {
                   clearTimeout(wsRefreshDebounceRef.current);
                 }
                 wsRefreshDebounceRef.current = setTimeout(() => {
                   wsRefreshDebounceRef.current = null;
                   if (activeStationRef.current) void fetchOrdersRef.current();
-                }, 2000);
+                }, leavesKds ? 400 : 2000);
               }
             } else if (
               d.event === "quantity_updated" &&
@@ -737,7 +761,8 @@ export function useKdsData(options?: UseKdsDataOptions) {
                 : null;
 
             const alreadyMergedReasons = new Set([
-              "item_status",
+              // item_status kasıtlı yok: DELIVERED kalem kds_active'ten düşer,
+              // skip refetch kartı asılı bırakıyordu.
               "item_cancelled",
               "item_recalled",
               "item_quantity_updated",

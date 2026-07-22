@@ -55,8 +55,9 @@ def build_ws_event(
     payload, extracted_scope = _split_scope(data)
     merged_scope = {**extracted_scope, **{k: str(v) for k, v in scope.items() if v}}
 
-    table_id = merged_scope.get("table_id")
-    sequence = next_ws_sequence(branch_id=str(branch_id), table_id=table_id)
+    # Sequence şube bazlı monoton olmalı. Masa anahtarı istemci filtreleri içindir;
+    # masa/şube karışık sayaçlar istemcide sahte gap / stale drop üretir.
+    sequence = next_ws_sequence(branch_id=str(branch_id))
 
     envelope: dict[str, Any] = {
         "version": 2,

@@ -10,7 +10,7 @@ export interface OrderItem {
   category_name: string | null;
   product_image: string | null;
   quantity: number;
-  status: "PENDING" | "PREPARING" | "READY" | "CANCELLED";
+  status: "PENDING" | "PREPARING" | "READY" | "DELIVERED" | "COMPLETED" | "CANCELLED";
   unit_name: string | null;
   notes: string | null;
   modifiers?: OrderItemModifierLine[];

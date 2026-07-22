@@ -140,6 +140,9 @@ export function TableSelect({
         <Select
             value={value || 'all'}
             onValueChange={(val) => onChange(!val || val === 'all' ? '' : val)}
+            onOpenChange={(open) => {
+                if (!open) setSearch('');
+            }}
         >
             <SelectTrigger className={className}>
                 <div className="flex items-center gap-1.5 truncate">
@@ -153,19 +156,28 @@ export function TableSelect({
                     </SelectValue>
                 </div>
             </SelectTrigger>
-            <SelectContent className="max-h-80">
-                <div className="sticky top-0 z-10 border-b border-border bg-popover px-3 py-2.5 border-border">
+            <SelectContent
+                /* Arama ile liste kısılınca seçili satır hizası popup'ı ekran altına iter */
+                alignItemWithTrigger={false}
+                align="start"
+                side="bottom"
+                className="max-h-[min(20rem,var(--available-height))] w-[var(--anchor-width)] min-w-48"
+            >
+                <div
+                    className="sticky top-0 z-20 border-b border-border bg-popover px-3 py-2.5"
+                    onPointerDown={(e) => e.stopPropagation()}
+                >
                     <div className="relative">
                         <Search
                             size={14}
-                            className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
+                            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground"
                         />
                         <input
                             type="text"
                             placeholder={t('tableSelect.searchPlaceholder')}
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-9 pr-3 py-1.5 text-xs border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 bg-muted border-border text-foreground"
+                            className="w-full rounded-lg border border-border bg-muted py-1.5 pl-9 pr-3 text-xs text-foreground focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500/20"
                             onKeyDown={(e) => e.stopPropagation()}
                             onPointerDown={(e) => e.stopPropagation()}
                         />
@@ -181,15 +193,15 @@ export function TableSelect({
 
                 {showTakeawayOption && (
                     <SelectGroup>
-                        <SelectLabel className="text-2xs font-semibold text-muted-foreground tracking-wider px-1.5 py-1">
+                        <SelectLabel className="px-1.5 py-1 text-2xs font-semibold tracking-wider text-muted-foreground">
                             {t('tableSelect.takeawayGroup')}
                         </SelectLabel>
                         <SelectItem
                             value={TAKEAWAY_SALES_FILTER_VALUE}
-                            className="text-sm pl-4"
+                            className="pl-4 text-sm"
                         >
                             <span className="inline-flex items-center gap-1.5">
-                                <Package size={14} className="text-amber-600 shrink-0" />
+                                <Package size={14} className="shrink-0 text-amber-600" />
                                 {takeawayLabel}
                             </span>
                         </SelectItem>
@@ -198,11 +210,11 @@ export function TableSelect({
 
                 {filteredGroups.map((group) => (
                     <SelectGroup key={group.zone.id}>
-                        <SelectLabel className="text-2xs font-semibold text-muted-foreground tracking-widerpx-1.5 py-1">
+                        <SelectLabel className="px-1.5 py-1 text-2xs font-semibold tracking-wider text-muted-foreground">
                             {group.zone.name}
                         </SelectLabel>
                         {group.tables.map((tb) => (
-                            <SelectItem key={tb.id} value={tb.id} className="text-sm pl-4">
+                            <SelectItem key={tb.id} value={tb.id} className="pl-4 text-sm">
                                 {tb.name}
                             </SelectItem>
                         ))}

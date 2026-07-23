@@ -355,7 +355,8 @@
     "recommendedColProduct": "Име на продукт",
     "recommendedColUnit": "Продажна единица",
     "recommendedColPrice": "Цена",
-    "recommendedColQty": "Количество"
+    "recommendedColQty": "Количество",
+    "themeToggleAria": "Превключване на темата на клиентския екран"
   },
   "displayConnection": {
     "unsafeTitle": "Връзката към клиентския дисплей не е защитена",
@@ -370,9 +371,9 @@
     "title": "POS настройки",
     "description": "Управлявайте известията, хардуера и предпочитанията за външен вид тук.",
     "notifPanel": "Панел за известия",
-    "notifPanelDesc": "Показване на списъка с продукти в долния десен ъгъл.",
+    "notifPanelDesc": "Показване на известия за повиквания от кухнята.",
     "waiterCallNotifs": "Известия за повикване на сервитьор",
-    "waiterCallNotifsDesc": "Показване на повиквания от интелигентни бутони и сигнали за резервации.",
+    "waiterCallNotifsDesc": "Показване на известията за повикване на сервитьор.",
     "notifSound": "Звуково известие",
     "notifSoundDesc": "Възпроизвеждане на звук, когато продуктът е готов.",
     "showCustomerDisplay": "Клиентски дисплей",

@@ -362,7 +362,8 @@
     "recommendedColProduct": "Ürün Adı",
     "recommendedColUnit": "Satış Birimi",
     "recommendedColPrice": "Fiyatı",
-    "recommendedColQty": "Adet"
+    "recommendedColQty": "Adet",
+    "themeToggleAria": "Müşteri ekranı temasını değiştir"
   },
   "displayConnection": {
     "unsafeTitle": "Müşteri ekranı bağlantısı güvenli değil",
@@ -377,9 +378,9 @@
     "title": "POS Ayarlar",
     "description": "Bildirim, donanım ve görünüm tercihlerini buradan yönetebilirsiniz.",
     "notifPanel": "Bildirim Paneli",
-    "notifPanelDesc": "Sağ alttaki ürün listesini göster.",
+    "notifPanelDesc": "Mutfak Çağrısı Bildirimlerini Göster",
     "waiterCallNotifs": "Garson Çağrısı Bildirimleri",
-    "waiterCallNotifsDesc": "Akıllı buton garson çağrıları ve rezervasyon uyarılarını göster.",
+    "waiterCallNotifsDesc": "Garson Çağrısı Bildirimlerini Göster",
     "notifSound": "Sesli Bildirim",
     "notifSoundDesc": "Ürün hazır olduğunda ses çal.",
     "showCustomerDisplay": "Müşteri Ekranı",

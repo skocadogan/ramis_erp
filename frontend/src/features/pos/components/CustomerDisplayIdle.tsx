@@ -77,8 +77,8 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
     return (
       <div className="h-screen w-full bg-card flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
-          <div className="w-12 h-12 border-4 border-blue-500/20 border-t-blue-500 rounded-full animate-spin" />
-          <p className="text-blue-200/50 font-medium tracking-widest uppercase text-xs">{t("loading")}</p>
+          <div className="w-12 h-12 border-4 border-cfd-accent/20 border-t-cfd-accent rounded-full animate-spin" />
+          <p className="text-cfd-accent/50 font-medium tracking-widest uppercase text-xs">{t("loading")}</p>
         </div>
       </div>
     )
@@ -88,10 +88,10 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
   if (slides.length === 0) {
     return (
       <div className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-indigo-600/10" />
+        <div className="absolute inset-0 bg-gradient-to-br from-cfd-accent/10 to-cfd-accent-muted/10" />
         <div className="relative z-10 text-center space-y-6">
-          <div className="animate-in rounded-5xl border border-white/10 /85 p-12 shadow-2xl zoom-in duration-1000">
-            <h1 className="text-6xl font-bold text-white tracking-tighter">
+          <div className="animate-in rounded-5xl border border-foreground/10 bg-card/85 p-12 shadow-2xl zoom-in duration-1000">
+            <h1 className="text-6xl font-bold text-foreground tracking-tighter">
               {settings?.welcome_title || t("welcomeDefault")}
             </h1>
             <p className="text-muted-foreground mt-4 text-xl">
@@ -107,7 +107,7 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
   const currentSlide = slides[currentIndex]
 
   return (
-    <div className="h-screen w-full bg-black relative overflow-hidden font-sans">
+    <div className="h-screen w-full bg-cfd-overlay relative overflow-hidden font-sans">
       {/* Slide Rendering */}
       {currentSlide.type === 'IMAGE' ? (
         <div className="absolute inset-0 z-0 animate-in fade-in duration-1000">
@@ -115,33 +115,33 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
             className="customer-display-kenburns-bg h-full w-full bg-cover bg-center will-change-transform"
             style={{ backgroundImage: `url(${currentSlide.image})` }}
           />
-          <div className="absolute inset-0 bg-black/45" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/30" />
+          <div className="absolute inset-0 bg-cfd-overlay/45" />
+          <div className="absolute inset-0 bg-gradient-to-t from-cfd-overlay via-transparent to-cfd-overlay/30" />
         </div>
       ) : (
         <div className="absolute inset-0 z-0 flex items-center justify-center animate-in fade-in zoom-in-95 duration-1000">
-          <div className="absolute inset-0 bg-gradient-to-br from-indigo-900/40 via-slate-900 to-purple-900/40" />
-          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-blue-500" />
+          <div className="absolute inset-0 bg-gradient-to-br from-cfd-accent-muted/40 via-background to-cfd-recommend/40" />
+          <div className="absolute inset-0 opacity-30 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] from-cfd-accent" />
           
           {/* Central Typography for Text Slide */}
           <div className="relative z-10 text-center max-w-5xl px-20 space-y-8 animate-in slide-in-from-bottom-12 duration-1000">
-            <div className="flex items-center justify-center gap-3 text-blue-400 font-bold uppercase tracking-[0.4em] text-sm mb-4">
+            <div className="flex items-center justify-center gap-3 text-cfd-accent font-bold uppercase tracking-[0.4em] text-sm mb-4">
               <Sparkles className="h-5 w-5" />
               <span>{t("announcement")}</span>
             </div>
             
-            <h1 className="text-9xl font-bold text-white leading-[0.9] tracking-tighter drop-shadow-2xl">
+            <h1 className="text-9xl font-bold text-foreground leading-[0.9] tracking-tighter drop-shadow-2xl">
               {currentSlide.title}
             </h1>
             
             {currentSlide.sub_title && (
-              <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-200 to-indigo-100 leading-tight">
+              <h2 className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cfd-accent to-foreground leading-tight">
                 {currentSlide.sub_title}
               </h2>
             )}
             
             {currentSlide.description && (
-              <div className="w-24 h-1 bg-blue-500/50 mx-auto my-8 rounded-full" />
+              <div className="w-24 h-1 bg-cfd-accent/50 mx-auto my-8 rounded-full" />
             )}
 
             {currentSlide.description && (
@@ -157,17 +157,17 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
       {currentSlide.type === 'IMAGE' && (
         <div className="relative z-10 h-full flex flex-col justify-end p-20 pb-24">
           <div className="max-w-4xl space-y-6 animate-in fade-in slide-in-from-bottom-8 duration-1000">
-            <div className="flex items-center gap-3 text-blue-400 font-bold uppercase tracking-[0.3em] text-sm">
+            <div className="flex items-center gap-3 text-cfd-accent font-bold uppercase tracking-[0.3em] text-sm">
               <Sparkles className="h-5 w-5" />
               <span>{t("deal")}</span>
             </div>
             
-            <h1 className="text-8xl font-bold text-white leading-none tracking-tighter">
+            <h1 className="text-8xl font-bold text-foreground leading-none tracking-tighter">
               {currentSlide.title}
             </h1>
             
             {currentSlide.sub_title && (
-              <h2 className="text-4xl font-bold text-blue-200/80 leading-tight">
+              <h2 className="text-4xl font-bold text-cfd-accent/80 leading-tight">
                 {currentSlide.sub_title}
               </h2>
             )}
@@ -186,7 +186,7 @@ export function CustomerDisplayIdle({ branchId, terminalCode }: { branchId?: str
         {slides.map((_: PromotionSlide, idx: number) => (
           <div 
             key={idx}
-            className={`h-1.5 transition-all duration-500 rounded-full ${idx === currentIndex ? "w-12 bg-blue-500" : "w-1.5 bg-white/20"}`}
+            className={`h-1.5 transition-all duration-500 rounded-full ${idx === currentIndex ? "w-12 bg-cfd-accent" : "w-1.5 bg-foreground/20"}`}
           />
         ))}
       </div>
@@ -220,8 +220,8 @@ function IdleClock() {
   }, [locale])
 
   return (
-    <div className="absolute right-10 top-10 z-30 flex items-center gap-4 rounded-3xl border border-white/10 bg-black/55 px-8 py-4 text-white shadow-2xl">
-      <ClockIcon className="h-6 w-6 text-blue-400" />
+    <div className="absolute right-6 top-24 z-30 flex items-center gap-4 rounded-3xl border border-foreground/10 bg-cfd-overlay/55 px-8 py-4 text-foreground shadow-2xl">
+      <ClockIcon className="h-6 w-6 text-cfd-accent" />
       <div className="flex flex-col">
         <span ref={timeRef} className="text-3xl font-bold leading-none tracking-tighter" />
         <span ref={dateRef} className="mt-1 text-2xs font-bold uppercase tracking-widest text-muted-foreground" />

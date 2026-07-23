@@ -14,30 +14,30 @@ export function CustomerDisplayRecommendedModal({ modal }: Props) {
   const t = useTranslations("pos.display");
 
   return (
-    <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center /90 p-8 fade-in duration-300">
-      <div className="w-full max-w-3xl overflow-hidden rounded-5xl border border-violet-500/30 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
-        <div className="border-b border-violet-500/20 bg-violet-500/10 px-10 py-8">
+    <div className="fixed inset-0 z-[100] flex animate-in items-center justify-center bg-cfd-overlay/90 p-8 fade-in duration-300">
+      <div className="w-full max-w-3xl overflow-hidden rounded-5xl border border-cfd-recommend/30 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
+        <div className="border-b border-cfd-recommend/20 bg-cfd-recommend/10 px-10 py-8">
           <div className="flex items-center gap-5">
-            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-violet-500 text-white shadow-lg ring-4 ring-violet-500/20">
+            <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-cfd-recommend text-white shadow-lg ring-4 ring-cfd-recommend/20">
               <Sparkles className="h-9 w-9" strokeWidth={2.25} />
             </div>
             <div>
-              <h2 className="text-3xl font-bold text-white">{t("recommendedModalTitle")}</h2>
-              <p className="mt-1 text-lg font-medium text-violet-200/90">{modal.sourceProductName}</p>
+              <h2 className="text-3xl font-bold text-foreground">{t("recommendedModalTitle")}</h2>
+              <p className="mt-1 text-lg font-medium text-cfd-recommend">{modal.sourceProductName}</p>
             </div>
           </div>
         </div>
 
         <div className="space-y-6 px-10 py-8">
-          <div className="space-y-3 text-lg leading-relaxed">
+          <div className="space-y-3 text-lg leading-relaxed text-muted-foreground">
             <p>{t("recommendedModalIntro")}</p>
             <p className="text-base">{t("recommendedModalHint")}</p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-violet-500/20">
+          <div className="overflow-hidden rounded-2xl border border-cfd-recommend/20">
             <table className="w-full text-left">
               <thead>
-                <tr className="bg-violet-500/10 text-sm uppercase tracking-wide text-violet-200/80">
+                <tr className="bg-cfd-recommend/10 text-sm uppercase tracking-wide text-cfd-recommend">
                   <th className="px-6 py-4">{t("recommendedColProduct")}</th>
                   <th className="px-6 py-4">{t("recommendedColUnit")}</th>
                   <th className="px-6 py-4 text-right">{t("recommendedColPrice")}</th>
@@ -48,10 +48,10 @@ export function CustomerDisplayRecommendedModal({ modal }: Props) {
                 {modal.items.map((item) => (
                   <tr
                     key={item.productId}
-                    className="border-t border-violet-500/15 text-xl text-violet-50"
+                    className="border-t border-cfd-recommend/15 text-xl text-foreground"
                   >
                     <td className="px-6 py-4 font-semibold">{item.name}</td>
-                    <td className="px-6 py-4 text-violet-200/90">
+                    <td className="px-6 py-4 text-muted-foreground">
                       {item.unitName ?? t("recommendedStandardUnit")}
                     </td>
                     <td className="px-6 py-4 text-right font-mono tabular-nums">

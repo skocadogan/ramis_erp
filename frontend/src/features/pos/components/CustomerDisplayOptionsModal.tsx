@@ -40,20 +40,20 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
   const caloriesLabel = formatProductCalories(modal.calories, t);
 
   return (
-    <div className="fixed inset-0 z-[90] flex animate-in items-center justify-center /85 p-8 fade-in duration-300">
-      <div className="relative w-full max-w-3xl overflow-hidden rounded-5xl border border-white/10 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
-        <div className="border-b border-white/10 px-10 py-8">
+    <div className="fixed inset-0 z-[90] flex animate-in items-center justify-center bg-cfd-overlay/85 p-8 fade-in duration-300">
+      <div className="relative w-full max-w-3xl overflow-hidden rounded-5xl border border-foreground/10 bg-card shadow-2xl animate-in zoom-in-95 duration-300">
+        <div className="border-b border-foreground/10 px-10 py-8">
           <div className="flex items-center gap-5">
-            <div className="rounded-2xl bg-blue-500/20 p-4">
-              <SlidersHorizontal className="h-8 w-8 text-blue-400" />
+            <div className="rounded-2xl bg-cfd-accent/20 p-4">
+              <SlidersHorizontal className="h-8 w-8 text-cfd-accent" />
             </div>
             <div>
-              <p className="text-sm font-bold uppercase tracking-[0.25em] text-blue-400">
+              <p className="text-sm font-bold uppercase tracking-[0.25em] text-cfd-accent">
                 {isUnitStep ? t("unitSelectionTitle") : t("optionsModalTitle")}
               </p>
-              <h2 className="mt-1 text-3xl font-bold text-white">{modal.productName}</h2>
+              <h2 className="mt-1 text-3xl font-bold text-foreground">{modal.productName}</h2>
               {caloriesLabel && (
-                <p className="mt-1 text-lg font-semibold tabular-nums text-amber-300">
+                <p className="mt-1 text-lg font-semibold tabular-nums text-cfd-warning">
                   {caloriesLabel}
                 </p>
               )}
@@ -69,8 +69,8 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                   className={cn(
                     "flex items-center justify-between gap-6 rounded-2xl border px-6 py-5 transition-all duration-300 ease-out",
                     isUnitSelected(modal, null)
-                      ? "scale-[1.02] border-emerald-400/70 bg-emerald-500/15 shadow-glow-emerald ring-2 ring-emerald-400/40"
-                      : "border-white/10 bg-white/5"
+                      ? "scale-[1.02] border-cfd-success/70 bg-cfd-success/15 shadow-glow-emerald ring-2 ring-cfd-success/40"
+                      : "border-foreground/10 bg-foreground/5"
                   )}
                 >
                   <div className="flex min-w-0 items-center gap-4">
@@ -78,16 +78,16 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                       className={cn(
                         "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300",
                         isUnitSelected(modal, null)
-                          ? "scale-100 border-emerald-400 bg-emerald-500 opacity-100"
-                          : "scale-75 border-white/20 bg-transparent opacity-0"
+                          ? "scale-100 border-cfd-success bg-cfd-success opacity-100"
+                          : "scale-75 border-foreground/20 bg-transparent opacity-0"
                       )}
                       aria-hidden
                     >
                       <CheckCircle2 className="h-5 w-5 text-white" />
                     </span>
-                    <span className="text-xl font-medium text-white">{t("standardUnit")}</span>
+                    <span className="text-xl font-medium text-foreground">{t("standardUnit")}</span>
                   </div>
-                  <span className="shrink-0 text-xl font-bold text-blue-300">
+                  <span className="shrink-0 text-xl font-bold text-cfd-accent">
                     {formatCurrency(modal.standardUnitPrice)}
                   </span>
                 </li>
@@ -100,8 +100,8 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                     className={cn(
                       "flex items-center justify-between gap-6 rounded-2xl border px-6 py-5 transition-all duration-300 ease-out",
                       selected
-                        ? "scale-[1.02] border-emerald-400/70 bg-emerald-500/15 shadow-glow-emerald ring-2 ring-emerald-400/40"
-                        : "border-white/10 bg-white/5"
+                        ? "scale-[1.02] border-cfd-success/70 bg-cfd-success/15 shadow-glow-emerald ring-2 ring-cfd-success/40"
+                        : "border-foreground/10 bg-foreground/5"
                     )}
                   >
                     <div className="flex min-w-0 items-center gap-4">
@@ -109,16 +109,16 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                         className={cn(
                           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300",
                           selected
-                            ? "scale-100 border-emerald-400 bg-emerald-500 opacity-100"
-                            : "scale-75 border-white/20 bg-transparent opacity-0"
+                            ? "scale-100 border-cfd-success bg-cfd-success opacity-100"
+                            : "scale-75 border-foreground/20 bg-transparent opacity-0"
                         )}
                         aria-hidden
                       >
                         <CheckCircle2 className="h-5 w-5 text-white" />
                       </span>
-                      <span className="text-xl font-medium text-white">{unit.name}</span>
+                      <span className="text-xl font-medium text-foreground">{unit.name}</span>
                     </div>
-                    <span className="shrink-0 text-xl font-bold text-blue-300">
+                    <span className="shrink-0 text-xl font-bold text-cfd-accent">
                       {formatCurrency(unit.price)}
                     </span>
                   </li>
@@ -135,8 +135,8 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                     className={cn(
                       "flex items-center justify-between gap-6 rounded-2xl border px-6 py-5 transition-all duration-300 ease-out",
                       selected
-                        ? "scale-[1.02] border-blue-400/70 bg-blue-500/15 shadow-[0_0_24px_rgba(59,130,246,0.25)] ring-2 ring-blue-400/40"
-                        : "border-white/10 bg-white/5"
+                        ? "scale-[1.02] border-cfd-accent/70 bg-cfd-accent/15 shadow-glow ring-2 ring-cfd-accent/40"
+                        : "border-foreground/10 bg-foreground/5"
                     )}
                   >
                     <div className="flex min-w-0 items-center gap-4">
@@ -144,8 +144,8 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                         className={cn(
                           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300",
                           selected
-                            ? "scale-100 border-blue-400 bg-blue-500 opacity-100"
-                            : "scale-75 border-white/20 bg-transparent opacity-0"
+                            ? "scale-100 border-cfd-accent bg-cfd-accent opacity-100"
+                            : "scale-75 border-foreground/20 bg-transparent opacity-0"
                         )}
                         aria-hidden
                       >
@@ -154,7 +154,7 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                       <span
                         className={cn(
                           "text-xl font-medium transition-colors duration-300",
-                          selected ? "text-white" : ""
+                          selected ? "text-foreground" : "text-muted-foreground"
                         )}
                       >
                         {mod.name}
@@ -164,10 +164,10 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
                       className={cn(
                         "shrink-0 text-xl font-bold transition-colors duration-300",
                         selected
-                          ? "text-blue-200"
+                          ? "text-cfd-accent"
                           : !mod.price_adjustment
-                            ? "text-emerald-400"
-                            : "text-blue-300"
+                            ? "text-cfd-success"
+                            : "text-cfd-accent"
                       )}
                     >
                       {formatOptionPrice(mod.price_adjustment, t)}
@@ -179,8 +179,8 @@ export function CustomerDisplayOptionsModal({ modal }: Props) {
           )}
         </div>
 
-        <div className="border-t border-white/10 px-10 py-6">
-          <p className="text-center text-base font-medium">{t("optionsModalHint")}</p>
+        <div className="border-t border-foreground/10 px-10 py-6">
+          <p className="text-center text-base font-medium text-muted-foreground">{t("optionsModalHint")}</p>
         </div>
       </div>
     </div>

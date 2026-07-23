@@ -106,17 +106,7 @@ export function useTableOrderModal({
                 params: { table_id: tableId, ordering: 'created_at' },
             });
             const all = (res.data.results ?? res.data) as OrderDetail[];
-            const active = all.filter(o => isActiveOrderStatus(o.status));
-            
-            if (shouldSyncPosCustomerDisplay()) {
-              usePosStore.getState().setActiveDisplayOrder(active);
-            }
-            
-            if (active.length === 0 && !isOrdersLoading) {
-                onPaymentComplete?.();
-                onClose();
-            }
-            return active;
+            return all.filter(o => isActiveOrderStatus(o.status));
         },
         enabled: !!tableId && !orderId,
         staleTime: 15_000,
@@ -150,6 +140,23 @@ export function useTableOrderModal({
     const sale = historicalOrder?.sale || null;
     const isLoading = orderId ? isHistoricalLoading : isOrdersLoading;
     const error = orderId ? historicalOrderError : activeOrdersError;
+
+    // Prefetch/cache hit'te queryFn çalışmaz; CFD yayını data'ya bağla (Takeaway ile aynı pattern)
+    useEffect(() => {
+        if (!shouldSyncPosCustomerDisplay()) return;
+        if (orders.length > 0) {
+            usePosStore.getState().setActiveDisplayOrder(orders);
+        }
+    }, [orders]);
+
+    // Aktif sipariş kalmadıysa modalı kapat (önceden queryFn yan etkisiydi)
+    useEffect(() => {
+        if (!tableId || orderId || isOrdersLoading) return;
+        if (activeOrders.length === 0) {
+            onPaymentComplete?.();
+            onClose();
+        }
+    }, [tableId, orderId, isOrdersLoading, activeOrders.length, onPaymentComplete, onClose]);
 
     // State
     const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('CASH');

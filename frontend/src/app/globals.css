@@ -32,6 +32,14 @@
   --color-kds-warning-foreground: hsl(var(--kds-warning-foreground));
   --color-kds-late: hsl(var(--kds-late));
   --color-kds-late-foreground: hsl(var(--kds-late-foreground));
+  /* Customer Display (CFD) — KDS gibi semantik; değerler [data-customer-display] altında */
+  --color-cfd-accent: hsl(var(--cfd-accent));
+  --color-cfd-accent-muted: hsl(var(--cfd-accent-muted));
+  --color-cfd-success: hsl(var(--cfd-success));
+  --color-cfd-warning: hsl(var(--cfd-warning));
+  --color-cfd-danger: hsl(var(--cfd-danger));
+  --color-cfd-recommend: hsl(var(--cfd-recommend));
+  --color-cfd-overlay: hsl(var(--cfd-overlay));
   --color-input: hsl(var(--input));
   --color-border: hsl(var(--border));
   --color-destructive: hsl(var(--destructive));
@@ -168,6 +176,16 @@
   --kds-late: 0 80% 55%;
   --kds-late-foreground: 0 0% 100%;
 
+  /* CFD token yedekleri — asıl değerler [data-customer-display] altında override edilir */
+  --cfd-accent: 217 91% 60%;
+  --cfd-accent-muted: 217 70% 45%;
+  --cfd-success: 160 70% 45%;
+  --cfd-warning: 38 92% 50%;
+  --cfd-danger: 0 72% 55%;
+  --cfd-recommend: 270 65% 58%;
+  --cfd-overlay: 222 40% 4%;
+  --cfd-surface-glass: 0 0% 100%;
+
   /* Density Defaults */
   --spacing-multiplier: 1;
 }
@@ -291,6 +309,111 @@
   --radius: 0.75rem;
   --spacing-multiplier: 1.25;
   font-size: 1rem;
+}
+
+/* =============================================================================
+   Customer Display (CFD) — sistem [data-theme] / ThemeProvider'dan bağımsız
+   Kök: [data-customer-display] (ör. /pos/display/[id])
+   Tema: data-customer-display-theme="dark" | "light" (varsayılan: dark)
+   html üzerindeki data-theme ne olursa olsun bu kapsamdaki semantik token'lar geçerlidir.
+   ============================================================================= */
+
+[data-customer-display] {
+  color-scheme: dark;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+
+  /* Varsayılan CFD teması: sinematik koyu (Idle / sipariş paneli) */
+  --background: 222 28% 7%;
+  --foreground: 210 40% 96%;
+  --card: 222 24% 10%;
+  --card-foreground: 210 40% 96%;
+  --popover: 222 26% 12%;
+  --popover-foreground: 210 40% 96%;
+  --primary: 217 91% 55%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 217 20% 16%;
+  --secondary-foreground: 210 40% 96%;
+  --muted: 217 16% 14%;
+  --muted-foreground: 215 16% 65%;
+  --accent: 217 22% 18%;
+  --accent-foreground: 210 40% 96%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 217 14% 22%;
+  --input: 217 14% 22%;
+  --ring: 217 91% 55%;
+  --radius: 0.75rem;
+
+  /* CFD vurgu / durum renkleri (bileşenlerde hsl(var(--cfd-*)) ile) */
+  --cfd-accent: 217 91% 60%;
+  --cfd-accent-muted: 217 70% 45%;
+  --cfd-success: 160 70% 45%;
+  --cfd-warning: 38 92% 50%;
+  --cfd-danger: 0 72% 55%;
+  --cfd-recommend: 270 65% 58%;
+  --cfd-overlay: 222 40% 4%;
+  --cfd-surface-glass: 0 0% 100%;
+}
+
+[data-customer-display][data-customer-display-theme="light"] {
+  color-scheme: light;
+
+  --background: 210 40% 98%;
+  --foreground: 222 28% 10%;
+  --card: 0 0% 100%;
+  --card-foreground: 222 28% 10%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 222 28% 10%;
+  --primary: 217 80% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 214 20% 94%;
+  --secondary-foreground: 222 28% 10%;
+  --muted: 214 20% 94%;
+  --muted-foreground: 215 14% 40%;
+  --accent: 214 25% 92%;
+  --accent-foreground: 222 28% 10%;
+  --destructive: 0 72% 45%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 214 18% 86%;
+  --input: 214 18% 86%;
+  --ring: 217 80% 45%;
+
+  --cfd-accent: 217 80% 45%;
+  --cfd-accent-muted: 217 70% 38%;
+  --cfd-success: 160 65% 36%;
+  --cfd-warning: 38 92% 42%;
+  --cfd-danger: 0 72% 48%;
+  --cfd-recommend: 270 55% 48%;
+  --cfd-overlay: 210 30% 96%;
+  --cfd-surface-glass: 0 0% 0%;
+}
+
+/* CFD animasyonları (inline <style> yerine) */
+@keyframes customer-display-shrink-width {
+  from { width: 100%; }
+  to { width: 0%; }
+}
+
+.customer-display-shrink-bar {
+  animation: customer-display-shrink-width calc(var(--customer-shrink-s, 5) * 1s) linear forwards;
+}
+
+@keyframes customer-display-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.15) translate(1%, 1%); }
+}
+
+.customer-display-kenburns-bg {
+  animation: customer-display-kenburns 20s infinite alternate;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .customer-display-kenburns-bg {
+    animation: none;
+    transform: none;
+    will-change: auto;
+  }
 }
 
 @layer base {

@@ -64,3 +64,17 @@ Menü ürününde tanımlı **`calories`** (kCal) değeri müşteri ekranında i
 | Kasiyer birim/seçenek modalı açıkken | `CustomerDisplayOptionsModal` | `displayOptionsModal.calories` (`buildDisplayOptionsModalPayload`) |
 
 WebSocket payload'ı `usePosDisplaySync` ile POS store'dan taşınır; backend ek alan gerektirmez. Gösterim yalnızca pozitif tam sayı kaloride yapılır. Kaynak alan: [[Menu#Product]] (`0026_product_calories`).
+
+## Frontend tema (sistemden bağımsız)
+
+Müşteri ekranı (`/pos/display/[id]`) görünümü [[Design_System_v2]] `data-theme` / ThemeProvider zincirinden **ayrı** yönetilir:
+
+| Mekanizma | Açıklama |
+|-----------|----------|
+| Kök | `CustomerDisplayShell` → `data-customer-display` + `data-customer-display-theme` |
+| Token'lar | `frontend/src/app/globals.css` içindeki CFD bölümü (`--background`, `--cfd-accent`, …) |
+| Tailwind | `bg-cfd-accent`, `text-cfd-success`, `bg-cfd-danger`, `bg-cfd-warning`, `bg-cfd-recommend`, `bg-cfd-overlay` vb. |
+| Varyant | `data-customer-display-theme="dark"` (varsayılan) veya `"light"` |
+| UI | Sağ üst `CustomerDisplayThemeToggle` (Moon/Sun + Switch); tercih `localStorage` anahtarı `customer-display-theme` |
+
+POS / admin temasını değiştirmek müşteri ekranı paletini etkilemez; CFD paleti yalnızca bu CSS bloğundan ayarlanır.

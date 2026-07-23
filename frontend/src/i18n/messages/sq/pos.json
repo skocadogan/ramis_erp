@@ -355,7 +355,8 @@
     "recommendedColProduct": "Emri i produktit",
     "recommendedColUnit": "Njësia e shitjes",
     "recommendedColPrice": "Çmimi",
-    "recommendedColQty": "Sasia"
+    "recommendedColQty": "Sasia",
+    "themeToggleAria": "Ndrysho temën e ekranit të klientit"
   },
   "displayConnection": {
     "unsafeTitle": "Lidhja e ekranit të klientit nuk është e sigurt",
@@ -370,9 +371,9 @@
     "title": "Cilësimet e POS",
     "description": "Menaxho njoftimet, pajisjet dhe preferencat e pamjes këtu.",
     "notifPanel": "Paneli i njoftimeve",
-    "notifPanelDesc": "Shfaq listën e produkteve në fund djathtas.",
+    "notifPanelDesc": "Shfaq njoftimet për thirrjet e kuzhinës.",
     "waiterCallNotifs": "Njoftimet e thirrjeve të kamerierit",
-    "waiterCallNotifsDesc": "Shfaq thirrjet e butonave inteligjentë dhe njoftimet e rezervimeve.",
+    "waiterCallNotifsDesc": "Shfaq njoftimet për thirrjet e kamerierit.",
     "notifSound": "Njoftim zanor",
     "notifSoundDesc": "Luaj tingull kur produkti është gati.",
     "showCustomerDisplay": "Ekrani i klientit",

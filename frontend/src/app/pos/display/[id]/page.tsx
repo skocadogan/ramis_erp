@@ -12,6 +12,38 @@ import { useTranslations } from "next-intl";
 import { getPosDisplayWsUrl, runManagedWebSocket } from "@/lib/ws";
 import api from "@/lib/api";
 import { CartItem, DisplayOptionsModalSync, DisplayAllergenModalSync, DisplayRecommendedModalSync, DisplaySurveyPrompt } from "@/types/pos";
+import {
+  CustomerDisplayThemeToggle,
+  persistCustomerDisplayTheme,
+  readCustomerDisplayTheme,
+  type CustomerDisplayTheme,
+} from "@/features/pos/components/CustomerDisplayThemeToggle";
+
+/** Müşteri ekranı kökü — tema `globals.css` [data-customer-display] ile sistem temasından bağımsız. */
+function CustomerDisplayShell({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<CustomerDisplayTheme>("dark");
+
+  useEffect(() => {
+    setTheme(readCustomerDisplayTheme());
+  }, []);
+
+  const handleThemeChange = (next: CustomerDisplayTheme) => {
+    setTheme(next);
+    persistCustomerDisplayTheme(next);
+  };
+
+  return (
+    <div
+      data-customer-display
+      data-customer-display-theme={theme}
+      className="relative min-h-screen bg-background text-foreground"
+      suppressHydrationWarning
+    >
+      <CustomerDisplayThemeToggle theme={theme} onThemeChange={handleThemeChange} />
+      {children}
+    </div>
+  );
+}
 
 export default function CustomerDisplayPage() {
   const t = useTranslations("pos.displayConnection");
@@ -132,65 +164,73 @@ export default function CustomerDisplayPage() {
 
   if (!clientReady) {
     return (
-      <div className="flex h-screen items-center justify-center text-white">
-        <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
-      </div>
+      <CustomerDisplayShell>
+        <div className="flex h-screen items-center justify-center">
+          <Loader2 className="h-16 w-16 animate-spin text-cfd-accent" />
+        </div>
+      </CustomerDisplayShell>
     );
   }
 
   if (!displayToken) {
     return (
-      <div className="flex h-screen items-center justify-center text-white p-6 text-center">
-        <div className="max-w-lg space-y-4">
-          <h2 className="text-2xl font-bold">{t("unsafeTitle")}</h2>
-          <p className="text-muted-foreground">
-            {t("unsafeDescription")}
-          </p>
+      <CustomerDisplayShell>
+        <div className="flex h-screen items-center justify-center p-6 text-center">
+          <div className="max-w-lg space-y-4">
+            <h2 className="text-2xl font-bold">{t("unsafeTitle")}</h2>
+            <p className="text-muted-foreground">
+              {t("unsafeDescription")}
+            </p>
+          </div>
         </div>
-      </div>
+      </CustomerDisplayShell>
     );
   }
 
   if (status === "connecting" && !data) {
     return (
-      <div className="flex h-screen items-center justify-center text-white">
-        <div className="flex flex-col items-center gap-6">
-          <Loader2 className="h-16 w-16 animate-spin text-blue-500" />
-          <h2 className="text-2xl font-bold tracking-tight">{t("connectingTitle")}</h2>
-          <p className="text-muted-foreground font-medium">
-            {t("terminalIdLabel")} <span className="text-blue-400">{terminalKey}</span>
-          </p>
+      <CustomerDisplayShell>
+        <div className="flex h-screen items-center justify-center">
+          <div className="flex flex-col items-center gap-6">
+            <Loader2 className="h-16 w-16 animate-spin text-cfd-accent" />
+            <h2 className="text-2xl font-bold tracking-tight">{t("connectingTitle")}</h2>
+            <p className="text-muted-foreground font-medium">
+              {t("terminalIdLabel")} <span className="text-cfd-accent">{terminalKey}</span>
+            </p>
+          </div>
         </div>
-      </div>
+      </CustomerDisplayShell>
     );
   }
 
   if (status === "disconnected" && !data) {
     return (
-      <div className="flex h-screen items-center justify-center text-white p-6 text-center">
-        <div className="max-w-md space-y-6">
-          <div className="bg-red-500/10 p-6 rounded-full inline-block mb-4 border border-red-500/20">
-            <MonitorOff className="h-16 w-16 text-red-500" />
-          </div>
-          <h2 className="text-4xl font-bold tracking-tight">{t("disconnectedTitle")}</h2>
-          <p className="text-muted-foreground text-xl">
-            {t("disconnectedDescription")}
-          </p>
-          <div className="pt-8">
-            <div className="h-1 w-full rounded-full overflow-hidden">
-              <div className="h-full bg-red-500/70 w-full"></div>
+      <CustomerDisplayShell>
+        <div className="flex h-screen items-center justify-center p-6 text-center">
+          <div className="max-w-md space-y-6">
+            <div className="bg-cfd-danger/10 p-6 rounded-full inline-block mb-4 border border-cfd-danger/20">
+              <MonitorOff className="h-16 w-16 text-cfd-danger" />
             </div>
-            <p className="mt-4 text-sm text-muted-foreground font-bold uppercase tracking-widest">
-              {t("reconnecting")}
+            <h2 className="text-4xl font-bold tracking-tight">{t("disconnectedTitle")}</h2>
+            <p className="text-muted-foreground text-xl">
+              {t("disconnectedDescription")}
             </p>
+            <div className="pt-8">
+              <div className="h-1 w-full rounded-full overflow-hidden">
+                <div className="h-full bg-cfd-danger/70 w-full"></div>
+              </div>
+              <p className="mt-4 text-sm text-muted-foreground font-bold uppercase tracking-widest">
+                {t("reconnecting")}
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </CustomerDisplayShell>
     );
   }
 
   return (
-    <>
+    <CustomerDisplayShell>
       <CustomerDisplayView
         branchId={branchId}
         terminalCode={terminalKey || undefined}
@@ -221,6 +261,6 @@ export default function CustomerDisplayPage() {
           }}
         />
       )}
-    </>
+    </CustomerDisplayShell>
   );
 }

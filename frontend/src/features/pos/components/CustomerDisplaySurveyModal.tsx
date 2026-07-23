@@ -179,8 +179,8 @@ export function CustomerDisplaySurveyModal({
               onClick={() => setAnswer(currentQuestion.id, { rating_value: value })}
               className={`rounded-2xl border px-4 py-5 text-center transition-all ${
  selected
- ? "border-blue-600 bg-blue-600 text-white shadow-lg shadow-blue-600/20"
- : "border-white/20 bg-white/10 text-white hover:border-blue-300 hover:bg-white/15"
+ ? "border-cfd-accent bg-cfd-accent text-white shadow-lg shadow-cfd-accent/20"
+ : "border-foreground/20 bg-foreground/10 text-foreground hover:border-cfd-accent/60 hover:bg-foreground/15"
  }`}
             >
               <div className="flex items-center justify-center gap-1">
@@ -208,8 +208,8 @@ export function CustomerDisplaySurveyModal({
           onClick={() => setAnswer(currentQuestion.id, { boolean_value: true })}
           className={`rounded-2xl border px-6 py-8 text-2xl font-bold transition-all ${
  selected === true
- ? "border-emerald-400 bg-emerald-500 text-white"
- : "border-white/20 bg-white/10 text-white"
+ ? "border-cfd-success bg-cfd-success text-white"
+ : "border-foreground/20 bg-foreground/10 text-foreground"
  }`}
         >
           {t("yes")}
@@ -219,8 +219,8 @@ export function CustomerDisplaySurveyModal({
           onClick={() => setAnswer(currentQuestion.id, { boolean_value: false })}
           className={`rounded-2xl border px-6 py-8 text-2xl font-bold transition-all ${
  selected === false
- ? "border-rose-400 bg-rose-500 text-white"
- : "border-white/20 bg-white/10 text-white"
+ ? "border-cfd-danger bg-cfd-danger text-white"
+ : "border-foreground/20 bg-foreground/10 text-foreground"
  }`}
         >
           {t("no")}
@@ -241,8 +241,8 @@ export function CustomerDisplaySurveyModal({
               onClick={() => setAnswer(currentQuestion.id, { selected_option_id: option.id })}
               className={`flex w-full items-center justify-between rounded-2xl border px-5 py-5 text-left text-xl transition-all ${
  selected
- ? "border-blue-400 bg-blue-600 text-white"
- : "border-white/20 bg-white/10 text-white"
+ ? "border-cfd-accent bg-cfd-accent text-white"
+ : "border-foreground/20 bg-foreground/10 text-foreground"
  }`}
             >
               <span>{option.label}</span>
@@ -259,7 +259,7 @@ export function CustomerDisplaySurveyModal({
         value={currentAnswer?.text_value ?? ""}
         onChange={(event) => setAnswer(currentQuestion.id, { text_value: event.target.value })}
         placeholder={currentQuestion.placeholder || t("textPlaceholder")}
-        className="min-h-[160px] rounded-2xl border-white/20 bg-white/10 p-4 text-lg text-white placeholder:"
+        className="min-h-[160px] rounded-2xl border-foreground/20 bg-foreground/10 p-4 text-lg text-foreground placeholder:text-muted-foreground"
       />
     )
   }
@@ -273,21 +273,21 @@ export function CustomerDisplaySurveyModal({
 
   if (isCompleted) {
     return (
-      <div className="fixed inset-0 z-[110] flex items-center justify-center /95 px-6 py-8">
-        <div className="w-full max-w-2xl overflow-hidden rounded-5xl border border-emerald-500/30 bg-card shadow-2xl">
-          <div className="border-b border-emerald-500/20 bg-emerald-500/10 px-10 py-8">
+      <div className="fixed inset-0 z-[110] flex items-center justify-center bg-cfd-overlay/95 px-6 py-8">
+        <div className="w-full max-w-2xl overflow-hidden rounded-5xl border border-cfd-success/30 bg-card shadow-2xl">
+          <div className="border-b border-cfd-success/20 bg-cfd-success/10 px-10 py-8">
             <div className="flex items-center gap-5">
-              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-emerald-500 text-white shadow-lg ring-4 ring-emerald-500/20">
+              <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-cfd-success text-white shadow-lg ring-4 ring-cfd-success/20">
                 <CheckCircle2 className="h-9 w-9" strokeWidth={2.25} />
               </div>
               <div>
-                <h2 className="text-3xl font-bold text-white">{t("thankYouTitle")}</h2>
-                <p className="mt-1 text-lg font-medium text-emerald-100">{t("thankYouSubtitle")}</p>
+                <h2 className="text-3xl font-bold text-foreground">{t("thankYouTitle")}</h2>
+                <p className="mt-1 text-lg font-medium text-cfd-success">{t("thankYouSubtitle")}</p>
               </div>
             </div>
           </div>
           <div className="space-y-4 px-10 py-10 text-center">
-            <p className="text-2xl font-semibold text-white">{t("thankYouMessage")}</p>
+            <p className="text-2xl font-semibold text-foreground">{t("thankYouMessage")}</p>
             <p className="text-base">{t("thankYouClosing")}</p>
           </div>
         </div>
@@ -296,15 +296,15 @@ export function CustomerDisplaySurveyModal({
   }
 
   return (
-    <div className="fixed inset-0 z-[110] flex items-center justify-center /95 px-6 py-8">
-      <div className="flex h-full w-full max-w-5xl flex-col rounded-5xl border border-white/10 /95 shadow-2xl">
-        <div className="border-b border-white/10 px-8 py-6">
+    <div className="fixed inset-0 z-[110] flex items-center justify-center bg-cfd-overlay/95 px-6 py-8">
+      <div className="flex h-full w-full max-w-5xl flex-col rounded-5xl border border-foreground/10 bg-card/95 shadow-2xl">
+        <div className="border-b border-foreground/10 px-8 py-6">
           <div className="flex items-center justify-between gap-4">
             <div>
-              <div className="text-xs font-bold uppercase tracking-[0.3em] text-blue-300">
+              <div className="text-xs font-bold uppercase tracking-[0.3em] text-cfd-accent">
                 {t("title")}
               </div>
-              <h2 className="mt-2 text-3xl font-bold text-white">{prompt.survey.title}</h2>
+              <h2 className="mt-2 text-3xl font-bold text-foreground">{prompt.survey.title}</h2>
               {prompt.survey.description ? (
                 <p className="mt-2 max-w-3xl text-base">{prompt.survey.description}</p>
               ) : null}
@@ -314,19 +314,19 @@ export function CustomerDisplaySurveyModal({
               <div>{t("answeredLabel", { count: answeredCount, total: questions.length })}</div>
             </div>
           </div>
-          <div className="mt-5 h-2 overflow-hidden rounded-full bg-white/10">
-            <div className="h-full rounded-full bg-blue-500 transition-all" style={{ width: `${progressPercent}%` }} />
+          <div className="mt-5 h-2 overflow-hidden rounded-full bg-foreground/10">
+            <div className="h-full rounded-full bg-cfd-accent transition-all" style={{ width: `${progressPercent}%` }} />
           </div>
         </div>
 
         <div className="flex flex-1 flex-col justify-center px-8 py-8">
           <div className="mx-auto flex w-full max-w-4xl flex-1 flex-col justify-center">
-            <div className="relative rounded-4xl border border-white/10 bg-white/5 p-8">
+            <div className="relative rounded-4xl border border-foreground/10 bg-foreground/5 p-8">
               {isSubmitting || isClosing ? (
-                <div className="absolute inset-0 z-10 flex items-center justify-center rounded-4xl /70">
+                <div className="absolute inset-0 z-10 flex items-center justify-center rounded-4xl bg-cfd-overlay/70">
                   <div className="flex flex-col items-center gap-3 text-center">
-                    <Loader2 className="h-8 w-8 animate-spin text-blue-300" />
-                    <div className="text-lg font-semibold text-white">
+                    <Loader2 className="h-8 w-8 animate-spin text-cfd-accent" />
+                    <div className="text-lg font-semibold text-foreground">
                       {isClosing ? t("closing") : t("submitting")}
                     </div>
                     <div className="text-sm">
@@ -335,7 +335,7 @@ export function CustomerDisplaySurveyModal({
                   </div>
                 </div>
               ) : null}
-              <div className="mb-6 text-4xl font-bold leading-tight text-white">
+              <div className="mb-6 text-4xl font-bold leading-tight text-foreground">
                 {currentQuestion.text}
               </div>
               <div className="min-h-[220px]">{renderQuestionBody()}</div>
@@ -348,7 +348,7 @@ export function CustomerDisplaySurveyModal({
             ) : null}
 
             {error ? (
-              <div className="mt-4 text-center text-base font-medium text-rose-300">{error}</div>
+              <div className="mt-4 text-center text-base font-medium text-cfd-danger">{error}</div>
             ) : null}
 
             <div className="mt-8 flex items-center justify-between gap-4">
@@ -356,7 +356,7 @@ export function CustomerDisplaySurveyModal({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-14 rounded-2xl border-white/15 bg-white/5 px-8 text-lg text-white hover:bg-white/10"
+                  className="h-14 rounded-2xl border-foreground/15 bg-foreground/5 px-8 text-lg text-foreground hover:bg-foreground/10"
                   onClick={() => void closeSurvey()}
                   disabled={isSubmitting || isClosing}
                 >
@@ -365,7 +365,7 @@ export function CustomerDisplaySurveyModal({
                 <Button
                   type="button"
                   variant="outline"
-                  className="h-14 rounded-2xl border-white/15 bg-white/5 px-8 text-lg text-white hover:bg-white/10"
+                  className="h-14 rounded-2xl border-foreground/15 bg-foreground/5 px-8 text-lg text-foreground hover:bg-foreground/10"
                   onClick={() => setCurrentIndex((value) => Math.max(0, value - 1))}
                   disabled={currentIndex === 0 || isSubmitting || isClosing}
                 >
@@ -376,7 +376,7 @@ export function CustomerDisplaySurveyModal({
               {!isLast ? (
                 <Button
                   type="button"
-                  className="h-14 rounded-2xl bg-blue-600 px-8 text-lg font-bold hover:bg-blue-700"
+                  className="h-14 rounded-2xl bg-cfd-accent px-8 text-lg font-bold hover:bg-cfd-accent-muted"
                   onClick={goNext}
                   disabled={isSubmitting || isClosing}
                 >
@@ -385,7 +385,7 @@ export function CustomerDisplaySurveyModal({
               ) : (
                 <Button
                   type="button"
-                  className="h-14 rounded-2xl bg-emerald-600 px-8 text-lg font-bold hover:bg-emerald-700"
+                  className="h-14 rounded-2xl bg-cfd-success px-8 text-lg font-bold hover:bg-cfd-success/90"
                   onClick={() => void submit()}
                   disabled={isSubmitting || isClosing}
                 >

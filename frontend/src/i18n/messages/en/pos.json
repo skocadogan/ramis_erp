@@ -358,7 +358,8 @@
     "recommendedColProduct": "Product Name",
     "recommendedColUnit": "Sales Unit",
     "recommendedColPrice": "Price",
-    "recommendedColQty": "Qty"
+    "recommendedColQty": "Qty",
+    "themeToggleAria": "Toggle customer display theme"
   },
   "displayConnection": {
     "unsafeTitle": "Customer display link is not secure",
@@ -373,9 +374,9 @@
     "title": "POS Settings",
     "description": "Manage notifications, hardware, and appearance preferences here.",
     "notifPanel": "Notification Panel",
-    "notifPanelDesc": "Show the product list in the bottom right.",
+    "notifPanelDesc": "Show the notifications for kitchen calls.",
     "waiterCallNotifs": "Waiter Call Notifications",
-    "waiterCallNotifsDesc": "Show smart button calls and reservation alerts.",
+    "waiterCallNotifsDesc": "Show the notifications for waiter calls.",
     "notifSound": "Sound Notification",
     "notifSoundDesc": "Play sound when product is ready.",
     "showCustomerDisplay": "Customer Display",

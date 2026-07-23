@@ -26,6 +26,7 @@ Tasarım kararlarının JSON formatında tutulduğu referans dosyasıdır.
 JSON'daki değerler `globals.css` içinde CSS değişkenlerine (`--primary`, `--background`, `--radius` vb.) dönüştürülür.
 - **Theme Seçicileri:** `[data-theme="dark"]`, `[data-theme="high-contrast"]`, `[data-theme="outdoor"]`
 - **Density Seçicileri:** `[data-density="compact"]`, `[data-density="comfortable"]`, `[data-density="spacious"]`
+- **Müşteri ekranı (CFD):** `[data-customer-display]` + `data-customer-display-theme="dark|light"` — sistem `data-theme` / ThemeProvider'dan **bağımsız** semantik token override'ı. Kök: `app/pos/display/[id]/page.tsx` → `CustomerDisplayShell`. Tailwind: `bg-cfd-accent`, `text-cfd-success`, `bg-cfd-warning`, `bg-cfd-danger`, `bg-cfd-recommend`, `bg-cfd-overlay` ([[POS_Display]])
 
 ### 3. ThemeProvider
 React context üzerinden tema ve yoğunluk durumunu yönetir, bu durumları `localStorage`'da saklar ve `document.documentElement`'e uygun sınıfları/nitelikleri uygular.

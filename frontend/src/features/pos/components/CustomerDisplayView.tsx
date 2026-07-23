@@ -129,12 +129,12 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
           : Banknote;
   const paymentIconClass =
     method === "CARD"
-      ? "text-blue-400"
+      ? "text-cfd-accent"
       : method === "OTHER"
-        ? ""
+        ? "text-muted-foreground"
         : method === "CREDIT"
-          ? "text-violet-400"
-          : "text-amber-400";
+          ? "text-cfd-recommend"
+          : "text-cfd-warning";
 
   const displaySubtotal = subtotal ?? total;
   const displayDiscount = discount || 0;
@@ -151,30 +151,6 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
   }
 
   return (
-    <>
-      <style>{`
-        @keyframes customer-display-shrink-width {
-          from { width: 100%; }
-          to { width: 0%; }
-        }
-        .customer-display-shrink-bar {
-          animation: customer-display-shrink-width calc(var(--customer-shrink-s, 5) * 1s) linear forwards;
-        }
-        @keyframes customer-display-kenburns {
-          from { transform: scale(1); }
-          to { transform: scale(1.15) translate(1%, 1%); }
-        }
-        .customer-display-kenburns-bg {
-          animation: customer-display-kenburns 20s infinite alternate;
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .customer-display-kenburns-bg {
-            animation: none;
-            transform: none;
-            will-change: auto;
-          }
-        }
-      `}</style>
       <div className="flex h-screen w-full bg-card overflow-hidden font-sans relative">
       {/* Left Side: Order List */}
       <div className={`flex-[3] flex flex-col h-full border-r border-border shadow-xl z-10 transition-all duration-700 ${isPayment ? 'grayscale-[0.2]' : ''}`}>
@@ -189,8 +165,8 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
               <p className="text-muted-foreground font-medium mt-0.5">{t("checkCart")}</p>
             )}
           </div>
-          <div className="bg-blue-50 p-2 rounded-xl">
-            <Utensils className="h-6 w-6 text-blue-600" />
+          <div className="bg-cfd-accent/15 p-2 rounded-xl">
+            <Utensils className="h-6 w-6 text-cfd-accent" />
           </div>
         </header>
 
@@ -218,18 +194,18 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                   <div
                     key={item.cartId}
                     className={`flex items-center justify-between rounded-lg border p-3 transition-colors ${
- lineCancelled
- ? "border-rose-200/80 bg-rose-50/60 dark:border-rose-900/50 dark:bg-rose-950/25"
- : " "
- }`}
+                      lineCancelled
+                        ? "border-cfd-danger/40 bg-cfd-danger/10"
+                        : "border-border"
+                    }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <div
                         className={`h-9 w-9 shrink-0 rounded-md border flex items-center justify-center shadow-sm ${
- lineCancelled
- ? "border-rose-200 bg-white/90 text-rose-600 dark:border-rose-800 dark:bg-rose-950/40"
- : "border-border text-blue-600"
- }`}
+                          lineCancelled
+                            ? "border-cfd-danger/50 bg-cfd-danger/15 text-cfd-danger"
+                            : "border-border text-cfd-accent"
+                        }`}
                       >
                         <span className="text-base font-bold">{item.quantity}x</span>
                       </div>
@@ -237,16 +213,16 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         <div className="flex items-start gap-1.5 min-w-0">
                           <h3
                             className={`text-base font-bold break-words min-w-0 ${
- lineCancelled
- ? " line-through decoration-rose-400 decoration-2"
- : ""
- }`}
+                              lineCancelled
+                                ? "line-through decoration-cfd-danger decoration-2"
+                                : ""
+                            }`}
                           >
                             {item.product.name}
                           </h3>
                           {hasAllergens && (
                             <span
-                               className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-white shadow-md ring-2 ring-white"
+                              className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cfd-warning text-white shadow-md ring-2 ring-background"
                               aria-label={t("allergenShieldAria")}
                               title={t("allergenShieldAria")}
                             >
@@ -257,21 +233,19 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         {caloriesLabel && (
                           <p
                             className={`mt-0.5 text-sm font-semibold tabular-nums ${
- lineCancelled
- ? " line-through"
- : "text-amber-700"
- }`}
+                              lineCancelled ? "line-through" : "text-cfd-warning"
+                            }`}
                           >
                             {caloriesLabel}
                           </p>
                         )}
                         {item.selectedUnit && (
                           <p
-                            className={`text-xs font-semibold tracking-widermt-0 ${
- lineCancelled
- ? "text-rose-600/80 line-through"
- : "text-muted-foreground"
- }`}
+                            className={`text-xs font-semibold tracking-wider mt-0 ${
+                              lineCancelled
+                                ? "text-cfd-danger/80 line-through"
+                                : "text-muted-foreground"
+                            }`}
                           >
                             {item.selectedUnit.name}
                           </p>
@@ -279,16 +253,16 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                         {(item.selectedModifiers ?? []).length > 0 && (
                           <p
                             className={`text-xs font-medium mt-0 ${
- lineCancelled
- ? "text-rose-600/80 line-through"
- : "text-emerald-700 dark:text-emerald-400"
- }`}
+                              lineCancelled
+                                ? "text-cfd-danger/80 line-through"
+                                : "text-cfd-success"
+                            }`}
                           >
                             * {modifiers.map(formatModifierLabel).join(", ")}
                           </p>
                         )}
                         {lineCancelled && (
-                          <p className="mt-1 text-xs font-semibold text-rose-700 dark:text-rose-400">
+                          <p className="mt-1 text-xs font-semibold text-cfd-danger">
                             {t("itemCancelledHint")}
                           </p>
                         )}
@@ -297,24 +271,24 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
                     <div className="text-right shrink-0 pl-2">
                       <p
                         className={`text-lg font-bold ${
- lineCancelled
- ? " line-through decoration-rose-300"
- : ""
- }`}
+                          lineCancelled
+                            ? "line-through decoration-cfd-danger/60"
+                            : ""
+                        }`}
                       >
                         {formatCurrency(lineTotal)}
                       </p>
                       <p
                         className={`text-xs font-medium ${
- lineCancelled ? " line-through" : "text-muted-foreground"
- }`}
+                          lineCancelled ? "line-through" : "text-muted-foreground"
+                        }`}
                       >
                         {t("unitPrice", {
                           price: formatCurrency(effectiveUnitPrice),
                         })}
                       </p>
                       {lineCancelled && (
-                        <span className="mt-2 inline-flex rounded-full bg-rose-600 px-2.5 py-0.5 text-sub font-bold uppercase tracking-wide text-white">
+                        <span className="mt-2 inline-flex rounded-full bg-cfd-danger px-2.5 py-0.5 text-sub font-bold uppercase tracking-wide text-white">
                           {t("itemCancelled")}
                         </span>
                       )}
@@ -328,13 +302,13 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
       </div>
 
       {/* Right Side: Total & Info */}
-      <div className="flex-[2] flex flex-col h-full bg-card text-white p-12 justify-center relative overflow-hidden transition-all duration-700">
+      <div className="flex-[2] flex flex-col h-full bg-card text-foreground p-12 justify-center relative overflow-hidden transition-all duration-700">
         {/* Abstract Background Decoration */}
-        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-blue-600/25" />
-        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-indigo-600/20" />
+        <div className="absolute -right-24 -top-24 h-96 w-96 rounded-full bg-cfd-accent/25" />
+        <div className="absolute -bottom-24 -left-24 h-64 w-64 rounded-full bg-cfd-accent-muted/20" />
 
         <div className="relative z-10 mb-auto">
-          <div className="bg-blue-600 w-16 h-1 rounded-full mb-8"></div>
+          <div className="bg-cfd-accent w-16 h-1 rounded-full mb-8"></div>
           <h2 className="text-5xl font-bold mb-6 leading-tight">
             {isPayment ? (
               <>
@@ -354,7 +328,7 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
           </p>
 
           <div className="mt-12 space-y-6">
-            <div className={`flex items-center gap-4 p-4 rounded-2xl border transition-all duration-500 ${isPayment ? 'text-blue-400 bg-blue-400/10 border-blue-400/30' : 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20'}`}>
+            <div className={`flex items-center gap-4 p-4 rounded-2xl border transition-all duration-500 ${isPayment ? "text-cfd-accent bg-cfd-accent/10 border-cfd-accent/30" : "text-cfd-success bg-cfd-success/10 border-cfd-success/20"}`}>
               {isPayment ? <Sparkles className="h-6 w-6" /> : <CheckCircle2 className="h-6 w-6" />}
               <span className="font-bold text-lg">{isPayment ? t("closingAccount") : t("securePayment")}</span>
             </div>
@@ -362,8 +336,8 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
             {isPayment && (
               <div className="space-y-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
                 <p className="text-xs font-bold text-muted-foreground uppercase tracking-[0.2em]">{tPay("method")}</p>
-                <div className="flex items-center gap-4 bg-white/5 p-4 rounded-2xl border border-white/10">
-                  <div className="bg-white/10 p-3 rounded-xl">
+                <div className="flex items-center gap-4 bg-foreground/5 p-4 rounded-2xl border border-foreground/10">
+                  <div className="bg-foreground/10 p-3 rounded-xl">
                     <PaymentMethodIcon className={`h-6 w-6 ${paymentIconClass}`} />
                   </div>
                   <div>
@@ -378,12 +352,12 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
 
         <div className="relative z-10 space-y-6 mt-8">
           {displayDiscount > 0 && (
-            <div className="space-y-3 bg-white/5 rounded-3xl p-6 border border-white/5">
+            <div className="space-y-3 bg-foreground/5 rounded-3xl p-6 border border-foreground/5">
               <div className="flex justify-between items-center text-muted-foreground font-bold uppercase tracking-widest text-xs">
                 <span>{t("subtotal")}</span>
-                <span className="">{formatCurrency(displaySubtotal)}</span>
+                <span>{formatCurrency(displaySubtotal)}</span>
               </div>
-              <div className="flex justify-between items-center text-emerald-400 font-bold uppercase tracking-widest text-xs">
+              <div className="flex justify-between items-center text-cfd-success font-bold uppercase tracking-widest text-xs">
                 <span>{t("discount")}</span>
                 <span>-{formatCurrency(displayDiscount)}</span>
               </div>
@@ -395,16 +369,16 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
             <ChevronRight className="h-4 w-4" />
           </div>
 
-          <div className="relative flex flex-col items-center justify-center gap-2 rounded-5xl border border-white/10 /90 p-8 shadow-2xl">
+          <div className="relative flex flex-col items-center justify-center gap-2 rounded-5xl border border-foreground/10 bg-card/90 p-8 shadow-2xl">
             <span className="text-6xl sm:text-7xl font-bold tracking-tighter relative z-10 flex items-start">
               {formatCurrency(total)}
             </span>
-            <span className="text-white/40 font-bold text-sm uppercase tracking-[0.3em] relative z-10">{isProcessing ? t("processing") : t("taxIncluded")}</span>
+            <span className="text-foreground/40 font-bold text-sm uppercase tracking-[0.3em] relative z-10">{isProcessing ? t("processing") : t("taxIncluded")}</span>
           </div>
 
           {isProcessing && (
             <div className="flex justify-center animate-bounce">
-              <Loader2 className="h-8 w-8 text-blue-500 animate-spin" />
+              <Loader2 className="h-8 w-8 text-cfd-accent animate-spin" />
             </div>
           )}
         </div>
@@ -413,26 +387,26 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
       {/* Subtle Background Layer for Payment Mode */}
       {isPayment && (
         <div className="absolute inset-0 pointer-events-none z-0">
-          <div className="absolute inset-0 bg-blue-950/20" />
+          <div className="absolute inset-0 bg-cfd-accent/10" />
         </div>
       )}
       {/* Success Overlay */}
       {successSignal && (
-        <div className="absolute inset-0 z-[100] flex animate-in items-center justify-center /95 fade-in duration-500">
+        <div className="absolute inset-0 z-[100] flex animate-in items-center justify-center bg-cfd-overlay/95 fade-in duration-500">
           <div className="text-center space-y-8 max-w-2xl px-12 animate-in zoom-in-95 slide-in-from-bottom-10 duration-700">
             <div className="flex justify-center">
-              <div className="h-40 w-40 rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center relative">
-                <div className="absolute inset-0 rounded-full bg-emerald-500/10 animate-ping" />
-                <CheckCircle2 className="h-24 w-24 text-emerald-500 animate-in zoom-in duration-1000 delay-300" />
+              <div className="h-40 w-40 rounded-full bg-cfd-success/20 border border-cfd-success/30 flex items-center justify-center relative">
+                <div className="absolute inset-0 rounded-full bg-cfd-success/10 animate-ping" />
+                <CheckCircle2 className="h-24 w-24 text-cfd-success animate-in zoom-in duration-1000 delay-300" />
               </div>
             </div>
             <div className="space-y-4">
-              <h2 className="text-7xl font-bold text-white tracking-tighter">
+              <h2 className="text-7xl font-bold text-foreground tracking-tighter">
                 {successSignal === "ORDER"
                   ? (settings?.order_success_title ?? t("orderSuccess"))
                   : (settings?.payment_success_title ?? t("paymentSuccess"))}
               </h2>
-              <p className="text-2xl font-medium leading-relaxed">
+              <p className="text-2xl font-medium leading-relaxed text-muted-foreground">
                 {successSignal === "ORDER"
                   ? (settings?.order_success_subtitle ?? t("orderSuccessDesc"))
                   : (settings?.payment_success_subtitle ?? t("paymentSuccessDesc"))}
@@ -440,9 +414,9 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
             </div>
 
             {/* Progress Bar for Duration */}
-            <div className="mt-12 h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+            <div className="mt-12 h-1.5 w-full overflow-hidden rounded-full bg-foreground/10">
               <div
-                className="customer-display-shrink-bar h-full bg-emerald-500"
+                className="customer-display-shrink-bar h-full bg-cfd-success"
                 style={
                   {
                     width: "100%",
@@ -455,6 +429,5 @@ export const CustomerDisplayView: React.FC<CustomerDisplayViewProps & { subtotal
         </div>
       )}
     </div>
-    </>
   );
 };

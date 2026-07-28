@@ -21,14 +21,18 @@ const READY_LIST_ORDERS_UPDATED_REASONS = new Set([
 
 /**
  * Tam `/tables/` (+ takeaway_virtual) HTTP — yapısal liste değişimi.
- * Fizik masada `item_status` çoğu zaman `table_update` ile gelir; paket için gelmez.
+ * Fizik masada `item_status` / `item_acknowledged` çoğu zaman `table_update` ile gelir.
  */
-const TABLES_HTTP_FALLBACK_REASONS = new Set([
+const TABLES_STRUCTURAL_HTTP_REASONS = new Set([
   "complete_table",
   "cancel_table",
   "order_created",
   "order_completed",
   "order_cancelled",
+]);
+
+/** Yalnız paket (table_id yok) için HTTP — fizik masa table_update yeter. */
+const TABLES_SOFT_HTTP_REASONS = new Set([
   "item_status",
   "item_acknowledged",
 ]);
@@ -107,7 +111,10 @@ export function shouldHttpFallbackPosTables(
     type === "kds_refresh" ||
     type === "kds.refresh"
   ) {
-    return reasonsInclude(d, TABLES_HTTP_FALLBACK_REASONS);
+    if (reasonsInclude(d, TABLES_STRUCTURAL_HTTP_REASONS)) return true;
+    // Soft status: paket sanal kartlar table_update almaz.
+    if (reasonsInclude(d, TABLES_SOFT_HTTP_REASONS)) return !d.table_id;
+    return false;
   }
 
   return false;

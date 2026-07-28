@@ -264,14 +264,17 @@ export function NotificationDrawer({
   }, [scheduleReadyFetch, scheduleReadyFetchFromWs]);
 
   useEffect(() => {
-    if (!canPollReadyOrders(user?.permissions, user?.is_superuser, variant)) {
+    if (
+      !showReadyNotifs ||
+      !canPollReadyOrders(user?.permissions, user?.is_superuser, variant)
+    ) {
       return;
     }
     const id = setInterval(() => {
       void fetchReadyRef.current();
     }, WS_HTTP_FALLBACK_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [user?.permissions, user?.is_superuser, variant]);
+  }, [showReadyNotifs, user?.permissions, user?.is_superuser, variant]);
 
   useEffect(() => {
     if (!hasToken || (!showReadyNotifs && !showWaiterCallNotifs)) {
@@ -304,7 +307,11 @@ export function NotificationDrawer({
   }, [hasToken, showReadyNotifs, showWaiterCallNotifs, branchIdProp, activeBranchId]);
 
   useEffect(() => {
-    if (!canPollReadyOrders(user?.permissions, user?.is_superuser, variant) || !hasToken) {
+    if (
+      !showReadyNotifs ||
+      !canPollReadyOrders(user?.permissions, user?.is_superuser, variant) ||
+      !hasToken
+    ) {
       return;
     }
 
@@ -341,7 +348,15 @@ export function NotificationDrawer({
       if (rateLimitRetryRef.current) clearTimeout(rateLimitRetryRef.current);
       cleanupWs();
     };
-  }, [user?.permissions, user?.is_superuser, hasToken, variant, branchIdProp, activeBranchId]);
+  }, [
+    showReadyNotifs,
+    user?.permissions,
+    user?.is_superuser,
+    hasToken,
+    variant,
+    branchIdProp,
+    activeBranchId,
+  ]);
 
   const deliverItem = async (itemId: string) => {
     setReadyItems((prev) => prev.filter((i) => i.id !== itemId));

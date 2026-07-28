@@ -16,6 +16,7 @@ import api, { skipInterceptorToast } from "@/lib/api"
 import {
   printersApi,
   type ReceiptBlock,
+  type ReceiptTemplate,
 } from "@/features/printing/services/printersApi"
 
 export type {
@@ -186,6 +187,21 @@ export interface SurveyResponseRecord {
 export const adminApi = {
   getUsers: (params?: Record<string, unknown>) =>
     api.get<PaginatedResponse<User>>("/admin/users/", { params }).then(r => r.data),
+
+  /** Tüm kullanıcı sayfalarını birleştirir (page_size:1000 tavanı yerine). */
+  fetchAllUsers: async (params?: Record<string, unknown>) => {
+    const out: User[] = []
+    let page = 1
+    for (;;) {
+      const data = await adminApi.getUsers({ ...params, page_size: 200, page })
+      const results = data.results ?? []
+      out.push(...results)
+      if (!data.next || results.length === 0) break
+      page += 1
+      if (page > 50) break
+    }
+    return out
+  },
 
   getUser: (id: string) =>
     api.get<UserDetail>(`/admin/users/${id}/`).then(r => r.data),

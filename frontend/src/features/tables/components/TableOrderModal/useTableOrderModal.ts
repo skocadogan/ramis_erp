@@ -238,13 +238,8 @@ export function useTableOrderModal({
 
     useEffect(() => {
         if (!shouldSyncPosCustomerDisplay()) return;
-        setDisplayMetadata({ paymentMethod });
-    }, [paymentMethod, setDisplayMetadata]);
-
-    useEffect(() => {
-        if (!shouldSyncPosCustomerDisplay()) return;
-        setDisplayMetadata({ isProcessing: isPaying });
-    }, [isPaying, setDisplayMetadata]);
+        setDisplayMetadata({ paymentMethod, isProcessing: isPaying });
+    }, [paymentMethod, isPaying, setDisplayMetadata]);
 
     useEffect(() => {
         setUseSplitPayment(false);

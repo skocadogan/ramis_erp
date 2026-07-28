@@ -139,11 +139,16 @@ export function TransferFormModal({ open, onSave, onClose, isLoading, initialTra
   useEffect(() => {
     if (form.source_warehouse_id && !isEdit) {
       setIsLoadingItems(true)
-      // Depodaki tüm stok seviyelerini çek
-      warehouseApi.getWarehouseStockLevels(form.source_warehouse_id, { page_size: 1000 })
-        .then((res) => {
-          const data = res.data.results ?? res.data
-          const rows: ItemRow[] = (data || []).map((sl: { stock_item: string; stock_item_name: string; stock_item_sku?: string; quantity: number; stock_item_unit?: string }) => ({
+      warehouseApi
+        .fetchAllWarehouseStockLevels(form.source_warehouse_id)
+        .then((levels) => {
+          const rows: ItemRow[] = (levels as Array<{
+            stock_item: string
+            stock_item_name: string
+            stock_item_sku?: string
+            quantity: number
+            stock_item_unit?: string
+          }>).map((sl) => ({
             rowKey: newClientId("row"),
             stock_item_id: sl.stock_item,
             stock_item_name: sl.stock_item_name,

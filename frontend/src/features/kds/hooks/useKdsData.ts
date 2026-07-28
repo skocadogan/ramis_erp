@@ -638,13 +638,15 @@ export function useKdsData(options?: UseKdsDataOptions) {
                 setAnnouncements((cur) => [...cur, cancelAnnouncement!]);
               }
               onOrdersSyncRef.current?.();
-              // Sipariş iptal: kısa süre sonra refetch ile listeden kaldır
+              // İptal kartını duyurudan sonra listeden düş — tam HTTP refetch yok
               if (wsRefreshDebounceRef.current) {
                 clearTimeout(wsRefreshDebounceRef.current);
               }
+              const cancelledId = d.order_id;
               wsRefreshDebounceRef.current = setTimeout(() => {
                 wsRefreshDebounceRef.current = null;
-                if (activeStationRef.current) void fetchOrdersRef.current();
+                setOrders((prev) => prev.filter((o) => o.id !== cancelledId));
+                onOrdersSyncRef.current?.();
               }, 2000);
             } else if (d.item_id && d.item_status) {
               const leavesKds =
@@ -682,13 +684,17 @@ export function useKdsData(options?: UseKdsDataOptions) {
               });
               if (RECALL_SYNC_ITEM_STATUSES.has(d.item_status) || leavesKds) {
                 onOrdersSyncRef.current?.();
-                if (wsRefreshDebounceRef.current) {
-                  clearTimeout(wsRefreshDebounceRef.current);
+                // DELIVERED/COMPLETED zaten inline filtrelendi — HTTP gereksiz.
+                // Recall (PREPARING vb.) için kısa reconcile kalsın.
+                if (!leavesKds) {
+                  if (wsRefreshDebounceRef.current) {
+                    clearTimeout(wsRefreshDebounceRef.current);
+                  }
+                  wsRefreshDebounceRef.current = setTimeout(() => {
+                    wsRefreshDebounceRef.current = null;
+                    if (activeStationRef.current) void fetchOrdersRef.current();
+                  }, 2000);
                 }
-                wsRefreshDebounceRef.current = setTimeout(() => {
-                  wsRefreshDebounceRef.current = null;
-                  if (activeStationRef.current) void fetchOrdersRef.current();
-                }, leavesKds ? 400 : 2000);
               }
             } else if (
               d.event === "quantity_updated" &&

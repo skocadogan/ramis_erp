@@ -16,8 +16,8 @@ export function useManagerAssignments(userId: string) {
 
   // Users for selection (Global users)
   const usersQuery = useQuery({
-    queryKey: ["admin", "users", { limit: 1000 }],
-    queryFn: () => adminApi.getUsers({ limit: 1000 }),
+    queryKey: ["admin", "users", "all"],
+    queryFn: () => adminApi.fetchAllUsers(),
   });
 
   const assignmentsQuery = useQuery({
@@ -42,7 +42,7 @@ export function useManagerAssignments(userId: string) {
   });
 
   const branches = Array.isArray(branchesQuery.data) ? branchesQuery.data : [];
-  const users = usersQuery.data?.results ?? [];
+  const users = usersQuery.data ?? [];
 
   return {
     branches,

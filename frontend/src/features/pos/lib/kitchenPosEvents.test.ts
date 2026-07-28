@@ -53,13 +53,31 @@ describe("shouldHttpFallbackPosTables", () => {
     ).toBe(true);
   });
 
-  it("item_acknowledged → HTTP yedek (paket kartı KITCHEN→SETTLE)", () => {
+  it("item_acknowledged + table_id yok → paket, HTTP yedek", () => {
     expect(
       shouldHttpFallbackPosTables({
         type: "orders_updated",
         data: { reason: "item_acknowledged", order_id: "o1" },
       }),
     ).toBe(true);
+  });
+
+  it("item_acknowledged + table_id → fizik masa, fallback yok", () => {
+    expect(
+      shouldHttpFallbackPosTables({
+        type: "orders_updated",
+        data: { reason: "item_acknowledged", table_id: "t1", order_id: "o1" },
+      }),
+    ).toBe(false);
+  });
+
+  it("item_status + table_id → fizik masa, fallback yok", () => {
+    expect(
+      shouldHttpFallbackPosTables({
+        type: "orders_updated",
+        data: { reason: "item_status", table_id: "t1" },
+      }),
+    ).toBe(false);
   });
 });
 

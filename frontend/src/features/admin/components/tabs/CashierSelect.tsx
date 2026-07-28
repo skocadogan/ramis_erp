@@ -39,10 +39,7 @@ export function CashierSelect({
 
     const { data: users = [] } = useQuery({
         queryKey: ['cashier-select', 'users'],
-        queryFn: async () => {
-            const res = await adminApi.getUsers({ page_size: 500 });
-            return (res.results ?? []) as User[];
-        },
+        queryFn: async () => adminApi.fetchAllUsers(),
         staleTime: 120_000,
     });
 

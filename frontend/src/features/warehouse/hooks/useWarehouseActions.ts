@@ -5,6 +5,45 @@ import { warehouseApi } from "@/features/warehouse/services/warehouseApi"
 import { inventoryApi } from "@/features/inventory/services/inventoryApi"
 import { queryKeys } from "@/lib/queryKeys"
 
+type QC = ReturnType<typeof useQueryClient>
+
+function invalidateWarehouseListAndSummary(qc: QC) {
+  qc.invalidateQueries({ queryKey: queryKeys.warehousesBase })
+  qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
+}
+
+function invalidateWarehouseSummary(qc: QC) {
+  qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
+}
+
+function invalidateStockSurfaces(qc: QC) {
+  qc.invalidateQueries({ queryKey: queryKeys.stockItemsBase })
+  qc.invalidateQueries({ queryKey: queryKeys.stockItemsSimpleBase })
+  qc.invalidateQueries({ queryKey: queryKeys.stockMovementsBase })
+  qc.invalidateQueries({ queryKey: queryKeys.stockSummaryBase })
+}
+
+function invalidateDomain(
+  qc: QC,
+  key: readonly unknown[],
+  opts?: { summary?: boolean; stockSimple?: boolean; stockSurfaces?: boolean },
+) {
+  qc.invalidateQueries({ queryKey: key })
+  if (opts?.summary) invalidateWarehouseSummary(qc)
+  if (opts?.stockSurfaces) invalidateStockSurfaces(qc)
+  else if (opts?.stockSimple) {
+    qc.invalidateQueries({ queryKey: queryKeys.stockItemsSimpleBase })
+  }
+}
+
+function invalidateExpiryQueries(qc: QC) {
+  qc.invalidateQueries({ queryKey: queryKeys.expiryWarningsBase })
+  qc.invalidateQueries({ queryKey: queryKeys.expirySummaryBase })
+  qc.invalidateQueries({ queryKey: queryKeys.expiryActionsHistoryBase })
+  qc.invalidateQueries({ queryKey: queryKeys.expiringLotsBase })
+}
+
+
 // ──────────────────────────────────────────────────
 // Warehouse CRUD
 // ──────────────────────────────────────────────────
@@ -12,7 +51,7 @@ export function useCreateWarehouse() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Record<string, unknown>) => warehouseApi.createWarehouse(data),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.warehousesBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateWarehouseListAndSummary(qc),
   })
 }
 
@@ -20,7 +59,7 @@ export function useUpdateWarehouse() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: Record<string, unknown> }) => warehouseApi.updateWarehouse(id, data),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.warehousesBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateWarehouseListAndSummary(qc),
   })
 }
 
@@ -28,7 +67,7 @@ export function useDeleteWarehouse() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.deleteWarehouse(id),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.warehousesBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateWarehouseListAndSummary(qc),
   })
 }
 
@@ -39,7 +78,7 @@ export function useCreatePurchaseOrder() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Record<string, unknown>) => warehouseApi.createPurchaseOrder(data),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.purchaseOrdersBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateDomain(qc, queryKeys.purchaseOrdersBase, { summary: true }),
   })
 }
 
@@ -48,10 +87,7 @@ export function useUpdatePurchaseOrder() {
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: Record<string, unknown> }) =>
       warehouseApi.updatePurchaseOrder(id, data),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.purchaseOrdersBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.purchaseOrdersBase, { summary: true }),
   })
 }
 
@@ -67,10 +103,7 @@ export function useSuggestPurchaseOrders() {
   return useMutation({
     mutationFn: ({ warehouse_id, preferred_suppliers }: { warehouse_id: string; preferred_suppliers?: Record<string, string> }) =>
       warehouseApi.suggestPurchaseOrders(warehouse_id, preferred_suppliers),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.purchaseOrdersBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.purchaseOrdersBase, { summary: true }),
   })
 }
 
@@ -87,19 +120,12 @@ export function useCommitPurchaseRecommendations() {
       preferred_suppliers?: Record<string, string>
     }) => warehouseApi.commitPurchaseRecommendations(payload),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.purchaseOrdersBase })
+      invalidateDomain(qc, queryKeys.purchaseOrdersBase, { summary: true })
       qc.invalidateQueries({ queryKey: queryKeys.purchaseRecommendationsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
     },
   })
 }
 
-function invalidateExpiryQueries(qc: ReturnType<typeof useQueryClient>) {
-  qc.invalidateQueries({ queryKey: queryKeys.expiryWarningsBase })
-  qc.invalidateQueries({ queryKey: queryKeys.expirySummaryBase })
-  qc.invalidateQueries({ queryKey: queryKeys.expiryActionsHistoryBase })
-  qc.invalidateQueries({ queryKey: queryKeys.expiringLotsBase })
-}
 
 export function useCommitExpiryAction() {
   const qc = useQueryClient()
@@ -135,9 +161,7 @@ export function useAutoReturnCancelExpiredLot() {
     mutationFn: (payload: Parameters<typeof inventoryApi.autoReturnCancelExpiredLot>[0]) =>
       inventoryApi.autoReturnCancelExpiredLot(payload),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.expiryWarningsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.expirySummaryBase })
-      qc.invalidateQueries({ queryKey: queryKeys.expiringLotsBase })
+      invalidateExpiryQueries(qc)
       qc.invalidateQueries({ queryKey: queryKeys.stockMovementsBase })
       qc.invalidateQueries({ queryKey: ["returnCancelMovements"] })
     },
@@ -180,7 +204,7 @@ export function useCancelPurchaseOrder() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.cancelPurchaseOrder(id),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.purchaseOrdersBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateDomain(qc, queryKeys.purchaseOrdersBase, { summary: true }),
   })
 }
 
@@ -199,7 +223,7 @@ export function useCreateGoodsReceiving() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Record<string, unknown>) => warehouseApi.createGoodsReceiving(data),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.goodsReceivingsBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateDomain(qc, queryKeys.goodsReceivingsBase, { summary: true }),
   })
 }
 
@@ -208,13 +232,8 @@ export function useCompleteGoodsReceiving() {
   return useMutation({
     mutationFn: (id: string) => warehouseApi.completeGoodsReceiving(id),
     onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.goodsReceivingsBase })
+      invalidateDomain(qc, queryKeys.goodsReceivingsBase, { summary: true, stockSurfaces: true })
       qc.invalidateQueries({ queryKey: queryKeys.purchaseOrdersBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-      qc.invalidateQueries({ queryKey: queryKeys.stockItemsSimpleBase })
-      qc.invalidateQueries({ queryKey: queryKeys.stockItemsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.stockMovementsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.stockSummaryBase })
     },
   })
 }
@@ -223,10 +242,7 @@ export function useDeleteGoodsReceiving() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.deleteGoodsReceiving(id),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.goodsReceivingsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.goodsReceivingsBase, { summary: true }),
   })
 }
 
@@ -237,7 +253,7 @@ export function useCreateTransfer() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Record<string, unknown>) => warehouseApi.createTransfer(data),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.transfersBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateDomain(qc, queryKeys.transfersBase, { summary: true }),
   })
 }
 
@@ -246,10 +262,7 @@ export function useUpdateTransfer() {
   return useMutation({
     mutationFn: ({ id, data }: { id: string; data: Record<string, unknown> }) =>
       warehouseApi.updateTransfer(id, data),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.transfersBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.transfersBase, { summary: true }),
   })
 }
 
@@ -265,11 +278,7 @@ export function useCompleteTransfer() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.completeTransfer(id),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.transfersBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-      qc.invalidateQueries({ queryKey: queryKeys.stockItemsSimpleBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.transfersBase, { summary: true, stockSimple: true }),
   })
 }
 
@@ -277,7 +286,7 @@ export function useCancelTransfer() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.cancelTransfer(id),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.transfersBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateDomain(qc, queryKeys.transfersBase, { summary: true }),
   })
 }
 
@@ -288,7 +297,7 @@ export function useCreateStockCounting() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Record<string, unknown>) => warehouseApi.createStockCounting(data),
-    onSuccess: () => { qc.invalidateQueries({ queryKey: queryKeys.stockCountingsBase }); qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase }) },
+    onSuccess: () => invalidateDomain(qc, queryKeys.stockCountingsBase, { summary: true }),
   })
 }
 
@@ -312,11 +321,7 @@ export function useApproveStockCounting() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.approveStockCounting(id),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.stockCountingsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-      qc.invalidateQueries({ queryKey: queryKeys.stockItemsSimpleBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.stockCountingsBase, { summary: true, stockSimple: true }),
   })
 }
 
@@ -333,10 +338,7 @@ export function useDeleteStockCounting() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.deleteStockCounting(id),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.stockCountingsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.stockCountingsBase, { summary: true }),
   })
 }
 
@@ -347,10 +349,7 @@ export function useCreateDeficiencyReport() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (data: Record<string, unknown>) => warehouseApi.createDeficiencyReport(data),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.deficiencyReportsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.deficiencyReportsBase, { summary: true }),
   })
 }
 
@@ -374,10 +373,7 @@ export function useDeleteDeficiencyReport() {
   const qc = useQueryClient()
   return useMutation({
     mutationFn: (id: string) => warehouseApi.deleteDeficiencyReport(id),
-    onSuccess: () => {
-      qc.invalidateQueries({ queryKey: queryKeys.deficiencyReportsBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
-    },
+    onSuccess: () => invalidateDomain(qc, queryKeys.deficiencyReportsBase, { summary: true }),
   })
 }
 
@@ -454,8 +450,7 @@ export function useSetWarehouseStockMinimum() {
       warehouseApi.setWarehouseStockMinimum(warehouseId, { stock_item_id, minimum_quantity }),
     onSuccess: (_data, variables) => {
       qc.invalidateQueries({ queryKey: ["warehouse-inventory-levels", variables.warehouseId] })
-      qc.invalidateQueries({ queryKey: queryKeys.warehousesBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
+      invalidateWarehouseListAndSummary(qc)
     },
   })
 }
@@ -481,8 +476,7 @@ export function useAdjustWarehouseStock() {
       }),
     onSuccess: (_data, variables) => {
       qc.invalidateQueries({ queryKey: ["warehouse-inventory-levels", variables.warehouse_id] })
-      qc.invalidateQueries({ queryKey: queryKeys.warehousesBase })
-      qc.invalidateQueries({ queryKey: queryKeys.warehouseSummaryBase })
+      invalidateWarehouseListAndSummary(qc)
       qc.invalidateQueries({ queryKey: queryKeys.stockItemsSimpleBase })
       qc.invalidateQueries({ queryKey: queryKeys.stockMovementsBase })
     },

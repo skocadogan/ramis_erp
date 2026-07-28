@@ -17,13 +17,12 @@ export function useBranchStaff(branchId?: string) {
     queryFn: async () => {
       const params: Record<string, unknown> = {
         is_active: true,
-        page_size: 1000,
       }
       if (branchId) {
         params.branch = branchId
       }
-      const data = await adminApi.getUsers(params)
-      return (data.results || []).map((u) => ({
+      const results = await adminApi.fetchAllUsers(params)
+      return results.map((u) => ({
         id: u.id,
         name: [u.first_name, u.last_name].filter(Boolean).join(" ") || u.username,
       }))

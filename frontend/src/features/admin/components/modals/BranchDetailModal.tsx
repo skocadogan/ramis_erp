@@ -69,8 +69,8 @@ export function BranchDetailModal({ branch, onClose }: BranchDetailModalProps) {
 
   const fetchAllUsers = async () => {
     try {
-      const data = await adminApi.getUsers({ page_size: 1000 })
-      setAllUsers(data.results)
+      const results = await adminApi.fetchAllUsers()
+      setAllUsers(results)
     } catch {
       console.error("Kullanıcılar yüklenemedi")
     }

@@ -65,8 +65,8 @@ export function CreditAccountFormModal({
   const { data: users = [], isLoading: usersLoading } = useQuery({
     queryKey: ["credit-form-users", branchId],
     queryFn: async () => {
-      const data = await adminApi.getUsers({ is_active: true, page_size: 1000 });
-      return data.results;
+      const results = await adminApi.fetchAllUsers({ is_active: true });
+      return results;
     },
     enabled: open,
     staleTime: 60_000,

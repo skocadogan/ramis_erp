@@ -20,6 +20,8 @@ export const { dynamic, dynamicParams, revalidate, generateStaticParams, GET } =
   createSerwistRoute({
     swSrc: "src/app/sw.ts",
     additionalPrecacheEntries: [{ url: "/offline", revision }],
+    // Linux/macOS varsayılanı esbuild-wasm; native esbuild zaten kurulu.
+    useNativeEsbuild: true,
     esbuildOptions: {
       define: {
         __RAMIS_API_ORIGIN__: JSON.stringify(apiOrigin),

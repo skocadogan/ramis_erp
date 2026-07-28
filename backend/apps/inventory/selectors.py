@@ -9,7 +9,6 @@ from core.decimal_constants import ZERO_MONEY, ZERO_QTY
 from .models import StockItem, StockMovement, Supplier, StockCategory
 from .stock_minimum import (
     ZERO_QTY,
-    q_low_stock_stock_item_vs_annotated_current,
     q_low_stock_vs_effective_minimum,
     q_low_stock_warehouse_level,
     quantity_at_warehouse_level,
@@ -126,7 +125,7 @@ def get_active_stock_items(
     supplier_id=None,
 ) -> QuerySet[StockItem]:
     """Aktif stok kalemlerini getirir. Warehouse ID ile filtreleme yapılabilir."""
-    qs = StockItem.objects.filter(is_active=True).select_related('category')
+    qs = StockItem.objects.filter(is_active=True).select_related('category').prefetch_related('allergens')
     
     # Her stock item için WarehouseStockLevel'dan fiziksel ve rezerve miktarları al
     physical_sub, reserved_sub = get_stock_item_quantities(
@@ -140,7 +139,12 @@ def get_active_stock_items(
         current_quantity=F('physical_quantity') - F('reserved_quantity'), # Available
         effective_minimum=get_stock_item_effective_minimum(
             warehouse_id=warehouse_id
-        )
+        ),
+        recipe_usage_count=Count(
+            'recipe_ingredients__recipe_id',
+            filter=Q(recipe_ingredients__is_active=True),
+            distinct=True,
+        ),
     )
     
     qs = qs.annotate(
@@ -175,37 +179,12 @@ def get_low_stock_items(
     category_id=None,
     limit_warehouse_ids=None,
 ) -> QuerySet[StockItem]:
-    """Düşük stok kalemlerini getirir — 60s cache ile (RAPOR-3 O-6)."""
-    from django.core.cache import cache
-    import hashlib
-
-    wh_key = warehouse_id or 'all'
-    cat_key = category_id or 'all'
-    limit_key = hashlib.md5(str(limit_warehouse_ids).encode()).hexdigest()[:8] if limit_warehouse_ids else 'none'
-    cache_key = f'low_stock_items:{wh_key}:{cat_key}:{limit_key}'
-
-    cached = cache.get(cache_key)
-    if cached is not None:
-        item_ids = cached
-        qs = StockItem.objects.filter(is_active=True, id__in=item_ids).select_related('category')
-        if category_id:
-            qs = qs.filter(category_id=category_id)
-        return qs
-
-    qs = StockItem.objects.filter(is_active=True).select_related('category')
-    qs = qs.annotate(
-        current_quantity=get_stock_item_quantities(
-            warehouse_id=warehouse_id,
-            limit_warehouse_ids=None if warehouse_id else limit_warehouse_ids,
-        )
-    )
-    qs = qs.filter(q_low_stock_stock_item_vs_annotated_current())
-
-    if category_id:
-        qs = qs.filter(category_id=category_id)
-
-    cache.set(cache_key, list(qs.values_list('id', flat=True)), timeout=60)
-    return qs
+    """Düşük stok kalemlerini getirir (annotate'li aktif stok QS üzerinden)."""
+    return get_active_stock_items(
+        warehouse_id=warehouse_id,
+        category_id=category_id,
+        limit_warehouse_ids=limit_warehouse_ids,
+    ).filter(is_low_stock=True)
 
 
 def get_stock_item_by_sku(sku: str) -> StockItem | None:

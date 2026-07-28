@@ -22,7 +22,7 @@ def search_products(query: str, user, request) -> list[dict]:
 
     qs = (
         Product.objects.filter(is_active=True)
-        .select_related("category")
+        .select_related("category", "category__station")
         .only("id", "name", "category__name")
     )
 

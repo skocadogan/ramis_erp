@@ -5,28 +5,8 @@ from datetime import date, datetime, time
 
 from django.db.models import QuerySet
 from django.utils import timezone
-from django.utils.dateparse import parse_date
 
-
-def parse_date_range(
-    start_date: str | date | None,
-    end_date: str | date | None,
-) -> tuple[date | None, date | None]:
-    if isinstance(start_date, date):
-        start = start_date
-    elif start_date:
-        start = parse_date(str(start_date))
-    else:
-        start = None
-
-    if isinstance(end_date, date):
-        end = end_date
-    elif end_date:
-        end = parse_date(str(end_date))
-    else:
-        end = None
-
-    return start, end
+from core.date_utils import parse_date_range
 
 
 def apply_branch_filter(qs: QuerySet, branch_id: str | None, *, field: str = 'branch_id') -> QuerySet:

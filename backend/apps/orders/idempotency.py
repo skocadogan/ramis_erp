@@ -7,6 +7,7 @@ from django.utils.translation import gettext as _
 from rest_framework import status
 from rest_framework.response import Response
 
+from core.json_utils import to_json_safe
 from .models import PosIdempotencyRecord, PosIdempotencyScope
 
 logger = logging.getLogger(__name__)
@@ -105,7 +106,7 @@ def cached_response(existing: PosIdempotencyRecord) -> Response:
 
 
 def _json_safe(data) -> dict:
-    return json.loads(json.dumps(data, default=str))
+    return to_json_safe(data) if data is not None else {}
 
 
 def save_idempotency_record(

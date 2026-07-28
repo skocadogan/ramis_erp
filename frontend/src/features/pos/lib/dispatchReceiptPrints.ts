@@ -1,7 +1,7 @@
 "use client";
 
 import { toast } from "sonner";
-import { adminApi } from "@/features/admin/services/adminApi";
+import { printersApi } from "@/features/printing/services/printersApi";
 import { toastApiError, toastApiSuccess } from "@/lib/operationalToast";
 
 export type ReceiptPrintJob = {
@@ -29,7 +29,7 @@ export async function dispatchReceiptPrints(
 
   const results = await Promise.allSettled(
     pending.map((job) =>
-      adminApi.printReceiptThermal(
+      printersApi.printReceiptThermal(
         job.templateSlug,
         job.printerId,
         job.context,

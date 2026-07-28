@@ -270,12 +270,14 @@ export const ProductCard = memo(function ProductCard({
         )}
       </div>
 
-      <RecommendedProductsDialog
-        sourceProduct={product}
-        open={showRecommendations}
-        onOpenChange={setShowRecommendations}
-        layout={layout}
-      />
+      {showRecommendations ? (
+        <RecommendedProductsDialog
+          sourceProduct={product}
+          open={showRecommendations}
+          onOpenChange={setShowRecommendations}
+          layout={layout}
+        />
+      ) : null}
 
       <Dialog open={showInfo} onOpenChange={setShowInfo}>
         <DialogContent className="sm:max-w-md">

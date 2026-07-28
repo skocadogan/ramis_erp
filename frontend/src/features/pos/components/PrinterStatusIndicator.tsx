@@ -5,7 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Printer as PrinterIcon, XCircle, RefreshCw, Send, ChevronDown } from "lucide-react";
 import { usePosStore } from "@/store/usePosStore";
 import { useShallow } from "zustand/react/shallow";
-import { adminApi, type Printer } from "@/features/admin/services/adminApi";
+import { printersApi, type Printer } from "@/features/printing/services/printersApi";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
@@ -80,7 +80,7 @@ export function PrinterStatusIndicator({
   const { data: allPrinters = [], isLoading } = useQuery({
     queryKey,
     queryFn: async () => {
-      const data = await adminApi.getPrinters({ branch_id: branchId, is_active: true });
+      const data = await printersApi.getPrinters({ branch_id: branchId, is_active: true });
       return "results" in data ? (data.results as Printer[]) : (data as unknown as Printer[]);
     },
     enabled: !!branchId,
@@ -118,7 +118,7 @@ export function PrinterStatusIndicator({
       if (ids.length === 0) return;
 
       const results = await Promise.allSettled(
-        ids.map((id) => adminApi.syncPrinterStatus(id)),
+        ids.map((id) => printersApi.syncPrinterStatus(id)),
       );
 
       let successCount = 0;
@@ -154,7 +154,7 @@ export function PrinterStatusIndicator({
   };
 
   const testPrintMutation = useMutation({
-    mutationFn: (printerId: string) => adminApi.testPrint(printerId),
+    mutationFn: (printerId: string) => printersApi.testPrint(printerId),
     onSuccess: () => {
       toast.success(t("testPrintSuccess"));
     },

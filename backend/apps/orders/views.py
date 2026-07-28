@@ -85,6 +85,7 @@ class OrderViewSet(viewsets.ModelViewSet):
         'table__zone__branch',
         'user',
         'branch',
+        'customer',
         'discount_by',
         'sale',
     ).prefetch_related(

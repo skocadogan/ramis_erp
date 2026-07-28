@@ -10,7 +10,7 @@ def get_active_categories() -> QuerySet[Category]:
 
 def get_active_products(category_id=None) -> QuerySet[Product]:
     """Aktif ürünleri getirir."""
-    qs = Product.objects.filter(is_active=True).select_related('category').prefetch_related(
+    qs = Product.objects.filter(is_active=True).select_related('category', 'category__station').prefetch_related(
         Prefetch('variants', queryset=ProductVariant.objects.all()),
         Prefetch(
             'modifier_groups',
@@ -25,7 +25,7 @@ def get_active_products(category_id=None) -> QuerySet[Product]:
 def get_product_by_id(product_id) -> Product | None:
     """ID ile ürün getirir."""
     try:
-        return Product.objects.select_related('category').prefetch_related(
+        return Product.objects.select_related('category', 'category__station').prefetch_related(
             'variants',
             Prefetch(
                 'modifier_groups',

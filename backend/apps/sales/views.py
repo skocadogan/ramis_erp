@@ -172,6 +172,7 @@ class SaleViewSet(viewsets.ModelViewSet):
     def export_excel(self, request):
         queryset = self.filter_queryset(self.get_queryset())
         totals = aggregate_sale_money_totals(queryset)
+        items = list(queryset[:5000])
         
         columns = [
             {'key': 'id', 'label': _('No')},
@@ -184,7 +185,7 @@ class SaleViewSet(viewsets.ModelViewSet):
         ]
         
         data = []
-        for s in queryset:
+        for s in items:
             pm_display = s.get_payment_method_display()
             if s.is_split_payment:
                 pm_display = f"{pm_display} ({_('(bölünmüş)')})"

@@ -246,10 +246,17 @@ class Product(BaseModel):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        # Ürün silindiğinde reçetesini boşa çıkart (soft veya hard delete fark etmeksizin)
-        if hasattr(self, 'recipe') and self.recipe is not None:
-            self.recipe.product = None
-            self.recipe.save(update_fields=['product', 'updated_at'])
+        # Soft-delete'te ürün-reçete bağını koparma: boş branches'li orphan reçete
+        # filter_recipe_queryset_by_accessible_branches içinde global görünür olur.
+        hard = kwargs.get('hard', False)
+        if hard:
+            try:
+                recipe = self.recipe
+            except Product.recipe.RelatedObjectDoesNotExist:
+                recipe = None
+            if recipe is not None:
+                recipe.product = None
+                recipe.save(update_fields=['product', 'updated_at'])
         return super().delete(*args, **kwargs)
 
 

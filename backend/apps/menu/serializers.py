@@ -74,7 +74,11 @@ class CategorySerializer(serializers.ModelSerializer):
         ]
 
     def get_tags(self, obj):
-        active_tags = obj.tags.filter(is_active=True)
+        cache = getattr(obj, '_prefetched_objects_cache', None)
+        if cache and 'tags' in cache:
+            active_tags = [t for t in cache['tags'] if t.is_active]
+        else:
+            active_tags = obj.tags.filter(is_active=True)
         return MenuTagBriefSerializer(active_tags, many=True).data
 
     def create(self, validated_data):
@@ -352,7 +356,11 @@ class ProductSerializer(serializers.ModelSerializer):
     )
 
     def get_tags(self, obj):
-        active_tags = obj.tags.filter(is_active=True)
+        cache = getattr(obj, '_prefetched_objects_cache', None)
+        if cache and 'tags' in cache:
+            active_tags = [t for t in cache['tags'] if t.is_active]
+        else:
+            active_tags = obj.tags.filter(is_active=True)
         return MenuTagBriefSerializer(active_tags, many=True).data
 
     def get_has_recommendations(self, obj):

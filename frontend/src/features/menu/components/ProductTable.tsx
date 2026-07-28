@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import { useMemo, type ReactNode } from "react"
 import { Search, Plus, TrendingUp, Tag, GripVertical, Utensils, StarIcon, Building2, Flame, ChefHat } from "lucide-react"
 import { useTranslations } from "next-intl"
 import {
@@ -14,6 +14,7 @@ import {
 } from '@dnd-kit/core';
 
 import { Button } from "@/components/ui/button"
+import { VirtualTable } from "@/components/ui/virtual-table"
 
 import {
   arrayMove,
@@ -115,6 +116,55 @@ export default function ProductTable({
   }
 
   const displayProducts = products.filter(p => !!p.is_combined === isCombinedTab);
+  // DnD + tam DOM küçük listelerde; büyük katalogda VirtualTable (sıralama o filtrede kapalı).
+  const useVirtualList = !canManage || displayProducts.length > 100;
+
+  const tableHeader = (
+    <thead className="border-b border-border sticky top-0 bg-muted border-border z-10">
+      <tr>
+        {canManage && <th className="w-8"></th>}
+        <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.product")}</th>
+        <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.branch")}</th>
+        <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.category")}</th>
+        {isCombinedTab && <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.contents")}</th>}
+        <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.price")}</th>
+        <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.status")}</th>
+        {canManage && <th className="w-12 px-4 py-2.5"></th>}
+      </tr>
+    </thead>
+  )
+
+  const emptyState = (
+    <div className="flex-1 overflow-auto rounded-lg border border-border bg-card border-border no-scrollbar">
+      <table className="w-full text-sm">
+        {tableHeader}
+        <tbody>
+          <tr>
+            <td colSpan={emptyColSpan} className="text-center py-12 text-sm text-muted-foreground">
+              {t("productTable.empty")}
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  )
+
+  const rowPropsFor = (product: Product): RowProps => ({
+    product,
+    canManage,
+    onEdit,
+    onDelete,
+    onCopy,
+    onRemoveDiscount,
+    onToggleActive,
+    onTogglePos,
+    onToggleFeatured,
+    onTogglePopular,
+    onToggleChefRecommendation,
+    isCombinedRow: isCombinedTab,
+    menuActive: getEffectiveMenuActive ? getEffectiveMenuActive(product) : product.is_active,
+    branchTagLabel: formatTagsForBranch(product.tags, selectedBranchId),
+  })
 
   return (
     <div className="flex-1 flex flex-col gap-3 overflow-hidden no-scrollbar">
@@ -194,62 +244,52 @@ export default function ProductTable({
 
       </div>
 
-      <div className="flex-1 overflow-auto rounded-lg border border-border bg-card border-border no-scrollbar">
-        <DndContext
-          sensors={sensors}
-          collisionDetection={closestCenter}
-          onDragEnd={handleDragEnd}
-        >
-          <SortableContext
-            items={products.map(p => p.id)}
-            strategy={verticalListSortingStrategy}
+      {/* Küçük manage listesi: DnD. Büyük / read-only: VirtualTable. */}
+      {!useVirtualList ? (
+        <div className="flex-1 overflow-auto rounded-lg border border-border bg-card border-border no-scrollbar">
+          <DndContext
+            sensors={sensors}
+            collisionDetection={closestCenter}
+            onDragEnd={handleDragEnd}
           >
-            <table className="w-full text-sm">
-              <thead className="border-b border-border sticky top-0 bg-muted border-border z-10">
-                <tr>
-                  {canManage && <th className="w-8"></th>}
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.product")}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.branch")}</th>
-                  <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.category")}</th>
-                  {isCombinedTab && <th className="text-left px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.contents")}</th>}
-                  <th className="text-right px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.price")}</th>
-                  <th className="text-center px-4 py-2.5 text-xs font-semibold text-muted-foreground tracking-widerdark:text-muted-foreground">{t("productTable.columns.status")}</th>
-                  {canManage && <th className="w-12 px-4 py-2.5"></th>}
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-border">
-                {displayProducts.length === 0 ? (
-                  <tr>
-                    <td colSpan={emptyColSpan} className="text-center py-12 text-sm text-muted-foreground">
-                      {t("productTable.empty")}
-                    </td>
-                  </tr>
-                ) : (
-                  displayProducts.map(product => (
-                    <SortableProductRow
-                      key={product.id}
-                      product={product}
-                      canManage={canManage}
-                      onEdit={onEdit}
-                      onDelete={onDelete}
-                      onCopy={onCopy}
-                      onRemoveDiscount={onRemoveDiscount}
-                      onToggleActive={onToggleActive}
-                      onTogglePos={onTogglePos}
-                      onToggleFeatured={onToggleFeatured}
-                      onTogglePopular={onTogglePopular}
-                      onToggleChefRecommendation={onToggleChefRecommendation}
-                      isCombinedRow={isCombinedTab}
-                      menuActive={getEffectiveMenuActive ? getEffectiveMenuActive(product) : product.is_active}
-                      branchTagLabel={formatTagsForBranch(product.tags, selectedBranchId)}
-                    />
-                  ))
-                )}
-              </tbody>
-            </table>
-          </SortableContext>
-        </DndContext>
-      </div>
+            <SortableContext
+              items={products.map(p => p.id)}
+              strategy={verticalListSortingStrategy}
+            >
+              <table className="w-full text-sm">
+                {tableHeader}
+                <tbody className="divide-y divide-border">
+                  {displayProducts.length === 0 ? (
+                    <tr>
+                      <td colSpan={emptyColSpan} className="text-center py-12 text-sm text-muted-foreground">
+                        {t("productTable.empty")}
+                      </td>
+                    </tr>
+                  ) : (
+                    displayProducts.map(product => (
+                      <SortableProductRow key={product.id} {...rowPropsFor(product)} />
+                    ))
+                  )}
+                </tbody>
+              </table>
+            </SortableContext>
+          </DndContext>
+        </div>
+      ) : displayProducts.length === 0 ? (
+        emptyState
+      ) : (
+        <VirtualTable
+          rows={displayProducts}
+          rowHeight={72}
+          overscan={6}
+          className="flex-1 rounded-lg border border-border bg-card border-border no-scrollbar"
+          tableClassName="text-sm"
+          header={tableHeader}
+          renderRow={(product) => (
+            <ProductRowCells {...rowPropsFor(product)} />
+          )}
+        />
+      )}
     </div>
   )
 }
@@ -271,35 +311,31 @@ interface RowProps {
   branchTagLabel?: string
 }
 
-function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRemoveDiscount, onToggleActive, onTogglePos, onToggleFeatured, onTogglePopular, onToggleChefRecommendation, isCombinedRow, menuActive, branchTagLabel }: RowProps) {
+function ProductRowCells({
+  product,
+  canManage,
+  onEdit,
+  onDelete,
+  onCopy,
+  onRemoveDiscount,
+  onToggleActive,
+  onTogglePos,
+  onToggleFeatured,
+  onTogglePopular,
+  onToggleChefRecommendation,
+  isCombinedRow,
+  menuActive,
+  branchTagLabel,
+  dragHandle,
+}: RowProps & { dragHandle?: ReactNode }) {
   const t = useTranslations("menu_management")
   const canViewAmounts = useCanViewAmounts()
-  const {
-    attributes,
-    listeners,
-    setNodeRef,
-    transform,
-    transition,
-    isDragging
-  } = useSortable({ id: product.id });
-
-  const style = {
-    transform: CSS.Translate.toString(transform),
-    transition,
-    zIndex: isDragging ? 10 : 'auto',
-    opacity: isDragging ? 0.6 : 1,
-    backgroundColor: isDragging ? 'rgba(241, 245, 249, 0.5)' : undefined,
-    contentVisibility: 'auto' as const,
-    containIntrinsicSize: '0 56px',
-  };
 
   return (
-    <tr ref={setNodeRef} style={style} className="group hover:/50 dark:hover:/50">
+    <>
       {canManage && (
         <td className="pl-2 w-8">
-          <button {...attributes} {...listeners} className="p-1 hover:text-muted-foreground cursor-grab active:cursor-grabbing">
-            <GripVertical size={14} />
-          </button>
+          {dragHandle}
         </td>
       )}
       <td className="px-4 py-3">
@@ -439,6 +475,40 @@ function SortableProductRow({ product, canManage, onEdit, onDelete, onCopy, onRe
           />
         </td>
       )}
+    </>
+  )
+}
+
+function SortableProductRow(props: RowProps) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging
+  } = useSortable({ id: props.product.id });
+
+  const style = {
+    transform: CSS.Translate.toString(transform),
+    transition,
+    zIndex: isDragging ? 10 : 'auto',
+    opacity: isDragging ? 0.6 : 1,
+    backgroundColor: isDragging ? 'rgba(241, 245, 249, 0.5)' : undefined,
+    contentVisibility: 'auto' as const,
+    containIntrinsicSize: '0 56px',
+  };
+
+  return (
+    <tr ref={setNodeRef} style={style} className="group hover:/50 dark:hover:/50">
+      <ProductRowCells
+        {...props}
+        dragHandle={
+          <button {...attributes} {...listeners} className="p-1 hover:text-muted-foreground cursor-grab active:cursor-grabbing">
+            <GripVertical size={14} />
+          </button>
+        }
+      />
     </tr>
   );
 }

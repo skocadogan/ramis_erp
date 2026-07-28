@@ -2,11 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import { useQuery } from "@tanstack/react-query"
-import { toast } from "sonner"
-import { useTranslations } from "next-intl"
 import api from "@/lib/api"
-import { checkBackendHealth } from "@/lib/healthCheck"
-import { useRuntimeConfig } from "@/lib/RuntimeConfigProvider"
 import { useAuthStore } from "@/store/useAuthStore"
 import {
   usePosStore,
@@ -19,19 +15,8 @@ import { WS_HTTP_FALLBACK_INTERVAL_MS } from "@/lib/wsBackendHost"
 import { queryKeys } from "@/lib/queryKeys"
 import { useMenuCatalogSync } from "./useMenuCatalogSync"
 import { usePosTables, usePosZones } from "./usePosTables"
-import { resolveMediaUrl } from "@/lib/mediaUrl"
-import type { Product } from "@/types/pos"
-
-
-function normalizePosProduct(product: Product): Product {
-  return {
-    ...product,
-    image: resolveMediaUrl(product.image),
-  }
-}
-
-/** Backend `MenuCatalogPagination.max_page_size` ile uyumlu; tüm menü (birleşik ürünler dahil) yüklensin. */
-const MENU_CATALOG_PAGE_SIZE = 500
+import { usePosProducts } from "./usePosProducts"
+import { usePosCategories } from "./usePosCategories"
 
 interface UsePosDataSyncOptions {
   pathname: string
@@ -56,8 +41,6 @@ export function usePosDataSync({
   pathname,
   variant = "pos",
 }: UsePosDataSyncOptions): UsePosDataSyncReturn {
-  const t = useTranslations("pos")
-  const runtime = useRuntimeConfig()
   const user = useAuthStore(useShallow((s) => s.user))
   const prevPathRef = useRef<string | null>(null)
 
@@ -111,39 +94,17 @@ export function usePosDataSync({
     enabled: !!user && !!bid && needTables,
   })
 
-  const categoriesQuery = useQuery({
-    queryKey: queryKeys.posCategories(bid),
-    queryFn: async () => {
-      const { data } = await api.get("/menu/categories/", {
-        params: { branch_id: bid, page_size: MENU_CATALOG_PAGE_SIZE },
-      })
-      return data.results || data
-    },
+  const categoriesQuery = usePosCategories({
+    branchId: bid,
     enabled: !!user && !!bid && needMenu,
     refetchInterval: menuPollMs,
-    staleTime: 5 * 60_000,
     gcTime: 30 * 60_000,
   })
 
-  const productsQuery = useQuery({
-    queryKey: queryKeys.posProducts(bid),
-    queryFn: async () => {
-      const { data } = await api.get("/menu/products/", {
-        params: {
-          branch_id: bid,
-          is_active: true,
-          show_on_pos: true,
-          page_size: MENU_CATALOG_PAGE_SIZE,
-        },
-      })
-      const raw = data.results || data
-      return Array.isArray(raw)
-        ? raw.map((product: Product) => normalizePosProduct(product))
-        : raw
-    },
+  const productsQuery = usePosProducts({
+    branchId: bid,
     enabled: !!user && !!bid && needMenu,
     refetchInterval: menuPollMs,
-    staleTime: 5 * 60_000,
   })
 
   const isLoading =
@@ -205,25 +166,7 @@ export function usePosDataSync({
     }
   }, [variant, initializeSettings, user?.id])
 
-
-  // ── Backend health check ──────────────────────────────────────────────────────
-
-  useEffect(() => {
-    const ac = new AbortController()
-    void (async () => {
-      const ok = await checkBackendHealth(ac.signal)
-      if (ac.signal.aborted) return
-      if (!ok) {
-        const base = runtime.apiBaseUrl
-        toast.error(t("healthCheck.unreachableTitle"), {
-          id: "pos-api-unreachable",
-          duration: 12_000,
-          description: t("healthCheck.unreachableDescription", { base }),
-        })
-      }
-    })()
-    return () => ac.abort()
-  }, [runtime.apiBaseUrl, t])
+  // Backend health: BackendHealthProvider / banner — POS'ta ayrı toast yok.
 
   // ── Visibility: menü WS kapalıysa katalog yenile ─────────────────────────────
 

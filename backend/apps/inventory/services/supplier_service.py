@@ -37,5 +37,4 @@ class SupplierService:
     @transaction.atomic
     def delete_supplier(supplier_id) -> None:
         supplier = Supplier.objects.get(id=supplier_id)
-        supplier.is_active = False
-        supplier.save(update_fields=['is_active', 'updated_at'])
+        supplier.delete()

@@ -78,14 +78,10 @@ function setNextLocaleCookie(locale: string) {
 
 const POSHeader = React.memo(function POSHeader({
   variant = "pos",
-  kitchenBadgeCount = 0,
-  waiterCallBadgeCount = 0,
   onKitchenToggle,
   onWaiterCallToggle,
 }: {
   variant?: "pos" | "waiter";
-  kitchenBadgeCount?: number;
-  waiterCallBadgeCount?: number;
   onKitchenToggle?: () => void;
   onWaiterCallToggle?: () => void;
 } = {}) {
@@ -516,8 +512,6 @@ const POSHeader = React.memo(function POSHeader({
               </DropdownMenu>
               {variant === "pos" && (
                 <NotificationButtons
-                  kitchenBadgeCount={kitchenBadgeCount}
-                  waiterCallBadgeCount={waiterCallBadgeCount}
                   onKitchenToggle={onKitchenToggle}
                   onWaiterCallToggle={onWaiterCallToggle}
                 />

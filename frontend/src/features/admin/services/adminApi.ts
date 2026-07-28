@@ -13,48 +13,18 @@ import {
   AssignUsersPayload,
 } from "@/types/user.types"
 import api, { skipInterceptorToast } from "@/lib/api"
+import {
+  printersApi,
+  type ReceiptBlock,
+} from "@/features/printing/services/printersApi"
 
-// --- Printing Types ---
-export interface Printer {
-  id: string
-  branch: string
-  name: string
-  connection_type: "NETWORK" | "USB"
-  connection_type_display: string
-  ip_address: string | null
-  port: number
-  device_path: string | null
-  printer_type: string
-  printer_type_display: string
-  usage_type: "KITCHEN" | "POS"
-  usage_type_display: string
-  kitchen_station: string | null
-  kitchen_station_name: string | null
-  receipt_template_slug: string | null
-  is_active: boolean
-  status_info: {
-    online: boolean
-    paper: "ok" | "low" | "out" | "unknown"
-    error?: string
-  }
-  last_seen: string | null
-  created_at: string
-  updated_at: string
-}
-
-export interface PrinterForm {
-  branch: string
-  name: string
-  connection_type: "NETWORK" | "USB"
-  ip_address?: string
-  port?: number
-  device_path?: string
-  printer_type: string
-  usage_type: "KITCHEN" | "POS"
-  kitchen_station?: string | null
-  receipt_template_slug?: string | null
-  is_active: boolean
-}
+export type {
+  Printer,
+  PrinterForm,
+  ReceiptBlock,
+  ReceiptBlockType,
+  ReceiptTemplate,
+} from "@/features/printing/services/printersApi"
 
 // --- Reporting Types ---
 export interface ReportTemplate {
@@ -81,65 +51,8 @@ export interface ReportTemplateForm {
   is_default: boolean
 }
 
-// --- ESC/POS Receipt Types ---
+// --- ESC/POS Receipt Types (Printer/ReceiptTemplate → printing/printersApi) ---
 type ReceiptCategory = "POS_RECEIPT" | "KITCHEN_TICKET" | "WAITER_TICKET"
-
-export type ReceiptBlockType =
-  | "text" | "divider" | "key_value" | "item_loop"
-  | "feed" | "cut" | "qr" | "date" | "time" | "branch_logo" | "branch_info"
-
-export interface ReceiptBlock {
-  type: ReceiptBlockType
-  // text
-  content?: string
-  align?: "left" | "center" | "right"
-  bold?: boolean
-  size?: "normal" | "double" | "triple" | "quadruple"
-  /** Kağıt satırında sol tarafta bırakılacak boşluk (karakter sayısı) */
-  margin_left?: number
-  /** Kağıt satırında sağ tarafta bırakılacak boşluk (karakter sayısı) */
-  margin_right?: number
-  // divider
-  char?: string
-  // key_value
-  left?: string
-  right?: string
-  // item_loop
-  variable?: string
-  columns?: { 
-    field: string; 
-    width: number; 
-    align: string; 
-    format?: string;
-    prefix?: string;
-    suffix?: string;
-  }[]
-  // feed
-  lines?: number
-  // qr
-  data?: string
-  // branch_logo
-  width_px?: number
-  branch_id?: string
-  // branch_info
-  fields?: string[]
-  /** İçerdiği değişkenler boş veya 0 ise bloğu gizle */
-  hide_if_empty?: boolean
-}
-
-export interface ReceiptTemplate {
-  id: string
-  name: string
-  slug: string
-  category: ReceiptCategory
-  category_display: string
-  paper_width: number
-  layout_json: ReceiptBlock[]
-  is_default: boolean
-  is_active: boolean
-  created_at: string
-  updated_at: string
-}
 
 export interface ReceiptTemplateForm {
   name: string
@@ -392,24 +305,13 @@ export const adminApi = {
   updateManagerAssignments: (userId: string, payload: { branch_ids: string[] }) =>
     api.put(`/branches/manager-assignments/${userId}/`, payload, { ...skipInterceptorToast }).then(r => r.data),
 
-  // --- Printing API ---
-  getPrinters: (params?: Record<string, unknown>) =>
-    api.get<PaginatedResponse<Printer>>("/printing/printers/", { params }).then(r => r.data),
-
-  createPrinter: (data: PrinterForm) =>
-    api.post<Printer>("/printing/printers/", data).then(r => r.data),
-
-  updatePrinter: (id: string, data: Partial<PrinterForm>) =>
-    api.patch<Printer>(`/printing/printers/${id}/`, data).then(r => r.data),
-
-  deletePrinter: (id: string) =>
-    api.delete(`/printing/printers/${id}/`),
-
-  testPrint: (id: string) =>
-    api.post(`/printing/printers/${id}/test_print/`).then(r => r.data),
-
-  syncPrinterStatus: (id: string) =>
-    api.post<Printer>(`/printing/printers/${id}/sync_status/`).then(r => r.data),
+  // --- Printing API (delegates to printersApi) ---
+  getPrinters: printersApi.getPrinters,
+  createPrinter: printersApi.createPrinter,
+  updatePrinter: printersApi.updatePrinter,
+  deletePrinter: printersApi.deletePrinter,
+  testPrint: printersApi.testPrint,
+  syncPrinterStatus: printersApi.syncPrinterStatus,
 
   // --- Reporting API ---
   getReportTemplates: (params?: Record<string, unknown>) =>
@@ -447,10 +349,7 @@ export const adminApi = {
     }).then(r => r.data),
 
   // --- ESC/POS Receipt API ---
-  getReceiptTemplates: (params?: Record<string, unknown>) =>
-    api.get<ReceiptTemplate[] | PaginatedResponse<ReceiptTemplate>>("reporting/receipts/", { params }).then((r) =>
-      Array.isArray(r.data) ? r.data : (r.data.results ?? [])
-    ),
+  getReceiptTemplates: printersApi.getReceiptTemplates,
 
   getReceiptTemplate: (slug: string) =>
     api.get<ReceiptTemplate>(`reporting/receipts/${slug}/`).then(r => r.data),
@@ -470,21 +369,7 @@ export const adminApi = {
       context ? { context } : {}
     ).then(r => r.data),
 
-  printReceiptThermal: (
-    slug: string,
-    printerId: string,
-    context?: Record<string, unknown>,
-    options?: { idempotencyKey?: string }
-  ) =>
-    api.post<{ status: string; message?: string; print_job_id?: string }>(
-      `reporting/receipts/${slug}/print_thermal/`,
-      {
-        printer_id: printerId,
-        ...(context ? { context } : {}),
-        ...(options?.idempotencyKey ? { idempotency_key: options.idempotencyKey } : {}),
-      },
-      { ...skipInterceptorToast }
-    ).then(r => r.data),
+  printReceiptThermal: printersApi.printReceiptThermal,
 
   setReceiptDefault: (slug: string) =>
     api.post<{ status: string; message: string }>(

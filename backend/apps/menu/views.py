@@ -91,8 +91,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.is_active = False
-        instance.save(update_fields=['is_active', 'updated_at'])
+        instance.delete()
         broadcast_menu_catalog_refresh("category_deleted")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -113,7 +112,7 @@ class ProductViewSet(viewsets.ModelViewSet):
             ),
         )
         child_recipe_qs = Recipe.objects.prefetch_related('allergens')
-        queryset = Product.objects.select_related('category').prefetch_related(
+        queryset = Product.objects.select_related('category', 'category__station').prefetch_related(
             'variants', 'modifier_groups', 'modifier_groups__modifiers', 'units', 'tags', 'branches',
             Prefetch(
                 'combined_items',
@@ -399,8 +398,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.is_active = False
-        instance.save(update_fields=['is_active', 'updated_at'])
+        instance.delete()
         broadcast_menu_catalog_refresh("product_deleted")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -477,8 +475,7 @@ class ProductVariantViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.is_active = False
-        instance.save(update_fields=['is_active', 'updated_at'])
+        instance.delete()
         broadcast_menu_catalog_refresh("variant_deleted")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -548,8 +545,7 @@ class ModifierGroupViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.is_active = False
-        instance.save(update_fields=['is_active', 'updated_at'])
+        instance.delete()
         broadcast_menu_catalog_refresh("modifier_group_deleted")
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -589,8 +585,7 @@ class ModifierViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request, *args, **kwargs):
         instance = self.get_object()
-        instance.is_active = False
-        instance.save(update_fields=['is_active', 'updated_at'])
+        instance.delete()
         broadcast_menu_catalog_refresh("modifier_deleted")
         return Response(status=status.HTTP_204_NO_CONTENT)
 

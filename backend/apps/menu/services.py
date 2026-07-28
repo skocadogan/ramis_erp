@@ -4,7 +4,7 @@ from uuid import UUID
 from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 
-from .models import Category, Product, ProductVariant, ModifierGroup, Modifier, ProductRecommendation
+from .models import Product, ModifierGroup, ProductRecommendation
 
 
 class MenuValidationError(Exception):
@@ -13,63 +13,6 @@ class MenuValidationError(Exception):
 
 class MenuService:
     """Menü yönetimi iş mantığı."""
-
-    @staticmethod
-    def toggle_product_availability(product: Product) -> Product:
-        """Ürün aktif/pasif durumunu değiştirir."""
-        product.is_active = not product.is_active
-        product.save(update_fields=['is_active', 'updated_at'])
-        return product
-
-    @staticmethod
-    @transaction.atomic
-    def create_product(
-        category_id,
-        name: str,
-        base_price,
-        description: str = '',
-        is_active: bool = True,
-    ) -> Product:
-        """Yeni ürün oluşturur."""
-        return Product.objects.create(
-            category_id=category_id,
-            name=name,
-            base_price=base_price,
-            description=description,
-            is_active=is_active,
-        )
-
-    @staticmethod
-    @transaction.atomic
-    def create_variant(
-        product_id,
-        name: str,
-        price_adjustment=0,
-    ) -> ProductVariant:
-        """Ürün varyasyonu oluşturur."""
-        return ProductVariant.objects.create(
-            product_id=product_id,
-            name=name,
-            price_adjustment=price_adjustment,
-        )
-
-    @staticmethod
-    @transaction.atomic
-    def create_modifier_group(
-        name: str,
-        is_multiple: bool = False,
-        is_required: bool = False,
-        product_ids=None,
-    ) -> ModifierGroup:
-        """Değiştirici grup oluşturur."""
-        group = ModifierGroup.objects.create(
-            name=name,
-            is_multiple=is_multiple,
-            is_required=is_required,
-        )
-        if product_ids:
-            group.products.set(product_ids)
-        return group
 
     @staticmethod
     @transaction.atomic
@@ -177,7 +120,6 @@ class MenuService:
             recommended_product_id__in=incoming_ids,
         )
         for rec in stale:
-            rec.is_active = False
-            rec.save(update_fields=['is_active', 'updated_at'])
+            rec.delete()
 
         return result

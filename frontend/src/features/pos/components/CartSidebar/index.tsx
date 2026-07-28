@@ -23,7 +23,7 @@ import { executeOrEnqueue, extractOrderFromResponse } from "@/features/pos/offli
 import { signalPosCustomerDisplaySuccess } from "@/features/pos/lib/posCustomerDisplaySync";
 import { dispatchReceiptPrints } from "@/features/pos/lib/dispatchReceiptPrints";
 import { buildStationOrderPrintJobs } from "@/features/pos/lib/buildStationOrderPrintJobs";
-import { adminApi, type Printer } from "@/features/admin/services/adminApi";
+import { printersApi, type Printer } from "@/features/printing/services/printersApi";
 import { isPosOfflineQueueEnabled } from "@/features/pos/offline/config";
 import type { DeferredPrintJob } from "@/features/pos/offline/types";
 import {
@@ -223,7 +223,7 @@ const CartSidebar = memo(function CartSidebar({
       let kitchenPrinters: Printer[] = [];
       if (autoPrintOrder) {
         try {
-          const printerData = await adminApi.getPrinters({
+          const printerData = await printersApi.getPrinters({
             branch_id: branchId,
             usage_type: "KITCHEN",
             is_active: true,

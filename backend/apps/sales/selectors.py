@@ -154,9 +154,9 @@ def get_sales_summary(base_qs):
         
         for pm in payment_methods:
             if pm == "OTHER":
-                pmf = f_pay & Q(payment_method__in=["OTHER", "CREDIT"]) & Q(sale_id__in=base_qs.values("pk"))
+                pmf = f_pay & Q(payment_method__in=["OTHER", "CREDIT"])
             else:
-                pmf = f_pay & Q(payment_method=pm) & Q(sale_id__in=base_qs.values("pk"))
+                pmf = f_pay & Q(payment_method=pm)
             payment_aggs[f'{name}_pm_{pm}_net'] = Sum('amount', filter=pmf)
             # Brüt hesaplama için SalePayment'ta indirim yok (indirim Sale seviyesinde),
             # ancak genellikle split ödemelerde brüt/net farkı Sale bazlıdır.

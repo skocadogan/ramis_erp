@@ -1,5 +1,6 @@
 "use client"
 import { useState, useCallback, useMemo } from "react"
+import dynamic from "next/dynamic"
 import { useTranslations } from "next-intl"
 import { useQueryClient } from "@tanstack/react-query"
 
@@ -48,12 +49,6 @@ import CategoryPanel from "@/features/menu/components/CategoryPanel"
 import ProductTable from "@/features/menu/components/ProductTable"
 import ModifierGroupsPanel from "@/features/menu/components/ModifierGroupsPanel"
 import MenuTagsPanel from "@/features/menu/components/MenuTagsPanel"
-import { ModifierGroupFormModal } from "@/features/menu/components/ModifierGroupFormModal"
-import { MenuTagFormModal } from "@/features/menu/components/MenuTagFormModal"
-import ProductFormModal from "@/features/menu/components/ProductFormModal"
-import CategoryFormModal from "@/features/menu/components/CategoryFormModal"
-import BulkPriceModal from "@/features/menu/components/BulkPriceModal"
-import DiscountModal from "@/features/menu/components/DiscountModal"
 import { AuthGuard } from "@/components/auth/AuthGuard"
 import { useModulePermissions } from "@/hooks/useModulePermissions"
 import { useAuthStore } from "@/store/useAuthStore"
@@ -67,6 +62,35 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog"
+
+const ProductFormModal = dynamic(
+  () => import("@/features/menu/components/ProductFormModal"),
+  { ssr: false },
+)
+const CategoryFormModal = dynamic(
+  () => import("@/features/menu/components/CategoryFormModal"),
+  { ssr: false },
+)
+const BulkPriceModal = dynamic(
+  () => import("@/features/menu/components/BulkPriceModal"),
+  { ssr: false },
+)
+const DiscountModal = dynamic(
+  () => import("@/features/menu/components/DiscountModal"),
+  { ssr: false },
+)
+const ModifierGroupFormModal = dynamic(
+  () =>
+    import("@/features/menu/components/ModifierGroupFormModal").then(
+      (m) => m.ModifierGroupFormModal,
+    ),
+  { ssr: false },
+)
+const MenuTagFormModal = dynamic(
+  () =>
+    import("@/features/menu/components/MenuTagFormModal").then((m) => m.MenuTagFormModal),
+  { ssr: false },
+)
 
 // ---------------------------------------------------------------------------
 // Form sabitleri

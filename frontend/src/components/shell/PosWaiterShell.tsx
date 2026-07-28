@@ -29,6 +29,18 @@ import { usePosDisplaySync } from "@/features/pos/hooks/usePosDisplaySync";
 import { resetPosCustomerDisplayState } from "@/features/pos/lib/posCustomerDisplaySync";
 import { queryKeys } from "@/lib/queryKeys";
 
+/** Müşteri ekranı sync — shell'i cart aboneliğiyle kirletmemek için ayrı mount. */
+function PosDisplaySyncBridge({
+  terminalId,
+  enabled,
+}: {
+  terminalId: string | null;
+  enabled: boolean;
+}) {
+  usePosDisplaySync(enabled ? terminalId : null, enabled);
+  return null;
+}
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -100,7 +112,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
   const [isKitchenNotifOpen, setIsKitchenNotifOpen] = useState(false);
   const [isWaiterCallNotifOpen, setIsWaiterCallNotifOpen] = useState(false);
 
-  const cart = usePosStore((s) => s.cart);
+  const cartLength = usePosStore((s) => s.cart.length);
   const selectedTable = usePosStore((s) => s.selectedTable);
   const activeBranchId = usePosStore((s) => s.activeBranchId);
   const setActiveBranchId = usePosStore((s) => s.setActiveBranchId);
@@ -112,11 +124,6 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
   const posTerminalUuid = usePosStore((s) => s.posTerminalUuid);
   const terminalId = usePosStore((s) => s.terminalId);
   const persistTerminalSelection = usePosStore((s) => s.persistTerminalSelection);
-  const showReadyNotifs = usePosStore((s) => s.showReadyNotifs);
-  const showWaiterCallNotifs = usePosStore((s) => s.showWaiterCallNotifs);
-  const readyItems = usePosStore((s) => s.readyItems);
-  const guestArrivedNotifs = usePosStore((s) => s.guestArrivedNotifs);
-  const waiterCallNotifs = usePosStore((s) => s.waiterCallNotifs);
 
   const { canManage } = useModulePermissions();
   const canOpenShift = canManage("shifts.manage_shift");
@@ -187,7 +194,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
   });
 
   // Müşteri ekranı yalnızca POS oturumunda senkronize edilir
-  usePosDisplaySync(isPosVariant ? terminalId || null : null, isPosVariant);
+  // (cart aboneliği bridge içinde kalır — shell re-render olmaz)
 
   useEffect(() => {
     if (isPosVariant) return;
@@ -464,20 +471,14 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
   }
 
   /* ── Main layout ── */
-  const visibleReadyCount = showReadyNotifs
-    ? readyItems.filter((i) => !i.waiter_acknowledged_at).length
-    : 0;
-  const visibleWaiterCallCount = showWaiterCallNotifs ? waiterCallNotifs.length : 0;
-  const kitchenBadgeCount = visibleReadyCount + guestArrivedNotifs.length;
 
   if (variant === "pos") {
     return (
       <AuthGuard module={variant}>
         <OfflineQueueProvider>
           <div className="flex h-screen flex-col overflow-hidden bg-background">
+            <PosDisplaySyncBridge terminalId={terminalId || null} enabled />
             <POSHeader
-              kitchenBadgeCount={kitchenBadgeCount}
-              waiterCallBadgeCount={visibleWaiterCallCount}
               onKitchenToggle={() => setIsKitchenNotifOpen((p) => !p)}
               onWaiterCallToggle={() => setIsWaiterCallNotifOpen((p) => !p)}
             />
@@ -492,7 +493,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               <div className="flex flex-1 flex-col overflow-hidden">
                 {!selectedTable ? <TableGrid layout="pos" /> : <MenuSection layout="pos" />}
               </div>
-              {cart.length > 0 && (
+              {cartLength > 0 && (
                 <CartSidebar
                   onOrderSuccess={handleOrderSuccess}
                   onRefreshData={refreshPosTables}
@@ -606,7 +607,7 @@ export function PosWaiterShell({ variant, OrderModalComponent: OrderModalCompone
               onClick={() => setCartSheetOpen(true)}
             >
               <ShoppingBag className="h-5 w-5 shrink-0" aria-hidden />
-              {t("cart")}{cart.length > 0 ? ` · ${cart.length}` : ""}
+              {t("cart")}{cartLength > 0 ? ` · ${cartLength}` : ""}
             </Button>
           </div>
 

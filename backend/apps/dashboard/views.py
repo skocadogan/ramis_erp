@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rbac.drf import RBACPermission
 from core.branch_scope import resolve_dashboard_branch_ids
 
-from .services import parse_date_range
+from core.date_utils import parse_date_range_strict as parse_date_range
 from apps.dashboard.selectors import (
     get_dashboard_summary,
     get_revenue_chart_data,

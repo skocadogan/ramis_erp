@@ -1,24 +1,12 @@
-import json
 import logging
 from typing import Any
 
 from channels.layers import get_channel_layer
-from django.core.serializers.json import DjangoJSONEncoder
 
 from apps.orders.ws_broadcast import broadcast_to_kitchen_ws_groups
+from core.json_utils import to_json_safe
 
 logger = logging.getLogger(__name__)
-
-
-def _json_safe(data: dict[str, Any] | None) -> dict[str, Any] | None:
-    """
-    DRF serializer'dan gelen UUID objelerini ve diğer non-JSON-safe tipleri
-    string'e çevirir. channels_redis (msgpack) serialize ederken
-    ``TypeError: can not serialize 'UUID' object`` hatasını engeller.
-    """
-    if data is None:
-        return None
-    return json.loads(json.dumps(data, cls=DjangoJSONEncoder))
 
 
 def serialize_prep_task_for_ws(task) -> dict[str, Any] | None:
@@ -33,7 +21,7 @@ def serialize_prep_task_for_ws(task) -> dict[str, Any] | None:
     )
     if obj is None:
         return None
-    return _json_safe(PrepTaskSerializer(obj).data)
+    return to_json_safe(PrepTaskSerializer(obj).data)
 
 
 def broadcast_prep_update(

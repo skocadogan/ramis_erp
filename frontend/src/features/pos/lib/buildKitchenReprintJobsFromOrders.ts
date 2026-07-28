@@ -1,4 +1,4 @@
-import type { Printer } from "@/features/admin/services/adminApi";
+import type { Printer } from "@/features/printing/services/printersApi";
 import type { OrderDetail } from "@/features/tables/components/TableOrderModal/types";
 import type { ReceiptPrintJob } from "./dispatchReceiptPrints";
 import { buildPrintJobIdempotencyKey } from "./printIdempotency";

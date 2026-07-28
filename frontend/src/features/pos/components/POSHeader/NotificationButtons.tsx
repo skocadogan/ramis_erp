@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Bell, Radio } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { usePosStore } from "@/store/usePosStore";
 
 function usePulseOnChange(value: number) {
   const [pulse, setPulse] = useState(false);
@@ -21,19 +22,30 @@ function usePulseOnChange(value: number) {
   return pulse;
 }
 
+/** Badge sayıları — shell'i kirletmemek için burada selector ile okunur. */
+function usePosNotifBadgeCounts() {
+  const kitchenBadgeCount = usePosStore((s) => {
+    const ready = s.showReadyNotifs
+      ? s.readyItems.filter((i) => !i.waiter_acknowledged_at).length
+      : 0
+    return ready + s.guestArrivedNotifs.length
+  })
+  const waiterCallBadgeCount = usePosStore((s) =>
+    s.showWaiterCallNotifs ? s.waiterCallNotifs.length : 0,
+  )
+  return { kitchenBadgeCount, waiterCallBadgeCount }
+}
+
 interface NotificationButtonsProps {
-  kitchenBadgeCount: number;
-  waiterCallBadgeCount: number;
   onKitchenToggle?: () => void;
   onWaiterCallToggle?: () => void;
 }
 
 const NotificationButtons = React.memo(function NotificationButtons({
-  kitchenBadgeCount,
-  waiterCallBadgeCount,
   onKitchenToggle,
   onWaiterCallToggle,
 }: NotificationButtonsProps) {
+  const { kitchenBadgeCount, waiterCallBadgeCount } = usePosNotifBadgeCounts();
   const kitchenPulse = usePulseOnChange(kitchenBadgeCount);
   const waiterPulse = usePulseOnChange(waiterCallBadgeCount);
 

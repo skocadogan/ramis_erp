@@ -26,11 +26,9 @@ def broadcast_table_change(instance, action):
         return
     branch_id = instance.zone.branch_id if instance.zone else None
     primary_group = f"pos_sync_{branch_id}" if branch_id else POS_SYNC_GLOBAL
-    import json
-    from django.core.serializers.json import DjangoJSONEncoder
+    from core.json_utils import to_json_safe
 
-    # UUID ve datetime objelerini stringe çevirmek için JSON üzerinden geçirip geri alıyoruz
-    clean_data = json.loads(json.dumps(TableListSerializer(instance).data, cls=DjangoJSONEncoder))
+    clean_data = to_json_safe(TableListSerializer(instance).data)
 
     event = {
         "type": "table_update",

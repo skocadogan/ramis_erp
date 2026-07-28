@@ -1,19 +1,11 @@
-import json
 import logging
-
-from django.core.serializers.json import DjangoJSONEncoder
 
 from .models import AuditLog
 from .thread_local import get_current_request
+from core.json_utils import to_json_safe
 
 logger = logging.getLogger(__name__)
 
-
-def _json_safe(data):
-    """JSONField'a yazılabilir, JSON-serileştirilebilir yapıya dönüştürür."""
-    if data is None:
-        return None
-    return json.loads(json.dumps(data, cls=DjangoJSONEncoder))
 
 def record_audit(
     action: str,
@@ -82,9 +74,9 @@ def record_audit(
             action=action,
             target_type=final_target_type or 'unknown',
             target_id=final_target_id or 'unknown',
-            before_json=_json_safe(before_json),
-            after_json=_json_safe(after_json),
-            metadata=_json_safe(metadata),
+            before_json=to_json_safe(before_json) if before_json is not None else None,
+            after_json=to_json_safe(after_json) if after_json is not None else None,
+            metadata=to_json_safe(metadata) if metadata is not None else None,
         )
     except Exception as e:
         logger.error(f"Failed to record audit log: {e}", exc_info=True)

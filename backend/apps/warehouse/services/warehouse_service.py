@@ -1,6 +1,5 @@
 """WarehouseService - Depo CRUD ve stok seviyesi iş mantığı."""
 
-from core.decimal_constants import ZERO_QTY
 from decimal import Decimal
 from django.db import transaction
 
@@ -61,18 +60,7 @@ class WarehouseService:
     @transaction.atomic
     def delete_warehouse(warehouse_id) -> None:
         warehouse = Warehouse.objects.get(id=warehouse_id)
-        warehouse.is_active = False
-        warehouse.save(update_fields=['is_active', 'updated_at'])
-
-    @staticmethod
-    def ensure_stock_level(warehouse, stock_item) -> WarehouseStockLevel:
-        """Depo-bazlı stok seviyesi kaydını oluşturur veya döndürür."""
-        level, _ = WarehouseStockLevel.objects.get_or_create(
-            warehouse=warehouse,
-            stock_item=stock_item,
-            defaults={'quantity': ZERO_QTY, 'minimum_quantity': ZERO_QTY},
-        )
-        return level
+        warehouse.delete()
 
     @staticmethod
     @transaction.atomic

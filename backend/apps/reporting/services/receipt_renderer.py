@@ -526,7 +526,12 @@ def _order_item_row(oi) -> dict:
     if note:
         row["notes"] = note
     mod_entries = []
-    for m in oi.modifiers.filter(is_active=True):
+    cache = getattr(oi, '_prefetched_objects_cache', None)
+    if cache and 'modifiers' in cache:
+        mods = [m for m in cache['modifiers'] if m.is_active]
+    else:
+        mods = oi.modifiers.filter(is_active=True)
+    for m in mods:
         if not m.modifier_id or not getattr(m.modifier, "name", None):
             continue
         mod_entries.append(

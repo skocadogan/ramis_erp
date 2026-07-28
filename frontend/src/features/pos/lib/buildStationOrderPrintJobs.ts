@@ -1,4 +1,4 @@
-import type { Printer } from "@/features/admin/services/adminApi";
+import type { Printer } from "@/features/printing/services/printersApi";
 import type { CartItem } from "@/types/pos";
 import type { ReceiptPrintJob } from "./dispatchReceiptPrints";
 import { buildPrintJobIdempotencyKey } from "./printIdempotency";

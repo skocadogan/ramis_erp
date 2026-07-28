@@ -14,7 +14,7 @@ import { useTheme, type ThemePreference, type DensityPreference } from "@/compon
 import { useTranslations } from "next-intl";
 import { usePosStore } from "@/store/usePosStore";
 import api from "@/lib/api";
-import { adminApi, type Printer, type ReceiptTemplate } from "@/features/admin/services/adminApi";
+import { printersApi, type Printer, type ReceiptTemplate } from "@/features/printing/services/printersApi";
 import { buildPosDisplayPageUrl } from "@/lib/runtimeConfig";
 import type { PosTerminalSwitchRow } from "@/features/pos/components/PosTerminalSwitchDialog";
 import { useEffect, useState } from "react";
@@ -134,7 +134,7 @@ export function PosSettingsDialog({
 
     let cancelled = false;
 
-    void adminApi.getPrinters({ branch_id: branchId, is_active: true }).then((data) => {
+    void printersApi.getPrinters({ branch_id: branchId, is_active: true }).then((data) => {
       if (cancelled) return;
       setPrinters("results" in data ? (data.results as Printer[]) : (data as unknown as Printer[]));
     });
@@ -142,11 +142,11 @@ export function PosSettingsDialog({
     const loadTemplates = async () => {
       if (variant === "pos") {
         try {
-          const data = await adminApi.getReceiptTemplates({ category: "POS_RECEIPT" });
+          const data = await printersApi.getReceiptTemplates({ category: "POS_RECEIPT" });
           if (!cancelled) setTemplates(data);
           return;
         } catch {
-          const all = await adminApi.getReceiptTemplates();
+          const all = await printersApi.getReceiptTemplates();
           if (!cancelled) {
             setTemplates(all.filter((tpl: ReceiptTemplate) => tpl.category === "POS_RECEIPT"));
           }
@@ -155,7 +155,7 @@ export function PosSettingsDialog({
       }
 
       try {
-        const all = await adminApi.getReceiptTemplates();
+        const all = await printersApi.getReceiptTemplates();
         if (!cancelled) {
           setTemplates(all.filter((tpl: ReceiptTemplate) => WAITER_RECEIPT_CATEGORIES.has(tpl.category)));
         }

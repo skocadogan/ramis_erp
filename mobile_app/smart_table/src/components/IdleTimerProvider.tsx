@@ -11,6 +11,7 @@ import { router } from "expo-router";
 import { useUIStore } from "@/store/ui-store";
 import { useOrderStore } from "@/store/order-store";
 import { useDialogStore } from "@/store/dialog-store";
+import { useCartStore } from "@/store/cart-store";
 
 interface IdleTimerProviderProps {
   children: ReactNode;
@@ -26,6 +27,8 @@ export default function IdleTimerProvider({
 
   const navigateToWelcome = useCallback(() => {
     useDialogStore.getState().hide();
+    useCartStore.getState().clearCart();
+    useUIStore.getState().setCartVisible(false);
     router.replace("/" as never);
   }, []);
 

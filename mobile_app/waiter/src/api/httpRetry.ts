@@ -43,3 +43,8 @@ export function shouldRetryTransientRequest(opts: {
 }
 
 export { RETRYABLE_HTTP_STATUSES };
+
+/** Auth endpoint'lerinde refresh denemesi yapılmaz (döngü koruması). */
+export function shouldAttemptTokenRefresh(url: string): boolean {
+  return !url.includes("/auth/token/") && !url.includes("/auth/register");
+}

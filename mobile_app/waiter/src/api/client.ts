@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
-import { shouldRetryTransientRequest } from "./httpRetry";
+import { shouldAttemptTokenRefresh, shouldRetryTransientRequest } from "./httpRetry";
 
 const DEFAULT_API_URL = Constants.expoConfig?.extra?.apiUrl || "http://localhost:8000/api/v1";
 
@@ -15,6 +15,7 @@ let baseUrlLockedByUser = false;
  * Token değişince (login/logout) `setCachedToken()` ile güncellenir.
  */
 let _cachedToken: string | null = null;
+let _cachedRefreshToken: string | null = null;
 
 export function setCachedToken(token: string | null) {
   _cachedToken = token;
@@ -22,6 +23,14 @@ export function setCachedToken(token: string | null) {
 
 export function getCachedToken(): string | null {
   return _cachedToken;
+}
+
+export function setCachedRefreshToken(token: string | null) {
+  _cachedRefreshToken = token;
+}
+
+export function getCachedRefreshToken(): string | null {
+  return _cachedRefreshToken;
 }
 
 // ─── Ready Promise (Race Condition Fix) ──────────────────────────────────────
@@ -92,9 +101,14 @@ export async function hydrateApiBaseURLFromSecureStore(): Promise<string | null>
 }
 
 // Uygulama başlangıcında SecureStore'dan sunucu URL ve token'ı önbelleğe al
-Promise.all([hydrateApiBaseURLFromSecureStore(), SecureStore.getItemAsync("auth_token")])
-  .then(([, token]) => {
+Promise.all([
+  hydrateApiBaseURLFromSecureStore(),
+  SecureStore.getItemAsync("auth_token"),
+  SecureStore.getItemAsync("auth_refresh_token"),
+])
+  .then(([, token, refresh]) => {
     if (token) _cachedToken = token;
+    if (refresh) _cachedRefreshToken = refresh;
     markReady();
   })
   .catch((err) => {
@@ -133,6 +147,20 @@ apiClient.interceptors.request.use(async (config) => {
 });
 
 let authRedirectInFlight = false;
+let isRefreshing = false;
+const failedQueue: Array<{
+  resolve: (token: string) => void;
+  reject: (reason: unknown) => void;
+}> = [];
+
+function processRefreshQueue(error: unknown, token: string | null) {
+  while (failedQueue.length > 0) {
+    const item = failedQueue.shift();
+    if (!item) break;
+    if (error || !token) item.reject(error ?? new Error("Token refresh failed"));
+    else item.resolve(token);
+  }
+}
 
 function markBackendHealthOk() {
   void import("../store/useBackendHealthStore").then(({ useBackendHealthStore }) => {
@@ -182,15 +210,48 @@ apiClient.interceptors.response.use(
       scheduleBackendHealthCheck();
     }
 
-    if (status === 401 && !reqUrl.includes("/auth/token/") && !reqUrl.includes("/auth/register")) {
-      if (!authRedirectInFlight) {
-        authRedirectInFlight = true;
-        try {
-          const { useAuthStore } = await import("../store/useAuthStore");
-          await useAuthStore.getState().logout();
-        } finally {
-          authRedirectInFlight = false;
+    if (status === 401 && shouldAttemptTokenRefresh(reqUrl) && config) {
+      if (config._authRetry) {
+        return Promise.reject(error);
+      }
+
+      if (isRefreshing) {
+        return new Promise<string>((resolve, reject) => {
+          failedQueue.push({ resolve, reject });
+        })
+          .then((token) => {
+            config.headers.Authorization = `Bearer ${token}`;
+            return apiClient(config);
+          })
+          .catch((refreshErr) => Promise.reject(refreshErr));
+      }
+
+      config._authRetry = true;
+      isRefreshing = true;
+
+      try {
+        const { useAuthStore } = await import("../store/useAuthStore");
+        const newAccess = await useAuthStore.getState().refreshAccessToken();
+        if (!newAccess) {
+          throw error;
         }
+        processRefreshQueue(null, newAccess);
+        config.headers.Authorization = `Bearer ${newAccess}`;
+        return apiClient(config);
+      } catch (refreshErr) {
+        processRefreshQueue(refreshErr, null);
+        if (!authRedirectInFlight) {
+          authRedirectInFlight = true;
+          try {
+            const { useAuthStore } = await import("../store/useAuthStore");
+            await useAuthStore.getState().logout();
+          } finally {
+            authRedirectInFlight = false;
+          }
+        }
+        return Promise.reject(refreshErr);
+      } finally {
+        isRefreshing = false;
       }
     }
     return Promise.reject(error);

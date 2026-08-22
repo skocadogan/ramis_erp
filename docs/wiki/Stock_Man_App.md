@@ -475,7 +475,7 @@ Bu izinler backend `[[RBAC]]` sisteminden gelir; frontend tarafında `useCan(per
 
 | Özellik | Açıklama |
 |---------|----------|
-| **Auth** | Query string `?token=<jwt>` (cookie yerine; tarayıcı dışı istemciler için) |
+| **Auth** | Kısa ömürlü `?ticket=` (`POST /auth/ws-ticket/`); JWT query string’e konmaz |
 | **Branch scope** | Query `?branch_id=<uuid>` — çok şubeli kullanıcılar için zorunlu, tek şubelide otomatik |
 | **Süper kullanıcı** | `?branch_id` olmadan `warehouse_notifications_global` grubuna bağlanır |
 | **Reconnect** | Exponential backoff (1s/2s/4s/.../30s) — `src/api/wsClient.ts` |
@@ -488,9 +488,9 @@ Bu izinler backend `[[RBAC]]` sisteminden gelir; frontend tarafında `useCan(per
 | `deficiency_created` | `{ id, report_number, station_name, branch_name, created_at, status }` | Dashboard KPI, `DeficiencyCreatedBanner`, toast |
 | `deficiency_status_changed` | `{ id, report_number, status, station_id, branch_id }` | Eksik detay + liste refetch |
 | `stock_low_alert` | `{ warehouse_id, stock_item_id, quantity, minimum_quantity, ... }` | Dashboard KPI, `LowStockBanner` |
-| `transfer.status_changed` (KDS karşılığı) | `{ deficiency_report_id, transfer_id, transfer_number, status, station_id, branch_id }` | Eksik detay (otomatik karşılama akışı) |
+| `transfer.status_changed` | `{ deficiency_report_id, transfer_id, transfer_number, status, station_id, branch_id }` | Eksik detay + transfer listesi (`WSPushHost` invalidation) |
 
-> Not: `transfer.status_changed` hem KDS hem depo tarafına gider. Detay: [[WebSocket_Architecture]], [[Warehouse]].
+> Not: `transfer.status_changed` KDS mutfak gruplarına **ve** `warehouse_notifications_{branch}` / `_global` gruplarına gider (`broadcast_kitchen_transfer_status_changed`). Detay: [[WebSocket_Architecture]], [[Warehouse]].
 
 ---
 
@@ -515,6 +515,8 @@ Bu izinler backend `[[RBAC]]` sisteminden gelir; frontend tarafında `useCan(per
 - **Bellek cache:** Zustand `useOfflineQueueStore` — `pendingCount`, `isFlushing`, `lastSyncAt`.
 - **Network listener:** `@react-native-community/netinfo` + `AppState` `active`.
 - **Idempotency header:** `X-Idempotency-Key: stockman:{op_type}:{uuid}`.
+- **Sayım `update_items`:** Sabit `sm:stock-counting:update_items:{id}` kullanılmaz; `stableIdempotencyKey` payload’ı dahil eder. Aynı sayımda farklı kalem güncellemeleri 409 ile yutulmaz. `start` / `finish` / `approve` sabit anahtarları bilinçli (entity başına tek kez).
+- **PO birim fiyat (düzenleme):** `financial.view_amount` yoksa `Amount` maskesi; fiyat input’u kapalı, miktar düzenlemesi açık.
 
 ### Akış
 
@@ -692,7 +694,7 @@ yana yaşar.
 | `src/api/client.ts` (interceptors, helpers) | 1 test | 55% ⚠️ |
 | `src/components/ui/{Button,Amount,Dialog}` | 3 test | 86–100% |
 
-**Toplam: ~73% lines / 76% branches / 210+ geçen test.**
+**Toplam (2026-08-22):** 15 suite, 228 geçen test.
 
 ### Komutlar
 
@@ -717,9 +719,7 @@ npm run test:ci
 - **`expo-sqlite` mock'u** in-memory bir `Map<id, Row>` simülasyonu
   yapar; gerçek UNIQUE constraint davranışı sadece davranışsal
   olarak doğrulanır.
-- **`formatQuantityWithUnit(0.5, "g")`** spec'e göre `"500 g"` dönmeli
-  iken implementasyon `"500 kg"` döndürür (bilinen bug; P0-P5'i
-  kırmadığı için bırakıldı).
+- **`formatQuantityWithUnit`:** `(0.5, "g")` → `"0,5 g"`; `(0.5, "kg")` → `"500 g"`. Eski “500 kg” kaydı mevcut kodda repro edilmiyor.
 
 ---
 

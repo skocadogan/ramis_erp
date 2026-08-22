@@ -133,5 +133,6 @@ Mevcut PO sekmesindeki minimum-stok `suggest-preview` / `suggest` akışı **ayr
 - Eksik listesi oluşturma / stok eşiği uyarıları
 - KDS tarafında `deficiency_status_changed` ile tam liste invalidation
 - **Geciken PO:** `procurement.overdue_alert` → istemcide `procurement_overdue_alert` (özet + PO listesi invalidation)
+- **Transfer (eksik bağlı):** `transfer.status_changed` hem KDS hem `warehouse_notifications_*` gruplarına gider; Stock Man `WSPushHost` transfer + deficiency cache’ini invalid eder
 
 Bkz: [[WebSocket_Architecture]], [[Frontend_Warehouse]], [[Procurement_Intelligence]].

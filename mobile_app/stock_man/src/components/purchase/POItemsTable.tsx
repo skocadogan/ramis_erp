@@ -10,6 +10,7 @@ import { Trash2 } from "lucide-react-native";
 import { Amount } from "@/components/ui/Amount";
 import { useI18n } from "@/i18n";
 import { useFormatters } from "@/hooks/useFormatters";
+import { useCanViewAmounts } from "@/hooks/usePermission";
 import { useResponsive } from "@/hooks/useResponsive";
 import { cn } from "@/utils/cn";
 import type { PurchaseOrderItem, UUID } from "@/types";
@@ -83,6 +84,7 @@ export function POItemsTable({
   const { t } = useI18n();
   const { isTablet, isWide } = useResponsive();
   const { quantity } = useFormatters();
+  const canViewAmounts = useCanViewAmounts();
 
   const columns = useMemo<ItemTableColumn[]>(
     () => {
@@ -181,7 +183,7 @@ export function POItemsTable({
           </CellText>
         );
       case "unitPrice":
-        if (editable && stockItemId) {
+        if (editable && stockItemId && canViewAmounts) {
           return (
             <View className="flex-row justify-end items-center">
               <TextInput

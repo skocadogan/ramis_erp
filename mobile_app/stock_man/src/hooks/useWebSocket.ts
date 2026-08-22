@@ -21,6 +21,7 @@ const KNOWN_TYPES = new Set([
   "deficiency_created",
   "deficiency_status_changed",
   "stock_low_alert",
+  "transfer.status_changed",
   "force_disconnect",
 ]);
 

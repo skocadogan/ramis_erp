@@ -8,6 +8,7 @@ import {
 } from "./db";
 import { buildIdempotencyKey, syncOneOperation } from "./queueExecutor";
 import { isQueueError, QueueNetworkError } from "./queueErrors";
+import { isFlushableQueueOperation } from "./queueStatus";
 import { randomUUID } from "./randomUUID";
 import type { QueuedOperation, QueuedOperationType, QueueCounts } from "./types";
 
@@ -102,7 +103,7 @@ export async function flushOfflineQueue(
   let aborted = false;
   try {
     const ops = await dbListOperations();
-    const pending = ops.filter((op) => op.status === "pending" || op.status === "failed");
+    const pending = ops.filter((op) => isFlushableQueueOperation(op));
     const total = pending.length;
 
     for (let index = 0; index < pending.length; index += 1) {

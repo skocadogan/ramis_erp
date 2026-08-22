@@ -201,9 +201,7 @@ npm run test:ci
   çalıştırmak gerekir.
 - **`expo-sqlite` mock'u** in-memory tablo simülasyonu yapar;
   gerçek UNIQUE constraint davranışı mock seviyesinde tutulur.
-- **`formatQuantityWithUnit`** için spec "500 g" bekliyordu ama
-  implementasyon "500 kg" döndürür (gerçek bug, **düzeltilmedi** —
-  kaynak dosyalara dokunulmamıştır).
+- **`formatQuantityWithUnit`:** `(0.5, "g")` → `"0,5 g"`; `(0.5, "kg")` → `"500 g"`. Eski “500 kg” kaydı güncel değil.
 
 ---
 

@@ -36,6 +36,13 @@ export function WSPushHost({ children }: { children: ReactNode }) {
       } else if (e.type === "stock_low_alert") {
         void qc.invalidateQueries({ queryKey: ["stock-items"] });
         void qc.invalidateQueries({ queryKey: ["warehouses"] });
+      } else if (e.type === "transfer.status_changed") {
+        void qc.invalidateQueries({ queryKey: ["transfers"] });
+        void qc.invalidateQueries({ queryKey: ["transfers", e.data.transfer_id] });
+        void qc.invalidateQueries({ queryKey: ["deficiency-reports"] });
+        void qc.invalidateQueries({
+          queryKey: ["deficiency-reports", e.data.deficiency_report_id],
+        });
       }
 
       if (e.type === "deficiency_created") {

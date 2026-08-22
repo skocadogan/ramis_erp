@@ -65,8 +65,8 @@ async function migrateFromAsyncStorage(): Promise<void> {
     await AsyncStorage.removeItem(LEGACY_STORAGE_KEY);
     migrationDone = true;
   } catch (err) {
-    console.warn("[OfflineDB] Migration failed, continuing with SQLite only:", err);
-    migrationDone = true; // Don't retry on every call
+    console.warn("[OfflineDB] Migration failed, will retry on next access:", err);
+    // MIGRATION_KEY yazılmaz — kısmi/başarısız geçişte legacy kuyruk kaybolmasın.
   }
 }
 

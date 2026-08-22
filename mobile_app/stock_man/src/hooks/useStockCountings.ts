@@ -129,7 +129,6 @@ export function useUpdateCountingItems() {
       payload: { items },
       feature: "stock-counting",
       description: "Update counting items",
-      idempotencyKey: `sm:stock-counting:update_items:${id}`,
     })),
     onSuccess: (c, { id }) => {
       if (isOfflineQueued(c)) return;

@@ -149,7 +149,10 @@ export default function LoginScreen() {
       setApiBaseURL(formattedUrl);
 
       const response = await apiClient.post("/auth/token/", { username, password });
-      const { access } = response.data;
+      const { access, refresh } = response.data as { access?: string; refresh?: string };
+      if (!access) {
+        throw new Error("missing_access_token");
+      }
 
       // Token bellek cache'inde; isAuthenticated henüz false — /auth/me tamamlanana kadar
       setCachedToken(access);
@@ -202,7 +205,8 @@ export default function LoginScreen() {
           branchName: u.branch_name ? String(u.branch_name) : undefined,
         },
         access,
-        rememberMe
+        rememberMe,
+        refresh
       );
 
       router.replace("/(main)");

@@ -242,7 +242,7 @@ export const useTableStore = create<TableState>((set, _get) => ({
   // ── Select table ──
   selectTable: async (table: SelectedTable) => {
     try {
-      const previousTableId = get().selectedTable?.id;
+      const previousTableId = _get().selectedTable?.id;
       await SecureStore.setItemAsync(
         STORAGE_KEYS.SELECTED_TABLE,
         JSON.stringify(table),

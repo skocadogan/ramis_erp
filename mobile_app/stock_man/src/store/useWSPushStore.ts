@@ -42,10 +42,23 @@ type StockLowAlertEvent = {
   };
 };
 
+type TransferStatusChangedEvent = {
+  type: "transfer.status_changed";
+  data: {
+    deficiency_report_id: string;
+    transfer_id: string;
+    transfer_number: string;
+    status: string;
+    station_id: string;
+    branch_id: string;
+  };
+};
+
 export type WarehouseWsEvent =
   | DeficiencyCreatedEvent
   | DeficiencyStatusChangedEvent
-  | StockLowAlertEvent;
+  | StockLowAlertEvent
+  | TransferStatusChangedEvent;
 
 type LowAlertEntry = StockLowAlertEvent["data"] & { at: number };
 

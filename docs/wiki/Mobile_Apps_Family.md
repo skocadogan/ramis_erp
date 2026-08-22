@@ -25,7 +25,7 @@
 | **Çevrimdışı kuyruk** | Var (AsyncStorage; sipariş/ödeme) | Yok (online-only) | Var (SQLite; PO/tesellüm/transfer/sayım/eksik) |
 | **Barkod/QR tarayıcı** | Kamera (QR masa açma) | Yok | Kamera (barkod SKU/lot okuma) |
 | **Yazıcı entegrasyonu** | Var (istasyon + ödeme fişi) | Yok (sadece sipariş) | Var (PO, transfer, etiket) |
-| **Auth** | `/auth/token/` + `/auth/me/` (JWT+SecureStore) | `/auth/token/` (JWT+SecureStore) | `/auth/token/` + `/auth/me/` (JWT+SecureStore) |
+| **Auth** | `/auth/token/` + refresh + `/auth/me/` (JWT+SecureStore) | `/auth/token/` (JWT+SecureStore, 401 refresh) | `/auth/token/` + refresh + `/auth/me/` (JWT+SecureStore) |
 | **Birincil backend modülleri** | `orders`, `tables`, `menu`, `shifts`, `waiter-calls` | `menu`, `orders`, `tables`, `waiter-calls` | `warehouse`, `inventory`, `printing`, `branches` |
 | **Bildirim tipi** | Push + ses + WS overlay | Toast + WS sync | Toast + WS banner |
 | **Vardiya kapısı** | `ShiftGate` (POS terminal seçimi) | Yok (self-servis) | Yok (depocular tek şubede) |

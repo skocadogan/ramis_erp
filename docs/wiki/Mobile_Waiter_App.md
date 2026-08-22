@@ -2,7 +2,7 @@
 
 > **Özet:** Garsonların masaları yönetmesi ve sipariş alması için geliştirilen React Native tabanlı mobil uygulama (v0.1.6). Backend API ile tam entegre çalışır ve anlık güncellemeler için WebSocket kullanır. 2026-06-27 itibariyle kurumsal **slate-blue** tasarım diline geçmiştir.
 > **Kütüphaneler:** React Native, Expo, NativeWind, Zustand, TanStack Query, Axios.
-> **Bağlantılar:** [[Frontend_Waiter]], [[API_Client]], [[Orders]], [[Shifts]], [[Branches]], [[WebSocket_Architecture]], [[Allergens]], [[Design_System_v2]]
+> **Bağlantılar:** [[Frontend_Waiter]], [[API_Client]], [[Auth_Flow]], [[Orders]], [[Shifts]], [[Branches]], [[WebSocket_Architecture]], [[Allergens]], [[Design_System_v2]], [[POS_Offline_Queue]], [[Mobile_Apps_Family]]
 
 ---
 
@@ -190,5 +190,12 @@ Hafıza geri dönüşüm (cell recycling) performansını ve kaydırma hızını
 - **ReadyItemsModal.tsx** (Hazır ürünler listesi): `estimatedItemSize={80}`
 - **TransferTableModal.tsx** (Masa seçim satırları): `estimatedItemSize={55}`
 
+## JWT yenileme ve offline kuyruk (2026-08-22)
+
+- **Refresh:** Login `access` + `refresh` alır; `auth_refresh_token` SecureStore’da. 401 interceptor `POST /auth/token/refresh/` + istek kuyruğu (Stock Man deseni). SimpleJWT `ROTATE_REFRESH_TOKENS` için yeni refresh diske yazılır. Refresh yoksa veya başarısızsa mevcut logout.
+- **Stale `syncing`:** Flush, 120 sn’den eski `syncing` satırlarını yeniden işler (crash/kill sonrası kayıp sipariş).
+- **SQLite yazma:** `dbPutOperation` hatayı yutmaz; kuyruğa alma başarısızsa UI hata gösterir (sahte “gönderildi” yok).
+- **Migration:** AsyncStorage → SQLite geçişi başarısız olursa `MIGRATION_KEY` yazılmaz; bir sonraki erişimde tekrar denenir.
+
 ---
-*Bu sayfa INGEST operasyonu ile oluşturulmuştur.*
+*Bu sayfa INGEST operasyonu ile güncellenmiştir.*

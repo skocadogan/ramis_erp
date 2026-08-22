@@ -20,6 +20,7 @@ import { NumberStepper } from "@/components/ui/NumberStepper";
 import { Input } from "@/components/ui/Input";
 import { useI18n } from "@/i18n";
 import { useFormatters } from "@/hooks/useFormatters";
+import { useCanViewAmounts } from "@/hooks/usePermission";
 import { cn } from "@/utils/cn";
 import type { PurchaseOrderItem } from "@/types";
 
@@ -42,6 +43,7 @@ export function POItemRow({
 }: POItemRowProps) {
   const { t } = useI18n();
   const { qtyWithUnit } = useFormatters();
+  const canViewAmounts = useCanViewAmounts();
   const [editingPrice, setEditingPrice] = useState(false);
   const [priceDraft, setPriceDraft] = useState(String(item.unit_price ?? 0));
 
@@ -125,7 +127,7 @@ export function POItemRow({
           <Text className="text-caption text-muted-foreground mb-1">
             {t("common.price")}
           </Text>
-          {editable && onPriceChange ? (
+          {editable && onPriceChange && canViewAmounts ? (
             editingPrice ? (
               <Input
                 value={priceDraft}

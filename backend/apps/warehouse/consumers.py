@@ -79,6 +79,13 @@ class WarehouseNotificationConsumer(AsyncWebsocketConsumer):
             'data': event['message']
         }))
 
+    async def transfer_status_changed(self, event):
+        """Eksik listesine bağlı transfer durumu değiştiğinde."""
+        await self.send(text_data=json.dumps({
+            'type': 'transfer.status_changed',
+            'data': event['message']
+        }))
+
     async def stock_low_alert(self, event):
         """Depoda kritik stok (diğer depolar) uyarısı."""
         await self.send(

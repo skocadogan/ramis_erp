@@ -151,11 +151,16 @@ def broadcast_kitchen_transfer_status_changed(transfer) -> None:
         "station_id": str(report.kitchen_station_id),
         "branch_id": str(branch_id),
     }
+    event = {"type": "transfer.status_changed", "message": message}
     try:
-        broadcast_to_kitchen_ws_groups(
-            channel_layer,
-            str(branch_id),
-            {"type": "transfer.status_changed", "message": message},
+        broadcast_to_kitchen_ws_groups(channel_layer, str(branch_id), event)
+        async_to_sync(channel_layer.group_send)(
+            f"warehouse_notifications_{branch_id}",
+            event,
+        )
+        async_to_sync(channel_layer.group_send)(
+            "warehouse_notifications_global",
+            event,
         )
     except Exception:
         logger.exception("Kitchen transfer WebSocket broadcast failed")

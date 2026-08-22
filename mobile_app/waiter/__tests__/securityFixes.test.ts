@@ -1,7 +1,9 @@
-import { shouldRetryTransientRequest } from "../src/api/httpRetry";
+import { shouldAttemptTokenRefresh, shouldRetryTransientRequest } from "../src/api/httpRetry";
 import { buildWsUrl } from "../src/api/wsUrl";
 import { effectiveBranchId, tableMatchesBranch } from "../src/utils/branchScope";
-import { resolveNonNetworkQueueStatus } from "../src/features/offline/queueStatus";
+import { isFlushableQueueOperation, resolveNonNetworkQueueStatus } from "../src/features/offline/queueStatus";
+import { STALE_SYNCING_MS } from "../src/features/offline/config";
+import type { QueuedOperation } from "../src/features/offline/types";
 
 describe("shouldRetryTransientRequest", () => {
   it("retries GET on network error", () => {
@@ -90,5 +92,61 @@ describe("resolveNonNetworkQueueStatus", () => {
 
   it("fails 4xx immediately for retry path", () => {
     expect(resolveNonNetworkQueueStatus(1, 400)).toBe("failed");
+  });
+});
+
+describe("shouldAttemptTokenRefresh", () => {
+  it("skips token and register endpoints", () => {
+    expect(shouldAttemptTokenRefresh("/auth/token/")).toBe(false);
+    expect(shouldAttemptTokenRefresh("/auth/token/refresh/")).toBe(false);
+    expect(shouldAttemptTokenRefresh("/auth/register")).toBe(false);
+  });
+
+  it("allows refresh for regular API calls", () => {
+    expect(shouldAttemptTokenRefresh("/orders/main/")).toBe(true);
+    expect(shouldAttemptTokenRefresh("/tables/")).toBe(true);
+  });
+});
+
+function queueOp(overrides: Partial<QueuedOperation>): QueuedOperation {
+  return {
+    id: "1",
+    clientOpId: "c1",
+    type: "CREATE_ORDER",
+    idempotencyKey: "pos:create:c1",
+    endpoint: "/orders/main/",
+    payload: {},
+    status: "pending",
+    retryCount: 0,
+    createdAt: 0,
+    updatedAt: 0,
+    branchId: "b1",
+    label: "test",
+    ...overrides,
+  };
+}
+
+describe("isFlushableQueueOperation", () => {
+  const now = 1_000_000;
+
+  it("includes pending and failed", () => {
+    expect(isFlushableQueueOperation(queueOp({ status: "pending" }), now)).toBe(true);
+    expect(isFlushableQueueOperation(queueOp({ status: "failed" }), now)).toBe(true);
+  });
+
+  it("excludes fresh syncing and conflict", () => {
+    expect(
+      isFlushableQueueOperation(queueOp({ status: "syncing", updatedAt: now - 1_000 }), now)
+    ).toBe(false);
+    expect(isFlushableQueueOperation(queueOp({ status: "conflict" }), now)).toBe(false);
+  });
+
+  it("includes stale syncing after 120s", () => {
+    expect(
+      isFlushableQueueOperation(
+        queueOp({ status: "syncing", updatedAt: now - STALE_SYNCING_MS }),
+        now
+      )
+    ).toBe(true);
   });
 });

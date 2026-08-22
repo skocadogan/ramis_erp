@@ -322,6 +322,10 @@ Smart Table üzerinden verilen siparişlerin veya belirli kalemlerin iptal edilm
 | **usePerformanceMark** | `src/hooks/usePerformanceMark.ts` (yeni) | Dev ortamında 16ms üzeri render'ları log'lar |
 
 ### Test Sonuçları
-- **TypeScript:** `tsc --noEmit` — temiz
-- **Test:** 14/16 suite PASS (2 önceden var olan hata — `auth-store.test.ts` mock scope, `useProductDetailCartLine.test.ts`)
+- **Test (2026-08-22):** 19/19 suite, 90/90 test PASS. Wiki’deki “14/16 + 2 kırık” kaydı güncel değil.
 - **Yeni testler:** `menuNormalizer.test.ts` — 11 test PASS
+
+## Oturum izolasyonu (2026-08-22)
+
+- **`selectTable`:** `table-store.ts` `_get()` ile önceki masa okunur; masa değişince sepet ve sipariş listesi temizlenir (önceki `get()` ReferenceError sessizce yutuluyordu).
+- **Idle timeout:** `IdleTimerProvider.navigateToWelcome` sepeti temizler ve cart sheet’i kapatır. Aktif masa siparişleri (welcome’da gösterim) kasıtlı olarak korunur.

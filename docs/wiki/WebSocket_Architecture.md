@@ -19,7 +19,7 @@
 | `branches` | `StaffNotificationConsumer` | `/ws/staff/notifications/` | Personel bildirimleri |
 | `branches` | `WaiterCallConsumer` | `/ws/waiter/calls/` | Akıllı buton garson çağrısı |
 | `menu` | — | `/ws/menu/catalog/` | Ürün/kategori değişiklikleri |
-| `warehouse` | — | `/ws/warehouse/notifications/` | Stok / eksik listesi / geciken PO uyarısı (`procurement_overdue_alert`) |
+| `warehouse` | — | `/ws/warehouse/notifications/` | Stok / eksik listesi / geciken PO (`procurement_overdue_alert`) / eksik bağlı transfer (`transfer.status_changed`) |
 | `production_planning` | — | `/ws/production-status/{branch}/` | Üretim durumu |
 
 `KitchenNotificationConsumer` içinde iki abonelik modu vardır:

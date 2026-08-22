@@ -43,6 +43,7 @@ export async function dbPutOperation(op: QueuedOperation): Promise<void> {
     });
   } catch (err) {
     console.warn("[OfflineDB] dbPutOperation error:", err);
+    throw err;
   }
 }
 

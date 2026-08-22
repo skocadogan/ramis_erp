@@ -2,7 +2,7 @@ import { create } from "zustand";
 import * as SecureStore from "expo-secure-store";
 import { usePosStore } from "./usePosStore";
 import { useWaiterPosPushStore } from "./useWaiterPosPushStore";
-import { setCachedToken } from "../api/client";
+import { setCachedRefreshToken, setCachedToken } from "../api/client";
 
 interface User {
   id: string;
@@ -19,13 +19,15 @@ export interface AuthState {
   token: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
-  login: (user: User, token: string, persist?: boolean) => Promise<void>;
+  login: (user: User, token: string, persist?: boolean, refreshToken?: string) => Promise<void>;
   logout: () => Promise<void>;
   init: () => Promise<void>;
+  refreshAccessToken: () => Promise<string | null>;
 }
 
 const SECURE_KEYS_ON_LOGOUT = [
   "auth_token",
+  "auth_refresh_token",
   "auth_user",
   "server_url",
   "delivered_count",
@@ -46,12 +48,16 @@ export const useAuthStore = create<AuthState>((set) => ({
   token: null,
   isAuthenticated: false,
   isLoading: true,
-  login: async (user, token, persist = true) => {
+  login: async (user, token, persist = true, refreshToken) => {
     if (persist) {
       await SecureStore.setItemAsync("auth_token", token);
       await SecureStore.setItemAsync("auth_user", JSON.stringify(user));
+      if (refreshToken) {
+        await SecureStore.setItemAsync("auth_refresh_token", refreshToken);
+      }
     }
     setCachedToken(token);
+    setCachedRefreshToken(refreshToken ?? null);
     set({ user, token, isAuthenticated: true });
   },
   logout: async () => {
@@ -61,6 +67,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     try {
       // Önce bellek içi oturumu kes — axios/WS eski token ile devam etmesin
       setCachedToken(null);
+      setCachedRefreshToken(null);
       set({ user: null, token: null, isAuthenticated: false });
 
       usePosStore.getState().resetSessionOnLogout();
@@ -98,10 +105,11 @@ export const useAuthStore = create<AuthState>((set) => ({
   init: async () => {
     try {
       const { setApiBaseURL } = await import("../api/client");
-      const [token, userStr, storedUrl] = await Promise.all([
+      const [token, userStr, storedUrl, refreshToken] = await Promise.all([
         SecureStore.getItemAsync("auth_token"),
         SecureStore.getItemAsync("auth_user"),
         SecureStore.getItemAsync("server_url"),
+        SecureStore.getItemAsync("auth_refresh_token"),
       ]);
 
       if (token && userStr) {
@@ -109,6 +117,7 @@ export const useAuthStore = create<AuthState>((set) => ({
           setApiBaseURL(storedUrl);
         }
         setCachedToken(token);
+        setCachedRefreshToken(refreshToken);
         set({
           token,
           user: JSON.parse(userStr),
@@ -122,5 +131,31 @@ export const useAuthStore = create<AuthState>((set) => ({
       console.error("Auth init error:", error);
       set({ isLoading: false });
     }
+  },
+  refreshAccessToken: async () => {
+    const { getCachedRefreshToken } = await import("../api/client");
+    const refresh =
+      getCachedRefreshToken() ?? (await SecureStore.getItemAsync("auth_refresh_token"));
+    if (!refresh) return null;
+
+    const { default: apiClient, setCachedToken: cacheAccess } = await import("../api/client");
+    const { data } = await apiClient.post<{ access?: string; refresh?: string }>(
+      "/auth/token/refresh/",
+      { refresh }
+    );
+    const access = data.access;
+    if (!access) return null;
+
+    cacheAccess(access);
+    const nextRefresh = data.refresh ?? refresh;
+    setCachedRefreshToken(nextRefresh);
+    set({ token: access });
+
+    const persistedRefresh = await SecureStore.getItemAsync("auth_refresh_token");
+    if (persistedRefresh) {
+      await SecureStore.setItemAsync("auth_token", access);
+      await SecureStore.setItemAsync("auth_refresh_token", nextRefresh);
+    }
+    return access;
   },
 }));

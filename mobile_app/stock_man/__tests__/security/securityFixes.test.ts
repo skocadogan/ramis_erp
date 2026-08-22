@@ -32,6 +32,17 @@ describe("stableIdempotencyKey", () => {
     });
     expect(a).not.toBe(b);
   });
+
+  it("changes when counting update_items payload changes", () => {
+    const base = {
+      feature: "stock-counting",
+      method: "POST",
+      endpoint: "/warehouse/stock-counting/1/update_items/",
+    };
+    const a = stableIdempotencyKey({ ...base, payload: { items: [{ id: "i1", counted: 1 }] } });
+    const b = stableIdempotencyKey({ ...base, payload: { items: [{ id: "i1", counted: 2 }] } });
+    expect(a).not.toBe(b);
+  });
 });
 
 describe("SavedServer shape (no password)", () => {

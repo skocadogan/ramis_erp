@@ -49,9 +49,11 @@ Aynı URL'ye birden fazla bileşenin abone olmasını sağlar. Tekil bağlantı 
 
 | Anahtar | Kullanım |
 |---------|----------|
-| `pos_sync` | POS sipariş/masa senkronizasyonu |
-| `kitchen_notifications` | KDS bildirimleri |
-| `staff_notifications` | Garson çağrısı, rezervasyon bildirimleri |
+| `pos-sync:{branch}:{platform}` | POS sipariş/masa senkronizasyonu |
+| `kitchen:{branch}` | KDS bildirimleri |
+| `staff:{branch}` | Personel bildirimleri |
+| `waiter-calls:{branch}` | Garson çağrısı |
+| `warehouse:{branch}` | Depo bildirimleri — depo sayfası + sidebar rozeti tek TCP |
 
 ---
 

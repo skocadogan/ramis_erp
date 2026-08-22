@@ -42,7 +42,7 @@ Bölünmüş ödemelerin alt kalemleri.
 | `amount` | `DecimalField` | Tutar |
 
 ## Services
-`services.py` — Satış oluşturma, iptal ve vardiya entegrasyonu.
+`services.py` — Satış oluşturma, iptal ve vardiya entegrasyonu. `return_sale` satış satırını `select_for_update(nowait=True)` ile kilitler (eşzamanlı çift iade).
 
 ### Bölünmüş ödeme (split payment)
 - **Tek sipariş:** `POST /orders/main/{id}/complete/` → `payments[]` doğrudan o siparişin `Sale` kaydına yazılır (`create_sale_for_order`).

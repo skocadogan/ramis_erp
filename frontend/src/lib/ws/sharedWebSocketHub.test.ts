@@ -5,6 +5,7 @@ import {
   reconnectAllSharedWebSockets,
   subscribeSharedWebSocket,
   waiterCallsHubKey,
+  warehouseNotificationsHubKey,
 } from "./sharedWebSocketHub";
 
 class FakeWebSocket {
@@ -91,6 +92,22 @@ describe("SharedWebSocketHub", () => {
     cleanups.push(
       subscribeSharedWebSocket(waiterKey, {
         getUrl: () => "ws://example/ws/waiter/calls/?branch_id=branch-1",
+      }),
+    );
+
+    expect(FakeWebSocket.instances).toHaveLength(1);
+  });
+
+  it("aynı depo bildirimi URL'sini tek TCP'de paylaşır", () => {
+    const key = warehouseNotificationsHubKey("branch-1");
+    cleanups.push(
+      subscribeSharedWebSocket(key, {
+        getUrl: () => "ws://example/ws/warehouse/notifications/?branch_id=branch-1",
+      }),
+    );
+    cleanups.push(
+      subscribeSharedWebSocket(key, {
+        getUrl: () => "ws://example/ws/warehouse/notifications/?branch_id=branch-1",
       }),
     );
 

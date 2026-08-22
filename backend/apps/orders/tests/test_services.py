@@ -95,6 +95,12 @@ class TestOrderServiceCompleteOrder:
         statuses = list(pending_order.items.values_list('status', flat=True))
         assert all(s == OrderStatus.COMPLETED for s in statuses)
 
+    def test_stale_instance_db_durumunu_yeniden_okur(self, pending_order, pos_user):
+        OrderService.complete_order(pending_order, 'CASH', pos_user)
+        pending_order.status = OrderStatus.PENDING
+        with pytest.raises(OrderValidationError):
+            OrderService.complete_order(pending_order, 'CASH', pos_user)
+
 
 @pytest.mark.django_db
 class TestOrderServiceCancelOrder:
@@ -123,6 +129,12 @@ class TestOrderServiceCancelOrder:
         log = AuditLog.objects.filter(action='order.cancelled', target_id=str(pending_order.id)).first()
         assert log is not None
         assert log.metadata.get('order_type') == 'TABLE'
+
+    def test_stale_instance_db_durumunu_yeniden_okur(self, pending_order):
+        OrderService.cancel_order(pending_order)
+        pending_order.status = OrderStatus.PENDING
+        with pytest.raises(OrderValidationError):
+            OrderService.cancel_order(pending_order)
 
 
 @pytest.mark.django_db

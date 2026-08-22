@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { useAuthStore } from "@/store/useAuthStore";
-import { getWarehouseNotificationsWsUrl, runManagedWebSocket } from "@/lib/ws";
+import { getWarehouseNotificationsWsUrl, subscribeSharedWebSocket, warehouseNotificationsHubKey } from "@/lib/ws";
 import { toast } from "sonner";
 import { queryKeys } from "@/lib/queryKeys";
 import { playNotificationSound } from "@/lib/notificationSounds";
@@ -15,7 +15,7 @@ export function useWarehouseNotifications(branchId?: string) {
   const t = useTranslations("warehouse");
 
   useEffect(() => {
-    const cleanup = runManagedWebSocket({
+    const cleanup = subscribeSharedWebSocket(warehouseNotificationsHubKey(branchId), {
       tag: "warehouse-notifications",
       enabled: !!token,
       getUrl: () => getWarehouseNotificationsWsUrl(branchId),

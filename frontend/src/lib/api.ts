@@ -2,36 +2,17 @@ import axios, { type AxiosRequestConfig } from "axios";
 import { getRuntimeConfig } from "@/lib/runtimeConfig";
 import { shouldToastFromApiInterceptor } from "@/lib/apiToastPolicy";
 import { toast } from "sonner";
+import {
+  clearTokenCache,
+  readAccessToken,
+  refreshTokenCache,
+  setCachedAccessToken,
+} from "@/lib/tokenCache";
 
-// In-memory token cache: sync localStorage reads on every request
-// are expensive in POS with hundreds of calls. Use refreshTokenCache()
-// to populate this from login/logout flows.
-let cachedToken: string | null = null;
+export { clearTokenCache, refreshTokenCache };
 
 // In-memory locale cache: parsed once from document.cookie
 let cachedLocale: string | null = null;
-
-/**
- * Read token from localStorage and populate the in-memory cache.
- * Call this after login/logout to keep cachedToken in sync.
- */
-export function refreshTokenCache(): void {
-  if (typeof window === "undefined") {
-    cachedToken = null;
-    return;
-  }
-  try {
-    const authData = localStorage.getItem("auth-storage");
-    if (authData) {
-      const parsed = JSON.parse(authData);
-      cachedToken = parsed?.state?.token ?? null;
-    } else {
-      cachedToken = null;
-    }
-  } catch {
-    cachedToken = null;
-  }
-}
 
 const api = axios.create({
   headers: {
@@ -46,11 +27,7 @@ api.interceptors.request.use((config) => {
   // Add Authorization header if token exists in localStorage (bypasses dev mode cookie restrictions)
   // We use direct localStorage parsing here to avoid circular imports and Turbopack build hangs
   if (typeof window !== "undefined") {
-    let token = cachedToken;
-    if (!token) {
-      refreshTokenCache();
-      token = cachedToken;
-    }
+    const token = readAccessToken();
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }
@@ -168,7 +145,7 @@ api.interceptors.response.use(
           const { useAuthStore } = await import("@/store/useAuthStore");
           useAuthStore.setState((s) => ({ ...s, token: newAccess }));
           // In-memory cache'i de güncelle ki retry'de expired token göndermesin
-          cachedToken = newAccess;
+          setCachedAccessToken(newAccess);
           const { reconnectAllSharedWebSockets } = await import("@/lib/ws");
           reconnectAllSharedWebSockets();
         }

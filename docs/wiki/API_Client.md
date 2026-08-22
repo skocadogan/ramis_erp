@@ -10,6 +10,7 @@
 | Dosya | Rol |
 |-------|-----|
 | `frontend/src/lib/api.ts` | Axios instance, response interceptor (toast + 401 refresh) |
+| `frontend/src/lib/tokenCache.ts` | Access JWT bellek önbelleği; logout `clearTokenCache`, login `refreshTokenCache` |
 | `frontend/src/lib/apiToastPolicy.ts` | Interceptor toast'larının hangi ortamda çalışacağı |
 | `frontend/src/lib/operationalToast.ts` | `toastApiError` / `toastApiSuccess`, `skipInterceptorToast` + `extractApiError` re-export |
 | `frontend/src/types/axios-augment.d.ts` | `AxiosRequestConfig.skipApiToast` tip genişletmesi |
@@ -20,6 +21,7 @@
 ### Request Interceptor
 - `baseURL` her istekte `getRuntimeConfig().apiBaseUrl` ile dinamik atanır
 - `withCredentials: true` — Cookie tabanlı JWT
+- `Authorization: Bearer` `readAccessToken()` ile (`tokenCache.ts`); logout sonrası skip bayrağı localStorage'dan token okumaz
 
 ### Toast politikası (merkezi)
 

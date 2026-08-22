@@ -1,6 +1,7 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { type AuthUser } from '@/types/user.types';
+import { clearTokenCache } from '@/lib/tokenCache';
 
 const SESSION_MARKER_KEY = 'ramis_session_active';
 /** Middleware auth kontrolü için cookie — token localStorage'da, cookie sadece "var mı" kontrolü için */
@@ -53,6 +54,7 @@ export const useAuthStore = create<AuthState>()(
                     sessionStorage.removeItem(SESSION_MARKER_KEY);
                 } catch { /* private mode */ }
                 clearAuthCookie();
+                clearTokenCache();
             },
         }),
         {

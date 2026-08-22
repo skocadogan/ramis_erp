@@ -50,6 +50,7 @@ Aşağıdaki yapılar endpoint sözleşmesidir; toast katmanına zorlanmaz:
 
 - Stok kontrolü: `{ "ok": false, "issues": [...] }`
 - POS idempotency: `{ "status": "created"|"already_processed", "idempotency_key", ... }`
+- Satır kilidi (`select_for_update(nowait=True)`): HTTP **409** `{ "detail": "...", "code": "ROW_LOCKED" }` + `Retry-After: 1` (`core/exception_handler.py`)
 
 ## Yeni kod kuralı
 

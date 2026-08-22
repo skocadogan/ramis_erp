@@ -37,6 +37,7 @@
 | `/pos` | POS satış ekranı |
 | `/kds` | Mutfak gösterim sistemi |
 | `/kds/prep-window` | Login gerektirmeyen istasyon hazırlık kiosk ekranı |
+| `/pos/display/[id]` | Müşteri ekranı (`display_token`); edge `PUBLIC_PATHS` + locale öneki |
 | `/panel` | Yönetim paneli (kullanıcı, rol, şube, POS ayarları, yazıcılar…) |
 | `/dashboard` | Restoran özeti |
 | `/admin` | Kalıcı yönlendirme → `/panel` (Django admin öneki ile çakışmayı önler) |

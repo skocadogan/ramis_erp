@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAuthStore } from "@/store/useAuthStore";
-import { getWarehouseNotificationsWsUrl, runManagedWebSocket } from "@/lib/ws";
+import { getWarehouseNotificationsWsUrl, subscribeSharedWebSocket, warehouseNotificationsHubKey } from "@/lib/ws";
 import { queryKeys } from "@/lib/queryKeys";
 import { hasOperationalManageAccess } from "@/lib/constants";
 import { useDeficiencyReports } from "./useWarehouse";
@@ -24,7 +24,7 @@ export function usePendingDeficiencyCount(
 
   useEffect(() => {
     if (!enabled) return;
-    return runManagedWebSocket({
+    return subscribeSharedWebSocket(warehouseNotificationsHubKey(), {
       tag: "sidebar-deficiency-badge",
       enabled: true,
       getUrl: () => getWarehouseNotificationsWsUrl(),

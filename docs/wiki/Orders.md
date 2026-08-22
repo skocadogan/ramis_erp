@@ -62,6 +62,8 @@ PENDING → PREPARING → READY → DELIVERED → COMPLETED
 
 **Masa kapatma (`complete_table`):** Masadaki tüm aktif siparişleri tek istekte tamamlar. İsteğe bağlı `payments[]` ile bölünmüş ödeme desteklenir; tutarlar sipariş tutarlarına orantılı dağıtılır (bkz. [[Sales]]). Tek sipariş tamamlama (`complete_order`) aynı `payments[]` sözleşmesini kullanır.
 
+**Satır kilidi:** `complete_table` siparişleri `select_for_update(nowait=True)` ile kilitler. Tekil `complete_order` / `cancel_order` / `force_close` aynı kilidi `_lock_order_row` ile alır (çağıran nesne `refresh_from_db` ile güncellenir). Kilidi alınamayan istek [[API_Responses]] `ROW_LOCKED` 409. Liste API: `OrderViewSet` / `OrderItemViewSet` varsayılan queryset `is_active=True` (Recycle Bin ayrı endpoint).
+
 **Ödeme sonrası masa durumu:** Başarılı `complete_order` / `complete_table` sonunda `TableService.close_table` yerine **`start_cleaning`** çağrılır; masa `CLEANING` olur ve Celery ETA ile otomatik `FREE`'ye döner ([[Branches]]). Idempotency: masa zaten `FREE` veya `CLEANING` ve aktif sipariş yoksa tekrar istek başarılı kabul edilir.
 
 ## WebSocket

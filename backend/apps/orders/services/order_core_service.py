@@ -15,6 +15,14 @@ from .combined_order_items import build_combined_component_order_items
 
 logger = logging.getLogger(__name__)
 
+
+def _lock_order_row(order):
+    """Sipariş satırını nowait kilitleyerek aynı Python nesnesini günceller."""
+    Order.objects.select_for_update(nowait=True).get(pk=order.pk)
+    order.refresh_from_db()
+    return order
+
+
 class OrderCoreService:
     @staticmethod
     @transaction.atomic
@@ -337,6 +345,7 @@ class OrderCoreService:
     def complete_order(order, payment_method, user, payments=None, shift=None, pos_terminal=None, allow_negative_stock=False):
         """Siparişi tamamlar."""
         from apps.branches.services import TableService
+        order = _lock_order_row(order)
         if order.status in [OrderStatus.COMPLETED, OrderStatus.CANCELLED]:
             raise OrderValidationError(_("Sipariş zaten tamamlanmış veya iptal edilmiş."))
         
@@ -374,6 +383,7 @@ class OrderCoreService:
         """Siparişi iptal eder."""
         from apps.branches.services import TableService
         from apps.audit.services import record_audit
+        order = _lock_order_row(order)
         if order.status in [OrderStatus.COMPLETED, OrderStatus.CANCELLED]:
             raise OrderValidationError(_("Sipariş zaten tamamlanmış veya iptal edilmiş."))
 
@@ -429,6 +439,7 @@ class OrderCoreService:
         from apps.branches.services import TableService
         from apps.audit.services import record_audit
 
+        order = _lock_order_row(order)
         if order.status in [OrderStatus.COMPLETED, OrderStatus.CANCELLED]:
             raise OrderValidationError(_("Sipariş zaten tamamlanmış veya iptal edilmiş."))
 

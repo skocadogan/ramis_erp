@@ -189,6 +189,12 @@ export function waiterCallsHubKey(branchId: string | null | undefined): string {
   return `waiter-calls:${branchId ?? "global"}`;
 }
 
+/** Depo bildirimleri — depo sayfası + sidebar rozeti paylaşır. */
+export function warehouseNotificationsHubKey(branchId?: string | null): string {
+  const resolved = resolveBranchIdForWs(branchId);
+  return `warehouse:${resolved ?? "global"}`;
+}
+
 if (typeof module !== "undefined" && "hot" in module && module.hot) {
   const hot = module.hot as { dispose?: (cb: () => void) => void };
   hot.dispose?.(() => {

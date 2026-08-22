@@ -27,10 +27,21 @@ _DB_BUSY_MARKERS = (
     'server closed the connection unexpectedly',
 )
 
+_ROW_LOCK_MARKERS = (
+    'could not obtain lock',
+    'lock not available',
+    'could not serialize access',
+)
+
 
 def _is_transient_db_error(exc: OperationalError) -> bool:
     msg = str(exc).lower()
     return any(marker in msg for marker in _DB_BUSY_MARKERS)
+
+
+def _is_row_lock_unavailable(exc: OperationalError) -> bool:
+    msg = str(exc).lower()
+    return any(marker in msg for marker in _ROW_LOCK_MARKERS)
 
 
 def api_exception_handler(exc, context):
@@ -46,6 +57,17 @@ def api_exception_handler(exc, context):
                 },
                 status=status.HTTP_503_SERVICE_UNAVAILABLE,
                 headers={'Retry-After': '2'},
+            )
+        if _is_row_lock_unavailable(exc):
+            return Response(
+                {
+                    'detail': _(
+                        'Kayıt şu anda başka bir işlemde. Lütfen birkaç saniye sonra tekrar deneyin.'
+                    ),
+                    'code': 'ROW_LOCKED',
+                },
+                status=status.HTTP_409_CONFLICT,
+                headers={'Retry-After': '1'},
             )
 
     if isinstance(exc, OrderValidationError):

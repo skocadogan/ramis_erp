@@ -7,6 +7,7 @@ export {
   kitchenNotificationsHubKey,
   staffNotificationsHubKey,
   waiterCallsHubKey,
+  warehouseNotificationsHubKey,
 } from "./sharedWebSocketHub";
 export {
   parseWsMessage,

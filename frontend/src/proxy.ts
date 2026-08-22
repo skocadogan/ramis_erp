@@ -8,6 +8,9 @@ const AUTH_COOKIE_NAME = 'ramis_auth';
  * Public rotalar — auth cookie kontrolü yapılmaz.
  * - /login: Giriş sayfası
  * - /offline: Offline sayfası
+ * - /kds/prep-window: İstasyon hazırlık kiosk (display token)
+ * - /pos/display: Müşteri ekranı (display token)
+ * - /serwist: PWA service worker
  * - /api/*: API route'ları (backend kendi auth'ını kontrol eder)
  * - /_next/*: Next.js internal
  * - /favicon.ico, /icons/*, /sounds/*: Static assets
@@ -17,6 +20,7 @@ const PUBLIC_PATHS = [
     '/login',
     '/offline',
     '/kds/prep-window',
+    '/pos/display',
     '/api',
     '/_next',
     '/favicon.ico',
@@ -25,6 +29,7 @@ const PUBLIC_PATHS = [
     '/manifest.webmanifest',
     '/sw.js',
     '/workbox',
+    '/serwist',
 ];
 
 /**
@@ -45,9 +50,12 @@ function withPathnameHeader(request: NextRequest, response: NextResponse): NextR
     return response;
 }
 
-/** /tr/kds/prep-window gibi locale önekli public rotalar */
+/** /tr/kds/prep-window veya /tr/pos/display gibi locale önekli public rotalar */
 function isLocalePublicPath(pathname: string): boolean {
-    return /^\/[a-z]{2}\/kds\/prep-window(\/.*)?$/.test(pathname);
+    return (
+        /^\/[a-z]{2}\/kds\/prep-window(\/.*)?$/.test(pathname) ||
+        /^\/[a-z]{2}\/pos\/display(\/.*)?$/.test(pathname)
+    );
 }
 
 export function proxy(request: NextRequest) {

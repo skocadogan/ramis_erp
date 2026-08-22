@@ -79,7 +79,7 @@ from core.ws_deferred import schedule_kds_refresh, schedule_order_status_changed
 from .services.item_status_service import apply_order_item_status, broadcast_order_item_touch
 
 class OrderViewSet(viewsets.ModelViewSet):
-    queryset = Order.objects.select_related(
+    queryset = Order.objects.filter(is_active=True).select_related(
         'table',
         'table__zone',
         'table__zone__branch',
@@ -720,7 +720,7 @@ class OrderViewSet(viewsets.ModelViewSet):
 
 
 class OrderItemViewSet(viewsets.ModelViewSet):
-    queryset = OrderItem.objects.select_related(
+    queryset = OrderItem.objects.filter(is_active=True, order__is_active=True).select_related(
         'product', 'product__category', 'variant', 'station', 'order', 'order__table'
     ).prefetch_related(
         'modifiers', 'modifiers__modifier',

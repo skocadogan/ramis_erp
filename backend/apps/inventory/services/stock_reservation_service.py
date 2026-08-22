@@ -141,12 +141,16 @@ class StockReservationService:
     @transaction.atomic
     def commit_reservations(order, performed_by=None, allow_negative: bool = False):
         """Rezervasyonları kesinleştirir (stoktan düşer) ve rezervasyon kayıtlarını kapatır."""
-        reservations = StockReservation.objects.filter(
-            order_item__order=order,
-            status=StockReservationStatus.RESERVED,
-        ).select_related("stock_item", "order_item", "order_item__product", "order_item__branch")
+        reservations = list(
+            StockReservation.objects.select_for_update(nowait=True)
+            .filter(
+                order_item__order=order,
+                status=StockReservationStatus.RESERVED,
+            )
+            .select_related("stock_item", "order_item", "order_item__product", "order_item__branch")
+        )
 
-        if not reservations.exists():
+        if not reservations:
             if StockReservation.objects.filter(
                 order_item__order=order,
                 status=StockReservationStatus.COMMITTED,
@@ -205,11 +209,11 @@ class StockReservationService:
             (movement.warehouse_id, movement.stock_item_id): movement
             for movement in movements
         }
-        ledger_entries = _build_cost_ledger_entries(order, movement_map, list(reservations))
+        ledger_entries = _build_cost_ledger_entries(order, movement_map, reservations)
         if ledger_entries:
             OrderItemIngredientCost.objects.bulk_create(ledger_entries)
 
-        reservations.update(
+        StockReservation.objects.filter(pk__in=[r.pk for r in reservations]).update(
             status=StockReservationStatus.COMMITTED, updated_at=timezone.now()
         )
 

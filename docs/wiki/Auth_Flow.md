@@ -76,7 +76,7 @@ PIN atanmamış kullanıcılar doğrudan şifre ekranına yönlendirilir. Test k
 
 ### Auth Store (`src/store/useAuthStore.ts`)
 
-Zustand + persist middleware ile `localStorage`'da saklanan oturum:
+Zustand + persist middleware ile `localStorage`'da saklanan oturum. Access JWT ayrıca `src/lib/tokenCache.ts` bellek önbelleğinde tutulur (POS isteklerinde localStorage okumamak için). `logout()` `clearTokenCache()` çağırır — persist gecikse bile Bearer gönderilmez. Login sonrası `refreshTokenCache()`.
 
 ```typescript
 interface AuthState {

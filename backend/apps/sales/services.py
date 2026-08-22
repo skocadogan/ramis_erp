@@ -118,7 +118,7 @@ class SaleService:
         from apps.inventory.services.stock_movement_service import return_stock
 
         try:
-            sale = Sale.objects.get(id=sale_id)
+            sale = Sale.objects.select_for_update(nowait=True).get(id=sale_id)
         except Sale.DoesNotExist:
             raise SaleValidationError(_("Satış kaydı bulunamadı."))
 
@@ -199,7 +199,7 @@ class SaleService:
         if not sale_ids:
             raise SaleValidationError(_("Geçerli id listesi gereklidir."))
 
-        deleted_count, _ = Sale.objects.filter(id__in=sale_ids, is_deleted=True).delete()
+        deleted_count, _unused = Sale.objects.filter(id__in=sale_ids, is_deleted=True).delete()
         _invalidate_summary_cache()
         from apps.dashboard.selectors import invalidate_dashboard_cache
         invalidate_dashboard_cache()

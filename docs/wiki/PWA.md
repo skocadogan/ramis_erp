@@ -17,6 +17,7 @@
 - Development'ta devre dışı (`process.env.NODE_ENV === "development"`)
 - `reloadOnOnline` — İnternet gelince yeniden yükle (offline kuyruk flush ile koordinasyon: bkz. [[POS_Offline_Queue]])
 - Next.js Turbopack entegrasyonu (`@serwist/turbopack`)
+- SW yolu `/serwist/sw.js` — `proxy.ts` `PUBLIC_PATHS` içinde `/serwist` (cookie’siz kurulum/güncelleme)
 
 ## Manifest
 - Uygulama adı: "Ramis ERP"

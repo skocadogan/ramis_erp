@@ -31,6 +31,8 @@ Kampanya slaytları (IMAGE/TEXT). Sıralama ve süre ayarları.
 ## Services
 `services.py` — Müşteri ekranı WS abonelik imzası (TimestampSigner).
 
+Frontend rota `/pos/display/[id]` edge middleware'de public (`proxy.ts` `PUBLIC_PATHS` + `/tr/pos/display/...`). Kimlik `display_token` / `?t=` ile WS/API tarafında doğrulanır; ayrı cihaz/profil CFD login'e düşmez. Prep kiosk ile aynı model: [[Frontend_Architecture]], [[Prep_Display]].
+
 ## API: Bağlantı Yönetimi
 
 ### `PosTerminalViewSet` — Connections Aksiyonları

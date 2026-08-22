@@ -42,7 +42,7 @@
 | Prep yalnız `prep_updated` | `prep/ws_broadcast.py` | Çift mutfak yayını kaldırıldı |
 | Prep yayın `on_commit` | `core/ws_deferred.schedule_prep_update` | Transaction commit sonrası serialize + broadcast |
 | WS JWT cache | `users/ws_auth.py` | Reconnect başına DB sorgusu azalır |
-| Paylaşımlı hub (frontend) | `lib/ws/sharedWebSocketHub.ts` | POS'ta çift `/ws/pos/sync/` bağlantısı birleşir |
+| Paylaşımlı hub (frontend) | `lib/ws/sharedWebSocketHub.ts` | POS'ta çift `/ws/pos/sync/` birleşir; depo `warehouseNotificationsHubKey` |
 | Ping/pong + stale close | `lib/ws/managedWebSocket.ts` | Kopuk bağlantı erken tespit |
 | Paket sanal masa HTTP yedeği | `kitchenPosEvents.shouldHttpFallbackPosTables` | TAKEAWAY'de `table_update` yok; `order_created`/`complete_table`/table_id'siz status → `/tables/takeaway_virtual/` |
 | Çoklu Daphne | `system_utils/daphne_units.sh` | Nginx `least_conn` upstream `ramis_daphne` |

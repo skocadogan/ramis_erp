@@ -447,6 +447,67 @@ class TestFiscalWebhook:
         assert pending.status == FiscalBasketStatus.COMPLETED
         assert pending.result_payload["receiptNo"] == 42
 
+    def test_webhook_rejects_missing_identity_when_configured(self, branch, sale):
+        from apps.sales.fiscal.webhook_service import (
+            FiscalWebhookAuthError,
+            handle_token_webhook,
+            register_pending_basket,
+        )
+
+        terminal = PosTerminal.objects.create(
+            branch=branch,
+            code="beko-wh-id-1",
+            name="Beko Webhook Identity",
+            fiscal_type=FiscalType.BEKO_GMP3,
+            fiscal_settings={
+                "connection_type": "CLOUD",
+                "client_id": "client-abc",
+                "serial_number": "AV0000099",
+            },
+        )
+        sale.pos_terminal = terminal
+        sale.save()
+        basket_id = "f85d8ce7-1111-4222-8333-444455556667"
+        register_pending_basket(sale, basket_id, terminal)
+
+        payload = {
+            "operation": "BASKET_COMPLETED",
+            "data": {"basketID": basket_id, "status": 0},
+        }
+        with pytest.raises(FiscalWebhookAuthError):
+            handle_token_webhook(terminal, payload)
+
+    def test_webhook_endpoint_rejects_identity_mismatch(self, api_client, branch, sale):
+        from apps.sales.fiscal.webhook_service import register_pending_basket
+
+        terminal = PosTerminal.objects.create(
+            branch=branch,
+            code="beko-wh-id-2",
+            name="Beko Webhook Identity API",
+            fiscal_type=FiscalType.BEKO_GMP3,
+            fiscal_settings={
+                "connection_type": "CLOUD",
+                "client_id": "client-xyz",
+                "serial_number": "AV0000100",
+            },
+        )
+        basket_id = "a1b2c3d4-5555-4666-8777-888899990001"
+        register_pending_basket(sale, basket_id, terminal)
+
+        url = f"/api/v1/sales/fiscal/webhook/{terminal.pk}/"
+        response = api_client.post(
+            url,
+            {
+                "terminalId": "WRONG",
+                "clientId": "client-xyz",
+                "operation": "BASKET_COMPLETED",
+                "data": {"basketID": basket_id, "status": 0},
+            },
+            format="json",
+        )
+        assert response.status_code == 403
+        assert response.data["status"] == "forbidden"
+
     def test_webhook_endpoint_accepts_basket_completed(self, api_client, branch, sale):
         from apps.sales.fiscal.webhook_service import register_pending_basket
 

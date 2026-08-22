@@ -161,7 +161,7 @@ Sipariş commit anında ingredient bazlı maliyet snapshot ledger'ı.
 
 **Masa ödemesi tuzağı (düzeltildi):** `complete_table` içinde siparişte önceden `Sale` varken yalnızca durum güncellenip `commit_reservations` atlanabiliyordu; artık RESERVED rezerv varsa commit yapılır.
 
-**İdempotency notu:** `commit_reservations`, aynı sipariş için RESERVED rezerv kalmadıysa ama COMMITTED rezerv / ledger kaydı varsa tekrar stok düşmez; çift maliyet ve çift hareket yazımı engellenir.
+**İdempotency notu:** `commit_reservations`, aynı sipariş için RESERVED rezerv kalmadıysa ama COMMITTED rezerv / ledger kaydı varsa tekrar stok düşmez; çift maliyet ve çift hareket yazımı engellenir. RESERVED satırlar `select_for_update(nowait=True)` ile kilitlenir (çift complete yarışında ikinci istek bekler veya [[API_Responses]] `ROW_LOCKED`).
 
 **Ayarlar:** `STOCK_RESERVATION_ENABLED` (rezervasyonu kapatır), `INGREDIENT_STOCK_STRICT_RESERVE` (rezerv oluşmazsa siparişi reddeder, varsayılan kapalı).
 

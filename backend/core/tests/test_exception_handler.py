@@ -16,6 +16,13 @@ class DbOperationalErrorHandlerTests(SimpleTestCase):
         self.assertEqual(response['Retry-After'], '2')
         self.assertEqual(response.data['code'], 'DB_CONNECTION_BUSY')
 
+    def test_row_lock_unavailable_returns_409(self):
+        exc = OperationalError('could not obtain lock on row in relation "orders_order"')
+        response = api_exception_handler(exc, {})
+        self.assertIsNotNone(response)
+        self.assertEqual(response.status_code, status.HTTP_409_CONFLICT)
+        self.assertEqual(response.data['code'], 'ROW_LOCKED')
+
     def test_other_operational_error_falls_through(self):
         exc = OperationalError('syntax error at or near "FOO"')
         response = api_exception_handler(exc, {})

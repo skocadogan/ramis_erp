@@ -79,7 +79,7 @@ sequenceDiagram
 | **quantity** | Mili-adet: 1 adet → `1000` |
 | **Retry** | 429 Rate Limit → Exponential backoff (2s → 4s → 8s, max 3 deneme) |
 | **Webhook (birincil)** | `POST /api/v1/sales/fiscal/webhook/{terminal_id}/` — `BASKET_COMPLETED` |
-| **Webhook kimlik** | `connection_type=CLOUD` değilse 404 (yerel/offline ÖKC etkilenmez). Ayarlı `serial_number` / `client_id` yoksa veya uyuşmazsa 403 (`FiscalWebhookAuthError`). Opsiyonel `fiscal_settings.webhook_secret` → `X-Ramis-Webhook-Secret`. JWT yok; AnonRateThrottle 30/dk. |
+| **Webhook kimlik** | `connection_type=CLOUD` değilse 404 (yerel/offline ÖKC etkilenmez). Payload'da `terminalId`/`clientId` **varsa** terminal ayarıyla eşleşmezse 403. Token iptal (`status: -1`/`99`) ve `BASKET_LOCKED`/`UNLOCKED` bu alanları çoğu zaman göndermez — eksik alan reddedilmez (URL terminal UUID + pending sepet). Opsiyonel `fiscal_settings.webhook_secret` → `X-Ramis-Webhook-Secret`. JWT yok; AnonRateThrottle 30/dk. |
 | **Webhook bekleme** | `FiscalPendingBasket` DB kaydı; 120 sn; zaman aşımında Token API polling fallback |
 | **Env** | `FISCAL_WEBHOOK_BASE_URL` — Token Set Client Settings için public API kökü (path yok) |
 

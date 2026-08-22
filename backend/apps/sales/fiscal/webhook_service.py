@@ -143,35 +143,38 @@ def pending_basket_to_driver_result(pending: FiscalPendingBasket, terminal_id: s
 
 
 class FiscalWebhookAuthError(Exception):
-    """Webhook kimliği doğrulanamadı (yanlış veya eksik terminal/client)."""
+    """Webhook kimliği doğrulanamadı (yanlış terminal/client)."""
 
 
 def _verify_webhook_identity(terminal, payload: dict, data: dict) -> bool:
-    """Ayarlı kimlik alanları varsa eşleşme zorunlu (alan yoksa kabul etme)."""
+    """Payload'da gelen kimlik alanları ayarlı değerle çelişmesin.
+
+    Token iptal (BASKET_COMPLETED status -1/99) ve kilit (LOCKED/UNLOCKED)
+    webhook'ları sıklıkla terminalId/clientId göndermez; URL zaten terminal UUID
+    taşır. Alan yoksa kabul et. Alan varsa ve terminal ayarı doluysa eşleşmeli.
+    """
     settings_json = terminal.fiscal_settings or {}
     expected_serial = str(settings_json.get("serial_number") or "").strip()
     payload_terminal = payload.get("terminalId") or data.get("terminalId")
-    if expected_serial:
-        if not payload_terminal or payload_terminal != expected_serial:
-            logger.warning(
-                "Token webhook terminalId uyuşmazlığı: beklenen=%s gelen=%s terminal=%s",
-                expected_serial,
-                payload_terminal,
-                terminal.pk,
-            )
-            return False
+    if payload_terminal and expected_serial and payload_terminal != expected_serial:
+        logger.warning(
+            "Token webhook terminalId uyuşmazlığı: beklenen=%s gelen=%s terminal=%s",
+            expected_serial,
+            payload_terminal,
+            terminal.pk,
+        )
+        return False
 
     expected_client = str(
         settings_json.get("client_id") or settings_json.get("api_key") or ""
     ).strip()
     payload_client = payload.get("clientId")
-    if expected_client:
-        if not payload_client or payload_client != expected_client:
-            logger.warning(
-                "Token webhook clientId uyuşmazlığı: terminal=%s",
-                terminal.pk,
-            )
-            return False
+    if payload_client and expected_client and payload_client != expected_client:
+        logger.warning(
+            "Token webhook clientId uyuşmazlığı: terminal=%s",
+            terminal.pk,
+        )
+        return False
 
     return True
 

@@ -447,12 +447,10 @@ class TestFiscalWebhook:
         assert pending.status == FiscalBasketStatus.COMPLETED
         assert pending.result_payload["receiptNo"] == 42
 
-    def test_webhook_rejects_missing_identity_when_configured(self, branch, sale):
-        from apps.sales.fiscal.webhook_service import (
-            FiscalWebhookAuthError,
-            handle_token_webhook,
-            register_pending_basket,
-        )
+    def test_webhook_accepts_cancel_without_identity_fields(self, branch, sale):
+        """Token iptal webhook'u terminalId/clientId göndermez."""
+        from apps.sales.fiscal.webhook_service import handle_token_webhook, register_pending_basket
+        from apps.sales.models import FiscalBasketStatus, FiscalPendingBasket
 
         terminal = PosTerminal.objects.create(
             branch=branch,
@@ -471,6 +469,72 @@ class TestFiscalWebhook:
         register_pending_basket(sale, basket_id, terminal)
 
         payload = {
+            "operation": "BASKET_COMPLETED",
+            "data": {
+                "basketID": basket_id,
+                "documentType": 9006,
+                "message": "CANCELLED",
+                "status": -1,
+            },
+        }
+        assert handle_token_webhook(terminal, payload) is True
+        pending = FiscalPendingBasket.objects.get(basket_id=basket_id)
+        assert pending.status == FiscalBasketStatus.CANCELLED
+
+    def test_webhook_accepts_lock_without_identity_fields(self, branch, sale):
+        from apps.sales.fiscal.webhook_service import handle_token_webhook, register_pending_basket
+        from apps.sales.models import FiscalBasketStatus, FiscalPendingBasket
+
+        terminal = PosTerminal.objects.create(
+            branch=branch,
+            code="beko-wh-lock-1",
+            name="Beko Webhook Lock",
+            fiscal_type=FiscalType.BEKO_GMP3,
+            fiscal_settings={
+                "connection_type": "CLOUD",
+                "client_id": "client-abc",
+                "serial_number": "AV0000099",
+            },
+        )
+        sale.pos_terminal = terminal
+        sale.save()
+        basket_id = "c6ffdfeb-1111-4222-8333-444455556668"
+        register_pending_basket(sale, basket_id, terminal)
+
+        payload = {
+            "operation": "BASKET_LOCKED",
+            "data": {"basketID": basket_id, "lockedBy": "AV0000099"},
+        }
+        assert handle_token_webhook(terminal, payload) is True
+        pending = FiscalPendingBasket.objects.get(basket_id=basket_id)
+        assert pending.status == FiscalBasketStatus.PENDING
+
+    def test_webhook_rejects_wrong_identity_when_present(self, branch, sale):
+        from apps.sales.fiscal.webhook_service import (
+            FiscalWebhookAuthError,
+            handle_token_webhook,
+            register_pending_basket,
+        )
+
+        terminal = PosTerminal.objects.create(
+            branch=branch,
+            code="beko-wh-id-mismatch",
+            name="Beko Webhook Mismatch",
+            fiscal_type=FiscalType.BEKO_GMP3,
+            fiscal_settings={
+                "connection_type": "CLOUD",
+                "client_id": "client-abc",
+                "serial_number": "AV0000099",
+            },
+        )
+        sale.pos_terminal = terminal
+        sale.save()
+        basket_id = "f85d8ce7-1111-4222-8333-444455556669"
+        register_pending_basket(sale, basket_id, terminal)
+
+        payload = {
+            "terminalId": "WRONG-SERIAL",
+            "clientId": "client-abc",
             "operation": "BASKET_COMPLETED",
             "data": {"basketID": basket_id, "status": 0},
         }

@@ -1,0 +1,36 @@
+# Ramis ERP — ShellCheck yapılandırması
+#
+# Bu kod tabanı büyük kurulum/güncelleme betikleri ve `source` edilen ortak
+# kütüphanelerden (system_utils/*.sh) oluşur. Aşağıdaki kurallar bu yapıda
+# kasıtlı/kabul edilen kalıplar olduğu için kapatılır.
+#
+# CI notu (.github/workflows/scripts-ci.yml):
+#   --severity=error   → FAIL eder (gerçek hatalar)
+#   --severity=warning → bilgi amaçlı (continue-on-error)
+
+# `source`/`.` ile yüklenen dosyaların izini sür (yol çözümlenebiliyorsa).
+external-sources=true
+
+# Varsayılan rapor seviyesi: warning ve üstü (info/style gizlenir).
+severity=warning
+
+# Kapatılan kurallar:
+#   SC1090 — takip edilemeyen dinamik `source` (yol değişkenden geliyor)
+#   SC1091 — shellcheck kaynak dosyayı çözümleyemedi
+#   SC2034 — atanıp kullanılmayan değişken (kaynaktan gelen/çağıran kullanır)
+#   SC2155 — atama ile bildirimi birleştirme (local x=$(...))
+#   SC2016 — tek tırnak içinde $ genişlememesi (kasıtlı literal kullanım)
+#   SC2086 — çift tırnaksız değişken genişletme (kasıtlı kelime ayırma)
+#   SC2046 — çift tırnaksız komut ikamesi (kasıtlı kelime ayırma)
+#   SC2001 — basit sed yerine bash parametre genişletmesi önerisi
+#   SC2317 — ulaşılamaz görünen komut (trap/fonksiyon tabanlı akış)
+#   SC2129 — birden çok satırda aynı dosyaya yönlendirme önerisi
+#   SC2154 — atanmamış değişken referansı (değer dış kaynaktan/çağırandan gelir)
+#   SC2164 — `cd` sonrası hata kontrolü önerisi
+#   SC2181 — `$?` yerine doğrudan komut kontrolü önerisi
+#   SC2310 — `set -e` devre dışı bırakan bağlamda fonksiyon çağrısı
+#   SC2311 — fonksiyon çağrısının hata durumunu maskelemesi
+#   SC2329 — hiç çağrılmayan fonksiyon (kütüphane dosyaları dışarıdan çağrılır)
+#   SC2148 — shebang/shell yönergesi yok (install_i18n.sh source edilen çeviri
+#            dosyasıdır; doğrudan çalıştırılmaz, shebang kasıtlı olarak yok)
+disable=SC1090,SC1091,SC2034,SC2155,SC2016,SC2086,SC2046,SC2001,SC2317,SC2129,SC2154,SC2164,SC2181,SC2310,SC2311,SC2329,SC2148

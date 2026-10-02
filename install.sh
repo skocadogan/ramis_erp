@@ -33,24 +33,16 @@ if [[ ! -f "${SCRIPT_DIR}/install_i18n.sh" ]]; then
 fi
 source "${SCRIPT_DIR}/install_i18n.sh"
 
+# shellcheck source=system_utils/install_state.sh
+source "${SCRIPT_DIR}/system_utils/install_state.sh"
+
+# shellcheck source=system_utils/common.sh
+source "${SCRIPT_DIR}/system_utils/common.sh"
+
 LOG_DIR="/var/log/ramis"
 LOG_FILE="${LOG_DIR}/install.log"
 STEP_CURRENT=0
-
-BACKEND_ONLY="false"
-for arg in "$@"; do
-    case "$arg" in
-        --backend-only)
-            BACKEND_ONLY="true"
-            ;;
-    esac
-done
-
-if [[ "${BACKEND_ONLY}" == "true" ]]; then
-    STEP_TOTAL=12
-else
-    STEP_TOTAL=13
-fi
+STEP_TOTAL=13
 
 # Wizard tarafından doldurulacak değişkenler
 INSTALL_DIR="/srv/ramis_erp"
@@ -76,6 +68,7 @@ DAPHNE_INSTANCES=2
 UVICORN_INSTANCES=4
 DJANGO_SECRET_KEY=""
 SYS_USER="ramis"
+RAMIS_VERSION="1.0"
 INSTALL_LANG_NEEDS_PROMPT=""
 if [[ -z "${INSTALL_LANG+x}" ]]; then
     INSTALL_LANG="tr"
@@ -90,10 +83,21 @@ fi
 
 # ── Yardımcı fonksiyonlar ────────────────────────────────────────────
 
-log() {
-    local msg="[$(date '+%Y-%m-%d %H:%M:%S')] $*"
-    echo "$msg" >> "$LOG_FILE" 2>/dev/null || true
+# Kurulum hata ile biterse son adımı ve günlük yolunu gösterir; başarılıysa sessizdir.
+# Otomatik servis başlatmaz (kurulum yarım kalmış olabilir) — yalnızca bilgilendirir.
+_on_install_error() {
+    local rc="${1:-0}"
+    if [[ "$rc" -eq 0 ]]; then
+        return 0
+    fi
+    echo ""
+    echo -e "  ${RED}${BOLD}Kurulum ${STEP_CURRENT}/${STEP_TOTAL} adımında başarısız oldu (çıkış kodu: ${rc}).${NC}"
+    echo -e "  ${DIM}Son adım bilgisi ve ayrıntılar için günlük dosyasına bakın: ${LOG_FILE}${NC}"
+    echo -e "  ${DIM}Servisler otomatik başlatılmadı; kurulum yarım kalmış olabilir. Gerekirse tekrar çalıştırın: sudo bash install.sh${NC}"
+    echo ""
+    return 0
 }
+trap '_on_install_error $?' EXIT
 
 step_header() {
     STEP_CURRENT=$((STEP_CURRENT + 1))
@@ -144,11 +148,6 @@ section_hint() {
     echo ""
 }
 
-info()    { echo -e "  ${INFO}  $*"; log "INFO: $*"; }
-success() { echo -e "  ${CHECK}  $*"; log "OK: $*"; }
-warn()    { echo -e "  ${WARN}  $*"; log "WARN: $*"; }
-fail()    { echo -e "  ${CROSS}  $*"; log "FAIL: $*"; }
-
 die() {
     fail "$*"
     echo ""
@@ -158,24 +157,78 @@ die() {
     exit 1
 }
 
-# .env / şifre: açık heredoc $(VAR) genişlerken değerde \n satır kırar; girişte yapıştırma kirliliği
-trim_space() {
-    local s="$1"
-    s="${s#"${s%%[![:space:]]*}"}"
-    s="${s%"${s##*[![:space:]]}"}"
-    printf '%s' "$s"
+# ── Argüman ayrıştırma ────────────────────────────────────────────────
+# ÖNEMLİ: --help/--version root kontrolünden (preflight_checks) önce çalışır.
+BACKEND_ONLY="false"
+KEEP_FRONTEND_SOURCES="false"
+RAMIS_DRY_RUN="false"
+
+print_usage() {
+    cat <<EOF
+Ramis ERP kurulum betiği v${RAMIS_VERSION}
+
+Kullanım:
+  sudo bash install.sh [seçenek]
+
+Seçenekler:
+  --backend-only    Yalnızca backend bileşenlerini kur; frontend adımı atlanır
+  -y, --yes         Tüm onay sorularını otomatik "evet" kabul et.
+                    Not: zorunlu gizli alanlar (admin/DB şifresi) yine sorulur.
+      --quiet       Bilgi ve başarı satırlarını gizle (uyarı/hata görünür kalır)
+      --no-color    Renkli çıktıyı kapat
+      --dry-run     Simülasyon: sihirbaz çalışır, sistemde hiçbir değişiklik yapılmaz
+      --keep-sources  Frontend kaynak dosyalarını kurulum sonunda temizleme
+  -h, --help        Bu yardım metnini göster ve çık
+      --version     Sürümü göster ve çık
+
+Örnek:
+  sudo bash install.sh --yes --quiet
+  sudo bash install.sh --dry-run
+EOF
 }
 
-env_single_line() {
-    printf '%s' "$1" | tr -d '\r\n'
-}
+for arg in "$@"; do
+    case "$arg" in
+        --backend-only)
+            BACKEND_ONLY="true"
+            ;;
+        -y|--yes)
+            RAMIS_ASSUME_YES="true"
+            ;;
+        --quiet)
+            RAMIS_QUIET="true"
+            ;;
+        --no-color)
+            RAMIS_NO_COLOR="true"
+            ;;
+        --dry-run)
+            RAMIS_DRY_RUN="true"
+            ;;
+        --keep-sources)
+            KEEP_FRONTEND_SOURCES="true"
+            ;;
+        --version)
+            echo "Ramis ERP install.sh v${RAMIS_VERSION}"
+            exit 0
+            ;;
+        -h|--help)
+            print_usage
+            exit 0
+            ;;
+        --*)
+            die "Bilinmeyen seçenek: ${arg}"
+            ;;
+    esac
+done
 
-# PostgreSQL ALTER/CREATE USER — tek tırnak kaçışı (backend.env ile aynı ham parola)
-postgres_sql_quote() {
-    local s="$1"
-    s="${s//\'/\'\'}"
-    printf "'%s'" "$s"
-}
+# --no-color verildiyse veya çıktı TTY değilse renkleri kapat
+ramis_maybe_disable_colors
+
+if [[ "${BACKEND_ONLY}" == "true" ]]; then
+    STEP_TOTAL=12
+else
+    STEP_TOTAL=13
+fi
 
 # backend.env: bash source + systemd EnvironmentFile için çift tırnaklı değer
 env_file_double_quote() {
@@ -266,33 +319,6 @@ _bootstrap_venv_pip() {
         "$(_L pip_bootstrap_ok)"
 }
 
-confirm_yn() {
-    local prompt="$1"
-    local default="${2:-e}"
-    local answer hint
-    if [[ "$INSTALL_LANG" == "en" ]]; then
-        if [[ "$default" == "e" ]]; then
-            hint="[Y/n]"
-            read -rp "  $prompt $hint " answer
-            answer="${answer:-y}"
-        else
-            hint="[y/N]"
-            read -rp "  $prompt $hint " answer
-            answer="${answer:-n}"
-        fi
-        [[ "${answer,,}" == "y" || "${answer,,}" == "yes" ]]
-    else
-        if [[ "$default" == "e" ]]; then
-            read -rp "  $prompt [E/h]: " answer
-            answer="${answer:-e}"
-        else
-            read -rp "  $prompt [e/H]: " answer
-            answer="${answer:-h}"
-        fi
-        [[ "${answer,,}" == "e" || "${answer,,}" == "evet" || "${answer,,}" == "y" || "${answer,,}" == "yes" ]]
-    fi
-}
-
 prompt_value() {
     local prompt="$1"
     local default="${2:-}"
@@ -374,52 +400,21 @@ uvicorn_ports_label() {
 }
 
 generate_password() {
-    openssl rand -base64 24 | tr -d '/+=' | head -c 32 | tr -d '\n\r'
+    if command_exists openssl; then
+        openssl rand -base64 24 | tr -d '/+=' | head -c 32 | tr -d '\n\r'
+    else
+        # openssl henüz kurulmamış olabilir (sihirbaz, sistem bağımlılıklarından önce çalışır)
+        head -c 32 /dev/urandom | base64 | tr -d '/+=\n\r' | cut -c1-32
+    fi
 }
 
 generate_secret_key() {
-    openssl rand -hex 48
-}
-
-command_exists() {
-    command -v "$1" &>/dev/null
-}
-
-# makemessages (.po güncelleme) + django.po → django.mo derleme
-_compile_backend_locale() {
-    local backend_dir="$1"
-    local python="$2"
-    local pip="$3"
-    local makemessages_args=(
-        -l tr -l en -l ar -l de -l ru
-        --ignore=venv --ignore=.venv --ignore=env
-        --ignore=node_modules --ignore=.pytest_cache
-    )
-
-    info "Backend çeviri dizeleri çıkarılıyor (makemessages)..."
-    if sudo -u "$SYS_USER" bash -c "set -a && source /etc/ramis/backend.env && set +a && cd ${backend_dir} && ${python} manage.py makemessages ${makemessages_args[*]}" >> "$LOG_FILE" 2>&1; then
-        success "Backend django.po dosyaları güncellendi (makemessages)"
+    if command_exists openssl; then
+        openssl rand -hex 48
     else
-        warn "makemessages başarısız — gettext kurulu değilse .po dosyaları rsync ile gelen sürümle kalır"
+        # openssl yoksa /dev/urandom'dan yeterli entropi (base64 tek satır)
+        head -c 48 /dev/urandom | base64 | tr -d '\n\r'
     fi
-
-    info "Backend dil dosyaları derleniyor (django.po → django.mo)..."
-    sudo -u "$SYS_USER" "$pip" install polib >> "$LOG_FILE" 2>&1 || true
-    if sudo -u "$SYS_USER" bash -c "cd ${backend_dir} && ${python} scripts/compile_locale_mo.py" >> "$LOG_FILE" 2>&1; then
-        success "Backend dil dosyaları derlendi"
-        return 0
-    fi
-
-    if sudo -u "$SYS_USER" bash -c "set -a && source /etc/ramis/backend.env && set +a && cd ${backend_dir} && ${python} manage.py compilemessages" >> "$LOG_FILE" 2>&1; then
-        success "Backend dil dosyaları derlendi (compilemessages)"
-        return 0
-    fi
-
-    warn "Backend dil dosyaları derlenemedi — çeviri metinleri eksik olabilir"
-}
-
-service_active() {
-    systemctl is-active --quiet "$1" 2>/dev/null
 }
 
 banner() {
@@ -496,17 +491,39 @@ preflight_checks() {
         success "$(_L chk_ram_line) ${total_ram_mb} $(_L lbl_mb)"
     fi
 
-    # Disk kontrolü
-    local free_disk_gb
-    free_disk_gb=$(df -BG / | awk 'NR==2 {gsub("G",""); print $4}')
-    if (( free_disk_gb < 2 )); then
-        die "$(_L die_disk_short): ${free_disk_gb} $(_L lbl_gb)."
-    fi
-    success "$(_L chk_disk_line) ${free_disk_gb} $(_L lbl_gb)"
+    # Disk kontrolü — /, INSTALL_DIR'in bulunduğu mount ve /var (log) ayrıysa hepsi.
+    # INSTALL_DIR henüz oluşmamış olabilir; en yakın var olan üst dizininden ölçülür.
+    local install_probe="$INSTALL_DIR"
+    while [[ ! -d "$install_probe" && "$install_probe" != "/" ]]; do
+        install_probe=$(dirname "$install_probe")
+    done
+
+    local disk_paths=("/")
+    disk_paths+=("$install_probe")
+    [[ -d /var ]] && disk_paths+=("/var")
+
+    local seen_mounts=() disk_path mount_id mp free_disk_gb
+    for disk_path in "${disk_paths[@]}"; do
+        [[ -d "$disk_path" ]] || continue
+        mount_id=$(df -P "$disk_path" | awk 'NR==2 {print $6}')
+        # Aynı mount'u iki kez test etme
+        for mp in "${seen_mounts[@]}"; do
+            if [[ "$mp" == "$mount_id" ]]; then
+                continue 2
+            fi
+        done
+        seen_mounts+=("$mount_id")
+
+        free_disk_gb=$(df -BG "$disk_path" | awk 'NR==2 {gsub("G",""); print $4}')
+        if (( free_disk_gb < 2 )); then
+            die "$(_L die_disk_short) (${disk_path}): ${free_disk_gb} $(_L lbl_gb)."
+        fi
+        success "$(_L chk_disk_line) ${disk_path} → ${free_disk_gb} $(_L lbl_gb)"
+    done
 
     # Port kontrolü
     local ports_in_use=()
-    local check_ports=(80 443 5432 6379)
+    local check_ports=(80 443 5432 6379 3000 8000 8001 8002 8003 9000 9001 9002 9003 9004 9005 9006 9007 9100)
     for port in "${check_ports[@]}"; do
         if ss -tlnp 2>/dev/null | grep -q ":${port} "; then
             ports_in_use+=("$port")
@@ -764,24 +781,13 @@ interactive_wizard() {
     printf '  %-20s %s\n' "$(_L sum_uvicorn)" "${BOLD}${UVICORN_INSTANCES:-4}${NC} $(uvicorn_ports_label "${UVICORN_INSTANCES:-4}")"
     echo ""
 
-    if ! confirm_yn "$(_L q_confirm_start)" "e"; then
-        die "$(_L die_cancel)"
+    if [[ "${RAMIS_DRY_RUN:-false}" != "true" ]]; then
+        if ! confirm_yn "$(_L q_confirm_start)" "e"; then
+            die "$(_L die_cancel)"
+        fi
     fi
 
     log "Sihirbaz tamam: INSTALL_DIR=$INSTALL_DIR API_DOMAIN=$API_DOMAIN APP_DOMAIN=$APP_DOMAIN SAME_DOMAIN=$SAME_DOMAIN IP_ONLY_MODE=$IP_ONLY_MODE PG_DB=$PG_DB PG_USER=$PG_USER SEED=$SEED_DATA POS_OFFLINE_QUEUE=$POS_OFFLINE_QUEUE DAPHNE_INSTANCES=$DAPHNE_INSTANCES INSTALL_LANG=$INSTALL_LANG"
-}
-
-# frontend build için /etc/ramis/frontend.env içindeki NEXT_PUBLIC_* satırlarını export ifadelerine çevirir
-_frontend_next_public_build_exports() {
-    local exports=""
-    if [[ -f /etc/ramis/frontend.env ]]; then
-        while IFS= read -r line || [[ -n "$line" ]]; do
-            [[ "$line" =~ ^[[:space:]]*# ]] && continue
-            [[ "$line" =~ ^NEXT_PUBLIC_[A-Za-z0-9_]+= ]] || continue
-            exports+=" export ${line};"
-        done < /etc/ramis/frontend.env
-    fi
-    printf '%s' "$exports"
 }
 
 # Sunucudaki /etc/ramis/runtime-config.json içeriğini yazar/günceller.
@@ -831,11 +837,35 @@ ENVEOF
 # BÖLÜM 3: Sistem Bağımlılıkları
 # ══════════════════════════════════════════════════════════════════════
 
+# dpkg/apt kilitlerini bekler ve yarım kalan işlemleri onarır (idempotent).
+# Önceki başarısız apt çalıştırmaları kurulumu kilitleyebilir; burada temizlenir.
+_apt_prepare() {
+    log "apt hazırlığı: dpkg/apt kilitleri bekleniyor"
+    local i
+    for i in {1..30}; do
+        if ! fuser /var/lib/dpkg/lock-frontend /var/lib/dpkg/lock \
+            /var/lib/apt/lists/lock /var/cache/apt/archives/lock >/dev/null 2>&1; then
+            break
+        fi
+        sleep 2
+    done
+
+    # Yarım kalan paket yapılandırmalarını ve bağımlılıkları onar (hatalar kritik değil).
+    dpkg --configure -a >> "$LOG_FILE" 2>&1 || true
+    DEBIAN_FRONTEND=noninteractive apt-get -f install -y -qq >> "$LOG_FILE" 2>&1 || true
+}
+
 install_system_deps() {
     step_header "$(_L step_deps)"
 
     info "$(_L pk_update)"
-    run_apt_to_log op_apt_update apt-get update -qq
+    _apt_prepare
+    # İlk deneme sessiz; başarısız olursa 1 kez daha denenir, yine olmazsa mevcut hata yoluyla die.
+    if ! apt-get update -qq >> "$LOG_FILE" 2>&1; then
+        warn "apt-get update başarısız — 1 kez daha deneniyor"
+        sleep 3
+        run_apt_to_log op_apt_update apt-get update -qq
+    fi
     success "$(_L pk_update_ok)"
 
     info "$(_L pk_base)"
@@ -849,6 +879,7 @@ install_system_deps() {
         ca-certificates \
         gnupg \
         lsb-release \
+        logrotate \
         ufw
     success "$(_L pk_base_ok)"
 
@@ -967,6 +998,34 @@ setup_user_and_dirs() {
 
     chown -R "${SYS_USER}:${SYS_USER}" "$INSTALL_DIR"
     chown -R "${SYS_USER}:${SYS_USER}" "$LOG_DIR"
+
+    # ── logrotate: /var/log/ramis/*.log sınırsız büyümesin ──
+    # Şablon dosyası deploy sonrası ${INSTALL_DIR}/system_utils/ramis-logrotate
+    # altında bulunur. Bu adım deploy'dan önce çalıştığı için dosya yoksa inline
+    # heredoc fallback kullanılır (içerik birebir aynıdır).
+    local logrotate_src="${INSTALL_DIR}/system_utils/ramis-logrotate"
+    mkdir -p /etc/logrotate.d
+    if [[ -f "$logrotate_src" ]]; then
+        install -o root -g root -m 644 "$logrotate_src" /etc/logrotate.d/ramis
+    else
+        cat > /etc/logrotate.d/ramis << 'LOGROTATE_EOF'
+# Ramis ERP — /var/log/ramis/*.log için logrotate yapılandırması
+# install.sh tarafından otomatik oluşturuldu (şablon: system_utils/ramis-logrotate).
+/var/log/ramis/*.log {
+    weekly
+    rotate 8
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 ramis ramis
+    copytruncate
+}
+LOGROTATE_EOF
+        chown root:root /etc/logrotate.d/ramis
+        chmod 644 /etc/logrotate.d/ramis
+    fi
+    success "logrotate yapılandırması kuruldu (/etc/logrotate.d/ramis)"
 
     success "$(_L dirs_ok) ${INSTALL_DIR}"
 }
@@ -1736,8 +1795,8 @@ server {
         proxy_send_timeout 3600;
         proxy_buffering off;
         proxy_socket_keepalive on;
-        proxy_buffer_size 4k;
-        proxy_buffers 2 4k;
+        # proxy_buffer* yönergeleri WS'te gereksiz (buffering off) ve
+        # "proxy_busy_buffers_size" doğrulamasını bozabiliyor — kaldırıldı.
     }
 
     # Medya dosyaları
@@ -1867,8 +1926,8 @@ server {
         proxy_send_timeout 3600;
         proxy_buffering off;
         proxy_socket_keepalive on;
-        proxy_buffer_size 4k;
-        proxy_buffers 2 4k;
+        # proxy_buffer* yönergeleri WS'te gereksiz (buffering off) ve
+        # "proxy_busy_buffers_size" doğrulamasını bozabiliyor — kaldırıldı.
     }
 
     # Django static (admin statiğleri)
@@ -2047,8 +2106,8 @@ server {
         proxy_send_timeout 3600;
         proxy_buffering off;
         proxy_socket_keepalive on;
-        proxy_buffer_size 4k;
-        proxy_buffers 2 4k;
+        # proxy_buffer* yönergeleri WS'te gereksiz (buffering off) ve
+        # "proxy_busy_buffers_size" doğrulamasını bozabiliyor — kaldırıldı.
     }
 
     # Django static (admin statiğleri)
@@ -2092,11 +2151,13 @@ setup_firewall() {
 
     # Hata durumunda scriptin durmasını engellemek için yerel hata yönetimi
     local fw_error=false
+    local ssh_ok=true
 
     # SSH erişimi korunmalı
     if ! ufw allow OpenSSH >> "$LOG_FILE" 2>&1; then
         warn "$(_L fw_ssh_bad)"
         fw_error=true
+        ssh_ok=false
     else
         success "$(_L fw_ssh_ok)"
     fi
@@ -2119,13 +2180,19 @@ setup_firewall() {
         fi
     fi
 
-    # Firewall'ı etkinleştir
-    info "$(_L fw_enable)"
-    if ! echo "y" | ufw enable >> "$LOG_FILE" 2>&1; then
-        warn "$(_L fw_enable_bad)"
-        fw_error=true
+    # Firewall'ı etkinleştir — YALNIZCA SSH kuralı doğrulandıysa.
+    # SSH kuralı eklenemediyse uzaktan erişimi kaybetmemek için UFW açılmaz.
+    if [[ "$ssh_ok" == "true" ]]; then
+        info "$(_L fw_enable)"
+        if ! echo "y" | ufw enable >> "$LOG_FILE" 2>&1; then
+            warn "$(_L fw_enable_bad)"
+            fw_error=true
+        else
+            success "$(_L fw_enabled_ok)"
+        fi
     else
-        success "$(_L fw_enabled_ok)"
+        warn "SSH kuralı doğrulanamadı; uzaktan erişimi kaybetmemek için UFW etkinleştirilmedi"
+        fw_error=true
     fi
 
     if [ "$fw_error" = true ]; then
@@ -2220,7 +2287,7 @@ setup_system_utils() {
         python3-gi \
         gir1.2-gtk-4.0 \
         gir1.2-adw-1 \
-        policykit-1
+       polkitd
     success "$(_L utils_deps_ok)"
 
     info "$(_L utils_chmod)"
@@ -2263,51 +2330,6 @@ setup_system_utils() {
     fi
 
     success "$(_L utils_done)"
-}
-
-# ══════════════════════════════════════════════════════════════════════
-# BÖLÜM 13: Frontend Kaynak Temizliği
-# ══════════════════════════════════════════════════════════════════════
-
-# next build (output: standalone) + postbuild tamamlandıktan sonra
-# üretim sunucusunda artık ihtiyaç duyulmayan kaynak dosyaları temizler.
-# Korunanlar: .next/  (çalışan standalone build)
-#              .env.local  (rsync hariç tutulur, install.sh oluşturur)
-#              scripts/    (prepare-standalone.sh — _prepare_next_standalone tarafından kullanılır)
-_cleanup_frontend_sources() {
-    local frontend_dir="${1:-${INSTALL_DIR}/frontend}"
-
-    if [[ ! -f "${frontend_dir}/.next/standalone/server.js" ]]; then
-        warn "Frontend kaynak temizliği atlandı: standalone build bulunamadı"
-        return 1
-    fi
-
-    if ! service_active ramis-frontend; then
-        warn "Frontend kaynak temizliği atlandı: ramis-frontend servisi çalışmıyor"
-        return 1
-    fi
-
-    info "Frontend kaynak dosyaları temizleniyor (üretimde gerekli değil)..."
-
-    local cleaned=0
-    while IFS= read -r -d '' entry; do
-        local base
-        base=$(basename "$entry")
-        case "$base" in
-            .next|.env.local|scripts) : ;;
-            *)
-                rm -rf "$entry"
-                cleaned=1
-                ;;
-        esac
-    done < <(find "${frontend_dir}" -maxdepth 1 -mindepth 1 -print0 2>/dev/null)
-
-    if [[ "$cleaned" -eq 1 ]]; then
-        success "Frontend kaynak dosyaları temizlendi (.next/ ve scripts/ korundu)"
-        log "Frontend source cleanup tamamlandı: ${frontend_dir}"
-    else
-        info "Frontend kaynak dizini zaten temiz"
-    fi
 }
 
 # ══════════════════════════════════════════════════════════════════════
@@ -2524,6 +2546,10 @@ main() {
     banner
     preflight_checks
     interactive_wizard
+    if [[ "${RAMIS_DRY_RUN:-false}" == "true" ]]; then
+        info "DRY-RUN: kurulum simülasyonu — hiçbir değişiklik yapılmadı"
+        return 0
+    fi
     install_system_deps
     setup_user_and_dirs
     deploy_project_files
@@ -2539,8 +2565,9 @@ main() {
     setup_firewall
     setup_system_utils
     verify_installation
+    ramis_write_install_state || warn "Kurulum durumu kaydedilemedi (/etc/ramis/install.conf)"
     if [[ "${BACKEND_ONLY}" != "true" ]]; then
-        _cleanup_frontend_sources "${INSTALL_DIR}/frontend"
+        [[ "$KEEP_FRONTEND_SOURCES" == "true" ]] || _cleanup_frontend_sources "${INSTALL_DIR}/frontend"
     fi
 }
 

@@ -1,0 +1,23 @@
+# Ramis ERP — /var/log/ramis/*.log için logrotate yapılandırması
+#
+# install.sh tarafından /etc/logrotate.d/ramis konumuna kopyalanır.
+# Amaç: uygulama/günlük dosyalarının sınırsız büyümesini engellemek.
+#
+# - weekly / rotate 8   : haftalık döndür, 8 arşiv sakla (~2 ay)
+# - compress / delaycompress : arşivleri sıkıştır (en yeniyi bir tur geciktir)
+# - missingok / notifempty  : dosya yoksa hata verme; boş dosyayı döndürme
+# - create 0640 ramis ramis  : yeni dosyayı ramis kullanıcısına ait oluştur
+# - copytruncate        : süreçleri yeniden başlatmadan log dosyasını kırp
+#
+# NOT: "ramis" kullanıcı adı install.sh içindeki SYS_USER ile uyumludur.
+
+/var/log/ramis/*.log {
+    weekly
+    rotate 8
+    compress
+    delaycompress
+    missingok
+    notifempty
+    create 0640 ramis ramis
+    copytruncate
+}

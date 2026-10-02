@@ -759,6 +759,10 @@ _patch_nginx_timeout() {
 _patch_nginx_buffers() {
     local conf="$1"
     [[ ! -f "$conf" ]] && return
+    # Patolojik kombinasyon: "proxy_buffers 2 4k" + proxy_buffer_size 4k,
+    # varsayılan proxy_busy_buffers_size'ı (2 buffer) doğrulama sınırının
+    # üstüne çıkarır → "must be less than" hatası. Her zaman düzelt.
+    sed -i "s/proxy_buffers 2 4k;/proxy_buffers 8 4k;/g" "$conf"
     if (( MEM_TOTAL_MB <= 4096 )); then
         # Düşük RAM: buffer'ları küçült
         if grep -q "proxy_buffer_size" "$conf"; then

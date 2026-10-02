@@ -23,70 +23,56 @@ INFO="${BLUE}·${NC}"
 
 # ── Global değişkenler ────────────────────────────────────────────────
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+
+# Kurulum durumu (install.sh sonunda /etc/ramis/install.conf yazar).
+# ramis_load_install_state ile özel INSTALL_DIR / SYS_USER / INSTALL_LANG /
+# PG_DB / API_DOMAIN değerleri okunur. State yoksa varsayılanlar korunur.
+# shellcheck source=system_utils/install_state.sh
+source "${SCRIPT_DIR}/system_utils/install_state.sh"
+
+# shellcheck source=system_utils/common.sh
+source "${SCRIPT_DIR}/system_utils/common.sh"
+
+# shellcheck source=system_utils/update_i18n.sh
+source "${SCRIPT_DIR}/system_utils/update_i18n.sh"
+
+RAMIS_VERSION="1.0"
 LOG_FILE="/var/log/ramis/update.log"
 INSTALL_DIR="/srv/ramis_erp"
 SYS_USER="ramis"
 REBUILD_FRONTEND="false"
-# all | db | backend | frontend | change-ip | sync-runtime-config | sync-celery-workers
+# all | db | backend | frontend | change-ip | sync-runtime-config | sync-celery-workers | rollback
 UPDATE_MODE="all"
 RELOAD_ROLES="false"
 RESET_USERS="false"
 SEED_ALLERGENS="false"
-INSTALL_LANG="tr"
+INSTALL_LANG="${INSTALL_LANG:-tr}"
+# --lang CLI ile açıkça verildiyse state dosyasındaki INSTALL_LANG'i ezmesin
+INSTALL_LANG_EXPLICIT="false"
 CHANGE_IP_MANUAL=""
+
+# ── UX bayrakları (common.sh bu globalleri okur) ─────────────────────
+# --yes / --quiet / --no-color / --dry-run / --keep-sources
+RAMIS_ASSUME_YES="${RAMIS_ASSUME_YES:-false}"
+RAMIS_QUIET="${RAMIS_QUIET:-false}"
+RAMIS_NO_COLOR="${RAMIS_NO_COLOR:-false}"
+RAMIS_DRY_RUN="false"
+KEEP_FRONTEND_SOURCES="false"
+
+# rsync öncesi dosya yedekleri (hedef ağacın DIŞINDA tutulur)
+UPDATE_BACKUP_ROOT="${RAMIS_BACKUP_ROOT:-/var/backups/ramis}"
+UPDATE_BACKUP_DIR=""
+
+# Hata sonrası servis kurtarma (EXIT trap) durum bayrakları
+SERVICES_STOPPED="false"
+UPDATE_SUCCEEDED="false"
 
 # ── Yardımcı fonksiyonlar ────────────────────────────────────────────
 
-log()     { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" >> "$LOG_FILE" 2>/dev/null || true; }
-info()    { echo -e "  ${INFO}  $*"; log "INFO: $*"; }
-success() { echo -e "  ${CHECK}  $*"; log "OK: $*"; }
-warn()    { echo -e "  ${WARN}  $*"; log "WARN: $*"; }
-fail()    { echo -e "  ${CROSS}  $*"; log "FAIL: $*"; }
-die()     { echo ""; echo -e "  ${RED}${BOLD}İşlem durdu.${NC} $*"; echo ""; exit 1; }
+die()     { echo ""; echo -e "  ${RED}${BOLD}$(_L upd_die_footer "İşlem durdu.")${NC} $*"; echo ""; exit 1; }
 
 # shellcheck source=system_utils/python_venv.sh
 source "${SCRIPT_DIR}/system_utils/python_venv.sh"
-
-confirm_yn() {
-    local prompt="$1"
-    local default="${2:-e}"
-    local answer
-    if [[ "$default" == "e" ]]; then
-        read -rp "  $prompt [E/h]: " answer
-        answer="${answer:-e}"
-    else
-        read -rp "  $prompt [e/H]: " answer
-        answer="${answer:-h}"
-    fi
-    [[ "${answer,,}" == "e" ]] || [[ "${answer,,}" == "evet" ]] || [[ "${answer,,}" == "y" ]] || [[ "${answer,,}" == "yes" ]]
-}
-
-# /etc/ramis/frontend.env içindeki NEXT_PUBLIC_* satırlarını npm build export ifadelerine çevirir
-_frontend_next_public_build_exports() {
-    local exports=""
-    if [[ -f /etc/ramis/frontend.env ]]; then
-        while IFS= read -r line || [[ -n "$line" ]]; do
-            [[ "$line" =~ ^[[:space:]]*# ]] && continue
-            [[ "$line" =~ ^NEXT_PUBLIC_[A-Za-z0-9_]+= ]] || continue
-            exports+=" export ${line};"
-        done < /etc/ramis/frontend.env
-    fi
-    printf '%s' "$exports"
-}
-
-# frontend.env içindeki NEXT_PUBLIC_* değerlerini .env.local ile hizalar (rsync .env.local hariç tutar)
-_sync_frontend_env_local() {
-    local frontend_dir="$1"
-    local tmp
-    tmp=$(mktemp)
-    if [[ -f /etc/ramis/frontend.env ]]; then
-        grep -E '^NEXT_PUBLIC_[A-Za-z0-9_]+=' /etc/ramis/frontend.env > "$tmp" || true
-    fi
-    if [[ -s "$tmp" ]]; then
-        install -o "$SYS_USER" -g "$SYS_USER" -m 600 "$tmp" "${frontend_dir}/.env.local"
-    fi
-    rm -f "$tmp"
-}
 
 # Mevcut standalone build'e public/static kopyalar (output: standalone).
 _prepare_next_standalone() {
@@ -100,47 +86,6 @@ _prepare_next_standalone() {
 
     sudo -u "$SYS_USER" bash -c "cd ${frontend_dir} && bash scripts/prepare-standalone.sh"
     return 0
-}
-
-# next build (output: standalone) + postbuild tamamlandıktan sonra
-# üretim sunucusunda artık ihtiyaç duyulmayan kaynak dosyaları temizler.
-# Korunanlar: .next/  (çalışan standalone build)
-#              .env.local  (rsync hariç tutulur, yeniden oluşturulur)
-#              scripts/    (prepare-standalone.sh — _prepare_next_standalone tarafından kullanılır)
-_cleanup_frontend_sources() {
-    local frontend_dir="${1:-${INSTALL_DIR}/frontend}"
-
-    if [[ ! -f "${frontend_dir}/.next/standalone/server.js" ]]; then
-        warn "Frontend kaynak temizliği atlandı: standalone build bulunamadı"
-        return 1
-    fi
-
-    if ! service_active ramis-frontend; then
-        warn "Frontend kaynak temizliği atlandı: ramis-frontend servisi çalışmıyor"
-        return 1
-    fi
-
-    info "Frontend kaynak dosyaları temizleniyor (üretimde gerekli değil)..."
-
-    local cleaned=0
-    while IFS= read -r -d '' entry; do
-        local base
-        base=$(basename "$entry")
-        case "$base" in
-            .next|.env.local|scripts) : ;;
-            *)
-                rm -rf "$entry"
-                cleaned=1
-                ;;
-        esac
-    done < <(find "${frontend_dir}" -maxdepth 1 -mindepth 1 -print0 2>/dev/null)
-
-    if [[ "$cleaned" -eq 1 ]]; then
-        success "Frontend kaynak dosyaları temizlendi (.next/ ve scripts/ korundu)"
-        log "Frontend source cleanup tamamlandı: ${frontend_dir}"
-    else
-        info "Frontend kaynak dizini zaten temiz"
-    fi
 }
 
 # ramis-frontend.service — Next.js standalone (node server.js)
@@ -250,10 +195,6 @@ _write_daphne_systemd_units() {
     _sync_split_asgi_stack
 }
 
-service_active() {
-    systemctl is-active --quiet "$1" 2>/dev/null
-}
-
 ramis_health_check() {
     local port=$1
     local service_name=$2
@@ -274,97 +215,6 @@ ramis_health_check() {
     echo "  ✗ ${service_name} failed health check after ${max_attempts}s"
     curl -sS --max-time 3 -o /dev/null -w "  Last HTTP status: %{http_code}\n" "$health_url" || true
     return 1
-}
-
-# makemessages (.po güncelleme) + django.po → django.mo derleme
-_compile_backend_locale() {
-    local backend_dir="$1"
-    local python="$2"
-    local pip="$3"
-    local makemessages_args=(
-        -l tr -l en -l ar -l de -l ru
-        --ignore=venv --ignore=.venv --ignore=env
-        --ignore=node_modules --ignore=.pytest_cache
-    )
-
-    info "Backend çeviri dizeleri çıkarılıyor (makemessages)..."
-    if sudo -u "$SYS_USER" bash -c "set -a && source /etc/ramis/backend.env && set +a && cd ${backend_dir} && ${python} manage.py makemessages ${makemessages_args[*]}" >> "$LOG_FILE" 2>&1; then
-        success "Backend django.po dosyaları güncellendi (makemessages)"
-    else
-        warn "makemessages başarısız — gettext kurulu değilse .po dosyaları rsync ile gelen sürümle kalır"
-    fi
-
-    info "Backend dil dosyaları derleniyor (django.po → django.mo)..."
-    sudo -u "$SYS_USER" "$pip" install polib >> "$LOG_FILE" 2>&1 || true
-    if sudo -u "$SYS_USER" bash -c "cd ${backend_dir} && ${python} scripts/compile_locale_mo.py" >> "$LOG_FILE" 2>&1; then
-        success "Backend dil dosyaları derlendi"
-        return 0
-    fi
-
-    if sudo -u "$SYS_USER" bash -c "set -a && source /etc/ramis/backend.env && set +a && cd ${backend_dir} && ${python} manage.py compilemessages" >> "$LOG_FILE" 2>&1; then
-        success "Backend dil dosyaları derlendi (compilemessages)"
-        return 0
-    fi
-
-    warn "Backend dil dosyaları derlenemedi — çeviri metinleri eksik olabilir"
-}
-
-_is_ipv4() {
-    local ip="$1"
-    local o1 o2 o3 o4
-
-    [[ "$ip" =~ ^([0-9]{1,3}\.){3}[0-9]{1,3}$ ]] || return 1
-    IFS='.' read -r o1 o2 o3 o4 <<< "$ip"
-    for o in "$o1" "$o2" "$o3" "$o4"; do
-        [[ "$o" =~ ^[0-9]+$ ]] || return 1
-        (( o >= 0 && o <= 255 )) || return 1
-    done
-}
-
-_detect_primary_ip() {
-    local ip=""
-    ip=$(ip -4 route get 1.1.1.1 2>/dev/null | awk '{for (i = 1; i <= NF; i++) if ($i == "src") { print $(i + 1); exit }}')
-    if [[ -z "$ip" ]]; then
-        ip=$(hostname -I 2>/dev/null | awk '{print $1}')
-    fi
-    printf '%s' "$ip"
-}
-
-_env_get() {
-    local file="$1"
-    local key="$2"
-    grep -E "^${key}=" "$file" 2>/dev/null | head -1 | cut -d= -f2- || true
-}
-
-_env_set() {
-    local file="$1"
-    local key="$2"
-    local value="$3"
-    if [[ ! -f "$file" ]]; then
-        die "Ortam dosyası bulunamadı: ${file}"
-    fi
-    if grep -q "^${key}=" "$file"; then
-        sed -i "s|^${key}=.*|${key}=${value}|" "$file"
-    else
-        echo "${key}=${value}" >> "$file"
-    fi
-}
-
-# Eksik anahtarları ekler; mevcut aktif satırları değiştirmez. Yorum satırı varsa açar.
-# Değişiklik yapıldıysa 0, anahtar zaten aktifse 1 döner.
-_env_ensure_default() {
-    local file="$1"
-    local key="$2"
-    local value="$3"
-    if grep -qE "^${key}=" "$file" 2>/dev/null; then
-        return 1
-    fi
-    if grep -qE "^#[[:space:]]*${key}=" "$file" 2>/dev/null; then
-        sed -i "s|^#[[:space:]]*${key}=.*|${key}=${value}|" "$file"
-        return 0
-    fi
-    echo "${key}=${value}" >> "$file"
-    return 0
 }
 
 _merge_backend_env_beat_defaults() {
@@ -660,6 +510,64 @@ _start_ramis_daphne_services() {
     ramis_start_daphne_services >> "$LOG_FILE" 2>&1 || warn "Bir veya daha fazla Daphne süreci başlatılamadı"
 }
 
+# EXIT trap: güncelleme hata ile biterse ve servisler durdurulmuşsa,
+# mode'a göre ilgili servisleri yeniden başlatmayı dener. Aksi halde sessizce çıkar.
+_restore_services_on_failure() {
+    local exit_code="${1:-0}"
+
+    if [[ "$exit_code" -eq 0 ]]; then
+        return 0
+    fi
+    if [[ "$UPDATE_SUCCEEDED" == "true" ]]; then
+        return 0
+    fi
+    if [[ "$SERVICES_STOPPED" != "true" ]]; then
+        return 0
+    fi
+
+    warn "Güncelleme hata ile sonlandı (exit=${exit_code}); durdurulan servisler yeniden başlatılıyor..."
+    log "WARN: EXIT trap — servis kurtarma başladı (mod=${UPDATE_MODE}, exit=${exit_code})"
+
+    # Uvicorn yardımcıları gerekebilir; tanımlıysa yeniden kaynağı yükle.
+    # shellcheck source=system_utils/uvicorn_units.sh
+    source "${SCRIPT_DIR}/system_utils/uvicorn_units.sh" >> "$LOG_FILE" 2>&1 || true
+
+    case "$UPDATE_MODE" in
+        db)
+            _start_ramis_daphne_services || true
+            ;;
+        backend)
+            _start_ramis_daphne_services || true
+            ramis_start_uvicorn_services >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker-maintenance.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker-broadcast.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker-pdf.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-beat.service >> "$LOG_FILE" 2>&1 || true
+            ;;
+        frontend)
+            systemctl start ramis-frontend.service >> "$LOG_FILE" 2>&1 || true
+            ;;
+        all|change-ip)
+            _start_ramis_daphne_services || true
+            ramis_start_uvicorn_services >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker-maintenance.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker-broadcast.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-worker-pdf.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-beat.service >> "$LOG_FILE" 2>&1 || true
+            systemctl start ramis-frontend.service >> "$LOG_FILE" 2>&1 || true
+            ;;
+        *)
+            warn "Bilinmeyen mod (${UPDATE_MODE}) — servis kurtarma atlandı"
+            ;;
+    esac
+
+    warn "Servis kurtarma denemesi tamamlandı. Durum: sudo systemctl status ramis-daphne ramis-uvicorn ramis-frontend"
+    log "WARN: EXIT trap — servis kurtarma denemesi tamamlandı"
+    return 0
+}
+
 # Sunucudaki /etc/ramis/runtime-config.json içeriğini yazar/günceller.
 _write_runtime_config_json() {
     local api_url="$1"
@@ -784,13 +692,24 @@ run_change_ip() {
         die "Geçersiz IP adresi: ${new_ip}"
     fi
 
-    echo -e "  ${BOLD}Mevcut IP:${NC}  ${old_ip}"
+    echo -e "  ${BOLD}$(_L upd_lbl_current_ip "Mevcut IP:")${NC}  ${old_ip}"
     if [[ -n "$CHANGE_IP_MANUAL" ]]; then
-        echo -e "  ${BOLD}Yeni IP:${NC}    ${new_ip} ${DIM}(manuel)${NC}"
+        echo -e "  ${BOLD}$(_L upd_lbl_new_ip "Yeni IP:")${NC}    ${new_ip} ${DIM}$(_L upd_ip_manual "(manuel)")${NC}"
     else
-        echo -e "  ${BOLD}Yeni IP:${NC}    ${new_ip} ${DIM}(otomatik tespit)${NC}"
+        echo -e "  ${BOLD}$(_L upd_lbl_new_ip "Yeni IP:")${NC}    ${new_ip} ${DIM}$(_L upd_ip_auto "(otomatik tespit)")${NC}"
     fi
     echo ""
+
+    # --dry-run: yalnızca özet ver; env/nginx/servis dosyalarına dokunma.
+    if [[ "$RAMIS_DRY_RUN" == "true" ]]; then
+        info "$(_L upd_dryrun_changeip_1 "backend.env / frontend.env / runtime-config.json yeni IP ile güncellenecek")"
+        info "$(_L upd_dryrun_changeip_2 "Nginx server_name yeni IP olarak değiştirilecek")"
+        info "$(_L upd_dryrun_changeip_3 "Daphne, Uvicorn, worker, beat ve frontend servisleri yeniden başlatılacak")"
+        echo ""
+        echo -e "  ${BOLD}${YELLOW}$(_L upd_dryrun_noop "DRY-RUN: hiçbir değişiklik yapılmadı.")${NC}"
+        echo ""
+        return 0
+    fi
 
     if [[ "$old_ip" == "$new_ip" ]]; then
         if [[ ! -f /etc/ramis/runtime-config.json ]]; then
@@ -811,7 +730,7 @@ run_change_ip() {
     app_origin="http://${new_ip},http://127.0.0.1"
     api_url="http://${new_ip}/api/v1"
 
-    info "Servisler durduruluyor..."
+    info "$(_L upd_info_stopping_services "Servisler durduruluyor...")"
     systemctl stop ramis-frontend.service 2>/dev/null || true
     _stop_ramis_daphne_services
     # shellcheck source=system_utils/uvicorn_units.sh
@@ -822,7 +741,8 @@ run_change_ip() {
     systemctl stop ramis-worker-broadcast.service 2>/dev/null || true
     systemctl stop ramis-worker-pdf.service 2>/dev/null || true
     systemctl stop ramis-beat.service 2>/dev/null || true
-    success "Servisler durduruldu"
+    SERVICES_STOPPED="true"
+    success "$(_L upd_success_services_stopped "Servisler durduruldu")"
 
     info "Backend ortam dosyası güncelleniyor..."
     _merge_backend_env_cors_defaults || true
@@ -853,7 +773,7 @@ run_change_ip() {
     info "Nginx server_name güncelleniyor..."
     _change_ip_update_nginx "$old_ip" "$new_ip"
 
-    info "Servisler yeniden başlatılıyor..."
+    info "$(_L upd_info_restarting_services "Servisler yeniden başlatılıyor...")"
     _prepare_next_standalone "${INSTALL_DIR}/frontend" && _write_ramis_frontend_systemd_unit || true
     _start_ramis_daphne_services
     # shellcheck source=system_utils/uvicorn_units.sh
@@ -908,60 +828,234 @@ run_change_ip() {
         fail "$(printf '%-26s %s' 'ramis-frontend' 'başlatılamadı')"
     fi
 
+    UPDATE_SUCCEEDED="true"
     echo ""
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "  ${GREEN}${BOLD}IP güncellemesi tamamlandı.${NC}  ${DIM}${old_ip} → ${new_ip}${NC}"
+    echo -e "  ${GREEN}${BOLD}$(_L upd_ip_done_title "IP güncellemesi tamamlandı.")${NC}  ${DIM}${old_ip} → ${new_ip}${NC}"
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "  ${BOLD}Panel:${NC}  http://${new_ip}/panel"
-    echo -e "  ${BOLD}API:${NC}    http://${new_ip}/api/v1/"
-    echo -e "  ${DIM}Tam günlük dosyası:${NC} ${LOG_FILE}"
+    echo -e "  ${BOLD}$(_L upd_lbl_panel "Panel:")${NC}  http://${new_ip}/panel"
+    echo -e "  ${BOLD}$(_L upd_lbl_api "API:")${NC}    http://${new_ip}/api/v1/"
+    echo -e "  ${DIM}$(_L upd_done_log "Tam günlük dosyası:")${NC} ${LOG_FILE}"
     echo ""
 
     log "=== IP güncellemesi tamamlandı (${old_ip} -> ${new_ip}) ==="
 }
 
+# --dry-run: moda göre yapılacak işlemleri özetler; hiçbir yan etki üretmez.
+run_dry_run() {
+    local src="$SCRIPT_DIR"
+
+    echo ""
+    echo -e "  ${BOLD}$(_L upd_dryrun_header "DRY-RUN — yapılacak işlemler:")${NC}"
+    echo ""
+
+    case "$UPDATE_MODE" in
+        db)
+            info "$(_L upd_dryrun_db_env "backend.env varsayılan anahtarları kontrol edilecek/güncellenecek")"
+            info "$(_L upd_dryrun_migrate "Veritabanı migrasyonları çalıştırılacak (manage.py migrate)")"
+            info "$(_L upd_dryrun_db_beat "Celery Beat takvimi senkronize edilecek; beat/maintenance/broadcast yeniden başlatılacak")"
+            ;;
+        backend)
+            info "$(_L upd_dryrun_rsync_backend "Backend kaynakları rsync ile kopyalanacak: ${src}/backend → ${INSTALL_DIR}/backend")"
+            info "$(_L upd_dryrun_pip "Python bağımlılıkları güncellenecek (pip install)")"
+            info "$(_L upd_dryrun_migrate "Veritabanı migrasyonları çalıştırılacak (manage.py migrate)")"
+            info "$(_L upd_dryrun_collectstatic "Statik dosyalar toplanacak (collectstatic)")"
+            info "$(_L upd_dryrun_celery_units "Daphne/Celery systemd birimleri yeniden yazılacak")"
+            info "$(_L upd_dryrun_restart_backend "Daphne, Uvicorn, worker ve beat servisleri yeniden başlatılacak")"
+            ;;
+        frontend)
+            info "$(_L upd_dryrun_rsync_frontend "Frontend kaynakları rsync ile kopyalanacak: ${src}/frontend → ${INSTALL_DIR}/frontend")"
+            info "$(_L upd_dryrun_npm "Frontend bağımlılıkları (npm ci) ve derleme (npm run build) çalıştırılacak")"
+            info "$(_L upd_dryrun_frontend_service "ramis-frontend servisi yeniden başlatılacak")"
+            ;;
+        all)
+            info "$(_L upd_dryrun_rsync_backend "Backend kaynakları rsync ile kopyalanacak: ${src}/backend → ${INSTALL_DIR}/backend")"
+            info "$(_L upd_dryrun_rsync_frontend "Frontend kaynakları rsync ile kopyalanacak: ${src}/frontend → ${INSTALL_DIR}/frontend")"
+            info "$(_L upd_dryrun_pip "Python bağımlılıkları güncellenecek (pip install)")"
+            info "$(_L upd_dryrun_migrate "Veritabanı migrasyonları çalıştırılacak (manage.py migrate)")"
+            info "$(_L upd_dryrun_collectstatic "Statik dosyalar toplanacak (collectstatic)")"
+            info "$(_L upd_dryrun_npm "Frontend bağımlılıkları (npm ci) ve derleme (npm run build) çalıştırılacak")"
+            info "$(_L upd_dryrun_restart_all "Daphne, Uvicorn, worker, beat ve frontend servisleri yeniden başlatılacak")"
+            ;;
+        sync-runtime-config)
+            info "$(_L upd_dryrun_syncrc "frontend.env'den /etc/ramis/runtime-config.json yeniden yazılacak")"
+            ;;
+        sync-celery-workers)
+            info "$(_L upd_dryrun_synccelery "Celery worker systemd birimleri concurrency ile yeniden yazılacak")"
+            ;;
+        *)
+            info "$(_L upd_dryrun_generic "Güncelleme adımları uygulanacak")"
+            ;;
+    esac
+
+    if [[ "$KEEP_FRONTEND_SOURCES" == "true" ]]; then
+        info "$(_L upd_dryrun_keep_sources "Frontend kaynak dosyaları temizlenmeyecek (--keep-sources)")"
+    fi
+
+    echo ""
+    echo -e "  ${BOLD}${YELLOW}$(_L upd_dryrun_noop "DRY-RUN: hiçbir değişiklik yapılmadı.")${NC}"
+    echo ""
+}
+
+# --rollback: en güncel yedeği rsync -a ile (--delete OLMADAN) geri yükler.
+run_rollback() {
+    local backup_root="${RAMIS_BACKUP_ROOT:-/var/backups/ramis}"
+    local latest="" has_backend="false" has_frontend="false"
+    local svc
+
+    latest="$(ls -1dt "${backup_root}"/*/ 2>/dev/null | head -1 || true)"
+    latest="${latest%/}"
+
+    if [[ -z "$latest" ]] || [[ ! -d "$latest" ]]; then
+        die "$(_L upd_rollback_no_backup "Geri yüklenecek yedek bulunamadı:") ${backup_root}"
+    fi
+
+    [[ -d "${latest}/backend" ]] && has_backend="true"
+    [[ -d "${latest}/frontend" ]] && has_frontend="true"
+
+    echo ""
+    echo -e "  ${BOLD}$(_L upd_rollback_latest "Geri yüklenecek yedek:")${NC}  ${latest}"
+
+    if [[ "$has_backend" != "true" ]] && [[ "$has_frontend" != "true" ]]; then
+        die "$(_L upd_rollback_empty "Yedek dizini boş (backend/ ve frontend/ yok):") ${latest}"
+    fi
+    if [[ "$has_backend" == "true" ]]; then
+        echo -e "    ${DIM}$(_L upd_rollback_restore_backend "backend →")${NC} ${INSTALL_DIR}/backend"
+    fi
+    if [[ "$has_frontend" == "true" ]]; then
+        echo -e "    ${DIM}$(_L upd_rollback_restore_frontend "frontend →")${NC} ${INSTALL_DIR}/frontend"
+    fi
+    echo ""
+
+    # --dry-run: yalnızca hangi yedeğin geri yükleneceğini göster.
+    if [[ "$RAMIS_DRY_RUN" == "true" ]]; then
+        info "$(_L upd_rollback_would_restore "Yukarıdaki yedek rsync -a ile geri yüklenecek (--delete kullanılmaz)")"
+        info "$(_L upd_rollback_would_restart "İlgili servisler durdurulup yeniden başlatılacak")"
+        echo ""
+        echo -e "  ${BOLD}${YELLOW}$(_L upd_dryrun_noop "DRY-RUN: hiçbir değişiklik yapılmadı.")${NC}"
+        echo ""
+        return 0
+    fi
+
+    if ! confirm_yn "$(_L upd_rollback_confirm "Bu yedek geri yüklensin mi? Mevcut backend/frontend dosyaları yedekteki sürümle ezilecek.")" "h"; then
+        warn "$(_L upd_rollback_cancelled "Geri yükleme iptal edildi")"
+        return 0
+    fi
+
+    mkdir -p /var/log/ramis
+    log "=== Rollback başladı (yedek=${latest}) ==="
+
+    info "$(_L upd_info_stopping_services "Servisler durduruluyor...")"
+    _stop_ramis_daphne_services 2>/dev/null || true
+    # shellcheck source=system_utils/uvicorn_units.sh
+    source "${SCRIPT_DIR}/system_utils/uvicorn_units.sh"
+    ramis_stop_uvicorn_services 2>/dev/null || true
+    systemctl stop ramis-worker.service 2>/dev/null || true
+    systemctl stop ramis-worker-maintenance.service 2>/dev/null || true
+    systemctl stop ramis-worker-broadcast.service 2>/dev/null || true
+    systemctl stop ramis-worker-pdf.service 2>/dev/null || true
+    systemctl stop ramis-beat.service 2>/dev/null || true
+    systemctl stop ramis-frontend.service 2>/dev/null || true
+    SERVICES_STOPPED="true"
+    success "$(_L upd_success_services_stopped "İlgili servisler durduruldu")"
+
+    if [[ "$has_backend" == "true" ]]; then
+        info "$(_L upd_rollback_restoring_backend "Backend yedeği geri yükleniyor (rsync -a, --delete yok)...")"
+        rsync -a "${latest}/backend/" "${INSTALL_DIR}/backend/" >> "$LOG_FILE" 2>&1
+        success "$(_L upd_rollback_restored_backend "Backend yedeği geri yüklendi")"
+    fi
+    if [[ "$has_frontend" == "true" ]]; then
+        info "$(_L upd_rollback_restoring_frontend "Frontend yedeği geri yükleniyor (rsync -a, --delete yok)...")"
+        rsync -a "${latest}/frontend/" "${INSTALL_DIR}/frontend/" >> "$LOG_FILE" 2>&1
+        success "$(_L upd_rollback_restored_frontend "Frontend yedeği geri yüklendi")"
+    fi
+
+    chown -R "${SYS_USER}:${SYS_USER}" "$INSTALL_DIR" 2>/dev/null || true
+
+    info "$(_L upd_info_restarting_services "Servisler yeniden başlatılıyor...")"
+    _start_ramis_daphne_services
+    ramis_start_uvicorn_services >> "$LOG_FILE" 2>&1 || true
+    systemctl start ramis-worker.service >> "$LOG_FILE" 2>&1 || true
+    systemctl start ramis-worker-maintenance.service >> "$LOG_FILE" 2>&1 || true
+    systemctl start ramis-worker-broadcast.service >> "$LOG_FILE" 2>&1 || true
+    systemctl start ramis-worker-pdf.service >> "$LOG_FILE" 2>&1 || true
+    systemctl start ramis-beat.service >> "$LOG_FILE" 2>&1 || true
+    systemctl start ramis-frontend.service >> "$LOG_FILE" 2>&1 || true
+    sleep 2
+
+    UPDATE_SUCCEEDED="true"
+
+    echo ""
+    for svc in ramis-daphne ramis-uvicorn ramis-worker ramis-worker-maintenance \
+               ramis-worker-broadcast ramis-worker-pdf ramis-beat ramis-frontend; do
+        if service_active "$svc"; then
+            success "$(printf '%-26s %s' "$svc" "$(_L upd_status_running "çalışıyor")")"
+        else
+            fail "$(printf '%-26s %s' "$svc" "$(_L upd_status_failed "başlatılamadı")")"
+        fi
+    done
+
+    echo ""
+    echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "  ${GREEN}${BOLD}$(_L upd_rollback_done "Geri yükleme tamamlandı.")${NC}  ${DIM}${latest}${NC}"
+    echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
+    echo -e "  ${DIM}$(_L upd_done_log "Tam günlük dosyası:")${NC} ${LOG_FILE}"
+    echo ""
+
+    log "=== Rollback tamamlandı (yedek=${latest}) ==="
+    return 0
+}
+
 show_help() {
     echo ""
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "  ${BOLD}RAMIS ERP · Güncelleme${NC}  ${DIM}yardım${NC}"
+    echo -e "  ${BOLD}$(_L upd_help_title "RAMIS ERP · Güncelleme")${NC}  ${DIM}$(_L upd_help_help "yardım")${NC}"
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
     echo ""
-    echo -e "  ${BOLD}Kullanım${NC}  ${DIM}proje kök dizininden:${NC}"
-    echo -e "    ${BOLD}sudo bash update.sh${NC} ${DIM}[seçenek]${NC}"
+    echo -e "  ${BOLD}$(_L upd_help_usage "Kullanım")${NC}  ${DIM}$(_L upd_help_from_root "proje kök dizininden:")${NC}"
+    echo -e "    ${BOLD}sudo bash update.sh${NC} ${DIM}$(_L upd_help_option_word "[seçenek]")${NC}"
     echo ""
-    echo -e "  ${BOLD}Seçenekler${NC}"
+    echo -e "  ${BOLD}$(_L upd_help_options "Seçenekler")${NC}"
     echo ""
-    echo "    (boş)             Tam mod: backend + frontend dosyaları, bağımlılıklar,"
-    echo "                      isteğe bağlı frontend derleme, tüm Ramis servisleri."
+    echo "    $(_L upd_help_none "(boş)")             $(_L upd_help_default_1 "Tam mod: backend + frontend dosyaları, bağımlılıklar,")"
+    echo "                      $(_L upd_help_default_2 "isteğe bağlı frontend derleme, tüm Ramis servisleri.")"
     echo ""
-    echo "    --db-only         Yalnızca veritabanı migrasyonu; Daphne kısa süre durur."
-    echo "    --backend-only    Pip, migrate, collectstatic; Daphne / Worker / Beat."
-    echo "    --frontend-only   rsync, npm ci / build, Next.js servisi."
+    echo "    --db-only         $(_L upd_help_db "Yalnızca veritabanı migrasyonu; Daphne kısa süre durur.")"
+    echo "    --backend-only    $(_L upd_help_backend "Pip, migrate, collectstatic; Daphne / Worker / Beat.")"
+    echo "    --frontend-only   $(_L upd_help_frontend "rsync, npm ci / build, Next.js servisi.")"
     echo ""
-    echo "    --change-ip [IP]  Ağ IP'si değiştiyse backend/frontend env, runtime-config.json,"
-    echo "                      Nginx server_name güncellenir; servisler yeniden başlatılır."
-    echo "                      Frontend yeniden derleme gerekmez (runtime-config.json)."
-    echo "                      IP verilmezse otomatik tespit edilir."
-    echo "                      IP aynıysa yalnızca eksik runtime-config.json oluşturulur."
-    echo "                      Örnek: sudo bash update.sh --change-ip 192.168.1.50"
+    echo "    --change-ip [IP]  $(_L upd_help_changeip_1 "Ağ IP'si değiştiyse backend/frontend env, runtime-config.json,")"
+    echo "                      $(_L upd_help_changeip_2 "Nginx server_name güncellenir; servisler yeniden başlatılır.")"
+    echo "                      $(_L upd_help_changeip_3 "Frontend yeniden derleme gerekmez (runtime-config.json).")"
+    echo "                      $(_L upd_help_changeip_4 "IP verilmezse otomatik tespit edilir.")"
+    echo "                      $(_L upd_help_changeip_5 "IP aynıysa yalnızca eksik runtime-config.json oluşturulur.")"
+    echo "                      $(_L upd_help_changeip_example "Örnek: sudo bash update.sh --change-ip 192.168.1.50")"
     echo ""
     echo "    --sync-runtime-config"
-    echo "                      /etc/ramis/runtime-config.json dosyasını frontend.env ile yeniden yazar;"
-    echo "                      NEXT_PUBLIC_POS_OFFLINE_QUEUE=true üretim varsayılanını uygular."
+    echo "                      $(_L upd_help_syncrc_1 "/etc/ramis/runtime-config.json dosyasını frontend.env ile yeniden yazar;")"
+    echo "                      $(_L upd_help_syncrc_2 "NEXT_PUBLIC_POS_OFFLINE_QUEUE=true üretim varsayılanını uygular.")"
     echo ""
     echo "    --sync-celery-workers"
-    echo "                      ramis-worker birimlerini backend.env içindeki"
-    echo "                      CELERY_PRINTING_WORKER_CONCURRENCY ile yeniden yazar (daemon-reload)."
+    echo "                      $(_L upd_help_synccelery_1 "ramis-worker birimlerini backend.env içindeki")"
+    echo "                      $(_L upd_help_synccelery_2 "CELERY_PRINTING_WORKER_CONCURRENCY ile yeniden yazar (daemon-reload).")"
     echo ""
-    echo "    --reload-roles    RBAC rollerini seed_rbac ile yeniler."
-    echo "    --seed-allergens  Varsayılan allerjen referans listesini seed_allergens ile yeniler."
-    echo "    --reset-users     Örnek kullanıcıları yeniden oluşturur (şifreler sıfırlanır)."
-    echo "    --lang tr|en      Seed / rbac dil seçimi (varsayılan: tr)."
+    echo "    --reload-roles    $(_L upd_help_reload_roles "RBAC rollerini seed_rbac ile yeniler.")"
+    echo "    --seed-allergens  $(_L upd_help_seed_allergens "Varsayılan allerjen referans listesini seed_allergens ile yeniler.")"
+    echo "    --reset-users     $(_L upd_help_reset_users "Örnek kullanıcıları yeniden oluşturur (şifreler sıfırlanır).")"
+    echo "    --lang tr|en|bg|sq  $(_L upd_help_lang "Seed / rbac dil seçimi (varsayılan: tr).")"
     echo ""
-    echo "    --veritabani      ${DIM}--db-only ile aynı${NC}"
-    echo "    -h, --help        Bu metni gösterir."
+    echo "    -y, --yes         $(_L upd_help_yes "Tüm onay sorularını otomatik kabul et.")"
+    echo "    --quiet           $(_L upd_help_quiet "Bilgi/başarı çıktılarını gizle (warn/fail görünür).")"
+    echo "    --no-color        $(_L upd_help_no_color "Renkleri kapat (TTY değilse otomatik uygulanır).")"
+    echo "    --dry-run         $(_L upd_help_dry_run "Hiçbir değişiklik yapmadan yapılacak işlemleri göster.")"
+    echo "    --keep-sources    $(_L upd_help_keep_sources "Frontend kaynak dosyalarının temizliğini atla.")"
+    echo "    --rollback        $(_L upd_help_rollback "En güncel dosya yedeğini geri yükle.")"
+    echo "    --version         $(_L upd_help_version "Sürümü göster ve çık.")"
     echo ""
-    echo -e "  ${DIM}Ayrıntılı günlük: ${LOG_FILE}${NC}"
+    echo -e "    --veritabani      ${DIM}$(_L upd_help_veritabani "--db-only ile aynı")${NC}"
+    echo "    -h, --help        $(_L upd_help_h "Bu metni gösterir.")"
+    echo ""
+    echo -e "  ${DIM}$(_L upd_help_log "Ayrıntılı günlük:") ${LOG_FILE}${NC}"
     echo ""
 }
 
@@ -1023,8 +1117,45 @@ parse_args() {
                 shift
                 ;;
             --lang)
-                INSTALL_LANG="$2"
+                local lang="${2:-}"
+                if [[ -z "$lang" ]]; then
+                    die "--lang için değer gerekli. Geçerli değerler: tr, en, bg, sq"
+                fi
+                case "$lang" in
+                    tr|en|bg|sq) ;;
+                    *) die "Geçersiz dil değeri: ${lang}  (geçerli: tr, en, bg, sq)" ;;
+                esac
+                INSTALL_LANG="$lang"
+                INSTALL_LANG_EXPLICIT="true"
                 shift 2
+                ;;
+            -y|--yes)
+                RAMIS_ASSUME_YES="true"
+                shift
+                ;;
+            --quiet)
+                RAMIS_QUIET="true"
+                shift
+                ;;
+            --no-color)
+                RAMIS_NO_COLOR="true"
+                shift
+                ;;
+            --dry-run)
+                RAMIS_DRY_RUN="true"
+                shift
+                ;;
+            --keep-sources)
+                KEEP_FRONTEND_SOURCES="true"
+                shift
+                ;;
+            --version)
+                echo "Ramis ERP update.sh v${RAMIS_VERSION}"
+                exit 0
+                ;;
+            --rollback)
+                UPDATE_MODE=rollback
+                shift
                 ;;
             -h|--help)
                 show_help
@@ -1042,37 +1173,67 @@ parse_args() {
 # ══════════════════════════════════════════════════════════════════════
 
 main() {
+    trap '_restore_services_on_failure $?' EXIT
+
     parse_args "$@"
+
+    # --no-color veya TTY olmayan ortamda renkleri banner'dan önce kapat.
+    ramis_maybe_disable_colors
+
+    # --lang CLI ile verilmişse, state yüklemesinden sonra bu değeri geri koyacağız.
+    local cli_install_lang="$INSTALL_LANG"
 
     echo ""
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "  ${BOLD}RAMIS ERP · Güncelleme${NC}  ${DIM}·  proje dosyalarını ve servisleri günceller${NC}"
+    echo -e "  ${BOLD}$(_L upd_banner_title "RAMIS ERP · Güncelleme")${NC}  ${DIM}$(_L upd_banner_sub "·  proje dosyalarını ve servisleri günceller")${NC}"
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
     echo ""
+    local mode_label
+    mode_label="$(_L upd_mode_label "Mod:")"
     case "$UPDATE_MODE" in
-        all)      echo -e "  ${BOLD}Mod:${NC}  tam güncelleme  ${DIM}(backend + frontend + servisler)${NC}" ;;
-        db)       echo -e "  ${BOLD}Mod:${NC}  yalnızca veritabanı  ${DIM}(migrate + isteğe bağlı seed)${NC}" ;;
-        backend)  echo -e "  ${BOLD}Mod:${NC}  yalnızca backend  ${DIM}(rsync, pip, migrate, static)${NC}" ;;
-        frontend) echo -e "  ${BOLD}Mod:${NC}  yalnızca frontend  ${DIM}(rsync, npm, Next.js)${NC}" ;;
-        change-ip) echo -e "  ${BOLD}Mod:${NC}  IP güncelleme  ${DIM}(env + Nginx + servisler)${NC}" ;;
-        sync-runtime-config) echo -e "  ${BOLD}Mod:${NC}  runtime-config.json senkronu  ${DIM}(frontend.env)${NC}" ;;
-        sync-celery-workers) echo -e "  ${BOLD}Mod:${NC}  Celery worker birimleri  ${DIM}(printing + pdf_export concurrency)${NC}" ;;
+        all)      echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_all "tam güncelleme")  ${DIM}$(_L upd_mode_all_note "(backend + frontend + servisler)")${NC}" ;;
+        db)       echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_db "yalnızca veritabanı")  ${DIM}$(_L upd_mode_db_note "(migrate + isteğe bağlı seed)")${NC}" ;;
+        backend)  echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_backend "yalnızca backend")  ${DIM}$(_L upd_mode_backend_note "(rsync, pip, migrate, static)")${NC}" ;;
+        frontend) echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_frontend "yalnızca frontend")  ${DIM}$(_L upd_mode_frontend_note "(rsync, npm, Next.js)")${NC}" ;;
+        change-ip) echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_changeip "IP güncelleme")  ${DIM}$(_L upd_mode_changeip_note "(env + Nginx + servisler)")${NC}" ;;
+        sync-runtime-config) echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_syncrc "runtime-config.json senkronu")  ${DIM}$(_L upd_mode_syncrc_note "(frontend.env)")${NC}" ;;
+        sync-celery-workers) echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_synccelery "Celery worker birimleri")  ${DIM}$(_L upd_mode_synccelery_note "(printing + pdf_export concurrency)")${NC}" ;;
+        rollback) echo -e "  ${BOLD}${mode_label}${NC}  $(_L upd_mode_rollback "geri yükleme")  ${DIM}$(_L upd_mode_rollback_note "(en güncel dosya yedeği)")${NC}" ;;
     esac
-    echo -e "  ${DIM}Günlük: ${LOG_FILE}${NC}"
+    echo -e "  ${DIM}$(_L upd_log_label "Günlük:") ${LOG_FILE}${NC}"
     echo ""
 
     if [[ $EUID -ne 0 ]]; then
-        die "Yönetici yetkisi gerekir. Örnek: sudo bash update.sh"
+        die "$(_L upd_die_root "Yönetici yetkisi gerekir. Örnek: sudo bash update.sh")"
     fi
 
-    # Dil tercihini kaydet
-    if [[ -d /etc/ramis ]]; then
+    # install.sh tarafından /etc/ramis/install.conf'a yazılan kurulum durumunu
+    # yükle (varsa). State yoksa yukarıdaki varsayılanlar (INSTALL_DIR=/srv/ramis_erp,
+    # SYS_USER=ramis) korunur.
+    ramis_load_install_state || true
+
+    # Açıkça verilen --lang, state dosyasındaki INSTALL_LANG'i geçersiz kılar
+    # (geriye dönük uyumluluk: CLI seçeneği her zaman kazanır).
+    if [[ "$INSTALL_LANG_EXPLICIT" == "true" ]]; then
+        INSTALL_LANG="$cli_install_lang"
+    fi
+
+    # --rollback: erken dal. run_rollback yedeğin varlığını doğrular; yedek
+    # yoksa anlaşılır bir die mesajı verir. --dry-run ile birlikte yalnızca
+    # hangi yedeğin geri yükleneceğini gösterir, uygulamaz.
+    if [[ "$UPDATE_MODE" == "rollback" ]]; then
+        run_rollback
+        return 0
+    fi
+
+    # Dil tercihini kaydet (dry-run tamamen yan etkisiz olmalı)
+    if [[ "$RAMIS_DRY_RUN" != "true" ]] && [[ -d /etc/ramis ]]; then
         echo "$INSTALL_LANG" > /etc/ramis/lang
         chmod 644 /etc/ramis/lang
     fi
 
     if [[ ! -d "$INSTALL_DIR/backend" ]]; then
-        die "Ramis ERP kurulumu bulunamadı: ${INSTALL_DIR}/backend"
+        die "$(_L upd_die_no_install "Ramis ERP kurulumu bulunamadı:") ${INSTALL_DIR}/backend"
     fi
 
     if [[ "$UPDATE_MODE" == "change-ip" ]]; then
@@ -1081,6 +1242,10 @@ main() {
     fi
 
     if [[ "$UPDATE_MODE" == "sync-runtime-config" ]]; then
+        if [[ "$RAMIS_DRY_RUN" == "true" ]]; then
+            run_dry_run
+            return 0
+        fi
         mkdir -p /var/log/ramis
         log "=== runtime-config.json senkronu başladı ==="
         _merge_frontend_env_prod_defaults || true
@@ -1090,6 +1255,10 @@ main() {
     fi
 
     if [[ "$UPDATE_MODE" == "sync-celery-workers" ]]; then
+        if [[ "$RAMIS_DRY_RUN" == "true" ]]; then
+            run_dry_run
+            return 0
+        fi
         mkdir -p /var/log/ramis
         log "=== Celery worker birim senkronu başladı ==="
         _merge_backend_env_print_defaults || true
@@ -1102,7 +1271,7 @@ main() {
                 || warn "ramis-worker-pdf başlatılamadı"
             log "=== Celery worker birim senkronu tamamlandı (concurrency=$(ramis_printing_worker_concurrency)) ==="
         else
-            die "Celery worker birimleri güncellenemedi"
+            die "$(_L upd_die_celery "Celery worker birimleri güncellenemedi")"
         fi
         return 0
     fi
@@ -1110,13 +1279,20 @@ main() {
     local project_src="$SCRIPT_DIR"
     if [[ "$UPDATE_MODE" != "db" ]]; then
         if [[ ! -d "${project_src}/backend" ]]; then
-            die "Proje kaynak dosyaları bulunamadı: ${project_src}/backend"
+            die "$(_L upd_die_no_src "Proje kaynak dosyaları bulunamadı:") ${project_src}/backend"
         fi
     fi
     if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "frontend" ]]; then
         if [[ ! -d "${project_src}/frontend" ]]; then
-            die "Proje kaynak dosyaları bulunamadı: ${project_src}/frontend"
+            die "$(_L upd_die_no_src "Proje kaynak dosyaları bulunamadı:") ${project_src}/frontend"
         fi
+    fi
+
+    # --dry-run: kök/state/kaynak kontrolleri geçti; hiçbir mutasyon veya
+    # servis durdurma yapmadan yapılacakları özetleyip çık.
+    if [[ "$RAMIS_DRY_RUN" == "true" ]]; then
+        run_dry_run
+        return 0
     fi
 
     mkdir -p /var/log/ramis
@@ -1133,7 +1309,7 @@ main() {
         req_file="${INSTALL_DIR}/backend/requirements/development.txt"
     fi
     if [[ ! -x "$python" ]]; then
-        die "Python venv bulunamadı: ${python} (önce install.sh veya venv kurun)"
+        die "$(_L upd_die_no_venv "Python venv bulunamadı:") ${python} (önce install.sh veya venv kurun)"
     fi
 
     # ── Sadece DB: migrasyon dışında bir şey yok ──
@@ -1148,6 +1324,7 @@ main() {
         _merge_backend_env_pdf_defaults || true
         info "ramis-daphne durduruluyor (migrate)..."
         _stop_ramis_daphne_services
+        SERVICES_STOPPED="true"
         success "Daphne durdu"
 
         if confirm_yn "Veritabanı migrasyonları çalıştırılsın mı?" "e"; then
@@ -1194,11 +1371,12 @@ main() {
             fail "$(printf '%-26s %s' 'ramis-daphne' 'başlatılamadı')"
         fi
 
+        UPDATE_SUCCEEDED="true"
         echo ""
         echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-        echo -e "  ${GREEN}${BOLD}Veritabanı güncellemesi tamamlandı.${NC}"
+        echo -e "  ${GREEN}${BOLD}$(_L upd_done_title_db "Veritabanı güncellemesi tamamlandı.")${NC}"
         echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-        echo -e "  ${DIM}Ayrıntılı kayıt:${NC} ${LOG_FILE}"
+        echo -e "  ${DIM}$(_L upd_done_log_db "Ayrıntılı kayıt:")${NC} ${LOG_FILE}"
         echo ""
         log "=== Güncelleme tamamlandı (db) ==="
         return 0
@@ -1234,7 +1412,7 @@ main() {
     fi
 
     # ── Servisleri durdur (kapsama göre) ──
-    info "Servisler durduruluyor..."
+    info "$(_L upd_info_stopping_services "Servisler durduruluyor...")"
     if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "frontend" ]]; then
         systemctl stop ramis-frontend.service 2>/dev/null || true
     fi
@@ -1257,12 +1435,30 @@ main() {
         systemctl stop ramis-worker-pdf.service 2>/dev/null || true
         systemctl stop ramis-beat.service 2>/dev/null || true
     fi
-    success "İlgili servisler durduruldu"
+    SERVICES_STOPPED="true"
+    success "$(_L upd_success_services_stopped "İlgili servisler durduruldu")"
+
+    # ── rsync öncesi yedek dizini ──
+    # Üzerine yazılan/silinen dosyalar bu dizine yedeklenir. Yedek dizini asla
+    # hedef ağacın içinde olmamalıdır (rsync --delete + --backup-dir güvenliği).
+    if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "backend" ]] || [[ "$UPDATE_MODE" == "frontend" ]]; then
+        local install_real backup_real
+        install_real=$(readlink -f "$INSTALL_DIR" 2>/dev/null || printf '%s' "$INSTALL_DIR")
+        backup_real=$(readlink -f "$UPDATE_BACKUP_ROOT" 2>/dev/null || printf '%s' "$UPDATE_BACKUP_ROOT")
+        if [[ "$backup_real" == "$install_real" || "$backup_real" == "$install_real"/* ]]; then
+            warn "Yedek dizini kurulum ağacının içinde (${UPDATE_BACKUP_ROOT}); /var/backups/ramis kullanılacak"
+            UPDATE_BACKUP_ROOT="/var/backups/ramis"
+        fi
+        UPDATE_BACKUP_DIR="${UPDATE_BACKUP_ROOT}/$(date +%Y%m%d-%H%M%S)"
+        mkdir -p "${UPDATE_BACKUP_DIR}/backend" "${UPDATE_BACKUP_DIR}/frontend"
+        info "Dosya yedekleri: ${UPDATE_BACKUP_DIR}"
+    fi
 
     # ── Dosya senkronu ──
     if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "backend" ]]; then
-        info "Backend dosyaları güncelleniyor..."
+        info "$(_L upd_info_backend_files "Backend dosyaları güncelleniyor...")"
         rsync -a --delete \
+            --backup --backup-dir="${UPDATE_BACKUP_DIR}/backend" \
             --exclude='.venv' \
             --exclude='venv' \
             --exclude='env' \
@@ -1273,17 +1469,18 @@ main() {
             --exclude='media' \
             --exclude='staticfiles' \
             "${project_src}/backend/" "${INSTALL_DIR}/backend/"
-        success "Backend dosyaları güncellendi"
+        success "$(_L upd_success_backend_files "Backend dosyaları güncellendi")"
     fi
 
     if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "frontend" ]]; then
-        info "Frontend dosyaları güncelleniyor..."
+        info "$(_L upd_info_frontend_files "Frontend dosyaları güncelleniyor...")"
         rsync -a --delete \
+            --backup --backup-dir="${UPDATE_BACKUP_DIR}/frontend" \
             --exclude='node_modules' \
             --exclude='.next' \
             --exclude='.env.local' \
             "${project_src}/frontend/" "${INSTALL_DIR}/frontend/"
-        success "Frontend dosyaları güncellendi"
+        success "$(_L upd_success_frontend_files "Frontend dosyaları güncellendi")"
     fi
 
     chown -R "${SYS_USER}:${SYS_USER}" "$INSTALL_DIR"
@@ -1370,7 +1567,7 @@ main() {
     fi
 
     # ── Servisleri başlat ──
-    info "Servisler yeniden başlatılıyor..."
+    info "$(_L upd_info_restarting_services "Servisler yeniden başlatılıyor...")"
     if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "backend" ]]; then
         # shellcheck source=system_utils/postgresql_scaling.sh
         source "${SCRIPT_DIR}/system_utils/postgresql_scaling.sh"
@@ -1461,17 +1658,23 @@ main() {
     if [[ "$UPDATE_MODE" == "all" ]] || [[ "$UPDATE_MODE" == "frontend" ]]; then
         if service_active ramis-frontend; then
             success "$(printf '%-26s %s' 'ramis-frontend' 'çalışıyor')"
-            _cleanup_frontend_sources "${INSTALL_DIR}/frontend" || true
+            [[ "$KEEP_FRONTEND_SOURCES" == "true" ]] || _cleanup_frontend_sources "${INSTALL_DIR}/frontend" || true
         else
             fail "$(printf '%-26s %s' 'ramis-frontend' 'başlatılamadı')"
         fi
     fi
 
+    UPDATE_SUCCEEDED="true"
+
     echo ""
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "  ${GREEN}${BOLD}Güncelleme tamamlandı.${NC}  ${DIM}Mod: ${UPDATE_MODE}${NC}"
+    echo -e "  ${GREEN}${BOLD}$(_L upd_done_title "Güncelleme tamamlandı.")${NC}  ${DIM}${mode_label} ${UPDATE_MODE}${NC}"
     echo -e "${CYAN}  ══════════════════════════════════════════════════════════════════════${NC}"
-    echo -e "  ${DIM}Tam günlük dosyası:${NC} ${LOG_FILE}"
+    echo -e "  ${DIM}$(_L upd_done_log "Tam günlük dosyası:")${NC} ${LOG_FILE}"
+    if [[ -n "$UPDATE_BACKUP_DIR" ]] && [[ -d "$UPDATE_BACKUP_DIR" ]]; then
+        echo -e "  ${BOLD}$(_L upd_done_backup "Yedek dizini:")${NC}   ${UPDATE_BACKUP_DIR}"
+        log "Değişen/silinen dosyalar yedeklendi: ${UPDATE_BACKUP_DIR}"
+    fi
     echo ""
 
     log "=== Güncelleme tamamlandı (mod=${UPDATE_MODE}) ==="
